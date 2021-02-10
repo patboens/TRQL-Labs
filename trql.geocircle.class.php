@@ -46,6 +46,14 @@
         *}
     *}
 
+    {*chist
+        {*mdate 10-02-21 06:54 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct()[/c] method
+        *}
+    *}
+
 
     *}}} */
 /****************************************************************************************/
@@ -187,7 +195,7 @@ class GeoCircle extends GeoShape
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of GeoCircle.__construct() ========================================== */
+    }   /* End of GeoCircle.__construct() ============================================= */
     /* ================================================================================ */
 
 
@@ -212,10 +220,12 @@ class GeoCircle extends GeoShape
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of GeoCircle.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of GeoCircle.__destruct() ============================================== */
     /* ================================================================================ */
 
-}   /* End of class GeoCircle ====================================================== */
+}   /* End of class GeoCircle ========================================================= */
 /* ==================================================================================== */
 
 ?>

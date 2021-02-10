@@ -42,6 +42,14 @@
     *}
 
 
+    {*chist
+        {*mdate 10-02-21 06:54 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct()[/c] method
+        *}
+    *}
+
     *}}} */
 /****************************************************************************************/
 namespace trql\gasstation;
@@ -422,6 +430,8 @@ class GasStation extends AutomotiveBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of GasStation.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -42,6 +42,14 @@
     *}
 
 
+    {*chist
+        {*mdate 10-02-21 06:54 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct()[/c] method
+        *}
+    *}
+
     *}}} */
 /****************************************************************************************/
 namespace trql\governmentbuilding;
@@ -275,7 +283,7 @@ class GovernmentBuilding extends CivicStructure
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of GovernmentBuilding.__construct() ========================================== */
+    }   /* End of GovernmentBuilding.__construct() ==================================== */
     /* ================================================================================ */
 
 
@@ -300,10 +308,12 @@ class GovernmentBuilding extends CivicStructure
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of GovernmentBuilding.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of GovernmentBuilding.__destruct() ===================================== */
     /* ================================================================================ */
 
-}   /* End of class GovernmentBuilding ====================================================== */
+}   /* End of class GovernmentBuilding ================================================ */
 /* ==================================================================================== */
 
 ?>

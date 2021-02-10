@@ -45,6 +45,14 @@
         *}
     *}
 
+    {*chist
+        {*mdate 10-02-21 06:54 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct()[/c] method
+        *}
+    *}
+
 
     *}}} */
 /****************************************************************************************/
@@ -206,6 +214,8 @@ class GeoShape extends StructuredValue
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of GeoShape.__destruct() =========================================== */
     /* ================================================================================ */
 

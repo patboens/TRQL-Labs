@@ -42,6 +42,14 @@
     *}
 
 
+    {*chist
+        {*mdate 10-02-21 06:54 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct()[/c] method
+        *}
+    *}
+
     *}}} */
 /****************************************************************************************/
 namespace trql\gendertype;
@@ -156,7 +164,7 @@ class GenderType extends Enumeration
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of GenderType.__construct() ========================================== */
+    }   /* End of GenderType.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -181,10 +189,12 @@ class GenderType extends Enumeration
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of GenderType.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of GenderType.__destruct() ============================================= */
     /* ================================================================================ */
 
-}   /* End of class GenderType ====================================================== */
+}   /* End of class GenderType ======================================================== */
 /* ==================================================================================== */
 
 ?>

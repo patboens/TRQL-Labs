@@ -41,6 +41,16 @@
         *}
     *}
 
+    {*chist
+        {*mdate 10-02-21 06:54 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct()[/c] method
+                            2)  Adding the [c]__toForm()[/c] method; [c]__toString()[/c] 
+                                now calls [c]__toForm()[/c]
+        *}
+    *}
+
 
     *}}} */
 /****************************************************************************************/
@@ -134,8 +144,8 @@ class ChangePasswordForm extends Form
     /* ================================================================================ */
 
 
-    public function __toString():string
-    /*-------------------------------*/
+    public function __toForm():string
+    /*------------------------------*/
     {
         $this->settings['withBR'] = false;
 
@@ -190,6 +200,14 @@ class ChangePasswordForm extends Form
         }   /* Create a fieldset and add the field set to the form */
 
         return ( $this->render() );
+    }   /* End of ChangePasswordForm.__toForm() ======================================= */
+    /* ================================================================================ */
+
+
+    public function __toString():string
+    /*-------------------------------*/
+    {
+        return ( $this->__toForm() );
     }   /* End of ChangePasswordForm.__toString() ===================================== */
     /* ================================================================================ */
 

@@ -42,6 +42,14 @@
     *}
 
 
+    {*chist
+        {*mdate 10-02-21 06:54 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct()[/c] method
+        *}
+    *}
+
     *}}} */
 /****************************************************************************************/
 namespace trql\governmentpermit;
@@ -161,7 +169,7 @@ class GovernmentPermit extends Permit
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of GovernmentPermit.__construct() ========================================== */
+    }   /* End of GovernmentPermit.__construct() ====================================== */
     /* ================================================================================ */
 
 
@@ -186,10 +194,12 @@ class GovernmentPermit extends Permit
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of GovernmentPermit.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of GovernmentPermit.__destruct() ======================================= */
     /* ================================================================================ */
 
-}   /* End of class GovernmentPermit ====================================================== */
+}   /* End of class GovernmentPermit ================================================== */
 /* ==================================================================================== */
 
 ?>

@@ -51,6 +51,14 @@
         *}
     *}
 
+    {*chist
+        {*mdate 10-02-21 06:54 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct()[/c] method
+        *}
+    *}
+
 
     *}}} */
 /****************************************************************************************/
@@ -304,7 +312,7 @@ class FundingScheme extends Organization
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of FundingScheme.__construct() ========================================== */
+    }   /* End of FundingScheme.__construct() ========================================= */
     /* ================================================================================ */
 
 
@@ -329,10 +337,12 @@ class FundingScheme extends Organization
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of FundingScheme.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of FundingScheme.__destruct() ========================================== */
     /* ================================================================================ */
 
-}   /* End of class FundingScheme ====================================================== */
+}   /* End of class FundingScheme ===================================================== */
 /* ==================================================================================== */
 
 ?>

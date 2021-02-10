@@ -42,6 +42,14 @@
     *}
 
 
+    {*chist
+        {*mdate 10-02-21 06:54 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct()[/c] method
+        *}
+    *}
+
     *}}} */
 /****************************************************************************************/
 namespace trql\gameserver;
@@ -182,6 +190,8 @@ class GameServer extends Intangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of GameServer.__destruct() =========================================== */
     /* ================================================================================ */
 
