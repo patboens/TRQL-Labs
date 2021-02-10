@@ -26,11 +26,15 @@
 /****************************************************************************************/
 namespace trql\meeting;
 
-use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\vaesoli\Vaesoli       as v;
+use \trql\mother\iContext       as iContext;
 use \trql\event\Event           as Event;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
+
+if ( ! defined( 'MOTHER_CLASS_VERSION' ) )
+    require_once( 'trql.mother.class.php' );
 
 if ( ! defined( 'EVENT_ABSTRACT_CLASS' ) )
     require_once( 'trql.event.class.php' );

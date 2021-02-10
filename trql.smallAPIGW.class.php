@@ -277,8 +277,7 @@ class SmallAPIGW extends Gateway
                     //die();
 
                     $aResponse = $oHandler->process( $aCall );
-                    var_dump( $aResponse );
-                    //$oResponse = $this->oHandler->process( $aCall );
+                    //var_dump( $aResponse );
                 }
             }   /* if ( ! is_null( $szSelf ) ) */
             else    /* Else of ... if ( ! is_null( $szSelf ) ) */
@@ -299,15 +298,15 @@ class SmallAPIGW extends Gateway
             foreach ( $this->aHandlers as $oHandler )
             {
                 $aSupportedClasses = explode( ';',str_replace( ',',';',$oHandler->class ) );
-                var_dump( $aSupportedClasses );
-                var_dump( in_array( $szClass,$aSupportedClasses ) );
+                //var_dump( $aSupportedClasses );
+                //var_dump( in_array( $szClass,$aSupportedClasses ) );
                 //die();
 
                 //if ( $oHandler->class === $szClass )
                 if ( in_array( $szClass,$aSupportedClasses ) )
                 {
-                    var_dump( $oHandler->class . " MATCHES " . $szClass );
-                    die();
+                    //var_dump( $oHandler->class . " MATCHES " . $szClass );
+                    //die();
                     return ( $oHandler );
                 }
             }

@@ -133,16 +133,16 @@ class WhatWasDone extends Form
 
 
     /* ================================================================================ */
-    /** {{*__toForm( [$szHome] )=
+    /** {{*__toForm()=
 
-        Class constructor
+        Provides a standardized form for capturing the the main properties of a
+        WhatWasDone object (sort of task)
 
         {*params
-            $szHome     (string)        Home of the class. Optional.
         *}
 
         {*return
-            (self)      The current instance of the class
+            (string)        The HTML Code corresponding to the WhatWasDone object
         *}
 
         *}}
@@ -152,8 +152,6 @@ class WhatWasDone extends Form
     /*------------------------------*/
     {
         static $oForm = null;
-
-        $szRetVal = '';
 
         if ( is_null( $oForm ) )
         {
