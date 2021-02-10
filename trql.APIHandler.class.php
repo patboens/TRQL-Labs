@@ -68,6 +68,9 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 if ( ! defined( 'THING_CLASS_VERSION' ) )
     require_once( 'trql.thing.class.php' );
 
+if ( ! defined( 'API_ERROR_SUCCESS' ) )
+    require_once( 'trql.APIHandler.defines.php' );
+
 
 defined( 'APIHANDLER_CLASS_VERSION' ) or define( 'APIHANDLER_CLASS_VERSION','0.1' );
 
@@ -195,7 +198,7 @@ class APIHandler extends Thing
         $szXML .= "</Response>\n";
 
         return ( $szXML );
-    }   /* End of APIHandler.errorResponse() ========================================= */
+    }   /* End of APIHandler.errorResponse() ========================================== */
     /* ================================================================================ */
 
 
@@ -203,7 +206,7 @@ class APIHandler extends Thing
     public function process( &$aCall )
     /*------------------------------*/
     {
-        $oResponse = null;
+        $aResponse = null;
 
         $szVerb = strtolower( $aCall['verb'] );
         $szXML  = '';
@@ -211,8 +214,8 @@ class APIHandler extends Thing
         if ( ! empty( $this->handlerFnc ) && function_exists( $this->handlerFnc ) )
         {
             $szFnc = $this->handlerFnc;
-            $szFnc( $aCall,$this );
-        }
+            $aResponse = $szFnc( $aCall,$this );
+        }   /* if ( ! empty( $this->handlerFnc ) && function_exists( $this->handlerFnc ) ) */
 
 
         /* 07-02-21 10:08:52 : j'ai mis tout le traitement en commentaires
