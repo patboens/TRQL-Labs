@@ -175,9 +175,77 @@ class SmallAPIGW extends Gateway
     }   /* End of SmallAPIGW.storeStats() ============================================= */
     /* ================================================================================ */
 
+    protected function assembleArgs( $aArgs,$aValues )
+    /*--*/
+    {
+        $aRetVal = null;        
 
-    public function cashier( &$szSelf )
-    /*-------------------------------*/
+        if ( ( $iCount = count( $aArgs ) ) === count( $aValues ) )
+        {
+            for ( $i=0;$i<$iCount;$i++ )
+                $aRetVal[$aArgs[$i]] = $aValues[$i];
+        }
+
+        return ( $aRetVal );
+    }
+
+    protected function parse( &$szSelf )
+    /*--------------------------------*/
+    {
+        $aCall = null;
+
+        if ( ! empty( $szSelf ) )
+        {
+            $a = explode( '/',$szSelf );
+
+            //var_dump( $_REQUEST );
+            //var_dump( 'self=' . $szSelf,'$a exploded=',$a );
+            //die();
+
+            $aParts = null;
+
+            foreach ( $a as $szStr )
+            {
+                if ( ! empty( $szStr ) )
+                {
+                    $szThePart = trim( $szStr );
+
+                    if ( preg_match_all('/(\?|&)(?P<arg>[[:word:]]+)(=(?P<value>[[:word:]]+))?/',$szThePart,$aMatches,PREG_PATTERN_ORDER ) )
+                    {
+                        $aParams = $this->assembleArgs( $aMatches['arg']     ,
+                                                        $aMatches['value'] 
+                                                      );
+                        foreach( $aParams as $szKey => $szValue )
+                        {
+                            $_GET[$szKey] = $szValue;
+                        }
+                    }   /* if ( preg_match_all('/(\?|&)(?P<arg>[[:word:]]+)(=(?P<value>[[:word:]]+))?/',$szThePart,$aMatches,PREG_PATTERN_ORDER ) ) */
+                    else
+                    {
+                        $aParts[] = $szThePart;
+                    }
+                }   /* if ( ! empty( $szStr ) ) */
+            }   /* foreach ( $a as $szStr ) */
+
+            //var_dump( $aParts );
+            //var_dump( $_GET );
+            //die();
+
+            $aCall = array( 'verb'      => $aParts[1] ?? 'UNKNOWN'              ,
+                            'parts'     => $aParts                              ,
+                            'cookies'   => $_COOKIE                             ,
+                            'get'       => $_GET                                ,
+                            'post'      => $_POST                               ,
+                            'server'    => $_SERVER
+                          );
+        }   /* if ( ! is_null( $szSelf ) ) */
+
+        return ( $aCall );
+    }
+
+    /* Code qui devrait disparaître (note du 11-02-21 10:15:16) */
+    public function cashierOld( &$szSelf )
+    /*----------------------------------*/
     {
         $aCall = null;
 
@@ -196,8 +264,9 @@ class SmallAPIGW extends Gateway
             {
                 if ( ! empty( $szStr ) )
                 {
-                    //$aParts[] = strtolower( trim( $szStr ) );
-                    $aParts[] = trim( $szStr );
+                    $szThePart = trim( $szStr );
+                    // ICI, IL FAUT VERIFIER SI CETTE PARTIE AGIT COMME DES PARAMETRES (? et &)
+                    $aParts[] = $szThePart;
                 }   /* if ( ! empty( $szStr ) ) */
             }   /* foreach ( $a as $szStr ) */
 
@@ -217,14 +286,20 @@ class SmallAPIGW extends Gateway
         $this->storeStats( $szSelf,$aCall );
 
         return ( $aCall );
-    }   /* End of SmallAPIGW.cashier() ================================================ */
+    }   /* End of SmallAPIGW.cashierOld() ============================================= */
     /* ================================================================================ */
 
+
+    public function cashier( &$szSelf )
+    /*-------------------------------*/
+    {
+        // No cashier service YET (billing, ...)
+    }   /* End of SmallAPIGW.cashier() ================================================ */
+    /* ================================================================================ */
 
     public function checkVulnerability()
     /*--------------------------------*/
     {
-
     }   /* End of SmallAPIGW.checkVulnerability() ===================================== */
     /* ================================================================================ */
 
@@ -259,13 +334,19 @@ class SmallAPIGW extends Gateway
     public function processCall( &$szSelf )
     /*-----------------------------------*/
     {
+        $aCall = $this->parse( $szSelf );
+
         $this->checkVulnerability();
         $this->checkVolume();
 
-        $aCall = $this->cashier( $szSelf );                         /* $aCall has split the request */
+        $this->cashier( $szSelf );                                  /* $aCall has split the request */
 
-        //var_dump( $this->aHandlers,$aCall );
+        $this->storeStats( $aCall,$szSelf );
+
+
+        //var_dump( $aCall,$this->aHandlers );
         //var_dump( $aCall );
+        //die();
 
         if ( ! $this->dispatch( $szSelf ) )                         /* If no re-dispatch happened */
         {

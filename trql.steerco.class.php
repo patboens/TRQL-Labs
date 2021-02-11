@@ -26,13 +26,16 @@
 /****************************************************************************************/
 namespace trql\steerco;
 
-use \trql\vaesoli\Vaesoli       as v;
-use \trql\mother\iContext       as iContext;
-use \trql\meeting\Meeting       as Meeting;
-use \trql\form\Form             as Form;
-use \trql\fieldset\Fieldset     as Fieldset;
-use \trql\input\Input           as Input;
-use \trql\tag\Tag               as Tag;
+use \trql\vaesoli\Vaesoli               as v;
+use \trql\mother\iContext               as iContext;
+use \trql\meeting\Meeting               as Meeting;
+use \trql\form\Form                     as Form;
+use \trql\fieldset\Fieldset             as Fieldset;
+use \trql\input\Input                   as Input;
+use \trql\tag\Tag                       as Tag;
+use \trql\audience\Audience             as Audience;
+use \trql\person\Person                 as Person;
+use \trql\organization\Organization     as Organization;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -55,6 +58,15 @@ if ( ! defined( 'INPUT_CLASS_VERSION' ) )
 
 if ( ! defined( 'TAG_CLASS_VERSION' ) )
     require_once( 'trql.tag.class.php' );
+
+if ( ! defined( 'AUDIENCE_CLASS_VERSION' ) )
+    require_once( 'trql.audience.class.php' );
+
+if ( ! defined( 'PERSON_CLASS_VERSION' ) )
+    require_once( 'trql.person.class.php' );
+
+if ( ! defined( 'ORGANIZATION_CLASS_VERSION' ) )
+    require_once( 'trql.organization.class.php' );
 
 defined( 'STEERCO_CLASS_VERSION' ) or define( 'STEERCO_CLASS_VERSION','0.1' );
 
@@ -83,7 +95,7 @@ class Steerco extends Meeting implements iContext
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId = 'Q2761147';       /*                  {*property   $wikidataId            (string)        Wikidata ID. Meeting (Q2761147), which is closest
+    public      $wikidataId = 'Q2761147';                           /* {*property   $wikidataId         (string)        Wikidata ID. Meeting (Q2761147), which is closest
                                                                                                                         we can get. Event in which two or more people assemble,
                                                                                                                         planned in advance to facilitate discussion. *} */
 
@@ -112,6 +124,11 @@ class Steerco extends Meeting implements iContext
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+
+        $this->audience = new Audience();
+
+        // We may need to create a set of Persons/Organizations as well
+        // for the Sponsor, Attendees, Organizer, ...
 
         return ( $this );
     }   /* End of Steerco.__construct() =============================================== */
