@@ -810,10 +810,27 @@ class Vaesoli
     /* ============================================================================== */
 
 
+    /* ================================================================================ */
+    /** {{*isCommandLine()=
+
+        Determines if PHP runs in Cleint mode (Command Line)
+
+        {*params
+        *}
+
+        {*return
+            (bool)          [c]true[/c] if PHP runs in CLI mode; [c]false[/c] otherwise
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
     public static function isCommandLine()
     /*----------------------------------*/
     {
-        if ( empty( $_SERVER['REMOTE_ADDR'] ) && ! isset( $_SERVER['HTTP_USER_AGENT'] ) && count( $_SERVER['argv'] ) > 0 )
+    	if     ( defined( 'STDIN' ) )
+    	    $bCommandLine = true;
+        elseif ( empty( $_SERVER['REMOTE_ADDR'] ) && ! isset( $_SERVER['HTTP_USER_AGENT'] ) && count( $_SERVER['argv'] ) > 0 )
             $bCommandLine = true;
         else
             $bCommandLine = false;
@@ -838,7 +855,7 @@ class Vaesoli
                 //var_dump( $aMatches );
                 $szRetVal = $aMatches[$szParameter];
                 break;
-            }
+            }   /* if ( preg_match( $szPattern,$szValue,$aMatches ) ) */
         }   /* foreach( $aParams as $szValue ) */
 
         //var_dump( "WIll return: " );
@@ -1833,7 +1850,6 @@ class Vaesoli
     /* ================================================================================ */
 
 
-
     /* ================================================================================ */
     /** {{*STR_iInList( $aList,$szValue[,$bPartOf] )=
 
@@ -2376,14 +2392,14 @@ class Vaesoli
         }   /* if ( ! is_null( $x ) ) */
 
         return ( $x2 );                                                 /* Return result to caller */
-    }   /* End of function MISC_CastBool() ====================================== */
+    }   /* End of function MISC_CastBool() ============================================ */
 
 
     public static function NUM_RoundMultiple( $n,$x )
     /*---------------------------------------------*/
     {
         return ( ceil($n)%$x === 0) ? floor($n) : round(($n+$x/2)/$x)*$x;
-    }
+    }   /* End of function NUM_RoundMultiple() ======================================== */
 
 
     public static function STR_Ascii2( $szStr )
@@ -2398,11 +2414,11 @@ class Vaesoli
         }   /* for ( $i = 0;$i < $iLength;$i++ ) */
 
         return ( $iRetVal );                                            /* Return result to caller */
-    }   /* == End of vaesoli.STR_Ascii2() ========================================= */
-    /* ============================================================================ */
+    }   /* == End of vaesoli.STR_Ascii2() ============================================= */
+    /* ================================================================================ */
 
 
-    /* ========================================================================== */
+    /* ================================================================================ */
     /** {{*STR_Eliminate( $szStr,$szCharList )=
 
         Eliminates all characters of $szCharList from $szStr
@@ -2438,7 +2454,7 @@ class Vaesoli
 
         *}}
      */
-    /* ========================================================================== */
+    /* ================================================================================ */
     public static function STR_Eliminate( $szStr,$szCharList )
     /*------------------------------------------------------*/
     {
@@ -2455,8 +2471,8 @@ class Vaesoli
         }   /* while ( $iPos < $iLength ) */
 
         return ( $szRetVal );                                           /* Return result to caller */
-    }   /* == End of vaesoli.STR_Eliminate() ====================================== */
-    /* ============================================================================ */
+    }   /* == End of vaesoli.STR_Eliminate() ========================================== */
+    /* ================================================================================ */
 
 
     public static function STR_DetectLanguage( &$szText,$szDefault = '?',$iCount = 50 )
@@ -2570,16 +2586,16 @@ class Vaesoli
         }
 
         return ( $szDefault );
-    }   /* == End of vaesoli.STR_DetectLanguage() ================================= */
-    /* ============================================================================ */
+    }   /* == End of vaesoli.STR_DetectLanguage() ===================================== */
+    /* ================================================================================ */
 
     public static function isdigit( $c )
     /*--------------------------------*/
     {
         $c = (string) $c;
         return ( ! ( $c < '0' || $c > '9' ) );
-    }   /* == End of vaesoli.isdigit() ============================================ */
-    /* ============================================================================ */
+    }   /* == End of vaesoli.isdigit() ================================================ */
+    /* ================================================================================ */
 
 
     public static function STR_dionly( $szStr )
@@ -2599,16 +2615,16 @@ class Vaesoli
         }   /* for( $i=0;$i<$iLen;$i++ ) */
 
         return ( $szRetVal );                                           /* Return result to caller */
-    }   /* End of vaesoli.STR_dionly() ============================================ */
-    /* ============================================================================ */
+    }   /* End of vaesoli.STR_dionly() ================================================ */
+    /* ================================================================================ */
 
 
     public static function STR_padl( $szStr,$iLength,$szPadding = ' ' )
     /*---------------------------------------------------------------*/
     {
         return ( str_pad( (string) $szStr,$iLength,$szPadding,STR_PAD_LEFT ) );
-    }   /* End of vaesoli.STR_padl() ============================================== */
-    /* ============================================================================ */
+    }   /* End of vaesoli.STR_padl() ================================================== */
+    /* ================================================================================ */
 
 
     public static function STR_padr( $szStr,$iLength,$szPadding = ' ' )
@@ -2962,8 +2978,8 @@ class Vaesoli
     	return ( substr( $sIn,0,$iLength ) ); // Je limite à 16 caractères mais vous faites comme vous voulez!
     else
     	return '';
-    }   /* == End of vaesoli.STR_Phonetique() ===================================== */
-    /* ============================================================================ */
+    }   /* == End of vaesoli.STR_Phonetique() ========================================= */
+    /* ================================================================================ */
 
 
     public static function STR_iPos( $szStr,$szSubStr,$iStart = 0 )
@@ -3595,6 +3611,117 @@ class Vaesoli
                  self::STR_padl( (string) $iSeconds,2,'0' ) );
     }   /* End of vaesoli.TIM_Int2Time() ======================================== */
     /* ========================================================================== */
+
+
+    /* ================================================================================ */
+    /** {{*TIM_Season( $xDate )=
+
+        Gets the season at a given date.
+
+        {*params
+            $xDate      (string|int)    The date to consider. Optional.
+        *}
+
+        {*return
+            (string)                    'spring', 'summer', 'fall' or 'winter'
+        *}
+
+        {*abstract
+
+            Le printemps aura lieu du samedi 20 mars au dimanche 20 juin 2021.
+            L'été actuel se terminera le lundi 21 septembre 2020.
+            L'automne aura lieu du mardi 22 septembre au dimanche 20 décembre 2020.
+            L'hiver aura lieu du lundi 21 décembre au vendredi 19 mars 2021.
+
+            --------------
+
+            Spring will take place from Saturday, March 20 to Sunday, June 20, 2021.
+            The current summer will end on Monday, September 21, 2020.
+            Fall will take place from Tuesday, September 22 to Sunday, December 20, 2020.
+            Winter will take place from Monday, December 21 to Friday, March 19, 2021.
+
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function TIM_Season( $xDate = null )
+    /*----------------------------------------------*/
+    {
+        $xDate = $xDate ?? date( 'YmdHis' );
+
+        if ( is_int( $xDate ) )
+            $szMark = date( 'md',$xDate );
+        else
+            $szMark = date( 'md',strtotime( $xDate ) );
+
+        //var_dump( $szMark );
+
+        if     ( $szMark < '0321' || $szMark > '1220')
+            return ( 'winter' );
+        elseif ( $szMark < '0621' )
+            return ( 'spring' );
+        elseif ( $szMark < '0921' )
+            return ( 'summer' );
+        else
+            return ( 'fall' );
+
+    }   /* End of Vaesoli.TIM_season() ================================================ */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*TIM_timeOfTheDay( [$tTime] )=
+
+        Gets the time of the day at a gievn time
+
+        {*params
+            $tTime          (int)       The time to consider. Optional. Same sort of
+                                        value as [c]time()[/c]
+        *}
+
+        {*return
+            (string)                    'morning', 'afternoon', 'evening' or 'night'
+        *}
+
+        {*abstract
+
+            Definitions extrapolated from:[br][br]
+
+            [url]https://en.wikipedia.org/wiki/Morning[/url][br]
+            [url]https://en.wikipedia.org/wiki/Night[/url][br]
+            [url]https://wgntv.com/weather/how-do-you-define-daytime-and-evening-times-in-a-weather-forecast[/url][br]
+            [url]https://en.wikipedia.org/wiki/Evening[/url][br]
+            [url]https://ell.stackexchange.com/questions/8954/the-exact-time-of-evening-and-night[/url][br]
+
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function TIM_timeOfTheDay( $tTime = null )
+    /*----------------------------------------------------*/
+    {
+        if ( ! is_int( $tTime ) )
+            $tTime = time();
+
+        $szTime = (string) date( 'His' );
+
+        //var_dump( $szTime );
+
+        if     ( $szTime >= '170001' && $szTime <= '200000' )
+            return ( 'evening' );
+        elseif ( $szTime >= '200001' && $szTime <= '240000' )
+            return ( 'night' );
+        elseif ( $szTime >= '000001' && $szTime <= '040000' )
+            return ( 'night' );
+        elseif ( $szTime >= '040001' && $szTime <= '120000' )
+            return ( 'morning' );
+        else
+            return ( 'afternoon' );
+
+    }   /* End of Vaesoli.TIM_timeOfTheDay() ========================================== */
+    /* ================================================================================ */
 
 
     public static function URL_Parse( $szURL = null,$szPart = null )

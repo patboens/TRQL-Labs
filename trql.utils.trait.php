@@ -223,10 +223,10 @@ trait Utils
 
         {*abstract
 
-            Le printemps aura lieu du samedi 20 mars au dimanche 20 juin 2021.
-            L'été actuel se terminera le lundi 21 septembre 2020.
-            L'automne aura lieu du mardi 22 septembre au dimanche 20 décembre 2020.
-            L'hiver aura lieu du lundi 21 décembre au vendredi 19 mars 2021.
+            Spring will take place from Saturday, March 20 to Sunday, June 20, 2021.
+            The current summer will end on Monday, September 21, 2020.
+            Fall will take place from Tuesday, September 22 to Sunday, December 20, 2020.
+            Winter will take place from Monday, December 21 to Friday, March 19, 2021.
 
         *}
 
@@ -236,24 +236,7 @@ trait Utils
     public function season( $xDate = null )
     /*-----------------------------------*/
     {
-        $xDate = $xDate ?? date( 'YmdHis' );
-
-        if ( is_int( $xDate ) )
-            $szMark = date( 'md',$xDate );
-        else
-            $szMark = date( 'md',strtotime( $xDate ) );
-
-        var_dump( $szMark );
-
-        if     ( $szMark < '0321' || $szMark > '1220')
-            return ( 'winter' );
-        elseif ( $szMark < '0621' )
-            return ( 'spring' );
-        elseif ( $szMark < '0921' )
-            return ( 'summer' );
-        else
-            return ( 'fall' );
-
+        return ( Vaesoli::TIM_Season( $xDate ) );
     }   /* End of Utils.season() ====================================================== */
     /* ================================================================================ */
 

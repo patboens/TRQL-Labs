@@ -1029,11 +1029,12 @@ class RSSItem extends DataFeedItem
     {
         //$this->__die("IN POPULATE " . $szType );
         //var_dump( __METHOD__ . "(): DANS RSSITEM.POPULATE()" );
-        switch( $szType )
+        switch ( strtolower( trim( $szType ) ) )
         {
             case 'atom' :
                 {
                     //var_dump( __METHOD__ . "(): DANS RSSITEM.POPULATE() : CAS ATOM" );
+                    //die();
 
                     // If we are using Atom, then there is a registered namespace called "a"
                     // We use this namespace in all subsequent calls
@@ -1061,7 +1062,27 @@ class RSSItem extends DataFeedItem
                     if ( ! empty( $szCategory = $this->subTag( $oXPath,$oNode,'a:category' ) ) )
                         $this->aCategories[] = $szCategory;
                     else
-                        $this->aCategories[] = 'unknown';
+                    {
+                        //var_dump( "CATEGORIE VIDE",$oNode->nodeName );
+
+                        if ( ( $aCategoriesColl = $oXPath->query( 'a:category',$oNode ) ) && $aCategoriesColl->length > 0 )
+                        {
+                            foreach( $aCategoriesColl as $aCatNode )
+                            {
+                                if ( ! empty( $aCatNode->nodeValue ) )
+                                    $this->aCategories[] = $aCatNode->nodeValue;
+                                else
+                                {
+                                    if ( ! empty( $szCat = $aCatNode->getAttribute( 'term' ) ) )
+                                        $this->aCategories[] = $szCat;
+                                }
+                            }
+                            //var_dump( "FOUND {$aCategoriesColl->length} subnodes for category" );
+                        }
+
+                        if ( count( $this->aCategories ) < 1 )
+                            $this->aCategories[] = 'unknown';
+                    }
 
                     if ( ! empty( $szCreator = $this->subTag( $oXPath,$oNode,'a:author/a:name' ) ) )
                     {
