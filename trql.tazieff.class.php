@@ -461,6 +461,10 @@ class Tazieff extends Utility implements iContext
     /*------------------------*/
     {
         $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Tazieff.__destruct() ================================================ */
     /* ================================================================================ */
 

@@ -44,6 +44,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:28 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -195,7 +202,7 @@ class MoveAction extends Action
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MoveAction.__construct() ========================================== */
+    }   /* End of MoveAction.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -220,10 +227,12 @@ class MoveAction extends Action
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MoveAction.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MoveAction.__destruct() ============================================= */
     /* ================================================================================ */
 
-}   /* End of class MoveAction ====================================================== */
+}   /* End of class MoveAction ======================================================== */
 /* ==================================================================================== */
 
 ?>

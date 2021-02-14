@@ -39,6 +39,14 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 08:55 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
+
     *}}} */
 /****************************************************************************************/
 namespace trql\school;
@@ -149,8 +157,11 @@ class School extends EducationalOrganization implements iContext
     public function __destruct()
     /*------------------------*/
     {
-        //parent::__destruct();
         $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of School.__destruct() ================================================= */
     /* ================================================================================ */
 

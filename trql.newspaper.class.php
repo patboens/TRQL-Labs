@@ -44,6 +44,14 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:16 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
+
 
     *}}} */
 /****************************************************************************************/
@@ -465,7 +473,7 @@ class Newspaper extends Periodical
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Newspaper.__construct() ========================================== */
+    }   /* End of Newspaper.__construct() ============================================= */
     /* ================================================================================ */
 
 
@@ -490,10 +498,12 @@ class Newspaper extends Periodical
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Newspaper.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Newspaper.__destruct() ============================================== */
     /* ================================================================================ */
 
-}   /* End of class Newspaper ====================================================== */
+}   /* End of class Newspaper ========================================================= */
 /* ==================================================================================== */
 
 ?>

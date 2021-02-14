@@ -45,6 +45,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:52 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -163,7 +170,7 @@ class MedicalSpecialty extends MedicalEnumeration, Specialty
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MedicalSpecialty.__construct() ========================================== */
+    }   /* End of MedicalSpecialty.__construct() ====================================== */
     /* ================================================================================ */
 
 
@@ -188,10 +195,12 @@ class MedicalSpecialty extends MedicalEnumeration, Specialty
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MedicalSpecialty.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MedicalSpecialty.__destruct() ======================================= */
     /* ================================================================================ */
 
-}   /* End of class MedicalSpecialty ====================================================== */
+}   /* End of class MedicalSpecialty ================================================== */
 /* ==================================================================================== */
 
 ?>

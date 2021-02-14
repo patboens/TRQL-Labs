@@ -42,6 +42,14 @@
     *}
 
 
+    {*chist
+        {*mdate 14-02-21 09:16 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
+
     *}}} */
 /****************************************************************************************/
 namespace trql\nutritioninformation;
@@ -166,7 +174,7 @@ class NutritionInformation extends StructuredValue
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of NutritionInformation.__construct() ========================================== */
+    }   /* End of NutritionInformation.__construct() ================================== */
     /* ================================================================================ */
 
 
@@ -191,10 +199,12 @@ class NutritionInformation extends StructuredValue
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of NutritionInformation.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of NutritionInformation.__destruct() =================================== */
     /* ================================================================================ */
 
-}   /* End of class NutritionInformation ====================================================== */
+}   /* End of class NutritionInformation ============================================== */
 /* ==================================================================================== */
 
 ?>

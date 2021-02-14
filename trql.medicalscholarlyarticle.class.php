@@ -41,6 +41,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:52 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -488,7 +495,7 @@ class MedicalScholarlyArticle extends ScholarlyArticle
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MedicalScholarlyArticle.__construct() ========================================== */
+    }   /* End of MedicalScholarlyArticle.__construct() =============================== */
     /* ================================================================================ */
 
 
@@ -513,10 +520,12 @@ class MedicalScholarlyArticle extends ScholarlyArticle
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MedicalScholarlyArticle.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MedicalScholarlyArticle.__destruct() ================================ */
     /* ================================================================================ */
 
-}   /* End of class MedicalScholarlyArticle ====================================================== */
+}   /* End of class MedicalScholarlyArticle =========================================== */
 /* ==================================================================================== */
 
 ?>

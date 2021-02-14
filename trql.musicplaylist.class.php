@@ -153,6 +153,10 @@ class MusicPlaylist extends CreativeWork
     /*------------------------*/
     {
         $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MusicPlaylist.__destruct() ========================================== */
     /* ================================================================================ */
 

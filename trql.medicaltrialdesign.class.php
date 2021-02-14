@@ -41,6 +41,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:52 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -156,7 +163,7 @@ class MedicalTrialDesign extends MedicalEnumeration
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MedicalTrialDesign.__construct() ========================================== */
+    }   /* End of MedicalTrialDesign.__construct() ==================================== */
     /* ================================================================================ */
 
 
@@ -181,10 +188,12 @@ class MedicalTrialDesign extends MedicalEnumeration
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MedicalTrialDesign.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MedicalTrialDesign.__destruct() ===================================== */
     /* ================================================================================ */
 
-}   /* End of class MedicalTrialDesign ====================================================== */
+}   /* End of class MedicalTrialDesign ================================================ */
 /* ==================================================================================== */
 
 ?>

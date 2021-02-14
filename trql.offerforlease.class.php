@@ -44,6 +44,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:16 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -280,7 +287,7 @@ class OfferForLease extends Offer
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of OfferForLease.__construct() ========================================== */
+    }   /* End of OfferForLease.__construct() ========================================= */
     /* ================================================================================ */
 
 
@@ -305,10 +312,11 @@ class OfferForLease extends Offer
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of OfferForLease.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of OfferForLease.__destruct() ========================================== */
     /* ================================================================================ */
 
-}   /* End of class OfferForLease ====================================================== */
+}   /* End of class OfferForLease ===================================================== */
 /* ==================================================================================== */
-
 ?>

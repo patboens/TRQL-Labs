@@ -48,6 +48,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:52 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -202,7 +209,7 @@ class MedicalTherapy extends TherapeuticProcedure
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MedicalTherapy.__construct() ========================================== */
+    }   /* End of MedicalTherapy.__construct() ======================================== */
     /* ================================================================================ */
 
 
@@ -227,10 +234,12 @@ class MedicalTherapy extends TherapeuticProcedure
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MedicalTherapy.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MedicalTherapy.__destruct() ========================================= */
     /* ================================================================================ */
 
-}   /* End of class MedicalTherapy ====================================================== */
+}   /* End of class MedicalTherapy ==================================================== */
 /* ==================================================================================== */
 
 ?>

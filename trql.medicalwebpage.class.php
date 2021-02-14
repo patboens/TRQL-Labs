@@ -41,6 +41,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:52 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -493,7 +500,7 @@ class MedicalWebPage extends WebPage
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MedicalWebPage.__construct() ========================================== */
+    }   /* End of MedicalWebPage.__construct() ======================================== */
     /* ================================================================================ */
 
 
@@ -518,10 +525,12 @@ class MedicalWebPage extends WebPage
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MedicalWebPage.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MedicalWebPage.__destruct() ========================================= */
     /* ================================================================================ */
 
-}   /* End of class MedicalWebPage ====================================================== */
+}   /* End of class MedicalWebPage ==================================================== */
 /* ==================================================================================== */
 
 ?>

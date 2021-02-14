@@ -42,6 +42,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:28 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -477,7 +484,7 @@ class MovieSeries extends CreativeWorkSeries
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MovieSeries.__construct() ========================================== */
+    }   /* End of MovieSeries.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -502,10 +509,12 @@ class MovieSeries extends CreativeWorkSeries
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MovieSeries.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MovieSeries.__destruct() ============================================ */
     /* ================================================================================ */
 
-}   /* End of class MovieSeries ====================================================== */
+}   /* End of class MovieSeries ======================================================= */
 /* ==================================================================================== */
 
 ?>

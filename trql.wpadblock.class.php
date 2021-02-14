@@ -39,6 +39,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 10:03 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -145,6 +152,10 @@ class WPAdBlock extends WebPageElement
     /*------------------------*/
     {
         $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of WPAdBlock.__destruct() ============================================== */
     /* ================================================================================ */
 

@@ -42,6 +42,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:16 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -177,7 +184,7 @@ class Occupation extends Intangible
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Occupation.__construct() ========================================== */
+    }   /* End of Occupation.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -202,10 +209,12 @@ class Occupation extends Intangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Occupation.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Occupation.__destruct() ============================================= */
     /* ================================================================================ */
 
-}   /* End of class Occupation ====================================================== */
+}   /* End of class Occupation ======================================================== */
 /* ==================================================================================== */
 
 ?>

@@ -42,6 +42,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:16 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -158,7 +165,7 @@ class NLNonprofitType extends NonprofitType
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of NLNonprofitType.__construct() ========================================== */
+    }   /* End of NLNonprofitType.__construct() ======================================= */
     /* ================================================================================ */
 
 
@@ -183,10 +190,11 @@ class NLNonprofitType extends NonprofitType
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of NLNonprofitType.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of NLNonprofitType.__destruct() ======================================== */
     /* ================================================================================ */
 
-}   /* End of class NLNonprofitType ====================================================== */
+}   /* End of class NLNonprofitType =================================================== */
 /* ==================================================================================== */
-
 ?>

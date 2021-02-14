@@ -41,6 +41,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:28 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -161,7 +168,7 @@ class MonetaryGrant extends Grant
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MonetaryGrant.__construct() ========================================== */
+    }   /* End of MonetaryGrant.__construct() ========================================= */
     /* ================================================================================ */
 
 
@@ -186,10 +193,12 @@ class MonetaryGrant extends Grant
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MonetaryGrant.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MonetaryGrant.__destruct() ========================================== */
     /* ================================================================================ */
 
-}   /* End of class MonetaryGrant ====================================================== */
+}   /* End of class MonetaryGrant ===================================================== */
 /* ==================================================================================== */
 
 ?>

@@ -41,6 +41,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:28 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -475,7 +482,7 @@ class MovieClip extends Clip
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MovieClip.__construct() ========================================== */
+    }   /* End of MovieClip.__construct() ============================================= */
     /* ================================================================================ */
 
 
@@ -500,10 +507,12 @@ class MovieClip extends Clip
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MovieClip.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MovieClip.__destruct() ============================================== */
     /* ================================================================================ */
 
-}   /* End of class MovieClip ====================================================== */
+}   /* End of class MovieClip ========================================================= */
 /* ==================================================================================== */
 
 ?>

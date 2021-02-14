@@ -43,6 +43,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:52 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -202,7 +209,7 @@ class MedicalSymptom extends MedicalSignOrSymptom
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MedicalSymptom.__construct() ========================================== */
+    }   /* End of MedicalSymptom.__construct() ======================================== */
     /* ================================================================================ */
 
 
@@ -227,10 +234,12 @@ class MedicalSymptom extends MedicalSignOrSymptom
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MedicalSymptom.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MedicalSymptom.__destruct() ========================================= */
     /* ================================================================================ */
 
-}   /* End of class MedicalSymptom ====================================================== */
+}   /* End of class MedicalSymptom ==================================================== */
 /* ==================================================================================== */
 
 ?>

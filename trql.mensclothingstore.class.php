@@ -41,6 +41,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:52 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -397,7 +404,7 @@ class MensClothingStore extends Store
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MensClothingStore.__construct() ========================================== */
+    }   /* End of MensClothingStore.__construct() ===================================== */
     /* ================================================================================ */
 
 
@@ -422,10 +429,12 @@ class MensClothingStore extends Store
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MensClothingStore.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MensClothingStore.__destruct() ====================================== */
     /* ================================================================================ */
 
-}   /* End of class MensClothingStore ====================================================== */
+}   /* End of class MensClothingStore ================================================= */
 /* ==================================================================================== */
 
 ?>

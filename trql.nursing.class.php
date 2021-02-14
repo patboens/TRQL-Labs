@@ -42,6 +42,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:16 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -399,7 +406,7 @@ class Nursing extends MedicalBusiness
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Nursing.__construct() ========================================== */
+    }   /* End of Nursing.__construct() =============================================== */
     /* ================================================================================ */
 
 
@@ -424,10 +431,12 @@ class Nursing extends MedicalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Nursing.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Nursing.__destruct() ================================================ */
     /* ================================================================================ */
 
-}   /* End of class Nursing ====================================================== */
+}   /* End of class Nursing =========================================================== */
 /* ==================================================================================== */
 
 ?>

@@ -42,6 +42,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:28 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -398,7 +405,7 @@ class Motorcycle extends Vehicle
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Motorcycle.__construct() ========================================== */
+    }   /* End of Motorcycle.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -423,10 +430,12 @@ class Motorcycle extends Vehicle
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Motorcycle.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Motorcycle.__destruct() ============================================= */
     /* ================================================================================ */
 
-}   /* End of class Motorcycle ====================================================== */
+}   /* End of class Motorcycle ======================================================== */
 /* ==================================================================================== */
 
 ?>

@@ -42,6 +42,14 @@
     *}
 
 
+    {*chist
+        {*mdate 14-02-21 09:16 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
+
     *}}} */
 /****************************************************************************************/
 namespace trql\offeritemcondition;
@@ -156,7 +164,7 @@ class OfferItemCondition extends Enumeration
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of OfferItemCondition.__construct() ========================================== */
+    }   /* End of OfferItemCondition.__construct() ==================================== */
     /* ================================================================================ */
 
 
@@ -181,10 +189,12 @@ class OfferItemCondition extends Enumeration
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of OfferItemCondition.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of OfferItemCondition.__destruct() ===================================== */
     /* ================================================================================ */
 
-}   /* End of class OfferItemCondition ====================================================== */
+}   /* End of class OfferItemCondition ================================================ */
 /* ==================================================================================== */
 
 ?>

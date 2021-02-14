@@ -42,7 +42,16 @@
     *}
 
 
+    {*chist
+        {*mdate 14-02-21 10:44 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
+
     *}}} */
+
 /****************************************************************************************/
 namespace trql\amusementpark;
 
@@ -150,7 +159,10 @@ class AmusementPark extends EntertainmentBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of AmusementPark.__destruct() ========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }
+    /* End of AmusementPark.__destruct() ========================================== */
     /* ================================================================================ */
 
 }   /* End of class AmusementPark ===================================================== */

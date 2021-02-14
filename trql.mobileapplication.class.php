@@ -42,6 +42,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:28 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -498,7 +505,7 @@ class MobileApplication extends SoftwareApplication
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MobileApplication.__construct() ========================================== */
+    }   /* End of MobileApplication.__construct() ===================================== */
     /* ================================================================================ */
 
 
@@ -523,10 +530,12 @@ class MobileApplication extends SoftwareApplication
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MobileApplication.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MobileApplication.__destruct() ====================================== */
     /* ================================================================================ */
 
-}   /* End of class MobileApplication ====================================================== */
+}   /* End of class MobileApplication ================================================= */
 /* ==================================================================================== */
 
 ?>

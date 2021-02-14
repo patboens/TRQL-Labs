@@ -46,6 +46,14 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:16 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
+
 
     *}}} */
 /****************************************************************************************/
@@ -171,7 +179,7 @@ class OpeningHoursSpecification extends StructuredValue
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of OpeningHoursSpecification.__construct() ========================================== */
+    }   /* End of OpeningHoursSpecification.__construct() ============================= */
     /* ================================================================================ */
 
 
@@ -196,10 +204,12 @@ class OpeningHoursSpecification extends StructuredValue
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of OpeningHoursSpecification.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of OpeningHoursSpecification.__destruct() ============================== */
     /* ================================================================================ */
 
-}   /* End of class OpeningHoursSpecification ====================================================== */
+}   /* End of class OpeningHoursSpecification ========================================= */
 /* ==================================================================================== */
 
 ?>

@@ -41,6 +41,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:28 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -263,7 +270,7 @@ class Mountain extends Landform
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Mountain.__construct() ========================================== */
+    }   /* End of Mountain.__construct() ============================================== */
     /* ================================================================================ */
 
 
@@ -288,10 +295,12 @@ class Mountain extends Landform
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Mountain.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Mountain.__destruct() =============================================== */
     /* ================================================================================ */
 
-}   /* End of class Mountain ====================================================== */
+}   /* End of class Mountain ========================================================== */
 /* ==================================================================================== */
 
 ?>

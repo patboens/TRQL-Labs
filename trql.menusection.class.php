@@ -44,6 +44,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 08:55 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -464,7 +471,7 @@ class MenuSection extends CreativeWork
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of MenuSection.__construct() ========================================== */
+    }   /* End of MenuSection.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -489,10 +496,12 @@ class MenuSection extends CreativeWork
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MenuSection.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MenuSection.__destruct() ============================================ */
     /* ================================================================================ */
 
-}   /* End of class MenuSection ====================================================== */
+}   /* End of class MenuSection ======================================================= */
 /* ==================================================================================== */
 
 ?>

@@ -155,7 +155,10 @@ class AdvertiserContentArticle extends Article
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of AdvertiserContentArticle.__destruct() =============================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }
+    /* End of AdvertiserContentArticle.__destruct() =============================== */
     /* ================================================================================ */
 
 }   /* End of class AdvertiserContentArticle ========================================== */

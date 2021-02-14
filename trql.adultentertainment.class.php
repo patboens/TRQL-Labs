@@ -150,7 +150,10 @@ class AdultEntertainment extends EntertainmentBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of AdultEntertainment.__destruct() ===================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }
+   /* End of AdultEntertainment.__destruct() ===================================== */
     /* ================================================================================ */
 
 }   /* End of class AdultEntertainment ================================================ */

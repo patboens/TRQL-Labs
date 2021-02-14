@@ -1,5 +1,24 @@
 <?php
 /****************************************************************************************/
+
+/*
+    {PYB} is a shortcut for Patrick Boens
+
+    {COMPANY} is a shortcut to "Lato Sensu Management"
+
+    {RIGHTS} is a shortcut used by trql.documentor.class.php for
+    All rights reserved to Lato Sensu Management for all countries.
+    All Intellectual Property belongs to Patrick Boens.
+
+    Other shortcuts exist. They exist to make it simple to change the formulation
+    of parts that can vary over time.
+
+    It does not change the undisputed truth that ALL code has been created by
+    Patrick Boens, the author, who owns ALL the intellectual property of what
+    he created.
+
+*/
+
 /** {{{*fheader
     {*file                  trql.paradeigma.class.php *}
     {*purpose               Handles paradeigmas *}
@@ -24,6 +43,14 @@
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Original creation
+        *}
+    *}
+
+    {*chist
+        {*mdate 14-02-21 08:55 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
         *}
     *}
 
@@ -130,8 +157,11 @@ class Paradeigma extends WebPage implements iContext
     public function __destruct()
     /*------------------------*/
     {
-        //parent::__destruct();
         $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Paradeigma.__destruct() ============================================= */
     /* ================================================================================ */
 }   /* End of class Paradeigma ======================================================== */

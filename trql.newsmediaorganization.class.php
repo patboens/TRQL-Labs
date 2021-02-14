@@ -41,6 +41,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:16 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -295,7 +302,7 @@ class NewsMediaOrganization extends Organization
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of NewsMediaOrganization.__construct() ========================================== */
+    }   /* End of NewsMediaOrganization.__construct() ================================= */
     /* ================================================================================ */
 
 
@@ -320,10 +327,8 @@ class NewsMediaOrganization extends Organization
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of NewsMediaOrganization.__destruct() =========================================== */
+    }   /* End of NewsMediaOrganization.__destruct() ================================== */
     /* ================================================================================ */
-
-}   /* End of class NewsMediaOrganization ====================================================== */
+}   /* End of class NewsMediaOrganization ============================================= */
 /* ==================================================================================== */
-
 ?>

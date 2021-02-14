@@ -156,6 +156,10 @@ class MusicRecording extends CreativeWork
     /*------------------------*/
     {
         $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MusicRecording.__destruct() ========================================== */
     /* ================================================================================= */
 

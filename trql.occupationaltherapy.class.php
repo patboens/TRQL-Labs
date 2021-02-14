@@ -43,6 +43,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 09:16 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     *}}} */
 /****************************************************************************************/
@@ -194,7 +201,7 @@ class OccupationalTherapy extends MedicalTherapy
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of OccupationalTherapy.__construct() ========================================== */
+    }   /* End of OccupationalTherapy.__construct() =================================== */
     /* ================================================================================ */
 
 
@@ -219,10 +226,12 @@ class OccupationalTherapy extends MedicalTherapy
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of OccupationalTherapy.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of OccupationalTherapy.__destruct() ==================================== */
     /* ================================================================================ */
 
-}   /* End of class OccupationalTherapy ====================================================== */
+}   /* End of class OccupationalTherapy =============================================== */
 /* ==================================================================================== */
 
 ?>
