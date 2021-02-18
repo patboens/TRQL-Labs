@@ -40,7 +40,6 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
 namespace trql\service;
@@ -148,7 +147,8 @@ class Service extends Intangible
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q7406919';
+    public      $wikidataId             = 'Q7406919';               /* {*property   $wikidataId         (string)                                        Wikidata ID. Transaction in which possession of no physical goods 
+                                                                                                                                                        are transferred from the seller to the buyer *} */
 
 
     /* ================================================================================ */

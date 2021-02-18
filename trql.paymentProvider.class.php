@@ -1,5 +1,5 @@
 <?php
-/**************************************************************************/
+/**************************************************************************************/
 /** {{{*fheader
     {*file                  trql.paymentProvider.class.php *}
     {*purpose               TRQL Labs - Payment Provider Abstraction *}
@@ -22,16 +22,28 @@
 
 
     *}}} */
-/**************************************************************************/
+/**************************************************************************************/
+namespace trql\paymentProvider;
+
+use \trql\vaesoli\Vaesoli       as v;
+use \trql\thing\Thing           as Thing;
+
+if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+    require_once( 'trql.vaesoli.class.php' );
+
+if ( ! defined( 'THING_CLASS_VERSION' ) )
+    require_once( 'trql.thing.class.php' );
+
 interface iPaymentProvider
 /*-----------------------*/
 {
     public function init( $aData );
-}   /* End of interface ipaymentProvider ============================================ */
+}   /* End of interface iPaymentProvider ============================================ */
+/* ================================================================================== */
 
 
-class paymentProvider implements iPaymentProvider
-/*---------------------------------------------*/
+class paymentProvider extends Thing implements iPaymentProvider
+/*-----------------------------------------------------------*/
 {
     public $aProperties = null;
 
@@ -74,7 +86,8 @@ class paymentProvider implements iPaymentProvider
     /* ============================================================================== */
 
 
-}   /* End of class paymentProviderFactory ========================================== */
+}   /* End of class paymentProvider ================================================= */
+/* ================================================================================== */
 
 
 class paymentProviderFactory
@@ -91,18 +104,15 @@ class paymentProviderFactory
     }   /* End of paymentProviderFactory.create() =================================== */
     /* ============================================================================== */
 }   /* End of class paymentProviderFactory ========================================== */
+/* ================================================================================== */
 
 
 class mollie extends paymentProvider
 /*--------------------------------*/
 {
     public      $szMode                 = 'test';
-    protected   $aAPIKeys               = array( 'test' => 'test_4DJEW82S37n7pUtskggfp3v8793Q56'        ,
-                                                 'live' => 'live_F2a2Wt9s2FkFrJPFdMPpC9CmxqTdwv'
-                                               );
-    protected   $aURLs                  = array( 'redirect' => 'https://www.trql.fm/mollie-redirect/'   ,
-                                                 'hook'     => 'https://www.trql.fm/mollie-webhook/'
-                                               );
+    protected   $aAPIKeys               = null;
+    protected   $aURLs                  = null;
     public      $szContactOption        = null;
     public      $szContactDestination   = null;
 
@@ -114,11 +124,140 @@ class mollie extends paymentProvider
     public function __construct()
     /*-------------------------*/
     {
+        $this->getAPIKeys();
+        $this->getURLs();
+
+        return ( $this );
         //var_dump( "Salut ... je suis Mollie" );
-    }   /* End of mollie.__construct() ============================================== */
-    /* ============================================================================== */
+    }   /* End of mollie.__construct() ================================================ */
+    /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*getPIKeys()=
+
+        Get the URLs that must be used for the "redirect" and "hook" slots of Mollie
+
+        {*params
+        *}
+
+        {*return
+            (self)      The object itself is returned
+        *}
+
+        {*abstract
+            To remain secret, the keys are kept outside of the code area.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function getAPIKeys()
+    /*------------------------*/
+    {
+        $this->aAPIKeys['test'] = $this->getAPIKey( 'test' );
+        $this->aAPIKeys['live'] = $this->getAPIKey( 'live' );
+
+        return ( $this );
+
+    }   /* End of mollie.getAPIKeys() ================================================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*getURLs()=
+
+        Get the URLs that must be used for the "redirect" and "hook" slots of Mollie
+
+        {*params
+        *}
+
+        {*return
+            (self)      The object itself is returned
+        *}
+
+        {*remark
+            The [c]getURLs[/c] method uses the same sort of mechanism as the
+            [c]getAPIKeys()[/c] method.
+        *}
+
+        {*abstract
+            To remain secret, the URLs are kept outside of the code area.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function getURLs()
+    /*---------------------*/
+    {
+        $this->aURLs['redirect'] = $this->getAPIKey( 'redirect' );
+        $this->aURLs['redirect'] = $this->getAPIKey( 'hook'     );
+
+        return ( $this );
+    }   /* End of mollie.getURLs() ==================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*getAPIKey([$szSystem])=
+
+        Get the API Key related to the system we're dealing with
+
+        {*params
+            $szSystem       (string)        Optional. [c]null[/c] by default.
+        *}
+
+        {*return
+            (string)        The API Key or [c]null[/c] if not found
+        *}
+
+        {*abstract
+            As we are dealing with possibly multiple external API calls, we may have
+            several API keys to consider. That's what the "system" parameter is for.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    private function getAPIKey( $szSystem = null )
+    /*------------------------------------------*/
+    {
+        if ( ! is_null( $szSystem ) )
+            $szCave = "/api.{$szSystem}.key.txt";
+        else
+            $szCave = '/api.key.txt';
+
+        if ( is_file( $szFile = v::FIL_RealPath( $this->szHome . $szCave ) ) )
+            return ( v::FIL_FileToStr( $szFile ) );
+        else
+            return ( null );
+    }   /* End of mollie.getAPIKey() ================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*setAPIKeys( [$aData] )=
+
+        Sets the API Keys that will be used
+
+        {*params
+            $aData          (array)         Optional. [c]null[/c] by default. Otherwise
+                                            it is an associative array that looks like:
+
+                                            array( 'test' => 'my-key'        ,
+                                                   'live' => 'my-other-key'
+                                                 );
+
+        *}
+
+        {*return
+            (array)         The old set of API keys or [c]null[/c] if not set yet
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function setAPIKeys( $aData = null )
     /*---------------------------------------*/
     {
@@ -135,8 +274,8 @@ class mollie extends paymentProvider
         }   /* if ( isset( $aData['live'] ) ) */
 
         return ( $aRetVal );
-    }   /* End of mollie.setAPIKeys() =============================================== */
-    /* ============================================================================== */
+    }   /* End of mollie.setAPIKeys() ================================================= */
+    /* ================================================================================ */
 
 
     public function setRedirect( $szValue = null )
@@ -150,8 +289,8 @@ class mollie extends paymentProvider
         }   /* if ( ! is_null( $szValue ) ) */
 
         return ( $szRetVal );
-    }   /* End of mollie.setRedirect() ============================================== */
-    /* ============================================================================== */
+    }   /* End of mollie.setRedirect() ================================================ */
+    /* ================================================================================ */
 
 
     public function setHook( $szValue = null )
@@ -165,8 +304,8 @@ class mollie extends paymentProvider
         }   /* if ( ! is_null( $szValue ) ) */
 
         return ( $szRetVal );
-    }   /* End of mollie.setHook() ================================================== */
-    /* ============================================================================== */
+    }   /* End of mollie.setHook() ==================================================== */
+    /* ================================================================================ */
 
 
     public function setContactOption( $szValue = null )
@@ -180,8 +319,8 @@ class mollie extends paymentProvider
         }   /* if ( ! is_null( $szValue ) ) */
 
         return ( $szRetVal );
-    }   /* End of mollie.setContactOption() ========================================= */
-    /* ============================================================================== */
+    }   /* End of mollie.setContactOption() =========================================== */
+    /* ================================================================================ */
 
 
     public function setContactDestination( $szValue = null )
@@ -195,8 +334,8 @@ class mollie extends paymentProvider
         }   /* if ( ! is_null( $szValue ) ) */
 
         return ( $szRetVal );
-    }   /* End of mollie.setContactDestination() ==================================== */
-    /* ============================================================================== */
+    }   /* End of mollie.setContactDestination() ====================================== */
+    /* ================================================================================ */
 
 
     protected function call( $szURL,$o = null )
@@ -284,19 +423,29 @@ class mollie extends paymentProvider
             curl_close( $ch );
 
         return ( $oJSON );
-    }   /* End of mollie.call() ===================================================== */
-    /* ============================================================================== */
+    }   /* End of mollie.call() ======================================================= */
+    /* ================================================================================ */
 
 
-    public function createPayment( $aData = null )
+    public function createPayment( $aParams = null )
     /*------------------------------------------*/
     {
         $oRetVal = null;
 
-        if ( ! is_null( $aData ) )
+        if ( ! is_null( $aParams ) )
         {
             // Transformer l'array en objet
-            $o = (object) $aData;
+            $o = (object) $aParams;
+
+            /* If a language was set, use it for the UI, otherwise,
+               all messages will be displayed in the lnaguge of the
+               browser */
+            if ( isset( $aParams['locale'] ) )
+                $o->locale = $aParams['locale'];
+
+            //var_dump( $aParams );
+            //var_dump( 'DYING HERE',$o );
+            //die();
 
             // Au cas où le montant serait un float ou un int ... transformer en string
             $o->amount->value = (string) $o->amount->value;
@@ -326,11 +475,11 @@ class mollie extends paymentProvider
             // Doc: https://docs.mollie.com/reference/v2/payments-api/create-payment
             $oRetVal = $this->call( 'https://api.mollie.com/v2/payments',$o );
 
-        }   /* if ( ! is_null( $aData ) ) */
+        }   /* if ( ! is_null( $aParams ) ) */
 
         return ( $oRetVal );
-    }   /* End of mollie.createPayment() ============================================ */
-    /* ============================================================================== */
+    }   /* End of mollie.createPayment() ============================================== */
+    /* ================================================================================ */
 
 
     /* Doc: https://docs.mollie.com/reference/v2/payments-api/list-payments */
@@ -434,8 +583,8 @@ class mollie extends paymentProvider
 
         return ( $aRetVal );
 
-    }   /* End of mollie.listPayments() ============================================= */
-    /* ============================================================================== */
+    }   /* End of mollie.listPayments() =============================================== */
+    /* ================================================================================ */
 
 
     public function checkPaymentStatus( $szID )
@@ -446,8 +595,8 @@ class mollie extends paymentProvider
         // Il pourrait être intéressant de standardiser les statuts de paiement
         // avec ce qu'en dit schema.org: https://schema.org/PaymentStatusType
 
-    }   /* End of mollie.checkPaymentStatus() ======================================= */
-    /* ============================================================================== */
+    }   /* End of mollie.checkPaymentStatus() ========================================= */
+    /* ================================================================================ */
 
 
     public function checkout( $oPayment )
@@ -482,7 +631,34 @@ class mollie extends paymentProvider
 
         return ( false );                                           /* Si on arrive ici, c'est que c'est pas bon ! */
 
-    }   /* End of mollie.chekcout() ================================================= */
-    /* ============================================================================== */
-}   /* End of class mollie ========================================================== */
+    }   /* End of mollie.chekcout() =================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __destruct()
+    /*------------------------*/
+    {
+        $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of mollie.__destruct() ================================================= */
+    /* ================================================================================ */
+}   /* End of class mollie ============================================================ */
 ?>

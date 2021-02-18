@@ -1574,11 +1574,15 @@ class Vaesoli
 
 
     /* ========================================================================== */
-    /** {{*guid()=
+    /** {{*guid( [$normalize] )=
 
         Returns a GUID (unique in time, unique in space)
 
         {*params
+            $normalize      (bool)          Optional. [c]false[/c] by default. If
+                                            [c]true[/c], the GUID is presented in
+                                            lowercase and the opening and closing
+                                            curly braces are removed.
         *}
 
         {*return
@@ -1606,19 +1610,16 @@ class Vaesoli
         *}}
      */
     /* ========================================================================== */
-    public static function guid()
-    /*-------------------------*/
+    public static function guid( $normalized = false )
+    /*----------------------------------------------*/
     {
-        static $hyphen = null;
+        static $hyphen = '-';
 
-        if ( is_null( $hyphen ) )
-        {
-            $hyphen = chr(45);                                          /* "-" */
-        }
+        $szGUID = null;
 
         if ( function_exists( 'com_create_guid' ) )
         {
-            return ( com_create_guid() );
+            $szGUID = com_create_guid();
         }   /* if ( function_exists( 'com_create_guid' ) ) */
         else   /* Else of ... if ( function_exists('com_create_guid') ) */
         {
@@ -1626,16 +1627,22 @@ class Vaesoli
 
             $charid = strtoupper( md5( uniqid( rand(),true ) ) );
 
-            $uuid   = chr(123)                            .             /* "{" */
+            $szGUID = chr(123)                            .             /* "{" */
                       substr( $charid, 0, 8 ) . $hyphen   .
                       substr( $charid, 8, 4 ) . $hyphen   .
                       substr( $charid,12, 4 ) . $hyphen   .
                       substr( $charid,16, 4 ) . $hyphen   .
                       substr( $charid,20,12 )             .
                       chr(125);                                         /* "}" */
-            return ( $uuid );
         }   /* End of ... Else of ... if ( function_exists('com_create_guid') ) */
-    }   /* End of vaesoli.guid() =============================================== */
+
+        if ( ! $normalized )
+            return ( $szGUID );
+        else
+            return ( strtolower( str_replace( array('{','}'),'',$szGUID ) ) );
+
+    }   /* End of vaesoli.guid() ====================================================== */
+    /*==================================================================================*/
 
 
     public static function HTTP_GetURL( $szURL,$szUser = null,$szPwd = null,&$iErrCode = 0,$aOptions = null,&$szHeader = null,$iSecs = 5,$aPost = null,$aRequestHeaders = null,&$aInfo = null )
@@ -3696,16 +3703,38 @@ class Vaesoli
 
         *}
 
+        {*example
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "08:30" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "12:00" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "12:01" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "16:59" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "17:00" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "17:01" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "19:59" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "20:00" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "20:01" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "21:00" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "22:00" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "23:00" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "24:00" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "00:01" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "03:59" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "04:00" ) ),v::TIM_timeOfTheDay( $x ) );
+            var_dump( date( "d-m-Y H:i:s",$x = strtotime( "04:01" ) ),v::TIM_timeOfTheDay( $x ) );
+        *}
+
         *}}
      */
     /* ================================================================================ */
     public static function TIM_timeOfTheDay( $tTime = null )
     /*----------------------------------------------------*/
     {
+        //var_dump( $tTime );
+
         if ( ! is_int( $tTime ) )
             $tTime = time();
 
-        $szTime = (string) date( 'His' );
+        $szTime = (string) date( 'His',$tTime );
 
         //var_dump( $szTime );
 
@@ -3713,7 +3742,7 @@ class Vaesoli
             return ( 'evening' );
         elseif ( $szTime >= '200001' && $szTime <= '240000' )
             return ( 'night' );
-        elseif ( $szTime >= '000001' && $szTime <= '040000' )
+        elseif ( $szTime >= '000000' && $szTime <= '040000' )
             return ( 'night' );
         elseif ( $szTime >= '040001' && $szTime <= '120000' )
             return ( 'morning' );

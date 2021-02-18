@@ -45,6 +45,14 @@
         *}
     *}
 
+    {*chist
+        {*mdate 18-02-21 09:20 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
+
     *}}} */
 /****************************************************************************************/
 namespace trql\creativework;
@@ -424,6 +432,11 @@ class CreativeWork extends Thing implements iContext
     /*------------------------*/
     {
         $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
+
     }   /* End of CreativeWork.__destruct() =========================================== */
     /* ================================================================================ */
 

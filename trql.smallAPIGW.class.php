@@ -69,6 +69,7 @@ namespace trql\smallAPIGW;
 use \trql\vaesoli\Vaesoli           as v;
 use \trql\gateway\Gateway           as Gateway;
 use \trql\apihandler\APIHandler     as APIHandler;
+use \trql\bankaccount\BankAccount   as BankAccount;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -79,6 +80,9 @@ if ( ! defined( 'GATEWAY_CLASS_VERSION' ) )
 
 if ( ! defined( 'APIHANDLER_CLASS_VERSION' ) )
     require_once( 'trql.apihandler.class.php' );
+
+if ( ! defined( 'BANKACCOUNT_CLASS_VERSION' ) )
+    require_once( 'trql.bankaccount.class.php' );
 
 defined( 'SMALLAPIGW_CLASS_VERSION' ) or define( 'SMALLAPIGW_CLASS_VERSION','0.1' );
 
@@ -121,8 +125,13 @@ class SmallAPIGW extends Gateway
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                        Not found in Wikidata (yet: 06-02-21 10:56:29) *} */
 
-    public      $oHandler                       = null;         /* OLD WAY */
+    public      $bankAccount                    = null;             /* {*property   $bankAccount                (BankAccount)                   The bankAccount is EXPERIMENTAL. It may evolve in the future to a very
+                                                                                                                                                different model. *} */
+
+    /* Deprecated code */
+    public      $oHandler                       = null;         /* OLD WAY - Deprecated */
     public      $aHandlers                      = null;
+    /* Deprecated code */
 
 
 
@@ -183,8 +192,9 @@ class SmallAPIGW extends Gateway
     }   /* End of SmallAPIGW.storeStats() ============================================= */
     /* ================================================================================ */
 
+
     protected function assembleArgs( $aArgs,$aValues )
-    /*--*/
+    /*----------------------------------------------*/
     {
         $aRetVal = null;        
 
@@ -251,56 +261,13 @@ class SmallAPIGW extends Gateway
         return ( $aCall );
     }
 
-    /* Code qui devrait disparaître (note du 11-02-21 10:15:16) */
-    public function cashierOld( &$szSelf )
-    /*----------------------------------*/
-    {
-        $aCall = null;
-
-        if ( ! empty( $szSelf ) )
-        {
-            $a = explode( '/',$szSelf );
-
-            //var_dump( 'self=' . $szSelf );
-            //var_dump( '$a exploded=' );
-            //var_dump( $a );
-            //die();
-
-            $aParts = null;
-
-            foreach ( $a as $szStr )
-            {
-                if ( ! empty( $szStr ) )
-                {
-                    $szThePart = trim( $szStr );
-                    // ICI, IL FAUT VERIFIER SI CETTE PARTIE AGIT COMME DES PARAMETRES (? et &)
-                    $aParts[] = $szThePart;
-                }   /* if ( ! empty( $szStr ) ) */
-            }   /* foreach ( $a as $szStr ) */
-
-            //var_dump( $aParts );
-            //var_dump( $_GET );
-            //die();
-
-            $aCall = array( 'verb'      => $aParts[1] ?? 'UNKNOWN'              ,
-                            'parts'     => $aParts                              ,
-                            'cookies'   => $_COOKIE                             ,
-                            'get'       => $_GET                                ,
-                            'post'      => $_POST                               ,
-                            'server'    => $_SERVER
-                          );
-        }   /* if ( ! is_null( $szSelf ) ) */
-
-        $this->storeStats( $szSelf,$aCall );
-
-        return ( $aCall );
-    }   /* End of SmallAPIGW.cashierOld() ============================================= */
-    /* ================================================================================ */
-
-
     public function cashier( &$szSelf )
     /*-------------------------------*/
     {
+        if ( ! $this->bankAccount instanceof BankAccount )
+        {
+            // Do something
+        }
         // No cashier service YET (billing, ...)
     }   /* End of SmallAPIGW.cashier() ================================================ */
     /* ================================================================================ */

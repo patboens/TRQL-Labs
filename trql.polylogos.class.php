@@ -243,7 +243,7 @@ class PolyLogos extends Utility
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-}   /* End of PolyLogos.__destruct() ================================================== */
+    }   /* End of PolyLogos.__destruct() ============================================== */
     /* ================================================================================ */
 
 }   /* End of class PolyLogos ========================================================= */
