@@ -685,7 +685,7 @@ abstract class Mother
     /** {{*protected isRightTimeForHouseKeeping()=
 
         Is the current datetime suitable to start a bunch of housekeeping tasks such as
-        autobackup, autodocumengtation, ...
+        autobackup, autodocumentation, ...
 
         {*params
         *}
@@ -722,11 +722,14 @@ abstract class Mother
 
 
     /* ================================================================================ */
-    /** {{*backup()=
+    /** {{*backup( [$bForced] )=
 
         Provides an easy backup facility
 
         {*params
+            $bForced        (bool)      [c]true[/c] force the backup of the class.
+                                        [c]false[/c] do not force the backup of the 
+                                        class. Optional; [c]false[/c] by default.
         *}
 
         {*return
@@ -736,13 +739,13 @@ abstract class Mother
         *}}
     */
     /* ================================================================================ */
-    public function backup()
-    /*--------------------*/
+    public function backup( $bForced = false )
+    /*--------------------------------------*/
     {
-        if ( $this->backupRequired && $this->isRightTimeForHouseKeeping() )
+        if ( $bForced || ( $this->backupRequired && $this->isRightTimeForHouseKeeping() ) )
         {
-            $iDoW = (int) date('N');
-            $szWeekNo = date('W');
+            $iDoW       = (int) date('N');
+            $szWeekNo   = date('W');
 
             //var_dump( $this->self['home'] );
             $szSource = $this->self['file'];
@@ -1524,6 +1527,9 @@ abstract class Mother
         if ( is_null( $szHomeOfDocumentation ) )
             $szHomeOfDocumentation = vaesoli::FIL_RealPath( dirname( $this->self['home'] ) . '/DOCUMENTATION/' );
 
+        if ( ! is_dir( $szHomeOfDocumentation ) )
+            vaesoli::FIL_MkDir( $szHomeOfDocumentation );
+
         $szDocumentionFile = $szHomeOfDocumentation . basename( $this->self['file'] . '.html' );
 
         //var_dump( $szHomeOfDocumentation,$szDocumentionFile );
@@ -1532,6 +1538,7 @@ abstract class Mother
 
         return ( vaesoli::FIL_MTime( $szDocumentionFile ) < vaesoli::FIL_MTime( $this->self['file'] ) );
     }   /* End of Mother.isDocumentationOutdated() ==================================== */
+    /* ================================================================================ */
     /* ================================================================================ */
 
 
@@ -1561,12 +1568,14 @@ abstract class Mother
 
         $oDocumentor = new \trql\documentor\Documentor();
 
+        /* Just to avoid that using the class yields to 
+            1) an auto-backup
+            1) an auto-doc
+        */
         $oDocumentor->backupRequired  = false;
         $oDocumentor->autodocRequired = false;
 
-        //var_dump( __METHOD__ . "(): SHOULD DOCUMENT " . basename( $szFile ) );
         $oDocumentor->document( $szFile );
-        //var_dump( __METHOD__ . "(): DONE" );
 
         return ( $this );
     }   /* End of Mother.document() =================================================== */
@@ -1604,7 +1613,7 @@ abstract class Mother
             if ( $this->autodocRequired && ! isset( $aAlreadySeen[$szFile] ) && ( $iCalls < 10 ) )
             {
                 //var_dump( __METHOD__ );
-                if ( $this->IsDocumentationOutdated() )
+                if ( $this->isDocumentationOutdated() )
                 {
                     //var_dump( __METHOD__ . "(): DOCUMENTATION is OUTDATED" );
                     $aAlreadySeen[$szFile] = true;
@@ -1621,17 +1630,17 @@ abstract class Mother
                         $this->addInfo( __METHOD__ . "(): autodoc NOT started because of date" );
                         //var_dump( __METHOD__ . "(): autodoc NOT started because of date" );
                     }
-                }   /* if ( $this->IsDocumentationOutdated() ) */
+                }   /* if ( $this->isDocumentationOutdated() ) */
                 else    /* Else of ... if ( $this->IsDocumentationOutdated() ) */
                 {
                     $this->addInfo( $szMsg = __METHOD__ . "(): documentation of {$szFile} is up-to-date" );
                     //var_dump( $szMsg );
                 }    /* End of ... Else of ... if ( $this->IsDocumentationOutdated() ) */
             }   /* if ( $this->autodocRequired && ... ) */
-            else
+            else    /* Else of ... if ( $this->autodocRequired && ... */
             {
                 $this->addInfo( __METHOD__ . "(): autodoc NOT required" );
-            }
+            }    /* End of ... Else of ... if ( $this->autodocRequired && ... */
         }   /* if ( $this->autodocRequired && ... ) */
         else    /* Else of ... if ( ! is_null( $szFile ) ) */
         {

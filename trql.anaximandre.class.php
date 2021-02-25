@@ -225,9 +225,11 @@ class Anaximandre extends Thing implements iContext
     public function getURL( $szURL,$aParams = null )
     /*-----------------------------------------------*/
     {
+        $szAccessKey = $this->getAPIKey( 'anaximandre' );
+
         if ( isset( $aParams['lat'] ) && isset( $aParams['lng'] ) )
         {
-            $szURL = "{$szURL}?lat={$aParams['lat']}&lon={$aParams['lng']}&APPID=db7415c213da9e0e6aa096bd04ebde5e&mode=xml";
+            $szURL = "{$szURL}?lat={$aParams['lat']}&lon={$aParams['lng']}&APPID={$szAccessKey}&mode=xml";
             //var_dump( $szURL );
             return ( vaesoli::HTTP_GetURL( $szURL ) );
         }

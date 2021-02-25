@@ -232,7 +232,7 @@ class Email extends Utility
 
         if ( mail( $this->szTo,$this->szSubject,$this->szBody,$szHeaders ) )
         {
-            $iRetVal = EMAIL_RET_CODE_OK;            
+            $iRetVal = EMAIL_RET_CODE_OK;
         }
 
 
@@ -409,7 +409,31 @@ class Email extends Utility
     /*------------------------*/
     {
         return ( $this->__toHTML() );
-    }   /* End of Email.__toHTML() ==================================================== */
+    }   /* End of Email.__toString() ================================================== */
+    /* ================================================================================ */
+
+
+    public function isEmail( $szEmail, $szRecord = 'MX' )
+    /*-----------------------------------------------*/
+    {
+        if ( is_array( $aParts = explode( '@',$szEmail ) ) && count( $aParts ) > 1 )
+        {
+            $szUser     = $aParts[0];
+            $szDomain   = $aParts[1];
+
+            return ( checkdnsrr( $szDomain,$szRecord ) );
+        }   /*if ( is_array( $aParts = explode( '@',$szEmail ) ) && count( $aParts ) > 1 ) */
+
+        return ( false );
+    }   /* End of Email.isEmail() ===================================================== */
+    /* ================================================================================ */
+
+
+    public function DNSRecord( $szDomain )
+    /*---------------------------------*/
+    {
+        return ( dns_get_record( $szDomain,DNS_ANY ) );
+    }   /* End of Email.DNSRecord() =================================================== */
     /* ================================================================================ */
 
 

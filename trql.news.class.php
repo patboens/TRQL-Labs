@@ -310,6 +310,47 @@ class News extends RSS implements iContext
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*getAPIKey([$szSystem])=
+
+        Get the API Key related to the system we're dealing with
+
+        {*params
+            $szSystem       (string)        Optional. [c]null[/c] by default.
+        *}
+
+        {*return
+            (string)        The API Key or [c]null[/c] if not found
+        *}
+
+        {*abstract
+            As we are dealing with possibly multiple external API calls, we may have
+            several API keys to consider. That's what the "system" parameter is for.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    private function getAPIKey( $szSystem = null )
+    /*------------------------------------------*/
+    {
+        if ( ! is_null( $szSystem ) )
+            $szCave = "/api.{$szSystem}.key.txt";
+        else
+            $szCave = '/api.key.txt';
+
+        $szFile = vaesoli::FIL_RealPath( $this->szHome . $szCave );
+
+        //var_dump( $szCave,$szFile );
+
+        if ( is_file( $szFile ) )
+            return ( vaesoli::FIL_FileToStr( $szFile ) );
+        else
+            return ( null );
+    }   /* End of News.getAPIKey() ==================================================== */
+    /* ================================================================================ */
+
+
     public function get( $szService,$szAPISource,$szURL,$aParams )
     /*----------------------------------------------------------*/
     {
@@ -417,15 +458,12 @@ class News extends RSS implements iContext
         {
             $szTerms = urlencode( implode( ' ',$aParams['terms'] ) );
 
-            // Next 2 lines are debugging:
-            // $this->get( 'terms','gnews.io'      ,"https://gnews.io/api/v3/search?q={$szTerms}&token=ffa4303e361bd2fb77bbce1b415188d4"    ,$aParams );
-            // $this->get( 'terms','newsapi.org'   ,"https://newsapi.org/v2/everything?q={$szTerms}&apiKey=d7e2f1e3d68c432fbc03496f2cd41a4b",$aParams );
+            $szGNEWSKey     = $this->getAPIKey( 'GNEWS'  );
+            $szNEWSAPIKey   = $this->getAPIKey( 'NEWSAP' );
 
-            $aGNEWS     = $this->get( 'terms','gnews.io'      ,"https://gnews.io/api/v3/search?q={$szTerms}&token=ffa4303e361bd2fb77bbce1b415188d4"    ,$aParams );
-            $aNEWSAPI   = $this->get( 'terms','newsapi.org'   ,"https://newsapi.org/v2/everything?q={$szTerms}&apiKey=d7e2f1e3d68c432fbc03496f2cd41a4b",$aParams );
-
-            //var_dump( $aNEWSAPI );
-            //die("GGG");
+            // Les clefs DOIVENT être cachées
+            $aGNEWS     = $this->get( 'terms','gnews.io'      ,"https://gnews.io/api/v3/search?q={$szTerms}&token={$szGNEWSKey}"        ,$aParams );
+            $aNEWSAPI   = $this->get( 'terms','newsapi.org'   ,"https://newsapi.org/v2/everything?q={$szTerms}&apiKey={$szNEWSAPIKey}"  ,$aParams );
 
             if ( is_array( $aGNEWS ) && is_array( $aNEWSAPI ) )
                 $aRetVal    = array_merge( $aGNEWS,$aNEWSAPI );
@@ -443,6 +481,21 @@ class News extends RSS implements iContext
             if ( is_array( $aRetVal ) && count( $aRetVal ) < 1 )
                 $aRetVal = null;
 
+            //var_dump( $aRetVal );
+
+            if ( is_array( $aRetVal['results'] ) && count( $aRetVal['results'] ) > 0 )
+            {
+                usort( $aRetVal['results'],function( $a,$b )
+                                {
+                                    if     ( $a['pubDate'] === $b['pubDate'] )
+                                        return 0;
+                                    elseif ( $a['pubDate'] > $b['pubDate'] )
+                                        return -1;
+                                    else
+                                        return 1;
+                                }
+                     );
+            }
         }   /* if ( ! isset( $aParams['topics'] ) ) */
         else
         {

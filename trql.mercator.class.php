@@ -148,6 +148,9 @@ class Mercator extends Utility implements iContext
         $this->defaultCities();
         $this->setCountrySynonyms();
 
+        //var_dump( $this->ttl );
+        //die();
+
         return ( $this );
     }   /* End of Mercator.__construct() ============================================== */
     /* ================================================================================ */
@@ -215,56 +218,68 @@ class Mercator extends Utility implements iContext
     public function geoIP( $szIP = null )
     /*---------------------------------*/
     {
-        $aRetVal     = null;
-        $szAccessKey = 'd49a32bb7f4914a49f5da35ec1b2ab34';
-        $szAccessKey = $this->getAPIKey( 'geoip' );
+        $aRetVal        = null;
+        $szAccessKey    = $this->getAPIKey( 'geoip' );
+        $szIP           = $szIP ?? $_SERVER['REMOTE_ADDR'];
+        $szCacheFile    = $this->cacheName( 'geoIP'                                     ,
+                                            $xParams        = array( 'IP'   => $szIP )  ,
+                                            $xAdditional    = null );
 
-        $szIP = $szIP ?? $_SERVER['REMOTE_ADDR'];
-
-        //var_dump( $szIP );
-        //var_dump( $szAccessKey );
-        //die();
-
-        if ( ! empty( $szJSON = $this->GetURL( $szURL = "http://api.ipstack.com/{$szIP}?access_key={$szAccessKey}" ) ) )
+        if ( true && $this->remembering && is_file( $szCacheFile ) && $this->fileExistsAndNoOlderThan( $szCacheFile,$this->ttl ) )
         {
-            //var_dump( $szJSON );
-
-            if ( $oJSON = json_decode( $szJSON ) )
+            $aRetVal = $this->getCache( $szCacheFile );
+            $this->addInfo( __METHOD__ . "(): data obtained from {$szCacheFile}" );
+            goto end;
+        }   /* if ( true && $this->remembering && ... */
+        else    /* Else of ... if ( true && $this->remembering && ... */
+        {
+            if ( ! empty( $szJSON = $this->GetURL( $szURL = "http://api.ipstack.com/{$szIP}?access_key={$szAccessKey}" ) ) )
             {
-                //var_dump( $oJSON );
-                //var_dump( $oJSON->location );
+                //var_dump( $szJSON );
 
-                $aLanguages = null;
-
-                if ( isset( $oJSON->location ) && isset( $oJSON->location->langauges ) )
+                if ( $oJSON = json_decode( $szJSON ) )
                 {
-                    foreach( $oJSON->location->languages as $oLanguage )
+                    //var_dump( $oJSON );
+                    //var_dump( $oJSON->location );
+
+                    $aLanguages = null;
+
+                    if ( isset( $oJSON->location ) && isset( $oJSON->location->langauges ) )
                     {
-                        $aLanguages[] = array( 'code'   => $oLanguage->code     ,
-                                               'name'   => $oLanguage->name     ,
-                                               'native' => $oLanguage->native   ,
-                                             );
+                        foreach( $oJSON->location->languages as $oLanguage )
+                        {
+                            $aLanguages[] = array( 'code'   => $oLanguage->code     ,
+                                                   'name'   => $oLanguage->name     ,
+                                                   'native' => $oLanguage->native   ,
+                                                 );
 
-                    }   /* foreach( $oJSON->location->languages => $aLanguage ) */
-                }
+                        }   /* foreach( $oJSON->location->languages => $aLanguage ) */
+                    }   /* if ( isset( $oJSON->location ) && isset( $oJSON->location->langauges ) ) */
 
-                $aRetVal = array( 'type'            => $oJSON->type                 ,
-                                  'continentCode'   => $oJSON->continent_code       ,
-                                  'continentName'   => $oJSON->continent_name       ,
-                                  'countryCode'     => $oJSON->country_code         ,
-                                  'countryName'     => $oJSON->country_name         ,
-                                  'regionCode'      => $oJSON->region_code          ,
-                                  'regionName'      => $oJSON->region_name          ,
-                                  'locality'        => $oJSON->city                 ,
-                                  'postalcode'      => $oJSON->zip                  ,
-                                  'latitude'        => $oJSON->latitude             ,
-                                  'longitude'       => $oJSON->longitude            ,
-                                  'geonameId'       => $oJSON->location->geoname_id ,
-                                  'capital'         => $oJSON->location->capital    ,
-                                  'languages'       => $aLanguages                  ,
-                                );
-            }
-        }   /* if ( ! empty( $szJSON = $this->GetURL( $szURL = "http://api.ipstack.com/{$szIP}?access_key={$szAccessKey}" ) ) ) */
+                    $aRetVal = array( 'type'            => $oJSON->type                 ,
+                                      'continentCode'   => $oJSON->continent_code       ,
+                                      'continentName'   => $oJSON->continent_name       ,
+                                      'countryCode'     => $oJSON->country_code         ,
+                                      'countryName'     => $oJSON->country_name         ,
+                                      'regionCode'      => $oJSON->region_code          ,
+                                      'regionName'      => $oJSON->region_name          ,
+                                      'locality'        => $oJSON->city                 ,
+                                      'postalcode'      => $oJSON->zip                  ,
+                                      'latitude'        => $oJSON->latitude             ,
+                                      'longitude'       => $oJSON->longitude            ,
+                                      'geonameId'       => $oJSON->location->geoname_id ,
+                                      'capital'         => $oJSON->location->capital    ,
+                                      'languages'       => $aLanguages                  ,
+                                    );
+
+                    if ( $this->storing && is_array( $aRetVal ) && count( $aRetVal ) > 0 )
+                    {
+                        $this->saveHashFile( $szCacheFile,$aRetVal );
+                        $this->addInfo( __METHOD__ . "(): IP data stored in {$szCacheFile}" );
+                    }   /* if ( $this->storing ) */
+                }   /* if ( $oJSON = json_decode( $szJSON ) ) */
+            }   /* if ( ! empty( $szJSON = $this->GetURL( $szURL = "http://api.ipstack.com/{$szIP}?access_key={$szAccessKey}" ) ) ) */
+        }   /* End of ... Else of ... if ( true && $this->remembering && ... */
 
         end:
         return ( $aRetVal );
@@ -346,109 +361,98 @@ class Mercator extends Utility implements iContext
     }
 
 
-    /* Cette méthode n'est pas utilisée. Elle a servi à construire des fichiers intermédiaires */
-    public function csv( $szFile )
-    /*--------------------------*/
-    {
-        if ( ( $handle = fopen( $szFile,"r" ) ) !== false )         // Tentons de l'ouvrir en read-only
-        {
-            $aHeaders   = null;                                     // Le nom des champs (1ère ligne du fichier CSV)
-            $aFields    = null;                                     // Ensemble de champs (ligne par ligne)
-
-            $aFields = fgetcsv( $handle,1000,',');                  // Lisons la première ligne
-            $iFields = count( $aFields );                           // Comptons le nombre de champs (avec le temps, la structure du fichier .CSV a évolué ... et donc le nb de champs n'est pas toujours le même)
-
-            if ( $iFields > 0 )                                     // Si on est sur la première ligne (c'est la ligne du nom des champs)
-                $aHeaders = $aFields;
-
-            var_dump( $aHeaders );
-
-            $i = 1;
-
-            if ( is_array( $aHeaders ) )                            // Si on a des headers
-            {
-                $szOutputFileNL = $szFile . '.nl.2.txt';
-                $szOutputFileFR = $szFile . '.fr.2.txt';
-
-                if ( ( ( $handleNL = fopen( $szOutputFileNL,"a+" ) ) !== false ) &&
-                     ( ( $handleFR = fopen( $szOutputFileFR,"a+" ) ) !== false )
-                   )
-                {
-                    $tStart = microtime( true );
-                    while ( ( $aFields = fgetcsv( $handle,1000,',') ) !== false ) // Lisons toutes les lignes
-                    {
-                        //$aValues[] = array( 'EntityNumber'      => $aFields[0],
-                        //                    'TypeOfAddress'     => $aFields[1],
-                        //                    'CountryNL'         => $aFields[2],
-                        //                    'CountryFR'         => $aFields[3],
-                        //                    'Zipcode'           => $aFields[4],
-                        //                    'MunicipalityNL'    => $aFields[5],
-                        //                    'MunicipalityFR'    => $aFields[6],
-                        //                    'StreetNL'          => $aFields[7],
-                        //                    'StreetFR'          => $aFields[8],
-                        //                    'HouseNumber'       => $aFields[9],
-                        //                    'Box'               => $aFields[10],
-                        //                    'ExtraAddressInfo'  => $aFields[11],
-                        //                    'DateStrikingOff'   => $aFields[12],
-                        //                   );
-
-                        $this->echo( $i++ . "\n" );
-
-                        if ( ! empty( $aFields[4] ) && preg_match( '/\d{4}/',$aFields[4] ) )
-                        {
-                            if ( ! empty( $aFields[5] ) && ! empty( $aFields[7] ) )
-                            {
-                                $aFields[7] = preg_replace( '/\(.*?\)/','',$aFields[7] );
-                                fwrite( $handleNL,$aFields[4] . "\t" . $aFields[5] . "\t" . $aFields[7] . "\n" );
-                            }
-
-                            if ( ! empty( $aFields[6] ) && ! empty( $aFields[8] ) )
-                            {
-                                $aFields[8] = preg_replace( '/\(.*?\)/','',$aFields[8] );
-                                fwrite( $handleFR,$aFields[4] . "\t" . $aFields[6] . "\t" . $aFields[8] . "\n" );
-                            }
-                        }
-
-                        //if ( $i > 100 )
-                        //    break;
-
-                        //$aValues[] = $aFields;
-                        //var_dump( $aFields );
-                        //break;
-                    }
-                    $tEnd = microtime( true );
-                    $this->echo( "Took " . round( $tEnd - $tStart,5 ) . " secs to process the file" );
-
-
-                    fclose( $handleNL );
-                    fclose( $handleFR );
-
-                }
-                else
-                {
-                    $this->Echo( "Cannot open OUTPUT files\n" );
-                }
-            }   /* if ( is_array( $aHeaders ) ) */
-
-            fclose( $handle );                                      // Fermons le fichier de données CSV
-        }   /* if ( ( $handle = fopen( $szFile,"r" ) ) !== false ) */
-
-        var_dump( $aValues ?? null );
-
-        $this->die( "TRAITEMENT DES ADRESSES BELGES: " . $szFile );
-    }   /* End of Mercator.csv() ====================================================== */
-    /* ================================================================================ */
-
-
-    /* Experimental */
-    public function getSecret( $szService,$szField )
-    /*--------------------------------------------*/
-    {
-        // Bon, ici je devrais aller chercher le tag <$szField><![CDATA[]]></$szField>
-        // dans un fichier "secret" et je devrais y trouver "PatBoens"
-        return ( 'PatBoens' );
-    }   /* End of Mercator.getSecret() ================================================ */
-    /* ================================================================================ */
+    // /* Cette méthode n'est pas utilisée. Elle a servi à construire des fichiers intermédiaires */
+    // public function csv( $szFile )
+    // /*--------------------------*/
+    // {
+    //     if ( ( $handle = fopen( $szFile,"r" ) ) !== false )         // Tentons de l'ouvrir en read-only
+    //     {
+    //         $aHeaders   = null;                                     // Le nom des champs (1ère ligne du fichier CSV)
+    //         $aFields    = null;                                     // Ensemble de champs (ligne par ligne)
+    // 
+    //         $aFields = fgetcsv( $handle,1000,',');                  // Lisons la première ligne
+    //         $iFields = count( $aFields );                           // Comptons le nombre de champs (avec le temps, la structure du fichier .CSV a évolué ... et donc le nb de champs n'est pas toujours le même)
+    // 
+    //         if ( $iFields > 0 )                                     // Si on est sur la première ligne (c'est la ligne du nom des champs)
+    //             $aHeaders = $aFields;
+    // 
+    //         var_dump( $aHeaders );
+    // 
+    //         $i = 1;
+    // 
+    //         if ( is_array( $aHeaders ) )                            // Si on a des headers
+    //         {
+    //             $szOutputFileNL = $szFile . '.nl.2.txt';
+    //             $szOutputFileFR = $szFile . '.fr.2.txt';
+    // 
+    //             if ( ( ( $handleNL = fopen( $szOutputFileNL,"a+" ) ) !== false ) &&
+    //                  ( ( $handleFR = fopen( $szOutputFileFR,"a+" ) ) !== false )
+    //                )
+    //             {
+    //                 $tStart = microtime( true );
+    //                 while ( ( $aFields = fgetcsv( $handle,1000,',') ) !== false ) // Lisons toutes les lignes
+    //                 {
+    //                     //$aValues[] = array( 'EntityNumber'      => $aFields[0],
+    //                     //                    'TypeOfAddress'     => $aFields[1],
+    //                     //                    'CountryNL'         => $aFields[2],
+    //                     //                    'CountryFR'         => $aFields[3],
+    //                     //                    'Zipcode'           => $aFields[4],
+    //                     //                    'MunicipalityNL'    => $aFields[5],
+    //                     //                    'MunicipalityFR'    => $aFields[6],
+    //                     //                    'StreetNL'          => $aFields[7],
+    //                     //                    'StreetFR'          => $aFields[8],
+    //                     //                    'HouseNumber'       => $aFields[9],
+    //                     //                    'Box'               => $aFields[10],
+    //                     //                    'ExtraAddressInfo'  => $aFields[11],
+    //                     //                    'DateStrikingOff'   => $aFields[12],
+    //                     //                   );
+    // 
+    //                     $this->echo( $i++ . "\n" );
+    // 
+    //                     if ( ! empty( $aFields[4] ) && preg_match( '/\d{4}/',$aFields[4] ) )
+    //                     {
+    //                         if ( ! empty( $aFields[5] ) && ! empty( $aFields[7] ) )
+    //                         {
+    //                             $aFields[7] = preg_replace( '/\(.*?\)/','',$aFields[7] );
+    //                             fwrite( $handleNL,$aFields[4] . "\t" . $aFields[5] . "\t" . $aFields[7] . "\n" );
+    //                         }
+    // 
+    //                         if ( ! empty( $aFields[6] ) && ! empty( $aFields[8] ) )
+    //                         {
+    //                             $aFields[8] = preg_replace( '/\(.*?\)/','',$aFields[8] );
+    //                             fwrite( $handleFR,$aFields[4] . "\t" . $aFields[6] . "\t" . $aFields[8] . "\n" );
+    //                         }
+    //                     }
+    // 
+    //                     //if ( $i > 100 )
+    //                     //    break;
+    // 
+    //                     //$aValues[] = $aFields;
+    //                     //var_dump( $aFields );
+    //                     //break;
+    //                 }
+    //                 $tEnd = microtime( true );
+    //                 $this->echo( "Took " . round( $tEnd - $tStart,5 ) . " secs to process the file" );
+    // 
+    // 
+    //                 fclose( $handleNL );
+    //                 fclose( $handleFR );
+    // 
+    //             }
+    //             else
+    //             {
+    //                 $this->Echo( "Cannot open OUTPUT files\n" );
+    //             }
+    //         }   /* if ( is_array( $aHeaders ) ) */
+    // 
+    //         fclose( $handle );                                      // Fermons le fichier de données CSV
+    //     }   /* if ( ( $handle = fopen( $szFile,"r" ) ) !== false ) */
+    // 
+    //     var_dump( $aValues ?? null );
+    // 
+    //     $this->die( "TRAITEMENT DES ADRESSES BELGES: " . $szFile );
+    // }   /* End of Mercator.csv() ====================================================== */
+    // /* ================================================================================ */
 
 
     /* Final */
@@ -458,7 +462,7 @@ class Mercator extends Utility implements iContext
         static $szSecret = null;
 
         if ( is_null( $szSecret ) )
-            $szSecret = $this->getSecret( 'geoname','UserName' );
+            $szSecret = $this->getAPIKey( 'geonames' );
 
         $szParams = '';
 
@@ -528,7 +532,7 @@ class Mercator extends Utility implements iContext
         {
             if ( ! empty( $szXML = $this->call( 'findNearby',$aParams ) ) )
             {
-                if ( is_array( $aRetVal = $this->parse( $szXML ) ) )
+                if ( is_array( $aRetVal = $this->parse( $szXML,'nearby' ) ) )
                 {
                     //var_dump( $aRetVal );
                     //$this->die();
@@ -1169,16 +1173,21 @@ class Mercator extends Utility implements iContext
     {
         $aRetVal = null;
 
-        //$this->die();
 
         if ( isset( $aParams['geonameId1'] ) && isset( $aParams['geonameId2'] ) )
         {
-            $aRetVal1   = $this->get( array( 'geonameId' => $aParams['geonameId1'] ) );
+            //var_dump( "ON EST ICI");
+            //die();
+
+            //$aRetVal1   = $this->get( array( 'geonameId' => $aParams['geonameId1'] ) );
+            $aParams1   = array( 'geonameId' => $aParams['geonameId1'] );
+            $aRetVal1   = $this->get( $aParams1 );
             $aCoords1   = array( 'latitude'     => $aRetVal1['results'][0]['latitude'   ],
                                  'longitude'    => $aRetVal1['results'][0]['longitude'  ],
                                );
 
-            $aRetVal2   = $this->get( array( 'geonameId' => $aParams['geonameId2'] ) );
+            $aParams2   = array( 'geonameId' => $aParams['geonameId2'] );
+            $aRetVal2   = $this->get( $aParams2 );
             $aCoords2   = array( 'latitude'     => $aRetVal2['results'][0]['latitude'   ],
                                  'longitude'    => $aRetVal2['results'][0]['longitude'  ],
                                );
@@ -1187,12 +1196,19 @@ class Mercator extends Utility implements iContext
             $aGeo1 = $this->degrees2Meters( $aCoords1 );
             $aGeo2 = $this->degrees2Meters( $aCoords2 );
 
+            //var_dump( $aGeo1,$aGeo2 );
+
+            $szAccessKey    = $this->getAPIKey( 'traffic' );
+            //var_dump( $aParams );
+            //var_dump( $szAccessKey );
+            //die();
+
             // Here ...We should get the TomTom API Key from an external alibaba cave
-            $szURL = "https://api.tomtom.com/traffic/services/4/incidentDetails/s3/{$aGeo1['latitude']},{$aGeo1['longitude']},{$aGeo2['latitude']},{$aGeo2['longitude']}/10/-1/xml?key=TgelzGQzSBwMCfLvGXSHSniWAXqTtEkL&language=en&expandCluster=true";
+            $szURL = "https://api.tomtom.com/traffic/services/4/incidentDetails/s3/{$aGeo1['latitude']},{$aGeo1['longitude']},{$aGeo2['latitude']},{$aGeo2['longitude']}/10/-1/xml?key={$szAccessKey}&language=en&expandCluster=true";
 
             $szCacheFile = $this->cacheName( $szMethod = 'trafficIncidents',$xParams = $szURL,$xAdditional = null );
 
-            if ( true && $this->remembering && is_file( $szCacheFile ) && $this->fileExistsAndNoOlderThan( $szCacheFile,$iTTL = 1200 /* 20 min */) )
+            if ( true && $this->remembering && is_file( $szCacheFile ) && $this->fileExistsAndNoOlderThan( $szCacheFile,$iTTL = 900 /* 15 min */) )
             {
                 //var_dump( "Data retrieved from cache" );
                 $aRetVal = $this->getCache( $szCacheFile );
@@ -1203,7 +1219,9 @@ class Mercator extends Utility implements iContext
             {
                 if ( ! empty( $szXML = $this->getURL( $szURL ) ) )
                 {
-                    if ( is_array( $aRetVal = $this->parse( $szXML ) ) )
+                    //var_dump( $szXML );
+                    //die();
+                    if ( is_array( $aRetVal = $this->parse( $szXML,'traffic' ) ) )
                     {
                         //var_dump( $aRetVal );
                         //$this->die();
@@ -1339,13 +1357,13 @@ class Mercator extends Utility implements iContext
 
         $szCacheFile = $this->cacheName( 'country',$szCountry,$xAdditional = null );
 
-        if ( true && $this->remembering && $this->fileExistsAndNoOlderThan( $szCacheFile,$iTTL = 86400 * 30 * 3 /* ±3 months */ ) )
+        if ( true && $this->remembering && $this->fileExistsAndNoOlderThan( $szCacheFile,$iTTL = 86400 * 30 * 6 /* ±6 months */ ) )
         {
             $aRetVal = $this->getCache( $szCacheFile );
             $this->addInfo( __METHOD__ . "(): data obtained from {$szCacheFile}" );
             goto end;
         }   /* if ( true && $this->remembering && $this->fileExistsAndNoOlderThan( $szCacheFile,$iTTL = 86400 * 30 ) ) */
-        else    /* Else of ... if ( true && $this->remembering && $this->fileExistsAndNoOlderThan( $szCacheFile,$iTTL = 86400 * 30 ) ) */
+        else    /* Else of ... if ( true && $this->remembering && ... ) */
         {
             if ( ! is_null( $aRetVal = $this->countries( $szCountry ) ) )
             {
@@ -1355,7 +1373,7 @@ class Mercator extends Utility implements iContext
                     $this->addInfo( __METHOD__ . "(): data stored in {$szCacheFile}" );
                 }   /* if ( $this->storing ) */
             }   /* if ( ! is_null( $aRetVal = $this->countries( $szCountry ) ) ) */
-        }    /* End of ... Else of ... if ( true && $this->remembering && $this->fileExistsAndNoOlderThan( $szCacheFile,$iTTL = 86400 * 30 ) ) */
+        }    /* End of ... Else of ... if ( true && $this->remembering && ... ) */
 
         end:
 
@@ -1664,7 +1682,7 @@ class Mercator extends Utility implements iContext
 
             if ( ! empty( $szXML = $this->call( $szService = 'timezone',$aParams ) ) )
             {
-                $aRetVal = array_merge( array('service' => 'timezone' ),$this->parse( $szXML ) );
+                $aRetVal = array_merge( array('service' => 'timezone' ),$this->parse( $szXML,'dummy' ) );
 
                 if ( $this->storing )
                 {
@@ -1718,6 +1736,8 @@ class Mercator extends Utility implements iContext
         //$aParams['maxRows'] = $aParams['maxRows'] ?? 200;           /* Default number of results returned */
         $szCacheFile    = $this->cacheName( __METHOD__,$aParams );
 
+        //var_dump( $aParams );
+        //die("Dying at " . __LINE__ );
         if ( ! isset( $aParams['geonameId'] ) )
         {
             $this->addInfo( $szMsg = __METHOD__ . "() at line " . __LINE__ . ": Invalid parameter (geonameId NOT found) (ErrCode: " . EXCEPTION_CODE_INVALID_PARAMETER . ")" );
@@ -1733,11 +1753,17 @@ class Mercator extends Utility implements iContext
         }   /* if ( is_file( $szCacheFile ) ) */
         else    /* Else of ... if ( is_file( $szCacheFile ) ) */
         {
+            //die("Dying at " . __LINE__ );
+
             if ( ! empty( $szXML = $this->call( $szService = 'get',$aParams ) ) )
             {
                 //var_dump( "AFTER call()" );
-                //die();
+                var_dump( $szXML );
+                //die( "Dying at " . __LINE__ );
+
                 $aRetVal = array_merge( array( 'service' => 'get' ),$this->parse( $szXML,'get' ) );
+
+                //die( "Dying at " . __LINE__ );
 
                 if ( $this->storing )
                 {
@@ -1866,11 +1892,13 @@ class Mercator extends Utility implements iContext
         }   /* if ( is_file( $szCacheFile ) ) */
         else    /* Else of ... if ( is_file( $szCacheFile ) ) */
         {
+            $szAccessKey = $this->getAPIKey( 'geonames' );
+
             /* Cette ligne est douteuse !!! On devrait utiliser la méthode call(), puis faire un parsing du résultat */
             if ( $iMaxRows > 1 )
-                $szXML = $this->getURL( $szURL = "http://api.geonames.org/extendedFindNearby?lat={$fLat}&lng={$fLong}&username=patboens&maxRows=15&style=full" );
+                $szXML = $this->getURL( $szURL = "http://api.geonames.org/extendedFindNearby?lat={$fLat}&lng={$fLong}&username={$szAccessKey}&maxRows=15&style=full" );
             else
-                $szXML = $this->getURL( $szURL = "http://api.geonames.org/findNearby?lat={$fLat}&lng={$fLong}&username=patboens&maxRows=1&style=full" );
+                $szXML = $this->getURL( $szURL = "http://api.geonames.org/findNearby?lat={$fLat}&lng={$fLong}&username={$szAccessKey}&maxRows=1&style=full" );
 
             if ( ! is_null( $szXML) )
             {
@@ -1945,8 +1973,10 @@ class Mercator extends Utility implements iContext
         }   /* if ( is_file( $szCacheFile ) ) */
         else    /* Else of ... if ( is_file( $szCacheFile ) ) */
         {
+            $szAccessKey = $this->getAPIKey( 'geonames' );
+
             /* Cette ligne est douteuse !!! On devrait utiliser la méthode call(), puis faire un parsing du résultat */
-            $szRetVal = $this->getURL( "http://api.geonames.org/search?q={$szCity}&maxRows=1000&lang=fr&username=PatBoens&style=full" );
+            $szRetVal = $this->getURL( "http://api.geonames.org/search?q={$szCity}&maxRows=1000&lang=fr&username={$szAccessKey}&style=full" );
 
             if ( $this->storing )
             {
@@ -1961,7 +1991,6 @@ class Mercator extends Utility implements iContext
     /* ================================================================================ */
 
 
-    /* http://api.geonames.org/search?q=Los%20Angeles&maxRows=20&lang=fr&username=PatBoens */
     protected function defaultCities()
     /*------------------------------*/
     {
@@ -1975,9 +2004,11 @@ class Mercator extends Utility implements iContext
 
             if ( is_array( $aCities ) )
             {
+                $szAccessKey = $this->getAPIKey( 'geonames' );
+
                 foreach( $aCities as $szCity )
                 {
-                    if ( ! empty( $szXML = $this->getURL( "http://api.geonames.org/search?q={$szCity}&maxRows=20&lang=fr&username=PatBoens" ) ) )
+                    if ( ! empty( $szXML = $this->getURL( "http://api.geonames.org/search?q={$szCity}&maxRows=20&lang=fr&username={$szAccessKey}" ) ) )
                     {
                         $oDom   = new DOMDocument();
 
@@ -2017,7 +2048,7 @@ class Mercator extends Utility implements iContext
                                 }
                             }   /* if ( $oXPath = new DOMXPath( $oDom ) ) */
                         }   /* if ( $oDom->LoadXML( $szXML ) ) */
-                    }   /* if ( ! empty( $szXML = $this->getURL( "http://api.geonames.org/search?q={$szCity}&maxRows=20&lang=fr&username=PatBoens" ) ) ) */
+                    }   /* if ( ! empty( $szXML = $this->getURL( "http://api.geonames.org/search?q={$szCity}&maxRows=20&lang=fr&username=<key>" ) ) ) */
                 }   /* foreach( $aCities as $szCity ) */
 
                 $this->__die();
@@ -2509,7 +2540,7 @@ class Mercator extends Utility implements iContext
 
         $szCacheFile = $this->cacheName( __METHOD__,null );
 
-        if ( true && $this->remembering && $this->fileExistsAndNoOlderThan( $szCacheFile,$iTTL = 86400 * 30 * 1.5 /* ±1½ months */ ) )
+        if ( true && $this->remembering && $this->fileExistsAndNoOlderThan( $szCacheFile,$iTTL = 86400 * 30 * 3 /* ±3 months */ ) )
         {
             $this->aCountrySynonyms = $this->getCache( $szCacheFile );
             $this->addInfo( __METHOD__ . "(): country synonyms obtained from {$szCacheFile}" );

@@ -134,20 +134,22 @@ class OCR extends Utility implements iContext
     protected function call( $szURL,$szLang = 'fre' ) : string
     /*------------------------------------------------------*/
     {
-        $iErrCode   = 0;
-        $szHeader   = '';
+        $iErrCode       = 0;
+        $szHeader       = '';
 
-        $aPost      = array( 'apikey'                   => '83c46be3d988957',
-                             'isOverlayRequired'        => 'true'           ,
-                             'detectOrientation'        => 'true'           ,
-                             'isCreateSearchablePdf'    => 'true'           ,
-                             'scale'                    => 'true'           ,
-                             'isTable'                  => 'true'           ,
-                             'OCREngine'                => '2'              ,
-                             'url'                      => $szURL           ,
-                             'language'                 => $szLang );
+        $szAccessKey    = $this->getAPIKey( 'ocr' );
 
-        $szRetVal = vaesoli::HTTP_GetURL( 'https://api.ocr.space/parse/image',null,null,$iErrCode,null,$szHeader,5,$aPost );
+        $aPost          = array( 'apikey'                   => $szAccessKey     ,
+                                 'isOverlayRequired'        => 'true'           ,
+                                 'detectOrientation'        => 'true'           ,
+                                 'isCreateSearchablePdf'    => 'true'           ,
+                                 'scale'                    => 'true'           ,
+                                 'isTable'                  => 'true'           ,
+                                 'OCREngine'                => '2'              ,
+                                 'url'                      => $szURL           ,
+                                 'language'                 => $szLang );
+
+        $szRetVal       = vaesoli::HTTP_GetURL( 'https://api.ocr.space/parse/image',null,null,$iErrCode,null,$szHeader,5,$aPost );
 
         return ( $szRetVal );
     }   /* End of OCR.call() ========================================================== */

@@ -133,7 +133,6 @@ class RSS extends Utility implements iContext
     public      $szContent      = null;                             /* {*property   $szContent                  (string)                The content read from an URL *} */
     protected   $oDom           = null;                             /* {*property   $oDom                       (DOMDocument)           Internal DOMDocument *} */
     protected   $aChannels      = null;                             /* {*property   $aChannels                  (array)                 Array of channels found in the RSS feed *} */
-    public      $ttl            = 7200;                             /* {*property   $ttl                        (int)                   Time-to-Live in sec of an RSS cache; 2 hours by default *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId     = 'Q45432';                         /* {*property   $wikidataId                 (string)                Family of web feed formats *} */
@@ -166,6 +165,8 @@ class RSS extends Utility implements iContext
 
         $this->oDom     = new DOMDocument();
         $this->oForm    = new Form();
+
+        $this->ttl      = 7200;                                     /* Time-to-Live in sec of an RSS cache; 2 hours by default */
 
         return ( $this );
     }   /* End of RSS.__construct() =================================================== */

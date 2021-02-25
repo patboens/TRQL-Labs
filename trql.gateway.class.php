@@ -118,6 +118,42 @@ class Gateway extends Thing
 
 
     /* ================================================================================ */
+    /** {{*parseConfig( $szFile )=
+
+        Loads and parses a configuration file (XML)
+
+        {*params
+            $szFile         (string)        An XML configuration file that contains the
+                                            configuration that must be taken into account
+        *}
+
+        {*return
+            (self)      Returns the current instance of the class.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function parseConfig( $szFile )
+    /*----------------------------------*/
+    {
+        $aConfig = null;
+
+        if ( is_file( $szFile ) )
+        {
+            //var_dump( $szFile );
+            $aConfig = $this->XMLToArray( v::FIL_FileToStr( $szFile ) );
+            //var_dump("BACK",$aConfig['Routes']);
+            //$this->die();
+        }
+
+        //die();
+        return( $aConfig );
+    }   /* End of Gateway.parseConfig() =============================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
     /** {{*__destruct()=
 
         Class destructor

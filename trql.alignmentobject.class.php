@@ -172,6 +172,8 @@ class AlignmentObject extends Intangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of AlignmentObject.__destruct() ======================================== */
     /* ================================================================================ */
 

@@ -523,6 +523,9 @@ class Documentor extends CreativeWork implements iContext
 
         $oSourceFile->save( $oSourceFile->document( $szFile ) );
 
+        //var_dump( __METHOD__ . "(): SHOULD DOCUMENT " . basename( $szFile ) );
+        //die();
+
         return ( $this );
     }   /* End of Documentor.document() =============================================== */
     /* ================================================================================ */

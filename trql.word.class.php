@@ -265,11 +265,14 @@ class Word extends LexicalItem
         // Stratégies additionnelles disponible : 
         // D:\websites\latosensu.be\www\httpdocs\webservices\synonyms.php
 
+        //var_dump( $szTerm,$szLang,$szGrammaticalCategory );
+        //die();
+
         switch ( $szLang )
         {
             case 'fr'   :
                 {
-                    $szService              = 'synonyms';
+                    $szService              = 'definitions';
                     $szBaseURL              = "https://www.cnrtl.fr/definition/";
                     // La forme grammaticale devrait être déterminée par une analyse du
                     // terme avec le Morphalou
@@ -282,18 +285,27 @@ class Word extends LexicalItem
                                                                                        )                    ,
                                                                 $xAdditional    = null );
 
-                    if ( true && $this->remembering && is_file( $szCacheFile ) && $this->fileExistsAndNoOlderThan( $szCacheFile,$iTTL = 86400 * 90 /* 90 days */) )
+                    if ( true && $this->remembering && is_file( $szCacheFile ) && $this->fileExistsAndNoOlderThan( $szCacheFile,$iTTL = 86400 * 200 /* 200 days */) )
                     {
+                        //var_dump( "GOT AN ANSWER FROM THE CACHE");
+                        //die();
                         $aRetVal = $this->getCache( $szCacheFile );
                         $this->addInfo( __METHOD__ . "(): data obtained from {$szCacheFile}" );
                         goto end;
                     }   /* if ( true && $this->remembering && ... ) */
                     else    /* Else of ... if ( true && $this->remembering && ... ) */
                     {
-                        //var_dump( $szURL );
+                        /************************************************************************************/
+                        /* On fait la recherche en deux passes car il se pourrait qu'on trouve plusieurs    */
+                        /* définitions (comme avec le verbe tester qui est soit intransitif soit transitif  */
+                        /* Dès lors ... il y a 2 URLs au moins à tester et nous on s'arrête à la seconde    */
+                        /* même s'il y en a plus !                                                          */
+                        /************************************************************************************/
+
+                        /************************************************************************************/
+                        /* 1ère PASSE                                                                       */
+                        /************************************************************************************/
                         $szHTML = $this->getURL( $szURL );
-                        //echo( $szHTML );
-                        //die();
                         //if ( preg_match_all( '%<td class="syno_format">(.*?)</td>%si'                   ,$szHTML,$aMatches,PREG_PATTERN_ORDER ) )
                         if ( preg_match_all( '%<span(\b| *?)class="tlf_cdefinition"[^>]*>(?P<definition>.*?)</span>%' ,$szHTML,$aMatches,PREG_PATTERN_ORDER ) )
                         {
@@ -305,7 +317,8 @@ class Word extends LexicalItem
                                 //if ( preg_match( "%<a.*>(?P<term>.*?)</a>%si",$szMatch,$aParts ) )
                                 if ( preg_match( '%<span(\b| *?)class="tlf_cdefinition"[^>]*>(?P<definition>.*?)</span>%',$szMatch,$aDefinitions ) )
                                 {
-                                    $aRetVal[] = strip_tags( $aDefinitions['definition'] );
+                                    $szDef = strip_tags( $aDefinitions['definition'] );
+                                    $aRetVal[] = $szDef;
                                     //var_dump( $aParts );
                                 }   /* if ( preg_match( "%<a.*>(?P<term>.*?)</a>%si",$szMatch,$aParts ) ) */
                             }   /* foreach( $aMatches as $szMatch ) */
@@ -313,13 +326,56 @@ class Word extends LexicalItem
                             $this->addInfo( __METHOD__ . "(): chaque définition trouvée devrait être associée à un lemme de la langue française (voir trql_french.class.php)" );
                             //var_dump( $aRetVal );
                             //die();
-
-                            if ( $this->storing && is_array( $aRetVal ) && count( $aRetVal ) > 0 )
-                            {
-                                $this->saveHashFile( $szCacheFile,$aRetVal );
-                                $this->addInfo( __METHOD__ . "(): definitions of {$szTerm} stored in {$szCacheFile}" );
-                            }   /* if ( $this->storing ) */
                         }   /* if ( preg_match_all('%<td class="syno_format">(.*?)</td>%si', $szHTML,$aMatches,PREG_PATTERN_ORDER ) ) */
+
+                        /* Ici ... on regarde si on a une autre définition !!!!!!!!!!!!!!!!!!!!!!!!! */
+                        /* Ici, on va voir si on a d'autres définitions (//1 ... c'est la deuxième et ... on s'arrête là!) */
+
+                        /************************************************************************************/
+                        /* 2ème PASSE                                                                       */
+                        /************************************************************************************/
+                        $szURL .= '/1';
+
+                        $szHTML = $this->getURL( $szURL );
+
+                        if ( preg_match_all( '%<span(\b| *?)class="tlf_cdefinition"[^>]*>(?P<definition>.*?)</span>%' ,$szHTML,$aMatches,PREG_PATTERN_ORDER ) )
+                        {
+                            //var_dump( "YES ... WE FOUND A SECOND DEFINITION" );
+                            //die();
+                            $aMatches = $aMatches[0];
+                            //var_dump( $aMatches );
+                            //die();
+                            foreach( $aMatches as $szMatch )
+                            {
+                                //if ( preg_match( "%<a.*>(?P<term>.*?)</a>%si",$szMatch,$aParts ) )
+                                if ( preg_match( '%<span(\b| *?)class="tlf_cdefinition"[^>]*>(?P<definition>.*?)</span>%',$szMatch,$aDefinitions ) )
+                                {
+                                    $szDef = strip_tags( $aDefinitions['definition'] );
+                                    if ( ! in_array( $szDef,$aRetVal ) )
+                                    {
+                                        $aRetVal[] = $szDef;
+                                    }
+                                    //else
+                                    //{
+                                    //    var_dump( "DEJA DEDANS",$szDef );
+                                    //}
+                                    //var_dump( $aParts );
+                                }   /* if ( preg_match( "%<a.*>(?P<term>.*?)</a>%si",$szMatch,$aParts ) ) */
+                            }   /* foreach( $aMatches as $szMatch ) */
+
+                            //var_dump( $aRetVal );
+                            //die();
+                            $this->addInfo( __METHOD__ . "(): chaque définition trouvée devrait être associée à un lemme de la langue française (voir trql_french.class.php)" );
+                            //var_dump( $aRetVal );
+                            //die();
+                        }   /* if ( preg_match_all('%<td class="syno_format">(.*?)</td>%si', $szHTML,$aMatches,PREG_PATTERN_ORDER ) ) */
+
+                        if ( $this->storing && is_array( $aRetVal ) && count( $aRetVal ) > 0 )
+                        {
+                            $this->saveHashFile( $szCacheFile,$aRetVal );
+                            $this->addInfo( __METHOD__ . "(): definitions of {$szTerm} stored in {$szCacheFile}" );
+                        }   /* if ( $this->storing ) */
+
                     }   /* End of ... Else of ... if ( true && $this->remembering && ... ) */
                 }
                 break;

@@ -964,8 +964,8 @@ class Vaesoli
     /*--------------------------------------*/
     {
         return ( is_dir( $szDir ) );
-    }   /* End of vaesoli.FIL_IsDir() =========================================== */
-    /* ========================================================================== */
+    }   /* End of vaesoli.FIL_IsDir() ================================================= */
+    /* ================================================================================ */
 
 
     public static function FIL_KeepValidCharacters( $szFile )
@@ -2479,6 +2479,117 @@ class Vaesoli
 
         return ( $szRetVal );                                           /* Return result to caller */
     }   /* == End of vaesoli.STR_Eliminate() ========================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*STR_SquareBracketsToAngleBrackets( $szText )=
+
+        Turns square brackets to angle brackets
+
+        {*params
+            $szText     (string)    Text to process
+        *}
+
+        {*return
+            (string)    Square brackets turned to angle brackets
+        *}
+
+        {*cdate 22/09/2013 *}
+        {*version 5.6.0000 *}
+        {*author {PYB} *}
+        {*mdate 14/09/2014 h1,h2,h3 support *}
+
+        {*alias STR_FromSquareBracketsToAngleBrackets()
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '[ol][li]...[/li][/ol]' ) === '<ol><li>...</li></ol>'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '[h1][/h1]' ) === '<h1></h1>'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '[h2][/h2]' ) === '<h2></h2>'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '[h3][/h3]' ) === '<h3></h3>'
+        *}
+
+        {*seealso
+            STR_AngleBracketsToSquareBrackets()
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_SquareBracketsToAngleBrackets( $szText )
+    /*---------------------------------------------------------------*/
+    {
+        return ( str_replace( array( '[br]'  ,'[hr]'  ,'[p]' ,'[/p]' ,'[b]'     ,'[/b]'     ,'[q]','[/q]','[i]' ,'[/i]' ,'<br>'  ,'[h1]','[/h1]','[h2]','[/h2]','[h3]','[/h3]','[ul]','[/ul]','[ol]','[/ol]','[li]','[/li]','[url]' ,'[/url]'  )   ,
+                              array( '<br />','<hr />','<p>' ,'</p>' ,'<strong>','</strong>','<q>','</q>','<em>','</em>','<br />','<h1>','</h1>','<h2>','</h2>','<h3>','</h3>','<ul>','</ul>','<ol>','</ol>','<li>','</li>','[http]','[/http]' )   ,
+                              $szText ) );
+    }   /* End of vaesoli.STR_SquareBracketsToAngleBrackets() ========================= */
+    public static function STR_FromSquareBracketsToAngleBrackets( $szText )   { return ( self::STR_SquareBracketsToAngleBrackets( $szText ) ); }
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*STR_AngleBracketsToSquareBrackets( $szText )=
+
+        Turns angle brackets to square brackets
+
+        {*params
+            $szText     (string)    Text to process
+        *}
+
+        {*return
+            (string)    Angle brackets turned to square brackets
+        *}
+
+        {*cdate 22/09/2013 *}
+        {*version 5.6.0000 *}
+        {*author {PYB} *}
+        {*mdate 14/09/2014 h1,h2,h3 support *}
+
+        {*alias
+            STR_FromAngleBracketsToSquareBrackets()
+        *}
+
+        {*assert
+            STR_AngleBracketsToSquareBrackets( '<ol><li>...</li></ol>' ) === '[ol][li]...[/li][/ol]'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '<h1></h1>' ) === '[h1][/h1]'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '<h2></h2>' ) === '[h2][/h2]'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '<h3></h3>' ) === '[h3][/h1]'
+        *}
+
+        {*seealso
+            STR_SquareBracketsToAngleBrackets()
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_AngleBracketsToSquareBrackets( $szText )
+    /*-------------------------------------------------*/
+    {
+        return ( str_replace( array( '<br />','<hr />','<p>' ,'</p>', '<strong>','</strong>','<q>','</q>','<em>','</em>','<br />','<h1>','</h1>','<h2>','</h2>','<h3>','</h3>','<ul>','</ul>','<ol>','</ol>','<li>','</li>','[http]','[/http]' )   ,
+                              array( '[br]'  ,'[hr]'  ,'[p]' ,'[/p]', '[b]'     ,'[/b]'     ,'[q]','[/q]','[i]' ,'[/i]' ,'<br>'  ,'[h1]','[/h1]','[h2]','[/h2]','[h3]','[/h3]','[ul]','[/ul]','[ol]','[/ol]','[li]','[/li]','[url]' ,'[/url]'  )   ,
+                              $szText ) );
+    }   /* End of vaesoli.STR_AngleBracketsToSquareBrackets() ========================= */
+    public static function STR_FromAngleBracketsToSquareBrackets( $szText ) { return ( self::STR_AngleBracketsToSquareBrackets( $szText ) ); }
     /* ================================================================================ */
 
 

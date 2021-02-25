@@ -52,7 +52,7 @@
 namespace trql\XML;
 
 use \trql\mother\Mother                             as Mother;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
+use \trql\vaesoli\Vaesoli                           as v;
 use \trql\utility\Utility                           as Utility;
 
 use DOMDocument;
@@ -208,7 +208,7 @@ class XML extends Utility
                     else
                         $szRetVal .= $this->__toXML( $xValue,null,$aReplacements,false,null,$node_name );
 
-                    $szRetVal .= '</' . str_replace( ' ','_',vaesoli::STR_stripAccents( $szPropertyName ) ) . '>' . "\n";
+                    $szRetVal .= '</' . str_replace( ' ','_',v::STR_stripAccents( $szPropertyName ) ) . '>' . "\n";
                 }   /* foreach( $aProperties as $szPropertyName => $xValue ) */
             }   /* if ( ! empty( $aProperties ) ) */
 
@@ -259,12 +259,61 @@ class XML extends Utility
     /* ================================================================================ */
 
 
+    public function arrayToXML( $a )
+    /*----------------------------*/
+    {
+        $szRetVal   = null;
+        $oSimpleXML = new \SimpleXMLElement( '<STARTSTARTSTART></STARTSTARTSTART>' );
+
+        // function call to convert array to xml
+        $this->array_to_xml( $a,$oSimpleXML );
+
+        //saving generated xml file; 
+        $szXML = $oSimpleXML->asXML( );
+
+        if ( preg_match( '%<STARTSTARTSTART>(?P<payload>.*?)</STARTSTARTSTART>%si',$szXML,$aMatches ) )
+        {
+            $szRetVal = preg_replace('/<\/(\d*?)>/si','</item>',preg_replace('/<(\d*?)>/si','<item no="$1">',$aMatches['payload'] ) );
+        }   /* if ( preg_match( '%<STARTSTARTSTART>(?P<payload>.*?)</STARTSTARTSTART>%si',$szXML,$aMatches ) ) */
+
+        return ( $szRetVal );
+    }
+
+    protected function array_to_xml( $data,$oSimpleXML )
+    /*------------------------------------------------*/
+    {
+        foreach( $data as $key => $value )
+        {
+            if ( is_array( $value ) )
+            {
+                //var_dump( $key );
+                if ( is_numeric( $key ) )
+                {
+                    // Apparemment, ce cas ne se présente jamais et je ne comprends pas pourquoi !
+                    //var_dump( "NUMERIC KEY" );
+                    //die();
+                    //$key = 'item' . $key; //dealing with <0/>..<n/> issues
+                    $key = 'item';
+                }
+
+                $subnode = $oSimpleXML->addChild( $key );
+
+                $this->array_to_xml( $value,$subnode );
+            }
+            else
+            {
+                $oSimpleXML->addChild( "{$key}",htmlspecialchars( "{$value}" ) );
+            }
+        }   /* foreach( $data as $key => $value ) */
+    }
+
+
     protected function tagName( $szName )
     /*---------------------------------*/
     {
         //preg_replace('/[’\s\x0-\x2F\x3A-\x40\x5B-\x5E\x60\x7B-\xff]/i'
-        return ( vaesoli::STR_Reduce( str_replace( array( '\'',' ',':','.',',',';','&','@','(',')','{','}','[',']' ),'_',preg_replace( '/[’\s\x0-\x2F\x3A-\x40\x5B-\x5E\x60\x7B-\xff]/si','_',vaesoli::STR_stripAccents( $szName ) ) ),'_' ) );
-        //return ( vaesoli::STR_Reduce( str_replace( array( '\'',' ',':','.',',',';','&','@','(',')','{','}','[',']' ),'_',preg_replace( '/&#\d{1,4}(;|_)/si','_',vaesoli::STR_stripAccents( $szName ) ) ),'_' ) );
+        return ( v::STR_Reduce( str_replace( array( '\'',' ',':','.',',',';','&','@','(',')','{','}','[',']' ),'_',preg_replace( '/[’\s\x0-\x2F\x3A-\x40\x5B-\x5E\x60\x7B-\xff]/si','_',v::STR_stripAccents( $szName ) ) ),'_' ) );
+        //return ( v::STR_Reduce( str_replace( array( '\'',' ',':','.',',',';','&','@','(',')','{','}','[',']' ),'_',preg_replace( '/&#\d{1,4}(;|_)/si','_',v::STR_stripAccents( $szName ) ) ),'_' ) );
     }   /* End of XML.tagName() ======================================================= */
     /* ================================================================================ */
 

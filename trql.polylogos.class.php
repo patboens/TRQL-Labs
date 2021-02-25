@@ -123,6 +123,44 @@ class PolyLogos extends Utility
 
 
     /* ================================================================================ */
+    /** {{*getAPIKey([$szSystem])=
+
+        Get the API Key related to the system we're dealing with
+
+        {*params
+            $szSystem       (string)        Optional. [c]null[/c] by default.
+        *}
+
+        {*return
+            (string)        The API Key or [c]null[/c] if not found
+        *}
+
+        {*abstract
+            As we are dealing with possibly multiple external API calls, we may have
+            several API keys to consider. That's what the "system" parameter is for.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    private function getAPIKey( $szSystem = null )
+    /*------------------------------------------*/
+    {
+        if ( ! is_null( $szSystem ) )
+            $szCave = "/api.{$szSystem}.key.txt";
+        else
+            $szCave = '/api.key.txt';
+
+        if ( is_file( $szFile = vaesoli::FIL_RealPath( $this->szHome . $szCave ) ) )
+            return ( vaesoli::FIL_FileToStr( $szFile ) );
+        else
+            return ( null );
+    }   /* End of PolyLogos.getAPIKey() =============================================== */
+    /* ================================================================================ */
+
+
+
+    /* ================================================================================ */
     /** {{*translate( $szText[,$szSrcLang[,$szTargetLang]] )=
 
         Translate text
@@ -175,7 +213,9 @@ class PolyLogos extends Utility
             //var_dump( $szCacheFile );
             //goto end;
             // Ici ... je dois mettre la clef d'API dans un fichier indépendant!!!
-            $szURL = "https://api.deepl.com/v2/translate?text=" . urlencode( $szText ) . "&source_lang={$szSrcLang}&target_lang={$szTargetLang}&auth_key=91c40dae-ed30-6656-63c4-94a835dcc7be";
+            $szAccessKey    = $this->getAPIKey( 'deepl' );
+
+            $szURL = "https://api.deepl.com/v2/translate?text=" . urlencode( $szText ) . "&source_lang={$szSrcLang}&target_lang={$szTargetLang}&auth_key={$szAccessKey}";
             //var_dump( $szURL );
 
             if ( $szJSON = vaesoli::HTTP_GetURL( $szURL ) )

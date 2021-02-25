@@ -68,6 +68,7 @@ namespace trql\bankaccount;
 
 use \trql\vaesoli\Vaesoli                       as v;
 use \trql\financialproduct\FinancialProduct     as FinancialProduct;
+use \trql\ledger\Ledger                         as Ledger;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -76,6 +77,8 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 if ( ! defined( 'FINANCIALPRODUCT_CLASS_VERSION' ) )
     require_once( 'trql.financialproduct.class.php' );
 
+if ( ! defined( 'LEDGER_CLASS_VERSION' ) )
+    require_once( 'trql.ledger.class.php' );
 
 
 defined( 'BANKACCOUNT_CLASS_VERSION' ) or define( 'BANKACCOUNT_CLASS_VERSION','0.1' );
@@ -129,20 +132,25 @@ class BankAccount extends FinancialProduct
     public      $wikidataId                     = 'Q676459';        /* {*property   $wikidataId                     (string)                        Wikidata ID. Collective name for all account types, credit 
                                                                                                                                                     institutions  operates for their clients bank accounts *} */
 
-    public      $balance                        = 0;                /* {*property   $balance                        (float)                         Amount of money present in the acoount (Wikidata (Q1365641): amount of
+    public      $balance                        = 0.0;              /* {*property   $balance                        (float)                         Amount of money present in the acoount (Wikidata (Q1365641): amount of
                                                                                                                                                     money that remains in a deposit account. *} */
     public      $currency                       = 'EUR';            /* {*property   $currency                       (string)                        The 3-letter currency code as defined in ISO_4217 
                                                                                                                                                     ([url]https://fr.wikipedia.org/wiki/ISO_4217[/url]). 'EUR' by default.
                                                                                                                                                     The list of currencies can be obtained by RESTFul service on trql.io:
                                                                                                                                                     "https://www.trql.io/v1/currencies/" which links to 
                                                                                                                                                     /vaesoli/resources/XML/currencies.xml *} */
+    public      $szPersistenceFolder            = null;             /* {*property   $szPersistenceFolder            (string)                        Folder in which the files pertaining to the account will be saved/located *} */
+    public      $oLedger                        = null;             /* {*property   $oLedger                        (Ledger)                        Ledger of the account *} */
+
     /* ================================================================================ */
-    /** {{*__construct( [$szID] )=
+    /** {{*__construct( $szID,$szFolder )=
 
         Class constructor
 
         {*params
-            $szHome     (string)        Home of the class. Optional.
+            $szID       (string)        Bank Account ID.
+            $szFolder   (string)        Folder in which the persistence files of the 
+                                        account will be saved
         *}
 
         {*return
@@ -152,33 +160,141 @@ class BankAccount extends FinancialProduct
         *}}
     */
     /* ================================================================================ */
-    public function __construct( $szID = null )
-    /*---------------------------------------*/
+    public function __construct( $szID,$szFolder )
+    /*------------------------------------------*/
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         $this->identifier = $szID;
 
+        $a = $this->Map( $this->identifier );
+        //var_dump( $a );
+
+        $this->szPersistenceFolder = v::FIL_RealPath( $szFolder . '/' . $a['level1'] . '/' .
+                                                                        $a['level2'] . '/' .
+                                                                        $a['level3'] . '/' .
+                                                                        $a['level4'] );
+
+        if ( ! is_dir( $this->szPersistenceFolder ) )
+            v::FIL_MkDir( $this->szPersistenceFolder );
+
+        $this->balance = $this->readBalance();
+        //var_dump( "POSITION",$this->szPersistenceFolder,$this->balance );
+
+        $this->oLedger = new Ledger( $this->identifier,$this->szPersistenceFolder );
+
         return ( $this );
     }   /* End of BankAccount.__construct() =========================================== */
     /* ================================================================================ */
 
 
-    // Les opérations de dépôt et de retrait doivent être enregistrées dans un ledger
-    // du compte. La classe Ledger n'est PAS DU TOUT utilisée à ce stade 
-    // (18-02-21 11:20:50). Par contre, la classe Ledger existe bel et bien mais elle ne
-    // fait rien encore. Il faut réfléchir à la manière dont les opérations d'un compte
-    // donné devraient être enregistrées. Je penche pour une utilisation de storage->Map()
-    // pour savoir où stocker les informations de manière à les retrouver rapidement.
-    // Par ailleurs, il faut s'inspirer de ce que fait Mollie en ayant un mode de travail
-    // "test" et un mode "live"
+    /* ================================================================================ */
+    /** {{*balanceFile()=
 
+        Get the normalized balance filename (persistence layer)
+
+        {*params
+        *}
+
+        {*return
+            (string)        The name of the "balance" file
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    protected function balanceFile()
+    /*----------------------------*/
+    {
+        return ( v::FIL_RealPath( $this->szPersistenceFolder . '/' . v::STR_StripAccents( v::FIL_KeepValidCharacters( $this->identifier . '.balance.txt' ) ) ) );
+    }   /* End of BankAccount.balanceFile() =========================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*readBalance()=
+
+        Reads the account balance from its persistence layer
+
+        {*params
+        *}
+
+        {*return
+            (float)         The current account balance
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    protected function readBalance()
+    /*----------------------------*/
+    {
+        $fRetVal    = 0.0;
+        $szFile     = $this->balanceFile();
+
+        //var_dump( "Will read from",$szFile );
+
+        if ( is_file( $szFile ) )
+        {
+            $szAmount = v::FIL_FileToStr( $szFile );
+            $fRetVal = (float) $szAmount;
+        }
+        else
+        {
+            v::FIL_StrToFile( '0.0',$szFile );
+        }
+
+        return ( $fRetVal );
+    }   /* End of BankAccount.readBalance() =========================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*saveBalance()=
+
+        Saves the account balance to its persistence layer
+
+        {*params
+        *}
+
+        {*return
+            (bool)      [c]true[/c] if the balance was saved successfully; [c]false[/c]
+                        if not.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    protected function saveBalance()
+    /*----------------------------*/
+    {
+        return ( v::FIL_StrToFile( (string) $this->balance,$this->balanceFile() ) );
+    }   /* End of BankAccount.saveBalance() =========================================== */
+    /* ================================================================================ */
+
+
+    // ***********************************************************************************
+    // ***********************************************************************************
+    // ***********************************************************************************
+    // Il faut s'inspirer de ce que fait Mollie en ayant un mode de travail
+    // "test" et un mode "live"
+    //
+    // Chaque deposit ou chaque withdrawal sur le compte devrait aussi pouvoir s'accompagner 
+    //  1) d'un commentaire
+    //  2) d'un ID unique d'opération (aussi à sauver dans le ledger ?)
+    //  3) et chaque opération doit faire l'objet d'un log (le ledger n'est pas un log!)
+    // ***********************************************************************************
+    // ***********************************************************************************
+    // ***********************************************************************************
 
     public function deposit( $x )
     /*-------------------------*/
     {
-        $this->balance += ( is_numeric( $x ) ? abs( $x ) : 0 );
+        $fAmount = ( is_numeric( $x ) ? abs( $x ) : 0 );
+        $this->balance += $fAmount;
+        $this->saveBalance();
+        $this->oLedger->log( '+',$fAmount,$this->currency );
     }   /* End of BankAccount.deposit() =============================================== */
     /* ================================================================================ */
 
@@ -186,7 +302,10 @@ class BankAccount extends FinancialProduct
     public function withdraw( $x )
     /*-------------------------*/
     {
-        $this->balance -= ( is_numeric( $x ) ? abs( $x ) : 0 );
+        $fAmount = ( is_numeric( $x ) ? abs( $x ) : 0 );
+        $this->balance -= $fAmount;
+        $this->saveBalance();
+        $this->oLedger->log( '-',$fAmount,$this->currency );
     }   /* End of BankAccount.withdraw() ============================================== */
     /* ================================================================================ */
 
@@ -194,7 +313,7 @@ class BankAccount extends FinancialProduct
     public function __toString():string
     /*-------------------------------*/
     {
-        return ( "ID: {$this->identifier}; Balance: {$this->balance} {$this->currency}" );
+        return ( "<p>ID: {$this->identifier}; Balance: {$this->balance} {$this->currency}</p>" );
     }   /* End of BankAccount.__toString() ============================================ */
     /* ================================================================================ */
 

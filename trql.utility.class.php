@@ -100,6 +100,10 @@ class Utility extends Mother
                                'family' => null         ,
                              );
 
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId             = null;                     /* {*property   $wikidataId                 (string)                Wikidata ID. No equivalent. *} */
+    public      $ttl                    = 86400;                    /* {*property   $ttl                        (int)                   Time-to-Live in sec; 1 full day by default *} */
+
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 

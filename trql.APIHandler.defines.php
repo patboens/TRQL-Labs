@@ -123,7 +123,7 @@ if ( ! defined( 'RET_CODES' ) ) /* If HTTP codes not defined */
 }
 
 defined( "API_BASIS" )                                  or define( "API_BASIS"                                              ,1000000 );
-defined( "API_ERROR_SUCCESS" )                          or define( "API_ERROR_SUCCESS"                                      ,API_BASIS );
+defined( "API_ERROR_SUCCESS" )                          or define( "API_ERROR_SUCCESS"                                      ,API_BASIS + RET_CODE_OK );
 defined( "API_ERROR_NOT_FOUND" )                        or define( "API_ERROR_NOT_FOUND"                                    ,API_BASIS + RET_CODE_NOT_FOUND );
 defined( "API_ERROR_NOT_ACCEPTABLE" )                   or define( "API_ERROR_NOT_ACCEPTABLE"                               ,API_BASIS + RET_CODE_NOT_ACCEPTABLE );
 defined( "API_ERROR_INTERNAL_SERVER_ERROR" )            or define( "API_ERROR_INTERNAL_SERVER_ERROR"                        ,API_BASIS + RET_CODE_INTERNAL_SERVER_ERROR );
