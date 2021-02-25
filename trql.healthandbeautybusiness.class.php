@@ -379,6 +379,7 @@ class HealthAndBeautyBusiness extends LocalBusiness
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (25-02-21 18:17:24). *} */
 
 
     /* ================================================================================ */
@@ -406,7 +407,7 @@ class HealthAndBeautyBusiness extends LocalBusiness
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of HealthAndBeautyBusiness.__construct() ========================================== */
+    }   /* End of HealthAndBeautyBusiness.__construct() =============================== */
     /* ================================================================================ */
 
 
@@ -431,7 +432,9 @@ class HealthAndBeautyBusiness extends LocalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of HealthAndBeautyBusiness.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of HealthAndBeautyBusiness.__destruct() ================================ */
     /* ================================================================================ */
 
 }   /* End of class HealthAndBeautyBusiness ====================================================== */

@@ -409,7 +409,7 @@ class CommunityHealth extends MedicalBusiness
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of CommunityHealth.__construct() ========================================== */
+    }   /* End of CommunityHealth.__construct() ======================================= */
     /* ================================================================================ */
 
 
@@ -434,10 +434,11 @@ class CommunityHealth extends MedicalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of CommunityHealth.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of CommunityHealth.__destruct() ======================================== */
     /* ================================================================================ */
-
-}   /* End of class CommunityHealth ====================================================== */
+}   /* End of class CommunityHealth =================================================== */
 /* ==================================================================================== */
 
 ?>

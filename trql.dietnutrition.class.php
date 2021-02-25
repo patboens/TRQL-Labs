@@ -406,7 +406,7 @@ class DietNutrition extends MedicalBusiness
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of DietNutrition.__construct() ========================================== */
+    }   /* End of DietNutrition.__construct() ========================================= */
     /* ================================================================================ */
 
 
@@ -431,10 +431,11 @@ class DietNutrition extends MedicalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of DietNutrition.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of DietNutrition.__destruct() ========================================== */
     /* ================================================================================ */
-
-}   /* End of class DietNutrition ====================================================== */
+}   /* End of class DietNutrition ===================================================== */
 /* ==================================================================================== */
 
 ?>

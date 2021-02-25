@@ -406,7 +406,7 @@ class AutoPartsStore extends AutomotiveBusiness, Store
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of AutoPartsStore.__construct() ========================================== */
+    }   /* End of AutoPartsStore.__construct() ======================================== */
     /* ================================================================================ */
 
 
@@ -431,10 +431,11 @@ class AutoPartsStore extends AutomotiveBusiness, Store
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of AutoPartsStore.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of AutoPartsStore.__destruct() ========================================= */
     /* ================================================================================ */
-
-}   /* End of class AutoPartsStore ====================================================== */
+}   /* End of class AutoPartsStore ==================================================== */
 /* ==================================================================================== */
 
 ?>

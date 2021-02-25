@@ -409,7 +409,7 @@ class Midwifery extends MedicalBusiness
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Midwifery.__construct() ========================================== */
+    }   /* End of Midwifery.__construct() ============================================= */
     /* ================================================================================ */
 
 
@@ -434,10 +434,11 @@ class Midwifery extends MedicalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Midwifery.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Midwifery.__destruct() ============================================== */
     /* ================================================================================ */
-
-}   /* End of class Midwifery ====================================================== */
+}   /* End of class Midwifery ========================================================= */
 /* ==================================================================================== */
 
 ?>

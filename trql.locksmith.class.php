@@ -406,7 +406,7 @@ class Locksmith extends HomeAndConstructionBusiness
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Locksmith.__construct() ========================================== */
+    }   /* End of Locksmith.__construct() ============================================= */
     /* ================================================================================ */
 
 
@@ -431,10 +431,10 @@ class Locksmith extends HomeAndConstructionBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Locksmith.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Locksmith.__destruct() ============================================== */
     /* ================================================================================ */
-
-}   /* End of class Locksmith ====================================================== */
+}   /* End of class Locksmith ========================================================= */
 /* ==================================================================================== */
-
 ?>

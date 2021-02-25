@@ -431,6 +431,8 @@ class EmergencyService extends LocalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of EmergencyService.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -431,6 +431,8 @@ class HousePainter extends HomeAndConstructionBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of HousePainter.__destruct() =========================================== */
     /* ================================================================================ */
 

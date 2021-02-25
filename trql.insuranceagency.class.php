@@ -408,7 +408,7 @@ class InsuranceAgency extends FinancialService
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of InsuranceAgency.__construct() ========================================== */
+    }   /* End of InsuranceAgency.__construct() ======================================= */
     /* ================================================================================ */
 
 
@@ -433,10 +433,11 @@ class InsuranceAgency extends FinancialService
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of InsuranceAgency.__destruct() =========================================== */
-    /* ================================================================================ */
-
+    /* =================================================================================== */
 }   /* End of class InsuranceAgency ====================================================== */
-/* ==================================================================================== */
+/* ======================================================================================= */
 
 ?>

@@ -408,7 +408,7 @@ class AutomatedTeller extends FinancialService
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of AutomatedTeller.__construct() ========================================== */
+    }   /* End of AutomatedTeller.__construct() ======================================= */
     /* ================================================================================ */
 
 
@@ -433,10 +433,10 @@ class AutomatedTeller extends FinancialService
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of AutomatedTeller.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of AutomatedTeller.__destruct() ======================================== */
     /* ================================================================================ */
-
-}   /* End of class AutomatedTeller ====================================================== */
+}   /* End of class AutomatedTeller =================================================== */
 /* ==================================================================================== */
-
 ?>

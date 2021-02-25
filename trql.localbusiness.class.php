@@ -102,6 +102,7 @@ class LocalBusiness extends Organization implements iContext
                                'family' => null         ,
                              );
 
+
     public  $currenciesAccepted         = null;                     /* {*property   $currenciesAccepted             (string)                The currency accepted.
                                                                                                                     
                                                                                                                                             Use standard formats: ISO 4217 currency format
@@ -221,9 +222,12 @@ class LocalBusiness extends Organization implements iContext
     /*------------------------*/
     {
         $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of LocalBusiness.__destruct() ========================================== */
     /* ================================================================================ */
-
 }   /* End of class LocalBusiness ===================================================== */
 /* ==================================================================================== */
 ?>

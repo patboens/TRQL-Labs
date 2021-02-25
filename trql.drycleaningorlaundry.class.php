@@ -431,10 +431,12 @@ class DryCleaningOrLaundry extends LocalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of DryCleaningOrLaundry.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of DryCleaningOrLaundry.__destruct() =================================== */
     /* ================================================================================ */
 
-}   /* End of class DryCleaningOrLaundry ====================================================== */
+}   /* End of class DryCleaningOrLaundry ============================================== */
 /* ==================================================================================== */
 
 ?>

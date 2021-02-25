@@ -437,6 +437,8 @@ class ArchiveOrganization extends LocalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of ArchiveOrganization.__destruct() =========================================== */
     /* ================================================================================ */
 

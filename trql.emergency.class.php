@@ -409,7 +409,7 @@ class Emergency extends MedicalBusiness
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Emergency.__construct() ========================================== */
+    }   /* End of Emergency.__construct() ============================================= */
     /* ================================================================================ */
 
 
@@ -434,10 +434,10 @@ class Emergency extends MedicalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Emergency.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Emergency.__destruct() ============================================== */
     /* ================================================================================ */
-
-}   /* End of class Emergency ====================================================== */
+}   /* End of class Emergency ========================================================= */
 /* ==================================================================================== */
-
 ?>

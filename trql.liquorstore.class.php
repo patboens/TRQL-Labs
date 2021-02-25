@@ -433,6 +433,8 @@ class LiquorStore extends Store
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of LiquorStore.__destruct() =========================================== */
     /* ================================================================================ */
 

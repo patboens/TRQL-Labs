@@ -411,7 +411,7 @@ class Gynecologic extends MedicalBusiness
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Gynecologic.__construct() ========================================== */
+    }   /* End of Gynecologic.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -436,10 +436,11 @@ class Gynecologic extends MedicalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Gynecologic.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Gynecologic.__destruct() ============================================ */
     /* ================================================================================ */
-
-}   /* End of class Gynecologic ====================================================== */
+}   /* End of class Gynecologic ======================================================= */
 /* ==================================================================================== */
 
 ?>

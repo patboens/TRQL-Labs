@@ -431,9 +431,10 @@ class Electrician extends HomeAndConstructionBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Electrician.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class Electrician ====================================================== */
 /* ==================================================================================== */
 

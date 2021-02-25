@@ -49,16 +49,13 @@
 namespace trql\medicalbusiness;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\localbusiness\LocalBusiness    as LocalBusiness;
-
+use \trql\localbusiness\LocalBusiness       as LocalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'LOCALBUSINESS_CLASS_VERSION' ) )
     require_once( 'trql.localbusiness.class.php' );
-
-
 
 defined( 'MEDICALBUSINESS_CLASS_VERSION' ) or define( 'MEDICALBUSINESS_CLASS_VERSION','0.1' );
 
@@ -89,7 +86,7 @@ defined( 'MEDICALBUSINESS_CLASS_VERSION' ) or define( 'MEDICALBUSINESS_CLASS_VER
  */
 /* ==================================================================================== */
 class MedicalBusiness extends LocalBusiness
-/*--------------------------------------*/
+/*----------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -102,7 +99,7 @@ class MedicalBusiness extends LocalBusiness
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (25-02-21 18:17:24). *} */
 
 
     /* ================================================================================ */
@@ -159,8 +156,6 @@ class MedicalBusiness extends LocalBusiness
         $this->necroSignaling();
     }   /* End of MedicalBusiness.__destruct() ======================================== */
     /* ================================================================================ */
-
 }   /* End of class MedicalBusiness =================================================== */
 /* ==================================================================================== */
-
 ?>

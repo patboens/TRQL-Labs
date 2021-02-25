@@ -431,10 +431,10 @@ class BowlingAlley extends SportsActivityLocation
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BowlingAlley.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class BowlingAlley ====================================================== */
 /* ==================================================================================== */
-
 ?>

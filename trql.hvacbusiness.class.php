@@ -432,10 +432,10 @@ class HVACBusiness extends HomeAndConstructionBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of HVACBusiness.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class HVACBusiness ====================================================== */
 /* ==================================================================================== */
-
 ?>

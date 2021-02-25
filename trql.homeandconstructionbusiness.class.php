@@ -436,6 +436,8 @@ class HomeAndConstructionBusiness extends LocalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of HomeAndConstructionBusiness.__destruct() =========================================== */
     /* ================================================================================ */
 

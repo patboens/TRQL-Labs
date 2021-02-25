@@ -57,16 +57,13 @@
 namespace trql\dermatology;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\medicalbusiness\MedicalBusiness    as MedicalBusiness;
-
+use \trql\medicalbusiness\MedicalBusiness   as MedicalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'MEDICALBUSINESS_CLASS_VERSION' ) )
     require_once( 'trql.medicalbusiness.class.php' );
-
-
 
 defined( 'DERMATOLOGY_CLASS_VERSION' ) or define( 'DERMATOLOGY_CLASS_VERSION','0.1' );
 
@@ -96,7 +93,7 @@ defined( 'DERMATOLOGY_CLASS_VERSION' ) or define( 'DERMATOLOGY_CLASS_VERSION','0
  */
 /* ==================================================================================== */
 class Dermatology extends MedicalBusiness
-/*--------------------------------------*/
+/*-------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -107,10 +104,6 @@ class Dermatology extends MedicalBusiness
                                'UIKey'  => null         ,
                              );
 
-    public      $actionableFeedbackPolicy       = null;             /* {*property   $actionableFeedbackPolicy       (URL|CreativeWork)              For a NewsMediaOrganization or other news-related Organization, a
-                                                                                                                                                    statement about public engagement activities (for news media, the
-                                                                                                                                                    newsroom’s), including involving the public - digitally or otherwise
-                                                                                                                                                    -- in coverage decisions, reporting and activities after publication. *} */
     public      $additionalProperty             = null;             /* {*property   $additionalProperty             (PropertyValue)                 A property-value pair representing an additional characteristics of
                                                                                                                                                     the entitity, e.g. a product feature or another characteristic for
                                                                                                                                                     which there is no matching property in schema.org.Note: Publishers
@@ -433,10 +426,10 @@ class Dermatology extends MedicalBusiness
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Dermatology.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class Dermatology ====================================================== */
 /* ==================================================================================== */
-
 ?>

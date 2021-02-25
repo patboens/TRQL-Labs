@@ -184,6 +184,8 @@ class Organization extends Thing implements iContext
                                                                                                                                                             belongs. Inverse property: member. *} */
     public      $naics                      = null;                 /* {*property   $naics                      (string)                                    The North American Industry Classification System (NAICS) code for a
                                                                                                                                                             particular organization or business person. *} */
+    public      $nonprofitStatus            = null;                 /* {*property   $nonprofitStatus            (NonprofitType)                             nonprofit Status indicates the legal status of a non-profit organization 
+                                                                                                                                                            in its primary place of business. *} */
     public      $numberOfEmployees          = null;                 /* {*property   $numberOfEmployees          (QuantitativeValue)                         The number of employees in an organization e.g. business. *} */
     public      $ownershipFundingInfo       = null;                 /* {*property   $ownershipFundingInfo       (AboutPage|CreativeWork|string|URL)         For an Organization (often but not necessarily a NewsMediaOrganization),
                                                                                                                                                             a description of organizational ownership structure; funding and grants.
@@ -315,7 +317,6 @@ class Organization extends Thing implements iContext
         $this->necroSignaling();
     }   /* End of Organization.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class Organization ====================================================== */
 /* ==================================================================================== */
 ?>
