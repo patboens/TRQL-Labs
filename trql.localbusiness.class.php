@@ -53,7 +53,6 @@ use \trql\context\Context               as Context;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\organization\Organization     as Organization;
 
-
 use DOMDocument;
 use DOMXPath;
 

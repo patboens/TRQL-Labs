@@ -22,7 +22,7 @@
 /** {{{*fheader
     {*file                  trql.website.class.php *}
     {*purpose               A WebSite is a set of related web pages and other
-                            items typically served from a single web domain and 
+                            items typically served from a single web domain and
                             accessible via URLs. *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
@@ -50,6 +50,14 @@
         *}
     *}
 
+    {*chist
+        {*mdate 26-02-21 08:42 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  First steps of the generate() method
+        *}
+    *}
+
     *}}} */
 /****************************************************************************************/
 namespace trql\website;
@@ -58,6 +66,7 @@ use \trql\mother\Mother                             as Mother;
 use \trql\mother\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
 use \trql\creativework\CreativeWork                 as CreativeWork;
+use \trql\websitegenerator\WebsiteGenerator         as WebsiteGenerator;
 
 use DOMDocument;
 use DOMXPath;
@@ -69,16 +78,9 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
-    require_once( 'trql.thing.class.php' );
+    require_once( 'trql.creativework.class.php' );
 
 defined( 'WEBSITE_CLASS_VERSION' ) or define( 'WEBSITE_CLASS_VERSION','0.1' );
-
-/* Note (16-07-20 23:27:50):
-
-    Le code doit se sauver lui-même dans une sorte de DB. Il doit se compresser
-    lui-même et sauver au moins une dizaine de versions de lui-même.
-
-*/
 
 /* ================================================================================== */
 /** {{*class WebSite=
@@ -130,11 +132,16 @@ class WebSite extends CreativeWork implements iContext
                                'family' => null         ,
                              );
 
-    public      $issn                   = null                      /* {*property   $issn                       (string)                            The International Standard Serial Number (ISSN) that 
-                                                                                                                                                    identifies this serial publication. You can repeat 
-                                                                                                                                                    this property to identify different formats of, or 
+    public      $issn                   = null;                     /* {*property   $issn                       (string)                            The International Standard Serial Number (ISSN) that
+                                                                                                                                                    identifies this serial publication. You can repeat
+                                                                                                                                                    this property to identify different formats of, or
                                                                                                                                                     the linking ISSN (ISSN-L) for, this serial publication. *} */
 
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q35127';         /* {*property   $wikidataId                 (string)                            Wikidata ID. set of related web pages served from a single
+                                                                                                                                                    web domain *} */
+    public      $destinationDir                 = null;             /* {*property   $destinationDir             (string)                            Name where the website is supposed to be generated
+                                                                                                                                                    (e.g. "d:/websites/trql.io/") *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -179,11 +186,19 @@ class WebSite extends CreativeWork implements iContext
     */
     /* ================================================================================ */
     public function generate()
-    /*------------------------*/
+    /*----------------------*/
     {
         if ( empty( $this->url ) )
+            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND (ErrCode: " . EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND . ")",EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND );
+        else
         {
-            $this->die( "The class cannot generate a full website yet" );
+            //throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": EXCEPTION_CODE_UNAVAILABLE (ErrCode: " . EXCEPTION_CODE_UNAVAILABLE . ")",EXCEPTION_CODE_UNAVAILABLE );
+
+            if ( ! defined( 'WEBSITEGENERATOR_CLASS_CLASS' ) )
+                require_once( 'trql.websitegenerator.class.php' );
+
+            $oGenerator = new WebsiteGenerator( $this );
+            $oGenerator->generate();
         }
 
         return ( $this );
@@ -204,6 +219,14 @@ class WebSite extends CreativeWork implements iContext
     {
         return( '' );
     }   /* End of WebSite.sing() ====================================================== */
+    /* ================================================================================ */
+
+
+    public function __toString() : string
+    /*--------------------------------*/
+    {
+        return( ( $this->url ?? '' ) . ':' . $this->wikidataId );
+    }   /* End of WebSite.__toString() ================================================ */
     /* ================================================================================ */
 
 
@@ -230,10 +253,8 @@ class WebSite extends CreativeWork implements iContext
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of WebSite.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class WebSite =========================================================== */
 /* ==================================================================================== */
 ?>

@@ -61,7 +61,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
 
-
 defined( 'VISUALARTWORK_CLASS_VERSION' ) or define( 'VISUALARTWORK_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
@@ -99,31 +98,33 @@ class VisualArtwork extends CreativeWork
                                'family' => null         ,
                              );
 
-    public      $artEdition         = null;                         /* {*property   $artEdition                 (TYPE)                          The number of copies when multiple copies of a piece of artwork are
-                                                                                                                                                produced - e.g. for a limited edition of 20 prints, 'artEdition'
-                                                                                                                                                refers to the total number of copies (in this example "20"). *} */
-    public      $artMedium          = null;                         /* {*property   $artMedium                  (TYPE)                          The material used. (e.g. Oil, Watercolour, Acrylic, Linoprint,
-                                                                                                                                                Marble, Cyanotype, Digital, Lithograph, DryPoint, Intaglio, Pastel,
-                                                                                                                                                Woodcut, Pencil, Mixed Media, etc.) *} */
-    public      $artform            = null;                         /* {*property   $artform                    (TYPE)                          e.g. Painting, Drawing, Sculpture, Print, Photograph, Assemblage,
-                                                                                                                                                Collage, etc. *} */
-    public      $artist             = null;                         /* {*property   $artist                     (TYPE)                          The primary artist for a work in a medium other than pencils or
-                                                                                                                                                digital line art--for example, if the primary artwork is done
-                                                                                                                                                in watercolors or digital paints. *} */
-    public      $artworkSurface     = null;                         /* {*property   $artworkSurface             (TYPE)                          The supporting materials for the artwork, e.g. Canvas, Paper, Wood,
-                                                                                                                                                Board, etc. *} */
-    public      $colorist           = null;                         /* {*property   $colorist                   (TYPE)                          The individual who adds color to inked drawings. *} */
-    public      $depth              = null;                         /* {*property   $depth                      (TYPE)                          The depth of the item. *} */
-    public      $height             = null;                         /* {*property   $height                     (TYPE)                          The height of the item. *} */
-    public      $inker              = null;                         /* {*property   $inker                      (TYPE)                          The individual who traces over the pencil drawings in ink after pencils
-                                                                                                                                                are complete. *} */
-    public      $letterer           = null;                         /* {*property   $letterer                   (TYPE)                          The individual who adds lettering, including speech balloons and sound
-                                                                                                                                                effects, to artwork. *} */
-    public      $penciler           = null;                         /* {*property   $penciler                   (TYPE)                          The individual who draws the primary narrative artwork. *} */
-    public      $width              = null;                         /* {*property   $width                      (TYPE)                          The width of the item. *} */
+    public      $artEdition                     = null;             /* {*property   $artEdition                     (int|string)                    The number of copies when multiple copies of a piece of artwork are
+                                                                                                                                                    produced - e.g. for a limited edition of 20 prints, 'artEdition'
+                                                                                                                                                    refers to the total number of copies (in this example "20"). *} */
+    public      $artMedium                      = null;             /* {*property   $artMedium                      (string|URL)                    The material used. (e.g. Oil, Watercolour, Acrylic, Linoprint, Marble,
+                                                                                                                                                    Cyanotype, Digital, Lithograph, DryPoint, Intaglio, Pastel, Woodcut,
+                                                                                                                                                    Pencil, Mixed Media, etc.) *} */
+    public      $artform                        = null;             /* {*property   $artform                        (URL|string)                    e.g. Painting, Drawing, Sculpture, Print, Photograph, Assemblage,
+                                                                                                                                                    Collage, etc. *} */
+    public      $artist                         = null;             /* {*property   $artist                         (Person)                        The primary artist for a work in a medium other than pencils or
+                                                                                                                                                    digital line art--for example, if the primary artwork is done in
+                                                                                                                                                    watercolors or digital paints. *} */
+    public      $artworkSurface                 = null;             /* {*property   $artworkSurface                 (URL|string)                    The supporting materials for the artwork, e.g. Canvas, Paper, Wood,
+                                                                                                                                                    Board, etc. *} */
+    public      $colorist                       = null;             /* {*property   $colorist                       (Person)                        The individual who adds color to inked drawings. *} */
+    public      $depth                          = null;             /* {*property   $depth                          (QuantitativeValue|Distance)    The depth of the item. *} */
+    public      $height                         = null;             /* {*property   $height                         (Distance|QuantitativeValue)    The height of the item. *} */
+    public      $inker                          = null;             /* {*property   $inker                          (Person)                        The individual who traces over the pencil drawings in ink after
+                                                                                                                                                    pencils are complete. *} */
+    public      $letterer                       = null;             /* {*property   $letterer                       (Person)                        The individual who adds lettering, including speech balloons and sound
+                                                                                                                                                    effects, to artwork. *} */
+    public      $penciler                       = null;             /* {*property   $penciler                       (Person)                        The individual who draws the primary narrative artwork. *} */
+    public      $width                          = null;             /* {*property   $width                          (QuantitativeValue|Distance)    The width of the item. *} */
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q36649';         /* {*property   $wikidataId                     (string)                        Wikidata ID. Visual art: Art form which creates works that are 
+                                                                                                                                                    primarily visual in nature *} */
 
 
     /* ================================================================================ */
@@ -147,8 +148,6 @@ class VisualArtwork extends CreativeWork
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of VisualArtwork.__construct() ========================================= */
@@ -180,8 +179,6 @@ class VisualArtwork extends CreativeWork
         $this->necroSignaling();
     }   /* End of VisualArtwork.__destruct() ========================================== */
     /* ================================================================================ */
-
 }   /* End of class VisualArtwork ===================================================== */
 /* ==================================================================================== */
-
 ?>

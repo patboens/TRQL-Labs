@@ -54,17 +54,14 @@
 /****************************************************************************************/
 namespace trql\airline;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\organization\Organization    as Organization;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\organization\Organization     as Organization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'ORGANIZATION_CLASS_VERSION' ) )
     require_once( 'trql.organization.class.php' );
-
-
 
 defined( 'AIRLINE_CLASS_VERSION' ) or define( 'AIRLINE_CLASS_VERSION','0.1' );
 
@@ -87,13 +84,13 @@ defined( 'AIRLINE_CLASS_VERSION' ) or define( 'AIRLINE_CLASS_VERSION','0.1' );
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 14:41. IT HAS NOT BEEN TESTED YET!
+        on 26-08-2020 14:41.
     *}
 
  */
 /* ==================================================================================== */
 class Airline extends Organization
-/*--------------------------------------*/
+/*-------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -109,6 +106,8 @@ class Airline extends Organization
     public      $iataCode                       = null;             /* {*property   $iataCode                       (string)                        IATA identifier for an airline or airport. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q46970';         /* {*property   $wikidataId                     (string)                        Wikidata ID. Company that provides air transport services for 
+                                                                                                                                                    traveling passengers and freight. *} */
 
 
     /* ================================================================================ */
@@ -132,8 +131,6 @@ class Airline extends Organization
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
     }   /* End of Airline.__construct() =============================================== */
@@ -165,8 +162,6 @@ class Airline extends Organization
         $this->necroSignaling();
     }   /* End of Airline.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class Airline =========================================================== */
 /* ==================================================================================== */
-
 ?>

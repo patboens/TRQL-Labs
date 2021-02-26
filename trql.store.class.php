@@ -51,18 +51,14 @@
 /****************************************************************************************/
 namespace trql\store;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\localbusiness\LocalBusiness       as LocalBusiness;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'LOCALBUSINESS_CLASS_VERSION' ) )
     require_once( 'trql.localbusiness.class.php' );
-
-
 
 defined( 'STORE_CLASS_VERSION' ) or define( 'STORE_CLASS_VERSION','0.1' );
 
@@ -102,6 +98,7 @@ class Store extends LocalBusiness
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId         = 'Q213441';                   /* {*property   $wikidataId                     (string)                         Wikidata ID. shop : place where items or services are sold *} */
 
 
     /* ================================================================================ */
@@ -125,8 +122,6 @@ class Store extends LocalBusiness
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of Store.__construct() ================================================= */
@@ -158,7 +153,6 @@ class Store extends LocalBusiness
         $this->necroSignaling();
     }   /* End of Store.__destruct() ================================================== */
     /* ================================================================================ */
-
 }   /* End of class Store ============================================================= */
 /* ==================================================================================== */
 ?>

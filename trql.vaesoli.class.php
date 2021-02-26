@@ -900,6 +900,55 @@ class Vaesoli
     /* ================================================================================ */
 
 
+    public static function FIL_recurseCopy( $szSrc,$szDest,$szChildFolder = '' )
+    /*------------------------------------------------------------------------*/
+    {
+        $resDir = opendir( $szSrc );
+
+        @mkdir( $szDest );
+
+        if ( $szChildFolder != '' )
+        {
+            @mkdir( $szDest . '/' . $szChildFolder );
+
+            while ( false !== ( $szFile = readdir( $resDir ) ) )
+            {
+                if ( ( $szFile != '.' ) && ( $szFile != '..' ) )
+                {
+                    if ( is_dir( $szSrc . '/' . $szFile ) )
+                    {
+                        self::FIL_recurseCopy( $szSrc . '/' . $szFile,$szDest . '/'. $szChildFolder . '/' . $szFile );
+                    }
+                    else
+                    {
+                        copy( $szSrc . '/' . $szFile,$szDest . '/'. $szChildFolder . '/' . $szFile );
+                    }
+                }
+            }
+        }
+        else
+        {
+            while( false !== ( $szFile = readdir( $resDir ) ) )
+            {
+                if ( ( $szFile != '.' ) && ( $szFile != '..' ) )
+                {
+                    if ( is_dir( $szSrc . '/' . $szFile ) )
+                    {
+                        self::FIL_recurseCopy( $szSrc . '/' . $szFile,$szDest . '/' . $szFile );
+                    }
+                    else
+                    {
+                        copy( $szSrc . '/' . $szFile, $szDest . '/' . $szFile );
+                    }
+                }
+            }
+        }
+
+        closedir( $resDir );
+    }   /* End of vaesoli.FIL_recurseCopy() =========================================== */
+    /* ================================================================================ */
+
+
     public static function FIL_Delete( $szFile )
     /*----------------------------------------*/
     {
@@ -3908,7 +3957,93 @@ class Vaesoli
         {
             return ( $aURL );
         }
-    }   /* End of vaesoli.URL_Parse() =========================================== */
-    /* ========================================================================== */
+    }   /* End of vaesoli.URL_Parse() ================================================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*URL_ParseDomain( $szDomain,$szPart )=
+
+        Parses a domain
+
+        {*params
+            $szDomain   (string)    Domain to parse
+            $szPart     (string)    Optional. Part to receive.
+                                    Can be:[br]
+                                    - [c]'tld'[/c][br]
+                                    - [c]'domain'[/c][br]
+                                    - [c]'subdomain'[/c][br]
+        *}
+
+        {*return
+            (mixed)     Associative array with the following keys:[br]
+                            - [c]tld[/c][br]
+                            - [c]domain[/c][br]
+                            - [c]subdomain[/c][br]
+                        If $szPart passed ([c]'tld'[/c], [c]'domain'[/c] or [c]'subdomain'[/c]) the return value is a string
+        *}
+
+        {*assert
+            URL_ParseDomain( 'www.vaesoli.org','subdomain' ) == 'www'
+        *}
+
+        {*assert
+            URL_ParseDomain( 'www.vaesoli.org','domain'    ) == 'vaesoli'
+        *}
+
+        {*assert
+            URL_ParseDomain( 'www.vaesoli.org','tld'       ) == 'org'
+        *}
+
+        {*example
+            $szURL      = 'http://www.vaesoli.org/documentation/documentation-vaesoli-code-source.php?page=3';
+            $szDomain   = URL_Parse( $szURL,'domain' );
+            echo $szDomain;                                 // Prints 'www.vaesoli.org'
+            echo URL_ParseDomain( $szDomain,'subdomain' );  // Prints 'www'
+            echo URL_ParseDomain( $szDomain,'domain'    );  // Prints 'vaesoli'
+            echo URL_ParseDomain( $szDomain,'tld'       );  // Prints 'org'
+        *}
+
+        {*exec
+            $szDomain = "ui.tl";
+            $aParts   = URL_ParseDomain( $szDomain );
+            var_dump( $aParts );
+        *}
+        *}}
+     */
+    /* ================================================================================ */
+    public static function URL_ParseDomain( $szDomain,$szPart = null )
+    /*--------------------------------------------------------------*/
+    {
+        $aURL               = array();
+
+        $aURL['tld']        =
+        $aURL['domain']     =
+        $aURL['subdomain']  = '';
+
+        if ( preg_match( '/(?P<subdomain>[[:alnum:]]+?\.)?(?P<domain>.+?)\.(?P<tld>.{2,})/i',$szDomain,$aMatch ) )
+        {
+            $aURL['subdomain']  = isset( $aMatch['subdomain'] ) ? $aMatch['subdomain']  : '';
+            $aURL['domain']     = isset( $aMatch['domain']    ) ? $aMatch['domain']     : '';
+            $aURL['tld']        = isset( $aMatch['tld']       ) ? $aMatch['tld']        : '';
+
+            if ( ( $iPos = self::STR_Pos( $aURL['tld'],'/' ) ) != -1 )
+            {
+                $aURL['tld'] = self::STR_Left( $aURL['tld'],$iPos );
+            }
+        }
+
+        if ( ! is_null( $szPart ) && isset( $aURL[$szPart] ) )
+        {
+            return ( $aURL[$szPart] );
+        }
+        else
+        {
+            return ( $aURL );
+        }
+
+        return ( $aURL );
+    }   /* End of function URL_ParseDomain() ========================================== */
+    /* ================================================================================ */
 }
 ?>

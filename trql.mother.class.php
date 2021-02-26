@@ -71,12 +71,18 @@ defined( "EXCEPTION_CODE_INVALID_PARAMETERS_COUNT" )            or define( "EXCE
 defined( "EXCEPTION_CODE_NO_RESULTS_FOUND" )                    or define( "EXCEPTION_CODE_NO_RESULTS_FOUND"                        ,EXCEPTION_CODE_BASIS + 9 );
 defined( "EXCEPTION_CODE_MISSING_PARAMETER" )                   or define( "EXCEPTION_CODE_MISSING_PARAMETER"                       ,EXCEPTION_CODE_BASIS + 10 );
 defined( "EXCEPTION_CODE_RESOURCE_NOT_FOUND" )                  or define( "EXCEPTION_CODE_RESOURCE_NOT_FOUND"                      ,EXCEPTION_CODE_BASIS + 11 );
+defined( "EXCEPTION_CODE_UNAVAILABLE" )                         or define( "EXCEPTION_CODE_UNAVAILABLE"                             ,EXCEPTION_CODE_BASIS + 12 );
 
 defined( "EXCEPTION_CODE_RSS_BASIS" )                           or define( "EXCEPTION_CODE_RSS_BASIS"                               ,EXCEPTION_CODE_BASIS + 1000 );
 defined( "EXCEPTION_CODE_RSS_NO_CHANNEL_FOUND" )                or define( "EXCEPTION_CODE_RSS_NO_CHANNEL_FOUND"                    ,EXCEPTION_CODE_RSS_BASIS + 0 );
 
 defined( "EXCEPTION_CODE_XML_BASIS" )                           or define( "EXCEPTION_CODE_XML_BASIS"                               ,EXCEPTION_CODE_RSS_BASIS + 1000 );
 defined( "EXCEPTION_CODE_XML_INVALID" )                         or define( "EXCEPTION_CODE_XML_INVALID"                             ,EXCEPTION_CODE_XML_BASIS + 0 );
+
+defined( "EXCEPTION_CODE_WEBSITE_BASIS" )                       or define( "EXCEPTION_CODE_WEBSITE_BASIS"                           ,EXCEPTION_CODE_XML_BASIS + 1000 );
+defined( "EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND" )                or define( "EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND"                    ,EXCEPTION_CODE_WEBSITE_BASIS + 1 );
+
+
 
 defined( 'ROW_SOURCE_TYPE_VALUES' )                             or define( "ROW_SOURCE_TYPE_VALUES"                                 ,10 );
 defined( 'DATA_SOURCE_TYPE_VALUES' )                            or define( "DATA_SOURCE_TYPE_VALUES"                                ,ROW_SOURCE_TYPE_VALUES);

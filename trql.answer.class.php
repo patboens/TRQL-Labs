@@ -468,10 +468,8 @@ class Answer extends Comment
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
-    }   /* End of Answer.__construct() ========================================== */
+    }   /* End of Answer.__construct() ================================================ */
     /* ================================================================================ */
 
 
@@ -496,10 +494,8 @@ class Answer extends Comment
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Answer.__destruct() =========================================== */
+    }   /* End of Answer.__destruct() ================================================= */
     /* ================================================================================ */
-
-}   /* End of class Answer ====================================================== */
+}   /* End of class Answer ============================================================ */
 /* ==================================================================================== */
-
 ?>

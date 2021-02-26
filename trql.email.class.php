@@ -57,6 +57,9 @@ use \trql\emailmessage\EmailMessage     as EmailMessage;
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
+if ( ! defined( 'UTILITY_CLASS_VERSION' ) )
+    require_once( 'trql.utility.class.php' );
+
 if ( ! defined( 'MESSAGE_CLASS_VERSION' ) )
     require_once( 'trql.message.class.php' );
 

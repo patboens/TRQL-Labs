@@ -33,17 +33,14 @@
 /****************************************************************************************/
 namespace trql\entertainmentbusiness;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\localbusiness\LocalBusiness       as LocalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'LOCALBUSINESS_CLASS_VERSION' ) )
     require_once( 'trql.localbusiness.class.php' );
-
-
 
 defined( 'ENTERTAINMENTBUSINESS_CLASS_VERSION' ) or define( 'ENTERTAINMENTBUSINESS_CLASS_VERSION','0.1' );
 
@@ -129,7 +126,6 @@ class EntertainmentBusiness extends LocalBusiness
         $this->necroSignaling();
     }   /* End of EntertainmentBusiness.__destruct() ================================== */
     /* ================================================================================ */
-
 }   /* End of class EntertainmentBusiness ============================================= */
 /* ==================================================================================== */
 

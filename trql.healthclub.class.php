@@ -105,7 +105,8 @@ class HealthClub extends HealthAndBeautyBusiness
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (25-02-21 18:17:24). *} */
+    public      $wikidataId                     = 'Q1065656';       /* {*property   $wikidataId                     (string)                        Wikidata ID. A place which houses exercise equipment 
+                                                                                                                                                    for the purpose of physical exercise *} */
 
 
     /* ================================================================================ */
@@ -129,8 +130,6 @@ class HealthClub extends HealthAndBeautyBusiness
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
     }   /* End of HealthClub.__construct() ============================================ */

@@ -223,6 +223,11 @@ class Organization extends Thing implements iContext
     public      $vatID                      = null;                 /* {*propert    $vatID                      (string)                                    The Value-added Tax ID of the organization or person. *} */
 
 
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                 = 'Q43229';             /* {*property   $wikidataId                 (string)                                    Wikidata ID. Social entity (not necessarily commercial) uniting people 
+                                                                                                                                                            into a structured group managing shared means to meet some needs, or to 
+                                                                                                                                                            pursue collective goals *} */
+
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 

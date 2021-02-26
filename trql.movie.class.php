@@ -128,7 +128,8 @@ class Movie extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (25-02-21 18:17:24). *} */
+    public      $wikidataId                     = 'Q11424';         /* {*property   $wikidataId                     (string)                        Wikidata ID. Film (aliases: movie, motion picture, cinematic work,
+                                                                                                                                                    films, flick, moving picture): audiovisual work *} */
 
 
     /* ================================================================================ */
@@ -152,8 +153,6 @@ class Movie extends CreativeWork
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
     }   /* End of Movie.__construct() ================================================= */

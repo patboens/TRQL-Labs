@@ -379,6 +379,7 @@ class Locksmith extends HomeAndConstructionBusiness
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (25-02-21 18:17:24). *} */
 
 
     /* ================================================================================ */
