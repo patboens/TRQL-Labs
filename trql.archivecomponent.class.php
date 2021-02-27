@@ -466,8 +466,6 @@ class ArchiveComponent extends CreativeWork
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
     }   /* End of ArchiveComponent.__construct() ====================================== */
     /* ================================================================================ */

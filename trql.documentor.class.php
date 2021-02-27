@@ -3096,8 +3096,6 @@ Class DocumentorFunctionParameter extends DocumentorSourceFileObject
         $this->necroSignaling();
     }   /* End of DocumentorFunctionParameter.__destruct() ============================ */
     /* ================================================================================ */
-
 }   /* End of class DocumentorFunctionParameter ======================================= */
 /* ==================================================================================== */
-
 ?>

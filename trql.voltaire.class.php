@@ -48,11 +48,10 @@
 /****************************************************************************************/
 namespace trql\voltaire;
 
-
-use \trql\mother\Mother                             as Mother;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\utility\Utility                           as Utility;
-use \trql\mercator\Mercator                         as Mercator;
+use \trql\mother\Mother         as Mother;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\utility\Utility       as Utility;
+use \trql\mercator\Mercator     as Mercator;
 
 use DOMDocument;
 use DOMXPath;
@@ -69,10 +68,7 @@ if ( ! defined( 'UTILITY_CLASS_VERSION' ) )
 if ( ! defined( 'MERCATOR_CLASS_VERSION' ) )
     require_once( 'trql.mercator.class.php' );
 
-
 require_once( "q/common/addons/textrazor/TextRazor.php" );
-
-
 
 defined( 'VOLTAIRE_CLASS_VERSION' ) or define( 'VOLTAIRE_CLASS_VERSION','0.1' );
 
@@ -106,7 +102,7 @@ class Voltaire extends Utility
                                'family' => null         ,
                              );
 
-    protected   $oTR        = null;                                 /* {*property   $oTR                        (TextRazor)             Text Razor class *} */
+    protected   $oTR                            = null;             /* {*property   $oTR                        (TextRazor)             Text Razor class *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                Wikidata ID. No equivalent. *} */
