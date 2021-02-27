@@ -53,17 +53,14 @@
 /****************************************************************************************/
 namespace trql\offer;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\intangible\Intangible     as Intangible;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'INTANGIBLE_CLASS_VERSION' ) )
     require_once( 'trql.intangible.class.php' );
-
-
 
 defined( 'OFFER_CLASS_VERSION' ) or define( 'OFFER_CLASS_VERSION','0.1' );
 
@@ -93,8 +90,6 @@ defined( 'OFFER_CLASS_VERSION' ) or define( 'OFFER_CLASS_VERSION','0.1' );
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
-        CHECK ALL PROPERTIES. THERE WAS A SORT OF MISMATCH WHEN GENERATING THE CLASS
     *}
 
  */
@@ -238,7 +233,7 @@ class Offer extends Intangible
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q1193004';
+    public      $wikidataId                     = 'Q1193004';       /* {*property   $wikidataId                 (string)                                        Wikidata ID. Offer and acceptance. Two components of agreement *} */
 
 
     /* ================================================================================ */
@@ -262,8 +257,6 @@ class Offer extends Intangible
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of Offer.__construct() ================================================= */
@@ -295,8 +288,6 @@ class Offer extends Intangible
         $this->necroSignaling();
     }   /* End of Offer.__destruct() ================================================== */
     /* ================================================================================ */
-
 }   /* End of class Offer ============================================================= */
 /* ==================================================================================== */
-
 ?>

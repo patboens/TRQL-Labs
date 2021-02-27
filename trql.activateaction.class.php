@@ -57,14 +57,11 @@ namespace trql\activateaction;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\controlaction\ControlAction       as ControlAction;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CONTROLACTION_CLASS_VERSION' ) )
     require_once( 'trql.controlaction.class.php' );
-
-
 
 defined( 'ACTIVATEACTION_CLASS_VERSION' ) or define( 'ACTIVATEACTION_CLASS_VERSION','0.1' );
 
@@ -106,6 +103,7 @@ class ActivateAction extends ControlAction
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -129,8 +127,6 @@ class ActivateAction extends ControlAction
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of ActivateAction.__construct() ======================================== */
@@ -158,10 +154,10 @@ class ActivateAction extends ControlAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of ActivateAction.__destruct() ========================================= */
     /* ================================================================================ */
-
 }   /* End of class ActivateAction ==================================================== */
 /* ==================================================================================== */
-
 ?>

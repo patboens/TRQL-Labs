@@ -53,17 +53,15 @@
 /****************************************************************************************/
 namespace trql\albumrelease;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\\    as ;
+use \trql\vaesoli\Vaesoli                               as Vaesoli;
+use \trql\musicalbumreleasetype\MusicAlbumReleaseType   as MusicAlbumReleaseType;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( '_CLASS_VERSION' ) )
-    require_once( 'trql..class.php' );
-
-
+if ( ! defined( 'MUSICALBUMRELEASETYPE_CLASS_VERSION' ) )
+    require_once( 'trql.musicalbumreleasetype.class.php' );
 
 defined( 'ALBUMRELEASE_CLASS_VERSION' ) or define( 'ALBUMRELEASE_CLASS_VERSION','0.1' );
 
@@ -86,13 +84,13 @@ defined( 'ALBUMRELEASE_CLASS_VERSION' ) or define( 'ALBUMRELEASE_CLASS_VERSION',
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 14:41. IT HAS NOT BEEN TESTED YET!
+        on 26-08-2020 14:41.
     *}
 
  */
 /* ==================================================================================== */
-class AlbumRelease extends 
-/*--------------------------------------*/
+class AlbumRelease extends MusicAlbumReleaseType
+/*--------------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -103,10 +101,8 @@ class AlbumRelease extends
                                'UIKey'  => null         ,
                              );
 
-    public      $                               = null;             /* {*property   $                               (string)                        http://schema.org/Vehicle *} */
-
-
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -130,8 +126,6 @@ class AlbumRelease extends
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
     }   /* End of AlbumRelease.__construct() ========================================== */
@@ -159,10 +153,10 @@ class AlbumRelease extends
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of AlbumRelease.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class AlbumRelease ====================================================== */
 /* ==================================================================================== */
-
 ?>
