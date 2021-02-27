@@ -438,7 +438,8 @@ class Quotation extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
+
 
 
     /* ================================================================================ */
@@ -466,7 +467,7 @@ class Quotation extends CreativeWork
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Quotation.__construct() ========================================== */
+    }   /* End of Quotation.__construct() ============================================= */
     /* ================================================================================ */
 
 
@@ -493,10 +494,8 @@ class Quotation extends CreativeWork
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of Quotation.__destruct() =========================================== */
+    }   /* End of Quotation.__destruct() ============================================== */
     /* ================================================================================ */
-
-}   /* End of class Quotation ====================================================== */
+}   /* End of class Quotation ========================================================= */
 /* ==================================================================================== */
-
 ?>

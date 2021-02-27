@@ -449,7 +449,7 @@ class Recommendation extends Review
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */
@@ -477,7 +477,7 @@ class Recommendation extends Review
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Recommendation.__construct() ========================================== */
+    }   /* End of Recommendation.__construct() ======================================== */
     /* ================================================================================ */
 
 
@@ -504,10 +504,8 @@ class Recommendation extends Review
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of Recommendation.__destruct() =========================================== */
+    }   /* End of Recommendation.__destruct() ========================================= */
     /* ================================================================================ */
-
-}   /* End of class Recommendation ====================================================== */
+}   /* End of class Recommendation ==================================================== */
 /* ==================================================================================== */
-
 ?>

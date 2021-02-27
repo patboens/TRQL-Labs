@@ -438,7 +438,8 @@ class PublicationIssue extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
+
 
 
     /* ================================================================================ */
@@ -466,7 +467,7 @@ class PublicationIssue extends CreativeWork
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of PublicationIssue.__construct() ========================================== */
+    }   /* End of PublicationIssue.__construct() ====================================== */
     /* ================================================================================ */
 
 
@@ -493,10 +494,8 @@ class PublicationIssue extends CreativeWork
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of PublicationIssue.__destruct() =========================================== */
+    }   /* End of PublicationIssue.__destruct() ======================================= */
     /* ================================================================================ */
-
-}   /* End of class PublicationIssue ====================================================== */
+}   /* End of class PublicationIssue ================================================== */
 /* ==================================================================================== */
-
 ?>

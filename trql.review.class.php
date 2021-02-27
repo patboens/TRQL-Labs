@@ -51,17 +51,14 @@
 /****************************************************************************************/
 namespace trql\review;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\creativework\CreativeWork         as CreativeWork;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
-
 
 defined( 'REVIEW_CLASS_VERSION' ) or define( 'REVIEW_CLASS_VERSION','0.1' );
 
@@ -111,6 +108,7 @@ class Review extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q265158';       /* {*property   $wikidataId                 (string)        Wikidata ID. Evaluation *} */
 
 
     /* ================================================================================ */
@@ -134,8 +132,6 @@ class Review extends CreativeWork
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of Review.__construct() ================================================ */
@@ -167,8 +163,6 @@ class Review extends CreativeWork
         $this->necroSignaling();
     }   /* End of Review.__destruct() ================================================= */
     /* ================================================================================ */
-
 }   /* End of class Review ============================================================ */
 /* ==================================================================================== */
-
 ?>

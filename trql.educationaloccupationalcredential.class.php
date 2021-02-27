@@ -451,6 +451,7 @@ class EducationalOccupationalCredential extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */
@@ -475,10 +476,8 @@ class EducationalOccupationalCredential extends CreativeWork
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
-    }   /* End of EducationalOccupationalCredential.__construct() ========================================== */
+    }   /* End of EducationalOccupationalCredential.__construct() ===================== */
     /* ================================================================================ */
 
 
@@ -503,10 +502,10 @@ class EducationalOccupationalCredential extends CreativeWork
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of EducationalOccupationalCredential.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of EducationalOccupationalCredential.__destruct() ====================== */
     /* ================================================================================ */
-
-}   /* End of class EducationalOccupationalCredential ====================================================== */
+}   /* End of class EducationalOccupationalCredential ================================= */
 /* ==================================================================================== */
-
 ?>

@@ -47,9 +47,8 @@
 /****************************************************************************************/
 namespace trql\shortstory;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\creativework\CreativeWork    as CreativeWork;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\creativework\CreativeWork as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -430,7 +429,7 @@ class ShortStory extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */
@@ -455,10 +454,8 @@ class ShortStory extends CreativeWork
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
-    }   /* End of ShortStory.__construct() ========================================== */
+    }   /* End of ShortStory.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -485,10 +482,8 @@ class ShortStory extends CreativeWork
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of ShortStory.__destruct() =========================================== */
+    }   /* End of ShortStory.__destruct() ============================================= */
     /* ================================================================================ */
-
-}   /* End of class ShortStory ====================================================== */
+}   /* End of class ShortStory ======================================================== */
 /* ==================================================================================== */
-
 ?>

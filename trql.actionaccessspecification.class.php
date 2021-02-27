@@ -57,14 +57,11 @@ namespace trql\actionaccessspecification;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\intangible\Intangible         as Intangible;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'INTANGIBLE_CLASS_VERSION' ) )
     require_once( 'trql.intangible.class.php' );
-
-
 
 defined( 'ACTIONACCESSSPECIFICATION_CLASS_VERSION' ) or define( 'ACTIONACCESSSPECIFICATION_CLASS_VERSION','0.1' );
 
@@ -87,7 +84,7 @@ defined( 'ACTIONACCESSSPECIFICATION_CLASS_VERSION' ) or define( 'ACTIONACCESSSPE
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 08:25. IT HAS NOT BEEN TESTED YET!
+        on 26-08-2020 08:25.
     *}
 
  */
@@ -126,6 +123,7 @@ class ActionAccessSpecification extends Intangible
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                                        Wikidata ID. No equivalent *} */
 
 
     /* ================================================================================ */
@@ -149,8 +147,6 @@ class ActionAccessSpecification extends Intangible
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of ActionAccessSpecification.__construct() ============================= */
@@ -178,10 +174,10 @@ class ActionAccessSpecification extends Intangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of ActionAccessSpecification.__destruct() ============================== */
     /* ================================================================================ */
-
 }   /* End of class ActionAccessSpecification ========================================= */
 /* ==================================================================================== */
-
 ?>

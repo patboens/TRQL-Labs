@@ -444,6 +444,7 @@ class MusicAlbum extends MusicPlaylist
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */

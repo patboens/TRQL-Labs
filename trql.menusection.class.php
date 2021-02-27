@@ -444,6 +444,7 @@ class MenuSection extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */
@@ -467,8 +468,6 @@ class MenuSection extends CreativeWork
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
     }   /* End of MenuSection.__construct() =========================================== */
@@ -500,8 +499,6 @@ class MenuSection extends CreativeWork
         $this->necroSignaling();
     }   /* End of MenuSection.__destruct() ============================================ */
     /* ================================================================================ */
-
 }   /* End of class MenuSection ======================================================= */
 /* ==================================================================================== */
-
 ?>

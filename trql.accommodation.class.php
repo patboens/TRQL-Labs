@@ -53,18 +53,15 @@
 /****************************************************************************************/
 namespace trql\accommodation;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\place\Place    as Place;
-
+use \trql\thing\Thing           as Thing;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\place\Place           as Place;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'PLACE_CLASS_VERSION' ) )
     require_once( 'trql.place.class.php' );
-
-
 
 defined( 'ACCOMMODATION_CLASS_VERSION' ) or define( 'ACCOMMODATION_CLASS_VERSION','0.1' );
 
@@ -92,7 +89,7 @@ defined( 'ACCOMMODATION_CLASS_VERSION' ) or define( 'ACCOMMODATION_CLASS_VERSION
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 08:24. IT HAS NOT BEEN TESTED YET!
+        on 26-08-2020 08:24.
     *}
 
  */
@@ -154,6 +151,7 @@ class Accommodation extends Place
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q64576680';      /* {*property   $wikidataId                     (string)                        Wikidata ID. Place where someone can stay *} */
 
 
     /* ================================================================================ */
@@ -177,8 +175,6 @@ class Accommodation extends Place
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of Accommodation.__construct() ========================================= */
@@ -206,10 +202,10 @@ class Accommodation extends Place
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Accommodation.__destruct() ========================================== */
     /* ================================================================================ */
-
 }   /* End of class Accommodation ===================================================== */
 /* ==================================================================================== */
-
 ?>

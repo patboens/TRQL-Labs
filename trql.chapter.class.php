@@ -443,6 +443,7 @@ class Chapter extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */
@@ -467,10 +468,8 @@ class Chapter extends CreativeWork
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
-    }   /* End of Chapter.__construct() ========================================== */
+    }   /* End of Chapter.__construct() =============================================== */
     /* ================================================================================ */
 
 
@@ -495,10 +494,10 @@ class Chapter extends CreativeWork
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Chapter.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Chapter.__destruct() ================================================ */
     /* ================================================================================ */
-
-}   /* End of class Chapter ====================================================== */
+}   /* End of class Chapter =========================================================== */
 /* ==================================================================================== */
-
 ?>

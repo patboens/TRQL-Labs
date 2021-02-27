@@ -439,6 +439,7 @@ class Manuscript extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */
@@ -463,10 +464,8 @@ class Manuscript extends CreativeWork
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
-    }   /* End of Manuscript.__construct() ========================================== */
+    }   /* End of Manuscript.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -491,10 +490,10 @@ class Manuscript extends CreativeWork
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Manuscript.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Manuscript.__destruct() ============================================= */
     /* ================================================================================ */
-
-}   /* End of class Manuscript ====================================================== */
+}   /* End of class Manuscript ======================================================== */
 /* ==================================================================================== */
-
 ?>

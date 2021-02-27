@@ -109,7 +109,7 @@ class Voltaire extends Utility
     protected   $oTR        = null;                                 /* {*property   $oTR                        (TextRazor)             Text Razor class *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -1326,7 +1326,6 @@ class Voltaire extends Utility
         $this->necroSignaling();
     }   /* End of Voltaire.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class Voltaire ========================================================== */
 /* ==================================================================================== */
 ?>

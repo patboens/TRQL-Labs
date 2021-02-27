@@ -79,8 +79,8 @@ use \trql\creativework\CreativeWork     as CreativeWork;
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'CREATIVEWORK, SERIES_CLASS_VERSION' ) )
-    require_once( 'trql.creativework, series.class.php' );
+if ( ! defined( 'CREATIVEWORK_VERSION' ) )
+    require_once( 'trql.creativework.class.php' );
 
 defined( 'CREATIVEWORKSERIES_CLASS_VERSION' ) or define( 'CREATIVEWORKSERIES_CLASS_VERSION','0.1' );
 
@@ -117,7 +117,7 @@ defined( 'CREATIVEWORKSERIES_CLASS_VERSION' ) or define( 'CREATIVEWORKSERIES_CLA
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 18:46. IT HAS NOT BEEN TESTED YET!
+        on 26-08-2020 18:46.
     *}
 
  */
@@ -167,8 +167,6 @@ class CreativeWorkSeries extends CreativeWork
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
     }   /* End of CreativeWorkSeries.__construct() ==================================== */
     /* ================================================================================ */
@@ -201,5 +199,4 @@ class CreativeWorkSeries extends CreativeWork
     /* ================================================================================ */
 }   /* End of class CreativeWorkSeries ================================================ */
 /* ==================================================================================== */
-
 ?>

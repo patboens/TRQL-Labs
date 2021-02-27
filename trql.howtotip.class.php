@@ -448,6 +448,7 @@ class HowToTip extends CreativeWork, ListItem
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */
@@ -475,7 +476,7 @@ class HowToTip extends CreativeWork, ListItem
         $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of HowToTip.__construct() ========================================== */
+    }   /* End of HowToTip.__construct() ============================================== */
     /* ================================================================================ */
 
 
@@ -500,10 +501,10 @@ class HowToTip extends CreativeWork, ListItem
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of HowToTip.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of HowToTip.__destruct() =============================================== */
     /* ================================================================================ */
-
-}   /* End of class HowToTip ====================================================== */
+}   /* End of class HowToTip ========================================================== */
 /* ==================================================================================== */
-
 ?>

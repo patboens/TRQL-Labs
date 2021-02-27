@@ -447,6 +447,7 @@ class MusicComposition extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */
@@ -471,10 +472,8 @@ class MusicComposition extends CreativeWork
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
-    }   /* End of MusicComposition.__construct() ========================================== */
+    }   /* End of MusicComposition.__construct() ====================================== */
     /* ================================================================================ */
 
 
@@ -501,10 +500,8 @@ class MusicComposition extends CreativeWork
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of MusicComposition.__destruct() =========================================== */
+    }   /* End of MusicComposition.__destruct() ======================================= */
     /* ================================================================================ */
-
-}   /* End of class MusicComposition ====================================================== */
+}   /* End of class MusicComposition ================================================== */
 /* ==================================================================================== */
-
 ?>

@@ -457,6 +457,7 @@ class MediaReview extends Review
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */
@@ -481,10 +482,8 @@ class MediaReview extends Review
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
-    }   /* End of MediaReview.__construct() ========================================== */
+    }   /* End of MediaReview.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -509,10 +508,10 @@ class MediaReview extends Review
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MediaReview.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MediaReview.__destruct() ============================================ */
     /* ================================================================================ */
-
-}   /* End of class MediaReview ====================================================== */
+}   /* End of class MediaReview ======================================================= */
 /* ==================================================================================== */
-
 ?>

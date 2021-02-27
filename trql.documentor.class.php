@@ -1181,7 +1181,7 @@ Class DocumentorSourceFile extends DocumentorFile
 
         {*example
             $oDoc = new DocumentorSourceFile();
-            
+
         *}
 
         {*seealso
@@ -1273,13 +1273,16 @@ Class DocumentorSourceFile extends DocumentorFile
     {
         //var_dump( "On me demande de générer la doc de " . $szFile );
         //die();
+        //$this->die("ICI " . (string) time() );
+
         $szHTML = '';                                               /* Return value of the method */
 
         $szFile = $szFile ?? $this->szFileName ?? $this->self['file'];
         //var_dump( $szFile,$this->documentationFile() );
 
-        if ( vaesoli::FIL_MDate( $szDocFile = $this->documentationFile(),'int' ) > vaesoli::FIL_MDate( $szFile,'int' ) )
+        if ( false && vaesoli::FIL_MDate( $szDocFile = $this->documentationFile(),'int' ) > vaesoli::FIL_MDate( $szFile,'int' ) )
         {
+            $this->die("ICI " . (string) time() );
             //var_dump( "La doc EST à jour" );
             $szHTML = vaesoli::FIL_FileToStr( $szDocFile );
             goto end;
@@ -1303,7 +1306,7 @@ Class DocumentorSourceFile extends DocumentorFile
                     $szHTML .= "section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }\n";
                     $szHTML .= ".shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }\n";
 
-                    $szHTML .= "table.properties { border:1px solid silver; border-collapse: collapse; }\n";
+                    $szHTML .= "table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }\n";
                     $szHTML .= "table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }\n";
                     $szHTML .= "table.properties thead th.description { width:60%; }\n";
                     $szHTML .= "table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }\n";
@@ -2334,11 +2337,54 @@ Class DocumentorClass extends DocumentorSourceFileObject
     /* ================================================================================ */
 
 
+    /* This will extract all properties DECLARED in the source file
+       BUT will not extract the properties of any parent class ! */
     public function getProperties()
     /*---------------------------*/
     {
+        /* Reset ALL properties */
+        $this->aProperties      = array();
+
+        $szNS                   = trim( str_replace( array( 'namespace',';' ),'',$this->szNamespace ) );
+        $szClass                = $szNS . '\\' . $this->name;
+
+        $szHomeOfDocumentation  = vaesoli::FIL_RealPath( __DIR__ . '/q/common/trql.classes.home/DOCUMENTATION/' );
+        $szTargetFile           = $szHomeOfDocumentation . basename( $this->oSourceFile->szFileName ) . '.' . md5( str_replace( array( '\\','/' ),'-',$szClass ) ) . '.properties.cache';
+        //var_dump( $szTargetFile );
+        //var_dump( $szClass );
+
+        /* ******************************************************************************** */
+        {   /* Let's try to load all the properties of the parent classes FIRST */
+            require_once( $this->oSourceFile->oHeader->szFileName );
+
+            $class          = new \ReflectionClass( $o = new $szClass() );
+            $aParentClasses = $this->getParentClasses( $class );
+
+            //var_dump( $aParentClasses );
+
+            foreach( $aParentClasses as $aClass )
+            {
+                $szPropertiesFile = $szHomeOfDocumentation  . basename( $aClass['file'] ) . '.' . md5( str_replace( array( '\\','/' ),'-',$aClass['name'] ) ) . '.properties.cache';
+
+                if ( is_file( $szPropertiesFile ) )
+                {
+                    //$this->aProperties = array_merge( $this->aProperties,$this->getHashFile( $szPropertiesFile ) );
+                }
+                //var_dump( $szPropertiesFile );
+            }
+        }   /* Let's try to load all the properties of the parent classes FIRST */
+        /* ******************************************************************************** */
+
+        //if ( ! empty( $this->aProperties ) )
+        //{
+        //    var_dump( $this->aProperties );
+        //    $this->die("HEY ... ON A DES PROPERTIES PARENTES!!!");
+        //}
+
+        /* ******************************************************************************** */
         if ( preg_match_all( '/\{\*property(?P<prop>.*?)\*\}/si',$this->szSourceCode,$aMatches,PREG_PATTERN_ORDER ) )
         {
+            $aPropertiesOfThisClass = array();
             foreach( $aMatches['prop'] as $szPropertyDef )
             {
                 //if ( preg_match( '/\A(?P<name>\$[[:word:]]*).*?\((?P<types>.*?)\)(?P<comment>.*)\z/si',$szPropertyDef,$aParts ) )
@@ -2352,18 +2398,86 @@ Class DocumentorClass extends DocumentorSourceFileObject
                     //var_dump( $szPropertyTypes );
                     //var_dump( $szPropertyDesc  );
 
-                    $this->aProperties[] = new DocumentorClassProperty( $szPropertyName,$szPropertyTypes,$szPropertyDesc );
-                }
+                    $aPropertiesOfThisClass[] = new DocumentorClassProperty( $szPropertyName,$szPropertyTypes,$szPropertyDesc );
+                }   /* if ( preg_match( '/\A(?P<name>\$[[:word:]]*).*?\((?P<types>.*?)\)(?P<desc>.*)\z/si',trim( $szPropertyDef ),$aParts ) ) */
+            }   /* foreach( $aMatches['prop'] as $szPropertyDef ) */
+
+            /* Cache the properties found in THIS CLASS FILE (CAN LEAD TO SOME CONFUSION WHEN SEVERAL CLASSES ARE CONTAINED IN THE SAME FILE) */
+            if ( is_array( $aPropertiesOfThisClass ) && count( $aPropertiesOfThisClass ) > 0 )
+            {
+                $this->saveHashFile( $szTargetFile,$aPropertiesOfThisClass );
+                $this->aProperties = array_merge( $this->aProperties,$aPropertiesOfThisClass );
             }
-        }
 
-        //var_dump( $this->aProperties );
+        }   /* if ( preg_match_all( '/\{\*property(?P<prop>.*?)\*\}/si',$this->szSourceCode,$aMatches,PREG_PATTERN_ORDER ) ) */
+        /* ******************************************************************************** */
 
-        //$this->die();
         return ( $this );
     }   /* End of DocumentorClass.getProperties() ===================================== */
     /* ================================================================================ */
 
+
+    protected function getParentClasses( $class )
+    {
+        $aParentClasses = array();
+
+        while ( $parent = $class->getParentClass() )
+        {
+            $aParentClasses[]   = array( 'name'       => $parent->getName()     ,
+                                         'file'       => $parent->getFilename() ,
+                                       );
+            $class              = $parent;
+        }
+
+        return ( array_reverse( $aParentClasses ) );
+    }
+
+
+    /* Not used AT THIS MOMENT */
+    public function getPropertiesOfParentClasses()
+    /*------------------------------------------*/
+    {
+        //var_dump( $this );
+        //$this->die( "NO FURTHER GO" );
+
+        $szNS = trim( str_replace( array( 'namespace',';' ),'',$this->szNamespace ) );
+        var_dump( "NAMESPACE: " . $szNS );
+
+        require_once( $this->oSourceFile->oHeader->szFileName );
+        $szClass = $szNS . '\\' . $this->name;
+        var_dump( "CLASS: " . $szClass );
+
+        $class = new \ReflectionClass( $o = new $szClass() );
+
+        //var_dump( $aParentClasses );
+
+        $szHomeOfDocumentation = vaesoli::FIL_RealPath( __DIR__ . '/q/common/trql.classes.home/DOCUMENTATION/' );
+
+        /* Dealing with something like ...
+            array (size=4)
+              0 =>
+                array (size=2)
+                  'name' => string 'trql\mother\Mother' (length=18)
+                  'file' => string 'D:\websites\snippet-center\trql.mother.class.php' (length=48)
+              1 =>
+                array (size=2)
+                  'name' => string 'trql\thing\Thing' (length=16)
+                  'file' => string 'D:\websites\snippet-center\trql.thing.class.php' (length=47)
+              2 =>
+                array (size=2)
+                  'name' => string 'trql\creativework\CreativeWork' (length=30)
+                  'file' => string 'D:\websites\snippet-center\trql.creativework.class.php' (length=54)
+              3 =>
+                array (size=2)
+                  'name' => string 'trql\creativeworkseries\CreativeWorkSeries' (length=42)
+                  'file' => string 'D:\websites\snippet-center\trql.creativeworkseries.class.php' (length=60)
+        */
+        foreach( $aParentClasses as $aClass )
+        {
+            $szTargetFile = $szHomeOfDocumentation . basename( $aClass['file'] ) . '.properties.cache';
+            var_dump( $szTargetFile );
+        }
+    }
 
     public function getMethods()
     /*------------------------*/

@@ -56,7 +56,6 @@
 /****************************************************************************************/
 namespace trql\aboutpage;
 
-use \trql\thing\Thing           as Thing;
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\webpage\WebPage       as WebPage;
 
@@ -66,8 +65,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'WEBPAGE_CLASS_VERSION' ) )
     require_once( 'trql.webpage.class.php' );
-
-
 
 defined( 'ABOUTPAGE_CLASS_VERSION' ) or define( 'ABOUTPAGE_CLASS_VERSION','0.1' );
 
@@ -90,7 +87,7 @@ defined( 'ABOUTPAGE_CLASS_VERSION' ) or define( 'ABOUTPAGE_CLASS_VERSION','0.1' 
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 25-08-2020 13:14. IT HAS NOT BEEN TESTED YET!
+        on 25-08-2020 13:14.
     *}
 
  */
@@ -106,8 +103,8 @@ class AboutPage extends WebPage
                                'family' => null         ,
                              );
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. no equivalent *} */
 
 
     /* ================================================================================ */
@@ -131,8 +128,6 @@ class AboutPage extends WebPage
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of AboutPage.__construct() ============================================= */
@@ -162,10 +157,8 @@ class AboutPage extends WebPage
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of AboutPage.__destruct() ============================================== */
     /* ================================================================================ */
-
 }   /* End of class AboutPage ========================================================= */
 /* ==================================================================================== */
 ?>

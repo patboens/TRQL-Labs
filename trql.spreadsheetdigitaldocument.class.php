@@ -432,7 +432,7 @@ class SpreadsheetDigitalDocument extends DigitalDocument
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */
@@ -457,10 +457,8 @@ class SpreadsheetDigitalDocument extends DigitalDocument
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
-    }   /* End of SpreadsheetDigitalDocument.__construct() ========================================== */
+    }   /* End of SpreadsheetDigitalDocument.__construct() ============================ */
     /* ================================================================================ */
 
 
@@ -487,10 +485,8 @@ class SpreadsheetDigitalDocument extends DigitalDocument
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of SpreadsheetDigitalDocument.__destruct() =========================================== */
+    }   /* End of SpreadsheetDigitalDocument.__destruct() ============================= */
     /* ================================================================================ */
-
-}   /* End of class SpreadsheetDigitalDocument ====================================================== */
+}   /* End of class SpreadsheetDigitalDocument ======================================== */
 /* ==================================================================================== */
-
 ?>

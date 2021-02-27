@@ -54,9 +54,8 @@
 /****************************************************************************************/
 namespace trql\acceptaction;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\allocateaction\AllocateAction    as AllocateAction;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\allocateaction\AllocateAction as AllocateAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -64,8 +63,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'ALLOCATEACTION_CLASS_VERSION' ) )
     require_once( 'trql.allocateaction.class.php' );
-
-
 
 defined( 'ACCEPTACTION_CLASS_VERSION' ) or define( 'ACCEPTACTION_CLASS_VERSION','0.1' );
 
@@ -108,6 +105,7 @@ class AcceptAction extends AllocateAction
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. no equivalent *} */
 
 
     /* ================================================================================ */
@@ -131,8 +129,6 @@ class AcceptAction extends AllocateAction
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of AcceptAction.__construct() ========================================== */
@@ -160,10 +156,10 @@ class AcceptAction extends AllocateAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of AcceptAction.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class AcceptAction ====================================================== */
 /* ==================================================================================== */
-
 ?>

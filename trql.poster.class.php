@@ -431,7 +431,8 @@ class Poster extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
+
 
 
     /* ================================================================================ */
@@ -456,10 +457,8 @@ class Poster extends CreativeWork
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
-    }   /* End of Poster.__construct() ========================================== */
+    }   /* End of Poster.__construct() ================================================ */
     /* ================================================================================ */
 
 
@@ -486,10 +485,8 @@ class Poster extends CreativeWork
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of Poster.__destruct() =========================================== */
+    }   /* End of Poster.__destruct() ================================================= */
     /* ================================================================================ */
-
-}   /* End of class Poster ====================================================== */
+}   /* End of class Poster ============================================================ */
 /* ==================================================================================== */
-
 ?>

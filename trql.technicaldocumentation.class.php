@@ -19,13 +19,12 @@
 */
 
 /** {{{*fheader
-    {*file                  trql.achieveaction.class.php *}
-    {*purpose               The act of accomplishing something via previous efforts. 
-                            It is an instantaneous action rather than an ongoing 
-                            process. *}
+    {*file                  trql.TechnicalDocumentation.class.php *}
+    {*purpose               Description of a technical product and its handling, 
+                            functionality and architecture *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
-    {*cdate                 26-08-2020 09:15 *}
+    {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
 
@@ -34,7 +33,7 @@
     -------------------------------------------------------------------------------------
 
     {*chist
-        {*mdate 26-08-2020 09:15 *}
+        {*mdate 26-08-2020 18:36 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Original creation
@@ -51,46 +50,32 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\achieveaction;
+namespace trql\technicaldocumentation;
 
-use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\action\Action     as Action;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\document\Document     as Document;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'ACTION_CLASS_VERSION' ) )
-    require_once( 'trql.action.class.php' );
+if ( ! defined( 'DOCUMENT_CLASS_VERSION' ) )
+    require_once( 'trql.document.class.php' );
 
-defined( 'ACHIEVEACTION_CLASS_VERSION' ) or define( 'ACHIEVEACTION_CLASS_VERSION','0.1' );
+defined( 'TECHNICALDOCUMENTATION_CLASS_VERSION' ) or define( 'TECHNICALDOCUMENTATION_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
-/** {{*class AchieveAction=
+/** {{*class TechnicalDocumentation=
 
     {*desc
 
-        The act of accomplishing something via previous efforts. It is an instantaneous 
-        action rather than an ongoing process.
+        Description of a technical product and its handling, functionality and architecture
 
-    *}
-
-    {*credits
-        The whole concept is derived from the fabulous work of Schema.org
-        under the terms of their license:
-        [url]http://schema.org/docs/terms.html[/url]
-    *}
-
-    {*doc [url]http://schema.org/AchieveAction[/url] *}
-
-    {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 09:15.
     *}
 
  */
 /* ==================================================================================== */
-class AchieveAction extends Action
-/*------------------------------*/
+class TechnicalDocumentation extends Document
+/*-----------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -102,7 +87,9 @@ class AchieveAction extends Action
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
+    public      $wikidataId                     = 'Q1413406';       /* {*property   $wikidataId                     (string)                        Wikidata ID. Description of a technical product 
+                                                                                                                                                    and its handling, functionality and architecture *} */
+
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -127,7 +114,7 @@ class AchieveAction extends Action
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of AchieveAction.__construct() ========================================= */
+    }   /* End of TechnicalDocumentation.__construct() ================================ */
     /* ================================================================================ */
 
 
@@ -154,10 +141,8 @@ class AchieveAction extends Action
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of AchieveAction.__destruct() ========================================== */
+    }   /* End of TechnicalDocumentation.__destruct() ================================= */
     /* ================================================================================ */
-
-}   /* End of class AchieveAction ===================================================== */
+}   /* End of class TechnicalDocumentation ============================================ */
 /* ==================================================================================== */
-
 ?>

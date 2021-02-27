@@ -446,6 +446,7 @@ class Newspaper extends Periodical
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (27-02-21 06:56:22). *} */
 
 
     /* ================================================================================ */
@@ -469,8 +470,6 @@ class Newspaper extends Periodical
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
     }   /* End of Newspaper.__construct() ============================================= */
@@ -502,8 +501,6 @@ class Newspaper extends Periodical
         $this->necroSignaling();
     }   /* End of Newspaper.__destruct() ============================================== */
     /* ================================================================================ */
-
 }   /* End of class Newspaper ========================================================= */
 /* ==================================================================================== */
-
 ?>
