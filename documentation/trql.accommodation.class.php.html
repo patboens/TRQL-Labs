@@ -1,0 +1,170 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.accommodation.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">An accommodation is a place that can accommodate human 
+                            beings, e.g. a hotel room, a camping pitch, or a meeting 
+                            room. Many accommodations are for overnight stays, but 
+                            this is not a mandatory requirement.For more specific 
+                            types of accommodations not defined in schema.org, one 
+                            can use additionalType with external vocabularies. See 
+                            also the dedicated document on the use of schema.org 
+                            for marking up hotels and other forms of accommodations.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">26-08-2020 08:24</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">26/08/2020 - 07:14:39</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Accommodation</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">An accommodation is a place that can accommodate human beings, e.g. a hotel 
+        room, a camping pitch, or a meeting room. Many accommodations are for overnight 
+        stays, but this is not a mandatory requirement.For more specific types of 
+        accommodations not defined in schema.org, one can use additionalType with 
+        external vocabularies.See also the dedicated document on the use of schema.org 
+        for marking up hotels and other forms of accommodations.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Accommodation extends Place</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/Accommodation" class="DocumentorLink" title="Go to http://schema.org/Accommodation" itemprop="url">http://schema.org/Accommodation</a></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by <code>trql.schemaclassgenerator.class.php</code>
+        on 26-08-2020 08:24. IT HAS NOT BEEN TESTED YET!</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$accommodationCategory</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Category of an Accommodation, following real estate conventions e.g.
+                                                                                                                                                    RESO (see PropertySubType, and PropertyType fields for suggested
+                                                                                                                                                    values).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$accommodationFloorPlan</code></td>
+<td class="type"><code>FloorPlan</code></td>
+<td class="description">A floorplan of some Accommodation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$amenityFeature</code></td>
+<td class="type"><code>LocationFeatureSpecification</code></td>
+<td class="description">An amenity feature (e.g. a characteristic or service) of the
+                                                                                                                                                    Accommodation. This generic property does not make a statement about
+                                                                                                                                                    whether the feature is included in an offer for the main accommodation
+                                                                                                                                                    or available at extra costs.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$floorLevel</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The floor level for an Accommodation in a multi-storey building. Since
+                                                                                                                                                    counting systems vary internationally, the local system should be used
+                                                                                                                                                    where possible.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$floorSize</code></td>
+<td class="type"><code>QuantitativeValue</code></td>
+<td class="description">The size of the accommodation, e.g. in square meter or
+                                                                                                                                                    squarefoot.Typical unit code(s): MTK for square meter, FTK for square
+                                                                                                                                                    foot, or YDK for square yard</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$leaseLength</code></td>
+<td class="type"><code>QuantitativeValue|Duration</code></td>
+<td class="description">Length of the lease for some Accommodation, either particular to some
+                                                                                                                                                    Offer or in some cases intrinsic to the property.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$numberOfBathroomsTotal</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">The total integer number of bathrooms in a some Accommodation,
+                                                                                                                                                    following real estate conventions as documented in RESO: "The simple
+                                                                                                                                                    sum of the number of bathrooms. For example for a property with two
+                                                                                                                                                    Full Bathrooms and one Half Bathroom, the Bathrooms Total Integer will
+                                                                                                                                                    be 3.". See also numberOfRooms.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$numberOfBedrooms</code></td>
+<td class="type"><code>float|QuantitativeValue</code></td>
+<td class="description">The total integer number of bedrooms in a some Accommodation,
+                                                                                                                                                    ApartmentComplex or FloorPlan.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$numberOfFullBathrooms</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">Number of full bathrooms - The total number of full and ¾ bathrooms
+                                                                                                                                                    in an Accommodation. This corresponds to the BathroomsFull field in
+                                                                                                                                                    RESO.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$numberOfPartialBathrooms</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">Number of partial bathrooms - The total number of half and ¼
+                                                                                                                                                    bathrooms in an Accommodation. This corresponds to the
+                                                                                                                                                    BathroomsPartial field in RESO.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$numberOfRooms</code></td>
+<td class="type"><code>QuantitativeValue|float</code></td>
+<td class="description">The number of rooms (excluding bathrooms and closets) of the
+                                                                                                                                                    accommodation or lodging business.Typical unit code(s): ROM for room
+                                                                                                                                                    or C62 for no unit. The type of room can be put in the unitText
+                                                                                                                                                    property of the QuantitativeValue.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$permittedUsage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indications regarding the permitted usage of the accommodation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$petsAllowed</code></td>
+<td class="type"><code>boolean|string</code></td>
+<td class="description">Indicates whether pets are allowed to enter the accommodation or
+                                                                                                                                                    lodging business. More detailed information can be put in a text
+                                                                                                                                                    value.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$tourBookingPage</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">A page providing information on how to book a tour of some Place, such
+                                                                                                                                                    as an Accommodation or ApartmentComplex in a real estate setting, as
+                                                                                                                                                    well as other kinds of tours as appropriate.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$yearBuilt</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">The year an Accommodation was constructed. This corresponds to the
+                                                                                                                                                    YearBuilt field in RESO.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

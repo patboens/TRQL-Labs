@@ -1,0 +1,182 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.mediaobject.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">A media object, such as an image, video, or audio
+                            object embedded in a web page or a downloadable
+                            dataset i.e. DataDownload. Note that a creative
+                            work may have many media objects associated with
+                            it on the same web page. For example, a page about
+                            a single song (MusicRecording) may have a music
+                            video (VideoObject), and a high and low bandwidth
+                            audio stream (2 AudioObject's).</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">24-08-2020 01:21</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">24/08/2020 - 11:35:31</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>MediaObject</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A media object, such as an image, video, or audio object embedded in a web
+        page or a downloadable dataset i.e. DataDownload. Note that a creative work
+        may have many media objects associated with it on the same web page. For
+        example, a page about a single song (MusicRecording) may have a music video
+        (VideoObject), and a high and low bandwidth audio stream (2 AudioObject's).</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class MediaObject extends CreativeWork</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/MediaObject" class="DocumentorLink" title="Go to http://schema.org/MediaObject" itemprop="url">http://schema.org/MediaObject</a></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by <code>trql.schemaclassgenerator.class.php</code>
+        and as such HAS NOT BEEN TESTED YET!</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$associatedArticle</code></td>
+<td class="type"><code>NewsArticle</code></td>
+<td class="description">A NewsArticle associated with the Media Object.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$bitrate</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The bitrate of the media object.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$contentSize</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">File size in (mega/kilo) bytes.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$contentUrl</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">Actual bytes of the media object, for example the image
+                                                                                                                                            file or video file.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$duration</code></td>
+<td class="type"><code>Duration</code></td>
+<td class="description">The duration of the item (movie, audio recording, event,
+                                                                                                                                            etc.) in ISO 8601 date format.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$embedUrl</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">A URL pointing to a player for a specific video. In general,
+                                                                                                                                            this is the information in the src element of an embed tag
+                                                                                                                                            and should not be the same as the content of the loc tag.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$encodesCreativeWork</code></td>
+<td class="type"><code>CreativeWork</code></td>
+<td class="description">The CreativeWork encoded by this media object.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$encodingFormat</code></td>
+<td class="type"><code>string|URL</code></td>
+<td class="description">Media type typically expressed using a MIME format (see IANA
+                                                                                                                                            site and MDN reference) e.g. application/zip for a
+                                                                                                                                            SoftwareApplication binary, audio/mpeg for .mp3 etc.). In
+                                                                                                                                            cases where a CreativeWork has several media type representations,
+                                                                                                                                            encoding can be used to indicate each MediaObject alongside
+                                                                                                                                            particular encodingFormat information.Unregistered or niche
+                                                                                                                                            encoding and file formats can be indicated instead via the most
+                                                                                                                                            appropriate URL, e.g. defining Web page or a Wikipedia/Wikidata entry.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$endTime</code></td>
+<td class="type"><code>DateTime|Time</code></td>
+<td class="description">The endTime of something. For a reserved event or service
+                                                                                                                                            (e.g. FoodEstablishmentReservation), the time that it is expected
+                                                                                                                                            to end. For actions that span a period of time, when the action
+                                                                                                                                            was performed. e.g. John wrote a book from January to December.
+                                                                                                                                            For media, including audio and video, it's the time offset of the
+                                                                                                                                            end of a clip within a larger file.Note that Event uses startDate/endDate
+                                                                                                                                            instead of startTime/endTime, even when describing dates with times.
+                                                                                                                                            This situation may be clarified in future revisions.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$height</code></td>
+<td class="type"><code>Distance|QuantitativeValue</code></td>
+<td class="description">The height of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$playerType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Player type required-for example, Flash or Silverlight.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$productionCompany</code></td>
+<td class="type"><code>Organization</code></td>
+<td class="description">The production company or studio responsible for the item e.g. series,
+                                                                                                                                            video game, episode etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$regionsAllowed</code></td>
+<td class="type"><code>Place</code></td>
+<td class="description">The regions where the media is allowed. If not specified, then it's
+                                                                                                                                            assumed to be allowed everywhere. Specify the countries in
+                                                                                                                                            ISO 3166 format.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$requiresSubscription</code></td>
+<td class="type"><code>boolean|MediaSubscription</code></td>
+<td class="description">Indicates if use of the media require a subscription (either paid
+                                                                                                                                            or free). Allowed values are true or false (note that an earlier
+                                                                                                                                            version had 'yes', 'no').</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$startTime</code></td>
+<td class="type"><code>DateTime|Time</code></td>
+<td class="description">The startTime of something. For a reserved event or service
+                                                                                                                                            (e.g. FoodEstablishmentReservation), the time that it is expected
+                                                                                                                                            to start. For actions that span a period of time, when the action
+                                                                                                                                            was performed. e.g. John wrote a book from January to December.
+                                                                                                                                            For media, including audio and video, it's the time offset of the
+                                                                                                                                            start of a clip within a larger file.Note that Event uses
+                                                                                                                                            startDate/endDate instead of startTime/endTime, even when describing
+                                                                                                                                            dates with times. This situation may be clarified in future revisions.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$uploadDate</code></td>
+<td class="type"><code>Date</code></td>
+<td class="description">Date when this media object was uploaded to this site.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$width</code></td>
+<td class="type"><code>Distance|QuantitativeValue</code></td>
+<td class="description">The width of the item.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

@@ -1,0 +1,109 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.localbusiness.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">A particular physical business or branch of an organization.
+                            Examples of <code>LocalBusiness</code> include a restaurant, a 
+                            particular branch of a restaurant chain, a branch of a bank,
+                            a medical practice, a club, a bowling alley, etc.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">28-08-2020 14:09</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">26/02/2021 - 06:46:58</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>LocalBusiness</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A particular physical business or branch of an organization. Examples of
+        LocalBusiness include a restaurant, a particular branch of a restaurant
+        chain, a branch of a bank, a medical practice, a club, a bowling alley,
+        etc.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class LocalBusiness extends Organization implements iContext</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="https://schema.org/LocalBusiness" class="DocumentorLink" title="Go to https://schema.org/LocalBusiness" itemprop="url">https://schema.org/LocalBusiness</a></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$currenciesAccepted</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The currency accepted.
+                                                                                                                    
+                                                                                                                                            Use standard formats: ISO 4217 currency format
+                                                                                                                                            e.g. "USD"; Ticker symbol for
+                                                                                                                                            cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings
+                                                                                                                                            Systems (LETS) and other currency types e.g. "Ithaca HOUR".</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$openingHours</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The general opening hours for a business. Opening hours can be specified
+                                                                                                                                            as a weekly time range, starting with days, then times per day.
+                                                                                                                                            Multiple days can be listed with commas ',' separating each day.
+                                                                                                                                            Day or time ranges are specified using a hyphen '-'.
+                                                                                                                    
+                                                                                                                                            Days are specified using the following two-letter combinations:
+                                                                                                                                            Mo, Tu, We, Th, Fr, Sa, Su.
+                                                                                                                    
+                                                                                                                                            Times are specified using 24:00 time. For example, 3pm is specified as 15:00.
+                                                                                                                    
+                                                                                                                                            Here is an example: <time itemprop="openingHours"
+                                                                                                                                            datetime="Tu,Th 16:00-20:00">Tuesdays and Thursdays 4-8pm</time>.
+                                                                                                                    
+                                                                                                                                            If a business is open 7 days a week, then it can be specified as <time
+                                                                                                                                            itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$paymentAccepted</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$priceRange</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The price range of the business, for example $$$.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID (https://www.wikidata.org/wiki/Wikidata:Main_Page) : Particular 
+                                                                                                                                            physical business or branch of an organization</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>templates()</code></span>, 
+<span class="property func"><code>substitutions()</code></span>, 
+<span class="property func"><code>speak()</code></span>, 
+<span class="property func"><code>sing()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

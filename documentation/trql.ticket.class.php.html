@@ -1,0 +1,120 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.ticket.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">Used to describe a ticket to an event, a flight, a bus ride,
+                            etc.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />
+                            Rue Bois des Mazuis, 47<br />
+                            5070 Vitrival<br />
+                            Belgium<br />
+                            <a href="http://www.latosensu.be" class="DocumentorLink" title="Go to http://www.latosensu.be" itemprop="url">http://www.latosensu.be</a><br />
+                            Vae Soli! : <a href="http://www.vaesoli.org" class="DocumentorLink" title="Go to http://www.vaesoli.org" itemprop="url">http://www.vaesoli.org</a></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">22/08/2020 - 09:28:47</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">22/08/2020 - 09:28:47</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">All rights reserved to Lato Sensu Management
+                            for all countries. All Intellectual Property
+                            belongs to Patrick Boens.</span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Ticket</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Used to describe a ticket to an event, a flight, a bus ride, etc.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Ticket extends Intangible</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="https://schema.org/Ticket" class="DocumentorLink" title="Go to https://schema.org/Ticket" itemprop="url">https://schema.org/Ticket</a></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$dateIssued</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The date the ticket was issued.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$issuedBy</code></td>
+<td class="type"><code>Organization</code></td>
+<td class="description">The organization issuing the ticket or permit.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$priceCurrency</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The currency of the price, or a price component when attached 
+                                                                                                                                                    to PriceSpecification and its subtypes.
+                                                                                                                                                    
+                                                                                                                                                    Use standard formats: ISO 4217 currency format e.g. "USD"; 
+                                                                                                                                                    Ticker symbol for cryptocurrencies e.g. "BTC"; well known 
+                                                                                                                                                    names for Local Exchange Tradings Systems (LETS) and other
+                                                                                                                                                    currency types e.g. "Ithaca HOUR".</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$ticketNumber</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The unique identifier for the ticket.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$ticketToken</code></td>
+<td class="type"><code>string|URL</code></td>
+<td class="description">Reference to an asset (e.g., Barcode, QR code image or 
+                                                                                                                                                    PDF) usable for entrance.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$ticketedSeat</code></td>
+<td class="type"><code>Seat</code></td>
+<td class="description">The seat associated with the ticket.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$totalPrice</code></td>
+<td class="type"><code>Number|PriceSpecification|Text</code></td>
+<td class="description">The total price for the reservation or ticket, including 
+                                                                                                                                                    applicable taxes, shipping, etc.
+                                                                                                                
+                                                                                                                                                    Usage guidelines:
+                                                                                                                
+                                                                                                                                                    Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to
+                                                                                                                                                    'DIGIT NINE' (U+0039)) rather than superficially similiar 
+                                                                                                                                                    Unicode symbols.
+                                                                                                                                                    
+                                                                                                                                                    Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to 
+                                                                                                                                                    indicate a decimal point. Avoid using these symbols as a 
+                                                                                                                                                    readability separator.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$underName</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">The person or organization the reservation or ticket is for.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

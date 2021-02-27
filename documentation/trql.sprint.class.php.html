@@ -1,0 +1,129 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.sprint.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">In agile software development, a sprint is a set period of
+                            time during which specific tasks need to be completed and
+                            made ready for review.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">07-01-21 11:38</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">19/01/2021 - 19:45:58</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Sprint</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Process that repeats itself.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Sprint extends CyclicProcess</code></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. In agile software development, a
+                                                                                                                            sprint is a set period of time during which
+                                                                                                                            specific tasks need to be completed and made
+                                                                                                                            ready for review.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$duration</code></td>
+<td class="type"><code>Duration</code></td>
+<td class="description">The duration of the item (movie, audio recording, event, etc.)
+                                                                                                                            in ISO 8601 date format.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$endDate</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The end date and time of the item (in ISO 8601 date format).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$eventStatus</code></td>
+<td class="type"><code>EventStatusType</code></td>
+<td class="description">An eventStatus of an event represents its status; particularly useful
+                                                                                                                            when an event is cancelled or rescheduled.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$oAspiration</code></td>
+<td class="type"><code>Aspiration</code></td>
+<td class="description">Parent Aspiration this Sprint is attached to</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aObjectives</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">A set of objectives this sprint must meet</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aKeyMessages</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">A set of key messages pertaining to this sprint (achievements, failures, points of attention, ...)</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aRemarks</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">A set of general-purpose remarks pertaining to this sprint</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aTasks</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">A set of tasks pertaining to this sprint</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szStorage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">File in which the Sprint maintains its state
+                                                                                                                            (all properties)</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$previousStartDate</code></td>
+<td class="type"><code>Date</code></td>
+<td class="description">Used in conjunction with eventStatus for rescheduled or cancelled events.
+                                                                                                                            This property contains the previously scheduled start date. For
+                                                                                                                            rescheduled events, the startDate property should be used for the newly
+                                                                                                                            scheduled start date. In the (rare) case of an event that has been
+                                                                                                                            postponed and rescheduled multiple times, this field may be repeated.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$startDate</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The start date and time of the item (in ISO 8601 date format).</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>save()</code></span>, 
+<span class="property func"><code>loadData()</code></span>, 
+<span class="property func"><code>load()</code></span>, 
+<span class="property func"><code>speak()</code></span>, 
+<span class="property func"><code>sing()</code></span>, 
+<span class="property func"><code>__toHTML()</code></span>, 
+<span class="property func"><code>__toString()</code></span>, 
+<span class="property func"><code>__get()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

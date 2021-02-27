@@ -1,0 +1,117 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.contactpoint.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">A contact point—for example, a Customer Complaints department.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">23-08-20 14:04</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">11/11/2020 - 11:03:15</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>ContactPoint</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A contact point—for example, a Customer Complaints department.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class ContactPoint extends Thing implements iContext</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="https://schema.org/ContactPoint" class="DocumentorLink" title="Go to https://schema.org/ContactPoint" itemprop="url">https://schema.org/ContactPoint</a></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$areaServed</code></td>
+<td class="type"><code>AdministrativeArea|GeoShape|Place|string</code></td>
+<td class="description">The geograpic area where a service or offered item is
+                                                                                                                                                                provided. Supersedes serviceArea.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$availableLanguage</code></td>
+<td class="type"><code>Language|string</code></td>
+<td class="description">A language someone may use with or at the item, service
+                                                                                                                                                                or place. Please use one of the language codes from the
+                                                                                                                                                                IETF BCP 47 standard. See also inLanguage</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$contactOption</code></td>
+<td class="type"><code>ContactPointOption</code></td>
+<td class="description">An option available on this contact point (e.g. a
+                                                                                                                                                                toll-free number or support for hearing-impaired callers).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$contactType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A person or organization can have different contact
+                                                                                                                                                                points, for different purposes. For example, a sales
+                                                                                                                                                                contact point, a PR contact point and so on. This property
+                                                                                                                                                                is used to specify the kind of contact point.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$email</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Email address.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$faxNumber</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The fax number.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$hoursAvailable</code></td>
+<td class="type"><code>OpeningHoursSpecification</code></td>
+<td class="description">The hours during which this service or contact is available.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$productSupported</code></td>
+<td class="type"><code>Product|string</code></td>
+<td class="description">The product or service this support contact point is
+                                                                                                                                                                related to (such as product support for a particular
+                                                                                                                                                                product line). This can be a specific product or
+                                                                                                                                                                product line (e.g. "iPhone") or a general category of
+                                                                                                                                                                products or services (e.g. "smartphones").</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$telephone</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The telephone number.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">WikidataId ... entity serving as focal point of information</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>speak()</code></span>, 
+<span class="property func"><code>sing()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

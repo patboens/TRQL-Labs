@@ -1,0 +1,172 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.treatmentindication.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">An indication for treating an underlying condition, symptom,
+                            etc.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">28-08-2020 16:41</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">28/08/2020 - 14:41:55</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>TreatmentIndication</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">An indication for treating an underlying condition, symptom, etc.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class TreatmentIndication extends MedicalIndication</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/TreatmentIndication" class="DocumentorLink" title="Go to http://schema.org/TreatmentIndication" itemprop="url">http://schema.org/TreatmentIndication</a></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by <code>trql.schemaclassgenerator.class.php</code>
+        on 28-08-2020 16:41. IT HAS NOT BEEN TESTED YET!</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$additionalType</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">An additional type for the item, typically used for adding more
+                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
+                                                                                                                                                    a relationship between something and a class that the thing is in. In
+                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
+                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
+                                                                                                                                                    understanding of extra types, in particular those defined externally.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$code</code></td>
+<td class="type"><code>MedicalCode</code></td>
+<td class="description">A medical code for the entity, taken from a controlled vocabulary or
+                                                                                                                                                    ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A short description of the item used to
+                                                                                                                                                    disambiguate from other, similar items. Information from other
+                                                                                                                                                    properties (in particular, name) may be necessary for the description
+                                                                                                                                                    to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$guideline</code></td>
+<td class="type"><code>MedicalGuideline</code></td>
+<td class="description">A medical guideline related to this entity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$identifier</code></td>
+<td class="type"><code>URL|string|PropertyValue</code></td>
+<td class="description">The identifier property represents any kind of identifier for any kind
+                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
+                                                                                                                                                    dedicated properties for representing many of these, either as textual
+                                                                                                                                                    strings or as URL (URI) links. See background notes for more details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$image</code></td>
+<td class="type"><code>ImageObject|URL</code></td>
+<td class="description">An image of the item. This can be a URL or a fully described
+                                                                                                                                                    ImageObject.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$legalStatus</code></td>
+<td class="type"><code>string|DrugLegalStatus|MedicalEnumeration</code></td>
+<td class="description">The drug or supplement's legal status, including any controlled
+                                                                                                                                                    substance schedules that apply.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>CreativeWork|URL</code></td>
+<td class="description">Indicates a page (or other CreativeWork) for which this thing is the
+                                                                                                                                                    main entity being described. See background notes for details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$medicineSystem</code></td>
+<td class="type"><code>MedicineSystem</code></td>
+<td class="description">The system of medicine that includes this MedicalEntity, for example
+                                                                                                                                                    'evidence-based', 'homeopathic', 'chiropractic', etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential Action, which describes an idealized action in
+                                                                                                                                                    which this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$recognizingAuthority</code></td>
+<td class="type"><code>Organization</code></td>
+<td class="description">If applicable, the organization that officially recognizes this entity
+                                                                                                                                                    as part of its endorsed system of medicine.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$relevantSpecialty</code></td>
+<td class="type"><code>MedicalSpecialty</code></td>
+<td class="description">If applicable, a medical specialty in which this entity is relevant.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">URL of a reference Web page that unambiguously indicates the item's
+                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
+                                                                                                                                                    or official website.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$study</code></td>
+<td class="type"><code>MedicalStudy</code></td>
+<td class="description">A medical study or trial related to this entity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$subjectOf</code></td>
+<td class="type"><code>Event|CreativeWork</code></td>
+<td class="description">A CreativeWork or Event about this Thing.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$url</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

@@ -1,0 +1,971 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.exerciseplan.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">Fitness-related activity designed for a specific
+                            health-related purpose, including defined exercise routines
+                            as well as activity prescribed by a clinician.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">26-08-2020 18:46</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">26/08/2020 - 16:46:32</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>ExercisePlan</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Fitness-related activity designed for a specific health-related purpose,
+        including defined exercise routines as well as activity prescribed by a
+        clinician.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class ExercisePlan extends CreativeWork, PhysicalActivity</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/ExercisePlan" class="DocumentorLink" title="Go to http://schema.org/ExercisePlan" itemprop="url">http://schema.org/ExercisePlan</a></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by <code>trql.schemaclassgenerator.class.php</code>
+        on 26-08-2020 18:46. IT HAS NOT BEEN TESTED YET!</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$about</code></td>
+<td class="type"><code>Thing</code></td>
+<td class="description">The subject matter of the content.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$abstract</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An abstract is a short description that summarizes a CreativeWork.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$accessMode</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The human sensory perceptual system or cognitive faculty through which
+                                                                                                                                                    a person may process or perceive information. Expected values include:
+                                                                                                                                                    auditory, tactile, textual, visual, colorDependent, chartOnVisual,
+                                                                                                                                                    chemOnVisual, diagramOnVisual, mathOnVisual, musicOnVisual,
+                                                                                                                                                    textOnVisual.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$accessModeSufficient</code></td>
+<td class="type"><code>ItemList</code></td>
+<td class="description">A list of single or combined accessModes that are sufficient to
+                                                                                                                                                    understand all the intellectual content of a resource. Expected values
+                                                                                                                                                    include: auditory, tactile, textual, visual.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$accessibilityAPI</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates that the resource is compatible with the referenced
+                                                                                                                                                    accessibility API (WebSchemas wiki lists possible values).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$accessibilityControl</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Identifies input methods that are sufficient to fully control the
+                                                                                                                                                    described resource (WebSchemas wiki lists possible values).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$accessibilityFeature</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Content features of the resource, such as accessible media,
+                                                                                                                                                    alternatives and supported enhancements for accessibility (WebSchemas
+                                                                                                                                                    wiki lists possible values).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$accessibilityHazard</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A characteristic of the described resource that is physiologically
+                                                                                                                                                    dangerous to some users. Related to WCAG 2.0 guideline 2.3 (WebSchemas
+                                                                                                                                                    wiki lists possible values).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$accessibilitySummary</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A human-readable summary of specific accessibility features or
+                                                                                                                                                    deficiencies, consistent with the other accessibility metadata but
+                                                                                                                                                    expressing subtleties such as "short descriptions are present but long
+                                                                                                                                                    descriptions will be needed for non-visual users" or "short
+                                                                                                                                                    descriptions are present and no long descriptions are needed."</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$accountablePerson</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">Specifies the Person that is legally accountable for the CreativeWork.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$acquireLicensePage</code></td>
+<td class="type"><code>URL|CreativeWork</code></td>
+<td class="description">Indicates a page documenting how licenses can be purchased or
+                                                                                                                                                    otherwise acquired, for the current item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$activityDuration</code></td>
+<td class="type"><code>Duration|QuantitativeValue</code></td>
+<td class="description">Length of time to engage in the activity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$activityFrequency</code></td>
+<td class="type"><code>string|QuantitativeValue</code></td>
+<td class="description">How often one should engage in the activity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$additionalType</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">An additional type for the item, typically used for adding more
+                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
+                                                                                                                                                    a relationship between something and a class that the thing is in. In
+                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
+                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
+                                                                                                                                                    understanding of extra types, in particular those defined externally.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$additionalVariable</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Any additional component of the exercise prescription that may need to
+                                                                                                                                                    be articulated to the patient. This may include the order of
+                                                                                                                                                    exercises, the number of repetitions of movement, quantitative
+                                                                                                                                                    distance, progressions over time, etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aggregateRating</code></td>
+<td class="type"><code>AggregateRating</code></td>
+<td class="description">The overall rating, based on a collection of reviews or ratings, of
+                                                                                                                                                    the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$alternativeHeadline</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A secondary title of the CreativeWork.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$assesses</code></td>
+<td class="type"><code>string|DefinedTerm</code></td>
+<td class="description">The item being described is intended to assess the competency or
+                                                                                                                                                    learning outcome defined by the referenced term.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$associatedAnatomy</code></td>
+<td class="type"><code>SuperficialAnatomy|AnatomicalStructure|AnatomicalSystem</code></td>
+<td class="description">The anatomy of the underlying organ system or structures associated
+                                                                                                                                                    with this entity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$associatedMedia</code></td>
+<td class="type"><code>MediaObject</code></td>
+<td class="description">A media object that encodes this CreativeWork. This property is a
+                                                                                                                                                    synonym for encoding.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$audience</code></td>
+<td class="type"><code>Audience</code></td>
+<td class="description">An intended audience, i.e. a group for whom something was created.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$audio</code></td>
+<td class="type"><code>AudioObject|MusicRecording|Clip</code></td>
+<td class="description">An embedded audio object.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$author</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">The author of this content or rating. Please note that author is
+                                                                                                                                                    special in that HTML 5 provides a special mechanism for indicating
+                                                                                                                                                    authorship via the rel tag. That is equivalent to this and may be used
+                                                                                                                                                    interchangeably.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$award</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An award won by or for this item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$awards</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Awards won by or for this item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$category</code></td>
+<td class="type"><code>Thing|PhysicalActivityCategory|URL|string</code></td>
+<td class="description">A category for the item. Greater signs or slashes can be used to
+                                                                                                                                                    informally indicate a category hierarchy.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$character</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">Fictional person connected with a creative work.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$citation</code></td>
+<td class="type"><code>CreativeWork|string</code></td>
+<td class="description">A citation or reference to another creative work, such as another
+                                                                                                                                                    publication, web page, scholarly article, etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$code</code></td>
+<td class="type"><code>MedicalCode</code></td>
+<td class="description">A medical code for the entity, taken from a controlled vocabulary or
+                                                                                                                                                    ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$comment</code></td>
+<td class="type"><code>Comment</code></td>
+<td class="description">Comments, typically from users.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$commentCount</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">The number of comments this CreativeWork (e.g. Article, Question or
+                                                                                                                                                    Answer) has received. This is most applicable to works published in
+                                                                                                                                                    Web sites with commenting system; additional comments may exist
+                                                                                                                                                    elsewhere.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$conditionsOfAccess</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Conditions that affect the availability of, or method(s) of access to,
+                                                                                                                                                    an item. Typically used for real world items such as an
+                                                                                                                                                    ArchiveComponent held by an ArchiveOrganization. This property is not
+                                                                                                                                                    suitable for use as a general Web access control mechanism. It is
+                                                                                                                                                    expressed only in natural language.For example "Available by
+                                                                                                                                                    appointment from the Reading Room" or "Accessible only from logged-in
+                                                                                                                                                    accounts ".</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$contentLocation</code></td>
+<td class="type"><code>Place</code></td>
+<td class="description">The location depicted or described in the content. For example, the
+                                                                                                                                                    location in a photograph or painting.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$contentRating</code></td>
+<td class="type"><code>Rating|string</code></td>
+<td class="description">Official rating of a piece of content&#x2014;for example,'MPAA PG-13'.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$contentReferenceTime</code></td>
+<td class="type"><code>DateTime</code></td>
+<td class="description">The specific time described by a creative work, for works (e.g.
+                                                                                                                                                    articles, video objects etc.) that emphasise a particular moment
+                                                                                                                                                    within an Event.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$contributor</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">A secondary contributor to the CreativeWork or Event.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$copyrightHolder</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">The party holding the legal copyright to the CreativeWork.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$copyrightYear</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">The year during which the claimed copyright for the CreativeWork was
+                                                                                                                                                    first asserted.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$correction</code></td>
+<td class="type"><code>string|CorrectionComment|URL</code></td>
+<td class="description">Indicates a correction to a CreativeWork, either via a
+                                                                                                                                                    CorrectionComment, textually or in another document.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$creativeWorkStatus</code></td>
+<td class="type"><code>DefinedTerm|string</code></td>
+<td class="description">The status of a creative work in terms of its stage in a lifecycle.
+                                                                                                                                                    Example terms include Incomplete, Draft, Published, Obsolete. Some
+                                                                                                                                                    organizations define a set of terms for the stages of their
+                                                                                                                                                    publication lifecycle.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$creator</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">The creator/author of this CreativeWork. This is the same as the
+                                                                                                                                                    Author property for CreativeWork.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$dateCreated</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The date on which the CreativeWork was created or the item was added
+                                                                                                                                                    to a DataFeed.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$dateModified</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The date on which the CreativeWork was most recently modified or when
+                                                                                                                                                    the item's entry was modified within a DataFeed.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$datePublished</code></td>
+<td class="type"><code>DateTime|Date</code></td>
+<td class="description">Date of first broadcast/publication.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A short description of the item used to
+                                                                                                                                                    disambiguate from other, similar items. Information from other
+                                                                                                                                                    properties (in particular, name) may be necessary for the description
+                                                                                                                                                    to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$discussionUrl</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">A link to the page containing the comments of the CreativeWork.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$editEIDR</code></td>
+<td class="type"><code>URL|string</code></td>
+<td class="description">An EIDR (Entertainment Identifier Registry) identifier representing a
+                                                                                                                                                    specific edit / edition for a work of film or television.For example,
+                                                                                                                                                    the motion picture known as "Ghostbusters" whose titleEIDR is
+                                                                                                                                                    "10.5240/7EC7-228A-510A-053E-CBB8-J", has several edits e.g.
+                                                                                                                                                    "10.5240/1F2A-E1C5-680A-14C6-E76B-I" and
+                                                                                                                                                    "10.5240/8A35-3BEE-6497-5D12-9E4F-3".Since schema.org types like Movie
+                                                                                                                                                    and TVEpisode can be used for both works and their multiple
+                                                                                                                                                    expressions, it is possible to use titleEIDR alone (for a general
+                                                                                                                                                    description), or alongside editEIDR for a more edit-specific
+                                                                                                                                                    description.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$editor</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">Specifies the Person who edited the CreativeWork.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$educationalAlignment</code></td>
+<td class="type"><code>AlignmentObject</code></td>
+<td class="description">An alignment to an established educational framework.This property
+                                                                                                                                                    should not be used where the nature of the alignment can be described
+                                                                                                                                                    using a simple property, for example to express that a resource
+                                                                                                                                                    teaches or assesses a competency.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$educationalLevel</code></td>
+<td class="type"><code>DefinedTerm|URL|string</code></td>
+<td class="description">The level in terms of progression through an educational or training
+                                                                                                                                                    context. Examples of educational levels include 'beginner',
+                                                                                                                                                    'intermediate' or 'advanced', and formal sets of level indicators.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$educationalUse</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The purpose of a work in the context of education; for example,
+                                                                                                                                                    'assignment', 'group work'.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$encoding</code></td>
+<td class="type"><code>MediaObject</code></td>
+<td class="description">A media object that encodes this CreativeWork. This property is a
+                                                                                                                                                    synonym for associatedMedia.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$encodingFormat</code></td>
+<td class="type"><code>URL|string</code></td>
+<td class="description">Media type typically expressed using a MIME format (see IANA site and
+                                                                                                                                                    MDN reference) e.g. application/zip for a SoftwareApplication binary,
+                                                                                                                                                    audio/mpeg for .mp3 etc.).In cases where a CreativeWork has several
+                                                                                                                                                    media type representations, encoding can be used to indicate each
+                                                                                                                                                    MediaObject alongside particular encodingFormat
+                                                                                                                                                    information.Unregistered or niche encoding and file formats can be
+                                                                                                                                                    indicated instead via the most appropriate URL, e.g. defining Web page
+                                                                                                                                                    or a Wikipedia/Wikidata entry.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$encodings</code></td>
+<td class="type"><code>MediaObject</code></td>
+<td class="description">A media object that encodes this CreativeWork.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$epidemiology</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The characteristics of associated patients, such as age, gender, race
+                                                                                                                                                    etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$exampleOfWork</code></td>
+<td class="type"><code>CreativeWork</code></td>
+<td class="description">A creative work that this work is an
+                                                                                                                                                    example/instance/realization/derivation of.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$exerciseType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Type(s) of exercise or activity, such as strength training,
+                                                                                                                                                    flexibility training, aerobics, cardiac rehabilitation, etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$expires</code></td>
+<td class="type"><code>Date</code></td>
+<td class="description">Date the content expires and is no longer useful or available. For
+                                                                                                                                                    example a VideoObject or NewsArticle whose availability or relevance
+                                                                                                                                                    is time-limited, or a ClaimReview fact check whose publisher wants to
+                                                                                                                                                    indicate that it may no longer be relevant (or helpful to highlight)
+                                                                                                                                                    after some date.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$fileFormat</code></td>
+<td class="type"><code>URL|string</code></td>
+<td class="description">Media type, typically MIME format (see IANA site) of the content e.g.
+                                                                                                                                                    application/zip of a SoftwareApplication binary. In cases where a
+                                                                                                                                                    CreativeWork has several media type representations, 'encoding' can be
+                                                                                                                                                    used to indicate each MediaObject alongside particular fileFormat
+                                                                                                                                                    information. Unregistered or niche file formats can be indicated
+                                                                                                                                                    instead via the most appropriate URL, e.g. defining Web page or a
+                                                                                                                                                    Wikipedia entry.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$funder</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">A person or organization that supports (sponsors) something through
+                                                                                                                                                    some kind of financial contribution.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$genre</code></td>
+<td class="type"><code>URL|string</code></td>
+<td class="description">Genre of the creative work, broadcast channel or group.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$guideline</code></td>
+<td class="type"><code>MedicalGuideline</code></td>
+<td class="description">A medical guideline related to this entity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$hasPart</code></td>
+<td class="type"><code>CreativeWork</code></td>
+<td class="description">Indicates an item or CreativeWork that is part of this item, or
+                                                                                                                                                    CreativeWork (in some sense).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$headline</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Headline of the article.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$identifier</code></td>
+<td class="type"><code>URL|string|PropertyValue</code></td>
+<td class="description">The identifier property represents any kind of identifier for any kind
+                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
+                                                                                                                                                    dedicated properties for representing many of these, either as textual
+                                                                                                                                                    strings or as URL (URI) links. See background notes for more details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$image</code></td>
+<td class="type"><code>ImageObject|URL</code></td>
+<td class="description">An image of the item. This can be a URL or a fully described
+                                                                                                                                                    ImageObject.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$inLanguage</code></td>
+<td class="type"><code>string|Language</code></td>
+<td class="description">The language of the content or performance or used in an action.
+                                                                                                                                                    Please use one of the language codes from the IETF BCP 47 standard.
+                                                                                                                                                    See also availableLanguage.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$intensity</code></td>
+<td class="type"><code>QuantitativeValue|string</code></td>
+<td class="description">Quantitative measure gauging the degree of force involved in the
+                                                                                                                                                    exercise, for example, heartbeats per minute. May include the velocity
+                                                                                                                                                    of the movement.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$interactionStatistic</code></td>
+<td class="type"><code>InteractionCounter</code></td>
+<td class="description">The number of interactions for the CreativeWork using the WebSite or
+                                                                                                                                                    SoftwareApplication. The most specific child type of
+                                                                                                                                                    InteractionCounter should be used.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$interactivityType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The predominant mode of learning supported by the learning resource.
+                                                                                                                                                    Acceptable values are 'active', 'expositive', or 'mixed'.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isAccessibleForFree</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description">A flag to signal that the item, event, or place is accessible for
+                                                                                                                                                    free.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isBasedOn</code></td>
+<td class="type"><code>CreativeWork|Product|URL</code></td>
+<td class="description">A resource from which this work is derived or from which it is a
+                                                                                                                                                    modification or adaption.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isBasedOnUrl</code></td>
+<td class="type"><code>CreativeWork|Product|URL</code></td>
+<td class="description">A resource that was used in the creation of this resource. This term
+                                                                                                                                                    can be repeated for multiple sources. For example,
+                                                                                                                                                    http://example.com/great-multiplication-intro.html.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isFamilyFriendly</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description">Indicates whether this content is family friendly.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isPartOf</code></td>
+<td class="type"><code>CreativeWork|URL</code></td>
+<td class="description">Indicates an item or CreativeWork that this item, or CreativeWork (in
+                                                                                                                                                    some sense), is part of.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$keywords</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Keywords or tags used to describe this content. Multiple entries in a
+                                                                                                                                                    keywords list are typically delimited by commas.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$learningResourceType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The predominant type or kind characterizing the learning resource. For
+                                                                                                                                                    example, 'presentation', 'handout'.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$legalStatus</code></td>
+<td class="type"><code>string|DrugLegalStatus|MedicalEnumeration</code></td>
+<td class="description">The drug or supplement's legal status, including any controlled
+                                                                                                                                                    substance schedules that apply.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$license</code></td>
+<td class="type"><code>URL|CreativeWork</code></td>
+<td class="description">A license document that applies to this content, typically indicated
+                                                                                                                                                    by URL.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$locationCreated</code></td>
+<td class="type"><code>Place</code></td>
+<td class="description">The location where the CreativeWork was created, which may not be the
+                                                                                                                                                    same as the location depicted in the CreativeWork.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$mainEntity</code></td>
+<td class="type"><code>Thing</code></td>
+<td class="description">Indicates the primary entity described in some page or other
+                                                                                                                                                    CreativeWork.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>CreativeWork|URL</code></td>
+<td class="description">Indicates a page (or other CreativeWork) for which this thing is the
+                                                                                                                                                    main entity being described. See background notes for details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$maintainer</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">A maintainer of a Dataset, software package (SoftwareApplication), or
+                                                                                                                                                    other Project. A maintainer is a Person or Organization that manages
+                                                                                                                                                    contributions to, and/or publication of, some (typically complex)
+                                                                                                                                                    artifact. It is common for distributions of software and data to be
+                                                                                                                                                    based on "upstream" sources. When maintainer is applied to a specific
+                                                                                                                                                    version of something e.g. a particular version or packaging of a
+                                                                                                                                                    Dataset, it is always possible that the upstream source has a
+                                                                                                                                                    different maintainer. The isBasedOn property can be used to indicate
+                                                                                                                                                    such relationships between datasets to make the different maintenance
+                                                                                                                                                    roles clear. Similarly in the case of software, a package may have
+                                                                                                                                                    dedicated maintainers working on integration into software
+                                                                                                                                                    distributions such as Ubuntu, as well as upstream maintainers of the
+                                                                                                                                                    underlying work.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$material</code></td>
+<td class="type"><code>string|URL|Product</code></td>
+<td class="description">A material that something is made from, e.g. leather, wool, cotton,
+                                                                                                                                                    paper.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$materialExtent</code></td>
+<td class="type"><code>string|QuantitativeValue</code></td>
+<td class="description">The quantity of the materials being described or an expression of the
+                                                                                                                                                    physical space they occupy.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$medicineSystem</code></td>
+<td class="type"><code>MedicineSystem</code></td>
+<td class="description">The system of medicine that includes this MedicalEntity, for example
+                                                                                                                                                    'evidence-based', 'homeopathic', 'chiropractic', etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$mentions</code></td>
+<td class="type"><code>Thing</code></td>
+<td class="description">Indicates that the CreativeWork contains a reference to, but is not
+                                                                                                                                                    necessarily about a concept.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$offers</code></td>
+<td class="type"><code>Offer|Demand</code></td>
+<td class="description">An offer to provide this item&#x2014;for example, an offer to sell a
+                                                                                                                                                    product, rent the DVD of a movie, perform a service, or give away
+                                                                                                                                                    tickets to an event. Use businessFunction to indicate the kind of
+                                                                                                                                                    transaction offered, i.e. sell, lease, etc. This property can also be
+                                                                                                                                                    used to describe a Demand. While this property is listed as expected
+                                                                                                                                                    on a number of common types, it can be used in others. In that case,
+                                                                                                                                                    using a second type, such as Product or a subtype of Product, can
+                                                                                                                                                    clarify the nature of the offer.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$pathophysiology</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Changes in the normal mechanical, physical, and biochemical functions
+                                                                                                                                                    that are associated with this activity or condition.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$pattern</code></td>
+<td class="type"><code>string|DefinedTerm</code></td>
+<td class="description">A pattern that something has, for example 'polka dot', 'striped',
+                                                                                                                                                    'Canadian flag'. Values are typically expressed as text, although
+                                                                                                                                                    links to controlled value schemes are also supported.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$position</code></td>
+<td class="type"><code>string|int</code></td>
+<td class="description">The position of an item in a series or sequence of items.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential Action, which describes an idealized action in
+                                                                                                                                                    which this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$producer</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">The person or organization who produced the work (e.g. music album,
+                                                                                                                                                    movie, tv/radio series etc.).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$provider</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">The service provider, service operator, or service performer; the
+                                                                                                                                                    goods producer. Another party (a seller) may offer those services or
+                                                                                                                                                    goods on behalf of the provider. A provider may also serve as the
+                                                                                                                                                    seller.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$publication</code></td>
+<td class="type"><code>PublicationEvent</code></td>
+<td class="description">A publication event associated with the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$publisher</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">The publisher of the creative work.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$publisherImprint</code></td>
+<td class="type"><code>Organization</code></td>
+<td class="description">The publishing division which published the comic.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$publishingPrinciples</code></td>
+<td class="type"><code>URL|CreativeWork</code></td>
+<td class="description">The publishingPrinciples property indicates (typically via URL) a
+                                                                                                                                                    document describing the editorial principles of an Organization (or
+                                                                                                                                                    individual e.g. a Person writing a blog) that relate to their
+                                                                                                                                                    activities as a publisher, e.g. ethics or diversity policies. When
+                                                                                                                                                    applied to a CreativeWork (e.g. NewsArticle) the principles are those
+                                                                                                                                                    of the party primarily responsible for the creation of the
+                                                                                                                                                    CreativeWork.While such policies are most typically expressed in
+                                                                                                                                                    natural language, sometimes related information (e.g. indicating a
+                                                                                                                                                    funder) can be expressed using schema.org terminology.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$recognizingAuthority</code></td>
+<td class="type"><code>Organization</code></td>
+<td class="description">If applicable, the organization that officially recognizes this entity
+                                                                                                                                                    as part of its endorsed system of medicine.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$recordedAt</code></td>
+<td class="type"><code>Event</code></td>
+<td class="description">The Event where the CreativeWork was recorded. The CreativeWork may
+                                                                                                                                                    capture all or part of the event.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$releasedEvent</code></td>
+<td class="type"><code>PublicationEvent</code></td>
+<td class="description">The place and time the release was issued, expressed as a
+                                                                                                                                                    PublicationEvent.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$relevantSpecialty</code></td>
+<td class="type"><code>MedicalSpecialty</code></td>
+<td class="description">If applicable, a medical specialty in which this entity is relevant.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$repetitions</code></td>
+<td class="type"><code>QuantitativeValue|float</code></td>
+<td class="description">Number of times one should repeat the activity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$restPeriods</code></td>
+<td class="type"><code>string|QuantitativeValue</code></td>
+<td class="description">How often one should break from the activity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$review</code></td>
+<td class="type"><code>Review</code></td>
+<td class="description">A review of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$reviews</code></td>
+<td class="type"><code>Review</code></td>
+<td class="description">Review of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">URL of a reference Web page that unambiguously indicates the item's
+                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
+                                                                                                                                                    or official website.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$schemaVersion</code></td>
+<td class="type"><code>string|URL</code></td>
+<td class="description">Indicates (by URL or string) a particular version of a schema used in
+                                                                                                                                                    some CreativeWork. For example, a document could declare a
+                                                                                                                                                    schemaVersion using an URL such as http://schema.org/version/2.0/ if
+                                                                                                                                                    precise indication of schema version was required by some application.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sdDatePublished</code></td>
+<td class="type"><code>Date</code></td>
+<td class="description">Indicates the date on which the current structured data was generated
+                                                                                                                                                    / published. Typically used alongside sdPublisher</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sdLicense</code></td>
+<td class="type"><code>CreativeWork|URL</code></td>
+<td class="description">A license document that applies to this structured data, typically
+                                                                                                                                                    indicated by URL.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sdPublisher</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">Indicates the party responsible for generating and publishing the
+                                                                                                                                                    current structured data markup, typically in cases where the
+                                                                                                                                                    structured data is derived automatically from existing published
+                                                                                                                                                    content but published on a different site. For example, student
+                                                                                                                                                    projects and open data initiatives often re-publish existing content
+                                                                                                                                                    with more explicitly structured metadata. ThesdPublisher property
+                                                                                                                                                    helps make such practices more explicit.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$size</code></td>
+<td class="type"><code>DefinedTerm|QuantitativeValue|string</code></td>
+<td class="description">A standardized size of a product or creative work, often simplifying
+                                                                                                                                                    richer information into a simple textual string, either through
+                                                                                                                                                    referring to named sizes or (in the case of product markup), by
+                                                                                                                                                    adopting conventional simplifications. Use of QuantitativeValue with a
+                                                                                                                                                    unitCode or unitText can add more structure; in other cases, the
+                                                                                                                                                    /width, /height, /depth and /weight properties may be more applicable.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sourceOrganization</code></td>
+<td class="type"><code>Organization</code></td>
+<td class="description">The Organization on whose behalf the creator was working.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$spatial</code></td>
+<td class="type"><code>Place</code></td>
+<td class="description">The "spatial" property can be used in cases when more specific
+                                                                                                                                                    properties(e.g. locationCreated, spatialCoverage, contentLocation) are
+                                                                                                                                                    not known to be appropriate.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$spatialCoverage</code></td>
+<td class="type"><code>Place</code></td>
+<td class="description">The spatialCoverage of a CreativeWork indicates the place(s) which are
+                                                                                                                                                    the focus of the content. It is a subproperty of contentLocation
+                                                                                                                                                    intended primarily for more technical and detailed materials. For
+                                                                                                                                                    example with a Dataset, it indicates areas that the dataset describes:
+                                                                                                                                                    a dataset of New York weather would have spatialCoverage which was the
+                                                                                                                                                    place: the state of New York.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sponsor</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">A person or organization that supports a thing through a pledge,
+                                                                                                                                                    promise, or financial contribution. e.g. a sponsor of a Medical Study
+                                                                                                                                                    or a corporate sponsor of an event.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$study</code></td>
+<td class="type"><code>MedicalStudy</code></td>
+<td class="description">A medical study or trial related to this entity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$subjectOf</code></td>
+<td class="type"><code>Event|CreativeWork</code></td>
+<td class="description">A CreativeWork or Event about this Thing.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$teaches</code></td>
+<td class="type"><code>DefinedTerm|string</code></td>
+<td class="description">The item being described is intended to help a person learn the
+                                                                                                                                                    competency or learning outcome defined by the referenced term.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$temporal</code></td>
+<td class="type"><code>DateTime|string</code></td>
+<td class="description">The "temporal" property can be used in cases where more specific
+                                                                                                                                                    properties(e.g. temporalCoverage, dateCreated, dateModified,
+                                                                                                                                                    datePublished) are not known to be appropriate.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$temporalCoverage</code></td>
+<td class="type"><code>string|DateTime|URL</code></td>
+<td class="description">The temporalCoverage of a CreativeWork indicates the period that the
+                                                                                                                                                    content applies to, i.e. that it describes, either as a DateTime or as
+                                                                                                                                                    a textual string indicating a time period in ISO 8601 time interval
+                                                                                                                                                    format. In the case of a Dataset it will typically indicate the
+                                                                                                                                                    relevant time period in a precise notation (e.g. for a 2011 census
+                                                                                                                                                    dataset, the year 2011 would be written "2011/2012"). Other forms of
+                                                                                                                                                    content e.g. ScholarlyArticle, Book, TVSeries or TVEpisode may
+                                                                                                                                                    indicate their temporalCoverage in broader terms - textually or via
+                                                                                                                                                    well-known URL. Written works such as books may sometimes have precise
+                                                                                                                                                    temporal coverage too, e.g. a work set in 1939 - 1945 can be indicated
+                                                                                                                                                    in ISO 8601 interval format format via "1939/1945".Open-ended date
+                                                                                                                                                    ranges can be written with ".." in place of the end date. For example,
+                                                                                                                                                    "2015-11/.." indicates a range beginning in November 2015 and with no
+                                                                                                                                                    specified final date. This is tentative and might be updated in future
+                                                                                                                                                    when ISO 8601 is officially updated.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$text</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The textual content of this CreativeWork.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$thumbnailUrl</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">A thumbnail image relevant to the Thing.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$timeRequired</code></td>
+<td class="type"><code>Duration</code></td>
+<td class="description">Approximate or typical time it takes to work with or through this
+                                                                                                                                                    learning resource for the typical intended target audience, e.g.
+                                                                                                                                                    'PT30M', 'PT1H25M'.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$translationOfWork</code></td>
+<td class="type"><code>CreativeWork</code></td>
+<td class="description">The work that this work has been translated from. e.g. 物种起源 is
+                                                                                                                                                    a translationOf “On the Origin of Species”</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$translator</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">Organization or person who adapts a creative work to different
+                                                                                                                                                    languages, regional differences and technical requirements of a target
+                                                                                                                                                    market, or that translates during some event.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$typicalAgeRange</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The typical expected age range, e.g. '7-9', '11-'.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$url</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$usageInfo</code></td>
+<td class="type"><code>CreativeWork|URL</code></td>
+<td class="description">The schema.org usageInfo property indicates further information about
+                                                                                                                                                    a CreativeWork. This property is applicable both to works that are
+                                                                                                                                                    freely available and to those that require payment or other
+                                                                                                                                                    transactions. It can reference additional information e.g. community
+                                                                                                                                                    expectations on preferred linking and citation conventions, as well as
+                                                                                                                                                    purchasing details. For something that can be commercially licensed,
+                                                                                                                                                    usageInfo can provide detailed, resource-specific information about
+                                                                                                                                                    licensing options.This property can be used alongside the license
+                                                                                                                                                    property which indicates license(s) applicable to some piece of
+                                                                                                                                                    content. The usageInfo property can provide information about other
+                                                                                                                                                    licensing options, e.g. acquiring commercial usage rights for an image
+                                                                                                                                                    that is also available under non-commercial creative commons licenses.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$version</code></td>
+<td class="type"><code>float|string</code></td>
+<td class="description">The version of the CreativeWork embodied by a specified resource.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$video</code></td>
+<td class="type"><code>VideoObject|Clip</code></td>
+<td class="description">An embedded video object.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$workExample</code></td>
+<td class="type"><code>CreativeWork</code></td>
+<td class="description">Example/instance/realization/derivation of the concept of this
+                                                                                                                                                    creative work. eg. The paperback edition, first edition, or eBook.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$workTranslation</code></td>
+<td class="type"><code>CreativeWork</code></td>
+<td class="description">A work that is a translation of the content of this work. e.g.
+                                                                                                                                                    西遊記 has an English workTranslation “Journey to the West”,a
+                                                                                                                                                    German workTranslation “Monkeys Pilgerfahrt” and a Vietnamese
+                                                                                                                                                    translation Tây du ký bình khảo.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$workload</code></td>
+<td class="type"><code>Energy|QuantitativeValue</code></td>
+<td class="description">Quantitative measure of the physiologic output of the exercise; also
+                                                                                                                                                    referred to as energy expenditure.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

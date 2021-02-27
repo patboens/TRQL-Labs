@@ -1,0 +1,346 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.jobposting.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">A listing that describes a job opening in a certain
+                            organization.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">26-08-2020 18:49</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">26/08/2020 - 16:49:27</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>JobPosting</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A listing that describes a job opening in a certain organization.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class JobPosting extends Intangible</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/JobPosting" class="DocumentorLink" title="Go to http://schema.org/JobPosting" itemprop="url">http://schema.org/JobPosting</a></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by <code>trql.schemaclassgenerator.class.php</code>
+        on 26-08-2020 18:49. IT HAS NOT BEEN TESTED YET!</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$additionalType</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">An additional type for the item, typically used for adding more
+                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
+                                                                                                                                                    a relationship between something and a class that the thing is in. In
+                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
+                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
+                                                                                                                                                    understanding of extra types, in particular those defined externally.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$applicantLocationRequirements</code></td>
+<td class="type"><code>AdministrativeArea</code></td>
+<td class="description">The location(s) applicants can apply from. This is usually used for
+                                                                                                                                                    telecommuting jobs where the applicant does not need to be in a
+                                                                                                                                                    physical office. Note: This should not be used for citizenship or work
+                                                                                                                                                    visa requirements.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$applicationContact</code></td>
+<td class="type"><code>ContactPoint</code></td>
+<td class="description">Contact details for further information relevant to this job posting.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$baseSalary</code></td>
+<td class="type"><code>float|PriceSpecification|MonetaryAmount</code></td>
+<td class="description">The base salary of the job or of an employee in an EmployeeRole.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$benefits</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Description of benefits associated with the job.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$datePosted</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">Publication date of an online listing.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A short description of the item used to
+                                                                                                                                                    disambiguate from other, similar items. Information from other
+                                                                                                                                                    properties (in particular, name) may be necessary for the description
+                                                                                                                                                    to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$educationRequirements</code></td>
+<td class="type"><code>EducationalOccupationalCredential|string</code></td>
+<td class="description">Educational background needed for the position or Occupation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$eligibilityToWorkRequirement</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The legal requirements such as citizenship, visa and other
+                                                                                                                                                    documentation required for an applicant to this job.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$employerOverview</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A description of the employer, career opportunities and work
+                                                                                                                                                    environment for this position.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$employmentType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Type of employment (e.g. full-time, part-time, contract, temporary,
+                                                                                                                                                    seasonal, internship).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$employmentUnit</code></td>
+<td class="type"><code>Organization</code></td>
+<td class="description">Indicates the department, unit and/or facility where the employee
+                                                                                                                                                    reports and/or in which the job is to be performed.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$estimatedSalary</code></td>
+<td class="type"><code>float|MonetaryAmountDistribution|MonetaryAmount</code></td>
+<td class="description">An estimated salary for a job posting or occupation, based on a
+                                                                                                                                                    variety of variables including, but not limited to industry, job
+                                                                                                                                                    title, and location. Estimated salaries are often computed by outside
+                                                                                                                                                    organizations rather than the hiring organization, who may not have
+                                                                                                                                                    committed to the estimated value.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$experienceRequirements</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Description of skills and experience needed for the position or
+                                                                                                                                                    Occupation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$hiringOrganization</code></td>
+<td class="type"><code>Organization</code></td>
+<td class="description">Organization offering the job position.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$identifier</code></td>
+<td class="type"><code>URL|string|PropertyValue</code></td>
+<td class="description">The identifier property represents any kind of identifier for any kind
+                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
+                                                                                                                                                    dedicated properties for representing many of these, either as textual
+                                                                                                                                                    strings or as URL (URI) links. See background notes for more details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$image</code></td>
+<td class="type"><code>ImageObject|URL</code></td>
+<td class="description">An image of the item. This can be a URL or a fully described
+                                                                                                                                                    ImageObject.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$incentiveCompensation</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Description of bonus and commission compensation aspects of the job.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$incentives</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Description of bonus and commission compensation aspects of the job.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$industry</code></td>
+<td class="type"><code>DefinedTerm|string</code></td>
+<td class="description">The industry associated with the job position.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$jobBenefits</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Description of benefits associated with the job.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$jobImmediateStart</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description">An indicator as to whether a position is available for an immediate
+                                                                                                                                                    start.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$jobLocation</code></td>
+<td class="type"><code>Place</code></td>
+<td class="description">A (typically single) geographic location associated with the job
+                                                                                                                                                    position.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$jobLocationType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A description of the job location (e.g TELECOMMUTE for telecommute
+                                                                                                                                                    jobs).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$jobStartDate</code></td>
+<td class="type"><code>Date|string</code></td>
+<td class="description">The date on which a successful applicant for this job would be
+                                                                                                                                                    expected to start work. Choose a specific date in the future or use
+                                                                                                                                                    the jobImmediateStart property to indicate the position is to be
+                                                                                                                                                    filled as soon as possible.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>CreativeWork|URL</code></td>
+<td class="description">Indicates a page (or other CreativeWork) for which this thing is the
+                                                                                                                                                    main entity being described. See background notes for details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$occupationalCategory</code></td>
+<td class="type"><code>CategoryCode|string</code></td>
+<td class="description">A category describing the job, preferably using a term from a taxonomy
+                                                                                                                                                    such as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated
+                                                                                                                                                    for each applicable value. Ideally the taxonomy should be identified,
+                                                                                                                                                    and both the textual label and formal code for the category should be
+                                                                                                                                                    provided.Note: for historical reasons, any textual label and formal
+                                                                                                                                                    code provided as a literal may be assumed to be from O*NET-SOC.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$physicalRequirement</code></td>
+<td class="type"><code>URL|string|DefinedTerm</code></td>
+<td class="description">A description of the types of physical activity associated with the
+                                                                                                                                                    job. Defined terms such as those in O*net may be used, but note that
+                                                                                                                                                    there is no way to specify the level of ability as well as its nature
+                                                                                                                                                    when using a defined term.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential Action, which describes an idealized action in
+                                                                                                                                                    which this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$qualifications</code></td>
+<td class="type"><code>EducationalOccupationalCredential|string</code></td>
+<td class="description">Specific qualifications required for this role or Occupation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$relevantOccupation</code></td>
+<td class="type"><code>Occupation</code></td>
+<td class="description">The Occupation for the JobPosting.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$responsibilities</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Responsibilities associated with this role or Occupation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$salaryCurrency</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The currency (coded using ISO 4217 ) used for the main salary
+                                                                                                                                                    information in this job posting or for this employee.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">URL of a reference Web page that unambiguously indicates the item's
+                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
+                                                                                                                                                    or official website.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$securityClearanceRequirement</code></td>
+<td class="type"><code>string|URL</code></td>
+<td class="description">A description of any security clearance requirements of the job.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sensoryRequirement</code></td>
+<td class="type"><code>string|URL|DefinedTerm</code></td>
+<td class="description">A description of any sensory requirements and levels necessary to
+                                                                                                                                                    function on the job, including hearing and vision. Defined terms such
+                                                                                                                                                    as those in O*net may be used, but note that there is no way to
+                                                                                                                                                    specify the level of ability as well as its nature when using a
+                                                                                                                                                    defined term.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$skills</code></td>
+<td class="type"><code>DefinedTerm|string</code></td>
+<td class="description">A statement of knowledge, skill, ability, task or any other assertion
+                                                                                                                                                    expressing a competency that is desired or required to fulfill this
+                                                                                                                                                    role or to work in this occupation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$specialCommitments</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Any special commitments associated with this job posting. Valid
+                                                                                                                                                    entries include VeteranCommit, MilitarySpouseCommit, etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$subjectOf</code></td>
+<td class="type"><code>Event|CreativeWork</code></td>
+<td class="description">A CreativeWork or Event about this Thing.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$title</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The title of the job.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$totalJobOpenings</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">The number of positions open for this job posting. Use a positive
+                                                                                                                                                    integer. Do not use if the number of positions is unclear or not
+                                                                                                                                                    known.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$url</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$validThrough</code></td>
+<td class="type"><code>DateTime|Date</code></td>
+<td class="description">The date after when the item is not valid. For example the end of an
+                                                                                                                                                    offer, salary period, or a period of opening hours.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$workHours</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The typical working hours for this job (e.g. 1st shift, night shift,
+                                                                                                                                                    8am-5pm).</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

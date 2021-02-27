@@ -1,0 +1,99 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.geocoordinates.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">Geocoordinates (latitute/longitude)</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company"><br />Lato Sensu Management<br />
+                            Rue Bois des Mazuis, 47<br />
+                            5070 Vitrival<br />
+                            Belgium<br />
+                            <a href="http://www.latosensu.be" class="DocumentorLink" title="Go to http://www.latosensu.be" itemprop="url">http://www.latosensu.be</a><br />
+                            Vae Soli! : <a href="http://www.vaesoli.org" class="DocumentorLink" title="Go to http://www.vaesoli.org" itemprop="url">http://www.vaesoli.org</a></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">29/07/2020 - 11:45</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">20/08/2020 - 12:03:36</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Submitted to intellectual property rights (see
+                            author)</span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>GeoCoordinates</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">The geographic coordinates of a place or event.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class GeoCoordinates extends StructuredValue implements iContext</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="https://schema.org/GeoCoordinates" class="DocumentorLink" title="Go to https://schema.org/GeoCoordinates" itemprop="url">https://schema.org/GeoCoordinates</a></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$address</code></td>
+<td class="type"><code>PostalAddress|string</code></td>
+<td class="description">Physical address of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$addressCountry</code></td>
+<td class="type"><code>Country|string</code></td>
+<td class="description">The country. For example, USA. You can also
+                                                                                                                                            provide the two-letter ISO 3166-1 alpha-2
+                                                                                                                                            country code.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$elevation</code></td>
+<td class="type"><code>Number|string</code></td>
+<td class="description">The elevation of a location (WGS 84). Values
+                                                                                                                                            may be of the form 'NUMBER UNITOFMEASUREMENT'
+                                                                                                                                            (e.g., '1,000 m', '3,200 ft') while numbers
+                                                                                                                                            alone should be assumed to be a value in meters.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$latitude</code></td>
+<td class="type"><code>Number|string</code></td>
+<td class="description">The latitude of a location. For example
+                                                                                                                                            37.42242 (WGS 84).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$longitude</code></td>
+<td class="type"><code>Number|string</code></td>
+<td class="description">The longitude of a location. For example
+                                                                                                                                            -122.08585 (WGS 84).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$postalCode</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The postal code. For example, 94043.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>speak()</code></span>, 
+<span class="property func"><code>sing()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

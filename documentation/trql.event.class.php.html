@@ -1,0 +1,255 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.event.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">An event happening at a certain time and location, such as a
+                            concert, lecture, or festival. Ticketing information may be
+                            added via the offers property. Repeated events may be 
+                            structured as separate Event objects.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">29-07-20 11:46</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">23/08/2020 - 11:09:51</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Event</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">An event happening at a certain time and location, such as a concert,
+        lecture, or festival. Ticketing information may be added via the offers
+        property. Repeated events may be structured as separate Event objects.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Event extends Thing implements iContext</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/Event" class="DocumentorLink" title="Go to http://schema.org/Event" itemprop="url">http://schema.org/Event</a></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$about</code></td>
+<td class="type"><code>Thing</code></td>
+<td class="description">The subject matter of the content.
+                                                                                                                                                    Inverse property: subjectOf.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$actor</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">An actor, e.g. in tv, radio, movie, video games etc., or in an
+                                                                                                                                                    event. Actors can be associated with individual items or with a
+                                                                                                                                                    series, episode, clip. Supersedes actors.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aggregateRating</code></td>
+<td class="type"><code>AggregateRating</code></td>
+<td class="description">The overall rating, based on a collection of reviews or ratings,
+                                                                                                                                                    of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$attendee</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">A person or organization attending the event. Supersedes attendees.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$audience</code></td>
+<td class="type"><code>Audience</code></td>
+<td class="description">An intended audience, i.e. a group for whom something was created.
+                                                                                                                                                    Supersedes serviceAudience.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$composer</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">The person or organization who wrote a composition, or who is the
+                                                                                                                                                    composer of a work performed at some event.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$contributor</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">A secondary contributor to the CreativeWork or Event.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$director</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">A director of e.g. tv, radio, movie, video gaming etc. content,
+                                                                                                                                                    or of an event. Directors can be associated with individual items or
+                                                                                                                                                    with a series, episode, clip. Supersedes directors.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$doorTime</code></td>
+<td class="type"><code>DateTime|Time</code></td>
+<td class="description">The time admission will commence.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$duration</code></td>
+<td class="type"><code>Duration</code></td>
+<td class="description">The duration of the item (movie, audio recording, event, etc.)
+                                                                                                                                                    in ISO 8601 date format.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$endDate</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The end date and time of the item (in ISO 8601 date format).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$eventStatus</code></td>
+<td class="type"><code>EventStatusType</code></td>
+<td class="description">An eventStatus of an event represents its status; particularly useful
+                                                                                                                                                    when an event is cancelled or rescheduled.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$funder</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">A person or organization that supports (sponsors) something through
+                                                                                                                                                    some kind of financial contribution.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$inLanguage</code></td>
+<td class="type"><code>Language|string</code></td>
+<td class="description">The language of the content or performance or used in an action.
+                                                                                                                                                    Please use one of the language codes from the IETF BCP 47 standard.
+                                                                                                                                                    See also availableLanguage. Supersedes language.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isAccessibleForFree</code></td>
+<td class="type"><code>Boolean</code></td>
+<td class="description">A flag to signal that the item, event, or place is accessible for
+                                                                                                                                                    free. Supersedes free.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$location</code></td>
+<td class="type"><code>Place|PostalAddress|string</code></td>
+<td class="description">The location of for example where the event is happening, an organization
+                                                                                                                                                    is located, or where an action takes place.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$maximumAttendeeCapacity</code></td>
+<td class="type"><code>Integer</code></td>
+<td class="description">The total number of individuals that may attend an event or venue.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$offers</code></td>
+<td class="type"><code>Offer</code></td>
+<td class="description">An offer to provide this item—for example, an offer to sell a product,
+                                                                                                                                                    rent the DVD of a movie, perform a service, or give away tickets to an
+                                                                                                                                                    event.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$organizer</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">An organizer of an Event.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$performer</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">A performer at the event—for example, a presenter, musician, musical
+                                                                                                                                                    group or actor. Supersedes performers.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$previousStartDate</code></td>
+<td class="type"><code>Date</code></td>
+<td class="description">Used in conjunction with eventStatus for rescheduled or cancelled events.
+                                                                                                                                                    This property contains the previously scheduled start date. For
+                                                                                                                                                    rescheduled events, the startDate property should be used for the newly
+                                                                                                                                                    scheduled start date. In the (rare) case of an event that has been
+                                                                                                                                                    postponed and rescheduled multiple times, this field may be repeated.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$recordedIn</code></td>
+<td class="type"><code>CreativeWork</code></td>
+<td class="description">The CreativeWork that captured all or part of this Event. Inverse
+                                                                                                                                                    property: recordedAt.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$remainingAttendeeCapacity</code></td>
+<td class="type"><code>Integer</code></td>
+<td class="description">The number of attendee places for an event that remain unallocated.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$review</code></td>
+<td class="type"><code>Review</code></td>
+<td class="description">A review of the item. Supersedes reviews.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sponsor</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">A person or organization that supports a thing through a pledge, promise,
+                                                                                                                                                    or financial contribution. e.g. a sponsor of a Medical Study or a corporate
+                                                                                                                                                    sponsor of an event.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$startDate</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The start date and time of the item (in ISO 8601 date format).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$subEvent</code></td>
+<td class="type"><code>Event</code></td>
+<td class="description">An Event that is part of this event. For example, a conference event
+                                                                                                                                                    includes many presentations, each of which is a subEvent of the
+                                                                                                                                                    conference. Supersedes subEvents. Inverse property: superEvent.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$superEvent</code></td>
+<td class="type"><code>Event</code></td>
+<td class="description">An event that this event is a part of. For example, a collection of
+                                                                                                                                                    individual music performances might each have a music festival as their
+                                                                                                                                                    superEvent. Inverse property: subEvent.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$translator</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">Organization or person who adapts a creative work to different languages,
+                                                                                                                                                    regional differences and technical requirements of a target market,
+                                                                                                                                                    or that translates during some event.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$typicalAgeRange</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The typical expected age range, e.g. '7-9', '11-'.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$workFeatured</code></td>
+<td class="type"><code>CreativeWork</code></td>
+<td class="description">A work featured in some event, e.g. exhibited in an ExhibitionEvent.
+                                                                                                                                                    Specific subproperties are available for workPerformed (e.g. a play),
+                                                                                                                                                    or a workPresented (a Movie at a ScreeningEvent).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$workPerformed</code></td>
+<td class="type"><code>CreativeWork</code></td>
+<td class="description">A work performed in some event, for example a play performed in a
+                                                                                                                                                    TheaterEvent.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>speak()</code></span>, 
+<span class="property func"><code>sing()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

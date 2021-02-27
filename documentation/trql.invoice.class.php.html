@@ -1,0 +1,143 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.invoice.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">A statement of the money due for goods or services; a bill.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">26-08-2020 18:49</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">28/08/2020 - 09:18:36</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Invoice</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A statement of the money due for goods or services; a bill.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Invoice extends Intangible</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/Invoice" class="DocumentorLink" title="Go to http://schema.org/Invoice" itemprop="url">http://schema.org/Invoice</a></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by <code>trql.schemaclassgenerator.class.php</code>
+        on 26-08-2020 18:49. It must still be completed by a number of properties such as
+        the ones we use in Quitus|TRQL (lines of detail, ...)</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$accountId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The identifier for the account the payment will be applied to.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$billingPeriod</code></td>
+<td class="type"><code>Duration</code></td>
+<td class="description">The time interval used to compute the invoice.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$broker</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">An entity that arranges for an exchange between a buyer and a seller.
+                                                                                                                                                                    In most cases a broker never acquires or releases ownership of a
+                                                                                                                                                                    product or service involved in an exchange. If it is not clear whether
+                                                                                                                                                                    an entity is a broker, seller, or buyer, the latter two terms are
+                                                                                                                                                                    preferred.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$category</code></td>
+<td class="type"><code>Thing|PhysicalActivityCategory|URL|string</code></td>
+<td class="description">A category for the item. Greater signs or slashes can be used to
+                                                                                                                                                                    informally indicate a category hierarchy.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$confirmationNumber</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A number that confirms the given order or payment has been received.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$customer</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">Party placing the order or paying the invoice.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$minimumPaymentDue</code></td>
+<td class="type"><code>PriceSpecification|MonetaryAmount</code></td>
+<td class="description">The minimum payment required at this time.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$paymentDueDate</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The date that payment is due.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$paymentMethod</code></td>
+<td class="type"><code>PaymentMethod</code></td>
+<td class="description">The name of the credit card or other method of payment for the order.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$paymentMethodId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An identifier for the method of payment used (e.g. the last 4 digits
+                                                                                                                                                                    of the credit card).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$paymentStatus</code></td>
+<td class="type"><code>PaymentStatusType|string</code></td>
+<td class="description">The status of payment; whether the invoice has been paid or not.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$provider</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">The service provider, service operator, or service performer; the
+                                                                                                                                                                    goods producer. Another party (a seller) may offer those services or
+                                                                                                                                                                    goods on behalf of the provider. A provider may also serve as the
+                                                                                                                                                                    seller.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$referencesOrder</code></td>
+<td class="type"><code>Order</code></td>
+<td class="description">The Order(s) related to this Invoice. One or more Orders may be
+                                                                                                                                                                    combined into a single Invoice.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$scheduledPaymentDate</code></td>
+<td class="type"><code>Date</code></td>
+<td class="description">The date the invoice is scheduled to be paid.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$totalPaymentDue</code></td>
+<td class="type"><code>PriceSpecification|MonetaryAmount</code></td>
+<td class="description">The total amount due.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>WebForm()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

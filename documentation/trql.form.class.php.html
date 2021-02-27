@@ -1,0 +1,130 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.form.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">Document with blank spaces/fields for insertion of required
+                            or requested information. A device for collecting data.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">25-12-20 12:51</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">11/01/2021 - 07:59:57</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Form</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Document with blank spaces/fields for insertion of required or requested
+        information. A device for collecting data.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Form extends Tag</code></span>
+<span class="DocumentorLabel">TODOs: </span><span class="property remark">29-12-20 12:52:45: most of the implementation comes from
+        D:\websites\vaesoli.org\www\httpdocs\vaesoli\include\LSForm.class.php</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aItems</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of elements composing the form</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aAccepted</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of inner tags that are accepted in a form</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szLang</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Language of the form</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$settings</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Associative array with ALL settings used in the form:<br />
+
+                                                                                                                        - <code>method</code>             (string)            : HTTP method to be invoked to submit the form<br />
+                                                                                                                        - <code>action</code>             (string)            : Action fo the form (usually a URL or <code>self</code> to
+                                                                                                                                                                          submit the form to the current script)<br />
+                                                                                                                        - <code>tabindex</code>           (int)               : <code>tabindex</code> in the form (use the <code>$iTabIndex</code>
+                                                                                                                                                                          property of the current page ([doc]LSPage[/doc]) to hold
+                                                                                                                                                                          a precise count between forms)<br />
+                                                                                                                        - <code>withTabindex</code>       (bool)              : Determines whether tabindex must be used or not.
+                                                                                                                                                                          <code>true</code> by default<br />
+                                                                                                                        - <code>mode</code>               (string)            : Mode the form is entered. Can be <code>'edit'</code>
+                                                                                                                                                                          (modification of an existing record) or <code>'add'</code>
+                                                                                                                                                                          (add a new record). <code>'add'</code> by default<br />
+                                                                                                                        - <code>type</code>               (string)            : Container type. <code>'form'</code> by default<br />
+                                                                                                                        - <code>version</code>            (string)            : Form version. <code>'Web form 1.0'</code> by default.
+                                                                                                                                                                          Set to <code>'Web form 2.0'</code> to benefit from
+                                                                                                                                                                          HTML5 controls<br />
+                                                                                                                        - <code>foreword</code>           (string)            : Text that must precede the rendering of the form<br />
+                                                                                                                        - <code>afterword</code>          (string)            : Text that must follow the rendering of the form<br />
+                                                                                                                        - <code>dataEnvironment</code>    (DataEnvironment)   : A [doc]DataEnvironment[/doc] object. Warning: not
+                                                                                                                                                                          really used at this stage (04-09-13 07:46)<br />
+                                                                                                                        - <code>noECMA</code>             (bool)              : Indicates whether we need to have the ECMA scripts
+                                                                                                                                                                          be generated.<code>false</code> by default
+                                                                                                                                                                          (= ECMA scripts generated)<br />
+                                                                                                                        - <code>aECMA</code>              (array)             : Internal array of scripts to be generated by Vae Soli!
+                                                                                                                                                                          for entry checks and form validation<br />
+                                                                                                                        - <code>withPreviousValues</code> (bool)              : Indicates if previous control values must be saved
+                                                                                                                                                                          in the form <br />
+                                                                                                                        - <code>preRenderFnc</code>       (string)            : Callback to play before rendering of the form<br />
+                                                                                                                        - <code>postRenderFnc</code>      (string)            : Callback to play after rendering of the form<br />
+                                                                                                                        - <code>noValidate</code>         (bool)              : novalidate attribute of the form (HTML5)<br />
+                                                                                                                        - <code>target</code>             (string)            : Enumerated type (_blank, _self, _parent, _top).
+                                                                                                                                                                          Specifies where to display the response that is
+                                                                                                                                                                          received after submitting the form<br />
+                                                                                                                        - <code>autocomplete</code>       (string)            : Enumerated type (on, off). The off state indicates
+                                                                                                                                                                          that by default, form controls in the form will have
+                                                                                                                                                                          their resulting autocompletion state set to off; the
+                                                                                                                                                                          on state indicates that by default, form controls in
+                                                                                                                                                                          the form will have their resulting autocompletion
+                                                                                                                                                                          state set to automatic.<br />
+                                                                                                                        - <code>page</code>               (WebPage)           : The page in which this form must be rendered.
+                                                                                                                                                                          <code>null</code> by default<br />
+                                                                                                                        - <code>hasFile</code>            (boolean)           : Indicates whether the form is supposed to handle
+                                                                                                                                                                          files (can be set manually; otherwise, it is treated
+                                                                                                                                                                          automatically by examining all controls) <br /></td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. Document with blank spaces/fields
+                                                                                                                        for insertion of required or requested information.
+                                                                                                                        A device for collecting data.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>add()</code></span>, 
+<span class="property func"><code>parse()</code></span>, 
+<span class="property func"><code>mix()</code></span>, 
+<span class="property func"><code>makeInput()</code></span>, 
+<span class="property func"><code>render()</code></span>, 
+<span class="property func"><code>save()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

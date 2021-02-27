@@ -1,0 +1,222 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.project.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">Collaborative enterprise (potentially individual but typically
+                            collaborative), frequently involving research or design,
+                            planned to achieve a particular aim. Use properties from
+                            Organization,  subOrganization/parentOrganization to indicate
+                            project sub-structures.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">28-08-2020 16:28</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">20/01/2021 - 17:46:27</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Project</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Collaborative enterprise (potentially individual but typically
+        collaborative), frequently involving research or design, planned to
+        achieve a particular aim. Use properties from Organization,
+        subOrganization/parentOrganization to indicate project sub-structures.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Project extends Organization</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/Project" class="DocumentorLink" title="Go to http://schema.org/Project" itemprop="url">http://schema.org/Project</a></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by <code>trql.schemaclassgenerator.class.php</code>
+        on 28-08-2020 16:28. IT HAS NOT BEEN TESTED YET!</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Collaborative enterprise, frequently involving research
+                                                                                                                                        or design, that is carefully planned to achieve a
+                                                                                                                                        particular aim</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$oParentPortfolio</code></td>
+<td class="type"><code>Portfolio</code></td>
+<td class="description">The portfolio this project belongs to.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$oBusinessCase</code></td>
+<td class="type"><code>BusinessCase</code></td>
+<td class="description">Reasoning for initiating a project or task, presented in
+                                                                                                                                        a well-structured written document, but may also come in
+                                                                                                                                        the form of a short verbal agreement or presentation
+                                                                                                                                        (wikidataId: Q1896170)</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szCodeName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Code name of the Project.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$oLeader</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">Leader of the Project (othen the Project Manager).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aStakeholders</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of Persons.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aMeetings</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of meetings held in this Aspiration.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aSprints</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of sprints (<code>trql.sprint.class.php</code>).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aScope</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of items included in the scope; other which are excluded from the code.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aDeliverables</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of expected deliverables (<code>trq.deliverable.class.php</code>).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aDocuments</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of documents (<code>trq.document.class.php</code>).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aInDependencies</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of projects that must deliver an output for THIS project to be able to go ahead</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aOutDependencies</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of projects that are expecting THIS project to delievr an output to be able to go ahead</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aDraft</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of short draft messages</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szPhase</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Enumeration: bubble, to-start, started, done (used in Kanban column)</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szStatus</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Enumeration: running, on-hold, abandonned, completed</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szStorage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">File in which the Project maintains its state (all project properties)</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$oBudget</code></td>
+<td class="type"><code>Budget</code></td>
+<td class="description">Budget of the project</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$endDate</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The end date and time of the item (in ISO 8601 date format).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$startDate</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The start date and time of the item (in ISO 8601 date format).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szGroups</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">';' separated list of groups whose member can have access to the Project.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szMailto</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The page that should be used to send a mail. If value is 'mailto:', then the local 
+                                                                                                                                        email facility will be used</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>resolveVars()</code></span>, 
+<span class="property func"><code>loadClassesIfNotFound()</code></span>, 
+<span class="property func"><code>load()</code></span>, 
+<span class="property func"><code>save()</code></span>, 
+<span class="property func"><code>__toXML()</code></span>, 
+<span class="property func"><code>WhoAmI()</code></span>, 
+<span class="property func"><code>__call()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Aspiration</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Extends the Project class, which is not supposed to be used (use
+        Aspiration instead). Collaborative enterprise (potentially individual
+        but typically collaborative), frequently involving research or design,
+        planned to achieve a particular aim. Use properties from Organization,
+        subOrganization/parentOrganization to indicate project sub-structures.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Aspiration extends Project</code></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Collaborative enterprise, frequently involving research
+                                                                                                                                        or design, that is carefully planned to achieve a
+                                                                                                                                        particular aim</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>load()</code></span>, 
+<span class="property func"><code>render()</code></span>, 
+<span class="property func"><code>renderReports()</code></span>, 
+<span class="property func"><code>renderSprints()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

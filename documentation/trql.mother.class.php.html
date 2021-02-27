@@ -1,0 +1,107 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.mother.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">Mother of all TRQL Classes</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />
+                            Rue Bois des Mazuis, 47<br />
+                            5070 Vitrival<br />
+                            Belgium<br />
+                            <a href="http://www.latosensu.be" class="DocumentorLink" title="Go to http://www.latosensu.be" itemprop="url">http://www.latosensu.be</a><br />
+                            Vae Soli! : <a href="http://www.vaesoli.org" class="DocumentorLink" title="Go to http://www.vaesoli.org" itemprop="url">http://www.vaesoli.org</a></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">08/02/2017 - 12:10</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">12/11/2020 - 07:09:39</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">All rights reserved to Lato Sensu Management
+                            for all countries. All Intellectual Property
+                            belongs to Patrick Boens.</span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Mother</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Mother of all TRQL classes</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>abstract class Mother</code></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$learning</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description"><code>true</code> (default) if the class learns from past experience.  <code>false</code> if not.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$remembering</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description"><code>true</code> (default) if the class uses previous results stored in a deterministic cache file. <code>false</code> if not.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$storing</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description"><code>true</code> (default) if the class saves previous results in a deterministic cache file. <code>false</code> if not.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szHome</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Class' home, where data can be found</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$memory</code></td>
+<td class="type"><code>mixed</code></td>
+<td class="description">$memory is NOT used as of 25-08-20 15:55:15</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$pain</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Pain index - between 0 and 10</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$feelPain</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description">Does the object feel pain or not; <code>true</code> by default.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$family</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">An array with all classes similar to this one (the TRQL family)</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$backupRequired</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description">Should the class backup itself?</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$autodocRequired</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description">Should the class auto-document itself?</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>updateSelf()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

@@ -1,0 +1,390 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.creditcard.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">A card payment method of a particular brand or name. Used to
+                            mark up a particular payment method and/or the financial
+                            product/service that supplies the card account.Commonly used
+                            values:http://purl.org/goodrelations/v1#AmericanExpresshttp://purl.org/goodrelations/v1#DinersClubhttp://purl.org/goodrelations/v1#Discoverhttp://purl.org/goodrelations/v1#JCBhttp://purl.org/goodrelations/v1#MasterCardhttp://purl.org/goodrelations/v1#VISA</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">26-08-2020 18:46</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">26/08/2020 - 16:46:21</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>CreditCard</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A card payment method of a particular brand or name. Used to mark up a
+        particular payment method and/or the financial product/service that
+        supplies the card account.Commonly used
+        values:http://purl.org/goodrelations/v1#AmericanExpresshttp://purl.org/goodrelations/v1#DinersClubhttp://purl.org/goodrelations/v1#Discoverhttp://purl.org/goodrelations/v1#JCBhttp://purl.org/goodrelations/v1#MasterCardhttp://purl.org/goodrelations/v1#VISA</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class CreditCard extends LoanOrCredit, PaymentCard</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/CreditCard" class="DocumentorLink" title="Go to http://schema.org/CreditCard" itemprop="url">http://schema.org/CreditCard</a></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by <code>trql.schemaclassgenerator.class.php</code>
+        on 26-08-2020 18:46. IT HAS NOT BEEN TESTED YET!</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$additionalType</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">An additional type for the item, typically used for adding more
+                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
+                                                                                                                                                    a relationship between something and a class that the thing is in. In
+                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
+                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
+                                                                                                                                                    understanding of extra types, in particular those defined externally.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aggregateRating</code></td>
+<td class="type"><code>AggregateRating</code></td>
+<td class="description">The overall rating, based on a collection of reviews or ratings, of
+                                                                                                                                                    the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$amount</code></td>
+<td class="type"><code>MonetaryAmount|float</code></td>
+<td class="description">The amount of money.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$annualPercentageRate</code></td>
+<td class="type"><code>QuantitativeValue|float</code></td>
+<td class="description">The annual rate that is charged for borrowing (or made by investing),
+                                                                                                                                                    expressed as a single percentage number that represents the actual
+                                                                                                                                                    yearly cost of funds over the term of a loan. This includes any fees
+                                                                                                                                                    or additional costs associated with the transaction.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$areaServed</code></td>
+<td class="type"><code>Place|GeoShape|string|AdministrativeArea</code></td>
+<td class="description">The geographic area where a service or offered item is provided.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$audience</code></td>
+<td class="type"><code>Audience</code></td>
+<td class="description">An intended audience, i.e. a group for whom something was created.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$availableChannel</code></td>
+<td class="type"><code>ServiceChannel</code></td>
+<td class="description">A means of accessing the service (e.g. a phone bank, a web site, a
+                                                                                                                                                    location, etc.).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$award</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An award won by or for this item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$brand</code></td>
+<td class="type"><code>Brand|Organization</code></td>
+<td class="description">The brand(s) associated with a product or service, or the brand(s)
+                                                                                                                                                    maintained by an organization or business person.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$broker</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">An entity that arranges for an exchange between a buyer and a seller.
+                                                                                                                                                    In most cases a broker never acquires or releases ownership of a
+                                                                                                                                                    product or service involved in an exchange. If it is not clear whether
+                                                                                                                                                    an entity is a broker, seller, or buyer, the latter two terms are
+                                                                                                                                                    preferred.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$cashBack</code></td>
+<td class="type"><code>boolean|float</code></td>
+<td class="description">A cardholder benefit that pays the cardholder a small percentage of
+                                                                                                                                                    their net expenditures.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$category</code></td>
+<td class="type"><code>Thing|PhysicalActivityCategory|URL|string</code></td>
+<td class="description">A category for the item. Greater signs or slashes can be used to
+                                                                                                                                                    informally indicate a category hierarchy.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$contactlessPayment</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description">A secure method for consumers to purchase products or services via
+                                                                                                                                                    debit, credit or smartcards by using RFID or NFC technology.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$currency</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The currency in which the monetary amount is expressed.Use standard
+                                                                                                                                                    formats: ISO 4217 currency format e.g. "USD"; Ticker symbol for
+                                                                                                                                                    cryptocurrencies e.g. "BTC"; well known names for Local Exchange
+                                                                                                                                                    Tradings Systems (LETS) and other currency types e.g. "Ithaca HOUR".</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A short description of the item used to
+                                                                                                                                                    disambiguate from other, similar items. Information from other
+                                                                                                                                                    properties (in particular, name) may be necessary for the description
+                                                                                                                                                    to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$feesAndCommissionsSpecification</code></td>
+<td class="type"><code>URL|string</code></td>
+<td class="description">Description of fees, commissions, and other terms applied either to a
+                                                                                                                                                    class of financial product, or by a financial service organization.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$floorLimit</code></td>
+<td class="type"><code>MonetaryAmount</code></td>
+<td class="description">A floor limit is the amount of money above which credit card
+                                                                                                                                                    transactions must be authorized.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$gracePeriod</code></td>
+<td class="type"><code>Duration</code></td>
+<td class="description">The period of time after any due date that the borrower has to fulfil
+                                                                                                                                                    its obligations before a default (failure to pay) is deemed to have
+                                                                                                                                                    occurred.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$hasOfferCatalog</code></td>
+<td class="type"><code>OfferCatalog</code></td>
+<td class="description">Indicates an OfferCatalog listing for this Organization, Person, or
+                                                                                                                                                    Service.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$hoursAvailable</code></td>
+<td class="type"><code>OpeningHoursSpecification</code></td>
+<td class="description">The hours during which this service or contact is available.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$identifier</code></td>
+<td class="type"><code>URL|string|PropertyValue</code></td>
+<td class="description">The identifier property represents any kind of identifier for any kind
+                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
+                                                                                                                                                    dedicated properties for representing many of these, either as textual
+                                                                                                                                                    strings or as URL (URI) links. See background notes for more details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$image</code></td>
+<td class="type"><code>ImageObject|URL</code></td>
+<td class="description">An image of the item. This can be a URL or a fully described
+                                                                                                                                                    ImageObject.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$interestRate</code></td>
+<td class="type"><code>float|QuantitativeValue</code></td>
+<td class="description">The interest rate, charged or paid, applicable to the financial
+                                                                                                                                                    product. Note: This is different from the calculated
+                                                                                                                                                    annualPercentageRate.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isRelatedTo</code></td>
+<td class="type"><code>Product|Service</code></td>
+<td class="description">A pointer to another, somehow related product (or multiple products).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isSimilarTo</code></td>
+<td class="type"><code>Product|Service</code></td>
+<td class="description">A pointer to another, functionally similar product (or multiple
+                                                                                                                                                    products).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$loanRepaymentForm</code></td>
+<td class="type"><code>RepaymentSpecification</code></td>
+<td class="description">A form of paying back money previously borrowed from a lender.
+                                                                                                                                                    Repayment usually takes the form of periodic payments that normally
+                                                                                                                                                    include part principal plus interest in each payment.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$loanTerm</code></td>
+<td class="type"><code>QuantitativeValue</code></td>
+<td class="description">The duration of the loan or credit agreement.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$loanType</code></td>
+<td class="type"><code>string|URL</code></td>
+<td class="description">The type of a loan or credit.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$logo</code></td>
+<td class="type"><code>ImageObject|URL</code></td>
+<td class="description">An associated logo.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>CreativeWork|URL</code></td>
+<td class="description">Indicates a page (or other CreativeWork) for which this thing is the
+                                                                                                                                                    main entity being described. See background notes for details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$monthlyMinimumRepaymentAmount</code></td>
+<td class="type"><code>float|MonetaryAmount</code></td>
+<td class="description">The minimum payment is the lowest amount of money that one is required
+                                                                                                                                                    to pay on a credit card statement each month.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$offers</code></td>
+<td class="type"><code>Offer|Demand</code></td>
+<td class="description">An offer to provide this item&#x2014;for example, an offer to sell a
+                                                                                                                                                    product, rent the DVD of a movie, perform a service, or give away
+                                                                                                                                                    tickets to an event. Use businessFunction to indicate the kind of
+                                                                                                                                                    transaction offered, i.e. sell, lease, etc. This property can also be
+                                                                                                                                                    used to describe a Demand. While this property is listed as expected
+                                                                                                                                                    on a number of common types, it can be used in others. In that case,
+                                                                                                                                                    using a second type, such as Product or a subtype of Product, can
+                                                                                                                                                    clarify the nature of the offer.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential Action, which describes an idealized action in
+                                                                                                                                                    which this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$produces</code></td>
+<td class="type"><code>Thing</code></td>
+<td class="description">The tangible thing generated by the service, e.g. a passport, permit,
+                                                                                                                                                    etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$provider</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">The service provider, service operator, or service performer; the
+                                                                                                                                                    goods producer. Another party (a seller) may offer those services or
+                                                                                                                                                    goods on behalf of the provider. A provider may also serve as the
+                                                                                                                                                    seller.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$providerMobility</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates the mobility of a provided service (e.g. 'static',
+                                                                                                                                                    'dynamic').</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$recourseLoan</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description">The only way you get the money back in the event of default is the
+                                                                                                                                                    security. Recourse is where you still have the opportunity to go back
+                                                                                                                                                    to the borrower for the rest of the money.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$renegotiableLoan</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description">Whether the terms for payment of interest can be renegotiated during
+                                                                                                                                                    the life of the loan.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$requiredCollateral</code></td>
+<td class="type"><code>string|Thing</code></td>
+<td class="description">Assets required to secure loan or credit repayments. It may take form
+                                                                                                                                                    of third party pledge, goods, financial instruments (cash, securities,
+                                                                                                                                                    etc.)</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$review</code></td>
+<td class="type"><code>Review</code></td>
+<td class="description">A review of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">URL of a reference Web page that unambiguously indicates the item's
+                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
+                                                                                                                                                    or official website.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$serviceArea</code></td>
+<td class="type"><code>AdministrativeArea|Place|GeoShape</code></td>
+<td class="description">The geographic area where the service is provided.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$serviceAudience</code></td>
+<td class="type"><code>Audience</code></td>
+<td class="description">The audience eligible for this service.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$serviceOutput</code></td>
+<td class="type"><code>Thing</code></td>
+<td class="description">The tangible thing generated by the service, e.g. a passport, permit,
+                                                                                                                                                    etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$serviceType</code></td>
+<td class="type"><code>string|GovernmentBenefitsType</code></td>
+<td class="description">The type of service being offered, e.g. veterans' benefits, emergency
+                                                                                                                                                    relief, etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$slogan</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A slogan or motto associated with the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$subjectOf</code></td>
+<td class="type"><code>Event|CreativeWork</code></td>
+<td class="description">A CreativeWork or Event about this Thing.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$supersededBy</code></td>
+<td class="type"><code>Property|Class|Enumeration</code></td>
+<td class="description">Relates a term (i.e. a property, class or enumeration) to one that
+                                                                                                                                                    supersedes it.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$termsOfService</code></td>
+<td class="type"><code>URL|string</code></td>
+<td class="description">Human-readable terms of service documentation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$url</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

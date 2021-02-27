@@ -1,0 +1,86 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.citation.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">A quotation. Often but not necessarily from some written work,
+                            attributable to a real world author and - if associated with
+                            a fictional character - to any fictional <code>Person</code>. Use 
+                            <code>isBasedOn</code> to link to source/origin. The <code>recordedIn</code>
+                            property can be used to reference a Quotation from an Event.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company"><br />Lato Sensu Management<br />
+                            Rue Bois des Mazuis, 47<br />
+                            5070 Vitrival<br />
+                            Belgium<br />
+                            <a href="http://www.latosensu.be" class="DocumentorLink" title="Go to http://www.latosensu.be" itemprop="url">http://www.latosensu.be</a><br />
+                            Vae Soli! : <a href="http://www.vaesoli.org" class="DocumentorLink" title="Go to http://www.vaesoli.org" itemprop="url">http://www.vaesoli.org</a></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">15-08-20 10:14</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">20/08/2020 - 09:40:45</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Submitted to intellectual property rights (see
+                            author)</span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Citation</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A quotation. Often but not necessarily from some written work,
+        attributable to a real world author and - if associated with a fictional
+        character - to any fictional Person. Use isBasedOn to link to
+        source/origin. The recordedIn property can be used to reference a
+        Quotation from an Event.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Citation extends CreativeWork implements iContext</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="https://schema.org/Quotation" class="DocumentorLink" title="Go to https://schema.org/Quotation" itemprop="url">https://schema.org/Quotation</a></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">15-08-20 10:07:30 : This term is proposed for full integration into
+        Schema.org, pending implementation feedback and adoption from
+        applications and websites.</span>
+<span class="DocumentorLabel">TODOs: </span><span class="property remark">The class is called "Quotation" in schema.org but I have preferred calling
+        it "Citation" in the context of TRQL as it was called this way long before
+        starting this homogenous work.
+
+        The class is very incomplete at this stage (15-08-20 10:11:21) and I need
+        to import a whole lot of code from the LSCitation class of Vaesoli that,
+        over other things, takes advantage of the "citations.xml" resource.</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$spokenByCharacter</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">The (e.g. fictional) character, Person or Organization to whom 
+                                                                                                                                            the quotation is attributed within the containing CreativeWork.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>speak()</code></span>, 
+<span class="property func"><code>sing()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->
