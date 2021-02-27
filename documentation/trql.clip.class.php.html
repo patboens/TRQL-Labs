@@ -1,0 +1,130 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.clip.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">A short TV or radio program or a segment/part of a program.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">26-08-2020 18:40</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">27/02/2021 - 06:16:28</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Clip</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A short TV or radio program or a segment/part of a program.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Clip extends CreativeWork</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+        under the terms of their license:
+        <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/Clip" class="DocumentorLink" title="Go to http://schema.org/Clip" itemprop="url">http://schema.org/Clip</a></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by <code>trql.schemaclassgenerator.class.php</code>
+        on 26-08-2020 18:40.</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$actor</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">An actor, e.g. in tv, radio, movie, video games etc., or in an event.
+                                                                                                                                                    Actors can be associated with individual items or with a series,
+                                                                                                                                                    episode, clip.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$clipNumber</code></td>
+<td class="type"><code>int|string</code></td>
+<td class="description">Position of the clip within an ordered group of clips.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$director</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">A director of e.g. tv, radio, movie, video gaming etc. content, or of
+                                                                                                                                                    an event. Directors can be associated with individual items or with a
+                                                                                                                                                    series, episode, clip.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$endOffset</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">The end time of the clip expressed as the number of seconds from the
+                                                                                                                                                    beginning of the work.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$musicBy</code></td>
+<td class="type"><code>Person|MusicGroup</code></td>
+<td class="description">The composer of the soundtrack.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$offers</code></td>
+<td class="type"><code>Offer|Demand</code></td>
+<td class="description">An offer to provide this item&#x2014;for example, an offer to sell a
+                                                                                                                                                    product, rent the DVD of a movie, perform a service, or give away
+                                                                                                                                                    tickets to an event. Use businessFunction to indicate the kind of
+                                                                                                                                                    transaction offered, i.e. sell, lease, etc. This property can also be
+                                                                                                                                                    used to describe a Demand. While this property is listed as expected
+                                                                                                                                                    on a number of common types, it can be used in others. In that case,
+                                                                                                                                                    using a second type, such as Product or a subtype of Product, can
+                                                                                                                                                    clarify the nature of the offer.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$partOfEpisode</code></td>
+<td class="type"><code>Episode</code></td>
+<td class="description">The episode to which this clip belongs.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$partOfSeason</code></td>
+<td class="type"><code>CreativeWorkSeason</code></td>
+<td class="description">The season to which this episode belongs.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$partOfSeries</code></td>
+<td class="type"><code>CreativeWorkSeries</code></td>
+<td class="description">The series to which this episode or season belongs.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$startOffset</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">The start time of the clip expressed as the number of seconds from the
+                                                                                                                                                    beginning of the work.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. Media clip (the closest I can get): type of audiovisual 
+                                                                                                                                                    work; short segment of media</td>
+</tr>
+</table>
+<span class="DocumentorLabel">Methods: </span>
+<span class="property func"><code>__construct()</code></span>, 
+<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->
