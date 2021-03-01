@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
- 
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -105,7 +104,6 @@ class Aquarium extends CivicStructure
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId         = 'Q2281788';                   /* {*property   $wikidataId                     (string)                        Wikidata ID. Facility with large tanks for 
                                                                                                                                                     water-dwelling species *} */
-
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=

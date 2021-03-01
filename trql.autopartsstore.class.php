@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
- 
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -104,7 +103,6 @@ class AutoPartsStore extends Store
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = 'Q47516524';      /* {*property   $wikidataId                     (string)                        Wikidata ID. Car parts shop: shop selling car parts *} */
-
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=

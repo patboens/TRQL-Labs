@@ -51,18 +51,14 @@
 /****************************************************************************************/
 namespace trql\imageobject;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\mediaobject\MediaObject           as MediaObject;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'MEDIAOBJECT_CLASS_VERSION' ) )
     require_once( 'trql.mediaobject.class.php' );
-
-
 
 defined( 'IMAGEOBJECT_CLASS_VERSION' ) or define( 'IMAGEOBJECT_CLASS_VERSION','0.1' );
 
@@ -84,16 +80,16 @@ defined( 'IMAGEOBJECT_CLASS_VERSION' ) or define( 'IMAGEOBJECT_CLASS_VERSION','0
     {*doc [url]http://schema.org/ImageObject[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
  */
 /* ==================================================================================== */
 class ImageObject extends MediaObject
-/*--------------------------------------*/
+/*---------------------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                     Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                     Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
@@ -101,15 +97,16 @@ class ImageObject extends MediaObject
                                'family' => null         ,
                              );
 
-    public      $caption                        = null;            /* {*property   $caption                         (MediaObject|string)        The caption for this object. For downloadable machine formats 
-                                                                                                                                                (closed caption, subtitles etc.) use MediaObject and indicate 
-                                                                                                                                                the encodingFormat. *} */
-    public      $exifData                       = null;            /* {*property   $exifData                        (PropertyValue|string)      exif data for this object. *} */
-    public      $representativeOfPage           = null;            /* {*property   $representativeOfPage            (boolean)                   Indicates whether this image is representative of the content of the page. *} */
-    public      $thumbnail                      = null;            /* {*property   $thumbnail                       (ImageObject)               Thumbnail image for an image or video. *} */
+    public      $caption                        = null;             /* {*property   $caption                    (MediaObject|string)        The caption for this object. For downloadable machine formats 
+                                                                                                                                            (closed caption, subtitles etc.) use MediaObject and indicate 
+                                                                                                                                            the encodingFormat. *} */
+    public      $exifData                       = null;             /* {*property   $exifData                   (PropertyValue|string)      exif data for this object. *} */
+    public      $representativeOfPage           = null;             /* {*property   $representativeOfPage       (boolean)                   Indicates whether this image is representative of the content of the page. *} */
+    public      $thumbnail                      = null;             /* {*property   $thumbnail                  (ImageObject)               Thumbnail image for an image or video. *} */
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                    Wikidata ID: No equivalent *} */
 
 
     /* ================================================================================ */
@@ -133,8 +130,6 @@ class ImageObject extends MediaObject
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of ImageObject.__construct() =========================================== */
@@ -166,8 +161,6 @@ class ImageObject extends MediaObject
         $this->necroSignaling();
     }   /* End of ImageObject.__destruct() ============================================ */
     /* ================================================================================ */
-
 }   /* End of class ImageObject ======================================================= */
 /* ==================================================================================== */
-
 ?>

@@ -19,11 +19,11 @@
 */
 
 /** {{{*fheader
-    {*file                  trql.autorental.class.php *}
-    {*purpose               A car rental business. *}
+    {*file                  trql.beach.class.php *}
+    {*purpose               Beach that allows nudity. *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
-    {*cdate                 26-08-2020 18:36 *}
+    {*cdate                 01-03-21 12:39 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
 
@@ -32,64 +32,42 @@
     -------------------------------------------------------------------------------------
 
     {*chist
-        {*mdate 26-08-2020 18:36 *}
+        {*mdate 01-03-21 12:39 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Original creation
         *}
     *}
 
-
-    {*chist
-        {*mdate 14-02-21 10:44 *}
-        {*author {PYB} *}
-        {*v 8.0.0000 *}
-        {*desc              1)  Standardizing the [c]__destruct() method[/c]
-        *}
-    *}
-
     *}}} */
 
 /****************************************************************************************/
-namespace trql\autorental;
+namespace trql\nudebeach;
 
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\automotivebusiness\AutomotiveBusiness     as AutomotiveBusiness;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\beach\beach           as Beach;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'AUTOMOTIVEBUSINESS_CLASS_VERSION' ) )
-    require_once( 'trql.automotivebusiness.class.php' );
+if ( ! defined( 'BEACH_CLASS_VERSION' ) )
+    require_once( 'trql.beach.class.php' );
 
-defined( 'AUTORENTAL_CLASS_VERSION' ) or define( 'AUTORENTAL_CLASS_VERSION','0.1' );
+defined( 'NUDEBEACH_CLASS_VERSION' ) or define( 'NUDEBEACH_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
-/** {{*class AutoRental=
+/** {{*class NudeBeach=
 
     {*desc
 
-        A car rental business.
+        Beach that allows nudity
 
-    *}
-
-    {*credits
-        The whole concept is derived from the fabulous work of Schema.org
-        under the terms of their license:
-        [url]http://schema.org/docs/terms.html[/url]
-    *}
-
-    {*doc [url]http://schema.org/AutoRental[/url] *}
-
-    {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 18:36.
     *}
 
  */
 /* ==================================================================================== */
-class AutoRental extends AutomotiveBusiness
-/*--------------------------------------*/
+class NudeBeach extends Beach
+/*-------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -101,8 +79,7 @@ class AutoRental extends AutomotiveBusiness
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                            Wikidata ID: No equivalent *} */
-
+    public      $wikidataId                     = 'Q847935';        /* {*property   $wikidataId                 (string)                            Wikidata ID: Beach that allows nudity *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -127,7 +104,7 @@ class AutoRental extends AutomotiveBusiness
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of AutoRental.__construct() ============================================ */
+    }   /* End of NudeBeach.__construct(=============================================== */
     /* ================================================================================ */
 
 
@@ -154,8 +131,8 @@ class AutoRental extends AutomotiveBusiness
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of AutoRental.__destruct() ============================================= */
+    }   /* End of NudeBeach.__destruct() ============================================== */
     /* ================================================================================ */
-}   /* End of class AutoRental ======================================================== */
+}   /* End of class NudeBeach ========================================================= */
 /* ==================================================================================== */
 ?>

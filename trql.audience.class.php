@@ -117,13 +117,13 @@ class Audience extends Intangible
                                'home'   => null         ,
                                'family' => null         ,
                              );
-    public      $audienceType       = null;                         /* {*property   $audienceType               (string)                The target group associated with a given audience 
+    public      $audienceType                   = null;             /* {*property   $audienceType               (string)                The target group associated with a given audience 
                                                                                                                                         (e.g. veterans, car owners, musicians, etc.). *} */
-    public      $geographicArea     = null;                         /* {*property   $geographicArea             (AdministrativeArea)    The geographic area associated with the audience. *} */
+    public      $geographicArea                 = null;             /* {*property   $geographicArea             (AdministrativeArea)    The geographic area associated with the audience. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                            Wikidata ID: Not found in Wikidata (yet: 01-03-21 10:37:09) *} */
-
+    public      $wikidataId                     = 'Q211198';        /* {*property   $wikidataId                 (string)                Wikidata ID: Group of people who participate in a 
+                                                                                                                                        show or encounter a work of art *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -174,10 +174,8 @@ class Audience extends Intangible
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of Audience.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class Audience ========================================================== */
 /* ==================================================================================== */
 ?>

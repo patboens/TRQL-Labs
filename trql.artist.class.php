@@ -27,6 +27,7 @@
     {*cdate                 17-08-20 12:51 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -97,7 +98,8 @@ class Artist extends Person implements iContext
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                            Wikidata ID: Not found in Wikidata (yet: 01-03-21 10:37:09) *} */
+    public      $wikidataId                     = 'Q483501';        /* {*property   $wikidataId                 (string)                                    Wikidata ID: person who engages in any form 
+                                                                                                                                                            of artistic creation or practice *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -167,7 +169,6 @@ class Artist extends Person implements iContext
         $this->necroSignaling();
     }   /* End of Artist.__destruct() ================================================= */
     /* ================================================================================ */
-
 }   /* End of class Artist ============================================================ */
 /* ==================================================================================== */
 ?>

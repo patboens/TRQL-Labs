@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
- 
-
 */
 
 /** {{{*fheader
@@ -31,6 +29,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -94,7 +93,7 @@ defined( 'ASKPUBLICNEWSARTICLE_CLASS_VERSION' ) or define( 'ASKPUBLICNEWSARTICLE
  */
 /* ==================================================================================== */
 class AskPublicNewsArticle extends NewsArticle
-/*--------------------------------------*/
+/*------------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -127,7 +126,7 @@ class AskPublicNewsArticle extends NewsArticle
                                                                                                                                                     section in which the article appeared. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                            Wikidata ID: Not found in Wikidata (yet: 01-03-21 10:37:09) *} */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                            Wikidata ID: No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -151,8 +150,6 @@ class AskPublicNewsArticle extends NewsArticle
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        
 
         return ( $this );
     }   /* End of AskPublicNewsArticle.__construct() ================================== */
@@ -184,8 +181,6 @@ class AskPublicNewsArticle extends NewsArticle
         $this->necroSignaling();
     }   /* End of AskPublicNewsArticle.__destruct() =================================== */
     /* ================================================================================ */
-
 }   /* End of class AskPublicNewsArticle ============================================== */
 /* ==================================================================================== */
-
 ?>

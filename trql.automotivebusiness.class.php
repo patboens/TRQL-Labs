@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
- 
-
 */
 
 /** {{{*fheader
@@ -46,8 +44,8 @@
 /****************************************************************************************/
 namespace trql\automotivebusiness;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\localbusiness\LocalBusiness    as LocalBusiness;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\localbusiness\LocalBusiness   as LocalBusiness;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -55,8 +53,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'LOCALBUSINESS_CLASS_VERSION' ) )
     require_once( 'trql.localbusiness.class.php' );
-
-
 
 defined( 'AUTOMOTIVEBUSINESS_CLASS_VERSION' ) or define( 'AUTOMOTIVEBUSINESS_CLASS_VERSION','0.1' );
 
@@ -85,7 +81,7 @@ defined( 'AUTOMOTIVEBUSINESS_CLASS_VERSION' ) or define( 'AUTOMOTIVEBUSINESS_CLA
  */
 /* ==================================================================================== */
 class AutomotiveBusiness extends LocalBusiness
-/*--------------------------------------*/
+/*------------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -96,11 +92,10 @@ class AutomotiveBusiness extends LocalBusiness
                                'UIKey'  => null         ,
                              );
 
-
-
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q190117';
-
+    public      $wikidataId                     = 'Q190117';        /* {*property   $wikidataId                 (string)                            Wikidata ID: Automotive industry ... range of organizations 
+                                                                                                                                                    associated with motor vehicles, such as automobiles, 
+                                                                                                                                                    trucks and motorcycles *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -154,8 +149,6 @@ class AutomotiveBusiness extends LocalBusiness
         $this->necroSignaling();
     }   /* End of AutomotiveBusiness.__destruct() ===================================== */
     /* ================================================================================ */
-
 }   /* End of class AutomotiveBusiness ================================================ */
 /* ==================================================================================== */
-
 ?>

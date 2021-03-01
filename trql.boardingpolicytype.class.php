@@ -94,9 +94,9 @@ defined( 'BOARDINGPOLICYTYPE_CLASS_VERSION' ) or define( 'BOARDINGPOLICYTYPE_CLA
  */
 /* ==================================================================================== */
 class BoardingPolicyType extends Enumeration
-/*--------------------------------------*/
+/*----------------------------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                             Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
@@ -105,39 +105,12 @@ class BoardingPolicyType extends Enumeration
                                'UIKey'  => null         ,
                              );
 
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
-    public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
-    public      $supersededBy                   = null;             /* {*property   $supersededBy                   (Property|Class|Enumeration)    Relates a term (i.e. a property, class or enumeration) to one that
-                                                                                                                                                    supersedes it. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
+    public      $boardingPolicy                 = null;             /* {*property   $boardingPolicy                 (boardingPolicy|Airline|Flight)     The type of boarding policy used by the
+                                                                                                                                                        airline (e.g. zone-based or group-based) *} */
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                            Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -162,10 +135,8 @@ class BoardingPolicyType extends Enumeration
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
-    }   /* End of BoardingPolicyType.__construct() ========================================== */
+    }   /* End of BoardingPolicyType.__construct() ==================================== */
     /* ================================================================================ */
 
 
@@ -190,10 +161,10 @@ class BoardingPolicyType extends Enumeration
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of BoardingPolicyType.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of BoardingPolicyType.__destruct() ===================================== */
     /* ================================================================================ */
-
-}   /* End of class BoardingPolicyType ====================================================== */
+}   /* End of class BoardingPolicyType ================================================ */
 /* ==================================================================================== */
-
 ?>
