@@ -47,16 +47,14 @@
 /****************************************************************************************/
 namespace trql\itemlist;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\intangible\Intangible     as Intangible;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'INTANGIBLE_CLASS_VERSION' ) )
     require_once( 'trql.intangible.class.php' );
-
 
 defined( 'ITEMLIST_CLASS_VERSION' ) or define( 'ITEMLIST_CLASS_VERSION','0.1' );
 

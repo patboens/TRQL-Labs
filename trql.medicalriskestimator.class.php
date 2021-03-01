@@ -64,8 +64,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 if ( ! defined( 'MEDICALENTITY_CLASS_VERSION' ) )
     require_once( 'trql.medicalentity.class.php' );
 
-
-
 defined( 'MEDICALRISKESTIMATOR_CLASS_VERSION' ) or define( 'MEDICALRISKESTIMATOR_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
@@ -174,7 +172,7 @@ class MedicalRiskEstimator extends MedicalEntity
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
+
 
         return ( $this );
     }   /* End of MedicalRiskEstimator.__construct() ========================================== */

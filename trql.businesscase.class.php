@@ -88,7 +88,6 @@ class BusinessCase extends Document
                                'UIKey'  => null         ,
                              );
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = 'Q1896170';      /* {*property   $wikidataId                     (string)             Reasoning for initiating a project or task, presented in
                                                                                                                                         a well-structured written document, but may also come in
@@ -193,7 +192,6 @@ class BusinessCase extends Document
         $this->necroSignaling();
     }   /* End of BusinessCase.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class BusinessCase ====================================================== */
 /* ==================================================================================== */
 ?>

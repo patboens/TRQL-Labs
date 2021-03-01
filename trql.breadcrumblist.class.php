@@ -62,17 +62,14 @@
 /****************************************************************************************/
 namespace trql\breadcrumblist;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\itemlist\ItemList     as ItemList;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'ITEMLIST_CLASS_VERSION' ) )
     require_once( 'trql.itemlist.class.php' );
-
-
 
 defined( 'BREADCRUMBLIST_CLASS_VERSION' ) or define( 'BREADCRUMBLIST_CLASS_VERSION','0.1' );
 
@@ -113,6 +110,9 @@ class BreadcrumbList extends ItemList
                                'home'   => null         ,
                                'family' => null         ,
                              );
+
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */

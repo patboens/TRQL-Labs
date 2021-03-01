@@ -45,9 +45,8 @@
 /****************************************************************************************/
 namespace trql\infographic;
 
-use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\infographic\Infographic   as Infographic;
-
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\datavisualization\DataVisualization   as DataVisualization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
