@@ -54,8 +54,8 @@
 /****************************************************************************************/
 namespace trql\bookseries;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\creativeworkseries\CreativeWorkSeries    as CreativeWorkSeries;
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\creativeworkseries\CreativeWorkSeries as CreativeWorkSeries;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -63,8 +63,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'CREATIVEWORKSERIES_CLASS_VERSION' ) )
     require_once( 'trql.creativeworkseries.class.php' );
-
-
 
 defined( 'BOOKSERIES_CLASS_VERSION' ) or define( 'BOOKSERIES_CLASS_VERSION','0.1' );
 

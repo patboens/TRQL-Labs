@@ -129,6 +129,9 @@ class Tazieff extends Utility implements iContext
                                'family' => null         ,
                              );
 
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                Wikidata ID. No equivalent. *} */
+
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -158,7 +161,7 @@ class Tazieff extends Utility implements iContext
 
 
     /* ================================================================================ */
-    /** {{*__parse( $szXML )=
+    /** {{*parse( $szXML )=
 
         Parses an XML return from https://earthquake.usgs.gov/
 
@@ -308,7 +311,24 @@ class Tazieff extends Utility implements iContext
     /* ================================================================================ */
 
 
-    /* Final */
+    /* ================================================================================ */
+    /** {{*call( $szService,$aParams )=
+
+        Call https://earthquake.usgs.gov/fdsnws/event/1/query?format=xml
+
+        {*params
+            $szService      (string)        The service to call
+            $aParams        (array)         Parameters to be sent for $szService
+        *}
+
+        {*return
+            (string)        The result of the [c]getURL()[/c] call, which then will need
+                            to be parsed
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function call( $szService,$aParams )
     /*---------------------------------------*/
     {
@@ -316,7 +336,8 @@ class Tazieff extends Utility implements iContext
 
         foreach ( $aParams as $szKey => $xValue )
         {
-            $szParams .= "&{$szKey}={$xValue}";
+            $szTParams .= "&{$szKey}={$xValue}";
+            //$szParams .= '&' . $szKey . '=' . $xValue;
         }
 
         $szURL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=xml{$szParams}";
@@ -329,32 +350,29 @@ class Tazieff extends Utility implements iContext
     /* ================================================================================ */
 
 
-    /* Final */
-    protected function cacheName( $szMethod,$xParams,$xAdditional = null )
-    /*------------------------------------------------------------------*/
-    {
-        $szMethod = str_replace( array( '\\',':','::','..' ),
-                                 array( '.' ,'.','.' ,'.'  ),
-                                 $szMethod );
-
-        if ( is_null( $xAdditional ) )
-            $szCacheFile = vaesoli::FIL_RealPath( $this->szHome . '/' . $szMethod . '.' . md5( serialize( $xParams ) ) . '.cache' );
-        else
-            $szCacheFile = vaesoli::FIL_RealPath( $this->szHome . '/' . $szMethod . '.' . md5( serialize( $xParams ) ) . md5( serialize( $xAdditional ) ) . '.cache' );
-
-        return ( $szCacheFile );
-    }   /* End of Tazieff.cacheName() ================================================= */
     /* ================================================================================ */
+    /** {{*search( $aParams )=
 
+        Search all earthquakes
 
-    /* Paramètres possibles:
-        sdate
-        edate
-        minmagnitude
-        maxmagnitude
+        {*params
+            $aParams        (array)         Parameters to be sent
 
-        Après ... je dois aussi permettre des latitudes et longitudes
+                                            sdate
+                                            edate
+                                            minmagnitude
+                                            maxmagnitude
+
+                                            Après ... je dois aussi permettre des latitudes et longitudes
+        *}
+
+        {*return
+            (array)         An associative array of results
+        *}
+
+        *}}
     */
+    /* ================================================================================ */
     public function search( $aParams )
     /*------------------------------*/
     {
@@ -395,7 +413,7 @@ class Tazieff extends Utility implements iContext
         {
             //$this->__die( "ON A LE CACHE" );
             $aRetVal = $this->getHashFile( $szCacheFile );
-            $this->addInfo( __METHOD__ . "(): data obtained from {$szCacheFile}" );
+            $this->addInfo( __METHOD__ . '(): data obtained from ' . $szCacheFile );
             goto end;
         }   /* if ( is_file( $szCacheFile ) ) */
         else    /* Else of ... if ( is_file( $szCacheFile ) ) */
@@ -426,7 +444,25 @@ class Tazieff extends Utility implements iContext
     /* ================================================================================ */
 
 
-      public function speak() : string
+    /* Final */
+    protected function cacheName( $szMethod,$xParams,$xAdditional = null )
+    /*------------------------------------------------------------------*/
+    {
+        $szMethod = str_replace( array( '\\',':','::','..' ),
+                                 array( '.' ,'.','.' ,'.'  ),
+                                 $szMethod );
+
+        if ( is_null( $xAdditional ) )
+            $szCacheFile = vaesoli::FIL_RealPath( $this->szHome . '/' . $szMethod . '.' . md5( serialize( $xParams ) ) . '.cache' );
+        else
+            $szCacheFile = vaesoli::FIL_RealPath( $this->szHome . '/' . $szMethod . '.' . md5( serialize( $xParams ) ) . md5( serialize( $xAdditional ) ) . '.cache' );
+
+        return ( $szCacheFile );
+    }   /* End of Tazieff.cacheName() ================================================= */
+    /* ================================================================================ */
+
+
+    public function speak() : string
     /*----------------------------*/
     {
         return( '' );
@@ -467,7 +503,6 @@ class Tazieff extends Utility implements iContext
         $this->necroSignaling();
     }   /* End of Tazieff.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class Tazieff =========================================================== */
 /* ==================================================================================== */
 ?>

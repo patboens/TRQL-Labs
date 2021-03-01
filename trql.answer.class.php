@@ -101,6 +101,7 @@ class Answer extends Comment
                                'home'   => null         ,
                                'family' => null         ,
                                'UIKey'  => null         ,
+                             );
                             
     public      $answerExplanation              = null;             /* {*property   $answerExplanation              (Comment|WebContent)            An alias for the item. *} */
 

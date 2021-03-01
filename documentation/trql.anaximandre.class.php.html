@@ -6,7 +6,7 @@ code, .filename { color: crimson; font-family: Consolas,"courier new" }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
 .shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
-table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
 table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
 table.properties thead th.description { width:60%; }
 table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
@@ -25,20 +25,14 @@ table.properties tr.property td.description { width: 60%; }
                             <a href="http://www.latosensu.be" class="DocumentorLink" title="Go to http://www.latosensu.be" itemprop="url">http://www.latosensu.be</a><br />
                             Vae Soli! : <a href="http://www.vaesoli.org" class="DocumentorLink" title="Go to http://www.vaesoli.org" itemprop="url">http://www.vaesoli.org</a></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">16-08-20 19:19</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">16/08/2020 - 18:10:49</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">25/02/2021 - 14:26:53</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Submitted to intellectual property rights (see
                             author)</span>
 </section> <!-- .header -->
 <section class="classes">
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>Anaximandre</code></span>
-<span class="DocumentorLabel">Description: </span><span class="property description">Weather and weather forecasts
-
-        Anaximandre est le premier qui pense à la nécessité de faire appel à la
-        science (de l'époque) pour effectuer des relevés météorologiques
-
-        Anaximandre est donc notre classe pour faire de la météo !</span>
-<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Anaximandre extends Thing implements iContext</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description"></span>
 <span class="DocumentorLabel">Properties: </span>
 <table class="properties">
 <thead>
@@ -53,9 +47,42 @@ table.properties tr.property td.description { width: 60%; }
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
 </tr>
+<tr class="property">
+<td class="name"><code>$oCity</code></td>
+<td class="type"><code>City</code></td>
+<td class="description">A city or town</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aMercator</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Geo coordinates data</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$Weather</code></td>
+<td class="type"><code>array</code></td>
+<td class="description"></td>
+</tr>
+<tr class="property">
+<td class="name"><code>$Forecast</code></td>
+<td class="type"><code>array</code></td>
+<td class="description"></td>
+</tr>
+<tr class="property">
+<td class="name"><code>$WeatherTemplates</code></td>
+<td class="type"><code>array</code></td>
+<td class="description"></td>
+</tr>
+<tr class="property">
+<td class="name"><code>$ForecastTemplates</code></td>
+<td class="type"><code>array</code></td>
+<td class="description"></td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. No equivalent.</td>
+</tr>
 </table>
-<span class="DocumentorLabel">Methods: </span>
-<span class="property func"><code>__construct()</code></span>, 
-<span class="property func"><code>getURL()</code></span></section> <!-- .class -->
+</section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->
