@@ -51,17 +51,14 @@
 /****************************************************************************************/
 namespace trql\addaction;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\updateaction\UpdateAction    as UpdateAction;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\updateaction\UpdateAction     as UpdateAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'UPDATEACTION_CLASS_VERSION' ) )
     require_once( 'trql.updateaction.class.php' );
-
-
 
 defined( 'ADDACTION_CLASS_VERSION' ) or define( 'ADDACTION_CLASS_VERSION','0.1' );
 

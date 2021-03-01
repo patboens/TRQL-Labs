@@ -53,17 +53,14 @@
 /****************************************************************************************/
 namespace trql\apireference;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\techarticle\TechArticle   as TechArticle;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'TECHARTICLE_CLASS_VERSION' ) )
     require_once( 'trql.techarticle.class.php' );
-
-
 
 defined( 'APIREFERENCE_CLASS_VERSION' ) or define( 'APIREFERENCE_CLASS_VERSION','0.1' );
 
@@ -102,6 +99,9 @@ class APIReference extends TechArticle
     public $programmingModel        = null;                         /* {*property   $programmingModel           (string)                Indicates whether API is managed or unmanaged. *} */
     public $targetPlatform          = null;                         /* {*property   $targetPlatform             (string)                Type of app development: phone, Metro style, desktop, XBox, etc. *} */
 
+
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId         = null;                         /* {*property   $wikidataId                 (string)                 Wikidata ID: No equivalent *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -153,11 +153,8 @@ class APIReference extends TechArticle
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of APIReference.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class APIReference ====================================================== */
 /* ==================================================================================== */
-
 ?>

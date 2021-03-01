@@ -166,23 +166,30 @@ class BankAccount extends FinancialProduct
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->identifier = $szID;
+        $this->identifier = $szID ?? null;
 
-        $a = $this->Map( $this->identifier );
-        //var_dump( $a );
+        if ( ! empty( $this->identifier ) )
+        {
+            $a = $this->Map( $this->identifier );
+            //var_dump( $a );
 
-        $this->szPersistenceFolder = v::FIL_RealPath( $szFolder . '/' . $a['level1'] . '/' .
-                                                                        $a['level2'] . '/' .
-                                                                        $a['level3'] . '/' .
-                                                                        $a['level4'] );
+            $this->szPersistenceFolder = v::FIL_RealPath( $szFolder . '/' . $a['level1'] . '/' .
+                                                                            $a['level2'] . '/' .
+                                                                            $a['level3'] . '/' .
+                                                                            $a['level4'] );
 
-        if ( ! is_dir( $this->szPersistenceFolder ) )
-            v::FIL_MkDir( $this->szPersistenceFolder );
+            if ( ! is_dir( $this->szPersistenceFolder ) )
+                v::FIL_MkDir( $this->szPersistenceFolder );
 
-        $this->balance = $this->readBalance();
-        //var_dump( "POSITION",$this->szPersistenceFolder,$this->balance );
+            $this->balance = $this->readBalance();
+            //var_dump( "POSITION",$this->szPersistenceFolder,$this->balance );
 
-        $this->oLedger = new Ledger( $this->identifier,$this->szPersistenceFolder );
+            $this->oLedger = new Ledger( $this->identifier,$this->szPersistenceFolder );
+        }
+        else
+        {
+            // SHOULD THROW AN EXCEPTION
+        }
 
         return ( $this );
     }   /* End of BankAccount.__construct() =========================================== */

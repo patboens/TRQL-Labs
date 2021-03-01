@@ -58,18 +58,14 @@
 /****************************************************************************************/
 namespace trql\mediaobject;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\creativework\CreativeWork         as CreativeWork;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\creativework\CreativeWork     as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
-
-
 
 defined( 'MEDIAOBJECT_CLASS_VERSION' ) or define( 'MEDIAOBJECT_CLASS_VERSION','0.1' );
 
@@ -95,8 +91,8 @@ defined( 'MEDIAOBJECT_CLASS_VERSION' ) or define( 'MEDIAOBJECT_CLASS_VERSION','0
     {*doc [url]http://schema.org/MediaObject[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
  */
@@ -162,6 +158,7 @@ class MediaObject extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q571';           /* {*property   $wikidataId                 (string)                    Wikidata ID: No equivalent *} */
 
 
     /* ================================================================================ */
@@ -185,8 +182,6 @@ class MediaObject extends CreativeWork
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of MediaObject.__construct() =========================================== */
@@ -218,8 +213,6 @@ class MediaObject extends CreativeWork
         $this->necroSignaling();
     }   /* End of MediaObject.__destruct() ============================================ */
     /* ================================================================================ */
-
 }   /* End of class MediaObject ======================================================= */
 /* ==================================================================================== */
-
 ?>

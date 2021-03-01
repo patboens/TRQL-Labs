@@ -33,17 +33,14 @@
 /****************************************************************************************/
 namespace trql\bankorcreditunion;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\financialservice\FinancialService     as FinancialService;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'FINANCIALSERVICE_CLASS_VERSION' ) )
     require_once( 'trql.financialservice.class.php' );
-
-
 
 defined( 'BANKORCREDITUNION_CLASS_VERSION' ) or define( 'BANKORCREDITUNION_CLASS_VERSION','0.1' );
 
@@ -76,7 +73,12 @@ class BankOrCreditUnion extends FinancialService
                                'home'   => null         ,
                                'family' => null         ,
                              );
-s
+
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q22687';         /* {*property   $wikidataId                 (string)                        Wikidata ID: Bank: financial institution.
+                                                                                                                                                Also 'Q745877' : credit union ... 
+                                                                                                                                                member-owned financial cooperative *} */
+
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 
@@ -129,7 +131,6 @@ s
         $this->necroSignaling();
     }   /* End of BankOrCreditUnion.__destruct() ====================================== */
     /* ================================================================================ */
-
 }   /* End of class BankOrCreditUnion ================================================= */
 /* ==================================================================================== */
 ?>

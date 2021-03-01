@@ -55,7 +55,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 if ( ! defined( 'ACTION_CLASS_VERSION' ) )
     require_once( 'trql.action.class.php' );
 
-
 defined( 'UPDATEACTION_CLASS_VERSION' ) or define( 'UPDATEACTION_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */

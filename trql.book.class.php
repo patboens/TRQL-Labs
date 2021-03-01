@@ -51,17 +51,14 @@
 /****************************************************************************************/
 namespace trql\book;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\creativework\CreativeWork     as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
-
-
 
 defined( 'BOOK_CLASS_VERSION' ) or define( 'BOOK_CLASS_VERSION','0.1' );
 
@@ -83,8 +80,8 @@ defined( 'BOOK_CLASS_VERSION' ) or define( 'BOOK_CLASS_VERSION','0.1' );
     {*doc [url]http://schema.org/Book[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
  */
@@ -100,12 +97,16 @@ class Book extends CreativeWork
                                'family' => null         ,
                              );
 
-    public      $abridged       = null;                             /* {*property   $abridged                   (boolean)                   Indicates whether the book is an abridged edition. *} */
-    public      $bookEdition    = null;                             /* {*property   $bookEdition                (string)                    The edition of the book. *} */
-    public      $bookFormat     = null;                             /* {*property   $bookFormat                 (BookFormatType )           The format of the book. *} */
-    public      $illustrator    = null;                             /* {*property   $illustrator                (Person)                    The illustrator of the book. *} */
-    public      $isbn           = null;                             /* {*property   $isbn                       (string)                    The ISBN of the book. *} */
-    public      $numberOfPages  = null;                             /* {*property   $numberOfPages              (int)                       The number of pages in the book. *} */
+    public      $abridged                       = null;             /* {*property   $abridged                   (boolean)                   Indicates whether the book is an abridged edition. *} */
+    public      $bookEdition                    = null;             /* {*property   $bookEdition                (string)                    The edition of the book. *} */
+    public      $bookFormat                     = null;             /* {*property   $bookFormat                 (BookFormatType )           The format of the book. *} */
+    public      $illustrator                    = null;             /* {*property   $illustrator                (Person)                    The illustrator of the book. *} */
+    public      $isbn                           = null;             /* {*property   $isbn                       (string)                    The ISBN of the book. *} */
+    public      $numberOfPages                  = null;             /* {*property   $numberOfPages              (int)                       The number of pages in the book. *} */
+
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q571';           /* {*property   $wikidataId                 (string)                    Wikidata ID: a written text that can be published in 
+                                                                                                                                            printed or electronic form *} */
 
 
     /* ================================================================================ */
@@ -160,8 +161,6 @@ class Book extends CreativeWork
         $this->necroSignaling();
     }   /* End of Book.__destruct() =================================================== */
     /* ================================================================================ */
-
 }   /* End of class Book ============================================================== */
 /* ==================================================================================== */
-
 ?>

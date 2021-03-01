@@ -33,17 +33,14 @@
 /****************************************************************************************/
 namespace trql\artgallery;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\vaesoli\Vaesoli                               as Vaesoli;
+use \trql\entertainmentbusiness\EntertainmentBusiness   as EntertainmentBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'ENTERTAINMENTBUSINESS_CLASS_VERSION' ) )
     require_once( 'trql.entertainmentbusiness.class.php' );
-
-
 
 defined( 'ARTGALLERY_CLASS_VERSION' ) or define( 'ARTGALLERY_CLASS_VERSION','0.1' );
 
@@ -77,6 +74,10 @@ class ArtGallery extends EntertainmentBusiness
                                'family' => null         ,
                              );
 
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q1007870';       /* {*property   $wikidataId                 (string)                        Wikidata ID: Place where art is exhibited and 
+                                                                                                                                                sometimes also sold *} */
+
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 
@@ -100,7 +101,7 @@ class ArtGallery extends EntertainmentBusiness
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of ArtGallery.__construct() ========================================== */
+    }   /* End of ArtGallery.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -127,10 +128,8 @@ class ArtGallery extends EntertainmentBusiness
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of ArtGallery.__destruct() =========================================== */
+    }   /* End of ArtGallery.__destruct() ============================================= */
     /* ================================================================================ */
-
-}   /* End of class ArtGallery ====================================================== */
+}   /* End of class ArtGallery ======================================================== */
 /* ==================================================================================== */
-
 ?>

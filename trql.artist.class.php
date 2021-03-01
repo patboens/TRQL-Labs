@@ -96,6 +96,9 @@ class Artist extends Person implements iContext
                                'family' => null         ,
                              );
 
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                            Wikidata ID: Not found in Wikidata (yet: 01-03-21 10:37:09) *} */
+
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 

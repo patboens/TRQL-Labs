@@ -51,10 +51,8 @@
 /****************************************************************************************/
 namespace trql\audioobject;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\mediaobject\MediaObject           as MediaObject;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -107,6 +105,7 @@ class AudioObject extends MediaObject
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId         = null;                         /* {*property   $wikidataId                 (string)                    Wikidata ID: no equivalent *} */
 
 
     /* ================================================================================ */
@@ -130,8 +129,6 @@ class AudioObject extends MediaObject
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of AudioObject.__construct() =========================================== */
@@ -163,8 +160,6 @@ class AudioObject extends MediaObject
         $this->necroSignaling();
     }   /* End of AudioObject.__destruct() ============================================ */
     /* ================================================================================ */
-
 }   /* End of class AudioObject ======================================================= */
 /* ==================================================================================== */
-
 ?>
