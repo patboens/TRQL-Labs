@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 25-08-2020 11:42 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,18 +53,14 @@
 /****************************************************************************************/
 namespace trql\employeerole;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\organizationrole\OrganizationRole    as OrganizationRole;
-
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\organizationrole\OrganizationRole     as OrganizationRole;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'ORGANIZATIONROLE_CLASS_VERSION' ) )
     require_once( 'trql.organizationrole.class.php' );
-
-
 
 defined( 'EMPLOYEEROLE_CLASS_VERSION' ) or define( 'EMPLOYEEROLE_CLASS_VERSION','0.1' );
 
@@ -88,13 +83,13 @@ defined( 'EMPLOYEEROLE_CLASS_VERSION' ) or define( 'EMPLOYEEROLE_CLASS_VERSION',
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 25-08-2020 11:42. IT HAS NOT BEEN TESTED YET!
+        on 25-08-2020 11:42.
     *}
 
  */
 /* ==================================================================================== */
 class EmployeeRole extends OrganizationRole
-/*--------------------------------------*/
+/*---------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -109,6 +104,7 @@ class EmployeeRole extends OrganizationRole
                                                                                                                                                     information in this job posting or for this employee. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -132,8 +128,6 @@ class EmployeeRole extends OrganizationRole
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of EmployeeRole.__construct() ========================================== */
@@ -165,8 +159,6 @@ class EmployeeRole extends OrganizationRole
         $this->necroSignaling();
     }   /* End of EmployeeRole.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class EmployeeRole ====================================================== */
 /* ==================================================================================== */
-
 ?>

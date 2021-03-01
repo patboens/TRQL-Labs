@@ -40,7 +40,6 @@
         *}
     *}
 
-
     {*chist
         {*mdate 14-02-21 10:44 *}
         {*author {PYB} *}
@@ -83,7 +82,8 @@ defined( 'BREWERY_CLASS_VERSION' ) or define( 'BREWERY_CLASS_VERSION','0.1' );
     {*doc [url]http://schema.org/Brewery[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c]
         on 26-08-2020 18:37.
     *}
 

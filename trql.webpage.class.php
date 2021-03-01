@@ -1,5 +1,23 @@
 <?php
 /****************************************************************************************/
+/*
+    {PYB} is a shortcut for Patrick Boens
+
+    {COMPANY} is a shortcut to "Lato Sensu Management"
+
+    {RIGHTS} is a shortcut used by trql.documentor.class.php. In general the material
+    presented here is available under the conditions of 
+    https://creativecommons.org/licenses/by-sa/4.0/
+
+    Other shortcuts exist. They exist to make it simple to change the formulation
+    of parts that can vary over time.
+
+    It does not change the undisputed truth that ALL code has been created by
+    Patrick Boens, the author, who owns ALL the intellectual property of what
+    he created.
+
+*/
+
 /** {{{*fheader
     {*file                  trql.webpage.class.php *}
     {*purpose               A web page. Every web page is implicitly assumed to be 
@@ -19,6 +37,7 @@
     {*mdate                 auto *}
     {*license               Submitted to intellectual property rights (see
                             author) *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -36,7 +55,6 @@
 /****************************************************************************************/
 namespace trql\webpage;
 
-use \trql\mother\Mother                             as Mother;
 use \trql\mother\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
 use \trql\creativework\CreativeWork                 as CreativeWork;
@@ -147,7 +165,8 @@ class WebPage extends CreativeWork implements iContext
                                                                                                                                                     page's content applies. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q36774';         /* {*property   $wikidataId                 (string)                            https://www.wikidata.org/wiki/Q36774 *} */
+    public      $wikidataId                     = 'Q36774';         /* {*property   $wikidataId                 (string)                            Wikidata ID: Single document that is directly viewable
+                                                                                                                                                    via the World Wide Web and web browsers *} */
     public      $szShelter                      = null;             /* {*property   $szShelter                  (string)                            The name of the file where the XML definition of the page is stored *} */
     public      $szAuthor                       = null;             /* {*property   $szAuthor                   (string)                            Name of the author of the page *} */
     public      $szComment                      = null;             /* {*property   $szComment                  (string)                            Comments set for that page (not published) *} */
@@ -436,8 +455,6 @@ class WebPage extends CreativeWork implements iContext
             This method is experimental
         *}
 
-        
-
         *}}
     */
     /* ================================================================================ */
@@ -447,7 +464,7 @@ class WebPage extends CreativeWork implements iContext
         $szRetVal = '';
 
         return ( $szRetVal );
-    }   /* End of WebPage.renderComments() =============================================== */
+    }   /* End of WebPage.renderComments() ============================================ */
     /* ================================================================================ */
 
 
@@ -467,6 +484,21 @@ class WebPage extends CreativeWork implements iContext
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __destruct()
     /*------------------------*/
     {
@@ -477,7 +509,6 @@ class WebPage extends CreativeWork implements iContext
         $this->necroSignaling();
     }   /* End of WebPage.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class WebPage =========================================================== */
 /* ==================================================================================== */
 ?>

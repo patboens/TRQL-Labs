@@ -29,6 +29,7 @@
     {*cdate                 24-08-2020 12:35 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -104,7 +105,7 @@ class ItemList extends Intangible
                                                                                                                                             numberOfItems would be for the entire list. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -159,8 +160,6 @@ class ItemList extends Intangible
         $this->necroSignaling();
     }   /* End of ItemList.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class ItemList ========================================================== */
 /* ==================================================================================== */
-
 ?>

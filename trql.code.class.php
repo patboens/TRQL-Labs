@@ -53,17 +53,14 @@
 /****************************************************************************************/
 namespace trql\code;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\creativework\CreativeWork         as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
-
-
 
 defined( 'CODE_CLASS_VERSION' ) or define( 'CODE_CLASS_VERSION','0.1' );
 
@@ -150,7 +147,6 @@ class Code extends CreativeWork
         $this->necroSignaling();
     }   /* End of Code.__destruct() =================================================== */
     /* ================================================================================ */
-
 }   /* End of class Code ============================================================== */
 /* ==================================================================================== */
 
