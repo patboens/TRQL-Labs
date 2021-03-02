@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -30,6 +28,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -48,17 +47,14 @@
 /****************************************************************************************/
 namespace trql\reviewnewsarticle;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\criticreview, newsarticle\CriticReview, NewsArticle    as CriticReview, NewsArticle;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\newsarticle\NewsArticle   as NewsArticle;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'CRITICREVIEW, NEWSARTICLE_CLASS_VERSION' ) )
-    require_once( 'trql.criticreview, newsarticle.class.php' );
-
-
+if ( ! defined( 'NEWSARTICLE_CLASS_VERSION' ) )
+    require_once( 'trql.newsarticle.class.php' );
 
 defined( 'REVIEWNEWSARTICLE_CLASS_VERSION' ) or define( 'REVIEWNEWSARTICLE_CLASS_VERSION','0.1' );
 
@@ -81,14 +77,14 @@ defined( 'REVIEWNEWSARTICLE_CLASS_VERSION' ) or define( 'REVIEWNEWSARTICLE_CLASS
     {*doc [url]http://schema.org/ReviewNewsArticle[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 28-08-2020 16:28. IT HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c] on 28-08-2020 16:28.
     *}
 
  */
 /* ==================================================================================== */
-class ReviewNewsArticle extends CriticReview, NewsArticle
-/*--------------------------------------*/
+class ReviewNewsArticle extends NewsArticle
+/*---------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -133,8 +129,6 @@ class ReviewNewsArticle extends CriticReview, NewsArticle
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of ReviewNewsArticle.__construct() ===================================== */

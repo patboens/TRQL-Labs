@@ -52,17 +52,14 @@
 /****************************************************************************************/
 namespace trql\officeequipmentstore;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\store\Store           as Store;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'STORE_CLASS_VERSION' ) )
     require_once( 'trql.store.class.php' );
-
-
 
 defined( 'OFFICEEQUIPMENTSTORE_CLASS_VERSION' ) or define( 'OFFICEEQUIPMENTSTORE_CLASS_VERSION','0.1' );
 

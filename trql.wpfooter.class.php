@@ -55,7 +55,6 @@ namespace trql\wpfooter;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\webpageelement\WebPageElement     as WebPageElement;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
@@ -89,7 +88,7 @@ defined( 'WPFOOTER_CLASS_VERSION' ) or define( 'WPFOOTER_CLASS_VERSION','0.1' );
  */
 /* ==================================================================================== */
 class WPFooter extends WebPageElement
-/*--------------------------------------*/
+/*---------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -99,10 +98,9 @@ class WPFooter extends WebPageElement
                                'family' => null         ,
                              );
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
-
+    public      $wikidataId                     = 'Q526434';        /* {*property   $wikidataId                     (string)                    Wikidata ID. Page footer (the closest I can get) ... 
+                                                                                                                                                page section located under the main text *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -125,8 +123,6 @@ class WPFooter extends WebPageElement
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of WPFooter.__construct() ============================================== */
@@ -158,8 +154,6 @@ class WPFooter extends WebPageElement
         $this->necroSignaling();
     }   /* End of WPFooter.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class WPFooter ========================================================== */
 /* ==================================================================================== */
-
 ?>

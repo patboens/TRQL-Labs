@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -46,17 +44,14 @@
 /****************************************************************************************/
 namespace trql\pronounceabletext;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\text\Text    as Text;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\thing\Thing       as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'TEXT_CLASS_VERSION' ) )
-    require_once( 'trql.text.class.php' );
-
-
+if ( ! defined( 'THING_CLASS_VERSION' ) )
+    require_once( 'trql.thing.class.php' );
 
 defined( 'PRONOUNCEABLETEXT_CLASS_VERSION' ) or define( 'PRONOUNCEABLETEXT_CLASS_VERSION','0.1' );
 
@@ -78,14 +73,14 @@ defined( 'PRONOUNCEABLETEXT_CLASS_VERSION' ) or define( 'PRONOUNCEABLETEXT_CLASS
     {*doc [url]http://schema.org/PronounceableText[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 28-08-2020 16:28. IT HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c] on 28-08-2020 16:28.
     *}
 
  */
 /* ==================================================================================== */
-class PronounceableText extends Text
-/*--------------------------------------*/
+class PronounceableText extends Thing
+/*---------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -107,7 +102,7 @@ class PronounceableText extends Text
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -132,10 +127,8 @@ class PronounceableText extends Text
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of PronounceableText.__construct() ========================================== */
+    }   /* End of PronounceableText.__construct() ===================================== */
     /* ================================================================================ */
 
 
@@ -162,10 +155,8 @@ class PronounceableText extends Text
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of PronounceableText.__destruct() =========================================== */
+    }   /* End of PronounceableText.__destruct() ====================================== */
     /* ================================================================================ */
-
-}   /* End of class PronounceableText ====================================================== */
+}   /* End of class PronounceableText ================================================= */
 /* ==================================================================================== */
-
 ?>

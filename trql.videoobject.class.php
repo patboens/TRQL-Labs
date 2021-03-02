@@ -115,7 +115,7 @@ class VideoObject extends MediaObject
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
+    public      $wikidataId         = null;                         /* {*property   $wikidataId                 (string)                        Wikidata ID. No equivalent (!= 'Q1884715') *} */
 
 
     /* ================================================================================ */
@@ -139,8 +139,6 @@ class VideoObject extends MediaObject
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of VideoObject.__construct() =========================================== */
@@ -172,8 +170,6 @@ class VideoObject extends MediaObject
         $this->necroSignaling();
     }   /* End of VideoObject.__destruct() ============================================ */
     /* ================================================================================ */
-
 }   /* End of class VideoObject ======================================================= */
 /* ==================================================================================== */
-
 ?>

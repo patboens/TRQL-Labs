@@ -26,6 +26,7 @@
     {*cdate                 29-07-20 11:47 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,11 +52,9 @@
 /****************************************************************************************/
 namespace trql\school;
 
-use \trql\mother\Mother                                     as Mother;
 use \trql\mother\iContext                                   as iContext;
 use \trql\vaesoli\Vaesoli                                   as Vaesoli;
 use \trql\educationalorganization\EducationalOrganization   as EducationalOrganization;
-
 
 use DOMDocument;
 use DOMXPath;
@@ -68,7 +67,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'EDUCATIONALORGANIZATION_CLASS_VERSION' ) )
     require_once( 'trql.educationalorganization.class.php' );
-
 
 defined( 'SCHOOL_CLASS_VERSION' ) or define( 'SCHOOL_CLASS_VERSION','0.1' );
 
@@ -130,8 +128,7 @@ class School extends EducationalOrganization implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__ );
-        $this->setHome( '/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) ); /* Set the home folder of the class and create it if it does not exist */
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
     }   /* End of School.__construct() ================================================ */
@@ -154,6 +151,21 @@ class School extends EducationalOrganization implements iContext
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __destruct()
     /*------------------------*/
     {
@@ -164,7 +176,6 @@ class School extends EducationalOrganization implements iContext
         $this->necroSignaling();
     }   /* End of School.__destruct() ================================================= */
     /* ================================================================================ */
-
 }   /* End of class School ============================================================ */
 /* ==================================================================================== */
 ?>

@@ -46,17 +46,14 @@
 /****************************************************************************************/
 namespace trql\invoice;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\intangible\Intangible    as Intangible;
-
+use \trql\vaesoli\Vaesoli           as V;
+use \trql\intangible\Intangible     as Intangible;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'INTANGIBLE_CLASS_VERSION' ) )
     require_once( 'trql.intangible.class.php' );
-
-
 
 defined( 'INVOICE_CLASS_VERSION' ) or define( 'INVOICE_CLASS_VERSION','0.1' );
 
@@ -125,8 +122,10 @@ class Invoice extends Intangible
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q190581';
-
+    public      $wikidataId                     = 'Q190581';        /* {*property   $wikidataId                     (string)                                        Wikidata ID. Commercial document issued by a seller to a buyer, 
+                                                                                                                                                                    relating to a sale transaction and indicating the products, 
+                                                                                                                                                                    quantities, and agreed prices for products or services the seller 
+                                                                                                                                                                    has provided the buyer. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -189,6 +188,29 @@ class Invoice extends Intangible
 
 
     /* ================================================================================ */
+    /** {{*__toJSON()=
+
+        Turns the class into a JSON structure
+
+        {*params
+        *}
+
+        {*return
+            (string)    JSON representation of the invoice object
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __toJSON() : string
+    /*-------------------------------*/
+    {
+        return ( v::ObjectToJSON( $this ) );
+    }   /* End of Invoice.__toJSON() ================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
     /** {{*__destruct()=
 
         Class destructor
@@ -213,8 +235,6 @@ class Invoice extends Intangible
         $this->necroSignaling();
     }   /* End of Invoice.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class Invoice =========================================================== */
 /* ==================================================================================== */
-
 ?>

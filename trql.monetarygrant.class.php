@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -53,17 +52,14 @@
 /****************************************************************************************/
 namespace trql\monetarygrant;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\grant\Grant    as Grant;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\grant\Grant       as Grant;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'GRANT_CLASS_VERSION' ) )
     require_once( 'trql.grant.class.php' );
-
-
 
 defined( 'MONETARYGRANT_CLASS_VERSION' ) or define( 'MONETARYGRANT_CLASS_VERSION','0.1' );
 
@@ -92,7 +88,7 @@ defined( 'MONETARYGRANT_CLASS_VERSION' ) or define( 'MONETARYGRANT_CLASS_VERSION
  */
 /* ==================================================================================== */
 class MonetaryGrant extends Grant
-/*--------------------------------------*/
+/*------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -103,44 +99,8 @@ class MonetaryGrant extends Grant
                                'UIKey'  => null         ,
                              );
 
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
-    public      $amount                         = null;             /* {*property   $amount                         (MonetaryAmount|float)          The amount of money. *} */
-    public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
-    public      $fundedItem                     = null;             /* {*property   $fundedItem                     (Thing)                         Indicates an item funded or sponsored through a Grant. *} */
-    public      $funder                         = null;             /* {*property   $funder                         (Person|Organization)           A person or organization that supports (sponsors) something through
-                                                                                                                                                    some kind of financial contribution. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
-    public      $sponsor                        = null;             /* {*property   $sponsor                        (Person|Organization)           A person or organization that supports a thing through a pledge,
-                                                                                                                                                    promise, or financial contribution. e.g. a sponsor of a Medical Study
-                                                                                                                                                    or a corporate sponsor of an event. *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
-
-
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -164,8 +124,6 @@ class MonetaryGrant extends Grant
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of MonetaryGrant.__construct() ========================================= */

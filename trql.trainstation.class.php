@@ -103,7 +103,8 @@ class TrainStation extends CivicStructure
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
+    public      $wikidataId                     = 'Q55488';         /* {*property   $wikidataId                 (string)                        Wikidata ID. Railway station ... railway facility where trains 
+                                                                                                                                                regularly stop to load or unload passengers and/or freight *} */
 
 
     /* ================================================================================ */
@@ -127,8 +128,6 @@ class TrainStation extends CivicStructure
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of TrainStation.__construct() ========================================== */
@@ -160,8 +159,6 @@ class TrainStation extends CivicStructure
         $this->necroSignaling();
     }   /* End of TrainStation.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class TrainStation ====================================================== */
 /* ==================================================================================== */
-
 ?>

@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -42,22 +41,18 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
 namespace trql\productcollection;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\collection, product\Collection, Product    as Collection, Product;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\product\Product   as Product;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'COLLECTION, PRODUCT_CLASS_VERSION' ) )
-    require_once( 'trql.collection, product.class.php' );
-
-
+if ( ! defined( 'PRODUCT_CLASS_VERSION' ) )
+    require_once( 'trql.product.class.php' );
 
 defined( 'PRODUCTCOLLECTION_CLASS_VERSION' ) or define( 'PRODUCTCOLLECTION_CLASS_VERSION','0.1' );
 
@@ -86,8 +81,8 @@ defined( 'PRODUCTCOLLECTION_CLASS_VERSION' ) or define( 'PRODUCTCOLLECTION_CLASS
 
  */
 /* ==================================================================================== */
-class ProductCollection extends Collection, Product
-/*--------------------------------------*/
+class ProductCollection extends Product
+/*-----------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -126,8 +121,6 @@ class ProductCollection extends Collection, Product
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of ProductCollection.__construct() ===================================== */

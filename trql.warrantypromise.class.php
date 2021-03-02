@@ -108,7 +108,7 @@ class WarrantyPromise extends StructuredValue
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -132,8 +132,6 @@ class WarrantyPromise extends StructuredValue
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of WarrantyPromise.__construct() ======================================= */
@@ -165,8 +163,6 @@ class WarrantyPromise extends StructuredValue
         $this->necroSignaling();
     }   /* End of WarrantyPromise.__destruct() ======================================== */
     /* ================================================================================ */
-
 }   /* End of class WarrantyPromise =================================================== */
 /* ==================================================================================== */
-
 ?>
