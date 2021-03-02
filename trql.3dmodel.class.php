@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -36,6 +34,7 @@
     {*cdate                 26-08-2020 08:24 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,18 +53,14 @@
 /****************************************************************************************/
 namespace trql\3dmodel;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\mediaobject\MediaObject    as MediaObject;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\mediaobject\MediaObject   as MediaObject;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'MEDIAOBJECT_CLASS_VERSION' ) )
     require_once( 'trql.mediaobject.class.php' );
-
-
 
 defined( '3DMODEL_CLASS_VERSION' ) or define( '3DMODEL_CLASS_VERSION','0.1' );
 
@@ -117,6 +112,7 @@ class 3DModel extends MediaObject
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -141,7 +137,7 @@ class 3DModel extends MediaObject
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
+
 
         return ( $this );
     }   /* End of 3DModel.__construct() =============================================== */

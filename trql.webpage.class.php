@@ -73,13 +73,6 @@ if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
 
 defined( 'WEBPAGE_CLASS_VERSION' ) or define( 'WEBPAGE_CLASS_VERSION','0.1' );
 
-/* Note (16-07-20 23:27:50):
-
-    Le code doit se sauver lui-même dans une sorte de DB. Il doit se compresser
-    lui-même et sauver au moins une dizaine de versions de lui-même.
-
-*/
-
 /* ================================================================================== */
 /** {{*class WebPage=
 

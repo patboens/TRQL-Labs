@@ -28,6 +28,7 @@
     {*cdate                 15-11-20 17:42:08 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -41,7 +42,6 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
 namespace trql\language;
@@ -49,13 +49,11 @@ namespace trql\language;
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\language\Language     as Language;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'LANGUAGE_CLASS_VERSION' ) )
     require_once( 'trql.language.class.php' );
-
 
 defined( 'FRENCH_CLASS_VERSION' ) or define( 'FRENCH_CLASS_VERSION','0.1' );
 
@@ -115,8 +113,6 @@ class French extends Language
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        //$this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         $this->addInfo( "La classe Language devrait implémenter la méthode compile() que j'avais réalisée pour la compréhension OCR" );
 
@@ -610,10 +606,8 @@ class French extends Language
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of French.__destruct() ================================================= */
     /* ================================================================================ */
-
 }   /* End of class French ============================================================ */
 /* ==================================================================================== */
 

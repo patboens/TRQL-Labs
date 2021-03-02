@@ -1,5 +1,23 @@
 <?php
 /****************************************************************************************/
+/*
+    {PYB} is a shortcut for Patrick Boens
+
+    {COMPANY} is a shortcut to "Lato Sensu Management"
+
+    {RIGHTS} is a shortcut used by trql.documentor.class.php. In general the material
+    presented here is available under the conditions of 
+    https://creativecommons.org/licenses/by-sa/4.0/
+
+    Other shortcuts exist. They exist to make it simple to change the formulation
+    of parts that can vary over time.
+
+    It does not change the undisputed truth that ALL code has been created by
+    Patrick Boens, the author, who owns ALL the intellectual property of what
+    he created.
+
+*/
+
 /** {{{*fheader
     {*file                  trql.collectionpage.class.php *}
     {*purpose               Web page type: Collection page. *}
@@ -8,6 +26,7 @@
     {*cdate                 24-08-2020 12:34 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -33,17 +52,14 @@
 /****************************************************************************************/
 namespace trql\collectionpage;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\webpage\WebPage       as WebPage;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'WEBPAGE_CLASS_VERSION' ) )
     require_once( 'trql.webpage.class.php' );
-
-
 
 defined( 'COLLECTIONPAGE_CLASS_VERSION' ) or define( 'COLLECTIONPAGE_CLASS_VERSION','0.1' );
 
@@ -76,6 +92,9 @@ class CollectionPage extends WebPage
                                'home'   => null         ,
                                'family' => null         ,
                              );
+
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -127,10 +146,8 @@ class CollectionPage extends WebPage
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of CollectionPage.__destruct() ========================================= */
     /* ================================================================================ */
-
 }   /* End of class CollectionPage ==================================================== */
 /* ==================================================================================== */
 

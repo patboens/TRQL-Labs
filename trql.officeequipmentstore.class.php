@@ -26,6 +26,7 @@
     {*cdate                 24-08-2020 05:59 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -84,7 +85,7 @@ defined( 'OFFICEEQUIPMENTSTORE_CLASS_VERSION' ) or define( 'OFFICEEQUIPMENTSTORE
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+
     *}
 
  */
@@ -101,6 +102,7 @@ class OfficeEquipmentStore extends Store
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -125,7 +127,7 @@ class OfficeEquipmentStore extends Store
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
+
 
         return ( $this );
     }   /* End of OfficeEquipmentStore.__construct() ================================== */

@@ -31,6 +31,7 @@
     {*cdate                 25-08-2020 13:44 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -58,7 +59,6 @@ namespace trql\computerlanguage;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\intangible\Intangible             as Intangible;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -109,7 +109,8 @@ class ComputerLanguage extends Intangible
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-
+    public      $wikidataId                     = 'Q629206';        /* {*property   $wikidataId                     (string)                    Wikidata ID. Language used to design, develop 
+                                                                                                                                                or make use of computer systems. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -132,8 +133,6 @@ class ComputerLanguage extends Intangible
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of ComputerLanguage.__construct() ====================================== */
@@ -165,8 +164,6 @@ class ComputerLanguage extends Intangible
         $this->necroSignaling();
     }   /* End of ComputerLanguage.__destruct() ======================================= */
     /* ================================================================================ */
-
 }   /* End of class ComputerLanguage ================================================== */
 /* ==================================================================================== */
-
 ?>

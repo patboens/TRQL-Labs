@@ -1,19 +1,32 @@
 <?php
 /****************************************************************************************/
+/*
+    {PYB} is a shortcut for Patrick Boens
+
+    {COMPANY} is a shortcut to "Lato Sensu Management"
+
+    {RIGHTS} is a shortcut used by trql.documentor.class.php for
+    All rights reserved to Lato Sensu Management for all countries.
+    All Intellectual Property belongs to Patrick Boens.
+
+    Other shortcuts exist. They exist to make it simple to change the formulation
+    of parts that can vary over time.
+
+    It does not change the undisputed truth that ALL code has been created by
+    Patrick Boens, the author, who owns ALL the intellectual property of what
+    he created.
+
+*/
+
 /** {{{*fheader
     {*file                  trql.contactpage.class.php *}
     {*purpose               A Web page type: Contact page *}
     {*author                {PYB} *}
-    {*company               [br]Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 19-08-20 09:36:13 *}
     {*mdate                 auto *}
-    {*license               Submitted to intellectual property rights (see
-                            author) *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -39,10 +52,9 @@
 /****************************************************************************************/
 namespace trql\contactpage;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\creativework\CreativeWork                 as CreativeWork;
+use \trql\mother\iContext       as iContext;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\webpage\WebPage       as WebPage;
 
 use DOMDocument;
 use DOMXPath;
@@ -89,6 +101,9 @@ class ContactPage extends WebPage implements iContext
                                'family' => null         ,
                              );
 
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q5164842';       /* {*property   $wikidataId                     (string)                    Wikidata ID. Web page type : Contact page. *} */
+
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 
@@ -132,6 +147,21 @@ class ContactPage extends WebPage implements iContext
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __destruct()
     /*------------------------*/
     {
@@ -140,7 +170,6 @@ class ContactPage extends WebPage implements iContext
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of ContactPage.__destruct() ============================================ */
     /* ================================================================================ */
 }   /* End of class ContactPage ======================================================= */

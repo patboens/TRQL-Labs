@@ -28,6 +28,7 @@
     {*cdate                 24-08-2020 06:45 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,16 +55,13 @@
 namespace trql\warrantypromise;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\structuredvalue\StructuredValue   as Thing;
-
+use \trql\structuredvalue\StructuredValue   as StructuredValue;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'STRUCTUREDVALUE_CLASS_VERSION' ) )
     require_once( 'trql.structuredvalue.class.php' );
-
-
 
 defined( 'WARRANTYPROMISE_CLASS_VERSION' ) or define( 'WARRANTYPROMISE_CLASS_VERSION','0.1' );
 
@@ -88,7 +86,7 @@ defined( 'WARRANTYPROMISE_CLASS_VERSION' ) or define( 'WARRANTYPROMISE_CLASS_VER
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+
     *}
 
  */
@@ -110,6 +108,7 @@ class WarrantyPromise extends StructuredValue
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -134,7 +133,7 @@ class WarrantyPromise extends StructuredValue
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
+
 
         return ( $this );
     }   /* End of WarrantyPromise.__construct() ======================================= */

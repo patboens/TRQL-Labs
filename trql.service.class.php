@@ -27,6 +27,7 @@
     {*cdate                 24-08-2020 05:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,17 +45,14 @@
 /****************************************************************************************/
 namespace trql\service;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\intangible\Intangible             as Intangible;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\intangible\Intangible     as Intangible;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'INTANGIBLE_CLASS_VERSION' ) )
     require_once( 'trql.intangible.class.php' );
-
-
 
 defined( 'SERVICE_CLASS_VERSION' ) or define( 'SERVICE_CLASS_VERSION','0.1' );
 
@@ -78,7 +76,7 @@ defined( 'SERVICE_CLASS_VERSION' ) or define( 'SERVICE_CLASS_VERSION','0.1' );
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+
     *}
 
  */
@@ -203,7 +201,6 @@ class Service extends Intangible
         $this->necroSignaling();
     }   /* End of Service.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class Service =========================================================== */
 /* ==================================================================================== */
 ?>

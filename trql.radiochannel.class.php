@@ -20,12 +20,14 @@
 
 /** {{{*fheader
     {*file                  trql.radiochannel.class.php *}
-    {*purpose               A unique instance of a radio BroadcastService on a CableOrSatelliteService lineup. *}
+    {*purpose               A unique instance of a radio BroadcastService 
+                            on a CableOrSatelliteService lineup. *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
     {*cdate                 24-08-2020 01:05 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -51,17 +53,14 @@
 /****************************************************************************************/
 namespace trql\radiochannel;
 
-use \trql\thing\Thing                           as Thing;
 use \trql\vaesoli\Vaesoli                       as Vaesoli;
 use \trql\broadcastchannel\BroadcastChannel     as BroadcastChannel;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'BROADCASTCHANNEL_CLASS_VERSION' ) )
     require_once( 'trql.broadcastchannel.class.php' );
-
 
 defined( 'RADIOCHANNEL_CLASS_VERSION' ) or define( 'RADIOCHANNEL_CLASS_VERSION','0.1' );
 
@@ -83,8 +82,8 @@ defined( 'RADIOCHANNEL_CLASS_VERSION' ) or define( 'RADIOCHANNEL_CLASS_VERSION',
     {*doc [url]http://schema.org/RadioChannel[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
  */
@@ -101,7 +100,8 @@ class RadioChannel extends BroadcastChannel
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-
+    public      $wikidataId                     = 'Q25582589';      /* {*property   $wikidataId                     (string)                    Wikidata ID. Physical or virtual channel over which 
+                                                                                                                                                a radio station network is distributed. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -155,8 +155,6 @@ class RadioChannel extends BroadcastChannel
         $this->necroSignaling();
     }   /* End of RadioChannel.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class RadioChannel ====================================================== */
 /* ==================================================================================== */
-
 ?>

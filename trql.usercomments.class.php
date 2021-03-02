@@ -20,12 +20,16 @@
 
 /** {{{*fheader
     {*file                  trql.usercomments.class.php *}
-    {*purpose               UserInteraction and its subtypes is an old way of talking about users interacting with pages. It is generally better to use Action-based vocabulary, alongside types such as Comment. *}
+    {*purpose               UserInteraction and its subtypes is an old way 
+                            of talking about users interacting with pages. 
+                            It is generally better to use Action-based 
+                            vocabulary, alongside types such as Comment. *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
     {*cdate                 24-08-2020 03:33 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -51,17 +55,14 @@
 /****************************************************************************************/
 namespace trql\usercomments;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\userinteraction\UserInteraction   as UserInteraction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'USERINTERACTION_CLASS_VERSION' ) )
     require_once( 'trql.userinteraction.class.php' );
-
-
 
 defined( 'USERCOMMENTS_CLASS_VERSION' ) or define( 'USERCOMMENTS_CLASS_VERSION','0.1' );
 
@@ -70,7 +71,9 @@ defined( 'USERCOMMENTS_CLASS_VERSION' ) or define( 'USERCOMMENTS_CLASS_VERSION',
 
     {*desc
 
-        UserInteraction and its subtypes is an old way of talking about users interacting with pages. It is generally better to use Action-based vocabulary, alongside types such as Comment.
+        UserInteraction and its subtypes is an old way of talking about users 
+        interacting with pages. It is generally better to use Action-based 
+        vocabulary, alongside types such as Comment.
 
     *}
 
@@ -83,8 +86,8 @@ defined( 'USERCOMMENTS_CLASS_VERSION' ) or define( 'USERCOMMENTS_CLASS_VERSION',
     {*doc [url]http://schema.org/UserComments[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
  */
@@ -110,6 +113,7 @@ class UserComments extends UserInteraction
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -133,8 +137,6 @@ class UserComments extends UserInteraction
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of UserComments.__construct() ========================================== */
@@ -166,8 +168,6 @@ class UserComments extends UserInteraction
         $this->necroSignaling();
     }   /* End of UserComments.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class UserComments ====================================================== */
 /* ==================================================================================== */
-
 ?>

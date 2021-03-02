@@ -26,6 +26,7 @@
     {*cdate                 24-08-2020 01:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -81,7 +82,7 @@ defined( 'AUDIOOBJECT_CLASS_VERSION' ) or define( 'AUDIOOBJECT_CLASS_VERSION','0
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+
     *}
 
  */

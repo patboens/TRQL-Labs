@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -55,17 +54,14 @@
 /****************************************************************************************/
 namespace trql\cssselectortype;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\text\Text    as Text;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\thing\Thing       as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'TEXT_CLASS_VERSION' ) )
-    require_once( 'trql.text.class.php' );
-
-
+if ( ! defined( 'THING_CLASS_VERSION' ) )
+    require_once( 'trql.thing.class.php' );
 
 defined( 'CSSSELECTORTYPE_CLASS_VERSION' ) or define( 'CSSSELECTORTYPE_CLASS_VERSION','0.1' );
 
@@ -87,14 +83,14 @@ defined( 'CSSSELECTORTYPE_CLASS_VERSION' ) or define( 'CSSSELECTORTYPE_CLASS_VER
     {*doc [url]http://schema.org/CssSelectorType[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 18:46. IT HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by
+        [c]trql.schemaclassgenerator.class.php[/c] on 26-08-2020 18:46.
     *}
 
  */
 /* ==================================================================================== */
-class CssSelectorType extends Text
-/*--------------------------------------*/
+class CssSelectorType extends Thing
+/*-------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -105,11 +101,8 @@ class CssSelectorType extends Text
                                'UIKey'  => null         ,
                              );
 
-    public      $                               = null;             /* {*property   $                               (string)                        http://schema.org/Vehicle *} */
-
-
     /* === [Properties NOT defined in schema.org] ===================================== */
-
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -133,10 +126,8 @@ class CssSelectorType extends Text
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of CssSelectorType.__construct() ========================================== */
+    }   /* End of CssSelectorType.__construct() ======================================= */
     /* ================================================================================ */
 
 
@@ -161,10 +152,10 @@ class CssSelectorType extends Text
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of CssSelectorType.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of CssSelectorType.__destruct() ======================================== */
     /* ================================================================================ */
-
-}   /* End of class CssSelectorType ====================================================== */
+}   /* End of class CssSelectorType =================================================== */
 /* ==================================================================================== */
-
 ?>

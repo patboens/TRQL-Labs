@@ -20,12 +20,14 @@
 
 /** {{{*fheader
     {*file                  trql.televisionchannel.class.php *}
-    {*purpose               A unique instance of a television BroadcastService on a CableOrSatelliteService lineup. *}
+    {*purpose               A unique instance of a television BroadcastService 
+                            on a CableOrSatelliteService lineup. *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
     {*cdate                 24-08-2020 01:05 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -51,17 +53,14 @@
 /****************************************************************************************/
 namespace trql\televisionchannel;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\broadcastchannel\BroadcastChannel     as BroadcastChannel;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'BROADCASTCHANNEL_CLASS_VERSION' ) )
     require_once( 'trql.broadcastchannel.class.php' );
-
-
 
 defined( 'TELEVISIONCHANNEL_CLASS_VERSION' ) or define( 'TELEVISIONCHANNEL_CLASS_VERSION','0.1' );
 
@@ -83,8 +82,8 @@ defined( 'TELEVISIONCHANNEL_CLASS_VERSION' ) or define( 'TELEVISIONCHANNEL_CLASS
     {*doc [url]http://schema.org/TelevisionChannel[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
  */
@@ -102,6 +101,7 @@ class TelevisionChannel extends BroadcastChannel
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -156,8 +156,6 @@ class TelevisionChannel extends BroadcastChannel
         $this->necroSignaling();
     }   /* End of TelevisionChannel.__destruct() ====================================== */
     /* ================================================================================ */
-
 }   /* End of class TelevisionChannel ================================================= */
 /* ==================================================================================== */
-
 ?>

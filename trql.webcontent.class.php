@@ -91,7 +91,7 @@ defined( 'WEBCONTENT_CLASS_VERSION' ) or define( 'WEBCONTENT_CLASS_VERSION','0.1
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+
     *}
 
  */

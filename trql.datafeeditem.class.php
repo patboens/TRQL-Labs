@@ -1,19 +1,32 @@
 <?php
 /****************************************************************************************/
+/*
+    {PYB} is a shortcut for Patrick Boens
+
+    {COMPANY} is a shortcut to "Lato Sensu Management"
+
+    {RIGHTS} is a shortcut used by trql.documentor.class.php. In general the material
+    presented here is available under the conditions of 
+    https://creativecommons.org/licenses/by-sa/4.0/
+
+    Other shortcuts exist. They exist to make it simple to change the formulation
+    of parts that can vary over time.
+
+    It does not change the undisputed truth that ALL code has been created by
+    Patrick Boens, the author, who owns ALL the intellectual property of what
+    he created.
+
+*/
+
 /** {{{*fheader
     {*file                  trql.datafeeditem.class.php *}
     {*purpose               A single item within a larger data feed. *}
     {*author                {PYB} *}
-    {*company               [br]Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 27-07-20 10:43 *}
     {*mdate                 auto *}
-    {*license               Submitted to intellectual property rights (see
-                            author) *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -37,12 +50,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\datefeeditem;
+namespace trql\datafeeditem;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\utility\Utility                           as Utility;
+use \trql\mother\iContext               as iContext;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\intangible\Intangible         as Intangible;
 
 use DOMDocument;
 use DOMXPath;
@@ -89,23 +101,25 @@ class DataFeedItem extends Intangible
                                'family' => null         ,
                              );
 
-    public  $dateCreated                = null;                     /* {*property   $dateCreated                (Date|DateTime)                             The date on which the CreativeWork was created or the item was
+    public      $dateCreated                = null;                 /* {*property   $dateCreated                (Date|DateTime)                             The date on which the CreativeWork was created or the item was
                                                                                                                                                             added to a DataFeed. *} */
-    public  $dateDeleted                = null;                     /* {*property   $dateDeleted                (Date|DateTime)                             The datetime the item was removed from the DataFeed. *} */
-    public  $dateModified               = null;                     /* {*property   $dateModified               (Date|DateTime)                             The date on which the CreativeWork was most recently modified or
+    public      $dateDeleted                = null;                 /* {*property   $dateDeleted                (Date|DateTime)                             The datetime the item was removed from the DataFeed. *} */
+    public      $dateModified               = null;                 /* {*property   $dateModified               (Date|DateTime)                             The date on which the CreativeWork was most recently modified or
                                                                                                                                                             when the item's entry was modified within a DataFeed. *} */
-    public  $item                       = null;                     /* {*property   $item                       (Thing)                                     An entity represented by an entry in a list or data feed
+    public      $item                       = null;                 /* {*property   $item                       (Thing)                                     An entity represented by an entry in a list or data feed
                                                                                                                                                             (e.g. an 'artist' in a list of 'artists'). *} */
 
     /* -- [ Properties NOT found in schema.org ] ---------------- */
-    public  $datePublication            = null;                     /* {*property   $datePublication            (Date|DateTime)                             The date the feed can be published *} */
-    public  $identifier                 = null;                     /* {*property   $identifier                 (PropertyValue|string|URL)                  The identifier property represents any kind of identifier for any
+    public      $wikidataId                 = null;                 /* {*property   $wikidataId                 (string)                                    Wikidata ID. No equivalent. *} */
+
+    public      $datePublication            = null;                 /* {*property   $datePublication            (Date|DateTime)                             The date the feed can be published *} */
+    public      $identifier                 = null;                 /* {*property   $identifier                 (PropertyValue|string|URL)                  The identifier property represents any kind of identifier for any
                                                                                                                                                             kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org
                                                                                                                                                             provides dedicated properties for representing many of these,
                                                                                                                                                             either as textual strings or as URL (URI) links. See background
                                                                                                                                                             notes for more details. *} */
-
-    public  $comment                    = null;                     /* {*property   $comment                    (Comment)                                   A comment on an item *} */
+                
+    public      $comment                    = null;                 /* {*property   $comment                    (Comment)                                   A comment on an item *} */
 
 
     /* ================================================================================ */
@@ -127,13 +141,29 @@ class DataFeedItem extends Intangible
     public function __construct( $szHome = null )
     /*-----------------------------------------*/
     {
-        $this->__die( __CLASS__ . ' SHOULD NOT BE USED. USE DataFeedItem DEFINED IN trql.rss.class.php' );
+        parent::__construct();
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
     }   /* End of DataFeedItem.__construct() ========================================== */
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __destruct()
     /*------------------------*/
     {
@@ -142,10 +172,8 @@ class DataFeedItem extends Intangible
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of DataFeedItem.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class DataFeedItem ====================================================== */
 /* ==================================================================================== */
 ?>

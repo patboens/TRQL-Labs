@@ -26,6 +26,7 @@
     {*cdate                 25-08-2020 08:33 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,17 +52,14 @@
 /****************************************************************************************/
 namespace trql\wpadblock;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webpageelement\WebPageElement    as WebPageElement;
-
+use \trql\webpageelement\WebPageElement     as WebPageElement;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'WEBPAGEELEMENT_CLASS_VERSION' ) )
     require_once( 'trql.webpageelement.class.php' );
-
 
 defined( 'WPADBLOCK_CLASS_VERSION' ) or define( 'WPADBLOCK_CLASS_VERSION','0.1' );
 
@@ -84,7 +82,7 @@ defined( 'WPADBLOCK_CLASS_VERSION' ) or define( 'WPADBLOCK_CLASS_VERSION','0.1' 
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+
     *}
 
  */
@@ -100,8 +98,8 @@ class WPAdBlock extends WebPageElement
                                'family' => null         ,
                              );
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -125,8 +123,6 @@ class WPAdBlock extends WebPageElement
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of WPAdBlock.__construct() ============================================= */
@@ -158,8 +154,6 @@ class WPAdBlock extends WebPageElement
         $this->necroSignaling();
     }   /* End of WPAdBlock.__destruct() ============================================== */
     /* ================================================================================ */
-
 }   /* End of class WPAdBlock ========================================================= */
 /* ==================================================================================== */
-
 ?>

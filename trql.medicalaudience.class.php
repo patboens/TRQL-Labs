@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -40,7 +39,6 @@
         {*desc              1)  Original creation
         *}
     *}
-
 
     {*chist
         {*mdate 14-02-21 10:44 *}
@@ -56,16 +54,13 @@
 namespace trql\medicalaudience;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\audience, peopleaudience\Audience, PeopleAudience    as Audience, PeopleAudience;
-
+use \trql\peopleaudience\PeopleAudience     as PeopleAudience;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'AUDIENCE, PEOPLEAUDIENCE_CLASS_VERSION' ) )
-    require_once( 'trql.audience, peopleaudience.class.php' );
-
-
+if ( ! defined( 'PEOPLEAUDIENCE_CLASS_VERSION' ) )
+    require_once( 'trql.peopleaudience.class.php' );
 
 defined( 'MEDICALAUDIENCE_CLASS_VERSION' ) or define( 'MEDICALAUDIENCE_CLASS_VERSION','0.1' );
 
@@ -93,8 +88,8 @@ defined( 'MEDICALAUDIENCE_CLASS_VERSION' ) or define( 'MEDICALAUDIENCE_CLASS_VER
 
  */
 /* ==================================================================================== */
-class MedicalAudience extends Audience, PeopleAudience
-/*--------------------------------------*/
+class MedicalAudience extends PeopleAudience
+/*----------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -105,49 +100,17 @@ class MedicalAudience extends Audience, PeopleAudience
                                'UIKey'  => null         ,
                              );
 
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
-    public      $audienceType                   = null;             /* {*property   $audienceType                   (string)                        The target group associated with a given audience (e.g. veterans, car
-                                                                                                                                                    owners, musicians, etc.). *} */
-    public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
-    public      $geographicArea                 = null;             /* {*property   $geographicArea                 (AdministrativeArea)            The geographic area associated with the audience. *} */
     public      $healthCondition                = null;             /* {*property   $healthCondition                (MedicalCondition)              Specifying the health condition(s) of a patient, medical study, or
                                                                                                                                                     other target audience. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
     public      $requiredGender                 = null;             /* {*property   $requiredGender                 (string)                        Audiences defined by a person's gender. *} */
     public      $requiredMaxAge                 = null;             /* {*property   $requiredMaxAge                 (int)                           Audiences defined by a person's maximum age. *} */
     public      $requiredMinAge                 = null;             /* {*property   $requiredMinAge                 (int)                           Audiences defined by a person's minimum age. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
     public      $suggestedGender                = null;             /* {*property   $suggestedGender                (string)                        The gender of the person or audience. *} */
     public      $suggestedMaxAge                = null;             /* {*property   $suggestedMaxAge                (float)                         Maximal age recommended for viewing content. *} */
     public      $suggestedMinAge                = null;             /* {*property   $suggestedMinAge                (float)                         Minimal age recommended for viewing content. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
-
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID: no equivalent *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -171,10 +134,8 @@ class MedicalAudience extends Audience, PeopleAudience
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of MedicalAudience.__construct() ========================================== */
+    }   /* End of MedicalAudience.__construct() ======================================= */
     /* ================================================================================ */
 
 
@@ -199,10 +160,10 @@ class MedicalAudience extends Audience, PeopleAudience
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of MedicalAudience.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of MedicalAudience.__destruct() ======================================== */
     /* ================================================================================ */
-
-}   /* End of class MedicalAudience ====================================================== */
+}   /* End of class MedicalAudience =================================================== */
 /* ==================================================================================== */
-
 ?>

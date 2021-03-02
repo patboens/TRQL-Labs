@@ -26,6 +26,7 @@
     {*cdate                 24-08-2020 03:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,17 +52,14 @@
 /****************************************************************************************/
 namespace trql\webapplication;
 
-use \trql\thing\Thing                               as Thing;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\sofwareapplication\SoftwareApplication    as SoftwareApplication;
-
+use \trql\softwareapplication\SoftwareApplication   as SoftwareApplication;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'SOFTWAREAPPLICATION_CLASS_VERSION' ) )
     require_once( 'trql.softwareapplication.class.php' );
-
 
 defined( 'WEBAPPLICATION_CLASS_VERSION' ) or define( 'WEBAPPLICATION_CLASS_VERSION','0.1' );
 
@@ -83,8 +81,8 @@ defined( 'WEBAPPLICATION_CLASS_VERSION' ) or define( 'WEBAPPLICATION_CLASS_VERSI
     {*doc [url]http://schema.org/WebApplication[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
  */
@@ -103,8 +101,8 @@ class WebApplication extends SoftwareApplication
     public      $browserRequirements = null;                        /* {*property   $browserRequirements        (string)                    Specifies browser requirements in human-readable text. 
                                                                                                                                             For example, 'requires HTML5 support'. *} */
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -128,8 +126,6 @@ class WebApplication extends SoftwareApplication
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of WebApplication.__construct() ======================================== */
@@ -161,8 +157,6 @@ class WebApplication extends SoftwareApplication
         $this->necroSignaling();
     }   /* End of WebApplication.__destruct() ========================================= */
     /* ================================================================================ */
-
 }   /* End of class WebApplication ==================================================== */
 /* ==================================================================================== */
-
 ?>

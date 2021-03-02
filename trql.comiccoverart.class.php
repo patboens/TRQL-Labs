@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -55,15 +54,14 @@
 /****************************************************************************************/
 namespace trql\comiccoverart;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\comiccoverart\ComicCoverArt       as ComicCoverArt;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\coverart\CoverArt     as CoverArt;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'COMICSTORY, COVERART_CLASS_VERSION' ) )
-    require_once( 'trql.comicstory, coverart.class.php' );
+if ( ! defined( 'COVERART_CLASS_VERSION' ) )
+    require_once( 'trql.coverart.class.php' );
 
 defined( 'COMICCOVERART_CLASS_VERSION' ) or define( 'COMICCOVERART_CLASS_VERSION','0.1' );
 
@@ -91,8 +89,8 @@ defined( 'COMICCOVERART_CLASS_VERSION' ) or define( 'COMICCOVERART_CLASS_VERSION
 
  */
 /* ==================================================================================== */
-class ComicCoverArt extends ComicStory, CoverArt
-/*--------------------------------------*/
+class ComicCoverArt extends CoverArt
+/*--------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -139,8 +137,6 @@ class ComicCoverArt extends ComicStory, CoverArt
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of ComicCoverArt.__construct() ========================================= */

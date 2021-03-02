@@ -26,6 +26,7 @@
     {*cdate                 24-08-2020 07:08 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,17 +52,14 @@
 /****************************************************************************************/
 namespace trql\softwareapplication;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\creativework\CreativeWork         as CreativeWork;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
-
 
 defined( 'SOFTWAREAPPLICATION_CLASS_VERSION' ) or define( 'SOFTWAREAPPLICATION_CLASS_VERSION','0.1' );
 
@@ -83,8 +81,8 @@ defined( 'SOFTWAREAPPLICATION_CLASS_VERSION' ) or define( 'SOFTWAREAPPLICATION_C
     {*doc [url]http://schema.org/SoftwareApplication[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by
+        [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
  */
@@ -102,32 +100,32 @@ class SoftwareApplication extends CreativeWork
 
     public      $applicationCategory            = null;            /* {*property   $applicationCategory            (string|URL)                 Type of software application, e.g. 'Game, Multimedia'. *} */
     public      $applicationSubCategory         = null;            /* {*property   $applicationSubCategory         (string|URL)                 Subcategory of the application, e.g. 'Arcade Game'. *} */
-    public      $applicationSuite               = null;            /* {*property   $applicationSuite               (string)                     The name of the application suite to which the application 
+    public      $applicationSuite               = null;            /* {*property   $applicationSuite               (string)                     The name of the application suite to which the application
                                                                                                                                                 belongs (e.g. Excel belongs to Office). *} */
-    public      $availableOnDevice              = null;            /* {*property   $availableOnDevice              (string)                     Device required to run the application. Used in cases where a 
+    public      $availableOnDevice              = null;            /* {*property   $availableOnDevice              (string)                     Device required to run the application. Used in cases where a
                                                                                                                                                 specific make/model is required to run the application. *} */
-    public      $countriesNotSupported          = null;            /* {*property   $countriesNotSupported          (string)                     Countries for which the application is not supported. You can 
+    public      $countriesNotSupported          = null;            /* {*property   $countriesNotSupported          (string)                     Countries for which the application is not supported. You can
                                                                                                                                                 also provide the two-letter ISO 3166-1 alpha-2 country code. *} */
-    public      $countriesSupported             = null;            /* {*property   $countriesSupported             (string)                     Countries for which the application is supported. You can also 
+    public      $countriesSupported             = null;            /* {*property   $countriesSupported             (string)                     Countries for which the application is supported. You can also
                                                                                                                                                 provide the two-letter ISO 3166-1 alpha-2 country code. *} */
     public      $downloadUrl                    = null;            /* {*property   $downloadUrl                    (URL)                        If the file can be downloaded, URL to download the binary. *} */
-    public      $featureList                    = null;            /* {*property   $featureList                    (string|URL)                 Features or modules provided by this application (and possibly 
+    public      $featureList                    = null;            /* {*property   $featureList                    (string|URL)                 Features or modules provided by this application (and possibly
                                                                                                                                                 required by other applications). *} */
-    public      $fileSize                       = null;            /* {*property   $fileSize                       (string)                     Size of the application / package (e.g. 18MB). In the absence 
+    public      $fileSize                       = null;            /* {*property   $fileSize                       (string)                     Size of the application / package (e.g. 18MB). In the absence
                                                                                                                                                 of a unit (MB, KB etc.), KB will be assumed. *} */
-    public      $installUrl                     = null;            /* {*property   $installUrl                     (URL)                        URL at which the app may be installed, if different from the 
+    public      $installUrl                     = null;            /* {*property   $installUrl                     (URL)                        URL at which the app may be installed, if different from the
                                                                                                                                                 URL of the item. *} */
     public      $memoryRequirements             = null;            /* {*property   $memoryRequirements             (string|URL)                 Minimum memory requirements. *} */
     public      $operatingSystem                = null;            /* {*property   $operatingSystem                (string)                     Operating systems supported (Windows 7, OSX 10.6, Android 1.6). *} */
-    public      $permissions                    = null;            /* {*property   $permissions                    (string)                     Permission(s) required to run the app (for example, a mobile 
+    public      $permissions                    = null;            /* {*property   $permissions                    (string)                     Permission(s) required to run the app (for example, a mobile
                                                                                                                                                 app may require full internet access or may run only on wifi). *} */
     public      $processorRequirements          = null;            /* {*property   $processorRequirements          (string)                     Processor architecture required to run the application (e.g. IA64). *} */
     public      $releaseNotes                   = null;            /* {*property   $releaseNotes                   (string|URL)                 Description of what changed in this version. *} */
     public      $screenshot                     = null;            /* {*property   $screenshot                     (ImageObject|URL)            A link to a screenshot image of the app. *} */
     public      $softwareAddOn                  = null;            /* {*property   $softwareAddOn                  (SoftwareApplication)        Additional content for a software application. *} */
     public      $softwareHelp                   = null;            /* {*property   $softwareHelp                   (creativeWork)               Software application help. *} */
-    public      $softwareRequirements           = null;            /* {*property   $softwareRequirements           (string|URL)                 Component dependency requirements for application. This includes 
-                                                                                                                                                runtime environments and shared libraries that are not included 
+    public      $softwareRequirements           = null;            /* {*property   $softwareRequirements           (string|URL)                 Component dependency requirements for application. This includes
+                                                                                                                                                runtime environments and shared libraries that are not included
                                                                                                                                                 in the application distribution package, but required to run the
                                                                                                                                                 application (Examples: DirectX, Java or .NET runtime). *} */
     public      $softwareVersion                = null;            /* {*property   $softwareVersion                (string)                     Version of the software instance. *} */
@@ -136,6 +134,7 @@ class SoftwareApplication extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -159,8 +158,6 @@ class SoftwareApplication extends CreativeWork
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of SoftwareApplication.__construct() =================================== */
@@ -192,8 +189,6 @@ class SoftwareApplication extends CreativeWork
         $this->necroSignaling();
     }   /* End of SoftwareApplication.__destruct() ==================================== */
     /* ================================================================================ */
-
 }   /* End of class SoftwareApplication =============================================== */
 /* ==================================================================================== */
-
 ?>

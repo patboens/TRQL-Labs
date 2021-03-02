@@ -53,7 +53,6 @@ namespace trql\ledger;
 use \trql\vaesoli\Vaesoli                       as v;
 use \trql\accountingregister\AccountingRegister as AccountingRegister;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
@@ -115,11 +114,14 @@ class Ledger extends AccountingRegister
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->identifier = (string) $szID;
+        if ( isset( $szID ) )
+        {
+            $this->identifier = (string) $szID ?? '';
 
-        // We may need to reflect on the need to create a ledger PER year
-        // as to make sure performace remains optimal
-        $this->szStorage = $this->ledgerFile( $szFolder );
+            // We may need to reflect on the need to create a ledger PER year
+            // as to make sure performace remains optimal
+            $this->szStorage = $this->ledgerFile( $szFolder );
+        }
 
         return ( $this );
     }   /* End of Ledger.__construct() ================================================ */
@@ -252,7 +254,6 @@ class Ledger extends AccountingRegister
         $this->necroSignaling();
     }   /* End of Ledger.__destruct() ================================================= */
     /* ================================================================================ */
-
 }   /* End of class Ledger ============================================================ */
 /* ==================================================================================== */
 ?>

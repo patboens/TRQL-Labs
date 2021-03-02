@@ -20,33 +20,26 @@
 
 /** {{{*fheader
     {*file                  trql.game.class.php *}
-    {*purpose               The Game type represents things which are games. These are 
-                            typically rule-governed recreational activities, e.g. 
-                            role-playing games in which players assume the role of 
-                            characters in a fictional setting. *}
+    {*purpose               The Game type represents things which are games. 
+                            These are typically rule-governed recreational activities, 
+                            e.g. role-playing games in which players assume the 
+                            role of characters in a fictional setting. *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
-    {*cdate                 24-08-2020 09:19 *}
+    {*cdate                 02-03-21 07:24 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
     -------------------------------------------------------------------------------------
 
     {*chist
-        {*mdate 24-08-2020 09:19 *}
+        {*mdate 02-03-21 07:24 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Original creation
-        *}
-    *}
-
-    {*chist
-        {*mdate 10-02-21 06:54 *}
-        {*author {PYB} *}
-        {*v 8.0.0000 *}
-        {*desc              1)  Standardizing the [c]__destruct()[/c] method
         *}
     *}
 
@@ -54,18 +47,14 @@
 /****************************************************************************************/
 namespace trql\game;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\creativework\CreativeWork         as CreativeWork;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\creativework\CreativeWork     as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
-
-
 
 defined( 'GAME_CLASS_VERSION' ) or define( 'GAME_CLASS_VERSION','0.1' );
 
@@ -74,9 +63,9 @@ defined( 'GAME_CLASS_VERSION' ) or define( 'GAME_CLASS_VERSION','0.1' );
 
     {*desc
 
-        The Game type represents things which are games. These are typically 
-        rule-governed recreational activities, e.g. role-playing games in which players 
-        assume the role of characters in a fictional setting.
+        The Game type represents things which are games. These are typically
+        rule-governed recreational activities, e.g. role-playing games in which
+        players assume the role of characters in a fictional setting.
 
     *}
 
@@ -89,16 +78,16 @@ defined( 'GAME_CLASS_VERSION' ) or define( 'GAME_CLASS_VERSION','0.1' );
     {*doc [url]http://schema.org/Game[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
  */
 /* ==================================================================================== */
-class Game extends CreativeWork
-/*--------------------------------------*/
+class Game extends CreativeWork 
+/*---------------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
@@ -106,20 +95,17 @@ class Game extends CreativeWork
                                'family' => null         ,
                              );
 
-    public      $characterAttribute             = null;            /* {*property   $characterAttribute              (Thing)                         A piece of data that represents a particular aspect of a 
-                                                                                                                                                    fictional character (skill, power, character points, 
-                                                                                                                                                    advantage, disadvantage). *} */
-    public      $gameItem                       = null;            /* {*property   $gameItem                        (Thing)                         An item is an object within the game world that can be 
-                                                                                                                                                    collected by a player or, occasionally, a non-player character. *} */
-    public      $gameLocation                   = null;            /* {*property   $gameLocation                    (Place|PostalAddress|URL)       Real or fictional location of the game (or part of game). *} */
-    public      $numberOfPlayers                = null;            /* {*property   $numberOfPlayers                 (QuantitativeValue)             Indicate how many people can play this game (minimum, 
-                                                                                                                                                    maximum, or range). *} */
-    public      $quest                          = null;            /* {*property   $quest                           (Thing)                         The task that a player-controlled character, or group of 
-                                                                                                                                                    characters may complete in order to gain a reward. *} */
-
+    public      $characterAttribute             = null;             /* {*property   $characterAttribute         (Thing)                         A piece of data that represents a particular aspect of a fictional 
+                                                                                                                                                character (skill, power, character points, advantage, disadvantage). *} */
+    public      $gameItem                       = null;             /* {*property   $gameItem                   (Thing)                         An item is an object within the game world that can be collected by 
+                                                                                                                                                a player or, occasionally, a non-player character. *} */
+    public      $gameLocation                   = null;             /* {*property   $gameLocation               (Place|PostalAddress|URL)       Real or fictional location of the game (or part of game). *} */
+    public      $numberOfPlayers                = null;             /* {*property   $numberOfPlayers            (QuantitativeValue)             Indicate how many people can play this game (minimum, maximum, or range). *} */
+    public      $quest                          = null;             /* {*property   $quest                      (Thing)                         The task that a player-controlled character, or group of characters may 
+                                                                                                                                                complete in order to gain a reward. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-
+    public      $wikidataId                     = 'Q11410';         /* {*property   $wikidataId                 (string)                        Wikidata ID. Structured form of play, usually for entertainment *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -142,8 +128,6 @@ class Game extends CreativeWork
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of Game.__construct() ================================================== */

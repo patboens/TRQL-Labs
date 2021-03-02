@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -31,6 +29,7 @@
     {*cdate                 25-08-2020 11:44 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -56,18 +55,14 @@
 /****************************************************************************************/
 namespace trql\userpagevisits;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\userinteraction\UserInteraction    as UserInteraction;
-
+use \trql\userinteraction\UserInteraction   as UserInteraction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'USERINTERACTION_CLASS_VERSION' ) )
     require_once( 'trql.userinteraction.class.php' );
-
-
 
 defined( 'USERPAGEVISITS_CLASS_VERSION' ) or define( 'USERPAGEVISITS_CLASS_VERSION','0.1' );
 
@@ -109,6 +104,7 @@ class UserPageVisits extends UserInteraction
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -132,8 +128,6 @@ class UserPageVisits extends UserInteraction
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of UserPageVisits.__construct() ======================================== */
@@ -165,8 +159,6 @@ class UserPageVisits extends UserInteraction
         $this->necroSignaling();
     }   /* End of UserPageVisits.__destruct() ========================================= */
     /* ================================================================================ */
-
 }   /* End of class UserPageVisits ==================================================== */
 /* ==================================================================================== */
-
 ?>

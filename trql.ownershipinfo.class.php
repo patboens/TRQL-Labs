@@ -29,6 +29,7 @@
     {*cdate                 25-08-2020 11:26 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,18 +55,14 @@
 /****************************************************************************************/
 namespace trql\ownershipinfo;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\structuredvalue\StructuredValue    as StructuredValue;
-
+use \trql\structuredvalue\StructuredValue   as StructuredValue;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'STRUCTUREDVALUE_CLASS_VERSION' ) )
     require_once( 'trql.structuredvalue.class.php' );
-
-
 
 defined( 'OWNERSHIPINFO_CLASS_VERSION' ) or define( 'OWNERSHIPINFO_CLASS_VERSION','0.1' );
 
@@ -95,7 +92,7 @@ defined( 'OWNERSHIPINFO_CLASS_VERSION' ) or define( 'OWNERSHIPINFO_CLASS_VERSION
  */
 /* ==================================================================================== */
 class OwnershipInfo extends StructuredValue
-/*--------------------------------------*/
+/*---------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -140,6 +137,7 @@ class OwnershipInfo extends StructuredValue
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -164,7 +162,7 @@ class OwnershipInfo extends StructuredValue
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
+
 
         return ( $this );
     }   /* End of OwnershipInfo.__construct() ========================================= */

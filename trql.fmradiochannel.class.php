@@ -26,6 +26,7 @@
     {*cdate                 24-08-2020 01:06 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -51,18 +52,14 @@
 /****************************************************************************************/
 namespace trql\fmradiochannel;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\radiochannel\RadioChannel         as RadioChannel;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'RADIOCHANNEL_CLASS_VERSION' ) )
     require_once( 'trql.radiochannel.class.php' );
-
-
 
 defined( 'FMRADIOCHANNEL_CLASS_VERSION' ) or define( 'FMRADIOCHANNEL_CLASS_VERSION','0.1' );
 
@@ -84,8 +81,8 @@ defined( 'FMRADIOCHANNEL_CLASS_VERSION' ) or define( 'FMRADIOCHANNEL_CLASS_VERSI
     {*doc [url]http://schema.org/FMRadioChannel[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
  */
@@ -103,6 +100,7 @@ class FMRadioChannel extends RadioChannel
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -128,7 +126,7 @@ class FMRadioChannel extends RadioChannel
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of FMRadioChannel.__construct() ========================================== */
+    }   /* End of FMRadioChannel.__construct() ======================================== */
     /* ================================================================================ */
 
 
@@ -155,10 +153,8 @@ class FMRadioChannel extends RadioChannel
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of FMRadioChannel.__destruct() =========================================== */
+    }   /* End of FMRadioChannel.__destruct() ========================================= */
     /* ================================================================================ */
-
-}   /* End of class FMRadioChannel ====================================================== */
+}   /* End of class FMRadioChannel ==================================================== */
 /* ==================================================================================== */
-
 ?>

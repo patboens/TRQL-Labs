@@ -28,6 +28,7 @@
     {*cdate                 25-08-2020 13:22 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -53,9 +54,8 @@
 /****************************************************************************************/
 namespace trql\duration;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\quantity\Quantity    as Quantity;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\quantity\Quantity     as Quantity;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -63,8 +63,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'QUANTITY_CLASS_VERSION' ) )
     require_once( 'trql.quantity.class.php' );
-
-
 
 defined( 'DURATION_CLASS_VERSION' ) or define( 'DURATION_CLASS_VERSION','0.1' );
 
@@ -93,7 +91,7 @@ defined( 'DURATION_CLASS_VERSION' ) or define( 'DURATION_CLASS_VERSION','0.1' );
  */
 /* ==================================================================================== */
 class Duration extends Quantity
-/*--------------------------------------*/
+/*---------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -104,6 +102,7 @@ class Duration extends Quantity
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -127,8 +126,6 @@ class Duration extends Quantity
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of Duration.__construct() ============================================== */

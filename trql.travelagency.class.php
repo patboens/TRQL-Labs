@@ -26,6 +26,7 @@
     {*cdate                 24-08-2020 03:34 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -51,18 +52,14 @@
 /****************************************************************************************/
 namespace trql\travelagency;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\localbusiness\LocalBusiness       as LocalBusiness;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'LOCALBUSINESS_CLASS_VERSION' ) )
     require_once( 'trql.localbusiness.class.php' );
-
-
 
 defined( 'TRAVELAGENCY_CLASS_VERSION' ) or define( 'TRAVELAGENCY_CLASS_VERSION','0.1' );
 
@@ -85,7 +82,7 @@ defined( 'TRAVELAGENCY_CLASS_VERSION' ) or define( 'TRAVELAGENCY_CLASS_VERSION',
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+
     *}
 
  */
@@ -103,6 +100,7 @@ class TravelAgency extends LocalBusiness
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -127,7 +125,7 @@ class TravelAgency extends LocalBusiness
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
+
 
         return ( $this );
     }   /* End of TravelAgency.__construct() ========================================== */

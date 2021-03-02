@@ -26,6 +26,7 @@
     {*cdate                 24-08-2020 01:05 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -51,18 +52,14 @@
 /****************************************************************************************/
 namespace trql\amradiochannel;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\radiochannel\RadioChannel         as RadioChannel;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'RADIOCHANNEL_CLASS_VERSION' ) )
     require_once( 'trql.radiochannel.class.php' );
-
-
 
 defined( 'AMRADIOCHANNEL_CLASS_VERSION' ) or define( 'AMRADIOCHANNEL_CLASS_VERSION','0.1' );
 
@@ -85,7 +82,7 @@ defined( 'AMRADIOCHANNEL_CLASS_VERSION' ) or define( 'AMRADIOCHANNEL_CLASS_VERSI
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+
     *}
 
  */
@@ -102,6 +99,7 @@ class AMRadioChannel extends RadioChannel
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -156,8 +154,6 @@ class AMRadioChannel extends RadioChannel
         $this->necroSignaling();
     }   /* End of AMRadioChannel.__destruct() ========================================= */
     /* ================================================================================ */
-
 }   /* End of class AMRadioChannel ==================================================== */
 /* ==================================================================================== */
-
 ?>

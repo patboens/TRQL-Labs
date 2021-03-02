@@ -29,6 +29,7 @@
     {*cdate                 25-08-2020 14:00 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,18 +55,14 @@
 /****************************************************************************************/
 namespace trql\rsvpaction;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\informaction\InformAction    as InformAction;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\informaction\InformAction as InformAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'INFORMACTION_CLASS_VERSION' ) )
     require_once( 'trql.informaction.class.php' );
-
-
 
 defined( 'RSVPACTION_CLASS_VERSION' ) or define( 'RSVPACTION_CLASS_VERSION','0.1' );
 
@@ -112,6 +109,7 @@ class RsvpAction extends InformAction
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -136,7 +134,7 @@ class RsvpAction extends InformAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
+
 
         return ( $this );
     }   /* End of RsvpAction.__construct() ============================================ */

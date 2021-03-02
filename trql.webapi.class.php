@@ -27,6 +27,7 @@
     {*cdate                 24-08-2020 03:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -55,13 +56,11 @@ namespace trql\webapi;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\service\Service                   as Service;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'SERVICE_CLASS_VERSION' ) )
     require_once( 'trql.service.class.php' );
-
 
 defined( 'WEBAPI_CLASS_VERSION' ) or define( 'WEBAPI_CLASS_VERSION','0.1' );
 
@@ -84,7 +83,7 @@ defined( 'WEBAPI_CLASS_VERSION' ) or define( 'WEBAPI_CLASS_VERSION','0.1' );
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+
     *}
 
  */
@@ -100,10 +99,11 @@ class WebAPI extends Service
                                'family' => null         ,
                              );
 
-    public      $documentation      = null;                         /* {*property   $documentation              (CreativeWork|URL)              Further documentation describing the Web API in more detail. *} */
+    public      $documentation                  = null;             /* {*property   $documentation              (CreativeWork|URL)              Further documentation describing the Web API in more detail. *} */
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q20202982';      /* {*property   $wikidataId                     (string)                    Wikidata ID. API exposed by web browser to web pages. *} */
 
 
     /* ================================================================================ */
@@ -127,8 +127,6 @@ class WebAPI extends Service
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
 
         return ( $this );
     }   /* End of WebAPI.__construct() ================================================ */
@@ -160,8 +158,6 @@ class WebAPI extends Service
         $this->necroSignaling();
     }   /* End of WebAPI.__destruct() ================================================= */
     /* ================================================================================ */
-
 }   /* End of class WebAPI ============================================================ */
 /* ==================================================================================== */
-
 ?>

@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -31,6 +29,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -43,7 +42,6 @@
         {*desc              1)  Original creation
         *}
     *}
-
 
     {*chist
         {*mdate 14-02-21 10:44 *}
@@ -58,17 +56,14 @@
 /****************************************************************************************/
 namespace trql\legislationobject;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\legislation, mediaobject\Legislation, MediaObject    as Legislation, MediaObject;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\legislation\Legislation       as Legislation;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'LEGISLATION, MEDIAOBJECT_CLASS_VERSION' ) )
-    require_once( 'trql.legislation, mediaobject.class.php' );
-
-
+if ( ! defined( 'LEGISLATION_CLASS_VERSION' ) )
+    require_once( 'trql.legislation.class.php' );
 
 defined( 'LEGISLATIONOBJECT_CLASS_VERSION' ) or define( 'LEGISLATIONOBJECT_CLASS_VERSION','0.1' );
 
@@ -98,8 +93,8 @@ defined( 'LEGISLATIONOBJECT_CLASS_VERSION' ) or define( 'LEGISLATIONOBJECT_CLASS
 
  */
 /* ==================================================================================== */
-class LegislationObject extends Legislation, MediaObject
-/*--------------------------------------*/
+class LegislationObject extends Legislation
+/*---------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -142,8 +137,6 @@ class LegislationObject extends Legislation, MediaObject
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
     }   /* End of LegislationObject.__construct() ===================================== */
     /* ================================================================================ */
@@ -174,8 +167,6 @@ class LegislationObject extends Legislation, MediaObject
         $this->necroSignaling();
     }   /* End of LegislationObject.__destruct() ====================================== */
     /* ================================================================================ */
-
 }   /* End of class LegislationObject ================================================= */
 /* ==================================================================================== */
-
 ?>

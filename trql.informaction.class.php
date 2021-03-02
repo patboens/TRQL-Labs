@@ -29,6 +29,7 @@
     {*cdate                 25-08-2020 13:56 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -57,14 +58,11 @@ namespace trql\informaction;
 use \trql\vaesoli\Vaesoli                       as Vaesoli;
 use \trql\communicateaction\CommunicateAction   as CommunicateAction;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'COMMUNICATEACTION_CLASS_VERSION' ) )
     require_once( 'trql.communicateaction.class.php' );
-
-
 
 defined( 'INFORMACTION_CLASS_VERSION' ) or define( 'INFORMACTION_CLASS_VERSION','0.1' );
 
@@ -109,6 +107,7 @@ class InformAction extends CommunicateAction
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -133,7 +132,7 @@ class InformAction extends CommunicateAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' has NOT been tested yet!' );
+
 
         return ( $this );
     }   /* End of InformAction.__construct() ========================================== */

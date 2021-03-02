@@ -54,7 +54,6 @@ namespace trql\visualartwork;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\creativework\CreativeWork         as CreativeWork;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
@@ -82,7 +81,7 @@ defined( 'VISUALARTWORK_CLASS_VERSION' ) or define( 'VISUALARTWORK_CLASS_VERSION
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        and as such HAS NOT BEEN TESTED YET!
+
     *}
 
  */
@@ -123,8 +122,7 @@ class VisualArtwork extends CreativeWork
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q36649';         /* {*property   $wikidataId                     (string)                        Wikidata ID. Visual art: Art form which creates works that are 
-                                                                                                                                                    primarily visual in nature *} */
+    public      $wikidataId                     = 'Q4502142';       /* {*property   $wikidataId                     (string)                        Wikidata ID. Work of art that is primarily visual *} */
 
 
     /* ================================================================================ */
