@@ -83,13 +83,13 @@ defined( 'ORGANIZATIONROLE_CLASS_VERSION' ) or define( 'ORGANIZATIONROLE_CLASS_V
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 25-08-2020 11:40. IT HAS NOT BEEN TESTED YET!
+        on 25-08-2020 11:40.
     *}
 
  */
 /* ==================================================================================== */
 class OrganizationRole extends Role
-/*--------------------------------------*/
+/*--------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -99,8 +99,8 @@ class OrganizationRole extends Role
                                'family' => null         ,
                              );
 
-    public      $numberedPosition               = null;             /* {*property   $numberedPosition               (string)                        A number associated with a role in an organization, for example, the
-
+    public      $numberedPosition               = null;             /* {*property   $numberedPosition               (string)                    A number associated with a role in an organization, 
+                                                                                                                                                for example, the number on an athlete's jersey. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
@@ -127,8 +127,6 @@ class OrganizationRole extends Role
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of OrganizationRole.__construct() ====================================== */
@@ -160,8 +158,6 @@ class OrganizationRole extends Role
         $this->necroSignaling();
     }   /* End of OrganizationRole.__destruct() ======================================= */
     /* ================================================================================ */
-
 }   /* End of class OrganizationRole ================================================== */
 /* ==================================================================================== */
-
 ?>

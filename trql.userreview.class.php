@@ -53,17 +53,14 @@
 /****************************************************************************************/
 namespace trql\userreview;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\review\Review         as Review;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'REVIEW_CLASS_VERSION' ) )
     require_once( 'trql.review.class.php' );
-
-
 
 defined( 'USERREVIEW_CLASS_VERSION' ) or define( 'USERREVIEW_CLASS_VERSION','0.1' );
 
@@ -87,7 +84,6 @@ defined( 'USERREVIEW_CLASS_VERSION' ) or define( 'USERREVIEW_CLASS_VERSION','0.1
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-
     *}
 
  */
@@ -102,7 +98,6 @@ class UserReview extends Review
                                'home'   => null         ,
                                'family' => null         ,
                              );
-
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
@@ -129,8 +124,6 @@ class UserReview extends Review
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of UserReview.__construct() ============================================ */
@@ -162,8 +155,6 @@ class UserReview extends Review
         $this->necroSignaling();
     }   /* End of UserReview.__destruct() ============================================= */
     /* ================================================================================ */
-
 }   /* End of class UserReview ======================================================== */
 /* ==================================================================================== */
-
 ?>

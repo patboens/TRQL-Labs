@@ -59,7 +59,6 @@ namespace trql\demand;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\intangible\Intangible             as Intangible;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
@@ -90,7 +89,6 @@ defined( 'DEMAND_CLASS_VERSION' ) or define( 'DEMAND_CLASS_VERSION','0.1' );
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-
     *}
 
  */
@@ -195,7 +193,7 @@ class Demand extends Intangible
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
+    public      $wikidataId                 = 'Q4402708';           /* {*property   $wikidataId                 (string)                                        Wikidata ID. Economic principle (the closest I can get). *} */
 
 
     /* ================================================================================ */
@@ -219,8 +217,6 @@ class Demand extends Intangible
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of Demand.__construct() ================================================ */
@@ -252,8 +248,6 @@ class Demand extends Intangible
         $this->necroSignaling();
     }   /* End of Demand.__destruct() ================================================= */
     /* ================================================================================ */
-
 }   /* End of class Demand ============================================================ */
 /* ==================================================================================== */
-
 ?>

@@ -2,7 +2,8 @@
 /****************************************************************************** */
 /** {{{*fheader
     {*file                  documentor.test.php *}
-    {*purpose               Script that tests the documentor class *}
+    {*purpose               Script that tests the documentor class and each
+                            TRQL Labs class (minus few exceptions. *}
     {*author                {PYB} *}
     {*company               Lato Sensu Management[br]
                             Rue Bois des Mazuis, 47[br]
@@ -54,6 +55,8 @@
 use \trql\vaesoli\Vaesoli           as v;
 use \trql\documentor\Documentor     as Documentor;
 
+set_time_limit( 0 );
+
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'd:/websites/snippet-center/trql.vaesoli.class.php' );
 
@@ -89,8 +92,23 @@ if ( true )
     $noTest[] = 'backgroundprocess';
     $noTest[] = '3dmodel';
     $noTest[] = 'bankaccount';
+    $noTest[] = 'class';
+    $noTest[] = 'cursor';
+    $noTest[] = 'documentor';
+    $noTest[] = 'french';
+    $noTest[] = 'mail';
+    $noTest[] = 'mother';
+    $noTest[] = 'paradeigma';
+    $noTest[] = 'personororganization';
+    $noTest[] = 'pulse';
+    $noTest[] = 'uikey';
+    $noTest[] = 'vaesoli';
+    $noTest[] = 'version';
+    $noTest[] = 'websitegenerator';
+    $noTest[] = 'zip';
 
     $i = 0;
+
     foreach( $oDoc->self['family'] as $szFile )
     {
         if ( preg_match('/trql\.(?P<class>.*?)\.class\.php/i',$szFile,$aMatches ) )
@@ -101,7 +119,7 @@ if ( true )
             {
                 $szClass = '\\trql\\' . strtolower( $aMatches['class'] ) . '\\' . $aMatches['class'];
 
-                if ( strtolower( $szClass ) > '\trql\backgroundnewsarticle\backgroundnewsarticle' )
+                //if ( strtolower( $szClass ) > '\trql\shortstory\shortstory' )
                 {
                     var_dump( ++$i . ': ' . $szClass );
                     $o = new $szClass();

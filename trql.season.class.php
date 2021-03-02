@@ -79,7 +79,7 @@ defined( 'SEASON_CLASS_VERSION' ) or define( 'SEASON_CLASS_VERSION','0.1' );
     {*warning
 
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 28-08-2020 16:30. IT HAS NOT BEEN TESTED YET![br][br]
+        on 28-08-2020 16:30.[br][br]
 
         This class has been announced "superseded" by [c]CreativeWorkSeason[/c]. Consequently,
         it has been set as an extended class of CreativeWorkSeason to serve as an alias.

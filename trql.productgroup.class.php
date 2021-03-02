@@ -102,13 +102,13 @@ defined( 'PRODUCTGROUP_CLASS_VERSION' ) or define( 'PRODUCTGROUP_CLASS_VERSION',
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 25-08-2020 11:16. IT HAS NOT BEEN TESTED YET!
+        on 25-08-2020 11:16.
     *}
 
  */
 /* ==================================================================================== */
 class ProductGroup extends Product
-/*--------------------------------------*/
+/*------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -153,8 +153,6 @@ class ProductGroup extends Product
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
     }   /* End of ProductGroup.__construct() ========================================== */
     /* ================================================================================ */
@@ -185,8 +183,6 @@ class ProductGroup extends Product
         $this->necroSignaling();
     }   /* End of ProductGroup.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class ProductGroup ====================================================== */
 /* ==================================================================================== */
-
 ?>

@@ -80,7 +80,7 @@ defined( 'RADIATIONTHERAPY_CLASS_VERSION' ) or define( 'RADIATIONTHERAPY_CLASS_V
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 28-08-2020 16:28. IT HAS NOT BEEN TESTED YET!
+        on 28-08-2020 16:28.
     *}
 
  */

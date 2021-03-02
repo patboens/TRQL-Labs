@@ -86,7 +86,7 @@ defined( 'OPINIONNEWSARTICLE_CLASS_VERSION' ) or define( 'OPINIONNEWSARTICLE_CLA
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 28-08-2020 14:01. IT HAS NOT BEEN TESTED YET!
+        on 28-08-2020 14:01.
     *}
 
  */

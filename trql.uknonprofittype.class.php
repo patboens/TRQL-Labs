@@ -81,7 +81,7 @@ defined( 'UKNONPROFITTYPE_CLASS_VERSION' ) or define( 'UKNONPROFITTYPE_CLASS_VER
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 28-08-2020 16:41. IT HAS NOT BEEN TESTED YET!
+        on 28-08-2020 16:41.
     *}
 
  */

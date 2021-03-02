@@ -79,7 +79,7 @@ defined( 'EMAILMESSAGE_CLASS_VERSION' ) or define( 'EMAILMESSAGE_CLASS_VERSION',
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 18:46. IT HAS NOT BEEN TESTED YET!
+        on 26-08-2020 18:46.
     *}
 
  */

@@ -86,13 +86,13 @@ defined( 'QUANTITY_CLASS_VERSION' ) or define( 'QUANTITY_CLASS_VERSION','0.1' );
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 25-08-2020 13:20. IT HAS NOT BEEN TESTED YET!
+        on 25-08-2020 13:20.
     *}
 
  */
 /* ==================================================================================== */
 class Quantity extends Intangible
-/*--------------------------------------*/
+/*-----------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -104,8 +104,9 @@ class Quantity extends Intangible
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
-
+    public      $wikidataId                     = 'Q309314';        /* {*property   $wikidataId                     (string)                        Wikidata ID. Property that exists in a range of 
+                                                                                                                                                    magnitudes or multitudes; property that can exist
+                                                                                                                                                    as a magnitude or multitude. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -161,8 +162,6 @@ class Quantity extends Intangible
         $this->necroSignaling();
     }   /* End of Quantity.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class Quantity ========================================================== */
 /* ==================================================================================== */
-
 ?>

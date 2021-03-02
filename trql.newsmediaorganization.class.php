@@ -86,7 +86,7 @@ defined( 'NEWSMEDIAORGANIZATION_CLASS_VERSION' ) or define( 'NEWSMEDIAORGANIZATI
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 21:40. IT HAS NOT BEEN TESTED YET!
+        on 26-08-2020 21:40.
     *}
 
  */

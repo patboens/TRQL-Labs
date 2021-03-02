@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -86,7 +84,7 @@ defined( 'INFORMACTION_CLASS_VERSION' ) or define( 'INFORMACTION_CLASS_VERSION',
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 25-08-2020 13:56. IT HAS NOT BEEN TESTED YET!
+        on 25-08-2020 13:56.
     *}
 
  */
@@ -107,7 +105,7 @@ class InformAction extends CommunicateAction
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -131,8 +129,6 @@ class InformAction extends CommunicateAction
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of InformAction.__construct() ========================================== */
@@ -164,8 +160,6 @@ class InformAction extends CommunicateAction
         $this->necroSignaling();
     }   /* End of InformAction.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class InformAction ====================================================== */
 /* ==================================================================================== */
-
 ?>

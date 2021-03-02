@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 28-08-2020 16:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -48,13 +47,13 @@
 namespace trql\tvseries;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\creativework\CreativeWork     as CreativeWork
+use \trql\creativework\CreativeWork     as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'CREATIVEWORK, CREATIVEWORKSERIES_CLASS_VERSION' ) )
-    require_once( 'trql.creativework, creativeworkseries.class.php' );
+if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
+    require_once( 'trql.creativework.class.php' );
 
 defined( 'TVSERIES_CLASS_VERSION' ) or define( 'TVSERIES_CLASS_VERSION','0.1' );
 
@@ -78,7 +77,7 @@ defined( 'TVSERIES_CLASS_VERSION' ) or define( 'TVSERIES_CLASS_VERSION','0.1' );
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 28-08-2020 16:41. IT HAS NOT BEEN TESTED YET!
+        on 28-08-2020 16:41.
     *}
 
  */
@@ -138,8 +137,6 @@ class TVSeries extends CreativeWork
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of TVSeries.__construct() ============================================== */

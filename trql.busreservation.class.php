@@ -93,7 +93,7 @@ defined( 'BUSRESERVATION_CLASS_VERSION' ) or define( 'BUSRESERVATION_CLASS_VERSI
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 18:40. IT HAS NOT BEEN TESTED YET!
+        on 26-08-2020 18:40.
     *}
 
  */

@@ -2619,7 +2619,10 @@ Class DocumentorClass extends DocumentorSourceFileObject
 
         /* ******************************************************************************** */
         {   /* Let's try to load all the properties of the parent classes FIRST */
-            require_once( $this->oSourceFile->oHeader->szFileName );
+            if ( is_file( $this->oSourceFile->oHeader->szFileName ) )
+                require_once( $this->oSourceFile->oHeader->szFileName );
+            else
+                goto end;
 
             $class          = new \ReflectionClass( $o = new $szClass() );
             $aParentClasses = $this->getParentClasses( $class );
@@ -2680,6 +2683,7 @@ Class DocumentorClass extends DocumentorSourceFileObject
         }   /* if ( preg_match_all( '/\{\*property(?P<prop>.*?)\*\}/si',$this->szSourceCode,$aMatches,PREG_PATTERN_ORDER ) ) */
         /* ******************************************************************************** */
 
+        end:
         return ( $this );
     }   /* End of DocumentorClass.getDocumentedProperties() =========================== */
     /* ================================================================================ */

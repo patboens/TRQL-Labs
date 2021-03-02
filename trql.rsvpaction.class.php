@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -55,8 +53,8 @@
 /****************************************************************************************/
 namespace trql\rsvpaction;
 
-use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\informaction\InformAction as InformAction;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\informaction\InformAction     as InformAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -86,7 +84,7 @@ defined( 'RSVPACTION_CLASS_VERSION' ) or define( 'RSVPACTION_CLASS_VERSION','0.1
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 25-08-2020 14:00. IT HAS NOT BEEN TESTED YET!
+        on 25-08-2020 14:00.
     *}
 
  */
@@ -109,8 +107,8 @@ class RsvpAction extends InformAction
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
-
+    public      $wikidataId                     = 'Q311679';        /* {*property   $wikidataId                     (string)                        Wikidata ID. RSVP ... process by which people are asked to respond 
+                                                                                                                                                    to an invitation (the closes we can get). *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -133,8 +131,6 @@ class RsvpAction extends InformAction
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of RsvpAction.__construct() ============================================ */
@@ -166,8 +162,6 @@ class RsvpAction extends InformAction
         $this->necroSignaling();
     }   /* End of RsvpAction.__destruct() ============================================= */
     /* ================================================================================ */
-
 }   /* End of class RsvpAction ======================================================== */
 /* ==================================================================================== */
-
 ?>

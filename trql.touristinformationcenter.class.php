@@ -52,18 +52,14 @@
 /****************************************************************************************/
 namespace trql\touristinformationcenter;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\localbusiness\LocalBusiness       as LocalBusiness;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'LOCALBUSINESS_CLASS_VERSION' ) )
     require_once( 'trql.localbusiness.class.php' );
-
-
 
 defined( 'TOURISTINFORMATIONCENTER_CLASS_VERSION' ) or define( 'TOURISTINFORMATIONCENTER_CLASS_VERSION','0.1' );
 
@@ -103,8 +99,9 @@ class TouristInformationCenter extends LocalBusiness
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
-
+    public      $wikidataId                     = 'Q1587716';       /* {*property   $wikidataId                     (string)                    Wikidata ID. Tourism office ... Physical location that
+                                                                                                                                                provides tourist information on the place or attraction
+                                                                                                                                                where it is located *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -127,8 +124,6 @@ class TouristInformationCenter extends LocalBusiness
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of TouristInformationCenter.__construct() ============================== */
@@ -160,8 +155,6 @@ class TouristInformationCenter extends LocalBusiness
         $this->necroSignaling();
     }   /* End of TouristInformationCenter.__destruct() =============================== */
     /* ================================================================================ */
-
 }   /* End of class TouristInformationCenter ========================================== */
 /* ==================================================================================== */
-
 ?>

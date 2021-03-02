@@ -87,7 +87,6 @@ defined( 'USERINTERACTION_CLASS_VERSION' ) or define( 'USERINTERACTION_CLASS_VER
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-
     *}
 
  */

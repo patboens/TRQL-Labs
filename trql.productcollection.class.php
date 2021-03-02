@@ -76,7 +76,7 @@ defined( 'PRODUCTCOLLECTION_CLASS_VERSION' ) or define( 'PRODUCTCOLLECTION_CLASS
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 28-08-2020 16:28. IT HAS NOT BEEN TESTED YET!
+        on 28-08-2020 16:28.
     *}
 
  */
@@ -95,9 +95,10 @@ class ProductCollection extends Product
 
     public      $includesObject                 = null;             /* {*property   $includesObject                 (TypeAndQuantityNode)           This links to a node or nodes indicating the exact quantity of the
                                                                                                                                                     products included in an Offer or ProductCollection. *} */
+    public      $collectionSize                 = null;             /* {*property   $collectionSize                 (int)                           The number of items in the Collection. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId             = null;                     /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */

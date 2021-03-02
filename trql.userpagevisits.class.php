@@ -87,7 +87,7 @@ defined( 'USERPAGEVISITS_CLASS_VERSION' ) or define( 'USERPAGEVISITS_CLASS_VERSI
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 25-08-2020 11:44. IT HAS NOT BEEN TESTED YET!
+        on 25-08-2020 11:44.
     *}
 
  */

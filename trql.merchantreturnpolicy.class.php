@@ -53,9 +53,8 @@
 /****************************************************************************************/
 namespace trql\merchantreturnpolicy;
 
-use \trql\thing\Thing                       as Thing;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\intangible\Intangible    as Intangible;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\intangible\Intangible as Intangible;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -63,8 +62,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'INTANGIBLE_CLASS_VERSION' ) )
     require_once( 'trql.intangible.class.php' );
-
-
 
 defined( 'MERCHANTRETURNPOLICY_CLASS_VERSION' ) or define( 'MERCHANTRETURNPOLICY_CLASS_VERSION','0.1' );
 
@@ -116,7 +113,7 @@ class MerchantReturnPolicy extends Intangible
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -140,8 +137,6 @@ class MerchantReturnPolicy extends Intangible
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of MerchantReturnPolicy.__construct() ================================== */
@@ -173,7 +168,6 @@ class MerchantReturnPolicy extends Intangible
         $this->necroSignaling();
     }   /* End of MerchantReturnPolicy.__destruct() =================================== */
     /* ================================================================================ */
-
 }   /* End of class MerchantReturnPolicy ============================================== */
 /* ==================================================================================== */
 ?>

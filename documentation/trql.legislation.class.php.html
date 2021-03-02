@@ -22,137 +22,13 @@ table.properties tr.property td.description { width: 60%; }
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">26-08-2020 18:49</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">01/03/2021 - 16:02:04</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">02/03/2021 - 14:12:34</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>Legislation</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description"></span>
-<span class="DocumentorLabel">Properties: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$jurisdiction</code></td>
-<td class="type"><code>string|AdministrativeArea</code></td>
-<td class="description">Indicates a legal jurisdiction, e.g. of some legislation, or where
-                                                                                                                                                    some government service is based.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationApplies</code></td>
-<td class="type"><code>Legislation</code></td>
-<td class="description">Indicates that this legislation (or part of a legislation) somehow
-                                                                                                                                                    transfers another legislation in a different legislative context. This
-                                                                                                                                                    is an informative link, and it has no legal value. For legally-binding
-                                                                                                                                                    links of transposition, use the legislationTransposes property. For
-                                                                                                                                                    example an informative consolidated law of a European Union's member
-                                                                                                                                                    state "applies" the consolidated version of the European Directive
-                                                                                                                                                    implemented in it.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationChanges</code></td>
-<td class="type"><code>Legislation</code></td>
-<td class="description">Another legislation that this legislation changes. This encompasses
-                                                                                                                                                    the notions of amendment, replacement, correction, repeal, or other
-                                                                                                                                                    types of change. This may be a direct change (textual or non-textual
-                                                                                                                                                    amendment) or a consequential or indirect change. The property is to
-                                                                                                                                                    be used to express the existence of a change relationship between two
-                                                                                                                                                    acts rather than the existence of a consolidated version of the text
-                                                                                                                                                    that shows the result of the change. For consolidation relationships,
-                                                                                                                                                    use the legislationConsolidates property.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationConsolidates</code></td>
-<td class="type"><code>Legislation</code></td>
-<td class="description">Indicates another legislation taken into account in this consolidated
-                                                                                                                                                    legislation (which is usually the product of an editorial process that
-                                                                                                                                                    revises the legislation). This property should be used multiple times
-                                                                                                                                                    to refer to both the original version or the previous consolidated
-                                                                                                                                                    version, and to the legislations making the change.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationDate</code></td>
-<td class="type"><code>Date</code></td>
-<td class="description">The date of adoption or signature of the legislation. This is the date
-                                                                                                                                                    at which the text is officially aknowledged to be a legislation, even
-                                                                                                                                                    though it might not even be published or in force.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationDateVersion</code></td>
-<td class="type"><code>Date</code></td>
-<td class="description">The point-in-time at which the provided description of the legislation
-                                                                                                                                                    is valid (e.g. : when looking at the law on the 2016-04-07 (=
-                                                                                                                                                    dateVersion), I get the consolidation of 2015-04-12 of the "National
-                                                                                                                                                    Insurance Contributions Act 2015")</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationIdentifier</code></td>
-<td class="type"><code>string|URL</code></td>
-<td class="description">An identifier for the legislation. This can be either a string-based
-                                                                                                                                                    identifier, like the CELEX at EU level or the NOR in France, or a
-                                                                                                                                                    web-based, URL/URI identifier, like an ELI (European Legislation
-                                                                                                                                                    Identifier) or an URN-Lex.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationJurisdiction</code></td>
-<td class="type"><code>string|AdministrativeArea</code></td>
-<td class="description">The jurisdiction from which the legislation originates.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationLegalForce</code></td>
-<td class="type"><code>LegalForceStatus</code></td>
-<td class="description">Whether the legislation is currently in force, not in force, or
-                                                                                                                                                    partially in force.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationPassedBy</code></td>
-<td class="type"><code>Person|Organization</code></td>
-<td class="description">The person or organization that originally passed or made the law :
-                                                                                                                                                    typically parliament (for primary legislation) or government (for
-                                                                                                                                                    secondary legislation). This indicates the "legal author" of the law,
-                                                                                                                                                    as opposed to its physical author.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationResponsible</code></td>
-<td class="type"><code>Person|Organization</code></td>
-<td class="description">An individual or organization that has some kind of responsibility for
-                                                                                                                                                    the legislation. Typically the ministry who is/was in charge of
-                                                                                                                                                    elaborating the legislation, or the adressee for potential questions
-                                                                                                                                                    about the legislation once it is published.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationTransposes</code></td>
-<td class="type"><code>Legislation</code></td>
-<td class="description">Indicates that this legislation (or part of legislation) fulfills the
-                                                                                                                                                    objectives set by another legislation, by passing appropriate
-                                                                                                                                                    implementation measures. Typically, some legislations of European
-                                                                                                                                                    Union's member states or regions transpose European Directives. This
-                                                                                                                                                    indicates a legally binding link between the 2 legislations.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legislationType</code></td>
-<td class="type"><code>CategoryCode|string</code></td>
-<td class="description">The type of the legislation. Examples of values are "law", "act",
-                                                                                                                                                    "directive", "decree", "regulation", "statutory instrument", "loi
-                                                                                                                                                    organique", "règlement grand-ducal", etc., depending on the country.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Wikidata ID. NOT CHECKED SO FAR (25-02-21 18:17:24).</td>
-</tr>
-</table>
 </section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

@@ -16,57 +16,74 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
-    {*file                  trql.xpathtype.class.php *}
-    {*purpose               Text representing an XPath (typically but not necessarily
-                            version 1.0). *}
+    {*file                  trql.threedmodel.class.php *}
+    {*purpose               A 3D model represents some kind of 3D content, which may have 
+                            encodings in one or more MediaObjects. Many 3D formats are 
+                            available (e.g. see Wikipedia); specific encoding formats 
+                            can be represented using the encodingFormat property applied 
+                            to the relevant MediaObject. For thecase of a single file 
+                            published after Zip compression, the convention of 
+                            appending '+zip' to the encodingFormat can be used. 
+                            Geospatial, AR/VR, artistic/animation, gaming, engineering 
+                            and scientific content can all be represented using 3DModel. *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
-    {*cdate                 28-08-2020 16:43 *}
+    {*cdate                 26-08-2020 08:24 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
     -------------------------------------------------------------------------------------
 
     {*chist
-        {*mdate 28-08-2020 16:43 *}
+        {*mdate 26-08-2020 08:24 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Original creation
         *}
     *}
 
+    {*chist
+        {*mdate 02-03-21 16:03 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  3DModel renamed ThreeDModel
+        *}
+    *}
+
 
     *}}} */
 /****************************************************************************************/
-namespace trql\xpathtype;
+namespace trql\threedmodel;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\text\Text    as Text;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\mediaobject\MediaObject   as MediaObject;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'TEXT_CLASS_VERSION' ) )
-    require_once( 'trql.text.class.php' );
+if ( ! defined( 'MEDIAOBJECT_CLASS_VERSION' ) )
+    require_once( 'trql.mediaobject.class.php' );
 
-
-
-defined( 'XPATHTYPE_CLASS_VERSION' ) or define( 'XPATHTYPE_CLASS_VERSION','0.1' );
+defined( 'THREEDMODEL_CLASS_VERSION' ) or define( 'THREEDMODEL_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
-/** {{*class XPathType=
+/** {{*class ThreeDModel=
 
     {*desc
 
-        Text representing an XPath (typically but not necessarily version 1.0).
+        A 3D model represents some kind of 3D content, which may have encodings in one 
+        or more MediaObjects. Many 3D formats are available (e.g. see Wikipedia); 
+        specific encoding formats can be represented using the encodingFormat property 
+        applied to the relevant MediaObject. For thecase of a single file published 
+        after Zip compression, the convention of appending '+zip' to the encodingFormat 
+        can be used. Geospatial, AR/VR, artistic/animation, gaming, engineering and 
+        scientific content can all be represented using 3DModel.
 
     *}
 
@@ -76,17 +93,17 @@ defined( 'XPATHTYPE_CLASS_VERSION' ) or define( 'XPATHTYPE_CLASS_VERSION','0.1' 
         [url]http://schema.org/docs/terms.html[/url]
     *}
 
-    {*doc [url]http://schema.org/XPathType[/url] *}
+    {*doc [url]http://schema.org/3DModel[/url] *}
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 28-08-2020 16:43. IT HAS NOT BEEN TESTED YET!
+        on 26-08-2020 08:24.
     *}
 
  */
 /* ==================================================================================== */
-class XPathType extends Text
-/*--------------------------------------*/
+class ThreeDModel extends MediaObject
+/*---------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -97,11 +114,12 @@ class XPathType extends Text
                                'UIKey'  => null         ,
                              );
 
-    public      $                               = null;             /* {*property   $                               (string)                        http://schema.org/Vehicle *} */
-
+    public      $isResizable                    = null;             /* {*property   $isResizable                    (boolean)                       Whether the 3DModel allows resizing. For example, room layout
+                                                                                                                                                    applications often do not allow 3DModel elements to be resized to
+                                                                                                                                                    reflect reality. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -126,10 +144,8 @@ class XPathType extends Text
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of XPathType.__construct() ========================================== */
+    }   /* End of ThreeDModel.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -156,10 +172,8 @@ class XPathType extends Text
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of XPathType.__destruct() =========================================== */
+    }   /* End of ThreeDModel.__destruct() ============================================ */
     /* ================================================================================ */
-
-}   /* End of class XPathType ====================================================== */
+}   /* End of class ThreeDModel ======================================================= */
 /* ==================================================================================== */
-
 ?>

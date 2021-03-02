@@ -6,7 +6,7 @@ code, .filename { color: crimson; font-family: Consolas,"courier new" }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
 .shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
-table.properties { border:1px solid silver; border-collapse: collapse; }
+table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
 table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
 table.properties thead th.description { width:60%; }
 table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
@@ -21,7 +21,7 @@ table.properties tr.property td.description { width: 60%; }
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">16-08-20 19:19</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">12/11/2020 - 07:06:59</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">28/02/2021 - 10:00:07</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 <span class="DocumentorLabel">Abstract: </span><span class="property abstract">The <code>Documentor</code> class helps document ALL TRQL Labs classes
                             defined in <a href="?file=d:\websites\snippet-center\" title="View d:\websites\snippet-center\">d:\websites\snippet-center\</a>.<br /><br />
@@ -83,266 +83,46 @@ table.properties tr.property td.description { width: 60%; }
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>Documentor</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">Self-documentation class for the entirety of TRQL.</span>
-<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Documentor extends CreativeWork implements iContext</code></span>
-<span class="DocumentorLabel">Properties: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-</table>
-<span class="DocumentorLabel">Methods: </span>
-<span class="property func"><code>__construct()</code></span>, 
-<span class="property func"><code>documentAll()</code></span>, 
-<span class="property func"><code>document()</code></span>, 
-<span class="property func"><code>speak()</code></span>, 
-<span class="property func"><code>sing()</code></span>, 
-<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorFile</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">A file</span>
-<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>Class DocumentorFile extends CreativeWork</code></span>
-<span class="DocumentorLabel">Methods: </span>
-<span class="property func"><code>__construct()</code></span>, 
-<span class="property func"><code>readFile()</code></span>, 
-<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorSourceFile</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">A source file. There is also a class called SoftwareSourceCode. We have decided
         not to use it so far and prefer to use the DocumentorFile class.</span>
-<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>Class DocumentorSourceFile extends DocumentorFile</code></span>
-<span class="DocumentorLabel">Properties: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="property">
-<td class="name"><code>$aDocumentedClasses</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Classes documented. See also $aDefinedClasses</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$aDefinedClasses</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Classes detected by source code parsing. There may be
-                                                                                                                                                    less classes in $aDocumentedClasses because they may
-                                                                                                                                                    be not documented</td>
-</tr>
-</table>
-<span class="DocumentorLabel">Methods: </span>
-<span class="property func"><code>__construct()</code></span>, 
-<span class="property func"><code>getHeader()</code></span>, 
-<span class="property func"><code>getClassesDefinedInCodeOld()</code></span></section> <!-- .class -->
+</section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorSourceFileObject</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">An object that is found in a DocumentorSourceFile: a history block, a class, a
         function, a parameter, a comment, a method, a property, a constant, a variable,
         ...</span>
-<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>Class DocumentorSourceFileObject extends Thing</code></span>
-<span class="DocumentorLabel">Methods: </span>
-<span class="property func"><code>__construct()</code></span>, 
-<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorClass</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">A class</span>
-<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>Class DocumentorClass extends DocumentorSourceFileObject</code></span>
-<span class="DocumentorLabel">Properties: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="property">
-<td class="name"><code>$szDeclaration</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Class declaration (e.g. "class AdministrativeArea extends Place implements iContext" )</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$aProperties</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">A set of properties</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$aMethods</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">A set of methods</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$oSourceFile</code></td>
-<td class="type"><code>DocumentorSourceFile</code></td>
-<td class="description">The source file object this class has been declared in</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szNamespace</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Namespace of the class if any</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szTODOs</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A list of TODOs</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szWarning</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A warning</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szRemark</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A remark</td>
-</tr>
-</table>
-<span class="DocumentorLabel">Methods: </span>
-<span class="property func"><code>__construct()</code></span>, 
-<span class="property func"><code>__get()</code></span>, 
-<span class="property func"><code>parseDefinition()</code></span>, 
-<span class="property func"><code>getProperties()</code></span>, 
-<span class="property func"><code>getMethods()</code></span>, 
-<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorClassProperty</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">A property of a class</span>
-<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>Class DocumentorClassProperty extends DocumentorSourceFileObject</code></span>
-<span class="DocumentorLabel">Properties: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="property">
-<td class="name"><code>$szTypes</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Types this property can take</td>
-</tr>
-</table>
-<span class="DocumentorLabel">Methods: </span>
-<span class="property func"><code>__construct()</code></span>, 
-<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorFileHeader</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">File header block</span>
-<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>Class DocumentorFileHeader extends DocumentorSourceFileObject</code></span>
-<span class="DocumentorLabel">Properties: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="property">
-<td class="name"><code>$oSourceFile</code></td>
-<td class="type"><code>DocumentorSourceFile</code></td>
-<td class="description">The source file the header belongs to</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szFileName</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Source filename</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szPurpose</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Purpose of the code included in the source file</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$author</code></td>
-<td class="type"><code>Organization|Person</code></td>
-<td class="description">Author(s) of the code included in the source file.
-                                                                                                                                                        Supersedes <code>$szAuthor</code></td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szCompany</code></td>
-<td class="type"><code>string|Corporation|Organization|LocalBusiness</code></td>
-<td class="description">Company name</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szCDate</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">File creation datetime of <code>$oSourceFile</code></td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szMDate</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Last modification datetime of <code>$oSourceFile</code></td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szLicense</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">License assigned to the source code included in the source file</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$aHistory</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">A set of history blocks - changes made to the source file</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szTODOs</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A list of TODOs</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$image</code></td>
-<td class="type"><code>ImageObject|string</code></td>
-<td class="description">An image of the item. This can be a URL or a fully described
-                                                                                                                                                        ImageObject.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$thumbnailUrl</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A thumbnail image relevant to the oSourceFile property</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$abstract</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A general explanation/disambiguation about what the class aims
-                                                                                                                                                        to solve. Supersedes $szAbstract because we have prefered to use
-                                                                                                                                                        a common vocabulary.</td>
-</tr>
-</table>
-<span class="DocumentorLabel">Methods: </span>
-<span class="property func"><code>__construct()</code></span>, 
-<span class="property func"><code>render()</code></span></section> <!-- .class -->
+</section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorHistory</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">Change History block (can be pertaining to header, class, trait, interface,
         function or method)</span>
-<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>Class DocumentorHistory extends DocumentorSourceFileObject</code></span>
-<span class="DocumentorLabel">Methods: </span>
-<span class="property func"><code>__construct()</code></span>, 
-<span class="property func"><code>parse()</code></span>, 
-<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorFunction</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">A function or a method</span>
-<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>Class DocumentorFunction extends DocumentorSourceFileObject</code></span>
-<span class="DocumentorLabel">Methods: </span>
-<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorFunctionParameter</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">A paramater of a function or method (both work the same way)</span>
-<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>Class DocumentorFunctionParameter extends DocumentorSourceFileObject</code></span>
-<span class="DocumentorLabel">Methods: </span>
-<span class="property func"><code>__destruct()</code></span></section> <!-- .class -->
+</section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

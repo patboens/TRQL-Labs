@@ -87,7 +87,7 @@ defined( 'LIQUORSTORE_CLASS_VERSION' ) or define( 'LIQUORSTORE_CLASS_VERSION','0
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 18:49. IT HAS NOT BEEN TESTED YET!
+        on 26-08-2020 18:49.
     *}
 
  */

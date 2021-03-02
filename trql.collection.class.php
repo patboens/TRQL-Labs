@@ -79,7 +79,7 @@ defined( 'COLLECTION_CLASS_VERSION' ) or define( 'COLLECTION_CLASS_VERSION','0.1
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 18:40. IT HAS NOT BEEN TESTED YET!
+        on 26-08-2020 18:40.
     *}
 
  */
@@ -98,9 +98,9 @@ class Collection extends CreativeWork
 
     public      $collectionSize                 = null;             /* {*property   $collectionSize                 (int)                           The number of items in the Collection. *} */
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
-
+    public      $wikidataId                     = 'Q2668072';       /* {*property   $wikidataId                     (string)                        Wikidata ID. Set of purposefully gathered physical or 
+                                                                                                                                                    digital objects with some common characteristics. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -124,10 +124,8 @@ class Collection extends CreativeWork
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        //$this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
-
         return ( $this );
-    }   /* End of Collection.__construct() ========================================== */
+    }   /* End of Collection.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -152,10 +150,10 @@ class Collection extends CreativeWork
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of Collection.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Collection.__destruct() ============================================= */
     /* ================================================================================ */
-
-}   /* End of class Collection ====================================================== */
+}   /* End of class Collection ======================================================== */
 /* ==================================================================================== */
-
 ?>

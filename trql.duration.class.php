@@ -57,7 +57,6 @@ namespace trql\duration;
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\quantity\Quantity     as Quantity;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
@@ -85,7 +84,7 @@ defined( 'DURATION_CLASS_VERSION' ) or define( 'DURATION_CLASS_VERSION','0.1' );
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 25-08-2020 13:22. IT HAS NOT BEEN TESTED YET!
+        on 25-08-2020 13:22.
     *}
 
  */
@@ -102,8 +101,9 @@ class Duration extends Quantity
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
-
+    public      $wikidataId                     = 'Q2199864';       /* {*property   $wikidataId                     (string)                        Wikidata ID. Length of time of an event or process;
+                                                                                                                                                    quality of an event or process with beginning and 
+                                                                                                                                                    end. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -157,8 +157,6 @@ class Duration extends Quantity
         $this->necroSignaling();
     }   /* End of Duration.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class Duration ========================================================== */
 /* ==================================================================================== */
-
 ?>

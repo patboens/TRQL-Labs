@@ -100,8 +100,9 @@ class TravelAgency extends LocalBusiness
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
-
+    public      $wikidataId                     = 'Q217107';        /* {*property   $wikidataId                     (string)                    Wikidata ID. Private retailer or public service 
+                                                                                                                                                that provides tourism-related services to the 
+                                                                                                                                                public. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -124,8 +125,6 @@ class TravelAgency extends LocalBusiness
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of TravelAgency.__construct() ========================================== */
@@ -157,8 +156,6 @@ class TravelAgency extends LocalBusiness
         $this->necroSignaling();
     }   /* End of TravelAgency.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class TravelAgency ====================================================== */
 /* ==================================================================================== */
-
 ?>

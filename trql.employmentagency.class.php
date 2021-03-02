@@ -52,18 +52,14 @@
 /****************************************************************************************/
 namespace trql\employmentagency;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\localbusiness\LocalBusiness       as LocalBusiness;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'LOCALBUSINESS_CLASS_VERSION' ) )
     require_once( 'trql.localbusiness.class.php' );
-
-
 
 defined( 'EMPLOYMENTAGENCY_CLASS_VERSION' ) or define( 'EMPLOYMENTAGENCY_CLASS_VERSION','0.1' );
 
@@ -92,7 +88,7 @@ defined( 'EMPLOYMENTAGENCY_CLASS_VERSION' ) or define( 'EMPLOYMENTAGENCY_CLASS_V
  */
 /* ==================================================================================== */
 class EmploymentAgency extends LocalBusiness
-/*--------------------------------------*/
+/*----------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -102,10 +98,9 @@ class EmploymentAgency extends LocalBusiness
                                'family' => null         ,
                              );
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                    Wikidata ID. No equivalent. *} */
-
+    public      $wikidataId                     = 'Q261362';        /* {*property   $wikidataId                     (string)                    Wikidata ID. An organization that helps 
+                                                                                                                                                people find a job. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -128,8 +123,6 @@ class EmploymentAgency extends LocalBusiness
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of EmploymentAgency.__construct() ====================================== */
@@ -161,8 +154,6 @@ class EmploymentAgency extends LocalBusiness
         $this->necroSignaling();
     }   /* End of EmploymentAgency.__destruct() ======================================= */
     /* ================================================================================ */
-
 }   /* End of class EmploymentAgency ================================================== */
 /* ==================================================================================== */
-
 ?>

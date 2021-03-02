@@ -51,8 +51,8 @@
         *}}
      */
 /****************************************************************************** */
-use \trql\vaesoli\Vaesoli                   as v;
-use \trql\zip\Zip as zip;
+use \trql\vaesoli\Vaesoli   as v;
+use \trql\utility\Zip       as Zip;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'd:/websites/snippet-center/trql.vaesoli.class.php' );
@@ -60,7 +60,7 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 if ( ! defined( 'ZIP_CLASS_VERSION' ) )
     require_once( 'd:/websites/snippet-center/trql.zip.class.php' );
 
-$o = new zip();
+$o = new Zip();
 
 end:
 var_dump( $o->lastInfo );

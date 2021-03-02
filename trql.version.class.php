@@ -1,20 +1,35 @@
 <?php
 /****************************************************************************************/
+/*
+    {PYB} is a shortcut for Patrick Boens
+
+    {COMPANY} is a shortcut to "Lato Sensu Management"
+
+    {RIGHTS} is a shortcut used by trql.documentor.class.php. In general the material
+    presented here is available under the conditions of 
+    https://creativecommons.org/licenses/by-sa/4.0/
+
+    Other shortcuts exist. They exist to make it simple to change the formulation
+    of parts that can vary over time.
+
+    It does not change the undisputed truth that ALL code has been created by
+    Patrick Boens, the author, who owns ALL the intellectual property of what
+    he created.
+
+*/
+
 /** {{{*fheader
     {*file                  trql.version.class.php *}
     {*purpose               Version object *}
     {*author                {PYB} *}
-    {*company               Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 30-07-20 15:48 *}
     {*mdate                 auto *}
     {*license               All rights reserved to Lato Sensu Management
                             for all countries. All Intellectual Property
                             belongs to Patrick Boens. *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -41,9 +56,8 @@
 /****************************************************************************************/
 namespace trql\version;
 
-use \trql\vaesoli\vaesoli                           as vaesoli;
-use \trql\thing\Thing                               as Thing;
-
+use \trql\vaesoli\vaesoli       as vaesoli;
+use \trql\thing\Thing           as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -52,7 +66,6 @@ if ( ! defined( 'THING_CLASS_VERSION' ) )
     require_once( 'trql.thing.class.php' );
 
 defined( 'VERSION_CLASS_VERSION' ) or define( 'VERSION_CLASS_VERSION','0.1' );
-
 
 /* ==================================================================================== */
 /** {{*class Version=
@@ -75,16 +88,18 @@ class Version extends Thing
                                'family' => null         ,
                              );
 
-    public  $iMajor                 = 0;                            /* {*property   $iMajor         (int)       Major version number (e.g. [c]5[/c]) *} */
-    public  $iMinor                 = 0;                            /* {*property   $iMinor         (int)       Minor version number (e.g. [c]4[/c]) *} */
-    public  $Revision               = '';                           /* {*property   $Revision       (string)    Revision (e.g [c]'0015b'[/c]) *} */
-    public  $Build                  = '';                           /* {*property   $Build          (string)    Build (e.g [c]'Genome and gene interaction in LSContainers'[/c]) *} */
-    public  $ReleaseType            = '';                           /* {*property   $ReleaseType    (string)    Release type (alpha, beta, release candidate, final release, ...) (e.g [c]'beta'[/c]) *} */
-    public  $szCodeName             = '';                           /* {*property   $szCodeName     (string)    Codename (e.g [c]Quitus Rebooted[/c]) *} */
-    public  $szDateTime             = '';                           /* {*property   $szDateTime     (string)    Version date & time (e.g [c]'20130905082700'[/c]) *} */
-    public  $aCredits               = array();                      /* {*property   $aCredits       (array)     An array of possible credits *} */
+    public      $iMajor                 = 0;                        /* {*property   $iMajor         (int)       Major version number (e.g. [c]5[/c]) *} */
+    public      $iMinor                 = 0;                        /* {*property   $iMinor         (int)       Minor version number (e.g. [c]4[/c]) *} */
+    public      $Revision               = '';                       /* {*property   $Revision       (string)    Revision (e.g [c]'0015b'[/c]) *} */
+    public      $Build                  = '';                       /* {*property   $Build          (string)    Build (e.g [c]'Genome and gene interaction in LSContainers'[/c]) *} */
+    public      $ReleaseType            = '';                       /* {*property   $ReleaseType    (string)    Release type (alpha, beta, release candidate, final release, ...) (e.g [c]'beta'[/c]) *} */
+    public      $szCodeName             = '';                       /* {*property   $szCodeName     (string)    Codename (e.g [c]Quitus Rebooted[/c]) *} */
+    public      $szDateTime             = '';                       /* {*property   $szDateTime     (string)    Version date & time (e.g [c]'20130905082700'[/c]) *} */
+    public      $aCredits               = array();                  /* {*property   $aCredits       (array)     An array of possible credits *} */
 
-
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId             = 'Q20826013';              /* {*property   $wikidataId     (string)    Wikidata ID. Software version ... defined and 
+                                                                                                                identifiable development stage of a software product*} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -104,6 +119,7 @@ class Version extends Thing
     /* ================================================================================ */
     public function __construct( $szHome = null )
     /*-----------------------------------------*/
+    {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
@@ -378,10 +394,8 @@ class Version extends Thing
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of Version.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class Version =========================================================== */
 /* ==================================================================================== */
 ?>

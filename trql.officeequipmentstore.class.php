@@ -124,8 +124,6 @@ class OfficeEquipmentStore extends Store
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
     }   /* End of OfficeEquipmentStore.__construct() ================================== */
     /* ================================================================================ */
@@ -156,8 +154,6 @@ class OfficeEquipmentStore extends Store
         $this->necroSignaling();
     }   /* End of OfficeEquipmentStore.__destruct() =================================== */
     /* ================================================================================ */
-
 }   /* End of class OfficeEquipmentStore ============================================== */
 /* ==================================================================================== */
-
 ?>
