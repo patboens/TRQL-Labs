@@ -98,7 +98,7 @@ defined( 'WARRANTYSCOPE_CLASS_VERSION' ) or define( 'WARRANTYSCOPE_CLASS_VERSION
  */
 /* ==================================================================================== */
 class WarrantyScope extends Enumeration
-/*--------------------------------------*/
+/*-----------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
