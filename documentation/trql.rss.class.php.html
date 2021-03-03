@@ -27,18 +27,555 @@ table.properties tr.property td.description { width: 60%; }
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>RSS</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description"></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. No equivalent.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$ttl</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Time-to-Live in sec; 1 full day by default</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szContent</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The content read from an URL</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$oDom</code></td>
+<td class="type"><code>DOMDocument</code></td>
+<td class="description">Internal DOMDocument</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aChannels</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of channels found in the RSS feed</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Family of web feed formats</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$oForm</code></td>
+<td class="type"><code>Form</code></td>
+<td class="description">Form that is generated via <code>__toForm()</code></td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szClass</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">CSS class of the RSS form (<code>__toForm()</code>)</td>
+</tr>
+</table>
 </section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>DataFeedItem</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description"></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$additionalType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An additional type for the item,
+                                                                                                                                        typically used for adding more
+                                                                                                                                        specific types from external
+                                                                                                                                        vocabularies in microdata syntax.
+                                                                                                                                        This is a relationship between
+                                                                                                                                        something and a class that the
+                                                                                                                                        thing is in. In RDFa syntax, it is
+                                                                                                                                        better to use the native RDFa
+                                                                                                                                        syntax - the 'typeof' attribute
+                                                                                                                                        - for multiple types.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A short description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A
+                                                                                                                                        short description of the item used
+                                                                                                                                        to disambiguate from other, similar
+                                                                                                                                        items. Information from other
+                                                                                                                                        properties (in particular, name)
+                                                                                                                                        may be necessary for the description
+                                                                                                                                        to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$image</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of an image of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$identifier</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The identifier property represents any
+                                                                                                                                        kind of identifier for any kind of Thing,
+                                                                                                                                        such as ISBNs, GTIN codes, UUIDs etc.
+                                                                                                                                        http://schema.org provides dedicated
+                                                                                                                                        properties for representing many of these,
+                                                                                                                                        either as textual strings or as URL (URI)
+                                                                                                                                        links. See <a
+                                                                                                                                        href="https://schema.org/docs/datamodel.html#identifierBg">
+                                                                                                                                        background notes</a>
+                                                                                                                                        for more details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates a page (or other CreativeWork)
+                                                                                                                                        for which this thing is the main entity
+                                                                                                                                        being described. See <a
+                                                                                                                                        href="https://schema.org/docs/datamodel.html#mainEntityBackground">
+                                                                                                                                        background notes</a> for details.
+                                                                                                                                        Inverse property: mainEntity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential Action, which
+                                                                                                                                        describes an idealized action in which
+                                                                                                                                        this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+                                                                                                                                        unambiguously indicates the item's
+                                                                                                                                        identity. E.g. the URL of the
+                                                                                                                                        item's Wikipedia page, Freebase
+                                                                                                                                        page, or official website.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A CreativeWork or Event about this Thing. 
+                                                                                                                                        Inverse property: about.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$url</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">WikidataId ... entity ... a thing with independent and 
+                                                                                                                                        distinct existence</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$dateCreated</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The date on which the CreativeWork was created or the item was
+                                                                                                                                                            added to a DataFeed.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$dateDeleted</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The datetime the item was removed from the DataFeed.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$dateModified</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The date on which the CreativeWork was most recently modified or
+                                                                                                                                                            when the item's entry was modified within a DataFeed.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$item</code></td>
+<td class="type"><code>Thing</code></td>
+<td class="description">An entity represented by an entry in a list or data feed
+                                                                                                                                                            (e.g. an 'artist' in a list of 'artists').</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$datePublication</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The date the feed can be published</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$identifier</code></td>
+<td class="type"><code>PropertyValue|string|URL</code></td>
+<td class="description">The identifier property represents any kind of identifier for any
+                                                                                                                                                            kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org
+                                                                                                                                                            provides dedicated properties for representing many of these,
+                                                                                                                                                            either as textual strings or as URL (URI) links. See background
+                                                                                                                                                            notes for more details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$comment</code></td>
+<td class="type"><code>Comment</code></td>
+<td class="description">A comment on an item</td>
+</tr>
+</table>
 </section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>RSSChannel</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description"></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$additionalType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An additional type for the item,
+                                                                                                                                        typically used for adding more
+                                                                                                                                        specific types from external
+                                                                                                                                        vocabularies in microdata syntax.
+                                                                                                                                        This is a relationship between
+                                                                                                                                        something and a class that the
+                                                                                                                                        thing is in. In RDFa syntax, it is
+                                                                                                                                        better to use the native RDFa
+                                                                                                                                        syntax - the 'typeof' attribute
+                                                                                                                                        - for multiple types.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A short description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A
+                                                                                                                                        short description of the item used
+                                                                                                                                        to disambiguate from other, similar
+                                                                                                                                        items. Information from other
+                                                                                                                                        properties (in particular, name)
+                                                                                                                                        may be necessary for the description
+                                                                                                                                        to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$image</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of an image of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$identifier</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The identifier property represents any
+                                                                                                                                        kind of identifier for any kind of Thing,
+                                                                                                                                        such as ISBNs, GTIN codes, UUIDs etc.
+                                                                                                                                        http://schema.org provides dedicated
+                                                                                                                                        properties for representing many of these,
+                                                                                                                                        either as textual strings or as URL (URI)
+                                                                                                                                        links. See <a
+                                                                                                                                        href="https://schema.org/docs/datamodel.html#identifierBg">
+                                                                                                                                        background notes</a>
+                                                                                                                                        for more details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates a page (or other CreativeWork)
+                                                                                                                                        for which this thing is the main entity
+                                                                                                                                        being described. See <a
+                                                                                                                                        href="https://schema.org/docs/datamodel.html#mainEntityBackground">
+                                                                                                                                        background notes</a> for details.
+                                                                                                                                        Inverse property: mainEntity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential Action, which
+                                                                                                                                        describes an idealized action in which
+                                                                                                                                        this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+                                                                                                                                        unambiguously indicates the item's
+                                                                                                                                        identity. E.g. the URL of the
+                                                                                                                                        item's Wikipedia page, Freebase
+                                                                                                                                        page, or official website.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A CreativeWork or Event about this Thing. 
+                                                                                                                                        Inverse property: about.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$url</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">WikidataId ... entity ... a thing with independent and 
+                                                                                                                                        distinct existence</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+</table>
 </section> <!-- .class -->
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>RSSItem</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description"></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$additionalType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An additional type for the item,
+                                                                                                                                        typically used for adding more
+                                                                                                                                        specific types from external
+                                                                                                                                        vocabularies in microdata syntax.
+                                                                                                                                        This is a relationship between
+                                                                                                                                        something and a class that the
+                                                                                                                                        thing is in. In RDFa syntax, it is
+                                                                                                                                        better to use the native RDFa
+                                                                                                                                        syntax - the 'typeof' attribute
+                                                                                                                                        - for multiple types.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A short description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A
+                                                                                                                                        short description of the item used
+                                                                                                                                        to disambiguate from other, similar
+                                                                                                                                        items. Information from other
+                                                                                                                                        properties (in particular, name)
+                                                                                                                                        may be necessary for the description
+                                                                                                                                        to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$image</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of an image of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$identifier</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The identifier property represents any
+                                                                                                                                        kind of identifier for any kind of Thing,
+                                                                                                                                        such as ISBNs, GTIN codes, UUIDs etc.
+                                                                                                                                        http://schema.org provides dedicated
+                                                                                                                                        properties for representing many of these,
+                                                                                                                                        either as textual strings or as URL (URI)
+                                                                                                                                        links. See <a
+                                                                                                                                        href="https://schema.org/docs/datamodel.html#identifierBg">
+                                                                                                                                        background notes</a>
+                                                                                                                                        for more details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates a page (or other CreativeWork)
+                                                                                                                                        for which this thing is the main entity
+                                                                                                                                        being described. See <a
+                                                                                                                                        href="https://schema.org/docs/datamodel.html#mainEntityBackground">
+                                                                                                                                        background notes</a> for details.
+                                                                                                                                        Inverse property: mainEntity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential Action, which
+                                                                                                                                        describes an idealized action in which
+                                                                                                                                        this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+                                                                                                                                        unambiguously indicates the item's
+                                                                                                                                        identity. E.g. the URL of the
+                                                                                                                                        item's Wikipedia page, Freebase
+                                                                                                                                        page, or official website.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A CreativeWork or Event about this Thing. 
+                                                                                                                                        Inverse property: about.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$url</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">WikidataId ... entity ... a thing with independent and 
+                                                                                                                                        distinct existence</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$dateCreated</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The date on which the CreativeWork was created or the item was
+                                                                                                                                                            added to a DataFeed.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$dateDeleted</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The datetime the item was removed from the DataFeed.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$dateModified</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The date on which the CreativeWork was most recently modified or
+                                                                                                                                                            when the item's entry was modified within a DataFeed.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$item</code></td>
+<td class="type"><code>Thing</code></td>
+<td class="description">An entity represented by an entry in a list or data feed
+                                                                                                                                                            (e.g. an 'artist' in a list of 'artists').</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$datePublication</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The date the feed can be published</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$identifier</code></td>
+<td class="type"><code>PropertyValue|string|URL</code></td>
+<td class="description">The identifier property represents any kind of identifier for any
+                                                                                                                                                            kind of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org
+                                                                                                                                                            provides dedicated properties for representing many of these,
+                                                                                                                                                            either as textual strings or as URL (URI) links. See background
+                                                                                                                                                            notes for more details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$comment</code></td>
+<td class="type"><code>Comment</code></td>
+<td class="description">A comment on an item</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$source</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The RSS channel that the item came from
+                                                                                                                                                            (e.g. <source url="http://www.quotationspage.com/data/qotd.rss">Quotes
+                                                                                                                                                            of the Day</source>)</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$summary</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Summary of the item</td>
+</tr>
+</table>
 </section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

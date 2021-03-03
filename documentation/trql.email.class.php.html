@@ -27,6 +27,112 @@ table.properties tr.property td.description { width: 60%; }
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>Email</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description"></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. No equivalent.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$ttl</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Time-to-Live in sec; 1 full day by default</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. A single message, sent by email</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szHost</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Host to connect to</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$iPort</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Connection port</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szMailType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Mail format (can also be text/html)</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szCharset</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Character set</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szDomain</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Domaine internet</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$iPriority</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Mail priority (1 = highest ... 5 = lowest)</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szFromName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Sender name */
+    public      $szFromEmail        = null;                         /* {*property   $szFromEmail                    (string)                Sender Email address</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szTo</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Recipient's email address (can be multiple with a ',' separated string</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szCC</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Email address of copy</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szBCC</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Blind copy email address</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szSubject</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Subject of the email</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szBody</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Body of the mail</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aFiles</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">List of attachments</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$szLogFile</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Possible log file</td>
+</tr>
+</table>
 </section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

@@ -27,6 +27,498 @@ table.properties tr.property td.description { width: 60%; }
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>Taxi</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description"></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$additionalType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An additional type for the item,
+                                                                                                                                        typically used for adding more
+                                                                                                                                        specific types from external
+                                                                                                                                        vocabularies in microdata syntax.
+                                                                                                                                        This is a relationship between
+                                                                                                                                        something and a class that the
+                                                                                                                                        thing is in. In RDFa syntax, it is
+                                                                                                                                        better to use the native RDFa
+                                                                                                                                        syntax - the 'typeof' attribute
+                                                                                                                                        - for multiple types.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A short description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A
+                                                                                                                                        short description of the item used
+                                                                                                                                        to disambiguate from other, similar
+                                                                                                                                        items. Information from other
+                                                                                                                                        properties (in particular, name)
+                                                                                                                                        may be necessary for the description
+                                                                                                                                        to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$image</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of an image of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$identifier</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The identifier property represents any
+                                                                                                                                        kind of identifier for any kind of Thing,
+                                                                                                                                        such as ISBNs, GTIN codes, UUIDs etc.
+                                                                                                                                        http://schema.org provides dedicated
+                                                                                                                                        properties for representing many of these,
+                                                                                                                                        either as textual strings or as URL (URI)
+                                                                                                                                        links. See <a
+                                                                                                                                        href="https://schema.org/docs/datamodel.html#identifierBg">
+                                                                                                                                        background notes</a>
+                                                                                                                                        for more details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates a page (or other CreativeWork)
+                                                                                                                                        for which this thing is the main entity
+                                                                                                                                        being described. See <a
+                                                                                                                                        href="https://schema.org/docs/datamodel.html#mainEntityBackground">
+                                                                                                                                        background notes</a> for details.
+                                                                                                                                        Inverse property: mainEntity.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential Action, which
+                                                                                                                                        describes an idealized action in which
+                                                                                                                                        this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+                                                                                                                                        unambiguously indicates the item's
+                                                                                                                                        identity. E.g. the URL of the
+                                                                                                                                        item's Wikipedia page, Freebase
+                                                                                                                                        page, or official website.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A CreativeWork or Event about this Thing. 
+                                                                                                                                        Inverse property: about.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$url</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">WikidataId ... entity ... a thing with independent and 
+                                                                                                                                        distinct existence</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aggregateRating</code></td>
+<td class="type"><code>AggregateRating</code></td>
+<td class="description">The overall rating, based on a collection of reviews
+                                                                                                                                                        or ratings, of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$areaServed</code></td>
+<td class="type"><code>AdministrativeArea|GeoShape|Place|string</code></td>
+<td class="description">The geographic area where a service or offered item is
+                                                                                                                                                        provided.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$audience</code></td>
+<td class="type"><code>Audience</code></td>
+<td class="description">An intended audience, i.e. a group for whom something
+                                                                                                                                                        was created.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$availableChannel</code></td>
+<td class="type"><code>ServiceChannel</code></td>
+<td class="description">A means of accessing the service (e.g. a phone bank,
+                                                                                                                                                        a web site, a location, etc.).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$award</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An award won by or for this item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$brand</code></td>
+<td class="type"><code>Brand|Organization</code></td>
+<td class="description">The brand(s) associated with a product or service, or
+                                                                                                                                                        the brand(s) maintained by an organization or
+                                                                                                                                                        business person.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$broker</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">An entity that arranges for an exchange between a buyer
+                                                                                                                                                        and a seller. In most cases a broker never acquires or
+                                                                                                                                                        releases ownership of a product or service involved in
+                                                                                                                                                        an exchange. If it is not clear whether an entity is a
+                                                                                                                                                        broker, seller, or buyer, the latter two terms are
+                                                                                                                                                        preferred.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$category</code></td>
+<td class="type"><code>PhysicalActivityCategory|string|Thing|URL</code></td>
+<td class="description">A category for the item. Greater signs or slashes can
+                                                                                                                                                        be used to informally indicate a category hierarchy.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$hasOfferCatalog</code></td>
+<td class="type"><code>OfferCatalog</code></td>
+<td class="description">Indicates an OfferCatalog listing for this Organization,
+                                                                                                                                                        Person, or Service.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$hoursAvailable</code></td>
+<td class="type"><code>OpeningHoursSpecification</code></td>
+<td class="description">The hours during which this service or contact is available.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isRelatedTo</code></td>
+<td class="type"><code>Product|Service</code></td>
+<td class="description">A pointer to another, somehow related product
+                                                                                                                                                        (or multiple products).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isSimilarTo</code></td>
+<td class="type"><code>Product|Service</code></td>
+<td class="description">A pointer to another, functionally similar product
+                                                                                                                                                        (or multiple products).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$logo</code></td>
+<td class="type"><code>ImageObject|URL</code></td>
+<td class="description">An associated logo.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$offers</code></td>
+<td class="type"><code>Demand|Offer</code></td>
+<td class="description">An offer to provide this item-for example, an offer to sell
+                                                                                                                                                        a product, rent the DVD of a movie, perform a service, or give
+                                                                                                                                                        away tickets to an event. Use businessFunction to indicate the
+                                                                                                                                                        kind of transaction offered, i.e. sell, lease, etc. This
+                                                                                                                                                        property can also be used to describe a Demand. While this
+                                                                                                                                                        property is listed as expected on a number of common types,
+                                                                                                                                                        it can be used in others. In that case, using a second type,
+                                                                                                                                                        such as Product or a subtype of Product, can clarify the
+                                                                                                                                                        nature of the offer.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$provider</code></td>
+<td class="type"><code>Organization|Person</code></td>
+<td class="description">The service provider, service operator, or service performer;
+                                                                                                                                                        the goods producer. Another party (a seller) may offer those
+                                                                                                                                                        services or goods on behalf of the provider. A provider may
+                                                                                                                                                        also serve as the seller.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$providerMobility</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates the mobility of a provided service (e.g. 'static',
+                                                                                                                                                        'dynamic').</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$review</code></td>
+<td class="type"><code>Review</code></td>
+<td class="description">A review of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$serviceOutput</code></td>
+<td class="type"><code>Thing</code></td>
+<td class="description">The tangible thing generated by the service, e.g. a passport,
+                                                                                                                                                        permit, etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$serviceType</code></td>
+<td class="type"><code>GovernmentBenefitsType|string</code></td>
+<td class="description">The type of service being offered, e.g. veterans' benefits,
+                                                                                                                                                        emergency relief, etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$slogan</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A slogan or motto associated with the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$termsOfService</code></td>
+<td class="type"><code>string|URL</code></td>
+<td class="description">Human-readable terms of service documentation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. Transaction in which possession of no physical goods 
+                                                                                                                                                        are transferred from the seller to the buyer</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$additionalType</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">An additional type for the item, typically used for adding more
+                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
+                                                                                                                                                    a relationship between something and a class that the thing is in. In
+                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
+                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
+                                                                                                                                                    understanding of extra types, in particular those defined externally.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aggregateRating</code></td>
+<td class="type"><code>AggregateRating</code></td>
+<td class="description">The overall rating, based on a collection of reviews or ratings, of
+                                                                                                                                                    the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$areaServed</code></td>
+<td class="type"><code>Place|GeoShape|string|AdministrativeArea</code></td>
+<td class="description">The geographic area where a service or offered item is provided.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$audience</code></td>
+<td class="type"><code>Audience</code></td>
+<td class="description">An intended audience, i.e. a group for whom something was created.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$availableChannel</code></td>
+<td class="type"><code>ServiceChannel</code></td>
+<td class="description">A means of accessing the service (e.g. a phone bank, a web site, a
+                                                                                                                                                    location, etc.).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$award</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An award won by or for this item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$brand</code></td>
+<td class="type"><code>Brand|Organization</code></td>
+<td class="description">The brand(s) associated with a product or service, or the brand(s)
+                                                                                                                                                    maintained by an organization or business person.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$broker</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">An entity that arranges for an exchange between a buyer and a seller.
+                                                                                                                                                    In most cases a broker never acquires or releases ownership of a
+                                                                                                                                                    product or service involved in an exchange. If it is not clear whether
+                                                                                                                                                    an entity is a broker, seller, or buyer, the latter two terms are
+                                                                                                                                                    preferred.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$category</code></td>
+<td class="type"><code>Thing|PhysicalActivityCategory|URL|string</code></td>
+<td class="description">A category for the item. Greater signs or slashes can be used to
+                                                                                                                                                    informally indicate a category hierarchy.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A short description of the item used to
+                                                                                                                                                    disambiguate from other, similar items. Information from other
+                                                                                                                                                    properties (in particular, name) may be necessary for the description
+                                                                                                                                                    to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$hasOfferCatalog</code></td>
+<td class="type"><code>OfferCatalog</code></td>
+<td class="description">Indicates an OfferCatalog listing for this Organization, Person, or
+                                                                                                                                                    Service.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$hoursAvailable</code></td>
+<td class="type"><code>OpeningHoursSpecification</code></td>
+<td class="description">The hours during which this service or contact is available.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$identifier</code></td>
+<td class="type"><code>URL|string|PropertyValue</code></td>
+<td class="description">The identifier property represents any kind of identifier for any kind
+                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
+                                                                                                                                                    dedicated properties for representing many of these, either as textual
+                                                                                                                                                    strings or as URL (URI) links. See background notes for more details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$image</code></td>
+<td class="type"><code>ImageObject|URL</code></td>
+<td class="description">An image of the item. This can be a URL or a fully described
+                                                                                                                                                    ImageObject.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isRelatedTo</code></td>
+<td class="type"><code>Product|Service</code></td>
+<td class="description">A pointer to another, somehow related product (or multiple products).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$isSimilarTo</code></td>
+<td class="type"><code>Product|Service</code></td>
+<td class="description">A pointer to another, functionally similar product (or multiple
+                                                                                                                                                    products).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$logo</code></td>
+<td class="type"><code>ImageObject|URL</code></td>
+<td class="description">An associated logo.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>CreativeWork|URL</code></td>
+<td class="description">Indicates a page (or other CreativeWork) for which this thing is the
+                                                                                                                                                    main entity being described. See background notes for details.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$offers</code></td>
+<td class="type"><code>Offer|Demand</code></td>
+<td class="description">An offer to provide this item&#x2014;for example, an offer to sell a
+                                                                                                                                                    product, rent the DVD of a movie, perform a service, or give away
+                                                                                                                                                    tickets to an event. Use businessFunction to indicate the kind of
+                                                                                                                                                    transaction offered, i.e. sell, lease, etc. This property can also be
+                                                                                                                                                    used to describe a Demand. While this property is listed as expected
+                                                                                                                                                    on a number of common types, it can be used in others. In that case,
+                                                                                                                                                    using a second type, such as Product or a subtype of Product, can
+                                                                                                                                                    clarify the nature of the offer.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential Action, which describes an idealized action in
+                                                                                                                                                    which this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$produces</code></td>
+<td class="type"><code>Thing</code></td>
+<td class="description">The tangible thing generated by the service, e.g. a passport, permit,
+                                                                                                                                                    etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$provider</code></td>
+<td class="type"><code>Person|Organization</code></td>
+<td class="description">The service provider, service operator, or service performer; the
+                                                                                                                                                    goods producer. Another party (a seller) may offer those services or
+                                                                                                                                                    goods on behalf of the provider. A provider may also serve as the
+                                                                                                                                                    seller.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$providerMobility</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates the mobility of a provided service (e.g. 'static',
+                                                                                                                                                    'dynamic').</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$review</code></td>
+<td class="type"><code>Review</code></td>
+<td class="description">A review of the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$sameAs</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">URL of a reference Web page that unambiguously indicates the item's
+                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
+                                                                                                                                                    or official website.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$serviceArea</code></td>
+<td class="type"><code>AdministrativeArea|Place|GeoShape</code></td>
+<td class="description">The geographic area where the service is provided.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$serviceAudience</code></td>
+<td class="type"><code>Audience</code></td>
+<td class="description">The audience eligible for this service.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$serviceOutput</code></td>
+<td class="type"><code>Thing</code></td>
+<td class="description">The tangible thing generated by the service, e.g. a passport, permit,
+                                                                                                                                                    etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$serviceType</code></td>
+<td class="type"><code>string|GovernmentBenefitsType</code></td>
+<td class="description">The type of service being offered, e.g. veterans' benefits, emergency
+                                                                                                                                                    relief, etc.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$slogan</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A slogan or motto associated with the item.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$subjectOf</code></td>
+<td class="type"><code>Event|CreativeWork</code></td>
+<td class="description">A CreativeWork or Event about this Thing.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$termsOfService</code></td>
+<td class="type"><code>URL|string</code></td>
+<td class="description">Human-readable terms of service documentation.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$url</code></td>
+<td class="type"><code>URL</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+</table>
 </section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->
