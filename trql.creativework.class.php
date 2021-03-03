@@ -28,6 +28,7 @@
     {*cdate                 29-07-20 11:51 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
     {*todo                  1) Make the difference between [c]render()[/c] and
                                [c]speak()[/c][br]
                             2) Implement [c]render()[/c] (in its simplest form)
@@ -368,8 +369,6 @@ class CreativeWork extends Thing implements iContext
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = 'Q17537576';      /* {*property   $wikidataId                     (string)                        Wikidata ID. Distinct artistic creation such as 
                                                                                                                                                     artwork, literature, music, and paintings. *} */
-
-
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 
@@ -436,10 +435,8 @@ class CreativeWork extends Thing implements iContext
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of CreativeWork.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class CreativeWork ====================================================== */
 /* ==================================================================================== */
 ?>

@@ -37,7 +37,23 @@ table.properties tr.property td.description { width: 60%; }
 <section class="classes">
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>ProductGroup</code></span>
-<span class="DocumentorLabel">Description: </span><span class="property description"></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A ProductGroup represents a group of Products that vary only in certain 
+ well-described ways, such as by size, color, material etc.While a ProductGroup 
+ itself is not directly offered for sale, the various varying products that it 
+ represents can be. The ProductGroup serves as a prototype or template, standing 
+ in for all of the products who have an isVariantOf relationship to it. As such, 
+ properties (including additional types) can be applied to the ProductGroup 
+ to represent characteristics shared by each of the (possibly very many) 
+ variants. Properties that reference a ProductGroup are not included in this 
+ mechanism; neither are the following specific properties variesBy, 
+ hasVariant, url.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class ProductGroup extends Product</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+ under the terms of their license:
+ <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/ProductGroup" class="DocumentorLink" title="Go to http://schema.org/ProductGroup" itemprop="url">http://schema.org/ProductGroup</a>?utm_source=TRQLLabs</span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by <code>trql.schemaclassgenerator.class.php</code>
+ on 25-08-2020 11:16.</span>
 <span class="DocumentorLabel">Properties: </span>
 <table class="properties">
 <thead>

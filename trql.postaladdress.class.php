@@ -26,6 +26,7 @@
     {*cdate                 23-08-20 14:04 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -152,7 +153,6 @@ class PostalAddress extends ContactPoint implements iContext
 
                                                                                                                                         [url]https://www.wikidata.org/wiki/Wikidata:Main_Page[/url]
                                                                                                                                         [url]https://www.wikidata.org/wiki/Special:Statistics[/url] *} */
-
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -976,7 +976,6 @@ class PostalAddress extends ContactPoint implements iContext
     /* ================================================================================ */
 
 
-
     /* ================================================================================ */
     /** {{*__destruct()=
 
@@ -1000,10 +999,8 @@ class PostalAddress extends ContactPoint implements iContext
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of PostalAddress.__destruct() ========================================== */
     /* ================================================================================ */
-
 }   /* End of class PostalAddress ===================================================== */
 /* ==================================================================================== */
 ?>

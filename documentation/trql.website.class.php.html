@@ -28,7 +28,28 @@ table.properties tr.property td.description { width: 60%; }
 <section class="classes">
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>WebSite</code></span>
-<span class="DocumentorLabel">Description: </span><span class="property description"></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A WebSite is a set of related web pages and other items typically served
+ from a single web domain and accessible via URLs.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class WebSite extends CreativeWork implements iContext</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+ under the terms of their license:
+ <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/WebSite" class="DocumentorLink" title="Go to http://schema.org/WebSite" itemprop="url">http://schema.org/WebSite</a>?utm_source=TRQLLabs</span>
+<span class="DocumentorLabel">TODOs: </span><span class="property todo"><ol>
+ <li>Implement a <code>generate()</code> method that should take a paradeigma
+ and generate a full website</li>
+ <li>Must create a <code>trql.exception.class.php</code></li>
+ <li>Je dois aussi créer un fichier de type <a href="?file=companies.xml" title="View companies.xml">companies.xml</a> qui
+ devra être un objet dérivant d'une classe <code>trql.configurationfile.class</code>,
+ elle-même devant au moins répondre au fichiers de type <code>manifest</code>
+ dans uen radio (ce qui devrait aussi être une classe spécifique et qui
+ doit répondre également à ce qu'est un manifest pour un site web) et
+ au fichier des shows et au fichiers de config radio. Brrrr ... y'a du
+ boulot !</li>
+ <li>Je ne trouve pas de propriétés comme <code>pages</code> dans la classe
+ <code>WebSite</code> et pourtant ... j'ai vraiment besoin de cela pour
+ commencer la génération d'un site web</li>
+ </ol></span>
 <span class="DocumentorLabel">Properties: </span>
 <table class="properties">
 <thead>

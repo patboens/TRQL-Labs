@@ -27,6 +27,7 @@
     {*cdate                 16-08-20 19:19 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     {*abstract              The [c]Documentor[/c] class helps document ALL TRQL Labs classes
                             defined in [file]d:\websites\snippet-center\[/file].[br][br]
@@ -895,6 +896,8 @@ Class DocumentorSourceFile extends DocumentorFile
 
                 $oClass->szNamespace = $this->szNamespace;
 
+                var_dump( "WE ARE HERE" );
+                die();
                 $oClass->getDocumentedProperties();     /* Gets all the documented properties found in the class */
                 $oClass->getDocumentedMethods();        /* Gets all the documented methods found in the class */
             }
@@ -923,6 +926,18 @@ Class DocumentorSourceFile extends DocumentorFile
     }   /* End of DocumentorSourceFile.getClassesDefinedInCodeNEWOLD() ====================== */
     /* ================================================================================ */
 
+
+    protected function getClassDefinition( $szClassName )
+    /*-------------------------------------------------*/
+    {
+        $szRetVal = '';
+        
+        if ( preg_match('%/\*\* *?\{\{\*(abstract)? *?class *?' . $szClassName . '=(.*?)\*\}\}%si',$this->content,$aMatches ) )
+            $szRetVal = $aMatches[0];
+
+        return ( $szRetVal );
+    }   /* End of DocumentorSourceFile.getClassDefinition() =========================== */
+    /* ================================================================================ */
 
     /* ================================================================================ */
     /** {{*getClassesDefinedInCode()=
@@ -1098,6 +1113,8 @@ Class DocumentorSourceFile extends DocumentorFile
                 {
                     $aDef = $this->parseClassDeclaration( $aLines[0] );
 
+                    //var_dump( $aDef );
+
                     if ( ! empty( $aDef['name'] ) )
                     {
                         $aClasses[$aDef['name']] = array( 'definition'  => $aDef            ,
@@ -1114,29 +1131,63 @@ Class DocumentorSourceFile extends DocumentorFile
         {
             $this->aDefinedClasses = null;
 
+            //var_dump( $aClasses );
+            //$this->die();
+
             foreach( $aClasses as $szName => $aClass )
             {
                 $szDefinitionComments   = ''; // Like all comments extracted by The Documentor ( "/** {{*__construct( $szName,$szDef,$oSourceFile )=*/ ... ") */
+                //var_dump( "Will create a new DocumentorClass" );
                 $oClass                 = new DocumentorClass( $szName,$szDefinitionComments,$this );
                 $oClass->content        = $oClass->szSourceCode = $aClass['sourcecode'];
 
+                $oClass->szNamespace    = $this->szNamespace;
+
+                /* What we have in $aClass
+                    'declaration' => string 'class WarrantyScope extends Enumeration' (length=39)
+                    'name' => string 'WarrantyScope' (length=13)
+                    'abstract' => boolean false
+                    'parent' => string '' (length=0)
+                    'implements' => null
+                */
+
+                $oClass->szDeclaration  = $aClass['definition']['declaration'];
+                $oClass->isAbstract     = $aClass['definition']['abstract'];
+                $oClass->szParent       = $aClass['definition']['parent'];
+                $oClass->implements     = is_array( $aClass['definition']['implements'] ) ? $aClass['definition']['implements'] : null;
+
+                $oClass->szDefinition   = $this->getClassDefinition( $oClass->name );         /* Extracts everything that is betweeen {{* and *}} */ 
+
+                //var_dump( "CLASS DEFINITION",$oClass );
+                //$this->die();
                 // getProperties() et getMethods() MAIS il faudra que je distincte
                 // les propriétés et les méthodes qui sont DÉFINIES de celles qui
                 // sont DOCUMENTÉES
 
-                $oClass->szNamespace = $this->szNamespace;
+                //var_dump( 'Calling parseDefinition()' );
+                $oClass->parseDefinition();                         /* Parses the meta information contained in the comment block of the class */
+
+                //var_dump( $oClass->szTODOs );
+                //var_dump( $oClass->implements );
+                //var_dump( $aClass['definition'] );
+                //$this->die();
 
                 $oClass->getDocumentedProperties();     /* Gets all the documented properties found in the class */
                 $oClass->getDocumentedMethods();        /* Gets all the documented methods found in the class */
 
                 $this->aDefinedClasses[] = $oClass;
+                //var_dump( "AJOUT DE LA CLASSE" );
 
                 //var_dump( $oClass );
             }   /* foreach( $aClasses as $szName => $aClass ) */
         }   /* if ( is_array( $aClasses ) && count( $aClasses ) > 0 ) */
 
         //var_dump( $this->aDefinedClasses[0]->aProperties );
+        //var_dump( $this->aDocumentedClasses );
+        //var_dump( $this->aDefinedClasses );
         //$this->die();
+
+        //$this->die("Bon ... je m'arrête ici en mode DEBUG pour voir pourquoi les propriétés ne sont plus trouvées" );
 
         return ( $this );
     }   /* == End of DocumentorSourceFile.getClassesDefinedInCode() =================== */
@@ -1158,7 +1209,9 @@ Class DocumentorSourceFile extends DocumentorFile
             (array)     An associative array that holds the parts of the class
                         declaration; the 'implements' slot is either null or an array.
 
-                        $aRetVal = array( 'abstract'    => false,
+                        $aRetVal = array( 'declaration' => null ,
+                                          'name'        => null ,
+                                          'abstract'    => false,
                                           'parent'      => ''   ,
                                           'implements'  => null ,
                                         );
@@ -1180,13 +1233,14 @@ Class DocumentorSourceFile extends DocumentorFile
         if ( preg_match('/abstract *?class/i',$szDeclaration ) )
             $aRetVal['abstract'] = true;
 
-        if ( preg_match('/class *(?<class>[[:ascii:][:word:]]*?)( |\z)/i',$szDeclaration,$aMatches ) )
+        if ( preg_match('/class *(?<class>[[:ascii:][:word:]]*?)( |\z)/i'       ,$szDeclaration,$aMatches ) )
             $aRetVal['name'] = trim( $aMatches['class'] );
 
-        if ( preg_match( '/extends *(?P<parent>[[:ascii:][:word:]]*?) /i',$szDeclaration,$aMatches ) )
+        if ( preg_match( '/extends *(?P<parent>.*?)( |\z)/si'                   ,$szDeclaration,$aMatches ) )
             $aRetVal['parent'] = trim( $aMatches['parent'] );
 
-        if ( preg_match( '/implements *(?P<implements>[[:ascii:][:word:]]*)/i',$szDeclaration,$aMatches ) )
+        //if ( preg_match( '/implements *(?P<implements>[[:ascii:][:word:]]*)/i'  ,$szDeclaration,$aMatches ) )
+        if ( preg_match( '/implements *(?P<implements>.*?)( |\z)/si'            ,$szDeclaration,$aMatches ) )
             $aRetVal['implements'] = explode( ',',trim( $aMatches['implements'] ) );
 
         return ( $aRetVal );
@@ -1220,34 +1274,38 @@ Class DocumentorSourceFile extends DocumentorFile
         *}}
     */
     /* ================================================================================ */
-    public function getClassesDocumented()
-    /*----------------------------------*/
-    {
-        //var_dump( __METHOD__ );
-        $this->aDocumentedClasses = array();                        /* Default return value of the method */
-
-        if ( preg_match_all( '/\{\{\*class(.*?)\*\}\}/si',$this->content,$aMatch,PREG_PATTERN_ORDER ) )
-        {
-            $aResults = $aMatch[0];
-
-            foreach ( $aResults as $szClassDef )
-            {
-                if ( preg_match( "/{{\*class (?P<classname>.*?)=/si",$szClassDef,$aMatch ) )
-                {
-                    $szClassName = trim( $aMatch['classname'] );
-                    //var_dump( $szClassName );
-                    //var_dump( $szClassDef );
-                    $this->aDocumentedClasses[] = new DocumentorClass( $szClassName,$szClassDef,$this );
-                }   /* if ( preg_match( "/{{\*class (?P<classname>.*?)=/si",$szClassDef,$aMatch ) ) */
-            }   /* foreach ( $aResults as $szClassDef ) */
-        }   /* if ( preg_match_all( '/\{\{\*class(.*?)\*\}\}/si',$this->content,$aMatch,PREG_PATTERN_ORDER ) ) */
-
-        foreach( $this->aDocumentedClasses as $aClass )
-        {
-            //var_dump( $aClass );
-        }
-        return ( $this );                                           /* Return self to caller : object updated */
-    }   /* End of DocumentorSourceFile.getClassesDocumented() ========================= */
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented public function getClassesDocumented()
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented /*----------------------------------*/
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented {
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented     //var_dump( __METHOD__ );
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented     $this->aDocumentedClasses = array();                        /* Default return value of the method */
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented 
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented     if ( preg_match_all( '/\{\{\*class(.*?)\*\}\}/si',$this->content,$aMatch,PREG_PATTERN_ORDER ) )
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented     {
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented         $aResults = $aMatch[0];
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented 
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented         foreach ( $aResults as $szClassDef )
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented         {
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented             if ( preg_match( "/{{\*class (?P<classname>.*?)=/si",$szClassDef,$aMatch ) )
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented             {
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented                 $szClassName = trim( $aMatch['classname'] );
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented                 //var_dump( $szClassName );
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented                 //var_dump( $szClassDef );
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented                 var_dump( "Will create a new DocumentorClass" );
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented                 $this->aDocumentedClasses[] = new DocumentorClass( $szClassName,$szClassDef,$this );
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented             }   /* if ( preg_match( "/{{\*class (?P<classname>.*?)=/si",$szClassDef,$aMatch ) ) */
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented         }   /* foreach ( $aResults as $szClassDef ) */
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented     }   /* if ( preg_match_all( '/\{\{\*class(.*?)\*\}\}/si',$this->content,$aMatch,PREG_PATTERN_ORDER ) ) */
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented 
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented 
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented     foreach( $this->aDocumentedClasses as $aClass )
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented     {
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented         //var_dump( $this->aDocumentedClasses );
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented     }   /* foreach( $this->aDocumentedClasses as $aClass ) */
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented 
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented     //$this->die();
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented     return ( $this );                                           /* Return self to caller : object updated */
+    // 2021-03-03 ... tmp ... avoid confusion between defined and documented }   /* End of DocumentorSourceFile.getClassesDocumented() ========================= */
     /* ================================================================================ */
 
 
@@ -1365,7 +1423,7 @@ Class DocumentorSourceFile extends DocumentorFile
         $this->getTraitsDefinedInCode();                        /* Get the traits defined in the code of the source file */
         $this->getInterfacesDocumented();                       /* Get the interfaces documented in the source file */
         $this->getInterfacesDefinedInCode();                    /* Get the interfaces defined in the code of the source file */
-        $this->getClassesDocumented();                          /* Get the classes documented in the source file (NOT ALL classes are documented -> different from getClassesDefinedInCode())*/
+        //$this->getClassesDocumented();                          /* Get the classes documented in the source file (NOT ALL classes are documented -> different from getClassesDefinedInCode())*/
         $this->getClassesDefinedInCode();                       /* Get the classes defined in the source code (NOT ALL classes are documented -> different from getClassesDocumented()) */
         $this->getFunctionsDocumented();                        /* Get the functions documented in the source file */
         $this->getFunctionsDefinedInCode();                     /* Get the functions defined in the code of the source file */
@@ -1449,43 +1507,49 @@ Class DocumentorSourceFile extends DocumentorFile
 
                         //var_dump( $this->aDocumentedClasses );
                         // Bon ... ici, j'ai un petit problème!
-                        
+
                         // En fait, j'ai une sorte de confusion entre (1) les
                         // classes dites "documentées" et (2) les classes définies
-                        // 
-                        // Normalement, tout devrait être disponible dans les 
+                        //
+                        // Normalement, tout devrait être disponible dans les
                         // classes documentées ($this->aDocumentedClasses) mais
                         // en fait tout se trouve dans les classes définies
                         // ($this->aDefinedClasses).
                         //
                         // En soi, cela n'est pas un problème pour la génération
-                        // de la documentation. Par contre, c'est un problème 
-                        // dans la programmation. 
+                        // de la documentation. Par contre, c'est un problème
+                        // dans la programmation.
                         // {*todo résoudre confusion entre "this->aDefinedClasses" et "this->aDocumentedClasses" *}
-                        
+
                         foreach( $this->aDefinedClasses as $oClass )
                         //foreach( $this->aDocumentedClasses as $oClass )
                         {
                             //var_dump( $oClass );
+                            //var_dump( $oClass->szDeclaration );
+                            //var_dump( $oClass->description );
+                            //$this->die();
 
                             $szHTML    .= "<section class=\"class shadow\">\n";
-                                $szHTML     .= "<span class=\"DocumentorLabel\">Class: </span><span class=\"property classname\">"              . $this->squareToAngle( say( '[c]' . $oClass->name           . '[/c]'   ) ) . "</span>\n";
-                                $szHTML     .= "<span class=\"DocumentorLabel\">Description: </span><span class=\"property description\">"      . $this->squareToAngle( say(         $oClass->description               ) ) . "</span>\n";
-
-                                if ( ! empty( $oClass->szDeclaration ) )
-                                    $szHTML     .= "<span class=\"DocumentorLabel\">Declaration: </span><span class=\"property declaration\">"  . $this->squareToAngle( say( '[c]' . $oClass->szDeclaration  . '[/c]'   ) ) . "</span>\n";
-
-                                if ( ! empty( $oClass->szCredits ) )
-                                    $szHTML     .= "<span class=\"DocumentorLabel\">Credits: </span><span class=\"property credits\">"          . $this->squareToAngle( say(         $oClass->szCredits                 ) ) . "</span>\n";
+                                $szHTML     .= "<span class=\"DocumentorLabel\">Class: </span><span class=\"property classname\">"              . $this->squareToAngle( say( '[c]' . $oClass->name           . '[/c]'           ) ) . "</span>\n";
+                                $szHTML     .= "<span class=\"DocumentorLabel\">Description: </span><span class=\"property description\">"      . $this->squareToAngle( say(         $oClass->description                       ) ) . "</span>\n";
+                                                                                                                                                                                                                                
+                                if ( ! empty( $oClass->szDeclaration ) )                                                                                                                                                        
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Declaration: </span><span class=\"property declaration\">"  . $this->squareToAngle( say( '[c]' . $oClass->szDeclaration  . '[/c]'           ) ) . "</span>\n";
+                                                                                                                                                                                                                                
+                                if ( ! empty( $oClass->szCredits ) )                                                                                                                                                            
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Credits: </span><span class=\"property credits\">"          . $this->squareToAngle( say(         $oClass->szCredits                         ) ) . "</span>\n";
 
                                 if ( ! empty( $oClass->szDoc ) )
-                                    $szHTML     .= "<span class=\"DocumentorLabel\">Doc: </span><span class=\"property doc\">"                  . $this->squareToAngle( say(         $oClass->szDoc                     ) ) . "</span>\n";
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Doc: </span><span class=\"property doc\">"                  . $this->squareToAngle( say(         $oClass->szDoc . '?utm_source=TRQLLabs'    ) ) . "</span>\n";
 
                                 if ( ! empty( $oClass->szWarning ) )
-                                    $szHTML .= "<span class=\"DocumentorLabel\">Warning: </span><span class=\"property warning\">"              . $this->squareToAngle( say(         $oClass->szWarning                 ) ) . "</span>\n";
-
-                                if ( ! empty( $oClass->szRemark ) )
-                                    $szHTML .= "<span class=\"DocumentorLabel\">TODOs: </span><span class=\"property remark\">"                 . $this->squareToAngle( say(         $oClass->szRemark                  ) ) . "</span>\n";
+                                    $szHTML .= "<span class=\"DocumentorLabel\">Warning: </span><span class=\"property warning\">"              . $this->squareToAngle( say(         $oClass->szWarning                         ) ) . "</span>\n";
+                                                                                                                                                                                                                                
+                                if ( ! empty( $oClass->szRemark ) )                                                                                                                                                             
+                                    $szHTML .= "<span class=\"DocumentorLabel\">Remarks: </span><span class=\"property remark\">"               . $this->squareToAngle( say(         $oClass->szRemark                          ) ) . "</span>\n";
+                                                                                                                                                                                                                                
+                                if ( ! empty( $oClass->szTODOs ) )                                                                                                                                                              
+                                    $szHTML .= "<span class=\"DocumentorLabel\">TODOs: </span><span class=\"property todo\">"                   . $this->squareToAngle( say(         $oClass->szTODOs                           ) ) . "</span>\n";
 
 
                                 /* Bon, ici ... ce que je cherchee à faire c'est de créer un objet
@@ -2353,6 +2417,9 @@ Class DocumentorClass extends DocumentorSourceFileObject
     public      $szDoc          = null;         /* Documentation (e.g. URL(s) where documentation can be obtained */
     public      $szSourceCode   = null;         /* Class' source code */
     public      $szDeclaration  = null;                             /* {*property       $szDeclaration          (string)                        Class declaration (e.g. "class AdministrativeArea extends Place implements iContext" ) *} */
+    public      $szParent       = null;                             /* {*property       $szParent               (string)                        Name of the parent class (if any) *} */
+    public      $isAbstract     = false;                            /* {*property       $isAbstract             (bool)                          [c]true[/c] if the class is an abstract class; [c]false[/c] otherwise *} */
+    public      $implements     = null;                             /* {*property       $implements             (array)                         An array of intyerfaces that the class implements (if any); otehrwise, [c]null[/c] *} */
     public      $aProperties    = null;                             /* {*property       $aProperties            (array)                         A set of properties *} */
     public      $aMethods       = null;                             /* {*property       $aMethods               (array)                         A set of methods *} */
     public      $oSourceFile    = null;                             /* {*property       $oSourceFile            (DocumentorSourceFile)          The source file object this class has been declared in *} */
@@ -2360,6 +2427,7 @@ Class DocumentorClass extends DocumentorSourceFileObject
     public      $szTODOs        = null;                             /* {*property       $szTODOs                (string)                        A list of TODOs *} */
     public      $szWarning      = null;                             /* {*property       $szWarning              (string)                        A warning *} */
     public      $szRemark       = null;                             /* {*property       $szRemark               (string)                        A remark *} */
+    public      $author         = null;                             /* {*property       $author                 (Organization|Person|string)    The author of the class *} */
 
     /* ================================================================================ */
     /** {{*__construct( $szName,$szDef,$oSourceFile )=
@@ -2388,7 +2456,8 @@ Class DocumentorClass extends DocumentorSourceFileObject
         $this->szDefinition = $szDef;
         $this->oSourceFile  = $oSourceFile;
 
-        $this->parseDefinition();               /* Parses the definition (comments) of the class */
+        //var_dump( 'Calling parseDefinition() from Constructor' );
+        //$this->parseDefinition();               /* Parses the definition (comments) of the class */
 
         return ( $this );
     }   /* End of DocumentorClass.__construct() ======================================= */
@@ -2433,7 +2502,7 @@ Class DocumentorClass extends DocumentorSourceFileObject
 
 
     /* ================================================================================ */
-    /** {{*parseDefinition()=
+    /** {{*public parseDefinition()=
 
         Parses the definition of the class (what's between the documentor marks
         class <name>= ...)
@@ -2451,8 +2520,8 @@ Class DocumentorClass extends DocumentorSourceFileObject
         *}}
     */
     /* ================================================================================ */
-    protected function parseDefinition()
-    /*--------------------------------*/
+    public function parseDefinition()
+    /*-----------------------------*/
     {
         /* J'ai au moins ces 3 choses que j'ai souvent ... voir dans mon guide.php les
            autres données que j'extrayais !!!
@@ -2476,12 +2545,29 @@ Class DocumentorClass extends DocumentorSourceFileObject
 
         */
 
-        $this->description  = trim( $this->property( '{*desc'       ,$this->szDefinition ) );
-        $this->szCredits    = trim( $this->property( '{*credits'    ,$this->szDefinition ) );
-        $this->szDoc        = trim( $this->property( '{*doc'        ,$this->szDefinition ) );
-        $this->szTODOs      = trim( $this->property( '{*todo'       ,$this->szDefinition ) );
-        $this->szWarning    = trim( $this->property( '{*warning'    ,$this->szDefinition ) );
-        $this->szRemark     = trim( $this->property( '{*remark'     ,$this->szDefinition ) );
+        //var_dump( $this->szDefinition );
+
+        $this->description  = trim( vaesoli::STR_Reduce( $this->property( '{*desc'       ,$this->szDefinition ) ) );
+        $this->szCredits    = trim( vaesoli::STR_Reduce( $this->property( '{*credits'    ,$this->szDefinition ) ) );
+        $this->szDoc        = trim( vaesoli::STR_Reduce( $this->property( '{*doc'        ,$this->szDefinition ) ) );
+        $this->szTODOs      = trim( vaesoli::STR_Reduce( $this->property( '{*todo'       ,$this->szDefinition ) ) );
+        $this->szWarning    = trim( vaesoli::STR_Reduce( $this->property( '{*warning'    ,$this->szDefinition ) ) );
+        $this->szRemark     = trim( vaesoli::STR_Reduce( $this->property( '{*remark'     ,$this->szDefinition ) ) );
+        $this->author       = trim( vaesoli::STR_Reduce( $this->property( '{*author'     ,$this->szDefinition ) ) );
+
+        if ( empty( $this->author) && isset( $this->oSourceFile ) && $this->oSourceFile instanceof \trql\documentor\DocumentorSourceFile )
+            $this->author = $this->oSourceFile->oHeader->author;
+
+        //var_dump( 'description',$this->description  );
+        //var_dump( 'credits',$this->szCredits    );
+        //var_dump( 'doc',$this->szDoc        );
+        //var_dump( 'TODOs',$this->szTODOs      );
+        //var_dump( 'Warning',$this->szWarning    );
+        //var_dump( 'Remark',$this->szRemark     );
+        //var_dump( 'Author',$this->author );
+        //
+        ////var_dump( $this );
+        //$this->die();
 
         return ( $this );
     }   /* End of DocumentorClass.parseDefinition() =================================== */
@@ -2616,13 +2702,17 @@ Class DocumentorClass extends DocumentorSourceFileObject
         $szTargetFile           = $szHomeOfDocumentation . basename( $this->oSourceFile->szFileName ) . '.' . md5( str_replace( array( '\\','/' ),'-',$szClass ) ) . '.properties.cache';
         //var_dump( $szTargetFile );
         //var_dump( $szClass );
+        //var_dump( "SOURCE CODE: ",$this->szSourceCode );
 
         /* ******************************************************************************** */
         {   /* Let's try to load all the properties of the parent classes FIRST */
-            if ( is_file( $this->oSourceFile->oHeader->szFileName ) )
+            if ( is_file( vaesoli::FIL_RealPath( __DIR__ . '/' . $this->oSourceFile->oHeader->szFileName ) ) )
                 require_once( $this->oSourceFile->oHeader->szFileName );
             else
+            {
+                //var_dump( "Ooops ... je ne trouve pas le fichier!!!" );
                 goto end;
+            }
 
             $class          = new \ReflectionClass( $o = new $szClass() );
             $aParentClasses = $this->getParentClasses( $class );
@@ -2635,8 +2725,9 @@ Class DocumentorClass extends DocumentorSourceFileObject
 
                 if ( is_file( $szPropertiesFile ) )
                 {
-                    //$this->aProperties = array_merge( $this->aProperties,$this->getHashFile( $szPropertiesFile ) );
-                }
+                    //var_dump( "FOUND " . $szPropertiesFile );
+                    $this->aProperties = array_merge( $this->aProperties,$this->getHashFile( $szPropertiesFile ) );
+                }   /* if ( is_file( $szPropertiesFile ) ) */
                 //var_dump( $szPropertiesFile );
             }
         }   /* Let's try to load all the properties of the parent classes FIRST */
@@ -2681,6 +2772,10 @@ Class DocumentorClass extends DocumentorSourceFileObject
                 //var_dump( $this->aProperties );
             }
         }   /* if ( preg_match_all( '/\{\*property(?P<prop>.*?)\*\}/si',$this->szSourceCode,$aMatches,PREG_PATTERN_ORDER ) ) */
+        else
+        {
+            //var_dump( "Punaise ... je ne trouve pas les propriétés" );
+        }
         /* ******************************************************************************** */
 
         end:
@@ -2884,8 +2979,6 @@ Class DocumentorClass extends DocumentorSourceFileObject
         $this->necroSignaling();
     }   /* End of DocumentorClass.__destruct() ======================================== */
     /* ================================================================================ */
-
-
 }   /* End of class DocumentorClass =================================================== */
 /* ==================================================================================== */
 

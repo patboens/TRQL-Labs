@@ -16,21 +16,22 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
     {*file                  trql.warrantyscope.class.php *}
     {*purpose               A range of of services that will be provided to a customer
                             free of charge in case of a defect or malfunction of a
-                            product.Commonly used
-                            values:http://purl.org/goodrelations/v1#Labor-BringInhttp://purl.org/goodrelations/v1#PartsAndLabor-BringInhttp://purl.org/goodrelations/v1#PartsAndLabor-PickUp *}
+                            product.Commonly used values: 
+                            http://purl.org/goodrelations/v1#Labor-BringIn
+                            http://purl.org/goodrelations/v1#PartsAndLabor-BringIn
+                            http://purl.org/goodrelations/v1#PartsAndLabor-PickUp *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
     {*cdate                 28-08-2020 16:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,22 +45,18 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
 namespace trql\warrantyscope;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\enumeration\Enumeration    as Enumeration;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\enumeration\Enumeration   as Enumeration;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'ENUMERATION_CLASS_VERSION' ) )
     require_once( 'trql.enumeration.class.php' );
-
-
 
 defined( 'WARRANTYSCOPE_CLASS_VERSION' ) or define( 'WARRANTYSCOPE_CLASS_VERSION','0.1' );
 
@@ -69,8 +66,11 @@ defined( 'WARRANTYSCOPE_CLASS_VERSION' ) or define( 'WARRANTYSCOPE_CLASS_VERSION
     {*desc
 
         A range of of services that will be provided to a customer free of charge
-        in case of a defect or malfunction of a product.Commonly used
-        values:http://purl.org/goodrelations/v1#Labor-BringInhttp://purl.org/goodrelations/v1#PartsAndLabor-BringInhttp://purl.org/goodrelations/v1#PartsAndLabor-PickUp
+        in case of a defect or malfunction of a product. Commonly used
+        values: 
+        http://purl.org/goodrelations/v1#Labor-BringIn
+        http://purl.org/goodrelations/v1#PartsAndLabor-BringIn
+        http://purl.org/goodrelations/v1#PartsAndLabor-PickUp
 
     *}
 
@@ -83,9 +83,17 @@ defined( 'WARRANTYSCOPE_CLASS_VERSION' ) or define( 'WARRANTYSCOPE_CLASS_VERSION
     {*doc [url]http://schema.org/WarrantyScope[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 28-08-2020 16:41.
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c] on 28-08-2020 16:41.
     *}
+
+    {*todo
+        Search if there is any WikidataId corresponding to this class
+        (use the [c]wikidata()[/c] method, which does not do anything at 
+        the moment)
+    *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -134,7 +142,7 @@ class WarrantyScope extends Enumeration
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT LOOKED AT IT YET. *} */
 
 
     /* ================================================================================ */
@@ -159,10 +167,8 @@ class WarrantyScope extends Enumeration
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of WarrantyScope.__construct() ========================================== */
+    }   /* End of WarrantyScope.__construct() ========================================= */
     /* ================================================================================ */
 
 
@@ -189,10 +195,8 @@ class WarrantyScope extends Enumeration
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of WarrantyScope.__destruct() =========================================== */
+    }   /* End of WarrantyScope.__destruct() ========================================== */
     /* ================================================================================ */
-
-}   /* End of class WarrantyScope ====================================================== */
+}   /* End of class WarrantyScope ===================================================== */
 /* ==================================================================================== */
-
 ?>

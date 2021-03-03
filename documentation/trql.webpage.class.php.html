@@ -37,7 +37,16 @@ table.properties tr.property td.description { width: 60%; }
 <section class="classes">
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>WebPage</code></span>
-<span class="DocumentorLabel">Description: </span><span class="property description"></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A web page. Every web page is implicitly assumed to be declared to be of
+ type WebPage, so the various properties about that webpage, such as
+ breadcrumb may be used. We recommend explicit declaration if these
+ properties are specified, but if they are found outside of an itemscope,
+ they will be assumed to be about the page.</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class WebPage extends CreativeWork implements iContext</code></span>
+<span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
+ under the terms of their license:
+ <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
+<span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/WebPage" class="DocumentorLink" title="Go to http://schema.org/WebPage" itemprop="url">http://schema.org/WebPage</a>?utm_source=TRQLLabs</span>
 <span class="DocumentorLabel">Properties: </span>
 <table class="properties">
 <thead>
