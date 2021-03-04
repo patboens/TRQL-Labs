@@ -237,6 +237,8 @@ class LocationFeatureSpecification extends PropertyValue
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of LocationFeatureSpecification.__destruct() =========================================== */
     /* ================================================================================ */
 

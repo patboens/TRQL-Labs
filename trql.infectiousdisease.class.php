@@ -247,6 +247,8 @@ class InfectiousDisease extends MedicalCondition
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of InfectiousDisease.__destruct() =========================================== */
     /* ================================================================================ */
 

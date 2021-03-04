@@ -194,6 +194,8 @@ class HealthPlanFormulary extends Intangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of HealthPlanFormulary.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -211,6 +211,8 @@ class MaximumDoseSchedule extends DoseSchedule
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MaximumDoseSchedule.__destruct() =========================================== */
     /* ================================================================================ */
 

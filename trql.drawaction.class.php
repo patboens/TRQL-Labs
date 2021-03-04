@@ -223,6 +223,8 @@ class DrawAction extends CreateAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DrawAction.__destruct() =========================================== */
     /* ================================================================================ */
 

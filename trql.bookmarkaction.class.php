@@ -220,6 +220,8 @@ class BookmarkAction extends OrganizeAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BookmarkAction.__destruct() =========================================== */
     /* ================================================================================ */
 

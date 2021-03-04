@@ -196,6 +196,8 @@ class HowToItem extends ListItem
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of HowToItem.__destruct() =========================================== */
     /* ================================================================================ */
 

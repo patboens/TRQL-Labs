@@ -250,6 +250,8 @@ class InvestmentFund extends InvestmentOrDeposit
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of InvestmentFund.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -211,6 +211,8 @@ class BoatTrip extends Trip
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BoatTrip.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -28,6 +28,7 @@
     {*cdate                 25-08-2020 08:43 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -87,10 +88,12 @@ defined( 'PRODUCT_CLASS_VERSION' ) or define( 'PRODUCT_CLASS_VERSION','0.1' );
 
     *}
 
+    *}}
+
  */
 /* ==================================================================================== */
 class Product extends Thing
-/*--------------------------------------*/
+/*-----------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -242,7 +245,7 @@ class Product extends Thing
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of Product.__construct() ========================================== */
+    }   /* End of Product.__construct() =============================================== */
     /* ================================================================================ */
 
 
@@ -269,10 +272,8 @@ class Product extends Thing
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of Product.__destruct() =========================================== */
+    }   /* End of Product.__destruct() ================================================ */
     /* ================================================================================ */
-
-}   /* End of class Product ====================================================== */
+}   /* End of class Product =========================================================== */
 /* ==================================================================================== */
-
 ?>

@@ -174,6 +174,8 @@ class DataDownload extends MediaObject
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DataDownload.__destruct() =========================================== */
     /* ================================================================================ */
 }   /* End of class DataDownload ====================================================== */

@@ -229,6 +229,8 @@ class LeaveAction extends InteractAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of LeaveAction.__destruct() =========================================== */
     /* ================================================================================ */
 

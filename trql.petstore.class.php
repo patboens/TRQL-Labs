@@ -78,6 +78,7 @@ defined( 'PETSTORE_CLASS_VERSION' ) or define( 'PETSTORE_CLASS_VERSION','0.1' );
         on 28-08-2020 14:09.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class PetStore extends Store

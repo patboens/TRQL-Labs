@@ -245,6 +245,8 @@ class DonateAction extends TradeAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DonateAction.__destruct() =========================================== */
     /* ================================================================================ */
 

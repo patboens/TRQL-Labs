@@ -68,9 +68,9 @@ defined( 'WARRANTYSCOPE_CLASS_VERSION' ) or define( 'WARRANTYSCOPE_CLASS_VERSION
         A range of of services that will be provided to a customer free of charge
         in case of a defect or malfunction of a product. Commonly used
         values: 
-        http://purl.org/goodrelations/v1#Labor-BringIn
-        http://purl.org/goodrelations/v1#PartsAndLabor-BringIn
-        http://purl.org/goodrelations/v1#PartsAndLabor-PickUp
+        [url]http://purl.org/goodrelations/v1#Labor-BringIn[/url]
+        [url]http://purl.org/goodrelations/v1#PartsAndLabor-BringIn[/url]
+        [url]http://purl.org/goodrelations/v1#PartsAndLabor-PickUp[/url]
 
     *}
 

@@ -257,6 +257,8 @@ class Drug extends Substance
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Drug.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -202,6 +202,8 @@ class HealthInsurancePlan extends Intangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of HealthInsurancePlan.__destruct() =========================================== */
     /* ================================================================================ */
 

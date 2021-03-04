@@ -213,6 +213,8 @@ class BusTrip extends Trip
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BusTrip.__destruct() =========================================== */
     /* ================================================================================ */
 

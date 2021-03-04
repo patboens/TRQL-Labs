@@ -226,6 +226,8 @@ class ListenAction extends ConsumeAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of ListenAction.__destruct() =========================================== */
     /* ================================================================================ */
 

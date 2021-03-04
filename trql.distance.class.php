@@ -191,6 +191,8 @@ class Distance extends Quantity
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Distance.__destruct() =========================================== */
     /* ================================================================================ */
 

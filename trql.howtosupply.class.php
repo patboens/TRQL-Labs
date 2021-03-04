@@ -198,6 +198,8 @@ class HowToSupply extends HowToItem
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of HowToSupply.__destruct() =========================================== */
     /* ================================================================================ */
 

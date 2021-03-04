@@ -258,6 +258,8 @@ class EducationalOccupationalProgram extends Intangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of EducationalOccupationalProgram.__destruct() =========================================== */
     /* ================================================================================ */
 

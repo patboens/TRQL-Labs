@@ -211,6 +211,8 @@ class EmployerAggregateRating extends AggregateRating
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of EmployerAggregateRating.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -170,6 +170,8 @@ class HowTo extends CreativeWork
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of HowTo.__destruct() ================================================== */
     /* ================================================================================ */
 

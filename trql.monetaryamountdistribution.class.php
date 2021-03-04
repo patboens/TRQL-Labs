@@ -197,6 +197,8 @@ class MonetaryAmountDistribution extends QuantitativeValueDistribution
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MonetaryAmountDistribution.__destruct() ============================= */
     /* ================================================================================ */
 

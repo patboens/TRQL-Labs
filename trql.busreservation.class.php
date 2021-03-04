@@ -224,6 +224,8 @@ class BusReservation extends Reservation
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BusReservation.__destruct() =========================================== */
     /* ================================================================================ */
 

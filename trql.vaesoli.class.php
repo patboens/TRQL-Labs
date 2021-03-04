@@ -4045,5 +4045,239 @@ class Vaesoli
         return ( $aURL );
     }   /* End of function URL_ParseDomain() ========================================== */
     /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /* XML to JSON, to Array, to Object */
+            /* ======================================================================== */
+            /** {{*XMLtoJSON( $szXML )=
+
+                Turns an XML into JSON
+
+                {*params
+                    $szXML      (string)        XML to turn to JSON
+                *}
+
+                {*return
+                    (string)    $szXML turned into JSON
+                *}
+
+                *}}
+             */
+            /* ======================================================================== */
+            public static function XMLtoJSON( $szXML )
+            /*--------------------------------------*/
+            {
+                $a = self::XMLToArray( $szXML );
+                return ( json_encode( $a ) );
+            }   /* End of Vaesoli.XMLtoJSON() ========================================= */
+            /* ======================================================================== */
+
+            /* ======================================================================== */
+            /** {{*XMLtoArray( $szXML )=
+
+                Turns an XML into an array
+
+                {*params
+                    $szXML      (string)        XML to turn to an array
+                *}
+
+                {*return
+                    (array)     $szXML turned into an array
+                *}
+
+                *}}
+             */
+            /* ======================================================================== */
+            public static function XMLToArray( $szXML )
+            /*---------------------------------------*/
+            {
+                $oXML = @simplexml_load_string( $szXML,"SimpleXMLElement",LIBXML_NOENT | LIBXML_NOCDATA | LIBXML_NOERROR | LIBXML_NOWARNING );
+
+                if ( is_bool( $oXML ) )
+                {
+                    var_dump( $szXML );
+                    die( "NOT WORKING" );
+                }
+
+                $szJSON = json_encode( $oXML );
+
+                return ( json_decode( $szJSON,true ) );
+            }   /* End of Vaesoli.XMLtoArray() ======================================== */
+            /* ======================================================================== */
+
+
+            /* ======================================================================== */
+            /** {{*XMLtoObject( $szXML )=
+
+                Turns an XML into an array
+
+                {*params
+                    $szXML      (string)        XML to turn to an standard object
+                *}
+
+                {*return
+                    (array)     $szXML turned into an object
+                *}
+
+                *}}
+             */
+            /* ======================================================================== */
+            public static function XMLToObject( $szXML )
+            /*----------------------------------------*/
+            {
+                return ( self::ArrayToObject( self::XMLToArray( $szXML ) ) );
+            }   /* End of Vaesoli.XMLtoObject() ======================================= */
+            /* ======================================================================== */
+    /* XML to JSON, to Array, to Object */
+    /* ================================================================================ */
+
+
+
+
+    /* ================================================================================ */
+    /* Array to Object, to JSON, to XML*/
+            public static function ArrayToObject( $a )
+            /*--------------------------------------*/
+            {
+                return ( (object) $a );
+            }   /* End of Vaesoli.ArraytoObject() ===================================== */
+            /* ======================================================================== */
+
+
+            public static function ArrayToJSON( $a )
+            /*--------------------------------------*/
+            {
+                return ( json_encode( self::ArrayToObject( $a ) ) );
+            }   /* End of Vaesoli.ArraytoJSON() ======================================= */
+            /* ======================================================================== */
+
+
+            public static function ArrayToXML( $a )
+            /*-----------------------------------*/
+            {
+                $szRetVal   = null;
+                $oSimpleXML = new \SimpleXMLElement( '<STARTSTARTSTART></STARTSTARTSTART>' );
+
+                // function call to convert array to xml
+                self::array_to_xml( $a,$oSimpleXML );
+
+                //saving generated xml file; 
+                $szXML = $oSimpleXML->asXML( );
+
+                if ( preg_match( '%<STARTSTARTSTART>(?P<payload>.*?)</STARTSTARTSTART>%si',$szXML,$aMatches ) )
+                {
+                    $szRetVal = preg_replace('/<\/(\d*?)>/si','</item>',preg_replace('/<(\d*?)>/si','<item no="$1">',$aMatches['payload'] ) );
+                }   /* if ( preg_match( '%<STARTSTARTSTART>(?P<payload>.*?)</STARTSTARTSTART>%si',$szXML,$aMatches ) ) */
+
+                return ( $szRetVal );
+            }   /* End of Vaesoli.ArraytoXML() ======================================== */
+            /* ======================================================================== */
+
+
+            protected static function array_to_xml( $data,$oSimpleXML )
+            /*------------------------------------------------------*/
+            {
+                foreach( $data as $key => $value )
+                {
+                    if ( is_array( $value ) )
+                    {
+                        //var_dump( $key );
+                        if ( is_numeric( $key ) )
+                        {
+                            // Apparemment, ce cas ne se présente jamais et je ne comprends pas pourquoi !
+                            //var_dump( "NUMERIC KEY" );
+                            //die();
+                            //$key = 'item' . $key; //dealing with <0/>..<n/> issues
+                            $key = 'item';
+                        }
+
+                        $subnode = $oSimpleXML->addChild( $key );
+
+                        self::array_to_xml( $value,$subnode );
+                    }
+                    else
+                    {
+                        //var_dump( gettype( $value ) );
+                        // DOUTEUX ... if ( gettype( $value ) === 'object' )
+                        // DOUTEUX ...     $value = self::ArrayToXML( (array) $value );
+
+                        // Ceci fonctionnait !!!
+                        //$oSimpleXML->addChild( "{$key}",htmlspecialchars( "{$value}" ) );
+
+                        if ( gettype( $value ) === 'object' )
+                        {
+                            $subnode = $oSimpleXML->addChild( $key );
+                            self::array_to_xml( (array) $value,$subnode );
+                        }
+                        else
+                        {
+                            $oSimpleXML->addChild( "{$key}",$value );
+                        }
+                    }
+                }   /* foreach( $data as $key => $value ) */
+            }   /* End of Vaesoli.array_to_xml() ====================================== */
+            /* ======================================================================== */
+    /* Array to Object, to JSON, to XML*/
+    /* ================================================================================ */
+
+
+
+
+    /* ================================================================================ */
+    /* JSON to Object, to Array , to XML*/
+            public static function JSONToObject( $szJSON )
+            /*------------------------------------------*/
+            {
+                return ( json_decode( $szJSON ) );
+            }   /* End of Vaesoli.JSONToObject() ====================================== */
+            /* ======================================================================== */
+
+            public static function JSONToArray( $szJSON )
+            /*-----------------------------------------*/
+            {
+                return ( (array) json_decode( $szJSON ) );
+            }   /* End of Vaesoli.JSONToArray() ======================================= */
+            /* ======================================================================== */
+
+            public static function JSONToXML( $szJSON )
+            /*--------------------------------------*/
+            {
+                return ( self::ArrayToXML( (array) self::JSONToArray( $szJSON ) ) );
+            }   /* End of Vaesoli.JSONToXML() ========================================= */
+            /* ======================================================================== */
+    /* JSON to Object, to Array , to XML*/
+    /* ================================================================================ */
+
+
+
+
+    /* ================================================================================ */
+    /* Object to JSON, to Array , to XML*/
+            public static function ObjectToJSON( $o )
+            /*-------------------------------------*/
+            {
+                return ( json_encode( $o ) );
+            }   /* End of Vaesoli.ObjectToJSON() ====================================== */
+            /* ======================================================================== */
+
+
+            public static function ObjectToArray( $o )
+            /*--------------------------------------*/
+            {
+                return ( (array) $o );
+            }   /* End of Vaesoli.ObjectToArray() ===================================== */
+            /* ======================================================================== */
+
+
+            public static function ObjectToXML( $o )
+            /*------------------------------------*/
+            {
+                return ( self::ArrayToXML( (array) $o ) );
+            }   /* End of Vaesoli.JSONToXML() ========================================= */
+            /* ======================================================================== */
+    /* JSON to Object, to Array , to XML*/
+    /* ================================================================================ */
+
 }
 ?>

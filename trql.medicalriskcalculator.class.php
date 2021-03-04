@@ -204,6 +204,8 @@ class MedicalRiskCalculator extends MedicalRiskEstimator
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MedicalRiskCalculator.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -35,7 +35,7 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">26-08-2020 18:49</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">02/03/2021 - 15:12:34</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">04/03/2021 - 12:10:38</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
@@ -176,21 +176,6 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$additionalType</code></td>
-<td class="type"><code>URL</code></td>
-<td class="description">An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$alternateName</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">An alias for the item.</td>
-</tr>
-<tr class="property">
 <td class="name"><code>$applicantLocationRequirements</code></td>
 <td class="type"><code>AdministrativeArea</code></td>
 <td class="description">The location(s) applicants can apply from. This is usually used for
@@ -209,11 +194,6 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <td class="description">The base salary of the job or of an employee in an EmployeeRole.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$benefits</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Description of benefits associated with the job.</td>
-</tr>
-<tr class="property">
 <td class="name"><code>$datePosted</code></td>
 <td class="type"><code>Date|DateTime</code></td>
 <td class="description">Publication date of an online listing.</td>
@@ -222,14 +202,6 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <td class="name"><code>$description</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A description of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$disambiguatingDescription</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
 <td class="name"><code>$educationRequirements</code></td>
@@ -281,26 +253,7 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <td class="description">Organization offering the job position.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$identifier</code></td>
-<td class="type"><code>URL|string|PropertyValue</code></td>
-<td class="description">The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$image</code></td>
-<td class="type"><code>ImageObject|URL</code></td>
-<td class="description">An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject.</td>
-</tr>
-<tr class="property">
 <td class="name"><code>$incentiveCompensation</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Description of bonus and commission compensation aspects of the job.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$incentives</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Description of bonus and commission compensation aspects of the job.</td>
 </tr>
@@ -341,17 +294,6 @@ p.property.func span.name { border:1px solid red; padding:6px; }
                                                                                                                                                     filled as soon as possible.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$mainEntityOfPage</code></td>
-<td class="type"><code>CreativeWork|URL</code></td>
-<td class="description">Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$name</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The name of the item.</td>
-</tr>
-<tr class="property">
 <td class="name"><code>$occupationalCategory</code></td>
 <td class="type"><code>CategoryCode|string</code></td>
 <td class="description">A category describing the job, preferably using a term from a taxonomy
@@ -368,12 +310,6 @@ p.property.func span.name { border:1px solid red; padding:6px; }
                                                                                                                                                     job. Defined terms such as those in O*net may be used, but note that
                                                                                                                                                     there is no way to specify the level of ability as well as its nature
                                                                                                                                                     when using a defined term.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$potentialAction</code></td>
-<td class="type"><code>Action</code></td>
-<td class="description">Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
 <td class="name"><code>$qualifications</code></td>
@@ -395,13 +331,6 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <td class="type"><code>string</code></td>
 <td class="description">The currency (coded using ISO 4217 ) used for the main salary
                                                                                                                                                     information in this job posting or for this employee.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$sameAs</code></td>
-<td class="type"><code>URL</code></td>
-<td class="description">URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website.</td>
 </tr>
 <tr class="property">
 <td class="name"><code>$securityClearanceRequirement</code></td>
@@ -431,11 +360,6 @@ p.property.func span.name { border:1px solid red; padding:6px; }
                                                                                                                                                     entries include VeteranCommit, MilitarySpouseCommit, etc.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$subjectOf</code></td>
-<td class="type"><code>Event|CreativeWork</code></td>
-<td class="description">A CreativeWork or Event about this Thing.</td>
-</tr>
-<tr class="property">
 <td class="name"><code>$title</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The title of the job.</td>
@@ -448,11 +372,6 @@ p.property.func span.name { border:1px solid red; padding:6px; }
                                                                                                                                                     known.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$url</code></td>
-<td class="type"><code>URL</code></td>
-<td class="description">URL of the item.</td>
-</tr>
-<tr class="property">
 <td class="name"><code>$validThrough</code></td>
 <td class="type"><code>DateTime|Date</code></td>
 <td class="description">The date after when the item is not valid. For example the end of an
@@ -463,6 +382,11 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <td class="type"><code>string</code></td>
 <td class="description">The typical working hours for this job (e.g. 1st shift, night shift,
                                                                                                                                                     8am-5pm).</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. NOT LOOKED AT IT YET.</td>
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>JobPosting</code></h2>

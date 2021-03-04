@@ -215,6 +215,8 @@ class EngineSpecification extends StructuredValue
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of EngineSpecification.__destruct() =========================================== */
     /* ================================================================================ */
 

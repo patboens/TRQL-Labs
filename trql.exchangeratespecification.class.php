@@ -195,6 +195,8 @@ class ExchangeRateSpecification extends StructuredValue
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of ExchangeRateSpecification.__destruct() =========================================== */
     /* ================================================================================ */
 

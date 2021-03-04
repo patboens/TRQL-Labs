@@ -190,6 +190,8 @@ class Energy extends Quantity
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Energy.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -191,6 +191,8 @@ class LegalForceStatus extends StatusEnumeration
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of LegalForceStatus.__destruct() =========================================== */
     /* ================================================================================ */
 

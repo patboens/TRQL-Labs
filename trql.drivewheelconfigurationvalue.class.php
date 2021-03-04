@@ -212,6 +212,8 @@ class DriveWheelConfigurationValue extends QualitativeValue
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DriveWheelConfigurationValue.__destruct() =========================================== */
     /* ================================================================================ */
 

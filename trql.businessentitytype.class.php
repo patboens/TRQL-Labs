@@ -198,6 +198,8 @@ class BusinessEntityType extends Enumeration
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BusinessEntityType.__destruct() =========================================== */
     /* ================================================================================ */
 

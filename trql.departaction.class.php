@@ -227,6 +227,8 @@ class DepartAction extends MoveAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DepartAction.__destruct() =========================================== */
     /* ================================================================================ */
 

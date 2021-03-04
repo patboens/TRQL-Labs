@@ -213,6 +213,8 @@ class Ligament extends AnatomicalStructure
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Ligament.__destruct() =========================================== */
     /* ================================================================================ */
 

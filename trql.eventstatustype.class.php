@@ -192,6 +192,8 @@ class EventStatusType extends StatusEnumeration
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of EventStatusType.__destruct() =========================================== */
     /* ================================================================================ */
 

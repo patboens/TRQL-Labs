@@ -233,6 +233,8 @@ class JoinAction extends InteractAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of JoinAction.__destruct() =========================================== */
     /* ================================================================================ */
 

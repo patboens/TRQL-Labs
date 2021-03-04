@@ -204,6 +204,8 @@ class DoseSchedule extends MedicalIntangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DoseSchedule.__destruct() =========================================== */
     /* ================================================================================ */
 

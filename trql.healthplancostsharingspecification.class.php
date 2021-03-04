@@ -197,6 +197,8 @@ class HealthPlanCostSharingSpecification extends Intangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of HealthPlanCostSharingSpecification.__destruct() =========================================== */
     /* ================================================================================ */
 

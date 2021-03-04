@@ -238,6 +238,8 @@ class FloorPlan extends Intangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of FloorPlan.__destruct() =========================================== */
     /* ================================================================================ */
 

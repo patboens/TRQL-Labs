@@ -226,6 +226,8 @@ class EventReservation extends Reservation
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of EventReservation.__destruct() =========================================== */
     /* ================================================================================ */
 

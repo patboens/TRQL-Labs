@@ -21,13 +21,14 @@
 
 /** {{{*fheader
     {*file                  trql.organization.class.php *}
-    {*purpose               An organization such as a school, NGO, corporation, club, 
+    {*purpose               An organization such as a school, NGO, corporation, club,
                             etc. *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
     {*cdate                 29-07-20 11:51 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -184,7 +185,7 @@ class Organization extends Thing implements iContext
                                                                                                                                                             belongs. Inverse property: member. *} */
     public      $naics                      = null;                 /* {*property   $naics                      (string)                                    The North American Industry Classification System (NAICS) code for a
                                                                                                                                                             particular organization or business person. *} */
-    public      $nonprofitStatus            = null;                 /* {*property   $nonprofitStatus            (NonprofitType)                             nonprofit Status indicates the legal status of a non-profit organization 
+    public      $nonprofitStatus            = null;                 /* {*property   $nonprofitStatus            (NonprofitType)                             nonprofit Status indicates the legal status of a non-profit organization
                                                                                                                                                             in its primary place of business. *} */
     public      $numberOfEmployees          = null;                 /* {*property   $numberOfEmployees          (QuantitativeValue)                         The number of employees in an organization e.g. business. *} */
     public      $ownershipFundingInfo       = null;                 /* {*property   $ownershipFundingInfo       (AboutPage|CreativeWork|string|URL)         For an Organization (often but not necessarily a NewsMediaOrganization),
@@ -224,8 +225,8 @@ class Organization extends Thing implements iContext
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                 = 'Q43229';             /* {*property   $wikidataId                 (string)                                    Wikidata ID. Social entity (not necessarily commercial) uniting people 
-                                                                                                                                                            into a structured group managing shared means to meet some needs, or to 
+    public      $wikidataId                 = 'Q43229';             /* {*property   $wikidataId                 (string)                                    Wikidata ID. Social entity (not necessarily commercial) uniting people
+                                                                                                                                                            into a structured group managing shared means to meet some needs, or to
                                                                                                                                                             pursue collective goals *} */
 
     /* ================================================================================ */
@@ -261,7 +262,7 @@ class Organization extends Thing implements iContext
         $aRetVal = null;
 
         echo __LINE__," ... " . __METHOD__ . "() : SHOULD RETURN TEMPLATES\n";
-        die();
+        $this->die();
 
         return ( $aRetVal );
     }   /* End of Organization.templates() ============================================ */

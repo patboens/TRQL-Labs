@@ -213,6 +213,8 @@ class DefinedRegion extends StructuredValue
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DefinedRegion.__destruct() =========================================== */
     /* ================================================================================ */
 

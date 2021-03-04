@@ -208,6 +208,8 @@ class MedicalContraindication extends MedicalEntity
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MedicalContraindication.__destruct() =========================================== */
     /* ================================================================================ */
 

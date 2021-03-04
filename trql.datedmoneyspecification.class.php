@@ -202,6 +202,8 @@ class DatedMoneySpecification extends StructuredValue
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DatedMoneySpecification.__destruct() =========================================== */
     /* ================================================================================ */
 

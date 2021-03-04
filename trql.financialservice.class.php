@@ -33,8 +33,8 @@
 /****************************************************************************************/
 namespace trql\financialservice;
 
-use \trql\thing\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\localbusiness\LocalBusiness       as LocalBusiness;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -78,6 +78,10 @@ class FinancialService extends LocalBusiness
     public $feesAndCommissionsSpecification = null;                 /* {*property   $feesAndCommissionsSpecification    (string|URL)                    Description of fees, commissions, and other terms 
                                                                                                                                                         applied either to a class of financial product, or
                                                                                                                                                         by a financial service organization. *} */
+
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q837171';        /* {*property   $wikidataId                         (string)                        Wikidata ID. Financial services: economic service provided 
+                                                                                                                                                        by the finance industry *} */
 
 
     /* ================================================================================ */
@@ -132,8 +136,7 @@ class FinancialService extends LocalBusiness
         $this->necroSignaling();
     }   /* End of FinancialService.__destruct() ======================================= */
     /* ================================================================================ */
-
-}   /* End of class FinancialServi===================================================== */
+}   /* End of class FinancialService ================================================== */
 /* ==================================================================================== */
 
 ?>

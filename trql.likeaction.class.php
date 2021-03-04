@@ -223,6 +223,8 @@ class LikeAction extends ReactAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of LikeAction.__destruct() =========================================== */
     /* ================================================================================ */
 

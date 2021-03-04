@@ -255,6 +255,132 @@ class WebSite extends CreativeWork implements iContext
         $this->necroSignaling();
     }   /* End of WebSite.__destruct() ================================================ */
     /* ================================================================================ */
+
+    /*  Properties of a website
+        =======================
+
+        Depuis cette base, il faut que je compare avec ce qui est sauvé dans le companies.xml
+
+        L'idée c'est de pouvoir créer une photo du site pour m'en servir lors de la génération
+        du site.
+
+
+        public 'about' => null
+        public 'accessMode' => null
+        public 'accessModeSufficient' => null
+        public 'accessibilityAPI' => null
+        public 'accessibilityControl' => null
+        public 'accessibilityFeature' => null
+        public 'accessibilityHazard' => null
+        public 'accessibilitySummary' => null
+        public 'accountablePerson' => null
+        public 'additionalType' => null
+        public 'aggregateRating' => null
+        public 'alternateName' => null
+        public 'alternativeHeadline' => null
+        public 'associatedMedia' => null
+        public 'audience' => null
+        public 'audio' => null
+        public 'author' => null
+        public 'autodocRequired' => boolean true
+        public 'award' => null
+        public 'backupRequired' => boolean true
+        public 'character' => null
+        public 'citation' => null
+        public 'classIcon' => string 'D:\websites\snippet-center\q\common\resources\icons\mother.png' (length=62)
+        public 'comment' => null
+        public 'commentCount' => null
+        public 'conditionsOfAccess' => null
+        public 'contentLocation' => null
+        public 'contentRating' => null
+        public 'contentReferenceTime' => null
+        public 'contributor' => null
+        public 'copyrightHolder' => null
+        public 'copyrightYear' => null
+        public 'correction' => null
+        public 'creativeWorkStatus' => null
+        public 'creator' => null
+        public 'dateCreated' => null
+        public 'dateModified' => null
+        public 'datePublished' => null
+        public 'description' => null
+        public 'destinationDir' => string 'd:/websites/%host%' (length=18)
+        public 'disambiguatingDescription' => null
+        public 'discussionUrl' => null
+        public 'editor' => null
+        public 'educationalAlignment' => null
+        public 'educationalUse' => null
+        public 'encoding' => null
+        public 'encodingFormat' => null
+        public 'exampleOfWork' => null
+        public 'expires' => null
+        public 'funder' => null
+        public 'genre' => null
+        public 'hasPart' => null
+        public 'headline' => null
+        public 'identifier' => null
+        public 'image' => null
+        public 'inLanguage' => null
+        public 'interactionStatistic' => null
+        public 'interactivityType' => null
+        public 'isAccessibleForFree' => null
+        public 'isBasedOn' => null
+        public 'isFamilyFriendly' => null
+        public 'isPartOf' => null
+        public 'issn' => null
+        public 'keywords' => null
+        public 'lastInfo' =>
+        public 'learning' => boolean true
+        public 'learningResourceType' => null
+        public 'license' => null
+        public 'locationCreated' => null
+        public 'mainEntity' => null
+        public 'mainEntityOfPage' => null
+        public 'material' => null
+        public 'materialExtent' => null
+        public 'mentions' => null
+        public 'name' => null
+        public 'offers' => null
+        public 'position' => null
+        public 'potentialAction' => null
+        public 'producer' => null
+        public 'provider' => null
+        public 'publication' => null
+        public 'publisher' => null
+        public 'publisherImprint' => null
+        public 'publishingPrinciples' => null
+        public 'recordedAt' => null
+        public 'releasedEvent' => null
+        public 'remembering' => boolean true
+        public 'review' => null
+        public 'sameAs' => null
+        public 'schemaVersion' => null
+        public 'sdDatePublished' => null
+        public 'sdLicense' => null
+        public 'sdPublisher' => null
+        public 'sourceOrganization' => null
+        public 'spatial' => null
+        public 'spatialCoverage' => null
+        public 'sponsor' => null
+        public 'storing' => boolean true
+        public 'subjectOf' => null
+        public 'temporal' => null
+        public 'temporalCoverage' => null
+        public 'text' => null
+        public 'thumbnailUrl' => null
+        public 'timeRequired' => null
+        public 'translationOfWork' => null
+        public 'translator' => null
+        public 'typicalAgeRange' => null
+        public 'url' => string 'http://www.trql.io' (length=18)
+        public 'version' => null
+        public 'video' => null
+        public 'wikidataId' => string 'Q35127' (length=6)
+        public 'workExample' => null
+        public 'workTranslation' => null
+
+    */
+
 }   /* End of class WebSite =========================================================== */
 /* ==================================================================================== */
 ?>

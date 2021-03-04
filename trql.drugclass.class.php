@@ -204,6 +204,8 @@ class DrugClass extends MedicalEntity
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DrugClass.__destruct() =========================================== */
     /* ================================================================================ */
 

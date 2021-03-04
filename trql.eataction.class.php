@@ -226,6 +226,8 @@ class EatAction extends ConsumeAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of EatAction.__destruct() =========================================== */
     /* ================================================================================ */
 

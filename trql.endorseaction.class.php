@@ -223,6 +223,8 @@ class EndorseAction extends ReactAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of EndorseAction.__destruct() =========================================== */
     /* ================================================================================ */
 

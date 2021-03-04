@@ -214,6 +214,8 @@ class BrainStructure extends AnatomicalStructure
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BrainStructure.__destruct() =========================================== */
     /* ================================================================================ */
 

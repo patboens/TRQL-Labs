@@ -209,6 +209,8 @@ class DiagnosticProcedure extends MedicalProcedure
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DiagnosticProcedure.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -244,6 +244,8 @@ class ExerciseAction extends PlayAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of ExerciseAction.__destruct() =========================================== */
     /* ================================================================================ */
 

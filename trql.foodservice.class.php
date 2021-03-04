@@ -236,6 +236,8 @@ class FoodService extends Service
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of FoodService.__destruct() =========================================== */
     /* ================================================================================ */
 

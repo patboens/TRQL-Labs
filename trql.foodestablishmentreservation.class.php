@@ -241,6 +241,8 @@ class FoodEstablishmentReservation extends Reservation
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of FoodEstablishmentReservation.__destruct() =========================================== */
     /* ================================================================================ */
 

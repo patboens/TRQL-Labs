@@ -230,6 +230,8 @@ class BorrowAction extends TransferAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BorrowAction.__destruct() =========================================== */
     /* ================================================================================ */
 

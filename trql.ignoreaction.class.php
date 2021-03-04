@@ -222,6 +222,8 @@ class IgnoreAction extends AssessAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of IgnoreAction.__destruct() =========================================== */
     /* ================================================================================ */
 

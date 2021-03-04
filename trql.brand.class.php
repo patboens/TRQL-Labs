@@ -195,6 +195,8 @@ class Brand extends Intangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Brand.__destruct() =========================================== */
     /* ================================================================================ */
 

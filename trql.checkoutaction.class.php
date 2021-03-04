@@ -242,6 +242,8 @@ class CheckOutAction extends CommunicateAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of CheckOutAction.__destruct() =========================================== */
     /* ================================================================================ */
 

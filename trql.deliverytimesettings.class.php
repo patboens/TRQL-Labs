@@ -212,6 +212,8 @@ class DeliveryTimeSettings extends StructuredValue
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DeliveryTimeSettings.__destruct() =========================================== */
     /* ================================================================================ */
 

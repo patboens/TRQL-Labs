@@ -211,6 +211,8 @@ class LinkRole extends Role
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of LinkRole.__destruct() =========================================== */
     /* ================================================================================ */
 

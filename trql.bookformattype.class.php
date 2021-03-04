@@ -190,6 +190,8 @@ class BookFormatType extends Enumeration
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BookFormatType.__destruct() =========================================== */
     /* ================================================================================ */
 

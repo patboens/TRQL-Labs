@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -56,17 +55,14 @@
 /****************************************************************************************/
 namespace trql\jobposting;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\intangible\Intangible    as Intangible;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\intangible\Intangible     as Intangible;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'INTANGIBLE_CLASS_VERSION' ) )
     require_once( 'trql.intangible.class.php' );
-
-
 
 defined( 'JOBPOSTING_CLASS_VERSION' ) or define( 'JOBPOSTING_CLASS_VERSION','0.1' );
 
@@ -92,10 +88,12 @@ defined( 'JOBPOSTING_CLASS_VERSION' ) or define( 'JOBPOSTING_CLASS_VERSION','0.1
         on 26-08-2020 18:49.
     *}
 
+    *}}
+
  */
 /* ==================================================================================== */
 class JobPosting extends Intangible
-/*--------------------------------------*/
+/*-------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -106,26 +104,14 @@ class JobPosting extends Intangible
                                'UIKey'  => null         ,
                              );
 
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
     public      $applicantLocationRequirements  = null;             /* {*property   $applicantLocationRequirements  (AdministrativeArea)            The location(s) applicants can apply from. This is usually used for
                                                                                                                                                     telecommuting jobs where the applicant does not need to be in a
                                                                                                                                                     physical office. Note: This should not be used for citizenship or work
                                                                                                                                                     visa requirements. *} */
     public      $applicationContact             = null;             /* {*property   $applicationContact             (ContactPoint)                  Contact details for further information relevant to this job posting. *} */
     public      $baseSalary                     = null;             /* {*property   $baseSalary                     (float|PriceSpecification|MonetaryAmount)The base salary of the job or of an employee in an EmployeeRole. *} */
-    public      $benefits                       = null;             /* {*property   $benefits                       (string)                        Description of benefits associated with the job. *} */
     public      $datePosted                     = null;             /* {*property   $datePosted                     (Date|DateTime)                 Publication date of an online listing. *} */
     public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
     public      $educationRequirements          = null;             /* {*property   $educationRequirements          (EducationalOccupationalCredential|string)Educational background needed for the position or Occupation. *} */
     public      $eligibilityToWorkRequirement   = null;             /* {*property   $eligibilityToWorkRequirement   (string)                        The legal requirements such as citizenship, visa and other
                                                                                                                                                     documentation required for an applicant to this job. *} */
@@ -143,14 +129,7 @@ class JobPosting extends Intangible
     public      $experienceRequirements         = null;             /* {*property   $experienceRequirements         (string)                        Description of skills and experience needed for the position or
                                                                                                                                                     Occupation. *} */
     public      $hiringOrganization             = null;             /* {*property   $hiringOrganization             (Organization)                  Organization offering the job position. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
     public      $incentiveCompensation          = null;             /* {*property   $incentiveCompensation          (string)                        Description of bonus and commission compensation aspects of the job. *} */
-    public      $incentives                     = null;             /* {*property   $incentives                     (string)                        Description of bonus and commission compensation aspects of the job. *} */
     public      $industry                       = null;             /* {*property   $industry                       (DefinedTerm|string)            The industry associated with the job position. *} */
     public      $jobBenefits                    = null;             /* {*property   $jobBenefits                    (string)                        Description of benefits associated with the job. *} */
     public      $jobImmediateStart              = null;             /* {*property   $jobImmediateStart              (boolean)                       An indicator as to whether a position is available for an immediate
@@ -163,9 +142,6 @@ class JobPosting extends Intangible
                                                                                                                                                     expected to start work. Choose a specific date in the future or use
                                                                                                                                                     the jobImmediateStart property to indicate the position is to be
                                                                                                                                                     filled as soon as possible. *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
     public      $occupationalCategory           = null;             /* {*property   $occupationalCategory           (CategoryCode|string)           A category describing the job, preferably using a term from a taxonomy
                                                                                                                                                     such as BLS O*NET-SOC, ISCO-08 or similar, with the property repeated
                                                                                                                                                     for each applicable value. Ideally the taxonomy should be identified,
@@ -176,16 +152,11 @@ class JobPosting extends Intangible
                                                                                                                                                     job. Defined terms such as those in O*net may be used, but note that
                                                                                                                                                     there is no way to specify the level of ability as well as its nature
                                                                                                                                                     when using a defined term. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
     public      $qualifications                 = null;             /* {*property   $qualifications                 (EducationalOccupationalCredential|string)Specific qualifications required for this role or Occupation. *} */
     public      $relevantOccupation             = null;             /* {*property   $relevantOccupation             (Occupation)                    The Occupation for the JobPosting. *} */
     public      $responsibilities               = null;             /* {*property   $responsibilities               (string)                        Responsibilities associated with this role or Occupation. *} */
     public      $salaryCurrency                 = null;             /* {*property   $salaryCurrency                 (string)                        The currency (coded using ISO 4217 ) used for the main salary
                                                                                                                                                     information in this job posting or for this employee. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
     public      $securityClearanceRequirement   = null;             /* {*property   $securityClearanceRequirement   (string|URL)                    A description of any security clearance requirements of the job. *} */
     public      $sensoryRequirement             = null;             /* {*property   $sensoryRequirement             (string|URL|DefinedTerm)        A description of any sensory requirements and levels necessary to
                                                                                                                                                     function on the job, including hearing and vision. Defined terms such
@@ -197,19 +168,17 @@ class JobPosting extends Intangible
                                                                                                                                                     role or to work in this occupation. *} */
     public      $specialCommitments             = null;             /* {*property   $specialCommitments             (string)                        Any special commitments associated with this job posting. Valid
                                                                                                                                                     entries include VeteranCommit, MilitarySpouseCommit, etc. *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
     public      $title                          = null;             /* {*property   $title                          (string)                        The title of the job. *} */
     public      $totalJobOpenings               = null;             /* {*property   $totalJobOpenings               (int)                           The number of positions open for this job posting. Use a positive
                                                                                                                                                     integer. Do not use if the number of positions is unclear or not
                                                                                                                                                     known. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
     public      $validThrough                   = null;             /* {*property   $validThrough                   (DateTime|Date)                 The date after when the item is not valid. For example the end of an
                                                                                                                                                     offer, salary period, or a period of opening hours. *} */
     public      $workHours                      = null;             /* {*property   $workHours                      (string)                        The typical working hours for this job (e.g. 1st shift, night shift,
                                                                                                                                                     8am-5pm). *} */
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT LOOKED AT IT YET. *} */
 
 
     /* ================================================================================ */
@@ -234,10 +203,8 @@ class JobPosting extends Intangible
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of JobPosting.__construct() ========================================== */
+    }   /* End of JobPosting.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -262,10 +229,10 @@ class JobPosting extends Intangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
-    }   /* End of JobPosting.__destruct() =========================================== */
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of JobPosting.__destruct() ============================================= */
     /* ================================================================================ */
-
-}   /* End of class JobPosting ====================================================== */
+}   /* End of class JobPosting ======================================================== */
 /* ==================================================================================== */
-
 ?>

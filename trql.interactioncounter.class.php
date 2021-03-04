@@ -198,6 +198,8 @@ class InteractionCounter extends StructuredValue
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of InteractionCounter.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -220,6 +220,8 @@ class DiscoverAction extends FindAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DiscoverAction.__destruct() =========================================== */
     /* ================================================================================ */
 

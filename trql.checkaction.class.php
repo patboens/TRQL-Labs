@@ -222,6 +222,8 @@ class CheckAction extends FindAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of CheckAction.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -250,6 +250,8 @@ class InvestmentOrDeposit extends FinancialProduct
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of InvestmentOrDeposit.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -190,6 +190,8 @@ class Mass extends Quantity
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Mass.__destruct() =========================================== */
     /* ================================================================================ */
 

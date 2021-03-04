@@ -190,6 +190,8 @@ class ItemAvailability extends Enumeration
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of ItemAvailability.__destruct() =========================================== */
     /* ================================================================================ */
 

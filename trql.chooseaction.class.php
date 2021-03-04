@@ -161,6 +161,8 @@ class ChooseAction extends AssessAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of ChooseAction.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -166,6 +166,8 @@ class Diet extends CreativeWork
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Diet.__destruct() =================================================== */
     /* ================================================================================ */
 }   /* End of class Diet ============================================================== */

@@ -208,6 +208,8 @@ class DrugStrength extends MedicalIntangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DrugStrength.__destruct() =========================================== */
     /* ================================================================================ */
 

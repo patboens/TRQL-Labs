@@ -137,6 +137,8 @@ class Tool extends Equipment
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Tool.__destruct() =================================================== */
     /* ================================================================================ */
 

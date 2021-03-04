@@ -223,6 +223,8 @@ class DislikeAction extends ReactAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DislikeAction.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -192,6 +192,8 @@ class CategoryCode extends DefinedTerm
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of CategoryCode.__destruct() =========================================== */
     /* ================================================================================ */
 

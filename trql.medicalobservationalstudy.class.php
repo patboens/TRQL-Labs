@@ -223,6 +223,8 @@ class MedicalObservationalStudy extends MedicalStudy
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MedicalObservationalStudy.__destruct() =========================================== */
     /* ================================================================================ */
 

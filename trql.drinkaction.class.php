@@ -226,6 +226,8 @@ class DrinkAction extends ConsumeAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DrinkAction.__destruct() =========================================== */
     /* ================================================================================ */
 

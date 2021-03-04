@@ -230,6 +230,8 @@ class InviteAction extends CommunicateAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of InviteAction.__destruct() =========================================== */
     /* ================================================================================ */
 

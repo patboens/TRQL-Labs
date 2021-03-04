@@ -233,6 +233,8 @@ class DeliveryChargeSpecification extends PriceSpecification
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DeliveryChargeSpecification.__destruct() =========================================== */
     /* ================================================================================ */
 

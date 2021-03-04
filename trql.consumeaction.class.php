@@ -226,6 +226,8 @@ class ConsumeAction extends Action
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of ConsumeAction.__destruct() =========================================== */
     /* ================================================================================ */
 

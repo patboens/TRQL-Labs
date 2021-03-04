@@ -232,6 +232,8 @@ class CompoundPriceSpecification extends PriceSpecification
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of CompoundPriceSpecification.__destruct() =========================================== */
     /* ================================================================================ */
 

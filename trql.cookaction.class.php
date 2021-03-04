@@ -226,6 +226,8 @@ class CookAction extends CreateAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of CookAction.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -220,6 +220,8 @@ class MarryAction extends InteractAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MarryAction.__destruct() =========================================== */
     /* ================================================================================ */
 

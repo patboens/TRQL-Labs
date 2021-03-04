@@ -222,6 +222,8 @@ class DeactivateAction extends ControlAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DeactivateAction.__destruct() =========================================== */
     /* ================================================================================ */
 

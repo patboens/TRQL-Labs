@@ -232,6 +232,8 @@ class ConfirmAction extends InformAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of ConfirmAction.__destruct() =========================================== */
     /* ================================================================================ */
 

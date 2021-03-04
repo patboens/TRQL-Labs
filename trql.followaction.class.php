@@ -248,6 +248,8 @@ class FollowAction extends InteractAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of FollowAction.__destruct() =========================================== */
     /* ================================================================================ */
 

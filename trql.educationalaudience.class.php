@@ -192,6 +192,8 @@ class EducationalAudience extends Audience
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of EducationalAudience.__destruct() =========================================== */
     /* ================================================================================ */
 

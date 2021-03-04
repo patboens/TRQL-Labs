@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -49,13 +48,11 @@ namespace trql\pdf;
 use \trql\vaesoli\Vaesoli                       as Vaesoli;
 use \trql\digitaldocument\DigitalDocument       as DigitalDocument;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'DIGITALDOCUMENT_CLASS_VERSION' ) )
     require_once( 'd:/websites/snippet-center/trql.digitaldocument.class.php' );
-
 
 defined( 'PDF_CLASS_VERSION' ) or define( 'PDF_CLASS_VERSION','0.1' );
 
@@ -68,6 +65,7 @@ defined( 'PDF_CLASS_VERSION' ) or define( 'PDF_CLASS_VERSION','0.1' );
 
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class PDF extends DigitalDocument
@@ -140,8 +138,6 @@ class PDF extends DigitalDocument
         $this->necroSignaling();
     }   /* End of PDF.__destruct() ==================================================== */
     /* ================================================================================ */
-
 }   /* End of class PDF =============================================================== */
 /* ==================================================================================== */
-
 ?>

@@ -223,6 +223,8 @@ class CreateAction extends Action
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of CreateAction.__destruct() =========================================== */
     /* ================================================================================ */
 

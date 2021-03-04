@@ -221,6 +221,8 @@ class FilmAction extends CreateAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of FilmAction.__destruct() =========================================== */
     /* ================================================================================ */
 

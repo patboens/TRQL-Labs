@@ -224,6 +224,8 @@ class CancelAction extends PlanAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of CancelAction.__destruct() =========================================== */
     /* ================================================================================ */
 

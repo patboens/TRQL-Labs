@@ -230,6 +230,8 @@ class Flight extends Trip
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Flight.__destruct() =========================================== */
     /* ================================================================================ */
 

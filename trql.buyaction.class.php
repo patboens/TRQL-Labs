@@ -249,6 +249,8 @@ class BuyAction extends TradeAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BuyAction.__destruct() =========================================== */
     /* ================================================================================ */
 

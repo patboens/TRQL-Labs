@@ -201,6 +201,8 @@ class DeliveryMethod extends Enumeration
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DeliveryMethod.__destruct() =========================================== */
     /* ================================================================================ */
 

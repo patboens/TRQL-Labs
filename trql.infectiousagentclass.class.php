@@ -192,6 +192,8 @@ class InfectiousAgentClass extends MedicalEnumeration
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of InfectiousAgentClass.__destruct() =========================================== */
     /* ================================================================================ */
 

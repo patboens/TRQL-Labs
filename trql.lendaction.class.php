@@ -231,6 +231,8 @@ class LendAction extends TransferAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of LendAction.__destruct() =========================================== */
     /* ================================================================================ */
 

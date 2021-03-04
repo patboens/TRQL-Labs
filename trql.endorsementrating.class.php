@@ -229,6 +229,8 @@ class EndorsementRating extends Rating
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of EndorsementRating.__destruct() =========================================== */
     /* ================================================================================ */
 

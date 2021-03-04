@@ -217,6 +217,8 @@ class LymphaticVessel extends Vessel
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of LymphaticVessel.__destruct() =========================================== */
     /* ================================================================================ */
 

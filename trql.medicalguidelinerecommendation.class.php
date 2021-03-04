@@ -208,6 +208,8 @@ class MedicalGuidelineRecommendation extends MedicalGuideline
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MedicalGuidelineRecommendation.__destruct() =========================================== */
     /* ================================================================================ */
 

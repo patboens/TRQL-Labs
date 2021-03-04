@@ -249,6 +249,8 @@ class BrokerageAccount extends InvestmentOrDeposit
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BrokerageAccount.__destruct() =========================================== */
     /* ================================================================================ */
 

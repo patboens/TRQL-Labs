@@ -199,6 +199,8 @@ class MedicalIntangible extends MedicalEntity
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MedicalIntangible.__destruct() =========================================== */
     /* ================================================================================ */
 

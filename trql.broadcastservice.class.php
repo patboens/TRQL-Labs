@@ -258,6 +258,8 @@ class BroadcastService extends Service
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of BroadcastService.__destruct() =========================================== */
     /* ================================================================================ */
 

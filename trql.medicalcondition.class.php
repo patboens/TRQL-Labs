@@ -238,6 +238,8 @@ class MedicalCondition extends MedicalEntity
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MedicalCondition.__destruct() =========================================== */
     /* ================================================================================ */
 

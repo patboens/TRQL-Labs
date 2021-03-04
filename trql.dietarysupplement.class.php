@@ -226,6 +226,8 @@ class DietarySupplement extends Substance
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DietarySupplement.__destruct() =========================================== */
     /* ================================================================================ */
 

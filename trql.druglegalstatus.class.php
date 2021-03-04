@@ -200,6 +200,8 @@ class DrugLegalStatus extends MedicalIntangible
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of DrugLegalStatus.__destruct() =========================================== */
     /* ================================================================================ */
 

@@ -229,6 +229,8 @@ class FlightReservation extends Reservation
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of FlightReservation.__destruct() =========================================== */
     /* ================================================================================ */
 

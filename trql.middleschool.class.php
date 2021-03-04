@@ -166,6 +166,8 @@ class MiddleSchool extends EducationalOrganization
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of MiddleSchool.__destruct() =========================================== */
     /* ================================================================================ */
 

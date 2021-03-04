@@ -226,6 +226,8 @@ class InstallAction extends ConsumeAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of InstallAction.__destruct() =========================================== */
     /* ================================================================================ */
 

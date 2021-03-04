@@ -214,6 +214,8 @@ class Joint extends AnatomicalStructure
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Joint.__destruct() =========================================== */
     /* ================================================================================ */
 

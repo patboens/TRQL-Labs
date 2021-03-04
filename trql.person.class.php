@@ -4,16 +4,11 @@
     {*file                  trql.person.class.php *}
     {*purpose               A person (alive, dead, undead, or fictional). *}
     {*author                {PYB} *}
-    {*company               [br]Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 31-07-20 16:21 *}
     {*mdate                 auto *}
-    {*license               Submitted to intellectual property rights (see
-                            author) *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -31,11 +26,11 @@
 /****************************************************************************************/
 namespace trql\person;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\utility\Utility                           as Utility;
-use \trql\thing\Thing                               as Thing;
+use \trql\mother\Mother         as Mother;
+use \trql\mother\iContext       as iContext;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\utility\Utility       as Utility;
+use \trql\thing\Thing           as Thing;
 
 use DOMDocument;
 use DOMXPath;
@@ -50,7 +45,6 @@ if ( ! defined( 'THING_CLASS_VERSION' ) )
     require_once( 'trql.thing.class.php' );
 
 defined( 'PERSON_CLASS_VERSION' ) or define( 'PERSON_CLASS_VERSION','0.1' );
-
 
 /* ==================================================================================== */
 /** {{*class Person=
@@ -180,6 +174,9 @@ class Person extends Thing implements iContext
     public  $workLocation               = null;                     /* {*property   $workLocation               (ContactPoint|Place)                        A contact location for a person's place of work. *} */
     public  $worksFor                   = null;                     /* {*property   $worksFor                   (Organization)                              Organizations that the person works for. *} */
 
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId             = 'Q5';                     /* {*property   $wikidataId                 (string)                                    Wikidata ID. Human. Common name of Homo sapiens, unique extant species 
+                                                                                                                                                            of the genus Homo. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -279,10 +276,8 @@ class Person extends Thing implements iContext
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of Person.__destruct() ================================================= */
     /* ================================================================================ */
-
 }   /* End of class Person ============================================================ */
 /* ==================================================================================== */
 ?>

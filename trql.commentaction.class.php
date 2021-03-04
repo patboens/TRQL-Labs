@@ -229,6 +229,8 @@ class CommentAction extends CommunicateAction
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of CommentAction.__destruct() =========================================== */
     /* ================================================================================ */
 

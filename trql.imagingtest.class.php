@@ -206,6 +206,8 @@ class ImagingTest extends MedicalTest
         $this->backup();
         $this->autodoc();
         $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of ImagingTest.__destruct() =========================================== */
     /* ================================================================================ */
 
