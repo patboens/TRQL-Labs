@@ -27,6 +27,7 @@
     {*cdate                 28-07-20 23:53 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     {*remark
 
@@ -444,7 +445,31 @@ class Tazieff extends Utility implements iContext
     /* ================================================================================ */
 
 
-    /* Final */
+    /* ================================================================================ */
+    /** {{*protected cacheName( $szMethod,$xParams[,$xAdditional] )=
+
+        Computes the name of a .cache file based on parameters
+
+        {*params
+            $szMethod               (string)    Method associated to the cache
+            $xParams                (mixed)     Any set of parameters that determine
+                                                the name of the cache
+            $xAdditional            (mixed)     Any set of additional parameters that
+                                                may determine the name of the cache.
+                                                Optional. [c]null[/c] by default
+        *}
+
+        {*return
+            (string)        Name of a .cache file
+        *}
+
+        {*warning           12-11-20 12:14:42 : cannot process any other language
+                            than French!
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     protected function cacheName( $szMethod,$xParams,$xAdditional = null )
     /*------------------------------------------------------------------*/
     {

@@ -27,6 +27,7 @@
     {*cdate                 31-12-20 14:08 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -45,16 +46,14 @@
 /****************************************************************************************/
 namespace trql\builder;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\tool\Tool                         as Tool;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\tool\Tool         as Tool;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'TOOL_CLASS_VERSION' ) )
     require_once( 'trql.tool.class.php' );
-
 
 defined( 'BUILDER_CLASS_VERSION' ) or define( 'BUILDER_CLASS_VERSION','0.1' );
 
@@ -66,6 +65,8 @@ defined( 'BUILDER_CLASS_VERSION' ) or define( 'BUILDER_CLASS_VERSION','0.1' );
         A person or thing that creates or develops a particular thing
 
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */

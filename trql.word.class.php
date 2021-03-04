@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 08-11-20 13:43:12 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -71,6 +70,7 @@ defined( 'WORD_CLASS_VERSION' ) or define( 'WORD_CLASS_VERSION','0.1' );
 
     {*doc [url]https://www.wikidata.org/wiki/Q8171[/url] *}
 
+    *}}
 
  */
 /* ==================================================================================== */
@@ -163,38 +163,26 @@ class Word extends LexicalItem
     /* ================================================================================ */
 
 
-    /* Final */
     /* ================================================================================ */
-    /** {{*protected cacheName( $szTerm[,$szGrammaticalCategory[,$szLang]] )=
+    /** {{*protected cacheName( $szMethod,$xParams[,$xAdditional] )=
 
-        Search a synonym for a term
+        Computes the name of a .cache file based on parameters
 
         {*params
-            $szTerm         (string)    Term to look for synonyms
+            $szMethod               (string)    Method associated to the cache
+            $xParams                (mixed)     Any set of parameters that determine
+                                                the name of the cache
+            $xAdditional            (mixed)     Any set of additional parameters that
+                                                may determine the name of the cache.
+                                                Optional. [c]null[/c] by default
         *}
 
         {*return
-            (array)         An array of associative arrays which are possible returns
+            (string)        Name of a .cache file
         *}
 
         {*warning           12-11-20 12:14:42 : cannot process any other language
                             than French!
-        *}
-
-        {*example
-            use \trql\vaesoli\Vaesoli       as Vaesoli;
-            use \trql\synonym\Synonym       as Synonym;
-
-            // Create a new object
-            $oSynonym = new Synonym();
-
-            // If results found
-            if ( ! is_null( $aRetVal = $oSynonym->search( 'susciter','fr','verbe' ) ) )
-            {
-                // Display each synonym
-                foreach( $aRetVal as $szSynonym )
-                    var_dump( $szSynonym );
-            }
         *}
 
         *}}
@@ -213,7 +201,7 @@ class Word extends LexicalItem
             $szCacheFile = vaesoli::FIL_RealPath( $this->szHome . '/' . $szMethod . '.' . md5( serialize( $xParams ) ) . md5( serialize( $xAdditional ) ) . '.cache' );
 
         return ( $szCacheFile );
-    }   /* End of Synonym.cacheName() ================================================= */
+    }   /* End of Word.cacheName() ==================================================== */
     /* ================================================================================ */
 
 
@@ -223,11 +211,13 @@ class Word extends LexicalItem
         Search a synonym for a term
 
         {*params
-            $szTerm                 (string)    Term to look for synonyms
-            $szLang                 (string)    2-letter language code (lowercase). 
-                                                Optional. [c]fr[/c] by default
-            $szGrammaticalCategory  (string)    Grammatical category: verbe, substantif,
-                                                adjectif, adverbe ...
+            $szTerm                 (string)    Term associated to the cache
+            $szLang                 (string)    Optional language. [c]fr[/c] by
+                                                default
+            $szGrammaticalCategory  (string)    Optional grammatical category
+                                                ([c]substantif[/c] by default; can be 
+                                                [c]verbe[/c], [c]substantif[/c],
+                                                [c]adjectif[/c], [c]adverbe[/c] ...)
         *}
 
         {*return
@@ -418,7 +408,6 @@ class Word extends LexicalItem
         $this->necroSignaling();
     }   /* End of Word.__destruct() =================================================== */
     /* ================================================================================ */
-
 }   /* End of class Word ============================================================== */
 /* ==================================================================================== */
 ?>

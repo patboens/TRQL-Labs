@@ -1,5 +1,6 @@
 <style>
-.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
 code, .filename { color: crimson; font-family: Consolas,"courier new" }
@@ -9,8 +10,21 @@ section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; backgroun
 table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
 table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
 table.properties thead th.description { width:60%; }
-table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
-table.properties tr.property td.description { width: 60%; }
+table.properties tr.property td,
+table.properties tr.parameter td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description,
+table.properties tr.parameter td.description { width: 60%; }
+p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
+   letter-spacing: 3px;
+   width: 100%;
+   margin: 0 0 15px 0;
+   padding: 5px;
+   color: rgb(255,128,0);
+   padding: 1em;
+   border: 1px solid #999;
+   box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
+   border: 1px solid #888; }
+p.property.func span.name { border:1px solid red; padding:6px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -108,6 +122,89 @@ table.properties tr.property td.description { width: 60%; }
 <td class="description">Last modification date & time</td>
 </tr>
 </table>
+<h2 class="DocumentorLabel">Methods of <code>File</code></h2>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>__construct()</code></span>: Class constructor</p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name"><code>$szFile</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Logical or physical filename. Optional. <code>null</code> by default.</td>
+</tr>
+<tr class="parameter">
+<td class="name"><code>$MustOpen</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description">Must the file be opened on object creation? <code>false</code> by default.</td>
+</tr>
+</table>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>open()</code></span>: Open a file in a given mode</p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name"><code>$szMode</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Optional type of access. <code>r</code> by default (read-only) <table> <tr><td><code>r </code></td><td>Open for reading only; place the file pointer at the beginning of the file. </td></tr> <tr><td><code>r+</code></td><td>Open for reading and writing; place the file pointer at the beginning of the file. </td></tr> <tr><td><code>w </code></td><td>Open for writing only; place the file pointer at the beginning of the file and truncate the file to zero length. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>w+</code></td><td>Open for reading and writing; place the file pointer at the beginning of the file and truncate the file to zero length. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>a </code></td><td>Open for writing only; place the file pointer at the end of the file. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>a+</code></td><td>Open for reading and writing; place the file pointer at the end of the file. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>x </code></td><td>Create and open for writing only; place the file pointer at the beginning of the file. If the file already exists, the fopen() call will fail by returning FALSE and generating an error of level E_WARNING. If the file does not exist, attempt to create it. This is equivalent to specifying O_EXCL|O_CREAT flags for the underlying open(2) system call. </td></tr> <tr><td><code>x+</code></td><td>Create and open for reading and writing; otherwise it has the same behavior as 'x'. </td></tr> <tr><td><code>c </code></td><td>Open the file for writing only. If the file does not exist, it is created. If it exists, it is neither truncated (as opposed to 'w'), nor the call to this function fails (as is the case with 'x'). The file pointer is positioned on the beginning of the file. This may be useful if it's desired to get an advisory lock (see flock()) before attempting to modify the file, as using 'w' could truncate the file before the lock was obtained (if truncation is desired, ftruncate() can be used after the lock is requested). </td></tr> <tr><td><code>c+</code></td><td>Open the file for reading and writing; otherwise it has the same behavior as 'c'. </td></tr> </table></td>
+</tr>
+</table>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>close()</code></span>: Close the file</p>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>time()</code></span>: Determines the date & time of a file</p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name"><code>$szTimes</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A = access date & time<br /> C = creation date & time<br /> M = modification date & time<br /> Times can be added to each other (e.g.: 'ACM')</td>
+</tr>
+</table>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>size()</code></span>: Determines the length of a file in bytes</p>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>mimeType()</code></span>: Returns the MIME type corresponding to the file extension of the file
+ object</p>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>gets()</code></span>: Get next line of file</p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name"><code>$iLength</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Maximum line length. Optional. <code>1024</code> by default</td>
+</tr>
+</table>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>destruct()</code></span>: Class destructor</p>
 </section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

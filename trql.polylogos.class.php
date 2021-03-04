@@ -1,20 +1,32 @@
 <?php
 /****************************************************************************************/
+/*
+    {PYB} is a shortcut for Patrick Boens
+
+    {COMPANY} is a shortcut to "Lato Sensu Management"
+
+    {RIGHTS} is a shortcut used by trql.documentor.class.php. In general the material
+    presented here is available under the conditions of 
+    https://creativecommons.org/licenses/by-sa/4.0/
+
+    Other shortcuts exist. They exist to make it simple to change the formulation
+    of parts that can vary over time.
+
+    It does not change the undisputed truth that ALL code has been created by
+    Patrick Boens, the author, who owns ALL the intellectual property of what
+    he created.
+
+*/
+
 /** {{{*fheader
     {*file                  trql.polylogos.class.php *}
     {*purpose               Entities that have a somewhat fixed, physical extension. *}
     {*author                {PYB} *}
-    {*company               Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 29-07-20 11:47 *}
     {*mdate                 auto *}
-    {*license               All rights reserved to Lato Sensu Management
-                            for all countries. All Intellectual Property
-                            belongs to Patrick Boens. *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -77,15 +89,14 @@ class PolyLogos extends Utility
                                'family' => null         ,
                              );
 
-    public  $szSrcLang      = 'FR';                                 /* {*property   $szSrcLang                  (string)                Source language *} */
-    public  $szTargetLang   = 'EN';                                 /* {*property   $szTargetLang               (string)                Target language *} */
-    public  $szText         = null;                                 /* {*property   $szText                     (string)                Text to be translated *} */
-    public  $aLastResults   = null;                                 /* {*property   $aLastResults               (string)                Last results obtained when translation service called *} */
-    public  $szHome         = __DIR__;                              /* {*property   $szHome                     (string)                Home directory of the class *} */
+    public      $szSrcLang                      = 'FR';             /* {*property   $szSrcLang                  (string)                Source language *} */
+    public      $szTargetLang                   = 'EN';             /* {*property   $szTargetLang               (string)                Target language *} */
+    public      $szText                         = null;             /* {*property   $szText                     (string)                Text to be translated *} */
+    public      $aLastResults                   = null;             /* {*property   $aLastResults               (string)                Last results obtained when translation service called *} */
+    public      $szHome                         = __DIR__;          /* {*property   $szHome                     (string)                Home directory of the class *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                *} */
-
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                 (string)                Wikidata ID. No equivalent. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -114,12 +125,12 @@ class PolyLogos extends Utility
     /* ================================================================================ */
 
 
-    public function home()
-    /*------------------*/
-    {
-        return ( $this->szHome );
-    }   /* End of PolyLogos.home() ==================================================== */
-    /* ================================================================================ */
+    // OBSOLETE ? public function home()
+    // OBSOLETE ? /*------------------*/
+    // OBSOLETE ? {
+    // OBSOLETE ?     return ( $this->szHome );
+    // OBSOLETE ? }   /* End of PolyLogos.home() ==================================================== */
+    // OBSOLETE ? /* ================================================================================ */
 
 
     /* ================================================================================ */
@@ -159,7 +170,6 @@ class PolyLogos extends Utility
     /* ================================================================================ */
 
 
-
     /* ================================================================================ */
     /** {{*translate( $szText[,$szSrcLang[,$szTargetLang]] )=
 
@@ -168,9 +178,9 @@ class PolyLogos extends Utility
         {*params
             $szText         (string)        Text to be translated
             $szSrcLang      (string)        Source language. Optional. 
-                                            [c]$this->szSrcLang[/c] by default
+                                            [c]this->szSrcLang[/c] by default
             $szTargetLang   (string)        Target language. Optional. 
-                                            [c]$this->szTargetLang[/c] by default
+                                            [c]this->szTargetLang[/c] by default
         *}
 
         {*return
@@ -252,8 +262,24 @@ class PolyLogos extends Utility
     /* ================================================================================ */
 
 
-    public function __toString()
-    /*------------------------*/
+    /* ================================================================================ */
+    /** {{*__toString()=
+
+        Allows a class to decide how it will react when it is treated like a
+        string. 
+
+        {*params
+        *}
+
+        {*return
+            (string)        Returns the last translation.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __toString() : string
+    /*---------------------------------*/
     {
         return ( $this->aLastResults['translation'] ?? '' );
     }   /* End of PolyLogos.__toString() ============================================== */
@@ -285,7 +311,6 @@ class PolyLogos extends Utility
         $this->necroSignaling();
     }   /* End of PolyLogos.__destruct() ============================================== */
     /* ================================================================================ */
-
 }   /* End of class PolyLogos ========================================================= */
 /* ==================================================================================== */
 ?>

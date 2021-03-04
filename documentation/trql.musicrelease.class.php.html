@@ -1,5 +1,6 @@
 <style>
-.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
 code, .filename { color: crimson; font-family: Consolas,"courier new" }
@@ -9,8 +10,21 @@ section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; backgroun
 table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
 table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
 table.properties thead th.description { width:60%; }
-table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
-table.properties tr.property td.description { width: 60%; }
+table.properties tr.property td,
+table.properties tr.parameter td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description,
+table.properties tr.parameter td.description { width: 60%; }
+p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
+   letter-spacing: 3px;
+   width: 100%;
+   margin: 0 0 15px 0;
+   padding: 5px;
+   color: rgb(255,128,0);
+   padding: 1em;
+   border: 1px solid #999;
+   box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
+   border: 1px solid #888; }
+p.property.func span.name { border:1px solid red; padding:6px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -813,6 +827,26 @@ table.properties tr.property td.description { width: 60%; }
                                                                                                                                                     creative output</td>
 </tr>
 </table>
+<h2 class="DocumentorLabel">Methods of <code>MusicRelease</code></h2>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>__construct()</code></span>: Class constructor</p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name"><code>$szHome</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Home of the class. Optional.</td>
+</tr>
+</table>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>__destruct()</code></span>: Class destructor</p>
 </section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

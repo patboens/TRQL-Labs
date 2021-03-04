@@ -1,20 +1,33 @@
 <?php
 /****************************************************************************************/
+/*
+    {PYB} is a shortcut for Patrick Boens
+
+    {COMPANY} is a shortcut to "Lato Sensu Management"
+
+    {RIGHTS} is a shortcut used by trql.documentor.class.php. In general the material
+    presented here is available under the conditions of 
+    https://creativecommons.org/licenses/by-sa/4.0/
+
+    Other shortcuts exist. They exist to make it simple to change the formulation
+    of parts that can vary over time.
+
+    It does not change the undisputed truth that ALL code has been created by
+    Patrick Boens, the author, who owns ALL the intellectual property of what
+    he created.
+
+*/
+
 /** {{{*fheader
     {*file                  trql.mercator.class.php *}
     {*purpose               Set of Utility geocoordinates-oriented services (mostly based
                             on geonames.org) *}
     {*author                {PYB} *}
-    {*company               [br]Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 15-08-20 12:38 *}
     {*mdate                 auto *}
-    {*license               Submitted to intellectual property rights (see
-                            author) *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:

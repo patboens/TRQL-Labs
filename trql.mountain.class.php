@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 18:50 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -53,17 +52,14 @@
 /****************************************************************************************/
 namespace trql\mountain;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\landform\Landform    as Landform;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\landform\Landform     as Landform;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'LANDFORM_CLASS_VERSION' ) )
     require_once( 'trql.landform.class.php' );
-
-
 
 defined( 'MOUNTAIN_CLASS_VERSION' ) or define( 'MOUNTAIN_CLASS_VERSION','0.1' );
 
@@ -89,10 +85,12 @@ defined( 'MOUNTAIN_CLASS_VERSION' ) or define( 'MOUNTAIN_CLASS_VERSION','0.1' );
         on 26-08-2020 18:50.
     *}
 
+    *}}
+
  */
 /* ==================================================================================== */
 class Mountain extends Landform
-/*--------------------------------------*/
+/*---------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -103,146 +101,8 @@ class Mountain extends Landform
                                'UIKey'  => null         ,
                              );
 
-    public      $additionalProperty             = null;             /* {*property   $additionalProperty             (PropertyValue)                 A property-value pair representing an additional characteristics of
-                                                                                                                                                    the entitity, e.g. a product feature or another characteristic for
-                                                                                                                                                    which there is no matching property in schema.org.Note: Publishers
-                                                                                                                                                    should be aware that applications designed to use specific schema.org
-                                                                                                                                                    properties (e.g. http://schema.org/width, http://schema.org/color,
-                                                                                                                                                    http://schema.org/gtin13, ...) will typically expect such data to be
-                                                                                                                                                    provided using those properties, rather than using the generic
-                                                                                                                                                    property/value mechanism. *} */
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $address                        = null;             /* {*property   $address                        (PostalAddress|string)          Physical address of the item. *} */
-    public      $aggregateRating                = null;             /* {*property   $aggregateRating                (AggregateRating)               The overall rating, based on a collection of reviews or ratings, of
-                                                                                                                                                    the item. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
-    public      $amenityFeature                 = null;             /* {*property   $amenityFeature                 (LocationFeatureSpecification)  An amenity feature (e.g. a characteristic or service) of the
-                                                                                                                                                    Accommodation. This generic property does not make a statement about
-                                                                                                                                                    whether the feature is included in an offer for the main accommodation
-                                                                                                                                                    or available at extra costs. *} */
-    public      $branchCode                     = null;             /* {*property   $branchCode                     (string)                        A short textual code (also called "store code") that uniquely
-                                                                                                                                                    identifies a place of business. The code is typically assigned by the
-                                                                                                                                                    parentOrganization and used in structured URLs.For example, in the URL
-                                                                                                                                                    http://www.starbucks.co.uk/store-locator/etc/detail/3047 the code
-                                                                                                                                                    "3047" is a branchCode for a particular branch. *} */
-    public      $containedIn                    = null;             /* {*property   $containedIn                    (Place)                         The basic containment relation between a place and one that contains
-                                                                                                                                                    it. *} */
-    public      $containedInPlace               = null;             /* {*property   $containedInPlace               (Place)                         The basic containment relation between a place and one that contains
-                                                                                                                                                    it. *} */
-    public      $containsPlace                  = null;             /* {*property   $containsPlace                  (Place)                         The basic containment relation between a place and another that it
-                                                                                                                                                    contains. *} */
-    public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
-    public      $event                          = null;             /* {*property   $event                          (Event)                         Upcoming or past event associated with this place, organization, or
-                                                                                                                                                    action. *} */
-    public      $events                         = null;             /* {*property   $events                         (Event)                         Upcoming or past events associated with this place or organization. *} */
-    public      $faxNumber                      = null;             /* {*property   $faxNumber                      (string)                        The fax number. *} */
-    public      $geo                            = null;             /* {*property   $geo                            (GeoCoordinates|GeoShape)       The geo coordinates of the place. *} */
-    public      $geoContains                    = null;             /* {*property   $geoContains                    (GeospatialGeometry|Place)      Represents a relationship between two geometries (or the places they
-                                                                                                                                                    represent), relating a containing geometry to a contained geometry. "a
-                                                                                                                                                    contains b iff no points of b lie in the exterior of a, and at least
-                                                                                                                                                    one point of the interior of b lies in the interior of a". As defined
-                                                                                                                                                    in DE-9IM. *} */
-    public      $geoCoveredBy                   = null;             /* {*property   $geoCoveredBy                   (GeospatialGeometry|Place)      Represents a relationship between two geometries (or the places they
-                                                                                                                                                    represent), relating a geometry to another that covers it. As defined
-                                                                                                                                                    in DE-9IM. *} */
-    public      $geoCovers                      = null;             /* {*property   $geoCovers                      (Place|GeospatialGeometry)      Represents a relationship between two geometries (or the places they
-                                                                                                                                                    represent), relating a covering geometry to a covered geometry. "Every
-                                                                                                                                                    point of b is a point of (the interior or boundary of) a". As defined
-                                                                                                                                                    in DE-9IM. *} */
-    public      $geoCrosses                     = null;             /* {*property   $geoCrosses                     (GeospatialGeometry|Place)      Represents a relationship between two geometries (or the places they
-                                                                                                                                                    represent), relating a geometry to another that crosses it: "a crosses
-                                                                                                                                                    b: they have some but not all interior points in common, and the
-                                                                                                                                                    dimension of the intersection is less than that of at least one of
-                                                                                                                                                    them". As defined in DE-9IM. *} */
-    public      $geoDisjoint                    = null;             /* {*property   $geoDisjoint                    (GeospatialGeometry|Place)      Represents spatial relations in which two geometries (or the places
-                                                                                                                                                    they represent) are topologically disjoint: they have no point in
-                                                                                                                                                    common. They form a set of disconnected geometries." (a symmetric
-                                                                                                                                                    relationship, as defined in DE-9IM) *} */
-    public      $geoEquals                      = null;             /* {*property   $geoEquals                      (GeospatialGeometry|Place)      Represents spatial relations in which two geometries (or the places
-                                                                                                                                                    they represent) are topologically equal, as defined in DE-9IM. "Two
-                                                                                                                                                    geometries are topologically equal if their interiors intersect and no
-                                                                                                                                                    part of the interior or boundary of one geometry intersects the
-                                                                                                                                                    exterior of the other" (a symmetric relationship) *} */
-    public      $geoIntersects                  = null;             /* {*property   $geoIntersects                  (Place|GeospatialGeometry)      Represents spatial relations in which two geometries (or the places
-                                                                                                                                                    they represent) have at least one point in common. As defined in
-                                                                                                                                                    DE-9IM. *} */
-    public      $geoOverlaps                    = null;             /* {*property   $geoOverlaps                    (GeospatialGeometry|Place)      Represents a relationship between two geometries (or the places they
-                                                                                                                                                    represent), relating a geometry to another that geospatially overlaps
-                                                                                                                                                    it, i.e. they have some but not all points in common. As defined in
-                                                                                                                                                    DE-9IM. *} */
-    public      $geoTouches                     = null;             /* {*property   $geoTouches                     (Place|GeospatialGeometry)      Represents spatial relations in which two geometries (or the places
-                                                                                                                                                    they represent) touch: they have at least one boundary point in
-                                                                                                                                                    common, but no interior points." (a symmetric relationship, as defined
-                                                                                                                                                    in DE-9IM ) *} */
-    public      $geoWithin                      = null;             /* {*property   $geoWithin                      (Place|GeospatialGeometry)      Represents a relationship between two geometries (or the places they
-                                                                                                                                                    represent), relating a geometry to one that contains it, i.e. it is
-                                                                                                                                                    inside (i.e. within) its interior. As defined in DE-9IM. *} */
-    public      $globalLocationNumber           = null;             /* {*property   $globalLocationNumber           (string)                        The Global Location Number (GLN, sometimes also referred to as
-                                                                                                                                                    International Location Number or ILN) of the respective organization,
-                                                                                                                                                    person, or place. The GLN is a 13-digit number used to identify
-                                                                                                                                                    parties and physical locations. *} */
-    public      $hasDriveThroughService         = null;             /* {*property   $hasDriveThroughService         (boolean)                       Indicates whether some facility (e.g. FoodEstablishment,
-                                                                                                                                                    CovidTestingFacility) offers a service that can be used by driving
-                                                                                                                                                    through in a car. In the case of CovidTestingFacility such facilities
-                                                                                                                                                    could potentially help with social distancing from other
-                                                                                                                                                    potentially-infected users. *} */
-    public      $hasMap                         = null;             /* {*property   $hasMap                         (URL|Map)                       A URL to a map of the place. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
-    public      $isAccessibleForFree            = null;             /* {*property   $isAccessibleForFree            (boolean)                       A flag to signal that the item, event, or place is accessible for
-                                                                                                                                                    free. *} */
-    public      $isicV4                         = null;             /* {*property   $isicV4                         (string)                        The International Standard of Industrial Classification of All
-                                                                                                                                                    Economic Activities (ISIC), Revision 4 code for a particular
-                                                                                                                                                    organization, business person, or place. *} */
-    public      $latitude                       = null;             /* {*property   $latitude                       (float|string)                  The latitude of a location. For example 37.42242 (WGS 84). *} */
-    public      $logo                           = null;             /* {*property   $logo                           (ImageObject|URL)               An associated logo. *} */
-    public      $longitude                      = null;             /* {*property   $longitude                      (string|float)                  The longitude of a location. For example -122.08585 (WGS 84). *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
-    public      $map                            = null;             /* {*property   $map                            (URL)                           A URL to a map of the place. *} */
-    public      $maps                           = null;             /* {*property   $maps                           (URL)                           A URL to a map of the place. *} */
-    public      $maximumAttendeeCapacity        = null;             /* {*property   $maximumAttendeeCapacity        (int)                           The total number of individuals that may attend an event or venue. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
-    public      $openingHoursSpecification      = null;             /* {*property   $openingHoursSpecification      (OpeningHoursSpecification)     The opening hours of a certain place. *} */
-    public      $photo                          = null;             /* {*property   $photo                          (Photograph|ImageObject)        A photograph of this place. *} */
-    public      $photos                         = null;             /* {*property   $photos                         (Photograph|ImageObject)        Photographs of this place. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
-    public      $publicAccess                   = null;             /* {*property   $publicAccess                   (boolean)                       A flag to signal that the Place is open to public visitors. If this
-                                                                                                                                                    property is omitted there is no assumed default boolean value *} */
-    public      $review                         = null;             /* {*property   $review                         (Review)                        A review of the item. *} */
-    public      $reviews                        = null;             /* {*property   $reviews                        (Review)                        Review of the item. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
-    public      $slogan                         = null;             /* {*property   $slogan                         (string)                        A slogan or motto associated with the item. *} */
-    public      $smokingAllowed                 = null;             /* {*property   $smokingAllowed                 (boolean)                       Indicates whether it is allowed to smoke in the place, e.g. in the
-                                                                                                                                                    restaurant, hotel or hotel room. *} */
-    public      $specialOpeningHoursSpecification = null;             /* {*property   $specialOpeningHoursSpecification(OpeningHoursSpecification)     The special opening hours of a certain place.Use this to explicitly
-                                                                                                                                                    override general opening hours brought in scope by
-                                                                                                                                                    openingHoursSpecification or openingHours. *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
-    public      $telephone                      = null;             /* {*property   $telephone                      (string)                        The telephone number. *} */
-    public      $tourBookingPage                = null;             /* {*property   $tourBookingPage                (URL)                           A page providing information on how to book a tour of some Place, such
-                                                                                                                                                    as an Accommodation or ApartmentComplex in a real estate setting, as
-                                                                                                                                                    well as other kinds of tours as appropriate. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
-
-
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT LOOKED AT IT YET. *} */
 
 
     /* ================================================================================ */
@@ -266,8 +126,6 @@ class Mountain extends Landform
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of Mountain.__construct() ============================================== */
@@ -299,8 +157,6 @@ class Mountain extends Landform
         $this->necroSignaling();
     }   /* End of Mountain.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class Mountain ========================================================== */
 /* ==================================================================================== */
-
 ?>

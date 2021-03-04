@@ -27,6 +27,7 @@
     {*cdate                 24-08-20 08:50 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     {*abstract              schema.org features a whole set of useful classes.[br][br]
 
@@ -98,7 +99,6 @@ use \trql\csv\CSV                                   as CSV;
 use \trql\xml\XML                                   as XML;
 use \trql\utility\Utility                           as Utility;
 
-
 use DOMDocument;
 use DOMXPath;
 
@@ -115,8 +115,6 @@ if ( ! defined( 'XML_CLASS_VERSION' ) )
     require_once( 'trql.xml.class.php' );
 
 defined( 'SCHEMACLASSGENERATOR_CLASS_VERSION' ) or define( 'SCHEMACLASSGENERATOR_CLASS_VERSION','0.1' );
-
-
 
 /* ==================================================================================== */
 /** {{*class SchemaClassGenerator=
@@ -143,6 +141,9 @@ class SchemaClassGenerator extends Utility
 
     public      $aProperties    = null;
     public      $aClasses       = null;
+
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -543,7 +544,6 @@ class SchemaClassGenerator extends Utility
         $this->necroSignaling();
     }   /* End of SchemaClassGenerator.__destruct() =================================== */
     /* ================================================================================ */
-
 }   /* End of class SchemaClassGenerator ============================================== */
 /* ==================================================================================== */
 ?>

@@ -1,5 +1,6 @@
 <style>
-.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
 code, .filename { color: crimson; font-family: Consolas,"courier new" }
@@ -9,8 +10,21 @@ section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; backgroun
 table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
 table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
 table.properties thead th.description { width:60%; }
-table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
-table.properties tr.property td.description { width: 60%; }
+table.properties tr.property td,
+table.properties tr.parameter td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description,
+table.properties tr.parameter td.description { width: 60%; }
+p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
+   letter-spacing: 3px;
+   width: 100%;
+   margin: 0 0 15px 0;
+   padding: 5px;
+   color: rgb(255,128,0);
+   padding: 1em;
+   border: 1px solid #999;
+   box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
+   border: 1px solid #888; }
+p.property.func span.name { border:1px solid red; padding:6px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -21,7 +35,7 @@ table.properties tr.property td.description { width: 60%; }
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">28-08-2020 16:30</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">02/03/2021 - 15:12:40</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">04/03/2021 - 09:41:54</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
@@ -441,366 +455,36 @@ table.properties tr.property td.description { width: 60%; }
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$additionalProperty</code></td>
-<td class="type"><code>PropertyValue</code></td>
-<td class="description">A property-value pair representing an additional characteristics of
-                                                                                                                                                    the entitity, e.g. a product feature or another characteristic for
-                                                                                                                                                    which there is no matching property in schema.org.Note: Publishers
-                                                                                                                                                    should be aware that applications designed to use specific schema.org
-                                                                                                                                                    properties (e.g. http://schema.org/width, http://schema.org/color,
-                                                                                                                                                    http://schema.org/gtin13, ...) will typically expect such data to be
-                                                                                                                                                    provided using those properties, rather than using the generic
-                                                                                                                                                    property/value mechanism.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$additionalType</code></td>
-<td class="type"><code>URL</code></td>
-<td class="description">An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$aggregateRating</code></td>
-<td class="type"><code>AggregateRating</code></td>
-<td class="description">The overall rating, based on a collection of reviews or ratings, of
-                                                                                                                                                    the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$alternateName</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">An alias for the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$audience</code></td>
-<td class="type"><code>Audience</code></td>
-<td class="description">An intended audience, i.e. a group for whom something was created.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$award</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">An award won by or for this item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$awards</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Awards won by or for this item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$brand</code></td>
-<td class="type"><code>Brand|Organization</code></td>
-<td class="description">The brand(s) associated with a product or service, or the brand(s)
-                                                                                                                                                    maintained by an organization or business person.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$category</code></td>
-<td class="type"><code>Thing|PhysicalActivityCategory|URL|string</code></td>
-<td class="description">A category for the item. Greater signs or slashes can be used to
-                                                                                                                                                    informally indicate a category hierarchy.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$color</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The color of the product.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$depth</code></td>
-<td class="type"><code>QuantitativeValue|Distance</code></td>
-<td class="description">The depth of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$description</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A description of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$disambiguatingDescription</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$gtin</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A Global Trade Item Number (GTIN). GTINs identify trade items,
-                                                                                                                                                    including products and services, using numeric identification codes.
-                                                                                                                                                    The gtin property generalizes the earlier gtin8, gtin12, gtin13, and
-                                                                                                                                                    gtin14 properties. The GS1 digital link specifications express GTINs
-                                                                                                                                                    as URLs. A correct gtin value should be a valid GTIN, which means that
-                                                                                                                                                    it should be an all-numeric string of either 8, 12, 13 or 14 digits,
-                                                                                                                                                    or a "GS1 Digital Link" URL based on such a string. The numeric
-                                                                                                                                                    component should also have a valid GS1 check digit and meet the other
-                                                                                                                                                    rules for valid GTINs. See also GS1's GTIN Summary and Wikipedia for
-                                                                                                                                                    more details. Left-padding of the gtin values is not required or
-                                                                                                                                                    encouraged.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$gtin12</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The GTIN-12 code of the product, or the product to which the offer
-                                                                                                                                                    refers. The GTIN-12 is the 12-digit GS1 Identification Key composed of
-                                                                                                                                                    a U.P.C. Company Prefix, Item Reference, and Check Digit used to
-                                                                                                                                                    identify trade items. See GS1 GTIN Summary for more details.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$gtin13</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The GTIN-13 code of the product, or the product to which the offer
-                                                                                                                                                    refers. This is equivalent to 13-digit ISBN codes and EAN UCC-13.
-                                                                                                                                                    Former 12-digit UPC codes can be converted into a GTIN-13 code by
-                                                                                                                                                    simply adding a preceeding zero. See GS1 GTIN Summary for more
-                                                                                                                                                    details.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$gtin14</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The GTIN-14 code of the product, or the product to which the offer
-                                                                                                                                                    refers. See GS1 GTIN Summary for more details.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$gtin8</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The GTIN-8 code of the product, or the product to which the offer
-                                                                                                                                                    refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See GS1
-                                                                                                                                                    GTIN Summary for more details.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$hasMerchantReturnPolicy</code></td>
-<td class="type"><code>MerchantReturnPolicy</code></td>
-<td class="description">Indicates a MerchantReturnPolicy that may be applicable.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$height</code></td>
-<td class="type"><code>Distance|QuantitativeValue</code></td>
-<td class="description">The height of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$identifier</code></td>
-<td class="type"><code>URL|string|PropertyValue</code></td>
-<td class="description">The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$image</code></td>
-<td class="type"><code>ImageObject|URL</code></td>
-<td class="description">An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$inProductGroupWithID</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Indicates the productGroupID for a ProductGroup that this product
-                                                                                                                                                    isVariantOf.</td>
-</tr>
-<tr class="property">
 <td class="name"><code>$inventoryLevel</code></td>
 <td class="type"><code>QuantitativeValue</code></td>
 <td class="description">The current approximate inventory level for the item or items.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$isAccessoryOrSparePartFor</code></td>
-<td class="type"><code>Product</code></td>
-<td class="description">A pointer to another product (or multiple products) for which this
-                                                                                                                                                    product is an accessory or spare part.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$isConsumableFor</code></td>
-<td class="type"><code>Product</code></td>
-<td class="description">A pointer to another product (or multiple products) for which this
-                                                                                                                                                    product is a consumable.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$isRelatedTo</code></td>
-<td class="type"><code>Product|Service</code></td>
-<td class="description">A pointer to another, somehow related product (or multiple products).</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$isSimilarTo</code></td>
-<td class="type"><code>Product|Service</code></td>
-<td class="description">A pointer to another, functionally similar product (or multiple
-                                                                                                                                                    products).</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$isVariantOf</code></td>
-<td class="type"><code>ProductGroup|ProductModel</code></td>
-<td class="description">Indicates the kind of product that this is a variant of. In the case
-                                                                                                                                                    of ProductModel, this is a pointer (from a ProductModel) to a base
-                                                                                                                                                    product from which this product is a variant. It is safe to infer that
-                                                                                                                                                    the variant inherits all product features from the base model, unless
-                                                                                                                                                    defined locally. This is not transitive. In the case of a
-                                                                                                                                                    ProductGroup, the group description also serves as a template,
-                                                                                                                                                    representing a set of Products that vary on explicitly defined,
-                                                                                                                                                    specific dimensions only (so it defines both a set of variants, as
-                                                                                                                                                    well as which values distinguish amongst those variants). When used
-                                                                                                                                                    with ProductGroup, this property can apply to any Product included in
-                                                                                                                                                    the group.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$itemCondition</code></td>
-<td class="type"><code>OfferItemCondition</code></td>
-<td class="description">A predefined value from OfferItemCondition or a textual description of
-                                                                                                                                                    the condition of the product or service, or the products or services
-                                                                                                                                                    included in the offer.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$logo</code></td>
-<td class="type"><code>ImageObject|URL</code></td>
-<td class="description">An associated logo.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$mainEntityOfPage</code></td>
-<td class="type"><code>CreativeWork|URL</code></td>
-<td class="description">Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$manufacturer</code></td>
-<td class="type"><code>Organization</code></td>
-<td class="description">The manufacturer of the product.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$material</code></td>
-<td class="type"><code>string|URL|Product</code></td>
-<td class="description">A material that something is made from, e.g. leather, wool, cotton,
-                                                                                                                                                    paper.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$model</code></td>
-<td class="type"><code>ProductModel|string</code></td>
-<td class="description">The model of the product. Use with the URL of a ProductModel or a
-                                                                                                                                                    textual representation of the model identifier. The URL of the
-                                                                                                                                                    ProductModel can be from an external source. It is recommended to
-                                                                                                                                                    additionally provide strong product identifiers via the
-                                                                                                                                                    gtin8/gtin13/gtin14 and mpn properties.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$mpn</code></td>
+<td class="name"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The Manufacturer Part Number (MPN) of the product, or the product to
-                                                                                                                                                    which the offer refers.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$name</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The name of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$nsn</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Indicates the NATO stock number (nsn) of a Product.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$offers</code></td>
-<td class="type"><code>Offer|Demand</code></td>
-<td class="description">An offer to provide this item&#x2014;for example, an offer to sell a
-                                                                                                                                                    product, rent the DVD of a movie, perform a service, or give away
-                                                                                                                                                    tickets to an event. Use businessFunction to indicate the kind of
-                                                                                                                                                    transaction offered, i.e. sell, lease, etc. This property can also be
-                                                                                                                                                    used to describe a Demand. While this property is listed as expected
-                                                                                                                                                    on a number of common types, it can be used in others. In that case,
-                                                                                                                                                    using a second type, such as Product or a subtype of Product, can
-                                                                                                                                                    clarify the nature of the offer.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$pattern</code></td>
-<td class="type"><code>string|DefinedTerm</code></td>
-<td class="description">A pattern that something has, for example 'polka dot', 'striped',
-                                                                                                                                                    'Canadian flag'. Values are typically expressed as text, although
-                                                                                                                                                    links to controlled value schemes are also supported.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$potentialAction</code></td>
-<td class="type"><code>Action</code></td>
-<td class="description">Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$productID</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The product identifier, such as ISBN. For example: meta
-                                                                                                                                                    itemprop="productID" content="isbn:123-456-789".</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$productionDate</code></td>
-<td class="type"><code>Date</code></td>
-<td class="description">The date of production of the item, e.g. vehicle.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$purchaseDate</code></td>
-<td class="type"><code>Date</code></td>
-<td class="description">The date the item e.g. vehicle was purchased by the current owner.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$releaseDate</code></td>
-<td class="type"><code>Date</code></td>
-<td class="description">The release date of a product or product model. This can be used to
-                                                                                                                                                    distinguish the exact variant of a product.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$review</code></td>
-<td class="type"><code>Review</code></td>
-<td class="description">A review of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$reviews</code></td>
-<td class="type"><code>Review</code></td>
-<td class="description">Review of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$sameAs</code></td>
-<td class="type"><code>URL</code></td>
-<td class="description">URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$size</code></td>
-<td class="type"><code>DefinedTerm|QuantitativeValue|string</code></td>
-<td class="description">A standardized size of a product or creative work, often simplifying
-                                                                                                                                                    richer information into a simple textual string, either through
-                                                                                                                                                    referring to named sizes or (in the case of product markup), by
-                                                                                                                                                    adopting conventional simplifications. Use of QuantitativeValue with a
-                                                                                                                                                    unitCode or unitText can add more structure; in other cases, the
-                                                                                                                                                    /width, /height, /depth and /weight properties may be more applicable.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$sku</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for
-                                                                                                                                                    a product or service, or the product to which the offer refers.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$slogan</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A slogan or motto associated with the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$subjectOf</code></td>
-<td class="type"><code>Event|CreativeWork</code></td>
-<td class="description">A CreativeWork or Event about this Thing.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$url</code></td>
-<td class="type"><code>URL</code></td>
-<td class="description">URL of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$weight</code></td>
-<td class="type"><code>QuantitativeValue</code></td>
-<td class="description">The weight of the product or person.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$width</code></td>
-<td class="type"><code>QuantitativeValue|Distance</code></td>
-<td class="description">The width of the item.</td>
+<td class="description">Wikidata ID. NOT LOOKED AT IT YET.</td>
 </tr>
 </table>
+<h2 class="DocumentorLabel">Methods of <code>SomeProducts</code></h2>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>__construct()</code></span>: Class constructor</p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name"><code>$szHome</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Home of the class. Optional.</td>
+</tr>
+</table>
+<p class="property">Syntax:</p>
+<p class="property func"><span class="name"><code>__destruct()</code></span>: Class destructor</p>
 </section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

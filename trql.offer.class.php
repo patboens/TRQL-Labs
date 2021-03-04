@@ -35,6 +35,7 @@
     {*cdate                 24-08-2020 06:02 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -92,6 +93,7 @@ defined( 'OFFER_CLASS_VERSION' ) or define( 'OFFER_CLASS_VERSION','0.1' );
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Offer extends Intangible

@@ -27,6 +27,7 @@
     {*cdate                 28-08-2020 16:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -78,6 +79,8 @@ defined( 'VEHICLE_CLASS_VERSION' ) or define( 'VEHICLE_CLASS_VERSION','0.1' );
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
         on 28-08-2020 16:41.
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */
