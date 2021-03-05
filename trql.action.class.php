@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -34,6 +32,8 @@
     {*cdate                 25-08-2020 13:33 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
+    {*keywords              action *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -84,6 +84,8 @@ defined( 'ACTION_CLASS_VERSION' ) or define( 'ACTION_CLASS_VERSION','0.1' );
     *}
 
     {*doc [url]http://schema.org/Action[/url] *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -154,6 +156,10 @@ class Action extends Thing
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -179,6 +185,10 @@ class Action extends Thing
         {*return
             (void)      No return
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
     */

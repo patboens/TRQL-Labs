@@ -1543,7 +1543,7 @@ Class DocumentorSourceFile extends DocumentorFile
                                     //$o = new $szClassName();
                                     //$aProps = get_object_vars( $o );
                                     //var_dump( $aProps );
-                                }
+                                }   /* if ( ! class_exists( $oClass->name ) ) */
 
                                 //var_dump( $oClass->aProperties );
                                 usort( $oClass->aProperties,function( $a,$b )
@@ -1745,7 +1745,7 @@ Class DocumentorSourceFile extends DocumentorFile
                 $szHomeOfDocumentation = vaesoli::FIL_RealPath( __DIR__ . '/q/common/trql.classes.home/DOCUMENTATION/' );
 
             $szFile =  $szHomeOfDocumentation . basename( $this->szFileName ) . '.html';
-        }
+        }   /* if ( ! empty( $this->szFileName ) ) */
 
         return ( $szFile );
     }   /* End of DocumentorSourceFile.document() ===================================== */
@@ -3426,19 +3426,19 @@ URL 	Indicates a page documenting how licenses can be purchased or otherwise acq
             $szRetVal .= "<section class=\"header\">\n";
                 if ( ! empty( $this->image ) )
                     $szRetVal .= "<p><img src=\"{$this->image}\" style=\"display:block;float:left;width:130px; height:auto;margin-right: 20px;\" class=\"shadow constrained\"/></p>\n";
-                $szRetVal .= "<span class=\"DocumentorLabel\">Filename: </span><span class=\"property filename\">"              . $this->squareToAngle( say( $this->szFileName ) ) . "</span>\n";
-                $szRetVal .= "<span class=\"DocumentorLabel\">Purpose: </span><span class=\"property purpose\">"                . $this->squareToAngle( say( $this->szPurpose  ) ) . "</span>\n";
-                $szRetVal .= "<span class=\"DocumentorLabel\">Author: </span><span class=\"property author\">"                  . $this->squareToAngle( say( $this->author     ) ) . "</span>\n";
-                $szRetVal .= "<span class=\"DocumentorLabel\">Company: </span><span class=\"property company\">"                . $this->squareToAngle( say( $this->szCompany  ) ) . "</span>\n";
-                $szRetVal .= "<span class=\"DocumentorLabel\">Creation date: </span><span class=\"property cdate\">"            . $this->squareToAngle( say( $this->szCDate    ) ) . "</span>\n";
-                $szRetVal .= "<span class=\"DocumentorLabel\">Last modification date: </span><span class=\"property mdate\">"   . $this->squareToAngle( say( $this->szMDate    ) ) . "</span>\n";
-                $szRetVal .= "<span class=\"DocumentorLabel\">License/Copyrights: </span><span class=\"property license\">"     . $this->squareToAngle( say( $this->szLicense  ) ) . "</span>\n";
+                $szRetVal .= "<span class=\"DocumentorLabel\">Filename: </span><span class=\"property filename\">"              . $this->squareToAngle( say(                      $this->szFileName )   ) . "</span>\n";
+                $szRetVal .= "<span class=\"DocumentorLabel\">Purpose: </span><span class=\"property purpose\">"                . $this->squareToAngle( say( vaesoli::STR_Reduce( $this->szPurpose  ) ) ) . "</span>\n";
+                $szRetVal .= "<span class=\"DocumentorLabel\">Author: </span><span class=\"property author\">"                  . $this->squareToAngle( say(                      $this->author     )   ) . "</span>\n";
+                $szRetVal .= "<span class=\"DocumentorLabel\">Company: </span><span class=\"property company\">"                . $this->squareToAngle( say(                      $this->szCompany  )   ) . "</span>\n";
+                $szRetVal .= "<span class=\"DocumentorLabel\">Creation date: </span><span class=\"property cdate\">"            . $this->squareToAngle( say(                      $this->szCDate    )   ) . "</span>\n";
+                $szRetVal .= "<span class=\"DocumentorLabel\">Last modification date: </span><span class=\"property mdate\">"   . $this->squareToAngle( say(                      $this->szMDate    )   ) . "</span>\n";
+                $szRetVal .= "<span class=\"DocumentorLabel\">License/Copyrights: </span><span class=\"property license\">"     . $this->squareToAngle( say(                      $this->szLicense  )   ) . "</span>\n";
 
                 if ( ! empty( $this->abstract ) )
-                    $szRetVal .= "<span class=\"DocumentorLabel\">Abstract: </span><span class=\"property abstract\">"          . $this->squareToAngle( say( $this->abstract ) ) . "</span>\n";
+                    $szRetVal .= "<span class=\"DocumentorLabel\">Abstract: </span><span class=\"property abstract\">"          . $this->squareToAngle( say(                      $this->abstract   )   ) . "</span>\n";
 
                 if ( ! empty( $this->szTODOs ) )
-                    $szRetVal .= "<span class=\"DocumentorLabel\">TODOs: </span><span class=\"property todo\">"                 . $this->squareToAngle( say( $this->szTODOs    ) ) . "</span>\n";
+                    $szRetVal .= "<span class=\"DocumentorLabel\">TODOs: </span><span class=\"property todo\">"                 . $this->squareToAngle( say(                      $this->szTODOs    )   ) . "</span>\n";
 
             $szRetVal .= "</section> <!-- .header -->\n";
             /* $oHistory = new DocumentorHistory( $szHistory ); */

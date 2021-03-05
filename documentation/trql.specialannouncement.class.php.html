@@ -39,69 +39,69 @@ code, samp {
 <section class="header">
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.specialannouncement.class.php</span>
 <span class="DocumentorLabel">Purpose: </span><span class="property purpose">A SpecialAnnouncement combines a simple date-stamped textual
-                            information update with contextualized Web links and other
-                            structured data. It represents an information update made by
-                            a locally-oriented organization, for example schools,
-                            pharmacies, healthcare providers, community groups, police,
-                            local government.For work in progress guidelines on
-                            Coronavirus-related markup see this doc.The motivating
-                            scenario for SpecialAnnouncement is the Coronavirus
-                            pandemic, and the initial vocabulary is oriented to this
-                            urgent situation. Schema.orgexpect to improve the markup
-                            iteratively as it is deployed and as feedback emerges from
-                            use. In addition to ourusual Github entry, feedback comments
-                            can also be provided in this document.While this schema is
-                            designed to communicate urgent crisis-related information,
-                            it is not the same as an emergency warning technology like
-                            CAP, although there may be overlaps. The intent is to
-                            coverthe kinds of everyday practical information being
-                            posted to existing websites during an emergency
-                            situation.Several kinds of information can be provided:We
-                            encourage the provision of "name", "text", "datePosted",
-                            "expires" (if appropriate), "category" and"url" as a simple
-                            baseline. It is important to provide a value for "category"
-                            where possible, most ideally as a well knownURL from
-                            Wikipedia or Wikidata. In the case of the 2019-2020
-                            Coronavirus pandemic, this should be
-                            "https://en.wikipedia.org/w/index.php?title=2019-20coronaviruspandemic"
-                            or "https://www.wikidata.org/wiki/Q81068910".For many of the
-                            possible properties, values can either be simple links or an
-                            inline description, depending on whether a summary is
-                            available. For a link, provide just the URL of the
-                            appropriate page as the property's value. For an inline
-                            description, use a WebContent type, and provide the url as a
-                            property of that, alongside at least a simple "text" summary
-                            of the page. It isunlikely that a single SpecialAnnouncement
-                            will need all of the possible properties simultaneously.We
-                            expect that in many cases the page referenced might contain
-                            more specialized structured data, e.g. contact info,
-                            openingHours, Event, FAQPage etc. By linking to those pages
-                            from a SpecialAnnouncement you can help make it clearer that
-                            the events are related to the situation (e.g. Coronavirus)
-                            indicated by the category property of the
-                            SpecialAnnouncement.Many SpecialAnnouncements will relate to
-                            particular regions and to identifiable local organizations.
-                            Use spatialCoverage for the region, and announcementLocation
-                            to indicate specific LocalBusinesses and CivicStructures. If
-                            the announcement affects both a particular region and a
-                            specific location (for example, a library closure that
-                            serves an entire region), use both spatialCoverage and
-                            announcementLocation.The about property can be used to
-                            indicate entities that are the focus of the announcement. We
-                            now recommend using about onlyfor representing non-location
-                            entities (e.g. a Course or a RadioStation). For places, use
-                            announcementLocation and spatialCoverage. Consumers of this
-                            markup should be aware that the initial design encouraged
-                            the use of /about for locations too.The basic content of
-                            SpecialAnnouncement is similar to that of an RSS or Atom
-                            feed. For publishers without such feeds, basic feed-like
-                            information can be shared by postingSpecialAnnouncement
-                            updates in a page, e.g. using JSON-LD. For sites with
-                            Atom/RSS functionality, you can point to a feedwith the
-                            webFeed property. This can be a simple URL, or an inline
-                            DataFeed object, with encodingFormat providingmedia type
-                            information e.g. "application/rss+xml" or
-                            "application/atom+xml".</span>
+ information update with contextualized Web links and other
+ structured data. It represents an information update made by
+ a locally-oriented organization, for example schools,
+ pharmacies, healthcare providers, community groups, police,
+ local government.For work in progress guidelines on
+ Coronavirus-related markup see this doc.The motivating
+ scenario for SpecialAnnouncement is the Coronavirus
+ pandemic, and the initial vocabulary is oriented to this
+ urgent situation. Schema.orgexpect to improve the markup
+ iteratively as it is deployed and as feedback emerges from
+ use. In addition to ourusual Github entry, feedback comments
+ can also be provided in this document.While this schema is
+ designed to communicate urgent crisis-related information,
+ it is not the same as an emergency warning technology like
+ CAP, although there may be overlaps. The intent is to
+ coverthe kinds of everyday practical information being
+ posted to existing websites during an emergency
+ situation.Several kinds of information can be provided:We
+ encourage the provision of "name", "text", "datePosted",
+ "expires" (if appropriate), "category" and"url" as a simple
+ baseline. It is important to provide a value for "category"
+ where possible, most ideally as a well knownURL from
+ Wikipedia or Wikidata. In the case of the 2019-2020
+ Coronavirus pandemic, this should be
+ "https://en.wikipedia.org/w/index.php?title=2019-20coronaviruspandemic"
+ or "https://www.wikidata.org/wiki/Q81068910".For many of the
+ possible properties, values can either be simple links or an
+ inline description, depending on whether a summary is
+ available. For a link, provide just the URL of the
+ appropriate page as the property's value. For an inline
+ description, use a WebContent type, and provide the url as a
+ property of that, alongside at least a simple "text" summary
+ of the page. It isunlikely that a single SpecialAnnouncement
+ will need all of the possible properties simultaneously.We
+ expect that in many cases the page referenced might contain
+ more specialized structured data, e.g. contact info,
+ openingHours, Event, FAQPage etc. By linking to those pages
+ from a SpecialAnnouncement you can help make it clearer that
+ the events are related to the situation (e.g. Coronavirus)
+ indicated by the category property of the
+ SpecialAnnouncement.Many SpecialAnnouncements will relate to
+ particular regions and to identifiable local organizations.
+ Use spatialCoverage for the region, and announcementLocation
+ to indicate specific LocalBusinesses and CivicStructures. If
+ the announcement affects both a particular region and a
+ specific location (for example, a library closure that
+ serves an entire region), use both spatialCoverage and
+ announcementLocation.The about property can be used to
+ indicate entities that are the focus of the announcement. We
+ now recommend using about onlyfor representing non-location
+ entities (e.g. a Course or a RadioStation). For places, use
+ announcementLocation and spatialCoverage. Consumers of this
+ markup should be aware that the initial design encouraged
+ the use of /about for locations too.The basic content of
+ SpecialAnnouncement is similar to that of an RSS or Atom
+ feed. For publishers without such feeds, basic feed-like
+ information can be shared by postingSpecialAnnouncement
+ updates in a page, e.g. using JSON-LD. For sites with
+ Atom/RSS functionality, you can point to a feedwith the
+ webFeed property. This can be a simple URL, or an inline
+ DataFeed object, with encodingFormat providingmedia type
+ information e.g. "application/rss+xml" or
+ "application/atom+xml".</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">28-08-2020 16:30</span>

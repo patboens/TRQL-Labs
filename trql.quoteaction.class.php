@@ -47,9 +47,8 @@
 /****************************************************************************************/
 namespace trql\quoteaction;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\tradeaction\TradeAction    as TradeAction;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\tradeaction\TradeAction       as TradeAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -81,6 +80,8 @@ defined( 'QUOTEACTION_CLASS_VERSION' ) or define( 'QUOTEACTION_CLASS_VERSION','0
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
         on 28-08-2020 16:28.
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -127,7 +128,7 @@ class QuoteAction extends TradeAction
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of QuoteAction.__construct() ========================================== */
+    }   /* End of QuoteAction.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -158,10 +159,8 @@ class QuoteAction extends TradeAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of QuoteAction.__destruct() =========================================== */
+    }   /* End of QuoteAction.__destruct() ============================================ */
     /* ================================================================================ */
-
-}   /* End of class QuoteAction ====================================================== */
+}   /* End of class QuoteAction ======================================================= */
 /* ==================================================================================== */
-
 ?>

@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,8 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
+    {*keywords              action *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -56,7 +56,7 @@
 namespace trql\drinkaction;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\consumeaction\ConsumeAction    as ConsumeAction;
+use \trql\consumeaction\ConsumeAction       as ConsumeAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -64,8 +64,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'CONSUMEACTION_CLASS_VERSION' ) )
     require_once( 'trql.consumeaction.class.php' );
-
-
 
 defined( 'DRINKACTION_CLASS_VERSION' ) or define( 'DRINKACTION_CLASS_VERSION','0.1' );
 
@@ -90,6 +88,8 @@ defined( 'DRINKACTION_CLASS_VERSION' ) or define( 'DRINKACTION_CLASS_VERSION','0
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
         on 26-08-2020 18:46.
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -174,6 +174,7 @@ class DrinkAction extends ConsumeAction
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR *} */
 
 
     /* ================================================================================ */
@@ -189,6 +190,10 @@ class DrinkAction extends ConsumeAction
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -198,10 +203,8 @@ class DrinkAction extends ConsumeAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of DrinkAction.__construct() ========================================== */
+    }   /* End of DrinkAction.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -217,6 +220,10 @@ class DrinkAction extends ConsumeAction
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -228,10 +235,7 @@ class DrinkAction extends ConsumeAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of DrinkAction.__destruct() =========================================== */
+    }   /* End of DrinkAction.__destruct() ============================================ */
     /* ================================================================================ */
-
-}   /* End of class DrinkAction ====================================================== */
+}   /* End of class DrinkAction ======================================================= */
 /* ==================================================================================== */
-
-?>

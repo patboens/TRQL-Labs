@@ -819,6 +819,16 @@ code, samp {
 <td class="description">Optional. File name.</td>
 </tr>
 </table>
+<p class="property">Example(s):</p>
+<pre>
+
+            use \trql\vaesoli\Vaesoli                   as Vaesoli;
+            use \trql\definedtermset\DefinedTermSet     as DefinedTermSet;
+
+            $oGlossary = new DefinedTermSet();
+            $oGlossary->load();
+
+       </pre>
 <hr /><p class="property func" id="fnc-search"><span class="name"><strong><code>search()</code></strong></span>: Search the glossary for a term</p>
 <p class="property">Syntax:</p>
 <p><code>search( $szKey )</code></p>
@@ -837,6 +847,21 @@ code, samp {
 <td class="description">Key to look for (e.g. '<code>API</code>')</td>
 </tr>
 </table>
+<p class="property">Example(s):</p>
+<pre>
+
+            use \trql\vaesoli\Vaesoli                   as Vaesoli;
+            use \trql\definedtermset\DefinedTermSet     as DefinedTermSet;
+
+            $oGlossary = new DefinedTermSet();
+            $oGlossary->load();
+
+            if ( ! is_null( $aRetVal = $oGlossary->search( 'API' ) ) )
+            {
+                foreach( $aRetVal as $aReturn )
+                    var_dump( $aReturn );
+            }
+       </pre>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

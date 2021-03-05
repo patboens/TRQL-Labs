@@ -77,13 +77,17 @@ code, samp {
 </tr>
 <tr class="property">
 <td class="name" id="var-additionalType"><code>$additionalType</code></td>
-<td class="type"><code>URL</code></td>
-<td class="description">An additional type for the item, typically used for adding more
- specific types from external vocabularies in microdata syntax. This is
- a relationship between something and a class that the thing is in. In
- RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
- attribute - for multiple types. Schema.org tools may have only weaker
- understanding of extra types, in particular those defined externally.</td>
+<td class="type"><code>string</code></td>
+<td class="description">An additional type for the item,
+ typically used for adding more
+ specific types from external
+ vocabularies in microdata syntax.
+ This is a relationship between
+ something and a class that the
+ thing is in. In RDFa syntax, it is
+ better to use the native RDFa
+ syntax - the 'typeof' attribute
+ - for multiple types.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-agent"><code>$agent</code></td>
@@ -99,14 +103,17 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-description"><code>$description</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">A description of the item.</td>
+<td class="description">A short description of the item.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-disambiguatingDescription"><code>$disambiguatingDescription</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">A sub property of description. A short description of the item used to
- disambiguate from other, similar items. Information from other
- properties (in particular, name) may be necessary for the description
+<td class="description">A sub property of description. A
+ short description of the item used
+ to disambiguate from other, similar
+ items. Information from other
+ properties (in particular, name)
+ may be necessary for the description
  to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
@@ -128,17 +135,22 @@ code, samp {
 </tr>
 <tr class="property">
 <td class="name" id="var-identifier"><code>$identifier</code></td>
-<td class="type"><code>URL|string|PropertyValue</code></td>
-<td class="description">The identifier property represents any kind of identifier for any kind
- of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
- dedicated properties for representing many of these, either as textual
- strings or as URL (URI) links. See background notes for more details.</td>
+<td class="type"><code>string</code></td>
+<td class="description">The identifier property represents any
+ kind of identifier for any kind of Thing,
+ such as ISBNs, GTIN codes, UUIDs etc.
+ http://schema.org provides dedicated
+ properties for representing many of these,
+ either as textual strings or as URL (URI)
+ links. See <a
+ href="https://schema.org/docs/datamodel.html#identifierBg">
+ background notes</a>
+ for more details.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-image"><code>$image</code></td>
-<td class="type"><code>ImageObject|URL</code></td>
-<td class="description">An image of the item. This can be a URL or a fully described
- ImageObject.</td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of an image of the item.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-instrument"><code>$instrument</code></td>
@@ -148,15 +160,19 @@ code, samp {
 </tr>
 <tr class="property">
 <td class="name" id="var-location"><code>$location</code></td>
-<td class="type"><code>string|PostalAddress|VirtualLocation|Place</code></td>
+<td class="type"><code>Place|PostalAddress|string|VirtualLocation</code></td>
 <td class="description">The location of for example where the event is happening, an
  organization is located, or where an action takes place.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-mainEntityOfPage"><code>$mainEntityOfPage</code></td>
-<td class="type"><code>CreativeWork|URL</code></td>
-<td class="description">Indicates a page (or other CreativeWork) for which this thing is the
- main entity being described. See background notes for details.</td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates a page (or other <code>CreativeWork</code>)
+ for which this thing is the main entity
+ being described. See <a
+ href="https://schema.org/docs/datamodel.html#mainEntityBackground">
+ background notes</a> for details.
+ Inverse property: mainEntity.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-name"><code>$name</code></td>
@@ -180,8 +196,9 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
-<td class="description">Indicates a potential Action, which describes an idealized action in
- which this thing would play an 'object' role.</td>
+<td class="description">Indicates a potential Action, which
+ describes an idealized action in which
+ this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-price"><code>$price</code></td>
@@ -232,10 +249,9 @@ code, samp {
 </tr>
 <tr class="property">
 <td class="name" id="var-sameAs"><code>$sameAs</code></td>
-<td class="type"><code>URL</code></td>
-<td class="description">URL of a reference Web page that unambiguously indicates the item's
- identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
- or official website.</td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A <code>CreativeWork</code> or <code>Event</code> about this <code>Thing</code>. 
+ Inverse property: <code>about</code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-self"><code>$self</code></td>
@@ -261,18 +277,13 @@ code, samp {
  situation may be clarified in future revisions.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-subjectOf"><code>$subjectOf</code></td>
-<td class="type"><code>Event|CreativeWork</code></td>
-<td class="description">A CreativeWork or Event about this Thing.</td>
-</tr>
-<tr class="property">
 <td class="name" id="var-target"><code>$target</code></td>
 <td class="type"><code>EntryPoint</code></td>
 <td class="description">Indicates a target EntryPoint for an Action.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-url"><code>$url</code></td>
-<td class="type"><code>URL</code></td>
+<td class="type"><code>string</code></td>
 <td class="description">URL of the item.</td>
 </tr>
 <tr class="property">
