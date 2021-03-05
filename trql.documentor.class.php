@@ -146,6 +146,14 @@
         *}
     *}
 
+    {*chist
+        {*mdate 05-03-21 06:17 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Adding IDs to properties and methods
+        *}
+    *}
+
     *}}} */
 /****************************************************************************************/
 namespace trql\documentor;
@@ -274,11 +282,76 @@ Trait Utils
         $szMark = preg_quote( $szMark );
 
         if ( preg_match( "/{$szMark}(?P<val>.*?) \*\}/si",$szStr,$aMatches ) )
-            $szRetVal = trim( $aMatches['val'] );
+            $szRetVal = $aMatches['val'];
 
         return ( $szRetVal );
     }   /* End of Utils.property() ==================================================== */
     /* ================================================================================ */
+
+
+    public function resolveSeealso( $a )
+    /*--------------------------------*/
+    {
+        $szSeeAlsos = '';
+
+        if ( is_array( $a ) && count( $a ) > 0 )
+        {
+            //var_dump( $a );
+            foreach( $a as $szSeeAlso )
+            {
+                if ( preg_match( '/@(?P<type>var|fnc)\.(?P<term>[[:word:]]*)(\s|\z|[[:space:][:punct:]])/si',$szSeeAlso,$aMatches ) )
+                {
+                    $szType = $aMatches['type'];
+                    $szTerm = $aMatches['term'];
+                    $szSeeAlsos .= "<a href=\"#{$szType}-{$szTerm}\">{$szTerm}" . ( $szType === 'fnc' ? '()' : '' ) . "</a>, ";
+                }
+                else
+                {
+                    $szSeeAlsos .= $szSeeAlso . ', ';
+                }
+            }   /* foreach( $a as $szSeeAlso ) */
+
+            if ( substr( $szSeeAlsos,-2 ) === ', ' )
+                $szSeeAlsos = substr( $szSeeAlsos,0,-2 );
+        }   /* if ( is_array( $a ) && count( $a ) > 0 ) */
+
+        return ( $szSeeAlsos );
+    }
+
+    /* ================================================================================ */
+    /** {{*makeID( $szType,$szStr )=
+
+        Generate a structured ID used to jump easily to properties ('[c]var[/c]') or to
+        methods ('[c]fnc[/c]')
+
+        {*params
+            $szType     (string)        Type of link. Can be '[c]var[/c]' or '[c]fnc[/c]'
+            $szStr      (string)        The name of the property or method for which we
+                                        want and ID
+        *}
+
+        {*return
+            (string)        A valid and useful ID to link to properties and methods
+        *}
+
+        {*example
+            $szID = $this->makeID( 'var','$self' );
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function makeID( $szType,$szStr )
+    /*------------------------------------*/
+    {
+        $szRetVal = '';
+
+        $szRetVal = $szType . '-' . str_replace( array('$'),'',$szStr );
+
+        return ( $szRetVal );
+    }   /* End of Utils.makeID() ==================================================== */
+    /* ================================================================================ */
+
 
     protected function safeName( $szName )
     /*----------------------------------*/
@@ -398,9 +471,8 @@ class Documentor extends CreativeWork implements iContext
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
     public      $szCurrentFile                  = null;             /* The current file we're documenting : TEMPORARY */
-
 
 
     /* ================================================================================ */
@@ -1188,7 +1260,7 @@ Class DocumentorSourceFile extends DocumentorFile
             foreach( $aMatch['todo'] as $szTODO )
             {
                 $this->aTODOs[] = trim( $szTODO );
-            }
+            }   /* foreach( $aMatch['todo'] as $szTODO ) */
 
         }   /* if ( preg_match_all('/\{\*todo(?P<todo>.*?)\*\}/si',$this->oHeader->szHeader,$aMatch,PREG_PATTERN_ORDER ) ) */
 
@@ -1264,7 +1336,7 @@ Class DocumentorSourceFile extends DocumentorFile
         $this->readFile();                                      /* Reads the file */
 
         $this->getHeader();                                     /* Get the file header */
-        $this->getNamespace();                                  /* Get the namspace of the source file : ONLY 1 namespace (limitation) */
+        $this->getNamespace();                                  /* Get the namespace of the source file: ONLY 1 namespace (limitation) */
         $this->getUses();                                       /* Get the top-level uses */
         $this->getConstants();                                  /* Get the top-level constants */
         $this->getDefines();                                    /* Get the top-level defines */
@@ -1325,10 +1397,14 @@ Class DocumentorSourceFile extends DocumentorFile
 
             $this->analyze();                                       /* Reads the file, get its namespace, read all USEs, the constants, etc. */
 
+            /* GRAND RENDERING ======================================================== */
             {   /* Style */
                 $szHTML .= "<style>\n";
                     $szHTML .= ".trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }\n";
                     $szHTML .= ".trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }\n";
+                    $szHTML .= ".trql_documentor_DocumentorSourceFile hr { border-top: 4px solid #800 !important; margin:2em 0; box-shadow: 0 6px 10px 1px rgba(0,0,0,.2); }\n";
+                    $szHTML .= ".trql_documentor_DocumentorSourceFile pre { background: #c001; }\n";
+                    $szHTML .= ".trql_documentor_DocumentorSourceFile pre strong { color: #b00; }\n";
                     $szHTML .= ".DocumentorLabel { font-style: italic; display: block; margin-top:1em; }\n";
                     $szHTML .= ".property { font-weight: bold;}\n";
                     $szHTML .= "code, .filename { color: crimson; font-family: Consolas,\"courier new\" }\n";
@@ -1355,11 +1431,20 @@ Class DocumentorSourceFile extends DocumentorFile
                                "   border: 1px solid #999;\n"                                                       .
                                "   box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);\n"                               .
                                "   border: 1px solid #888; }\n";
-                    $szHTML .= "p.property.func span.name { border:1px solid red; padding:6px; }\n";
+                    //$szHTML .= "p.property.func span.name { border:1px solid red; padding:6px; }\n";
+
+                    $szHTML .= "code, samp {\n"                                                                     .
+                               "   color: #800;\n"                                                                  .
+                               "   background: rgba(240, 240, 240, 0.5);\n"                                         .
+                               "   border: 1px solid silver;\n"                                                     .
+                               "   border-radius: 3px;\n"                                                           .
+                               "   padding: 0px 5px; }\n";
 
                 $szHTML .= "</style>\n\n";
             }   /* Style */
+            /* GRAND RENDERING ======================================================== */
 
+            /* GRAND RENDERING ======================================================== */
             {   /* HTML */
                 $szHTML    .= "<div class=\"" . $this->safeName( __CLASS__ ) . "\">\n";
                     $szHTML    .= $this->oHeader->render( 'html' );
@@ -1390,7 +1475,7 @@ Class DocumentorSourceFile extends DocumentorFile
                         foreach( $this->aDefinedClasses as $oClass )
                         //foreach( $this->aDocumentedClasses as $oClass )
                         {
-                            //var_dump( $oClass );
+                            //var_dump( $oClass->aParentClasses );
                             //var_dump( $oClass->szDeclaration );
                             //var_dump( $oClass->description );
                             //$this->die();
@@ -1399,8 +1484,26 @@ Class DocumentorSourceFile extends DocumentorFile
                                 $szHTML     .= "<span class=\"DocumentorLabel\">Class: </span><span class=\"property classname\">"              . $this->squareToAngle( say( '[c]' . $oClass->name           . '[/c]'           ) ) . "</span>\n";
                                 $szHTML     .= "<span class=\"DocumentorLabel\">Description: </span><span class=\"property description\">"      . $this->squareToAngle( say(         $oClass->description                       ) ) . "</span>\n";
 
+                                if ( is_array( $oClass->aParentClasses ) && count( $oClass->aParentClasses ) > 0 )
+                                {
+                                    $szBreadcrumb = '';
+                                    foreach( $oClass->aParentClasses as $aClass )
+                                    {
+                                        $a = explode( '\\',$aClass['name'] );
+                                        $szBreadcrumb .= end( $a ) . ' &gt; ';
+                                    }
+
+                                    // Finish the breadcrumb with the name of the class we're busy with
+                                    $szBreadcrumb .= $oClass->name;
+
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Inheritance: </span><span class=\"property declaration\">"  . $this->squareToAngle( say( '[c]' . $szBreadcrumb           . '[/c]'           ) ) . "</span>\n";
+                                }
+
                                 if ( ! empty( $oClass->szDeclaration ) )
                                     $szHTML     .= "<span class=\"DocumentorLabel\">Declaration: </span><span class=\"property declaration\">"  . $this->squareToAngle( say( '[c]' . $oClass->szDeclaration  . '[/c]'           ) ) . "</span>\n";
+
+                                if ( ! empty( $oClass->keywords ) )
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Keywords: </span><span class=\"property keywords\">"        . $this->squareToAngle( say(         $oClass->keywords                          ) ) . "</span>\n";
 
                                 if ( ! empty( $oClass->szCredits ) )
                                     $szHTML     .= "<span class=\"DocumentorLabel\">Credits: </span><span class=\"property credits\">"          . $this->squareToAngle( say(         $oClass->szCredits                         ) ) . "</span>\n";
@@ -1443,8 +1546,19 @@ Class DocumentorSourceFile extends DocumentorFile
                                 }
 
                                 //var_dump( $oClass->aProperties );
-                                //$this->die();
+                                usort( $oClass->aProperties,function( $a,$b )
+                                                            {
+                                                                if     ( strtolower( $a->name ) === strtolower( $b->name ) )
+                                                                    return 0;
+                                                                elseif ( strtolower( $a->name )  >  strtolower( $b->name ) )
+                                                                    return 1;
+                                                                else
+                                                                    return -1;
+                                                            } );
 
+                                /* **************************************************************************** */
+                                /* **************************************************************************** */
+                                /* Display ALL the properties */
                                 if ( is_array( $oClass->aProperties ) && count( $oClass->aProperties ) > 0 )
                                 {
                                     $szHTML     .= "<span class=\"DocumentorLabel\">Properties: </span>\n";
@@ -1461,9 +1575,9 @@ Class DocumentorSourceFile extends DocumentorFile
                                         //var_dump( $oProperty );
                                         //die();
                                         $szHTML .= "<tr class=\"property\">\n";
-                                            $szHTML .= "<td class=\"name\">"        . $this->squareToAngle( '[c]' . $oProperty->name        . '[/c]' ) . "</td>\n";
-                                            $szHTML .= "<td class=\"type\">"        . $this->squareToAngle( '[c]' . $oProperty->szTypes     . '[/c]' ) . "</td>\n";
-                                            $szHTML .= "<td class=\"description\">" . $this->squareToAngle(         $oProperty->description          ) . "</td>\n";
+                                            $szHTML .= "<td class=\"name\" id=\"" . $this->makeID( 'var',$oProperty->name ) . "\">" . trim(                      $this->squareToAngle( '[c]' . $oProperty->name        . '[/c]' )   ) . "</td>\n";
+                                            $szHTML .= "<td class=\"type\">"                                                        . trim(                      $this->squareToAngle( '[c]' . $oProperty->szTypes     . '[/c]' )   ) . "</td>\n";
+                                            $szHTML .= "<td class=\"description\">"                                                 . trim( vaesoli::STR_Reduce( $this->squareToAngle(         $oProperty->description          ) ) ) . "</td>\n";
                                         $szHTML .= "</tr>\n";
                                         //$szHTML     .= "<span class=\"property prop\">" . $this->squareToAngle( '[c]' . $oProperty->name . '[/c]') . "</span>, \n";
                                     }
@@ -1472,14 +1586,30 @@ Class DocumentorSourceFile extends DocumentorFile
                                     /* Get rid of the last ',' */
                                     //$szHTML = preg_replace( '/, *?[\r\n]\z/si','',$szHTML );
                                 }   /* if ( is_array( $oClass->aProperties ) && count( $oClass->aProperties ) > 0 ) */
+                                /* **************************************************************************** */
+                                /* **************************************************************************** */
 
-                                // PROCHAINE ETAPE ... METTRE LES METHODES
+                                if ( ! empty( $szSeeAlsos = $this->resolveSeealso( $oClass->aSeeAlsos ) ) )
+                                    $szHTML .= "<span class=\"DocumentorLabel\">See also: </span><span class=\"property seealso\">" . $this->squareToAngle( say( $szSeeAlsos ) ) . "</span>\n";
+
+                                usort( $oClass->aMethods,function( $a,$b )
+                                                            {
+                                                                if     ( strtolower( $a->name ) === strtolower( $b->name ) )
+                                                                    return 0;
+                                                                elseif ( strtolower( $a->name )  >  strtolower( $b->name ) )
+                                                                    return 1;
+                                                                else
+                                                                    return -1;
+                                                            } );
+
+                                /* **************************************************************************** */
+                                /* **************************************************************************** */
+                                /* Display ALL the methods */
                                 if ( is_array( $oClass->aMethods ) && count( $oClass->aMethods ) > 0 )
                                 {
                                     //$oFnc->szCredits      = trim( vaesoli::STR_Reduce( $this->property( '{*credits'   ,$szFncDef ) ) );
                                     //$oFnc->szDoc          = trim( vaesoli::STR_Reduce( $this->property( '{*doc'       ,$szFncDef ) ) );
                                     //$oFnc->szTODOs        = trim( vaesoli::STR_Reduce( $this->property( '{*todo'      ,$szFncDef ) ) );
-                                    //$oFnc->szWarning      = trim( vaesoli::STR_Reduce( $this->property( '{*warning'   ,$szFncDef ) ) );
                                     //$oFnc->szRemark       = trim( vaesoli::STR_Reduce( $this->property( '{*remark'    ,$szFncDef ) ) );
                                     //$oFnc->author         = trim( vaesoli::STR_Reduce( $this->property( '{*author'    ,$szFncDef ) ) );
 
@@ -1487,10 +1617,48 @@ Class DocumentorSourceFile extends DocumentorFile
                                     //$szHTML     .= "<span class=\"DocumentorLabel\">Methods: </span>\n";
                                     foreach( $oClass->aMethods as $oMethod )
                                     {
-                                        //$szHTML     .= "<span class=\"property func\">" . $this->squareToAngle( '[c]' . $oMethod->name . '()[/c]') . "</span>, \n";
-                                        $szHTML     .= "<p class=\"property\">Syntax:</p>\n"; 
-                                        $szHTML     .= "<p class=\"property func\"><span class=\"name\">" . $this->squareToAngle( '[c]' . $oMethod->name . '()[/c]</span>: ' ) . 
-                                                       $this->squareToAngle( $oMethod->szDescription ) ."</p>\n";
+                                        $szHTML .= "<p class=\"property func\" id=\"" . $this->makeID( 'fnc',$oMethod->name ) . "\"><span class=\"name\">" . $this->squareToAngle( '[b][c]' . $oMethod->name . '()[/c][/b]</span>: ' ) .
+                                                   $this->squareToAngle( $oMethod->szDescription ) ."</p>\n";
+
+                                        //var_dump( $oMethod->szWarning );
+
+                                        if ( ! empty( $oMethod->szWarning ) )
+                                        {
+                                            $szHTML     .= "<p class=\"property\">Warning:</p>\n";
+                                            $szHTML  .= "<p>" . $this->squareToAngle( say( $oMethod->szWarning ) ) . "</p>\n";
+                                        }
+
+                                        if ( ! empty( $oMethod->szRemark ) )
+                                        {
+                                            $szHTML     .= "<p class=\"property\">Remark:</p>\n";
+                                            $szHTML  .= "<p>" . $this->squareToAngle( say( $oMethod->szRemark ) ) . "</p>\n";
+                                        }   /* if ( ! empty( $oMethod->szRemark ) ) */
+
+                                        if ( ! empty( $oMethod->keywords ) )
+                                        {
+                                            $szHTML     .= "<p class=\"property\">Keywords:</p>\n";
+                                            $szHTML  .= "<p>" . $this->squareToAngle( say( $oMethod->keywords ) ) . "</p>\n";
+                                        }   /* if ( ! empty( $oMethod->keywords ) ) */
+
+                                        $szHTML     .= "<p class=\"property\">Syntax:</p>\n";
+
+                                        {   /* Generate a string of parameters (if any) and displays it */
+                                            $szParams = '';
+
+                                            if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 )
+                                            {
+                                                foreach( $oMethod->aParams as $oParam )
+                                                {
+                                                    $szParams = $oParam->name . ',';
+                                                }
+                                                $szParams = vaesoli::STR_strin( $szParams );
+                                            }   /* if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 ) */
+
+                                            if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 )
+                                                $szHTML     .= "<p><code>{$oMethod->name}( {$szParams} )</code></p>\n";
+                                            else
+                                                $szHTML     .= "<p><code>" . $oMethod->name . "()</code></p>\n";
+                                        }   /* Generate a string of parameters */
 
                                         if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 )
                                         {
@@ -1506,17 +1674,32 @@ Class DocumentorSourceFile extends DocumentorFile
                                             foreach( $oMethod->aParams as $oParam )
                                             {
                                                 $szHTML .= "<tr class=\"parameter\">\n";
-                                                    $szHTML .= "<td class=\"name\">"        . $this->squareToAngle( '[c]' . $oParam->name           . '[/c]' ) . "</td>\n";
-                                                    $szHTML .= "<td class=\"type\">"        . $this->squareToAngle( '[c]' . $oParam->types          . '[/c]' ) . "</td>\n";
-                                                    $szHTML .= "<td class=\"description\">" . $this->squareToAngle(         $oParam->description             ) . "</td>\n";
+                                                    $szHTML .= "<td class=\"name\" id=\"" . $this->makeID( 'param',$oParam->name ) . "\">"  . $this->squareToAngle( '[c]' . $oParam->name           . '[/c]' ) . "</td>\n";
+                                                    $szHTML .= "<td class=\"type\">"                                                        . $this->squareToAngle( '[c]' . $oParam->types          . '[/c]' ) . "</td>\n";
+                                                    $szHTML .= "<td class=\"description\">"                                                 . $this->squareToAngle(         $oParam->description             ) . "</td>\n";
                                                 $szHTML .= "</tr>\n";
                                             }
                                             $szHTML     .= "</table>\n";
-                                        }
+                                        }   /* if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 ) */
+
+                                        if ( ! empty( $oMethod->szExamples ) )
+                                        {
+                                            $szHTML     .= "<p class=\"property\">Example(s):</p>\n";
+                                            $szHTML     .= "<pre>\n";
+                                                $szHTML .= $this->squareToAngle( $oMethod->szExamples );
+                                            $szHTML     .= "</pre>\n";
+                                        }   /* if ( ! empty( $oMethod->szExamples ) ) */
+
+                                        if ( ! empty( $szSeeAlsos = $this->resolveSeealso( $oMethod->aSeeAlsos ) ) )
+                                            $szHTML .= "<span class=\"DocumentorLabel\">See also: </span><span class=\"property seealso\">" . $this->squareToAngle( say( $szSeeAlsos ) ) . "</span>\n";
+
+                                        $szHTML .= "<hr />";
                                     }   /* foreach( $oClass->aMethods as $oMethod ) */
                                     /* Get rid of the last ',' */
                                     //$szHTML = preg_replace( '/, *?[\r\n]\z/si','',$szHTML );
                                 }   /* if ( is_array( $oClass->aMethods ) && count( $oClass->aMethods ) > 0 ) */
+                                /* **************************************************************************** */
+                                /* **************************************************************************** */
                             $szHTML    .= "</section> <!-- .class -->\n";
                             //var_dump( $oClass );
                             //$this->die();
@@ -1524,6 +1707,7 @@ Class DocumentorSourceFile extends DocumentorFile
                     $szHTML    .= "</section> <!-- .classes -->\n";
                 $szHTML .= "</div> <!-- End of " . $this->safeName( __CLASS__ ) . "-->\n";
             }   /* HTML */
+            /* GRAND RENDERING ======================================================== */
         }   /* End of ... Else of ... if ( vaesoli::FIL_MDate( ... */
 
         end:
@@ -2315,8 +2499,9 @@ Class DocumentorClass extends DocumentorSourceFileObject
     public      $szCredits      = null;         /* Credits of the class (useful when some parts of the code are covered via CC licenses for example) */
     public      $szDoc          = null;         /* Documentation (e.g. URL(s) where documentation can be obtained */
     public      $szSourceCode   = null;         /* Class' source code */
-    public      $szDeclaration  = null;                             /* {*property       $szDeclaration          (string)                        Class declaration (e.g. "class AdministrativeArea extends Place implements iContext" ) *} */
-    public      $szParent       = null;                             /* {*property       $szParent               (string)                        Name of the parent class (if any) *} */
+    public      $szDeclaration  = null;                             /* {*property       $szDeclaration          (string)                        Class declaration
+                                                                                                                                                (e.g. "[c]class AdministrativeArea extends Place implements iContext[/c]" ) *} */
+    public      $aParents       = null;                             /* {*property       $aParents               (array)                         An associative array of parent class(es) (if any) *} */
     public      $isAbstract     = false;                            /* {*property       $isAbstract             (bool)                          [c]true[/c] if the class is an abstract class; [c]false[/c] otherwise *} */
     public      $implements     = null;                             /* {*property       $implements             (array)                         An array of intyerfaces that the class implements (if any); otehrwise, [c]null[/c] *} */
     public      $aProperties    = null;                             /* {*property       $aProperties            (array)                         A set of properties *} */
@@ -2327,6 +2512,10 @@ Class DocumentorClass extends DocumentorSourceFileObject
     public      $szWarning      = null;                             /* {*property       $szWarning              (string)                        A warning *} */
     public      $szRemark       = null;                             /* {*property       $szRemark               (string)                        A remark *} */
     public      $author         = null;                             /* {*property       $author                 (Organization|Person|string)    The author of the class *} */
+    public      $keywords       = null;                             /* {*property       $keywords               (string)                        A comma-delimited string where each token is a keyword *} */
+    public      $aSeeAlsos      = null;                             /* {*property       $aSeeAlsos              (array)                         An array of seealso *} */
+    public      $wikidataId     = 'Q4479242';                       /* {*property       $wikidataId             (string)                        Wikidata ID. In object-oriented programming, a definition that specifies
+                                                                                                                                                how an object works. *} */
 
     /* ================================================================================ */
     /** {{*__construct( $szName,$szDef,$oSourceFile )=
@@ -2446,27 +2635,22 @@ Class DocumentorClass extends DocumentorSourceFileObject
 
         //var_dump( $this->szDefinition );
 
-        $this->description  = trim( vaesoli::STR_Reduce( $this->property( '{*desc'       ,$this->szDefinition ) ) );
-        $this->szCredits    = trim( vaesoli::STR_Reduce( $this->property( '{*credits'    ,$this->szDefinition ) ) );
-        $this->szDoc        = trim( vaesoli::STR_Reduce( $this->property( '{*doc'        ,$this->szDefinition ) ) );
-        $this->szTODOs      = trim( vaesoli::STR_Reduce( $this->property( '{*todo'       ,$this->szDefinition ) ) );
-        $this->szWarning    = trim( vaesoli::STR_Reduce( $this->property( '{*warning'    ,$this->szDefinition ) ) );
-        $this->szRemark     = trim( vaesoli::STR_Reduce( $this->property( '{*remark'     ,$this->szDefinition ) ) );
-        $this->author       = trim( vaesoli::STR_Reduce( $this->property( '{*author'     ,$this->szDefinition ) ) );
+        /* TAG EXTRACTION ================================================================================= */
+        $this->description  =       trim( vaesoli::STR_Reduce( $this->property( '{*desc'       ,$this->szDefinition ) ) );
+        $this->szCredits    =       trim( vaesoli::STR_Reduce( $this->property( '{*credits'    ,$this->szDefinition ) ) );
+        $this->szDoc        =       trim( vaesoli::STR_Reduce( $this->property( '{*doc'        ,$this->szDefinition ) ) );
+        $this->szTODOs      =       trim( vaesoli::STR_Reduce( $this->property( '{*todo'       ,$this->szDefinition ) ) );
+        $this->szWarning    =       trim( vaesoli::STR_Reduce( $this->property( '{*warning'    ,$this->szDefinition ) ) );
+        $this->szRemark     =       trim( vaesoli::STR_Reduce( $this->property( '{*remark'     ,$this->szDefinition ) ) );
+        $this->author       =       trim( vaesoli::STR_Reduce( $this->property( '{*author'     ,$this->szDefinition ) ) );
+        $this->keywords     =       trim( vaesoli::STR_Reduce( $this->property( '{*keywords'   ,$this->szDefinition ) ) );
+        if ( ! empty( $szSeeAlsos = trim( vaesoli::STR_Reduce( $this->property( '{*seealso'    ,$this->szDefinition ) ) ) ) )
+            $this->aSeeAlsos = explode( ',',str_replace( ';',',',$szSeeAlsos ) );     /* All seealso's (array) */
+
+        /* TAG EXTRACTION ================================================================================= */
 
         if ( empty( $this->author) && isset( $this->oSourceFile ) && $this->oSourceFile instanceof \trql\documentor\DocumentorSourceFile )
             $this->author = $this->oSourceFile->oHeader->author;
-
-        //var_dump( 'description',$this->description  );
-        //var_dump( 'credits',$this->szCredits    );
-        //var_dump( 'doc',$this->szDoc        );
-        //var_dump( 'TODOs',$this->szTODOs      );
-        //var_dump( 'Warning',$this->szWarning    );
-        //var_dump( 'Remark',$this->szRemark     );
-        //var_dump( 'Author',$this->author );
-        //
-        ////var_dump( $this );
-        //$this->die();
 
         return ( $this );
     }   /* End of DocumentorClass.parseDefinition() =================================== */
@@ -2507,7 +2691,7 @@ Class DocumentorClass extends DocumentorSourceFileObject
             $class              = $parent;
         }   /* while ( $parent = $class->getParentClass() ) */
 
-        return ( array_reverse( $aParentClasses ) );
+        return ( $this->aParentClasses = array_reverse( $aParentClasses ) );
     }   /* End of DocumentorClass.getParentClasses() ================================== */
     /* ================================================================================ */
 
@@ -2599,9 +2783,6 @@ Class DocumentorClass extends DocumentorSourceFileObject
 
         $szHomeOfDocumentation  = vaesoli::FIL_RealPath( __DIR__ . '/q/common/trql.classes.home/DOCUMENTATION/' );
         $szTargetFile           = $szHomeOfDocumentation . basename( $this->oSourceFile->szFileName ) . '.' . md5( str_replace( array( '\\','/' ),'-',$szClass ) ) . '.properties.cache';
-        //var_dump( $szTargetFile );
-        //var_dump( $szClass );
-        //var_dump( "SOURCE CODE: ",$this->szSourceCode );
 
         /* ******************************************************************************** */
         {   /* Let's try to load all the properties of the parent classes FIRST */
@@ -2632,17 +2813,11 @@ Class DocumentorClass extends DocumentorSourceFileObject
         }   /* Let's try to load all the properties of the parent classes FIRST */
         /* ******************************************************************************** */
 
-        //if ( ! empty( $this->aProperties ) )
-        //{
-        //    var_dump( $this->aProperties );
-        //    $this->die("HEY ... ON A DES PROPERTIES PARENTES!!!");
-        //}
-
+        /* ******************************************************************************** */
+        /* Extract the properties now                                                       */
         /* ******************************************************************************** */
         if ( preg_match_all( '/\{\*property(?P<prop>.*?)\*\}/si',$this->szSourceCode,$aMatches,PREG_PATTERN_ORDER ) )
         {
-            //var_dump( $aMatches );
-
             $aPropertiesOfThisClass = array();
 
             foreach( $aMatches['prop'] as $szPropertyDef )
@@ -2658,24 +2833,28 @@ Class DocumentorClass extends DocumentorSourceFileObject
                     //var_dump( $szPropertyTypes );
                     //var_dump( $szPropertyDesc  );
 
-                    $aPropertiesOfThisClass[] = new DocumentorClassProperty( $szPropertyName,$szPropertyTypes,$szPropertyDesc );
+                    $aPropertiesOfThisClass[$szPropertyName] = new DocumentorClassProperty( $szPropertyName,$szPropertyTypes,$szPropertyDesc );
                 }   /* if ( preg_match( '/\A(?P<name>\$[[:word:]]*).*?\((?P<types>.*?)\)(?P<desc>.*)\z/si',trim( $szPropertyDef ),$aParts ) ) */
             }   /* foreach( $aMatches['prop'] as $szPropertyDef ) */
 
-            /* Cache the properties found in THIS CLASS FILE (CAN LEAD TO SOME CONFUSION WHEN SEVERAL CLASSES ARE CONTAINED IN THE SAME FILE) */
+
+            /* ******************************************************************************** */
+            /* Cache the properties found in THIS CLASS FILE (CAN LEAD TO SOME CONFUSION
+               WHEN SEVERAL CLASSES ARE CONTAINED IN THE SAME FILE) */
+            /* ******************************************************************************** */
             if ( is_array( $aPropertiesOfThisClass ) && count( $aPropertiesOfThisClass ) > 0 )
             {
                 //var_dump( $aPropertiesOfThisClass );
                 $this->saveHashFile( $szTargetFile,$aPropertiesOfThisClass );
                 $this->aProperties = array_merge( $this->aProperties,$aPropertiesOfThisClass );
                 //var_dump( $this->aProperties );
-            }
+            }   /* if ( is_array( $aPropertiesOfThisClass ) && count( $aPropertiesOfThisClass ) > 0 ) */
         }   /* if ( preg_match_all( '/\{\*property(?P<prop>.*?)\*\}/si',$this->szSourceCode,$aMatches,PREG_PATTERN_ORDER ) ) */
-        else
-        {
-            //var_dump( "Punaise ... je ne trouve pas les propriétés" );
-        }
         /* ******************************************************************************** */
+        /* ******************************************************************************** */
+
+        //var_dump( $this->aProperties );
+        //$this->die();
 
         end:
         return ( $this );
@@ -2720,24 +2899,53 @@ Class DocumentorClass extends DocumentorSourceFileObject
         $szClass                = $szNS . '\\' . $this->name;
 
         $szHomeOfDocumentation  = vaesoli::FIL_RealPath( __DIR__ . '/q/common/trql.classes.home/DOCUMENTATION/' );
-        $szTargetFile           = $szHomeOfDocumentation . basename( $this->oSourceFile->szFileName ) . '.' . md5( str_replace( array( '\\','/' ),'-',$szClass ) ) . '.properties.cache';
+        $szTargetFile           = $szHomeOfDocumentation . basename( $this->oSourceFile->szFileName ) . '.' . md5( str_replace( array( '\\','/' ),'-',$szClass ) ) . '.methods.cache';
 
-        //var_dump( $szTargetFile );
-        //var_dump( $szClass );
-        //echo $this->szSourceCode;
+        /* ******************************************************************************** */
+        {   /* Let's try to load all the methods of the parent classes FIRST */
+            if ( is_file( vaesoli::FIL_RealPath( __DIR__ . '/' . $this->oSourceFile->oHeader->szFileName ) ) )
+                require_once( $this->oSourceFile->oHeader->szFileName );
+            else
+            {
+                var_dump( "Ooops ... CANNOT FIND " . $this->oSourceFile->oHeader->szFileName );
+                goto end;
+            }
 
+            $class          = new \ReflectionClass( $o = new $szClass() );
+            $aParentClasses = $this->getParentClasses( $class );
+
+            //var_dump( "PARENT CLASSES: ",$aParentClasses );
+            //$this->die();
+
+            foreach( $aParentClasses as $aClass )
+            {
+                $szMethodsFile = $szHomeOfDocumentation  . basename( $aClass['file'] ) . '.' . md5( str_replace( array( '\\','/' ),'-',$aClass['name'] ) ) . '.methods.cache';
+
+                if ( is_file( $szMethodsFile ) )
+                {
+                    //var_dump( "FOUND " . $szMethodsFile );
+                    $this->aMethods = array_merge( $this->aMethods,$this->getHashFile( $szMethodsFile ) );
+                }   /* if ( is_file( $szMethodsFile ) ) */
+            }
+        }   /* Let's try to load all the methods of the parent classes FIRST */
+        /* ******************************************************************************** */
+
+
+        /* ******************************************************************************** */
+        /* Extract the methods now                                                          */
+        /* ******************************************************************************** */
         if ( preg_match_all('%/\*\* \{\{\* *?(?P<fnc>.*?)\((?P<args>.*?)\)=(.*?)\*\}\}%si',$this->szSourceCode,$aMatches, PREG_PATTERN_ORDER ) )
         {
+            $aMethodsOfThisClass = array();
+
             foreach( $aMatches[0] as $szFncDef )
             {
-                // Aussi aller voir en ligne 2555
-
                 if ( preg_match( '/\{\{\*(public|protected)?.*?(static)?(?P<name>.*)\((?P<args>.*?)\)=/si',$szFncDef,$aParts ) )
                 {
                     $szName = trim( $aParts['name'] );
                     $szArgs = trim( $aParts['args'] );
                     //var_dump( $szName,$szArgs );
-                    // STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE; 
+                    // STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE;
 
                     // IL FAUT PARSER LA DEFINITION DE
                     // CHAQUE METHODE POUR EN TROUVER
@@ -2745,7 +2953,6 @@ Class DocumentorClass extends DocumentorSourceFileObject
                     // - LES CDATE ET MDATE
                     // - ...
 
-                    // ICI ... JE DOIS AVOIR LE NOM !!!
                     $oFnc = new DocumentorClassMethod( $szName,$szFncDef,$szArgs );
 
                     if ( preg_match('%/\*\* \{\{\*.*\(.*?\)=(?P<desc>.*?)\{\*%si',$szFncDef,$aParts2 ) )
@@ -2755,34 +2962,50 @@ Class DocumentorClass extends DocumentorSourceFileObject
                         $oFnc->szDescription  = trim( vaesoli::STR_Reduce( $aParts2['desc'] ) );
                     }   /* if ( preg_match('%/\*\* \{\{\*.*\(.*?\)=(?P<desc>.*?)\{\*%si',$szFncDef,$aParts2 ) ) */
 
+                    /* TAG EXTRACTION ================================================================================= */
+                    $oFnc->szCredits    =       trim( vaesoli::STR_Reduce( $this->property( '{*credits'   ,$szFncDef ) ) );
+                    $oFnc->szDoc        =       trim( vaesoli::STR_Reduce( $this->property( '{*doc'       ,$szFncDef ) ) );
+                    $oFnc->szTODOs      =       trim( vaesoli::STR_Reduce( $this->property( '{*todo'      ,$szFncDef ) ) );
+                    $oFnc->szWarning    =       trim( vaesoli::STR_Reduce( $this->property( '{*warning'   ,$szFncDef ) ) );
+                    $oFnc->szRemark     =       trim( vaesoli::STR_Reduce( $this->property( '{*remark'    ,$szFncDef ) ) );
+                    $oFnc->author       =       trim( vaesoli::STR_Reduce( $this->property( '{*author'    ,$szFncDef ) ) );
+                    $oFnc->szExamples   =                                  $this->property( '{*example'   ,$szFncDef );
+                    $oFnc->keywords     =       trim( vaesoli::STR_Reduce( $this->property( '{*keywords'  ,$szFncDef ) ) );
+                    if ( ! empty( $szSeeAlsos = trim( vaesoli::STR_Reduce( $this->property( '{*seealso'   ,$szFncDef ) ) ) ) )
+                        $oFnc->aSeeAlsos = explode( ',',str_replace( ';',',',$szSeeAlsos ) );     /* All seealso's (array) */
 
-                    /* En réalité, la déclaration est ce qu'il y a entre le ")=" et le premier "{*" */
-
-                    $oFnc->szCredits      = trim( vaesoli::STR_Reduce( $this->property( '{*credits'   ,$szFncDef ) ) );
-                    $oFnc->szDoc          = trim( vaesoli::STR_Reduce( $this->property( '{*doc'       ,$szFncDef ) ) );
-                    $oFnc->szTODOs        = trim( vaesoli::STR_Reduce( $this->property( '{*todo'      ,$szFncDef ) ) );
-                    $oFnc->szWarning      = trim( vaesoli::STR_Reduce( $this->property( '{*warning'   ,$szFncDef ) ) );
-                    $oFnc->szRemark       = trim( vaesoli::STR_Reduce( $this->property( '{*remark'    ,$szFncDef ) ) );
-                    $oFnc->author         = trim( vaesoli::STR_Reduce( $this->property( '{*author'    ,$szFncDef ) ) );
+                    /* TAG EXTRACTION ================================================================================= */
 
                     if ( preg_match( '/\{\*params(?P<params>.*?)\*\}/si',$szFncDef,$aParts2 ) )
                     {
-                        //var_dump( $aParts2 );
-                        /* Parse the blog of parameters and add each parameter to the list
-                           of parameters of the function/method */
                         $oFnc->parseArgs( $aParts2['params'] );
                     }   /* if ( preg_match( '/\{\*params(.*?)\*\}/si',$szFncDef,$aParts2 ) ) */
-                    
-                    //$this->die();
 
                     // - LES PARAMETRES
                     // - LA VALEUR DE RETOUR
 
-                    $this->aMethods[] = $oFnc;
-                }
+                    $aMethodsOfThisClass[$szName] = $oFnc;
+                }   /* if ( preg_match( '/\{\{\*(public|protected)?.*?(static)?(?P<name>.*)\((?P<args>.*?)\)=/si',$szFncDef,$aParts ) ) */
             }   /* foreach( $aMatches[0] as $szFncDef ) */
-        }
 
+            /* ******************************************************************************** */
+            /* Cache the methods found in THIS CLASS FILE (CAN LEAD TO SOME CONFUSION
+               WHEN SEVERAL CLASSES ARE CONTAINED IN THE SAME FILE!!!) */
+            /* ******************************************************************************** */
+            if ( is_array( $aMethodsOfThisClass ) && count( $aMethodsOfThisClass ) > 0 )
+            {
+                $this->saveHashFile( $szTargetFile,$aMethodsOfThisClass );
+                $this->aMethods = array_merge( $this->aMethods,$aMethodsOfThisClass );
+            }   /* if ( is_array( $aMethodsOfThisClass ) && count( $aMethodsOfThisClass ) > 0 ) */
+
+        }   /* if ( preg_match_all('%/\*\* \{\{\* *?(?P<fnc>.*?)\((?P<args>.*?)\)=(.*?)\*\}\}%si' ..., PREG_PATTERN_ORDER ) ) */
+        /* ******************************************************************************** */
+        /* ******************************************************************************** */
+
+        //var_dump( $this->aMethods );
+        //$this->die();
+
+        end:
         return ( $this );
     }   /* End of DocumentorClass.getDocumentedMethods() ============================== */
     /* ================================================================================ */
@@ -2913,7 +3136,8 @@ Class DocumentorFunction extends DocumentorSourceFileObject
     public      $szDefinition   = null;                             /* {*property       $szDefinition           (string)                        Definition of the method (everything that defines the method in the comments) *} */
     public      $szArgs         = null;                             /* {*property       $szArgs                 (string)                        A comma-delimited list of parameters. *} */
     public      $szDescription  = null;                             /* {*property       $szDescription          (string)                        Description of the method *} */
-    public      $szCredits      = null;                             /* {*property       $szCredits              (string)                        Credits of the method (useful when some parts of the code are covered via CC licenses for example) */
+    public      $szCredits      = null;                             /* {*property       $szCredits              (string)                        Credits of the method (useful when some parts of the code are covered via
+                                                                                                                                                CC licenses for example) */
     public      $szDoc          = null;                             /* {*property       $szDoc                  (string)                        Documentation (e.g. URL(s) where documentation can be obtained */
     public      $szDeclaration  = null;                             /* {*property       $szDeclaration          (string)                        Function declaration (e.g. "public static function MyFnc()" ) *} */
     public      $szTODOs        = null;                             /* {*property       $szTODOs                (string)                        A list of TODOs *} */
@@ -2922,6 +3146,17 @@ Class DocumentorFunction extends DocumentorSourceFileObject
     public      $author         = null;                             /* {*property       $author                 (Organization|Person|string)    The author of the method *} */
     public      $aParams        = array();                          /* {*property       $aParams                (array)                         Array of parameters *} */
     public      $aAliases       = array();                          /* {*property       $aAliases               (array)                         Array of aliases *} */
+    public      $szExamples     = null;                             /* {*property       $szExamples             (string)                        Set of examples for this function/method *} */
+    public      $aExecs         = array();                          /* {*property       $aExecs                 (array)                         Array of code that must be executed *} */
+    public      $oReturn        = null;                             /* {*property       $oReturn                (DocumentorReturn)              Return object *} */
+    public      $szVersion      = null;                             /* {*property       $szVersion              (string)                        Version of the class/method *} */
+    public      $szCDate        = null;                             /* {*property       $szCDate                (string)                        Creation date of the function (if any) *} */
+    public      $szMDate        = null;                             /* {*property       $szMDate                (string)                        Modification date of the function (if any) *} */
+    public      $keywords       = null;                             /* {*property       $keywords               (string)                        A comma-delimited string where each token is a keyword *} */
+    public      $aSeeAlsos      = null;                             /* {*property       $aSeeAlsos              (array)                         An array of seealso *} */
+    public      $wikidataId     = 'Q190686';                        /* {*property       $wikidataId             (string)                        Wikidata ID. subroutine ... sequence of instructions that can be called
+                                                                                                                                                from other points in a computer program *} */
+
 
     /* ================================================================================ */
     /** {{*__construct( $szName,$szDef,szArgs )=

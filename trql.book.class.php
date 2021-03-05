@@ -26,6 +26,7 @@
     {*cdate                 24-08-2020 12:58 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -84,6 +85,7 @@ defined( 'BOOK_CLASS_VERSION' ) or define( 'BOOK_CLASS_VERSION','0.1' );
         [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Book extends CreativeWork

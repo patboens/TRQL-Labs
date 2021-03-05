@@ -37,9 +37,11 @@
     {*cdate                 06-02-21 10:54 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
     {*remark                A source of inspiration may come from the following Wikipedia
                             page [url]https://en.wikipedia.org/wiki/API_management[/url] *}
-    {*UTF-8                 Quel bel été *}
+
+    {*seealso               @class.APIHandler *}
 
     -------------------------------------------------------------------------------------
     Changes History:

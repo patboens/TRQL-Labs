@@ -26,6 +26,7 @@
     {*cdate                 28-08-2020 16:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -45,16 +46,13 @@
 namespace trql\sitenavigationelement;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webpageelement\WebPageElement    as WebPageElement;
-
+use \trql\webpageelement\WebPageElement     as WebPageElement;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'WEBPAGEELEMENT_CLASS_VERSION' ) )
     require_once( 'trql.webpageelement.class.php' );
-
-
 
 defined( 'SITENAVIGATIONELEMENT_CLASS_VERSION' ) or define( 'SITENAVIGATIONELEMENT_CLASS_VERSION','0.1' );
 
@@ -80,10 +78,11 @@ defined( 'SITENAVIGATIONELEMENT_CLASS_VERSION' ) or define( 'SITENAVIGATIONELEME
         on 28-08-2020 16:30.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class SiteNavigationElement extends WebPageElement
-/*--------------------------------------*/
+/*----------------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,

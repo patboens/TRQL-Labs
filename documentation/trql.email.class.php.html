@@ -1,6 +1,9 @@
 <style>
 .trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
 .trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile hr { border-top: 4px solid #800 !important; margin:2em 0; box-shadow: 0 6px 10px 1px rgba(0,0,0,.2); }
+.trql_documentor_DocumentorSourceFile pre { background: #c001; }
+.trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
 code, .filename { color: crimson; font-family: Consolas,"courier new" }
@@ -24,7 +27,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
    border: 1px solid #999;
    box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
    border: 1px solid #888; }
-p.property.func span.name { border:1px solid red; padding:6px; }
+code, samp {
+   color: #800;
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -41,6 +49,7 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>Email</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">A set of services to create and send an email message.</span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Utility &gt; Email</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Email extends Utility</code></span>
 <span class="DocumentorLabel">Properties: </span>
 <table class="properties">
@@ -52,105 +61,96 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Wikidata ID. No equivalent.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$ttl</code></td>
-<td class="type"><code>int</code></td>
-<td class="description">Time-to-Live in sec; 1 full day by default</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Wikidata ID. A single message, sent by email</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szHost</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Host to connect to</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$iPort</code></td>
-<td class="type"><code>int</code></td>
-<td class="description">Connection port</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szMailType</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Mail format (can also be text/html)</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szCharset</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Character set</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szDomain</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Domaine internet</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$iPriority</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Mail priority (1 = highest ... 5 = lowest)</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szFromName</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Sender name */
-    public      $szFromEmail        = null;                         /* {*property   $szFromEmail                    (string)                Sender Email address</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szTo</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Recipient's email address (can be multiple with a ',' separated string</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szCC</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Email address of copy</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szBCC</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Blind copy email address</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szSubject</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Subject of the email</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szBody</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Body of the mail</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$aFiles</code></td>
+<td class="name" id="var-aFiles"><code>$aFiles</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">List of attachments</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$szLogFile</code></td>
+<td class="name" id="var-iPort"><code>$iPort</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Connection port</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-iPriority"><code>$iPriority</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Mail priority (1 = highest ... 5 = lowest)</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-self"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szBCC"><code>$szBCC</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Blind copy email address</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szBody"><code>$szBody</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Body of the mail</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szCC"><code>$szCC</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Email address of copy</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szCharset"><code>$szCharset</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Character set</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szDomain"><code>$szDomain</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Domaine internet</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szFromName"><code>$szFromName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Sender name */
+ public $szFromEmail = null; /* {*property $szFromEmail (string) Sender Email address</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szHost"><code>$szHost</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Host to connect to</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szLogFile"><code>$szLogFile</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Possible log file</td>
 </tr>
+<tr class="property">
+<td class="name" id="var-szMailType"><code>$szMailType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Mail format (can also be text/html)</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szSubject"><code>$szSubject</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Subject of the email</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szTo"><code>$szTo</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Recipient's email address (can be multiple with a ',' separated string</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-ttl"><code>$ttl</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Time-to-Live in sec; 1 full day by default</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. A single message, sent by email</td>
+</tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>Email</code></h2>
+<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__construct()</code></span>: Class constructor</p>
+<p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -161,13 +161,14 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$szHome</code></td>
+<td class="name" id="param-szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Home of the class. Optional.</td>
 </tr>
 </table>
+<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__destruct()</code></span>: Class destructor</p>
-</section> <!-- .class -->
+<p><code>__destruct()</code></p>
+<hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

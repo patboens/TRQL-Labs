@@ -1,6 +1,9 @@
 <style>
 .trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
 .trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile hr { border-top: 4px solid #800 !important; margin:2em 0; box-shadow: 0 6px 10px 1px rgba(0,0,0,.2); }
+.trql_documentor_DocumentorSourceFile pre { background: #c001; }
+.trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
 code, .filename { color: crimson; font-family: Consolas,"courier new" }
@@ -24,7 +27,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
    border: 1px solid #999;
    box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
    border: 1px solid #888; }
-p.property.func span.name { border:1px solid red; padding:6px; }
+code, samp {
+   color: #800;
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -43,6 +51,7 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <span class="DocumentorLabel">Description: </span><span class="property description">High level file class which handles all details of a file:
  file size, modification date & time, creation date & time,
  last access date & time, ...</span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Utility &gt; File</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class File extends Utility</code></span>
 <span class="DocumentorLabel">Warning: </span><span class="property warning">This class must still be tested extensively in the context of TRQL Labs</span>
 <span class="DocumentorLabel">Properties: </span>
@@ -55,76 +64,67 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Wikidata ID. No equivalent.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$ttl</code></td>
-<td class="type"><code>int</code></td>
-<td class="description">Time-to-Live in sec; 1 full day by default</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">WikidataId ... block of arbitrary information, or 
-                                                                                                                                        resource for storing information, which is 
-                                                                                                                                        available to a computer program</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szFile</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Physical filename</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szStorage</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Logical filename</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$iSize</code></td>
-<td class="type"><code>int</code></td>
-<td class="description">File size in bytes</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$rHandle</code></td>
-<td class="type"><code>res</code></td>
-<td class="description">Handle of the file</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szMIMEType</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">File MIME type</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$iATime</code></td>
-<td class="type"><code>int</code></td>
-<td class="description">Last access date & time</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$CTime</code></td>
+<td class="name" id="var-CTime"><code>$CTime</code></td>
 <td class="type"><code>int</code></td>
 <td class="description">Creation date & time</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$iMTime</code></td>
+<td class="name" id="var-iATime"><code>$iATime</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Last access date & time</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-iMTime"><code>$iMTime</code></td>
 <td class="type"><code>int</code></td>
 <td class="description">Last modification date & time</td>
 </tr>
+<tr class="property">
+<td class="name" id="var-iSize"><code>$iSize</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">File size in bytes</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-rHandle"><code>$rHandle</code></td>
+<td class="type"><code>res</code></td>
+<td class="description">Handle of the file</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-self"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szFile"><code>$szFile</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Physical filename</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szMIMEType"><code>$szMIMEType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">File MIME type</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-szStorage"><code>$szStorage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Logical filename</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-ttl"><code>$ttl</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Time-to-Live in sec; 1 full day by default</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">WikidataId ... block of arbitrary information, or 
+ resource for storing information, which is 
+ available to a computer program</td>
+</tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>File</code></h2>
+<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__construct()</code></span>: Class constructor</p>
+<p><code>__construct( $MustOpen )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -135,18 +135,28 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$szFile</code></td>
+<td class="name" id="param-szFile"><code>$szFile</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Logical or physical filename. Optional. <code>null</code> by default.</td>
 </tr>
 <tr class="parameter">
-<td class="name"><code>$MustOpen</code></td>
+<td class="name" id="param-MustOpen"><code>$MustOpen</code></td>
 <td class="type"><code>bool</code></td>
 <td class="description">Must the file be opened on object creation? <code>false</code> by default.</td>
 </tr>
 </table>
+<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>open()</code></span>: Open a file in a given mode</p>
+<p><code>__destruct()</code></p>
+<hr /><p class="property func" id="fnc-close"><span class="name"><strong><code>close()</code></strong></span>: Close the file</p>
+<p class="property">Syntax:</p>
+<p><code>close()</code></p>
+<hr /><p class="property func" id="fnc-destruct"><span class="name"><strong><code>destruct()</code></strong></span>: Class destructor</p>
+<p class="property">Syntax:</p>
+<p><code>destruct()</code></p>
+<hr /><p class="property func" id="fnc-gets"><span class="name"><strong><code>gets()</code></strong></span>: Get next line of file</p>
+<p class="property">Syntax:</p>
+<p><code>gets( $iLength )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -157,54 +167,56 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$szMode</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Optional type of access. <code>r</code> by default (read-only) <table> <tr><td><code>r </code></td><td>Open for reading only; place the file pointer at the beginning of the file. </td></tr> <tr><td><code>r+</code></td><td>Open for reading and writing; place the file pointer at the beginning of the file. </td></tr> <tr><td><code>w </code></td><td>Open for writing only; place the file pointer at the beginning of the file and truncate the file to zero length. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>w+</code></td><td>Open for reading and writing; place the file pointer at the beginning of the file and truncate the file to zero length. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>a </code></td><td>Open for writing only; place the file pointer at the end of the file. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>a+</code></td><td>Open for reading and writing; place the file pointer at the end of the file. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>x </code></td><td>Create and open for writing only; place the file pointer at the beginning of the file. If the file already exists, the fopen() call will fail by returning FALSE and generating an error of level E_WARNING. If the file does not exist, attempt to create it. This is equivalent to specifying O_EXCL|O_CREAT flags for the underlying open(2) system call. </td></tr> <tr><td><code>x+</code></td><td>Create and open for reading and writing; otherwise it has the same behavior as 'x'. </td></tr> <tr><td><code>c </code></td><td>Open the file for writing only. If the file does not exist, it is created. If it exists, it is neither truncated (as opposed to 'w'), nor the call to this function fails (as is the case with 'x'). The file pointer is positioned on the beginning of the file. This may be useful if it's desired to get an advisory lock (see flock()) before attempting to modify the file, as using 'w' could truncate the file before the lock was obtained (if truncation is desired, ftruncate() can be used after the lock is requested). </td></tr> <tr><td><code>c+</code></td><td>Open the file for reading and writing; otherwise it has the same behavior as 'c'. </td></tr> </table></td>
-</tr>
-</table>
-<p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>close()</code></span>: Close the file</p>
-<p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>time()</code></span>: Determines the date & time of a file</p>
-<span class="DocumentorLabel">Parameters: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="parameter">
-<td class="name"><code>$szTimes</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A = access date & time<br /> C = creation date & time<br /> M = modification date & time<br /> Times can be added to each other (e.g.: 'ACM')</td>
-</tr>
-</table>
-<p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>size()</code></span>: Determines the length of a file in bytes</p>
-<p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>mimeType()</code></span>: Returns the MIME type corresponding to the file extension of the file
- object</p>
-<p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>gets()</code></span>: Get next line of file</p>
-<span class="DocumentorLabel">Parameters: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="parameter">
-<td class="name"><code>$iLength</code></td>
+<td class="name" id="param-iLength"><code>$iLength</code></td>
 <td class="type"><code>int</code></td>
 <td class="description">Maximum line length. Optional. <code>1024</code> by default</td>
 </tr>
 </table>
+<hr /><p class="property func" id="fnc-mimeType"><span class="name"><strong><code>mimeType()</code></strong></span>: Returns the MIME type corresponding to the file extension of the file
+ object</p>
+<p class="property">Remark:</p>
+<p>Only a small subset of MIME types is considered</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>destruct()</code></span>: Class destructor</p>
-</section> <!-- .class -->
+<p><code>mimeType()</code></p>
+<hr /><p class="property func" id="fnc-open"><span class="name"><strong><code>open()</code></strong></span>: Open a file in a given mode</p>
+<p class="property">Syntax:</p>
+<p><code>open( $szMode )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param-szMode"><code>$szMode</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Optional type of access. <code>r</code> by default (read-only) <table> <tr><td><code>r </code></td><td>Open for reading only; place the file pointer at the beginning of the file. </td></tr> <tr><td><code>r+</code></td><td>Open for reading and writing; place the file pointer at the beginning of the file. </td></tr> <tr><td><code>w </code></td><td>Open for writing only; place the file pointer at the beginning of the file and truncate the file to zero length. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>w+</code></td><td>Open for reading and writing; place the file pointer at the beginning of the file and truncate the file to zero length. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>a </code></td><td>Open for writing only; place the file pointer at the end of the file. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>a+</code></td><td>Open for reading and writing; place the file pointer at the end of the file. If the file does not exist, attempt to create it. </td></tr> <tr><td><code>x </code></td><td>Create and open for writing only; place the file pointer at the beginning of the file. If the file already exists, the fopen() call will fail by returning FALSE and generating an error of level E_WARNING. If the file does not exist, attempt to create it. This is equivalent to specifying O_EXCL|O_CREAT flags for the underlying open(2) system call. </td></tr> <tr><td><code>x+</code></td><td>Create and open for reading and writing; otherwise it has the same behavior as 'x'. </td></tr> <tr><td><code>c </code></td><td>Open the file for writing only. If the file does not exist, it is created. If it exists, it is neither truncated (as opposed to 'w'), nor the call to this function fails (as is the case with 'x'). The file pointer is positioned on the beginning of the file. This may be useful if it's desired to get an advisory lock (see flock()) before attempting to modify the file, as using 'w' could truncate the file before the lock was obtained (if truncation is desired, ftruncate() can be used after the lock is requested). </td></tr> <tr><td><code>c+</code></td><td>Open the file for reading and writing; otherwise it has the same behavior as 'c'. </td></tr> </table></td>
+</tr>
+</table>
+<hr /><p class="property func" id="fnc-size"><span class="name"><strong><code>size()</code></strong></span>: Determines the length of a file in bytes</p>
+<p class="property">Syntax:</p>
+<p><code>size()</code></p>
+<hr /><p class="property func" id="fnc-time"><span class="name"><strong><code>time()</code></strong></span>: Determines the date & time of a file</p>
+<p class="property">Syntax:</p>
+<p><code>time( $szTimes )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param-szTimes"><code>$szTimes</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A = access date & time<br /> C = creation date & time<br /> M = modification date & time<br /> Times can be added to each other (e.g.: 'ACM')</td>
+</tr>
+</table>
+<hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

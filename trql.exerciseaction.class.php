@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,8 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
+    {*keywords              action *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -56,17 +56,14 @@
 /****************************************************************************************/
 namespace trql\exerciseaction;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\playaction\PlayAction    as PlayAction;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\playaction\PlayAction as PlayAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'PLAYACTION_CLASS_VERSION' ) )
     require_once( 'trql.playaction.class.php' );
-
-
 
 defined( 'EXERCISEACTION_CLASS_VERSION' ) or define( 'EXERCISEACTION_CLASS_VERSION','0.1' );
 
@@ -96,7 +93,7 @@ defined( 'EXERCISEACTION_CLASS_VERSION' ) or define( 'EXERCISEACTION_CLASS_VERSI
  */
 /* ==================================================================================== */
 class ExerciseAction extends PlayAction
-/*--------------------------------------*/
+/*-----------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -107,24 +104,7 @@ class ExerciseAction extends PlayAction
                                'UIKey'  => null         ,
                              );
 
-    public      $actionStatus                   = null;             /* {*property   $actionStatus                   (ActionStatusType)              Indicates the current disposition of the Action. *} */
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $agent                          = null;             /* {*property   $agent                          (Organization|Person)           The direct performer or driver of the action (animate or inanimate).
-                                                                                                                                                    e.g. John wrote a book. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
-    public      $audience                       = null;             /* {*property   $audience                       (Audience)                      An intended audience, i.e. a group for whom something was created. *} */
-    public      $course                         = null;             /* {*property   $course                         (Place)                         A sub property of location. The course where this action was taken. *} */
-    public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
     public      $diet                           = null;             /* {*property   $diet                           (Diet)                          A sub property of instrument. The diet used in this action. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
     public      $distance                       = null;             /* {*property   $distance                       (Distance)                      The distance travelled, e.g. exercising or travelling. *} */
     public      $endTime                        = null;             /* {*property   $endTime                        (DateTime|Time)                 The endTime of something. For a reserved event or service (e.g.
                                                                                                                                                     FoodEstablishmentReservation), the time that it is expected to end.
@@ -134,9 +114,6 @@ class ExerciseAction extends PlayAction
                                                                                                                                                     larger file.Note that Event uses startDate/endDate instead of
                                                                                                                                                     startTime/endTime, even when describing dates with times. This
                                                                                                                                                     situation may be clarified in future revisions. *} */
-    public      $error                          = null;             /* {*property   $error                          (Thing)                         For failed actions, more information on the cause of the failure. *} */
-    public      $event                          = null;             /* {*property   $event                          (Event)                         Upcoming or past event associated with this place, organization, or
-                                                                                                                                                    action. *} */
     public      $exerciseCourse                 = null;             /* {*property   $exerciseCourse                 (Place)                         A sub property of location. The course where this action was taken. *} */
     public      $exercisePlan                   = null;             /* {*property   $exercisePlan                   (ExercisePlan)                  A sub property of instrument. The exercise plan used on this action. *} */
     public      $exerciseRelatedDiet            = null;             /* {*property   $exerciseRelatedDiet            (Diet)                          A sub property of instrument. The diet used in this action. *} */
@@ -144,54 +121,20 @@ class ExerciseAction extends PlayAction
                                                                                                                                                     flexibility training, aerobics, cardiac rehabilitation, etc. *} */
     public      $fromLocation                   = null;             /* {*property   $fromLocation                   (Place)                         A sub property of location. The original location of the object or the
                                                                                                                                                     agent before the action. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
-    public      $instrument                     = null;             /* {*property   $instrument                     (Thing)                         The object that helped the agent perform the action. e.g. John wrote a
-                                                                                                                                                    book with a pen. *} */
-    public      $location                       = null;             /* {*property   $location                       (string|PostalAddress|VirtualLocation|Place)The location of for example where the event is happening, an
-                                                                                                                                                    organization is located, or where an action takes place. *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
-    public      $object                         = null;             /* {*property   $object                         (Thing)                         The object upon which the action is carried out, whose state is kept
-                                                                                                                                                    intact or changed. Also known as the semantic roles patient, affected
-                                                                                                                                                    or undergoer (which change their state) or theme (which doesn't). e.g.
-                                                                                                                                                    John read a book. *} */
     public      $opponent                       = null;             /* {*property   $opponent                       (Person)                        A sub property of participant. The opponent on this action. *} */
     public      $participant                    = null;             /* {*property   $participant                    (Organization|Person)           Other co-agents that participated in the action indirectly. e.g. John
                                                                                                                                                     wrote a book with Steve. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
-    public      $result                         = null;             /* {*property   $result                         (Thing)                         The result produced in the action. e.g. John wrote a book. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
     public      $sportsActivityLocation         = null;             /* {*property   $sportsActivityLocation         (SportsActivityLocation)        A sub property of location. The sports activity location where this
                                                                                                                                                     action occurred. *} */
     public      $sportsEvent                    = null;             /* {*property   $sportsEvent                    (SportsEvent)                   A sub property of location. The sports event where this action
                                                                                                                                                     occurred. *} */
     public      $sportsTeam                     = null;             /* {*property   $sportsTeam                     (SportsTeam)                    A sub property of participant. The sports team that participated on
                                                                                                                                                     this action. *} */
-    public      $startTime                      = null;             /* {*property   $startTime                      (DateTime|Time)                 The startTime of something. For a reserved event or service (e.g.
-                                                                                                                                                    FoodEstablishmentReservation), the time that it is expected to start.
-                                                                                                                                                    For actions that span a period of time, when the action was performed.
-                                                                                                                                                    e.g. John wrote a book from January to December. For media, including
-                                                                                                                                                    audio and video, it's the time offset of the start of a clip within a
-                                                                                                                                                    larger file.Note that Event uses startDate/endDate instead of
-                                                                                                                                                    startTime/endTime, even when describing dates with times. This
-                                                                                                                                                    situation may be clarified in future revisions. *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
-    public      $target                         = null;             /* {*property   $target                         (EntryPoint)                    Indicates a target EntryPoint for an Action. *} */
     public      $toLocation                     = null;             /* {*property   $toLocation                     (Place)                         A sub property of location. The final location of the object or the
                                                                                                                                                     agent after the action. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
-
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR *} */
 
 
     /* ================================================================================ */
@@ -207,6 +150,10 @@ class ExerciseAction extends PlayAction
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -216,10 +163,8 @@ class ExerciseAction extends PlayAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of ExerciseAction.__construct() ========================================== */
+    }   /* End of ExerciseAction.__construct() ======================================== */
     /* ================================================================================ */
 
 
@@ -235,6 +180,10 @@ class ExerciseAction extends PlayAction
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -246,10 +195,8 @@ class ExerciseAction extends PlayAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of ExerciseAction.__destruct() =========================================== */
+    }   /* End of ExerciseAction.__destruct() ========================================= */
     /* ================================================================================ */
-
-}   /* End of class ExerciseAction ====================================================== */
+}   /* End of class ExerciseAction ==================================================== */
 /* ==================================================================================== */
-
 ?>

@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -39,8 +37,12 @@
     {*cdate                 06-02-21 10:54 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
+
     {*remark                A source of inspiration may come from the following Wikipedia
                             page [url]https://en.wikipedia.org/wiki/API_management[/url] *}
+
+    {*seealso               @class.smallAPIGW *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -53,6 +55,7 @@
         {*desc              1)  Original creation
         *}
     *}
+
 
     *}}} */
 /****************************************************************************************/
@@ -79,7 +82,7 @@ defined( 'APIHANDLER_CLASS_VERSION' ) or define( 'APIHANDLER_CLASS_VERSION','0.1
 
     {*desc
 
-        ...
+        Handles API call(s)
 
     *}
 

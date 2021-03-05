@@ -1,5 +1,23 @@
 <?php
 /****************************************************************************************/
+/*
+    {PYB} is a shortcut for Patrick Boens
+
+    {COMPANY} is a shortcut to "Lato Sensu Management"
+
+    {RIGHTS} is a shortcut used by trql.documentor.class.php for
+    All rights reserved to Lato Sensu Management for all countries.
+    All Intellectual Property belongs to Patrick Boens.
+
+    Other shortcuts exist. They exist to make it simple to change the formulation
+    of parts that can vary over time.
+
+    It does not change the undisputed truth that ALL code has been created by
+    Patrick Boens, the author, who owns ALL the intellectual property of what
+    he created.
+
+*/
+
 /** {{{*fheader
     {*file                  trql.sprint.class.php *}
     {*purpose               In agile software development, a sprint is a set period of
@@ -11,6 +29,7 @@
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
     {*UTF-8                 Quel bel été *}
+    {*keywords              agile, scrum, development *}
 
     --------------------------------------------------------------------------------------
     Changes History:
@@ -53,9 +72,16 @@ defined( 'SPRINT_CLASS_VERSION' ) or define( 'SPRINT_CLASS_VERSION','0.1' );
 
     {*desc
 
-        Process that repeats itself.
+        Process that repeats itself. In agile software development, a sprint is a
+        set period of time during which specific tasks need to be completed and made
+        ready for review.
 
     *}
+
+    {*keywords  agile, agility, portfolio, taskboard, kanban,
+                aspiration, task, user story *}
+
+    {*seealso @class.Portfolio, @class.Aspiration, @class.TaskBoard, @class.KanbanBoard, @class.Task *}
 
     *}}
  */
@@ -78,7 +104,6 @@ class Sprint extends CyclicProcess
                                                                                                                             specific tasks need to be completed and made
                                                                                                                             ready for review. *} */
 
-
     /* Propriétés qui viennent de trql.event.class.php */
     public      $duration           = null;                         /* {*property   $duration           (Duration)          The duration of the item (movie, audio recording, event, etc.)
                                                                                                                             in ISO 8601 date format. *} */
@@ -87,16 +112,16 @@ class Sprint extends CyclicProcess
                                                                                                                             when an event is cancelled or rescheduled. *} */
 
     /* Toutes ces propriétés doivent être revues */
-    public      $szSprintNo         = null;
-    public      $aData              = null;
-    public      $oAspiration        = null;                         /* {*property   $oAspiration        (Aspiration)        Parent Aspiration this Sprint is attached to *} */
-    public      $iWeeksPerSprint    = 2;
-    public      $helpNeeded         = false;
+    public      $szSprintNo         = null;                         /* {*property   $szSprintNo         (string)            Sprint number (e.g. '[c]0[/c]', '[c]1[/c]', '[c]hardening[/c]', '[c]special[/c]', '[c]S[/c]', ...) *} */
+    public      $aData              = null;                         /* {*property   $aData              (array)             EXPERIMENTAL. Do not use it (05-03-21 07:22:09) *} */
+    public      $oAspiration        = null;                         /* {*property   $oAspiration        (Aspiration)        Parent [c]Aspiration[/c] this Sprint is attached to *} */
+    public      $iWeeksPerSprint    = 2;                            /* {*property   $iWeeksPerSprint    (int)               Number of weeks in a sprint *} */
+    public      $helpNeeded         = false;                        /* {*property   $helpNeeded         (bool)              Indicates whether the help of the Management is required ([c]true[/c]) or not ([c]false[/c])*} */
     public      $aObjectives        = null;                         /* {*property   $aObjectives        (array)             A set of objectives this sprint must meet *} */
     public      $aKeyMessages       = null;                         /* {*property   $aKeyMessages       (array)             A set of key messages pertaining to this sprint (achievements, failures, points of attention, ...) *} */
     public      $aRemarks           = null;                         /* {*property   $aRemarks           (array)             A set of general-purpose remarks pertaining to this sprint *} */
     public      $aTasks             = null;                         /* {*property   $aTasks             (array)             A set of tasks pertaining to this sprint *} */
-    public      $aDocuments         = null;                         /* {*property   $aDocuments         (array)             Array of documents ([c]trq.document.class.php[/c]). *} */
+    public      $aDocuments         = null;                         /* {*property   $aDocuments         (array)             Array of documents ([c]trql.document.class.php[/c]). *} */
     public      $szStorage          = null;                         /* {*property   $szStorage          (string)            File in which the Sprint maintains its state
                                                                                                                             (all properties) *} */
     public      $previousStartDate  = null;                         /* {*property   $previousStartDate  (Date)              Used in conjunction with eventStatus for rescheduled or cancelled events.
@@ -104,7 +129,7 @@ class Sprint extends CyclicProcess
                                                                                                                             rescheduled events, the startDate property should be used for the newly
                                                                                                                             scheduled start date. In the (rare) case of an event that has been
                                                                                                                             postponed and rescheduled multiple times, this field may be repeated. *} */
-    public      $startDate                   = null;                /* {*property   $startDate          (Date|DateTime)     The start date and time of the item (in ISO 8601 date format). *} */
+    public      $startDate          = null;                         /* {*property   $startDate          (Date|DateTime)     The start date and time of the item (in ISO 8601 date format). *} */
 
 
     /* ================================================================================ */
@@ -118,6 +143,38 @@ class Sprint extends CyclicProcess
 
         {*return
             (self)      The current instance of the class
+        *}
+
+        {*seealso @fnc.__destruct *}
+
+        {*example
+        // Example #1
+        use \trql\vaesoli\VaeSoli           as VaeSoli;
+        use \trql\kanbanboard\KanbanBoard   as KanbanBoard;
+        use \trql\portfolio\Portfolio       as Portfolio;
+        use \trql\project\Aspiration        as Aspiration;
+        [b]use \trql\sprint\Sprint             as Sprint;[/b]
+        use \trql\task\Task                 as Task;
+
+        if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+            require_once( '/trql.vaesoli.class.php' );
+
+        if ( ! defined( 'KANBANBOARD_CLASS_VERSION' ) )
+            require_once( 'trql.kanbanboard.class.php' );
+
+        if ( ! defined( 'PORTFOLIO_CLASS_VERSION' ) )
+            require_once( 'trql.portfolio.class.php' );
+
+        if ( ! defined( 'ASPIRATION_CLASS_VERSION' ) )
+            require_once( 'trql.project.class.php' );
+
+        [b]if ( ! defined( 'SPRINT_CLASS_VERSION' ) )
+            require_once( 'trql.sprint.class.php' );[/b]
+
+        if ( ! defined( 'TASK_CLASS_VERSION' ) )
+            require_once( 'trql.task.class.php' );
+
+        [b]$oSprint = new Sprint();[/b]
         *}
 
         *}}
@@ -777,6 +834,8 @@ class Sprint extends CyclicProcess
             (bool)      [c]true[/c] if $szFile loaded successfully; [c]false[/c] if not
         *}
 
+        {*seealso @fnc.save *}
+
         *}}
     */
     /* ================================================================================ */
@@ -1080,10 +1139,29 @@ class Sprint extends CyclicProcess
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*speak()=
 
+        Generate a text representing the sprint
 
+        {*params
+        *}
 
+        {*return
+            (string)
+        *}
 
+        {*warning
+            This method is EXPERIMENTAL (04-03-21 17:20:17) and uses the [b]Victor Hugo[/b]
+            and [b]Voltaire[/b] components, which are still in development for the time
+            being.
+        *}
+
+        {*seealso @fnc.sing *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function speak() : string
     /*----------------------------*/
     {
@@ -1092,6 +1170,37 @@ class Sprint extends CyclicProcess
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*sing()=
+
+        Generate an MP3 file (text-to-speech)
+
+        {*params
+        *}
+
+        {*return
+            (string)        The name of the MP3 file that was generated
+        *}
+
+        {*remark
+            The [c]sing()[/c] and [c]speak()[/c] methods are heavily used in TRQL Radio
+            to generate intelligent announcements. The most emblematic usage of such
+            methods is in the creation of news flashes that are aired on TRQL Radio
+            ([url]https://stream.trql.fm:8080[/url] (streaming method)).
+        *}
+
+        {*warning
+            This method is EXPERIMENTAL (04-03-21 17:20:17) and uses the [b]Victor Hugo[/b]
+            and [b]Voltaire[/b] components, which are still in development for the time
+            being. It also uses the [b]Castafiore[/b] component that requires an API Key
+            from Amazon Polly.
+        *}
+
+        {*seealso @fnc.speak *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function sing() : string
     /*---------------------------*/
     {
@@ -1100,15 +1209,72 @@ class Sprint extends CyclicProcess
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__toHTML()=
+
+        Renders the sprint in HTML
+
+        {*return
+            (string)    The HTML counterpart of the object
+        *}
+
+        {*warning
+            The method returns an empty string for the time being (05-03-21 07:34:13)
+        *}
+
+        {*example
+        [b]use \trql\sprint\Sprint as Sprint;[/b]
+
+        [b]if ( ! defined( 'SPRINT_CLASS_VERSION' ) )
+            require_once( 'trql.sprint.class.php' );[/b]
+
+        [b]$oSprint = new Sprint();
+        $oSprint->name = 'My sprint';
+        echo $oSprint->__toHTML();[/b]
+        *}
+
+        {*seealso @fnc.__toString *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __toHTML() : string
-    /*---------------------------------*/
+    /*--------------------------------*/
     {
-        //var_dump( $this );
         return ( '' );
     }   /* End of Sprint.__toHTML() =================================================== */
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__toString()=
+
+        Turns the object to its string counterpart
+
+        {*return
+            (string)        Object turned to a string
+        *}
+
+        {*warning
+            The method returns what [c]__toHTML()[/c] returns
+        *}
+
+        {*example
+        [b]use \trql\sprint\Sprint as Sprint;[/b]
+
+        [b]if ( ! defined( 'SPRINT_CLASS_VERSION' ) )
+            require_once( 'trql.sprint.class.php' );[/b]
+
+        [b]$oSprint = new Sprint();
+        $oSprint->name = 'My sprint';
+        echo $oSprint;[/b]
+        *}
+
+        {*seealso @fnc.__toHTML *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __toString() : string
     /*---------------------------------*/
     {
@@ -1157,12 +1323,20 @@ class Sprint extends CyclicProcess
 
         Class destructor
 
-        {*params
-        *}
-
         {*return
             (void)      No return
         *}
+
+        {*abstract
+
+            The [c]__destruct()[/c] method performs the following: a backup, an autodoc,
+            a publication on UIKey, a check of Wikidata, and broadcasts a "necro" signal.
+
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
     */

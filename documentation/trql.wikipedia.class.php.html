@@ -1,6 +1,9 @@
 <style>
 .trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
 .trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile hr { border-top: 4px solid #800 !important; margin:2em 0; box-shadow: 0 6px 10px 1px rgba(0,0,0,.2); }
+.trql_documentor_DocumentorSourceFile pre { background: #c001; }
+.trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
 code, .filename { color: crimson; font-family: Consolas,"courier new" }
@@ -24,7 +27,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
    border: 1px solid #999;
    box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
    border: 1px solid #888; }
-p.property.func span.name { border:1px solid red; padding:6px; }
+code, samp {
+   color: #800;
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -41,6 +49,7 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>Wikipedia</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">Access to wikipedia</span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Utility &gt; Wikipedia</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Wikipedia extends Utility implements iContext</code></span>
 <span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="https://www.mediawiki.org/wiki/API:Opensearch" class="DocumentorLink" title="Go to https://www.mediawiki.org/wiki/API:Opensearch" itemprop="url">https://www.mediawiki.org/wiki/API:Opensearch</a>
  <a href="https://en.wikipedia.org/w/api.php" class="DocumentorLink" title="Go to https://en.wikipedia.org/w/api.php" itemprop="url">https://en.wikipedia.org/w/api.php</a>?utm_source=TRQLLabs</span>
@@ -54,29 +63,25 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="property">
-<td class="name"><code>$self</code></td>
+<td class="name" id="var-self"><code>$self</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Wikidata ID. No equivalent.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$ttl</code></td>
+<td class="name" id="var-ttl"><code>$ttl</code></td>
 <td class="type"><code>int</code></td>
 <td class="description">Time-to-Live in sec; 1 full day by default</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
+<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. No equivalent.</td>
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>Wikipedia</code></h2>
+<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__construct()</code></span>: Class constructor</p>
+<p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -87,13 +92,18 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$szHome</code></td>
+<td class="name" id="param-szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Home of the class. Optional.</td>
 </tr>
 </table>
+<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>call()</code></span>: Calls Wikipedia via its dedicated URL</p>
+<p><code>__destruct()</code></p>
+<hr /><p class="property func" id="fnc-__parse1"><span class="name"><strong><code>__parse1()</code></strong></span>: Parses the first set of results from Wikipedia (a list of URLs that correspond
+ to the term that is looked for</p>
+<p class="property">Syntax:</p>
+<p><code>__parse1( $szXML )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -104,14 +114,99 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$aParams</code></td>
+<td class="name" id="param-szXML"><code>$szXML</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The XML to parse</td>
+</tr>
+</table>
+<hr /><p class="property func" id="fnc-__parse2"><span class="name"><strong><code>__parse2()</code></strong></span>: Parses the second set of results from Wikipedia (the real content of a page)</p>
+<p class="property">Syntax:</p>
+<p><code>__parse2( $szXML )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param-szXML"><code>$szXML</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The XML to parse</td>
+</tr>
+</table>
+<hr /><p class="property func" id="fnc-__parse3"><span class="name"><strong><code>__parse3()</code></strong></span>: Parses the resulting XML of a call to searchEntities()</p>
+<p class="property">Syntax:</p>
+<p><code>__parse3( $szXML )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param-szTerm"><code>$szTerm</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The term that we looked for</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param-szXML"><code>$szXML</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The XML to parse</td>
+</tr>
+</table>
+<hr /><p class="property func" id="fnc-__parse4"><span class="name"><strong><code>__parse4()</code></strong></span>: Parses the return of an entity (get entity based on its ID) from WikiData</p>
+<p class="property">Syntax:</p>
+<p><code>__parse4( $szXML )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param-szTerm"><code>$szTerm</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The term that we looked for</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param-szXML"><code>$szXML</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The XML to parse</td>
+</tr>
+</table>
+<hr /><p class="property func" id="fnc-call"><span class="name"><strong><code>call()</code></strong></span>: Calls Wikipedia via its dedicated URL</p>
+<p class="property">Syntax:</p>
+<p><code>call( $aParams )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param-aParams"><code>$aParams</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Associative array to pass parameters in the URL that must be called ("opensearch" is the main verb)</td>
 </tr>
 </table>
+<hr /><p class="property func" id="fnc-destruct"><span class="name"><strong><code>destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__parse1()</code></span>: Parses the first set of results from Wikipedia (a list of URLs that correspond
- to the term that is looked for</p>
+<p><code>destruct()</code></p>
+<hr /><p class="property func" id="fnc-getEntity"><span class="name"><strong><code>getEntity()</code></strong></span>: Parses the return of an entity (get entity based on its ID) from WikiData</p>
+<p class="property">Syntax:</p>
+<p><code>getEntity( $szID )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -122,113 +217,16 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$szXML</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The XML to parse</td>
-</tr>
-</table>
-<p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__parse2()</code></span>: Parses the second set of results from Wikipedia (the real content of a page)</p>
-<span class="DocumentorLabel">Parameters: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="parameter">
-<td class="name"><code>$szXML</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The XML to parse</td>
-</tr>
-</table>
-<p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__parse3()</code></span>: Parses the resulting XML of a call to searchEntities()</p>
-<span class="DocumentorLabel">Parameters: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="parameter">
-<td class="name"><code>$szTerm</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The term that we looked for</td>
-</tr>
-<tr class="parameter">
-<td class="name"><code>$szXML</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The XML to parse</td>
-</tr>
-</table>
-<p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>search()</code></span>: Performs an open search on <code>$szTerm</code></p>
-<span class="DocumentorLabel">Parameters: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="parameter">
-<td class="name"><code>$szTerm</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The terms to look for</td>
-</tr>
-<tr class="parameter">
-<td class="name"><code>$iLimit</code></td>
-<td class="type"><code>int</code></td>
-<td class="description">Number of results. Optional. <code>All</code> by default.</td>
-</tr>
-</table>
-<p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>searchEntities()</code></span>: Returns the entities corresponding to <code>$szTerm</code></p>
-<span class="DocumentorLabel">Parameters: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="parameter">
-<td class="name"><code>$szTerm</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The terms to look for</td>
-</tr>
-<tr class="parameter">
-<td class="name"><code>$iResults</code></td>
-<td class="type"><code>int</code></td>
-<td class="description">Number of entities to return. Optional. <code>1</code> by default. <strong>No longer used!</strong></td>
-</tr>
-</table>
-<p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>getEntity()</code></span>: Parses the return of an entity (get entity based on its ID) from WikiData</p>
-<span class="DocumentorLabel">Parameters: </span>
-<table class="properties">
-<thead>
-<tr>
-<th class="name">Name</th>
-<th class="type">Type</th>
-<th class="description">Description</th>
-</tr>
-</thead>
-<tr class="parameter">
-<td class="name"><code>$szID</code></td>
+<td class="name" id="param-szID"><code>$szID</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Entity ID (e.g. "<code>Q234691</code>")</td>
 </tr>
 </table>
+<hr /><p class="property func" id="fnc-search"><span class="name"><strong><code>search()</code></strong></span>: Performs an open search on <code>$szTerm</code></p>
+<p class="property">Warning:</p>
+<p>Will onky work on the basis of English terms</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__parse4()</code></span>: Parses the return of an entity (get entity based on its ID) from WikiData</p>
+<p><code>search( $iLimit )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -239,18 +237,39 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$szTerm</code></td>
+<td class="name" id="param-szTerm"><code>$szTerm</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The term that we looked for</td>
+<td class="description">The terms to look for</td>
 </tr>
 <tr class="parameter">
-<td class="name"><code>$szXML</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The XML to parse</td>
+<td class="name" id="param-iLimit"><code>$iLimit</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Number of results. Optional. <code>All</code> by default.</td>
 </tr>
 </table>
+<hr /><p class="property func" id="fnc-searchEntities"><span class="name"><strong><code>searchEntities()</code></strong></span>: Returns the entities corresponding to <code>$szTerm</code></p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>destruct()</code></span>: Class destructor</p>
-</section> <!-- .class -->
+<p><code>searchEntities( $iResults )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param-szTerm"><code>$szTerm</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The terms to look for</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param-iResults"><code>$iResults</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Number of entities to return. Optional. <code>1</code> by default. <strong>No longer used!</strong></td>
+</tr>
+</table>
+<hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

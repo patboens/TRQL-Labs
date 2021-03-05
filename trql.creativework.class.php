@@ -1,6 +1,5 @@
 <?php
 /****************************************************************************************/
-
 /*
     {PYB} is a shortcut for Patrick Boens
 
@@ -58,10 +57,10 @@
 /****************************************************************************************/
 namespace trql\creativework;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\thing\Thing                               as Thing;
+use \trql\mother\Mother         as Mother;
+use \trql\mother\iContext       as iContext;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\thing\Thing           as Thing;
 
 use DOMDocument;
 use DOMXPath;
@@ -76,13 +75,6 @@ if ( ! defined( 'THING_CLASS_VERSION' ) )
     require_once( 'trql.thing.class.php' );
 
 defined( 'CREATIVEWORK_CLASS_VERSION' ) or define( 'CREATIVEWORK_CLASS_VERSION','0.1' );
-
-/* Note (16-07-20 23:27:50):
-
-    Le code doit se sauver lui-même dans une sorte de DB. Il doit se compresser
-    lui-même et sauver au moins une dizaine de versions de lui-même.
-
-*/
 
 /* ================================================================================== */
 /** {{*class CreativeWork=
@@ -116,7 +108,7 @@ class CreativeWork extends Thing implements iContext
                                'family' => null         ,
                              );
 
-    public      $about                      = null;                 /* {*property   $about                      (Thing)                         The subject matter of the content. Inverse property: subjectOf *} */
+    public      $about                      = null;                 /* {*property   $about                      (Thing)                         The subject matter of the content. Inverse property: [c]subjectOf[/c] *} */
     public      $accessMode                 = null;                 /* {*property   $accessMode                 (string)                        The human sensory perceptual system or cognitive faculty
                                                                                                                                                 through which a person may process or perceive information.
                                                                                                                                                 Expected values include: auditory, tactile, textual, visual,

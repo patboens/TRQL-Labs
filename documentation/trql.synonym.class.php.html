@@ -1,6 +1,9 @@
 <style>
 .trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
 .trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile hr { border-top: 4px solid #800 !important; margin:2em 0; box-shadow: 0 6px 10px 1px rgba(0,0,0,.2); }
+.trql_documentor_DocumentorSourceFile pre { background: #c001; }
+.trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
 code, .filename { color: crimson; font-family: Consolas,"courier new" }
@@ -24,7 +27,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
    border: 1px solid #999;
    box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
    border: 1px solid #888; }
-p.property.func span.name { border:1px solid red; padding:6px; }
+code, samp {
+   color: #800;
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -42,6 +50,7 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>Synonym</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">Word or phrase that means exactly or nearly the same as another word or
  phrase in the same language</span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Lexeme &gt; LexicalItem &gt; Word &gt; Synonym</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Synonym extends Word</code></span>
 <span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="https://www.wikidata.org/wiki/Q42106" class="DocumentorLink" title="Go to https://www.wikidata.org/wiki/Q42106" itemprop="url">https://www.wikidata.org/wiki/Q42106</a>?utm_source=TRQLLabs</span>
 <span class="DocumentorLabel">Warning: </span><span class="property warning">This class has never been tested (08-11-20 13:48:37)</span>
@@ -55,76 +64,31 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$hasDefinedTerm</code></td>
+<td class="name" id="var-hasDefinedTerm"><code>$hasDefinedTerm</code></td>
 <td class="type"><code>DefinedTerm</code></td>
 <td class="description">A Defined Term contained in this term set.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Wikidata ID ... unit of lexical meaning</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$self</code></td>
+<td class="name" id="var-self"><code>$self</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$hasDefinedTerm</code></td>
-<td class="type"><code>DefinedTerm</code></td>
-<td class="description">A Defined Term contained in this term set.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Element of a lexicon. Wikidata ID</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$hasDefinedTerm</code></td>
-<td class="type"><code>DefinedTerm</code></td>
-<td class="description">A Defined Term contained in this term set.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Smallest linguistic element that may be uttered 
-                                                                                                                                                    in isolation with semantic or pragmatic content</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$hasDefinedTerm</code></td>
-<td class="type"><code>DefinedTerm</code></td>
-<td class="description">A Defined Term contained in this term set.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">word or phrase that means exactly or nearly the same as
-                                                                                                                                                    another word or phrase in the same language</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$szStorage</code></td>
+<td class="name" id="var-szStorage"><code>$szStorage</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The file in which all synonyms are stored</td>
 </tr>
+<tr class="property">
+<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">word or phrase that means exactly or nearly the same as
+ another word or phrase in the same language</td>
+</tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>Synonym</code></h2>
+<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__construct()</code></span>: Class constructor</p>
+<p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -135,14 +99,18 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$szHome</code></td>
+<td class="name" id="param-szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Home of the class. Optional.</td>
 </tr>
 </table>
+<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__get()</code></span>: Called for reading data from inaccessible (protected or private) or
+<p><code>__destruct()</code></p>
+<hr /><p class="property func" id="fnc-__get"><span class="name"><strong><code>__get()</code></strong></span>: Called for reading data from inaccessible (protected or private) or
  non-existing properties.</p>
+<p class="property">Syntax:</p>
+<p><code>__get( $szProperty )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -153,13 +121,17 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$szProperty</code></td>
+<td class="name" id="param-szProperty"><code>$szProperty</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Name of the property to look for</td>
 </tr>
 </table>
+<hr /><p class="property func" id="fnc-cacheName"><span class="name"><strong><code>cacheName()</code></strong></span>: Computes the name of a .cache file based on parameters</p>
+<p class="property">Warning:</p>
+<p>12-11-20 12:14:42 : cannot process any other language
+ than French!</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>search()</code></span>: Search a synonym for a term</p>
+<p><code>cacheName( $xAdditional )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -170,13 +142,59 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$szTerm</code></td>
+<td class="name" id="param-szMethod"><code>$szMethod</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Method associated to the cache</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param-xParams"><code>$xParams</code></td>
+<td class="type"><code>mixed</code></td>
+<td class="description">Any set of parameters that determine the name of the cache</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param-xAdditional"><code>$xAdditional</code></td>
+<td class="type"><code>mixed</code></td>
+<td class="description">Any set of additional parameters that may determine the name of the cache. Optional. <code>null</code> by default</td>
+</tr>
+</table>
+<hr /><p class="property func" id="fnc-search"><span class="name"><strong><code>search()</code></strong></span>: Search a synonym for a term</p>
+<p class="property">Warning:</p>
+<p>12-11-20 12:14:42 : cannot process any other language
+ than French!</p>
+<p class="property">Syntax:</p>
+<p><code>search( $szTerm )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param-szTerm"><code>$szTerm</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Term to look for synonyms</td>
 </tr>
 </table>
-<p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__destruct()</code></span>: Class destructor</p>
-</section> <!-- .class -->
+<p class="property">Example(s):</p>
+<pre>
+
+            use \trql\vaesoli\Vaesoli       as Vaesoli;
+            use \trql\synonym\Synonym       as Synonym;
+
+            // Create a new object
+            $oSynonym = new Synonym();
+
+            // If results found
+            if ( ! is_null( $aRetVal = $oSynonym->search( 'susciter','fr','verbe' ) ) )
+            {
+                // Display each synonym
+                foreach( $aRetVal as $szSynonym )
+                    var_dump( $szSynonym );
+            }
+       </pre>
+<hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

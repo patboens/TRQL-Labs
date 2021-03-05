@@ -1,6 +1,9 @@
 <style>
 .trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
 .trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile hr { border-top: 4px solid #800 !important; margin:2em 0; box-shadow: 0 6px 10px 1px rgba(0,0,0,.2); }
+.trql_documentor_DocumentorSourceFile pre { background: #c001; }
+.trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
 code, .filename { color: crimson; font-family: Consolas,"courier new" }
@@ -24,7 +27,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
    border: 1px solid #999;
    box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
    border: 1px solid #888; }
-p.property.func span.name { border:1px solid red; padding:6px; }
+code, samp {
+   color: #800;
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -44,6 +52,7 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>MedicalRiskFactor</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">A risk factor is anything that increases a person's likelihood of
  developing or contracting a disease, medical condition, or complication.</span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Thing &gt; MedicalEntity &gt; MedicalRiskFactor</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class MedicalRiskFactor extends MedicalEntity</code></span>
 <span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
  under the terms of their license:
@@ -61,290 +70,140 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$additionalType</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">An additional type for the item,
-                                                                                                                                        typically used for adding more
-                                                                                                                                        specific types from external
-                                                                                                                                        vocabularies in microdata syntax.
-                                                                                                                                        This is a relationship between
-                                                                                                                                        something and a class that the
-                                                                                                                                        thing is in. In RDFa syntax, it is
-                                                                                                                                        better to use the native RDFa
-                                                                                                                                        syntax - the 'typeof' attribute
-                                                                                                                                        - for multiple types.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$alternateName</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">An alias for the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$description</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A short description of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$disambiguatingDescription</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">A sub property of description. A
-                                                                                                                                        short description of the item used
-                                                                                                                                        to disambiguate from other, similar
-                                                                                                                                        items. Information from other
-                                                                                                                                        properties (in particular, name)
-                                                                                                                                        may be necessary for the description
-                                                                                                                                        to be useful for disambiguation.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$image</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">URL of an image of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$identifier</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The identifier property represents any
-                                                                                                                                        kind of identifier for any kind of Thing,
-                                                                                                                                        such as ISBNs, GTIN codes, UUIDs etc.
-                                                                                                                                        http://schema.org provides dedicated
-                                                                                                                                        properties for representing many of these,
-                                                                                                                                        either as textual strings or as URL (URI)
-                                                                                                                                        links. See <a
-                                                                                                                                        href="https://schema.org/docs/datamodel.html#identifierBg">
-                                                                                                                                        background notes</a>
-                                                                                                                                        for more details.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$mainEntityOfPage</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Indicates a page (or other CreativeWork)
-                                                                                                                                        for which this thing is the main entity
-                                                                                                                                        being described. See <a
-                                                                                                                                        href="https://schema.org/docs/datamodel.html#mainEntityBackground">
-                                                                                                                                        background notes</a> for details.
-                                                                                                                                        Inverse property: mainEntity.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$name</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The name of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$potentialAction</code></td>
-<td class="type"><code>Action</code></td>
-<td class="description">Indicates a potential Action, which
-                                                                                                                                        describes an idealized action in which
-                                                                                                                                        this thing would play an 'object' role.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$sameAs</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">URL of a reference Web page that
-                                                                                                                                        unambiguously indicates the item's
-                                                                                                                                        identity. E.g. the URL of the
-                                                                                                                                        item's Wikipedia page, Freebase
-                                                                                                                                        page, or official website.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$sameAs</code></td>
-<td class="type"><code>CreativeWork|Event</code></td>
-<td class="description">A CreativeWork or Event about this Thing. 
-                                                                                                                                        Inverse property: about.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$url</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">URL of the item.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">WikidataId ... entity ... a thing with independent and 
-                                                                                                                                        distinct existence</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$code</code></td>
-<td class="type"><code>MedicalCode</code></td>
-<td class="description">A medical code for the entity, taken from a controlled vocabulary or
-                                                                                                                                                                ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$guideline</code></td>
-<td class="type"><code>MedicalGuideline</code></td>
-<td class="description">A medical guideline related to this entity.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$legalStatus</code></td>
-<td class="type"><code>string|DrugLegalStatus|MedicalEnumeration</code></td>
-<td class="description">The drug or supplement's legal status, including any controlled
-                                                                                                                                                                substance schedules that apply.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$medicineSystem</code></td>
-<td class="type"><code>MedicineSystem</code></td>
-<td class="description">The system of medicine that includes this MedicalEntity, for example
-                                                                                                                                                                'evidence-based', 'homeopathic', 'chiropractic', etc.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$recognizingAuthority</code></td>
-<td class="type"><code>Organization</code></td>
-<td class="description">If applicable, the organization that officially recognizes this entity
-                                                                                                                                                                as part of its endorsed system of medicine.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$relevantSpecialty</code></td>
-<td class="type"><code>MedicalSpecialty</code></td>
-<td class="description">If applicable, a medical specialty in which this entity is relevant.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$study</code></td>
-<td class="type"><code>MedicalStudy</code></td>
-<td class="description">A medical study or trial related to this entity.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Wikidata ID. No equivalent</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$additionalType</code></td>
+<td class="name" id="var-additionalType"><code>$additionalType</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally.</td>
+ specific types from external vocabularies in microdata syntax. This is
+ a relationship between something and a class that the thing is in. In
+ RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
+ attribute - for multiple types. Schema.org tools may have only weaker
+ understanding of extra types, in particular those defined externally.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$alternateName</code></td>
+<td class="name" id="var-alternateName"><code>$alternateName</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An alias for the item.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$code</code></td>
+<td class="name" id="var-code"><code>$code</code></td>
 <td class="type"><code>MedicalCode</code></td>
 <td class="description">A medical code for the entity, taken from a controlled vocabulary or
-                                                                                                                                                    ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.</td>
+ ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$description</code></td>
+<td class="name" id="var-description"><code>$description</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A description of the item.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$disambiguatingDescription</code></td>
+<td class="name" id="var-disambiguatingDescription"><code>$disambiguatingDescription</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation.</td>
+ disambiguate from other, similar items. Information from other
+ properties (in particular, name) may be necessary for the description
+ to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$guideline</code></td>
+<td class="name" id="var-guideline"><code>$guideline</code></td>
 <td class="type"><code>MedicalGuideline</code></td>
 <td class="description">A medical guideline related to this entity.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$identifier</code></td>
+<td class="name" id="var-identifier"><code>$identifier</code></td>
 <td class="type"><code>URL|string|PropertyValue</code></td>
 <td class="description">The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details.</td>
+ of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
+ dedicated properties for representing many of these, either as textual
+ strings or as URL (URI) links. See background notes for more details.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$image</code></td>
+<td class="name" id="var-image"><code>$image</code></td>
 <td class="type"><code>ImageObject|URL</code></td>
 <td class="description">An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject.</td>
+ ImageObject.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$increasesRiskOf</code></td>
+<td class="name" id="var-increasesRiskOf"><code>$increasesRiskOf</code></td>
 <td class="type"><code>MedicalEntity</code></td>
 <td class="description">The condition, complication, etc. influenced by this factor.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$legalStatus</code></td>
+<td class="name" id="var-legalStatus"><code>$legalStatus</code></td>
 <td class="type"><code>string|DrugLegalStatus|MedicalEnumeration</code></td>
 <td class="description">The drug or supplement's legal status, including any controlled
-                                                                                                                                                    substance schedules that apply.</td>
+ substance schedules that apply.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$mainEntityOfPage</code></td>
+<td class="name" id="var-mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
 <td class="description">Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details.</td>
+ main entity being described. See background notes for details.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$medicineSystem</code></td>
+<td class="name" id="var-medicineSystem"><code>$medicineSystem</code></td>
 <td class="type"><code>MedicineSystem</code></td>
 <td class="description">The system of medicine that includes this MedicalEntity, for example
-                                                                                                                                                    'evidence-based', 'homeopathic', 'chiropractic', etc.</td>
+ 'evidence-based', 'homeopathic', 'chiropractic', etc.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$name</code></td>
+<td class="name" id="var-name"><code>$name</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The name of the item.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$potentialAction</code></td>
+<td class="name" id="var-potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
 <td class="description">Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role.</td>
+ which this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$recognizingAuthority</code></td>
+<td class="name" id="var-recognizingAuthority"><code>$recognizingAuthority</code></td>
 <td class="type"><code>Organization</code></td>
 <td class="description">If applicable, the organization that officially recognizes this entity
-                                                                                                                                                    as part of its endorsed system of medicine.</td>
+ as part of its endorsed system of medicine.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$relevantSpecialty</code></td>
+<td class="name" id="var-relevantSpecialty"><code>$relevantSpecialty</code></td>
 <td class="type"><code>MedicalSpecialty</code></td>
 <td class="description">If applicable, a medical specialty in which this entity is relevant.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$sameAs</code></td>
+<td class="name" id="var-sameAs"><code>$sameAs</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website.</td>
+ identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
+ or official website.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$study</code></td>
+<td class="name" id="var-self"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var-study"><code>$study</code></td>
 <td class="type"><code>MedicalStudy</code></td>
 <td class="description">A medical study or trial related to this entity.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$subjectOf</code></td>
+<td class="name" id="var-subjectOf"><code>$subjectOf</code></td>
 <td class="type"><code>Event|CreativeWork</code></td>
 <td class="description">A CreativeWork or Event about this Thing.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$url</code></td>
+<td class="name" id="var-url"><code>$url</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">URL of the item.</td>
 </tr>
+<tr class="property">
+<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. No equivalent</td>
+</tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>MedicalRiskFactor</code></h2>
+<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__construct()</code></span>: Class constructor</p>
+<p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -355,13 +214,14 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$szHome</code></td>
+<td class="name" id="param-szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Home of the class. Optional.</td>
 </tr>
 </table>
+<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__destruct()</code></span>: Class destructor</p>
-</section> <!-- .class -->
+<p><code>__destruct()</code></p>
+<hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

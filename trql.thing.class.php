@@ -22,16 +22,11 @@
     {*file                  trql.thing.class.php *}
     {*purpose               Most generic class *}
     {*author                {PYB} *}
-    {*company               [br]Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 08/02/2017 - 12:10 *}
     {*mdate                 auto *}
-    {*license               Submitted to intellectual property rights (see
-                            author) *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -63,12 +58,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 defined( 'THING_CLASS_VERSION' ) or define( 'THING_CLASS_VERSION','0.1' );
 
-/* Note (16-07-20 23:27:50):
-
-    Le code doit se sauver lui-même dans une sorte de DB. Il doit se compresser
-    lui-même et sauver au moins une dizaine de versions de lui-même.
-
-*/
 
 /* ================================================================================== */
 /** {{*class Thing=
@@ -135,7 +124,7 @@ class Thing extends Mother
                                                                                                                                         background notes</a>
                                                                                                                                         for more details. *} */
                                                                     
-    public      $mainEntityOfPage           = null;                 /* {*property   $mainEntityOfPage           (string)                Indicates a page (or other CreativeWork)
+    public      $mainEntityOfPage           = null;                 /* {*property   $mainEntityOfPage           (string)                Indicates a page (or other [c]CreativeWork[/c])
                                                                                                                                         for which this thing is the main entity
                                                                                                                                         being described. See <a
                                                                                                                                         href="https://schema.org/docs/datamodel.html#mainEntityBackground">
@@ -153,8 +142,8 @@ class Thing extends Mother
                                                                                                                                         item's Wikipedia page, Freebase
                                                                                                                                         page, or official website. *} */
                 
-    public      $subjectOf                  = null;                 /* {*property   $sameAs                     (CreativeWork|Event)    A CreativeWork or Event about this Thing. 
-                                                                                                                                        Inverse property: about. *} */
+    public      $subjectOf                  = null;                 /* {*property   $sameAs                     (CreativeWork|Event)    A [c]CreativeWork[/c] or [c]Event[/c] about this [c]Thing[/c]. 
+                                                                                                                                        Inverse property: [c]about[/c]. *} */
                 
     public      $url                        = null;                 /* {*property   $url                        (string)                URL of the item. *} */
 

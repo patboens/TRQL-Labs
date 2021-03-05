@@ -1,6 +1,9 @@
 <style>
 .trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
 .trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile hr { border-top: 4px solid #800 !important; margin:2em 0; box-shadow: 0 6px 10px 1px rgba(0,0,0,.2); }
+.trql_documentor_DocumentorSourceFile pre { background: #c001; }
+.trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
 code, .filename { color: crimson; font-family: Consolas,"courier new" }
@@ -24,7 +27,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
    border: 1px solid #999;
    box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
    border: 1px solid #888; }
-p.property.func span.name { border:1px solid red; padding:6px; }
+code, samp {
+   color: #800;
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -41,6 +49,7 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>LexicalItem</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">Element of a lexicon</span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Lexeme &gt; LexicalItem</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class LexicalItem extends Lexeme</code></span>
 <span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="https://www.wikidata.org/wiki/Q111352" class="DocumentorLink" title="Go to https://www.wikidata.org/wiki/Q111352" itemprop="url">https://www.wikidata.org/wiki/Q111352</a>?utm_source=TRQLLabs</span>
 <span class="DocumentorLabel">Properties: </span>
@@ -53,39 +62,25 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$hasDefinedTerm</code></td>
+<td class="name" id="var-hasDefinedTerm"><code>$hasDefinedTerm</code></td>
 <td class="type"><code>DefinedTerm</code></td>
 <td class="description">A Defined Term contained in this term set.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Wikidata ID ... unit of lexical meaning</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$self</code></td>
+<td class="name" id="var-self"><code>$self</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$hasDefinedTerm</code></td>
-<td class="type"><code>DefinedTerm</code></td>
-<td class="description">A Defined Term contained in this term set.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
+<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Element of a lexicon. Wikidata ID</td>
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>LexicalItem</code></h2>
+<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__construct()</code></span>: Class constructor</p>
+<p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -96,13 +91,14 @@ p.property.func span.name { border:1px solid red; padding:6px; }
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name"><code>$szHome</code></td>
+<td class="name" id="param-szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Home of the class. Optional.</td>
 </tr>
 </table>
+<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
-<p class="property func"><span class="name"><code>__destruct()</code></span>: Class destructor</p>
-</section> <!-- .class -->
+<p><code>__destruct()</code></p>
+<hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

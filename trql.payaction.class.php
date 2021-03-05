@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,8 @@
     {*cdate                 28-08-2020 14:06 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
+    {*keywords              action *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -46,17 +46,14 @@
 /****************************************************************************************/
 namespace trql\payaction;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\tradeaction\TradeAction    as TradeAction;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\tradeaction\TradeAction   as TradeAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'TRADEACTION_CLASS_VERSION' ) )
     require_once( 'trql.tradeaction.class.php' );
-
-
 
 defined( 'PAYACTION_CLASS_VERSION' ) or define( 'PAYACTION_CLASS_VERSION','0.1' );
 
@@ -96,93 +93,11 @@ class PayAction extends TradeAction
                                'UIKey'  => null         ,
                              );
 
-    public      $actionStatus                   = null;             /* {*property   $actionStatus                   (ActionStatusType)              Indicates the current disposition of the Action. *} */
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $agent                          = null;             /* {*property   $agent                          (Organization|Person)           The direct performer or driver of the action (animate or inanimate).
-                                                                                                                                                    e.g. John wrote a book. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
-    public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
-    public      $endTime                        = null;             /* {*property   $endTime                        (DateTime|Time)                 The endTime of something. For a reserved event or service (e.g.
-                                                                                                                                                    FoodEstablishmentReservation), the time that it is expected to end.
-                                                                                                                                                    For actions that span a period of time, when the action was performed.
-                                                                                                                                                    e.g. John wrote a book from January to December. For media, including
-                                                                                                                                                    audio and video, it's the time offset of the end of a clip within a
-                                                                                                                                                    larger file.Note that Event uses startDate/endDate instead of
-                                                                                                                                                    startTime/endTime, even when describing dates with times. This
-                                                                                                                                                    situation may be clarified in future revisions. *} */
-    public      $error                          = null;             /* {*property   $error                          (Thing)                         For failed actions, more information on the cause of the failure. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
-    public      $instrument                     = null;             /* {*property   $instrument                     (Thing)                         The object that helped the agent perform the action. e.g. John wrote a
-                                                                                                                                                    book with a pen. *} */
-    public      $location                       = null;             /* {*property   $location                       (string|PostalAddress|VirtualLocation|Place)The location of for example where the event is happening, an
-                                                                                                                                                    organization is located, or where an action takes place. *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
-    public      $object                         = null;             /* {*property   $object                         (Thing)                         The object upon which the action is carried out, whose state is kept
-                                                                                                                                                    intact or changed. Also known as the semantic roles patient, affected
-                                                                                                                                                    or undergoer (which change their state) or theme (which doesn't). e.g.
-                                                                                                                                                    John read a book. *} */
-    public      $participant                    = null;             /* {*property   $participant                    (Organization|Person)           Other co-agents that participated in the action indirectly. e.g. John
-                                                                                                                                                    wrote a book with Steve. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
-    public      $price                          = null;             /* {*property   $price                          (float|string)                  The offer price of a product, or of a price component when attached to
-                                                                                                                                                    PriceSpecification and its subtypes.Usage guidelines:Use the
-                                                                                                                                                    priceCurrency property (with standard formats: ISO 4217 currency
-                                                                                                                                                    format e.g. "USD"; Ticker symbol for cryptocurrencies e.g. "BTC"; well
-                                                                                                                                                    known names for Local Exchange Tradings Systems (LETS) and other
-                                                                                                                                                    currency types e.g. "Ithaca HOUR") instead of including ambiguous
-                                                                                                                                                    symbols such as '$' in the value.Use '.' (Unicode 'FULL STOP'
-                                                                                                                                                    (U+002E)) rather than ',' to indicate a decimal point. Avoid using
-                                                                                                                                                    these symbols as a readability separator.Note that both RDFa and
-                                                                                                                                                    Microdata syntax allow the use of a "content=" attribute for
-                                                                                                                                                    publishing simple machine-readable values alongside more
-                                                                                                                                                    human-friendly formatting.Use values from 0123456789 (Unicode 'DIGIT
-                                                                                                                                                    ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than superficially
-                                                                                                                                                    similiar Unicode symbols. *} */
-    public      $priceCurrency                  = null;             /* {*property   $priceCurrency                  (string)                        The currency of the price, or a price component when attached to
-                                                                                                                                                    PriceSpecification and its subtypes.Use standard formats: ISO 4217
-                                                                                                                                                    currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g.
-                                                                                                                                                    "BTC"; well known names for Local Exchange Tradings Systems (LETS) and
-                                                                                                                                                    other currency types e.g. "Ithaca HOUR". *} */
-    public      $priceSpecification             = null;             /* {*property   $priceSpecification             (PriceSpecification)            One or more detailed price specifications, indicating the unit price
-                                                                                                                                                    and delivery or payment charges. *} */
-    public      $recipient                      = null;             /* {*property   $recipient                      (ContactPoint|Organization|Audience|Person)A sub property of participant. The participant who is at the receiving
+    public      $recipient                      = null;             /* {*property   $recipient      (ContactPoint|Organization|Audience|Person)     A sub property of participant. The participant who is at the receiving
                                                                                                                                                     end of the action. *} */
-    public      $result                         = null;             /* {*property   $result                         (Thing)                         The result produced in the action. e.g. John wrote a book. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
-    public      $startTime                      = null;             /* {*property   $startTime                      (DateTime|Time)                 The startTime of something. For a reserved event or service (e.g.
-                                                                                                                                                    FoodEstablishmentReservation), the time that it is expected to start.
-                                                                                                                                                    For actions that span a period of time, when the action was performed.
-                                                                                                                                                    e.g. John wrote a book from January to December. For media, including
-                                                                                                                                                    audio and video, it's the time offset of the start of a clip within a
-                                                                                                                                                    larger file.Note that Event uses startDate/endDate instead of
-                                                                                                                                                    startTime/endTime, even when describing dates with times. This
-                                                                                                                                                    situation may be clarified in future revisions. *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
-    public      $target                         = null;             /* {*property   $target                         (EntryPoint)                    Indicates a target EntryPoint for an Action. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
-
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR *} */
 
 
     /* ================================================================================ */
@@ -198,6 +113,10 @@ class PayAction extends TradeAction
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -207,10 +126,8 @@ class PayAction extends TradeAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of PayAction.__construct() ========================================== */
+    }   /* End of PayAction.__construct() ============================================= */
     /* ================================================================================ */
 
 
@@ -226,6 +143,10 @@ class PayAction extends TradeAction
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -237,10 +158,8 @@ class PayAction extends TradeAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of PayAction.__destruct() =========================================== */
+    }   /* End of PayAction.__destruct() ============================================== */
     /* ================================================================================ */
-
-}   /* End of class PayAction ====================================================== */
+}   /* End of class PayAction ========================================================= */
 /* ==================================================================================== */
-
 ?>

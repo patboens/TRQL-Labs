@@ -119,18 +119,15 @@ class TaskBoard extends Thing
     /* ================================================================================ */
     /** {{*render( [$szType] )=
 
-        Renders the form
+        Renders the taskboard in HTML or in XML
 
         {*params
-            $szType         (string)        Output type. Optional. 'HTML' by default.
+            $szType         (string)        Output type ('[c]XML[/c]' or '[c]HTML[/c]').
+                                            Optional. '[c]HTML[/c]' by default.
         *}
 
         {*return
             (string)        HTML Code
-        *}
-
-        {*warning
-
         *}
 
         *}}
@@ -232,17 +229,13 @@ class TaskBoard extends Thing
     /* ================================================================================ */
     /** {{*__toHTML()=
 
-        Renders the form in HTML
+        Renders the taskboard in HTML
 
         {*params
         *}
 
         {*return
             (string)        HTML Code
-        *}
-
-        {*warning
-            So far (25-12-20 13:29:10), the form is NOT rendered
         *}
 
         *}}
@@ -535,7 +528,7 @@ class TaskBoard extends Thing
     /* ================================================================================ */
     /** {{*__toString()=
 
-        Renders the form in HTML
+        Renders the taskboard in HTML (calls [c]__toHTML()[/c]
 
         {*params
         *}
