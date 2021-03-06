@@ -6,10 +6,23 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
-code, .filename { color: crimson; font-family: Consolas,"courier new" }
+code,samp, .filename {color: #800 !important;
+   font-family: Consolas,"courier new";
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
+.seealso code a {text-decoration:none;
+   color: #800 !important;
+   font-weight: bold;
+   font-style: italic;
+   }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
 table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
 table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
 table.properties thead th.description { width:60%; }
@@ -27,12 +40,6 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
    border: 1px solid #999;
    box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
    border: 1px solid #888; }
-code, samp {
-   color: #800;
-   background: rgba(240, 240, 240, 0.5);
-   border: 1px solid silver;
-   border-radius: 3px;
-   padding: 0px 5px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -243,11 +250,13 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szHome"><code>$szHome</code></td>
+<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Home of the class. Optional.</td>
+<td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

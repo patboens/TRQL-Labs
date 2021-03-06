@@ -6,10 +6,23 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
-code, .filename { color: crimson; font-family: Consolas,"courier new" }
+code,samp, .filename {color: #800 !important;
+   font-family: Consolas,"courier new";
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
+.seealso code a {text-decoration:none;
+   color: #800 !important;
+   font-weight: bold;
+   font-style: italic;
+   }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
 table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
 table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
 table.properties thead th.description { width:60%; }
@@ -27,12 +40,6 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
    border: 1px solid #999;
    box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
    border: 1px solid #888; }
-code, samp {
-   color: #800;
-   background: rgba(240, 240, 240, 0.5);
-   border: 1px solid silver;
-   border-radius: 3px;
-   padding: 0px 5px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -40,17 +47,10 @@ code, samp {
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.place.class.php</span>
 <span class="DocumentorLabel">Purpose: </span><span class="property purpose">Entities that have a somewhat fixed, physical extension.</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
-<span class="DocumentorLabel">Company: </span><span class="property company"><br />Lato Sensu Management<br />
-                            Rue Bois des Mazuis, 47<br />
-                            5070 Vitrival<br />
-                            Belgium<br />
-                            <a href="http://www.latosensu.be" class="DocumentorLink" title="Go to http://www.latosensu.be" itemprop="url">http://www.latosensu.be</a><br />
-                            Vae Soli! : <a href="http://www.vaesoli.org" class="DocumentorLink" title="Go to http://www.vaesoli.org" itemprop="url">http://www.vaesoli.org</a></span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">29-07-20 11:47</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">04/03/2021 - 11:15:08</span>
-<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">All rights reserved to Lato Sensu Management
-                            for all countries. All Intellectual Property
-                            belongs to Patrick Boens.</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">06/03/2021 - 19:45:01</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
 <section class="class shadow">
@@ -74,14 +74,17 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-additionalProperty"><code>$additionalProperty</code></td>
 <td class="type"><code>PropertyValue</code></td>
-<td class="description">A property-value pair representing an additional characteristics of the entitity,
- e.g. a product feature or another characteristic for which there is no matching 
+<td class="description">A property-value pair representing an additional
+
+ characteristics of the entitity, e.g. a product feature
+ or another characteristic for which there is no matching
  property in schema.org.
- 
- Note: Publishers should be aware that applications designed to use specific 
- schema.org properties (e.g. http://schema.org/width, http://schema.org/color,
- http://schema.org/gtin13, ...) will typically expect such data to be provided
- using those properties, rather than using the generic property/value mechanism.</td>
+
+ Note: Publishers should be aware that applications designed
+ to use specific schema.org properties (e.g. http://schema.org/width,
+ http://schema.org/color, http://schema.org/gtin13, ...) will
+ typically expect such data to be provided using those properties,
+ rather than using the generic property/value mechanism.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-additionalType"><code>$additionalType</code></td>
@@ -115,30 +118,30 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-amenityFeature"><code>$amenityFeature</code></td>
 <td class="type"><code>LocationFeatureSpecification</code></td>
-<td class="description">An amenity feature (e.g. a characteristic or service) of the Accommodation. 
- This generic property does not make a statement about whether the feature is 
+<td class="description">An amenity feature (e.g. a characteristic or service) of the Accommodation.
+ This generic property does not make a statement about whether the feature is
  included in an offer for the main accommodation or available at extra costs.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-branchCode"><code>$branchCode</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">A short textual code (also called "store code") that uniquely identifies a place of 
- business. The code is typically assigned by the parentOrganization and used in 
+<td class="description">A short textual code (also called "store code") that uniquely identifies a place of
+ business. The code is typically assigned by the parentOrganization and used in
  structured URLs.
- 
- For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047 
+
+ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
  the code "3047" is a branchCode for a particular branch.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-containedInPlace"><code>$containedInPlace</code></td>
 <td class="type"><code>Place</code></td>
-<td class="description">The basic containment relation between a place and one that contains it. 
+<td class="description">The basic containment relation between a place and one that contains it.
  Supersedes containedIn. Inverse property: containsPlace.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-containsPlace"><code>$containsPlace</code></td>
 <td class="type"><code>Place</code></td>
-<td class="description">The basic containment relation between a place and another that it contains. 
+<td class="description">The basic containment relation between a place and another that it contains.
  Inverse property: containedInPlace.</td>
 </tr>
 <tr class="property">
@@ -176,86 +179,86 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-geoContains"><code>$geoContains</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), 
- relating a containing geometry to a contained geometry. "a contains b iff no points of b 
- lie in the exterior of a, and at least one point of the interior of b lies in the 
+<td class="description">Represents a relationship between two geometries (or the places they represent),
+ relating a containing geometry to a contained geometry. "a contains b iff no points of b
+ lie in the exterior of a, and at least one point of the interior of b lies in the
  interior of a". As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-geoCoveredBy"><code>$geoCoveredBy</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), 
+<td class="description">Represents a relationship between two geometries (or the places they represent),
  relating a geometry to another that covers it. As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-geoCovers"><code>$geoCovers</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), 
- relating a covering geometry to a covered geometry. "Every point of b is a point of 
+<td class="description">Represents a relationship between two geometries (or the places they represent),
+ relating a covering geometry to a covered geometry. "Every point of b is a point of
  (the interior or boundary of) a". As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-geoCrosses"><code>$geoCrosses</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), 
- relating a geometry to another that crosses it: "a crosses b: they have some but not 
+<td class="description">Represents a relationship between two geometries (or the places they represent),
+ relating a geometry to another that crosses it: "a crosses b: they have some but not
  all interior points in common, and the dimension of the intersection is less than that
  of at least one of them". As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-geoDisjoint"><code>$geoDisjoint</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents spatial relations in which two geometries (or the places they represent) 
- are topologically disjoint: they have no point in common. They form a set of disconnected 
+<td class="description">Represents spatial relations in which two geometries (or the places they represent)
+ are topologically disjoint: they have no point in common. They form a set of disconnected
  geometries." (a symmetric relationship, as defined in DE-9IM)</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-geoEquals"><code>$geoEquals</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents spatial relations in which two geometries (or the places they represent) 
- are topologically equal, as defined in DE-9IM. "Two geometries are topologically equal 
- if their interiors intersect and no part of the interior or boundary of one geometry 
+<td class="description">Represents spatial relations in which two geometries (or the places they represent)
+ are topologically equal, as defined in DE-9IM. "Two geometries are topologically equal
+ if their interiors intersect and no part of the interior or boundary of one geometry
  intersects the exterior of the other" (a symmetric relationship)</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-geoIntersects"><code>$geoIntersects</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents spatial relations in which two geometries (or the places they represent) have 
+<td class="description">Represents spatial relations in which two geometries (or the places they represent) have
  at least one point in common. As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-geoOverlaps"><code>$geoOverlaps</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), relating 
+<td class="description">Represents a relationship between two geometries (or the places they represent), relating
  a geometry to another that geospatially overlaps it, i.e. they have some but not all points
  in common. As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-geoTouches"><code>$geoTouches</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents spatial relations in which two geometries (or the places they represent) touch: 
- they have at least one boundary point in common, but no interior points." (a symmetric 
+<td class="description">Represents spatial relations in which two geometries (or the places they represent) touch:
+ they have at least one boundary point in common, but no interior points." (a symmetric
  relationship, as defined in DE-9IM )</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-geoWithin"><code>$geoWithin</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), relating a 
- geometry to one that contains it, i.e. it is inside (i.e. within) its interior. 
+<td class="description">Represents a relationship between two geometries (or the places they represent), relating a
+ geometry to one that contains it, i.e. it is inside (i.e. within) its interior.
  As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-globalLocationNumber"><code>$globalLocationNumber</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The Global Location Number (GLN, sometimes also referred to as International Location Number or 
- ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify 
+<td class="description">The Global Location Number (GLN, sometimes also referred to as International Location Number or
+ ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify
  parties and physical locations.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-hasDriveThroughService"><code>$hasDriveThroughService</code></td>
 <td class="type"><code>Boolean</code></td>
-<td class="description">Indicates whether some facility (e.g. FoodEstablishment, CovidTestingFacility) offers a service that 
- can be used by driving through in a car. In the case of CovidTestingFacility such facilities could 
+<td class="description">Indicates whether some facility (e.g. FoodEstablishment, CovidTestingFacility) offers a service that
+ can be used by driving through in a car. In the case of CovidTestingFacility such facilities could
  potentially help with social distancing from other potentially-infected users.</td>
 </tr>
 <tr class="property">
@@ -290,7 +293,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-isicV4"><code>$isicV4</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 
+<td class="description">The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision
  4 code for a particular organization, business person, or place.</td>
 </tr>
 <tr class="property">
@@ -348,7 +351,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-publicAccess"><code>$publicAccess</code></td>
 <td class="type"><code>Boolean</code></td>
-<td class="description">A flag to signal that the Place is open to public visitors. If this property is omitted there is no 
+<td class="description">A flag to signal that the Place is open to public visitors. If this property is omitted there is no
  assumed default boolean value</td>
 </tr>
 <tr class="property">
@@ -381,8 +384,8 @@ code, samp {
 <td class="name" id="var-specialOpeningHoursSpecification"><code>$specialOpeningHoursSpecification</code></td>
 <td class="type"><code>OpeningHoursSpecification</code></td>
 <td class="description">The special opening hours of a certain place.
- 
- Use this to explicitly override general opening hours brought in scope by openingHoursSpecification 
+
+ Use this to explicitly override general opening hours brought in scope by openingHoursSpecification
  or openingHours.</td>
 </tr>
 <tr class="property">
@@ -393,16 +396,8 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-tourBookingPage"><code>$tourBookingPage</code></td>
 <td class="type"><code>URL</code></td>
-<td class="description">A page providing information on how to book a tour of some Place, such as an Accommodation or 
-
-
- /* ================================================================================ */
- /** {{*__construct( [$szHome] )=
-
- Class constructor
-
- {*params
- $szHome (string) Home of the class. Optional.</td>
+<td class="description">A page providing information on how to book a tour of some Place, such as an Accommodation or
+ ApartmentComplex in a real estate setting, as well as other kinds of tours as appropriate.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-url"><code>$url</code></td>
@@ -412,12 +407,13 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">WikidataId ... entity ... a thing with independent and 
- distinct existence</td>
+<td class="description">Wikidata ID. NOT CHECKED SO FAR</td>
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>Place</code></h2>
 <p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
 <p class="property">Syntax:</p>
 <p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -430,11 +426,22 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szHome"><code>$szHome</code></td>
+<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Home of the class. Optional.</td>
+<td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><a href="#fnc-__destruct">__destruct()</a></span>
+<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><a href="#fnc-__construct">__construct()</a></span>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

@@ -116,11 +116,6 @@ class mollie extends paymentProvider
     public      $szContactOption        = null;
     public      $szContactDestination   = null;
 
-    /* Champenois
-        test => test_UTnHtqeN7P8wyE9SRgdGNWt6R97uMq
-        live => live_6UHJ5xmyN6avr7f2Mn78R3P8CtkSTA
-    */
-
     public function __construct()
     /*-------------------------*/
     {
@@ -646,6 +641,10 @@ class mollie extends paymentProvider
         {*return
             (void)      No return.
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
     */

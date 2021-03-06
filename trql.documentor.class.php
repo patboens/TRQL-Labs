@@ -121,6 +121,8 @@
 
     {*image                 https://www.trql.fm/images/logos/trql.documentor.jpg *}
 
+    Official Coding Standards:
+    https://git.php.net/?p=php-src.git;a=blob_plain;f=CODING_STANDARDS.md;hb=HEAD
     -------------------------------------------------------------------------------------
     Changes History:
     -------------------------------------------------------------------------------------
@@ -245,6 +247,10 @@ function say( $szStr )
         $aSubsts[]  = '{COMPANY_SHORTNAME}' ; $aReplas[]  = 'Lato Sensu';
 
         $aSubsts[]  = '{PYB}'               ; $aReplas[]  = 'Pat Y. Boens';
+        $aSubsts[]  = '{MAT}'               ; $aReplas[]  = 'Mathieu Goffin';
+
+        $aSubsts[]  = '|**'                 ; $aReplas[]  = '/*';
+        $aSubsts[]  = '**|'                 ; $aReplas[]  = '*/';
 
     }   /* if ( is_null( $aSubsts ) ) */
 
@@ -289,6 +295,36 @@ Trait Utils
     /* ================================================================================ */
 
 
+    public function changeSeealso( $szStr,$szMethodName )
+    /*-------------------------------------------------*/
+    {
+        $szRetVal = $szStr;
+
+        //var_dump( $szStr );
+
+        if ( preg_match( '/@(?P<type>var|fnc|param)\.\$?(?P<term>[[:word:]]*)(\s|\z|[[:space:][:punct:]])/si',$szStr,$aMatches ) )
+        {
+            $szToReplace    = trim( $aMatches[0] );
+            $szType         = $aMatches['type'];
+            $szTerm         = $aMatches['term'];
+            $szSubstitute   = "[c]<a href=\"#{$szType}-{$szMethodName}.{$szTerm}\">$" . $szTerm . "</a>[/c]";
+            //var_dump( $szToReplace,$szSubstitute );
+
+            $szRetVal       = STR_replace( $szToReplace,$szSubstitute,$szRetVal );
+            //var_dump( __METHOD__,$szRetVal );
+        }
+        
+        return ( $szRetVal );
+    }
+
+    public function removeStartingBlanks( $szStr )
+    /*------------------------------------------*/
+    {
+        return ( preg_replace( '/^\d{1,8}/im','  ',$szStr ) );
+    }   /* End of Utils.removeStartingBlanks() ======================================== */
+    /* ================================================================================ */
+
+
     public function resolveSeealso( $a )
     /*--------------------------------*/
     {
@@ -299,7 +335,7 @@ Trait Utils
             //var_dump( $a );
             foreach( $a as $szSeeAlso )
             {
-                if ( preg_match( '/@(?P<type>var|fnc)\.(?P<term>[[:word:]]*)(\s|\z|[[:space:][:punct:]])/si',$szSeeAlso,$aMatches ) )
+                if ( preg_match( '/@(?P<type>var|fnc|param)\.(?P<term>[[:word:]]*)(\s|\z|[[:space:][:punct:]])/si',$szSeeAlso,$aMatches ) )
                 {
                     $szType = $aMatches['type'];
                     $szTerm = $aMatches['term'];
@@ -321,11 +357,12 @@ Trait Utils
     /* ================================================================================ */
     /** {{*makeID( $szType,$szStr )=
 
-        Generate a structured ID used to jump easily to properties ('[c]var[/c]') or to
-        methods ('[c]fnc[/c]')
+        Generate a structured ID used to jump easily to properties ('[c]var[/c]'), to
+        parameters ('[c]param[/c]') or methods ('[c]fnc[/c]')
 
         {*params
-            $szType     (string)        Type of link. Can be '[c]var[/c]' or '[c]fnc[/c]'
+            $szType     (string)        Type of link. Can be '[c]var[/c]', '[c]fnc[/c]'
+                                        or '[c]param[/c]'
             $szStr      (string)        The name of the property or method for which we
                                         want and ID
         *}
@@ -349,7 +386,7 @@ Trait Utils
         $szRetVal = $szType . '-' . str_replace( array('$'),'',$szStr );
 
         return ( $szRetVal );
-    }   /* End of Utils.makeID() ==================================================== */
+    }   /* End of Utils.makeID() ====================================================== */
     /* ================================================================================ */
 
 
@@ -408,7 +445,7 @@ Trait Utils
     /*--------------------------------------*/
     {
         $szStr = preg_replace( '/\[url\](.*?)\[\/url\]/si',"<a href=\"\${1}\" class=\"DocumentorLink\" title=\"Go to \${1}\" itemprop=\"url\">\${1}</a>",$szStr );
-        $szStr = preg_replace( '/\[img\](.*?)\[\/img\]/si',"<img class=\"vaesoli-doc\" src=\"\${1}\" />",$szStr );
+        $szStr = preg_replace( '/\[img\](.*?)\[\/img\]/si',"<img class=\"vaesoli-image shadow constrained\" src=\"\${1}\" />",$szStr );
         $szStr = preg_replace( '/\[file\](.*?)\[\/file\]/si',"<a href=\"?file=\${1}\" title=\"View \${1}\">\${1}</a>",$szStr );
         $szStr = preg_replace( '/\[author(.*)href="(.*?)"\](.*?)\[\/author\]/si',"<a href=\"\${2}\" rel=\"author\">\${3}</a>",$szStr );
 
@@ -442,7 +479,6 @@ Trait Utils
     /* ================================================================================ */
 }   /* End of trait Utils ============================================================= */
 /* ==================================================================================== */
-
 
 
 /* ==================================================================================== */
@@ -774,6 +810,7 @@ Class DocumentorSourceFile extends DocumentorFile
     public      $aFunctions         = null;
     public      $aConstants         = null;
     public      $aDefines           = null;
+    public      $aSubstitutions     = null;                         /* {*property   $aSubstitutions             (array)                             An array of substitutions *} */
 
     protected   $aDocumentedClasses = null;                         /* {*property   $aDocumentedClasses         (array)                             Classes documented. See also $aDefinedClasses *} */
     protected   $aDefinedClasses    = null;                         /* {*property   $aDefinedClasses            (array)                             Classes detected by source code parsing. There may be
@@ -802,6 +839,8 @@ Class DocumentorSourceFile extends DocumentorFile
     {
         $this->szFileName = $szFileName;
         parent::__construct( $szFileName );
+
+        $this->aSubstitutions['%class%'] = 'unknown';
 
         return ( $this );
     }   /* End of DocumentorSourceFile.__construct() ================================== */
@@ -1353,6 +1392,32 @@ Class DocumentorSourceFile extends DocumentorFile
     }   /* End of DocumentorSourceFile.analyze() ====================================== */
     /* ================================================================================ */
 
+    /* ================================================================================ */
+    /** {{*s( $szStr )=
+
+        Apply the private substitutions 
+
+        {*params
+            $szStr      (string)    The string in which we need to apply the private
+                                    substitutions (e.g. [c]%class%[/c] is, for example,
+                                    transformed into the class name we are currently
+                                    documenting)
+        *}
+
+        {*return
+            (string)    Returns [c]$szStr[/c] with subsitutions applied
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    protected function s( $szStr )
+    /*--------------------------*/
+    {
+        return ( str_replace( array_keys( $this->aSubstitutions ),array_values( $this->aSubstitutions ),$szStr ) );
+    }   /* End of DocumentorSourceFile.s() ============================================ */
+    /* ================================================================================ */
+    
 
     /* ================================================================================ */
     /** {{*document( [$szFile])=
@@ -1407,12 +1472,32 @@ Class DocumentorSourceFile extends DocumentorFile
                     $szHTML .= ".trql_documentor_DocumentorSourceFile pre strong { color: #b00; }\n";
                     $szHTML .= ".DocumentorLabel { font-style: italic; display: block; margin-top:1em; }\n";
                     $szHTML .= ".property { font-weight: bold;}\n";
-                    $szHTML .= "code, .filename { color: crimson; font-family: Consolas,\"courier new\" }\n";
+
+                    $szHTML .= "code,samp, .filename {color: #800 !important;\n"    .
+                               "   font-family: Consolas,\"courier new\";\n"        .
+                               "   background: rgba(240, 240, 240, 0.5);\n"         .
+                               "   border: 1px solid silver;\n"                     .
+                               "   border-radius: 3px;\n"                           .
+                               "   padding: 0px 5px; }\n";
+
+                    $szHTML .= ".seealso code a {text-decoration:none;\n"           .
+                               "   color: #800 !important;\n"                       .
+                               "   font-weight: bold;\n" .
+                               "   font-style: italic;\n" .
+                               "   }\n";
+
+                    $szHTML .= ".shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }\n";
+                    $szHTML .= ".constrained { max-width: 100%; height: auto; }\n";
+                    $szHTML .= ".center { text-align:center; }\n";
+
+                    //$szHTML .= ".seealso code a:before {content: \"\\2221 \" ;\n }";
+                    //$szHTML .= ".seealso code { background-color: #800 !important;}\n";
 
                     $szHTML .= ".DocumentorLabel { font-style: italic; display: block;}\n";
                     $szHTML .= "section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }\n";
-                    $szHTML .= ".shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }\n";
 
+                    $szHTML .= "img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}\n";
+        
                     $szHTML .= "table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }\n";
                     $szHTML .= "table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }\n";
                     $szHTML .= "table.properties thead th.description { width:60%; }\n";
@@ -1433,12 +1518,6 @@ Class DocumentorSourceFile extends DocumentorFile
                                "   border: 1px solid #888; }\n";
                     //$szHTML .= "p.property.func span.name { border:1px solid red; padding:6px; }\n";
 
-                    $szHTML .= "code, samp {\n"                                                                     .
-                               "   color: #800;\n"                                                                  .
-                               "   background: rgba(240, 240, 240, 0.5);\n"                                         .
-                               "   border: 1px solid silver;\n"                                                     .
-                               "   border-radius: 3px;\n"                                                           .
-                               "   padding: 0px 5px; }\n";
 
                 $szHTML .= "</style>\n\n";
             }   /* Style */
@@ -1480,9 +1559,11 @@ Class DocumentorSourceFile extends DocumentorFile
                             //var_dump( $oClass->description );
                             //$this->die();
 
+                            $this->aSubstitutions['%class%'] = $oClass->name;
+
                             $szHTML    .= "<section class=\"class shadow\">\n";
-                                $szHTML     .= "<span class=\"DocumentorLabel\">Class: </span><span class=\"property classname\">"              . $this->squareToAngle( say( '[c]' . $oClass->name           . '[/c]'           ) ) . "</span>\n";
-                                $szHTML     .= "<span class=\"DocumentorLabel\">Description: </span><span class=\"property description\">"      . $this->squareToAngle( say(         $oClass->description                       ) ) . "</span>\n";
+                                $szHTML     .= "<span class=\"DocumentorLabel\">Class: </span><span class=\"property classname\">"              . $this->squareToAngle( say( '[c]' .   $oClass->name  . '[/c]' ) ) . "</span>\n";
+                                $szHTML     .= "<span class=\"DocumentorLabel\">Description: </span><span class=\"property description\">"      . $this->squareToAngle( say( $this->s( $oClass->description  ) ) ) . "</span>\n";
 
                                 if ( is_array( $oClass->aParentClasses ) && count( $oClass->aParentClasses ) > 0 )
                                 {
@@ -1496,29 +1577,29 @@ Class DocumentorSourceFile extends DocumentorFile
                                     // Finish the breadcrumb with the name of the class we're busy with
                                     $szBreadcrumb .= $oClass->name;
 
-                                    $szHTML     .= "<span class=\"DocumentorLabel\">Inheritance: </span><span class=\"property declaration\">"  . $this->squareToAngle( say( '[c]' . $szBreadcrumb           . '[/c]'           ) ) . "</span>\n";
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Inheritance: </span><span class=\"property declaration\">"  . $this->squareToAngle( say( '[c]' .   $szBreadcrumb           . '[/c]'           ) ) . "</span>\n";
                                 }
 
                                 if ( ! empty( $oClass->szDeclaration ) )
-                                    $szHTML     .= "<span class=\"DocumentorLabel\">Declaration: </span><span class=\"property declaration\">"  . $this->squareToAngle( say( '[c]' . $oClass->szDeclaration  . '[/c]'           ) ) . "</span>\n";
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Declaration: </span><span class=\"property declaration\">"  . $this->squareToAngle( say( '[c]' .   $oClass->szDeclaration  . '[/c]'           ) ) . "</span>\n";
 
                                 if ( ! empty( $oClass->keywords ) )
-                                    $szHTML     .= "<span class=\"DocumentorLabel\">Keywords: </span><span class=\"property keywords\">"        . $this->squareToAngle( say(         $oClass->keywords                          ) ) . "</span>\n";
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Keywords: </span><span class=\"property keywords\">"        . $this->squareToAngle( say(           $oClass->keywords                          ) ) . "</span>\n";
 
                                 if ( ! empty( $oClass->szCredits ) )
-                                    $szHTML     .= "<span class=\"DocumentorLabel\">Credits: </span><span class=\"property credits\">"          . $this->squareToAngle( say(         $oClass->szCredits                         ) ) . "</span>\n";
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Credits: </span><span class=\"property credits\">"          . $this->squareToAngle( say( $this->s( $oClass->szCredits ) ) ) . "</span>\n";
 
                                 if ( ! empty( $oClass->szDoc ) )
-                                    $szHTML     .= "<span class=\"DocumentorLabel\">Doc: </span><span class=\"property doc\">"                  . $this->squareToAngle( say(         $oClass->szDoc . '?utm_source=TRQLLabs'    ) ) . "</span>\n";
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Doc: </span><span class=\"property doc\">"                  . $this->squareToAngle( say(           $oClass->szDoc . '?utm_source=TRQLLabs'    ) ) . "</span>\n";
 
                                 if ( ! empty( $oClass->szWarning ) )
-                                    $szHTML .= "<span class=\"DocumentorLabel\">Warning: </span><span class=\"property warning\">"              . $this->squareToAngle( say(         $oClass->szWarning                         ) ) . "</span>\n";
+                                    $szHTML .= "<span class=\"DocumentorLabel\">Warning: </span><span class=\"property warning\">"              . $this->squareToAngle( say( $this->s( $oClass->szWarning ) ) ) . "</span>\n";
 
                                 if ( ! empty( $oClass->szRemark ) )
-                                    $szHTML .= "<span class=\"DocumentorLabel\">Remarks: </span><span class=\"property remark\">"               . $this->squareToAngle( say(         $oClass->szRemark                          ) ) . "</span>\n";
+                                    $szHTML .= "<span class=\"DocumentorLabel\">Remarks: </span><span class=\"property remark\">"               . $this->squareToAngle( say( $this->s( $oClass->szRemark ) ) ) . "</span>\n";
 
                                 if ( ! empty( $oClass->szTODOs ) )
-                                    $szHTML .= "<span class=\"DocumentorLabel\">TODOs: </span><span class=\"property todo\">"                   . $this->squareToAngle( say(         $oClass->szTODOs                           ) ) . "</span>\n";
+                                    $szHTML .= "<span class=\"DocumentorLabel\">TODOs: </span><span class=\"property todo\">"                   . $this->squareToAngle( say( $this->s( $oClass->szTODOs ) ) ) . "</span>\n";
 
 
                                 /* Bon, ici ... ce que je cherchee à faire c'est de créer un objet
@@ -1558,7 +1639,7 @@ Class DocumentorSourceFile extends DocumentorFile
 
                                 /* **************************************************************************** */
                                 /* **************************************************************************** */
-                                /* Display ALL the properties */
+                                /* Display ALL the properties of the class */
                                 if ( is_array( $oClass->aProperties ) && count( $oClass->aProperties ) > 0 )
                                 {
                                     $szHTML     .= "<span class=\"DocumentorLabel\">Properties: </span>\n";
@@ -1618,20 +1699,21 @@ Class DocumentorSourceFile extends DocumentorFile
                                     foreach( $oClass->aMethods as $oMethod )
                                     {
                                         $szHTML .= "<p class=\"property func\" id=\"" . $this->makeID( 'fnc',$oMethod->name ) . "\"><span class=\"name\">" . $this->squareToAngle( '[b][c]' . $oMethod->name . '()[/c][/b]</span>: ' ) .
-                                                   $this->squareToAngle( $oMethod->szDescription ) ."</p>\n";
+                                                   $this->squareToAngle( $this->s( $oMethod->szDescription ) ) ."</p>\n";
 
-                                        //var_dump( $oMethod->szWarning );
+                                        // Here, it would be nice to include the source code of the method
+                                        // once it will be extracted!
 
                                         if ( ! empty( $oMethod->szWarning ) )
                                         {
                                             $szHTML     .= "<p class=\"property\">Warning:</p>\n";
-                                            $szHTML  .= "<p>" . $this->squareToAngle( say( $oMethod->szWarning ) ) . "</p>\n";
+                                            $szHTML  .= "<p>" . $this->squareToAngle( say( $this->s( $oMethod->szWarning ) ) ) . "</p>\n";
                                         }
 
                                         if ( ! empty( $oMethod->szRemark ) )
                                         {
                                             $szHTML     .= "<p class=\"property\">Remark:</p>\n";
-                                            $szHTML  .= "<p>" . $this->squareToAngle( say( $oMethod->szRemark ) ) . "</p>\n";
+                                            $szHTML  .= "<p>" . $this->squareToAngle( say( $this->s( $oMethod->szRemark ) ) ) . "</p>\n";
                                         }   /* if ( ! empty( $oMethod->szRemark ) ) */
 
                                         if ( ! empty( $oMethod->keywords ) )
@@ -1674,24 +1756,30 @@ Class DocumentorSourceFile extends DocumentorFile
                                             foreach( $oMethod->aParams as $oParam )
                                             {
                                                 $szHTML .= "<tr class=\"parameter\">\n";
-                                                    $szHTML .= "<td class=\"name\" id=\"" . $this->makeID( 'param',$oParam->name ) . "\">"  . $this->squareToAngle( '[c]' . $oParam->name           . '[/c]' ) . "</td>\n";
-                                                    $szHTML .= "<td class=\"type\">"                                                        . $this->squareToAngle( '[c]' . $oParam->types          . '[/c]' ) . "</td>\n";
-                                                    $szHTML .= "<td class=\"description\">"                                                 . $this->squareToAngle(         $oParam->description             ) . "</td>\n";
+                                                    $szHTML .= "<td class=\"name\" id=\"" . $this->makeID( 'param',$oMethod->name . '.' . $oParam->name ) . "\">"  . $this->squareToAngle(                    '[c]' . $oParam->name                . '[/c]' )   . "</td>\n";
+                                                    $szHTML .= "<td class=\"type\">"                                                                               . $this->squareToAngle(                    '[c]' . $oParam->types               . '[/c]' )   . "</td>\n";
+                                                    $szHTML .= "<td class=\"description seealso\">"                                                                . $this->squareToAngle( say( $this->s( $this->changeSeealso( $oParam->description,$oMethod->name ) ) ) ) . "</td>\n";
                                                 $szHTML .= "</tr>\n";
                                             }
                                             $szHTML     .= "</table>\n";
                                         }   /* if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 ) */
 
+                                        if ( ! empty( $oMethod->oReturn ) )
+                                        {
+                                            $szHTML     .= "<p class=\"property return\">Return:</p>\n";
+                                            $szHTML  .= "<p class=\"seealso\">({$oMethod->oReturn->szType}): " . $this->squareToAngle( say( $this->s( $this->changeSeealso( $oMethod->oReturn->description,$oMethod->name ) ) ) ) . "</p>\n";
+                                        }
+
                                         if ( ! empty( $oMethod->szExamples ) )
                                         {
                                             $szHTML     .= "<p class=\"property\">Example(s):</p>\n";
                                             $szHTML     .= "<pre>\n";
-                                                $szHTML .= $this->squareToAngle( $oMethod->szExamples );
+                                                $szHTML .= $this->squareToAngle( say( $this->s( $this->removeStartingBlanks( $oMethod->szExamples ) ) ) );
                                             $szHTML     .= "</pre>\n";
                                         }   /* if ( ! empty( $oMethod->szExamples ) ) */
 
                                         if ( ! empty( $szSeeAlsos = $this->resolveSeealso( $oMethod->aSeeAlsos ) ) )
-                                            $szHTML .= "<span class=\"DocumentorLabel\">See also: </span><span class=\"property seealso\">" . $this->squareToAngle( say( $szSeeAlsos ) ) . "</span>\n";
+                                            $szHTML .= "<span class=\"DocumentorLabel\">See also: </span><span class=\"property seealso\">" . $this->squareToAngle( say( $this->s( $szSeeAlsos ) ) ) . "</span>\n";
 
                                         $szHTML .= "<hr />";
                                     }   /* foreach( $oClass->aMethods as $oMethod ) */
@@ -2963,6 +3051,7 @@ Class DocumentorClass extends DocumentorSourceFileObject
                     }   /* if ( preg_match('%/\*\* \{\{\*.*\(.*?\)=(?P<desc>.*?)\{\*%si',$szFncDef,$aParts2 ) ) */
 
                     /* TAG EXTRACTION ================================================================================= */
+                    /* TAG EXTRACTION ================================================================================= */
                     $oFnc->szCredits    =       trim( vaesoli::STR_Reduce( $this->property( '{*credits'   ,$szFncDef ) ) );
                     $oFnc->szDoc        =       trim( vaesoli::STR_Reduce( $this->property( '{*doc'       ,$szFncDef ) ) );
                     $oFnc->szTODOs      =       trim( vaesoli::STR_Reduce( $this->property( '{*todo'      ,$szFncDef ) ) );
@@ -2973,7 +3062,20 @@ Class DocumentorClass extends DocumentorSourceFileObject
                     $oFnc->keywords     =       trim( vaesoli::STR_Reduce( $this->property( '{*keywords'  ,$szFncDef ) ) );
                     if ( ! empty( $szSeeAlsos = trim( vaesoli::STR_Reduce( $this->property( '{*seealso'   ,$szFncDef ) ) ) ) )
                         $oFnc->aSeeAlsos = explode( ',',str_replace( ';',',',$szSeeAlsos ) );     /* All seealso's (array) */
+                    if ( ! empty( $szReturn   = trim( vaesoli::STR_Reduce( $this->property( '{*return'    ,$szFncDef ) ) ) ) )
+                    {
+                        $oReturn = new DocumentorFunctionReturn();
+                        $oReturn->parseDefinition( $szReturn );
 
+                        //var_dump( $szReturn,$oReturn );
+
+                        if ( ! is_null( $oReturn->szType ) )
+                        {
+                            $oFnc->oReturn = $oReturn;
+                            //var_dump( $oFnc->oReturn );
+                        }
+                    }   /* if ( ! empty( $szReturn   = trim( vaesoli::STR_Reduce( $this->property( '{*return' ... ) */
+                    /* TAG EXTRACTION ================================================================================= */
                     /* TAG EXTRACTION ================================================================================= */
 
                     if ( preg_match( '/\{\*params(?P<params>.*?)\*\}/si',$szFncDef,$aParts2 ) )
@@ -3718,4 +3820,112 @@ Class DocumentorFunctionParameter extends DocumentorSourceFileObject
     /* ================================================================================ */
 }   /* End of class DocumentorFunctionParameter ======================================= */
 /* ==================================================================================== */
-?>
+
+
+/* ==================================================================================== */
+/** {{*class DocumentorFunctionReturn=
+
+    {*desc
+
+        Defines a return data structure: return value of a function and or
+        method
+
+    *}
+
+    *}}
+ */
+/* ==================================================================================== */
+Class DocumentorFunctionReturn extends DocumentorSourceFileObject
+/*-------------------------------------------------------------*/
+{
+    public  $szType         = null;
+
+    /* ================================================================================ */
+    /** {{*__construct( [$szHome] )=
+
+        Class constructor
+
+        {*params
+            $szHome     (string)        Home of the class. Optional.
+        *}
+
+        {*return
+            (self)      The current instance of the class
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __construct( $szHome = null )
+    /*-----------------------------------------*/
+    {
+        parent::__construct();
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+
+        return ( $this );
+    }   /* End of DocumentorFunctionReturn.__construct() ============================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*parseDefinition( $szDefinition )=
+
+        Parses the definition of a return
+
+        {*params
+            $szDefinition       (string)        The string that defines the return
+        *}
+
+        {*return
+            (self)      Object updated upon return. Returns the cirrent instance of the
+                        class.
+        *}
+
+        {*example
+            new 
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function parseDefinition( $szDefinition )
+    /*--------------------------------------------*/
+    {
+        if ( preg_match( '/\((?P<type>.*?)\)(?P<desc>.*)/si',$szDefinition,$aMatches ) )
+        {
+            $this->szType       = $aMatches['type'];
+            $this->description  = $aMatches['desc'];
+        }
+
+        return ( $this );
+    }   /* End of DocumentorFunctionReturn.parseDefinition() ========================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __destruct()
+    /*------------------------*/
+    {
+        $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of DocumentorFunctionReturn.__destruct() =============================== */
+    /* ================================================================================ */
+}   /* End of class DocumentorFunctionReturn ========================================== */
+/* ==================================================================================== */

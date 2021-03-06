@@ -6,10 +6,23 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
-code, .filename { color: crimson; font-family: Consolas,"courier new" }
+code,samp, .filename {color: #800 !important;
+   font-family: Consolas,"courier new";
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
+.seealso code a {text-decoration:none;
+   color: #800 !important;
+   font-weight: bold;
+   font-style: italic;
+   }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
 table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
 table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
 table.properties thead th.description { width:60%; }
@@ -27,12 +40,6 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
    border: 1px solid #999;
    box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
    border: 1px solid #888; }
-code, samp {
-   color: #800;
-   background: rgba(240, 240, 240, 0.5);
-   border: 1px solid silver;
-   border-radius: 3px;
-   padding: 0px 5px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -92,14 +99,18 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szHome"><code>$szHome</code></td>
+<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Home of the class. Optional.</td>
+<td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
 <hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
 <hr /><p class="property func" id="fnc-__parse1"><span class="name"><strong><code>__parse1()</code></strong></span>: Parses the first set of results from Wikipedia (a list of URLs that correspond
  to the term that is looked for</p>
 <p class="property">Syntax:</p>
@@ -114,11 +125,13 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szXML"><code>$szXML</code></td>
+<td class="name" id="param-__parse1.szXML"><code>$szXML</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The XML to parse</td>
+<td class="description seealso">The XML to parse</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc-__parse2"><span class="name"><strong><code>__parse2()</code></strong></span>: Parses the second set of results from Wikipedia (the real content of a page)</p>
 <p class="property">Syntax:</p>
 <p><code>__parse2( $szXML )</code></p>
@@ -132,11 +145,13 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szXML"><code>$szXML</code></td>
+<td class="name" id="param-__parse2.szXML"><code>$szXML</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The XML to parse</td>
+<td class="description seealso">The XML to parse</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc-__parse3"><span class="name"><strong><code>__parse3()</code></strong></span>: Parses the resulting XML of a call to searchEntities()</p>
 <p class="property">Syntax:</p>
 <p><code>__parse3( $szXML )</code></p>
@@ -150,16 +165,18 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szTerm"><code>$szTerm</code></td>
+<td class="name" id="param-__parse3.szTerm"><code>$szTerm</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The term that we looked for</td>
+<td class="description seealso">The term that we looked for</td>
 </tr>
 <tr class="parameter">
-<td class="name" id="param-szXML"><code>$szXML</code></td>
+<td class="name" id="param-__parse3.szXML"><code>$szXML</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The XML to parse</td>
+<td class="description seealso">The XML to parse</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc-__parse4"><span class="name"><strong><code>__parse4()</code></strong></span>: Parses the return of an entity (get entity based on its ID) from WikiData</p>
 <p class="property">Syntax:</p>
 <p><code>__parse4( $szXML )</code></p>
@@ -173,16 +190,18 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szTerm"><code>$szTerm</code></td>
+<td class="name" id="param-__parse4.szTerm"><code>$szTerm</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The term that we looked for</td>
+<td class="description seealso">The term that we looked for</td>
 </tr>
 <tr class="parameter">
-<td class="name" id="param-szXML"><code>$szXML</code></td>
+<td class="name" id="param-__parse4.szXML"><code>$szXML</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The XML to parse</td>
+<td class="description seealso">The XML to parse</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc-call"><span class="name"><strong><code>call()</code></strong></span>: Calls Wikipedia via its dedicated URL</p>
 <p class="property">Syntax:</p>
 <p><code>call( $aParams )</code></p>
@@ -196,14 +215,18 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-aParams"><code>$aParams</code></td>
+<td class="name" id="param-call.aParams"><code>$aParams</code></td>
 <td class="type"><code>array</code></td>
-<td class="description">Associative array to pass parameters in the URL that must be called ("opensearch" is the main verb)</td>
+<td class="description seealso">Associative array to pass parameters in the URL that must be called ("opensearch" is the main verb)</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  Result returned by the call to <code>getURL(...)</code></p>
 <hr /><p class="property func" id="fnc-destruct"><span class="name"><strong><code>destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return.</p>
 <hr /><p class="property func" id="fnc-getEntity"><span class="name"><strong><code>getEntity()</code></strong></span>: Parses the return of an entity (get entity based on its ID) from WikiData</p>
 <p class="property">Syntax:</p>
 <p><code>getEntity( $szID )</code></p>
@@ -217,11 +240,13 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szID"><code>$szID</code></td>
+<td class="name" id="param-getEntity.szID"><code>$szID</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Entity ID (e.g. "<code>Q234691</code>")</td>
+<td class="description seealso">Entity ID (e.g. "<code>Q234691</code>")</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc-search"><span class="name"><strong><code>search()</code></strong></span>: Performs an open search on <code>$szTerm</code></p>
 <p class="property">Warning:</p>
 <p>Will onky work on the basis of English terms</p>
@@ -237,16 +262,18 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szTerm"><code>$szTerm</code></td>
+<td class="name" id="param-search.szTerm"><code>$szTerm</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The terms to look for</td>
+<td class="description seealso">The terms to look for</td>
 </tr>
 <tr class="parameter">
-<td class="name" id="param-iLimit"><code>$iLimit</code></td>
+<td class="name" id="param-search.iLimit"><code>$iLimit</code></td>
 <td class="type"><code>int</code></td>
-<td class="description">Number of results. Optional. <code>All</code> by default.</td>
+<td class="description seealso">Number of results. Optional. <code>All</code> by default.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc-searchEntities"><span class="name"><strong><code>searchEntities()</code></strong></span>: Returns the entities corresponding to <code>$szTerm</code></p>
 <p class="property">Syntax:</p>
 <p><code>searchEntities( $iResults )</code></p>
@@ -260,16 +287,18 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szTerm"><code>$szTerm</code></td>
+<td class="name" id="param-searchEntities.szTerm"><code>$szTerm</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The terms to look for</td>
+<td class="description seealso">The terms to look for</td>
 </tr>
 <tr class="parameter">
-<td class="name" id="param-iResults"><code>$iResults</code></td>
+<td class="name" id="param-searchEntities.iResults"><code>$iResults</code></td>
 <td class="type"><code>int</code></td>
-<td class="description">Number of entities to return. Optional. <code>1</code> by default. <strong>No longer used!</strong></td>
+<td class="description seealso">Number of entities to return. Optional. <code>1</code> by default. <strong>No longer used!</strong></td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

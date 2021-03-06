@@ -209,6 +209,10 @@ class Demand extends Intangible
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -234,6 +238,10 @@ class Demand extends Intangible
         {*return
             (void)      No return
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
     */

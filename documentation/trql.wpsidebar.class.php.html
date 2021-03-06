@@ -6,10 +6,23 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
-code, .filename { color: crimson; font-family: Consolas,"courier new" }
+code,samp, .filename {color: #800 !important;
+   font-family: Consolas,"courier new";
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
+.seealso code a {text-decoration:none;
+   color: #800 !important;
+   font-weight: bold;
+   font-style: italic;
+   }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
 table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
 table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
 table.properties thead th.description { width:60%; }
@@ -27,12 +40,6 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
    border: 1px solid #999;
    box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
    border: 1px solid #888; }
-code, samp {
-   color: #800;
-   background: rgba(240, 240, 240, 0.5);
-   border: 1px solid silver;
-   border-radius: 3px;
-   padding: 0px 5px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -128,7 +135,7 @@ code, samp {
 <td class="name" id="var-accountablePerson"><code>$accountablePerson</code></td>
 <td class="type"><code>Person</code></td>
 <td class="description">Specifies the Person that is legally accountable for the
- CreativeWork.</td>
+ <code>@class.CreativeWork</code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-additionalType"><code>$additionalType</code></td>
@@ -158,12 +165,12 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-alternativeHeadline"><code>$alternativeHeadline</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">A secondary title of the CreativeWork.</td>
+<td class="description">A secondary title of the <code>@class.CreativeWork</code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-associatedMedia"><code>$associatedMedia</code></td>
 <td class="type"><code>MediaObject</code></td>
-<td class="description">A media object that encodes this CreativeWork. This property
+<td class="description">A media object that encodes this <code>@class.CreativeWork</code>. This property
  is a synonym for encoding.</td>
 </tr>
 <tr class="property">
@@ -204,7 +211,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-commentCount"><code>$commentCount</code></td>
 <td class="type"><code>int</code></td>
-<td class="description">The number of comments this CreativeWork (e.g. Article,
+<td class="description">The number of comments this <code>@class.CreativeWork</code> (e.g. Article,
  Question or Answer) has received. This is most applicable to
  works published in Web sites with commenting system;
  additional comments may exist elsewhere.</td>
@@ -239,24 +246,24 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-contributor"><code>$contributor</code></td>
 <td class="type"><code>Organization|Person</code></td>
-<td class="description">A secondary contributor to the CreativeWork or Event.</td>
+<td class="description">A secondary contributor to the <code>@class.CreativeWork</code> or Event.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-copyrightHolder"><code>$copyrightHolder</code></td>
 <td class="type"><code>Organization|Person</code></td>
-<td class="description">The party holding the legal copyright to the CreativeWork.</td>
+<td class="description">The party holding the legal copyright to the <code>@class.CreativeWork</code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-copyrightYear"><code>$copyrightYear</code></td>
 <td class="type"><code>Number</code></td>
 <td class="description">The year during which the claimed copyright for the
- CreativeWork was first asserted.</td>
+ <code>@class.CreativeWork</code> was first asserted.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-correction"><code>$correction</code></td>
 <td class="type"><code>CorrectionComment|string|URL</code></td>
-<td class="description">Indicates a correction to a CreativeWork, either via a
- CorrectionComment, textually or in another document.</td>
+<td class="description">Indicates a correction to a <code>@class.CreativeWork</code>, either via a
+ <code>@class.CorrectionComment</code>, textually or in another document.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-creativeWorkStatus"><code>$creativeWorkStatus</code></td>
@@ -269,8 +276,8 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-creator"><code>$creator</code></td>
 <td class="type"><code>Organization|Person</code></td>
-<td class="description">The creator/author of this CreativeWork. This is the same as
- the Author property for CreativeWork.</td>
+<td class="description">The creator/author of this <code>@class.CreativeWork</code>. This is the same as
+ the Author property for <code>@class.CreativeWork</code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-cssSelector"><code>$cssSelector</code></td>
@@ -282,13 +289,13 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-dateCreated"><code>$dateCreated</code></td>
 <td class="type"><code>Date|DateTime</code></td>
-<td class="description">The date on which the CreativeWork was created or the item was
+<td class="description">The date on which the <code>@class.CreativeWork</code> was created or the item was
  added to a DataFeed.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-dateModified"><code>$dateModified</code></td>
 <td class="type"><code>Date|DateTime</code></td>
-<td class="description">The date on which the CreativeWork was most recently modified or
+<td class="description">The date on which the <code>@class.CreativeWork</code> was most recently modified or
  when the item's entry was modified within a DataFeed.</td>
 </tr>
 <tr class="property">
@@ -315,12 +322,12 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-discussionUrl"><code>$discussionUrl</code></td>
 <td class="type"><code>URL</code></td>
-<td class="description">A link to the page containing the comments of the CreativeWork.</td>
+<td class="description">A link to the page containing the comments of the <code>@class.CreativeWork</code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-editor"><code>$editor</code></td>
 <td class="type"><code>Person</code></td>
-<td class="description">Specifies the Person who edited the CreativeWork.</td>
+<td class="description">Specifies the Person who edited the <code>@class.CreativeWork</code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-educationalAlignment"><code>$educationalAlignment</code></td>
@@ -336,9 +343,9 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-encoding"><code>$encoding</code></td>
 <td class="type"><code>MediaObject</code></td>
-<td class="description">A media object that encodes this CreativeWork. This property is
+<td class="description">A media object that encodes this <code>@class.CreativeWork</code>. This property is
  a synonym for associatedMedia. Supersedes encodings.
- Inverse property: encodesCreativeWork.</td>
+ Inverse property: encodes<code>@class.CreativeWork</code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-encodingFormat"><code>$encodingFormat</code></td>
@@ -377,8 +384,8 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-hasPart"><code>$hasPart</code></td>
 <td class="type"><code>CreativeWork</code></td>
-<td class="description">Indicates an item or CreativeWork that is part of this item,
- or CreativeWork (in some sense). Inverse property: isPartOf.</td>
+<td class="description">Indicates an item or <code>@class.CreativeWork</code> that is part of this item,
+ or <code>@class.CreativeWork</code> (in some sense). Inverse property: isPartOf.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-headline"><code>$headline</code></td>
@@ -415,7 +422,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-interactionStatistic"><code>$interactionStatistic</code></td>
 <td class="type"><code>InteractionCounter</code></td>
-<td class="description">The number of interactions for the CreativeWork using the
+<td class="description">The number of interactions for the <code>@class.CreativeWork</code> using the
  WebSite or SoftwareApplication. The most specific child
  type of InteractionCounter should be used.
  Supersedes interactionCount.</td>
@@ -447,8 +454,8 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-isPartOf"><code>$isPartOf</code></td>
 <td class="type"><code>CreativeWork</code></td>
-<td class="description">Indicates an item or CreativeWork that this item, or
- CreativeWork (in some sense), is part of.
+<td class="description">Indicates an item or <code>@class.CreativeWork</code> that this item, or
+ <code>@class.CreativeWork</code> (in some sense), is part of.
  Inverse property: hasPart.</td>
 </tr>
 <tr class="property">
@@ -472,14 +479,14 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-locationCreated"><code>$locationCreated</code></td>
 <td class="type"><code>Place</code></td>
-<td class="description">The location where the CreativeWork was created, which may
- not be the same as the location depicted in the CreativeWork.</td>
+<td class="description">The location where the <code>@class.CreativeWork</code> was created, which may
+ not be the same as the location depicted in the <code>@class.CreativeWork</code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-mainEntity"><code>$mainEntity</code></td>
 <td class="type"><code>Thing</code></td>
 <td class="description">Indicates the primary entity described in some page or
- other CreativeWork. Inverse property: mainEntityOfPage.</td>
+ other <code>@class.CreativeWork</code>. Inverse property: mainEntityOfPage.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-mainEntityOfPage"><code>$mainEntityOfPage</code></td>
@@ -506,7 +513,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-mentions"><code>$mentions</code></td>
 <td class="type"><code>Thing</code></td>
-<td class="description">Indicates that the CreativeWork contains a reference to, but
+<td class="description">Indicates that the <code>@class.CreativeWork</code> contains a reference to, but
  is not necessarily about a concept.</td>
 </tr>
 <tr class="property">
@@ -569,9 +576,9 @@ code, samp {
  a document describing the editorial principles of an Organization
  (or individual e.g. a Person writing a blog) that relate to their
  activities as a publisher, e.g. ethics or diversity policies.
- When applied to a CreativeWork (e.g. NewsArticle) the principles
+ When applied to a <code>@class.CreativeWork</code> (e.g. NewsArticle) the principles
  are those of the party primarily responsible for the creation of
- the CreativeWork.
+ the <code>@class.CreativeWork</code>.
  
  While such policies are most typically expressed in natural
  language, sometimes related information (e.g. indicating a funder)
@@ -580,7 +587,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-recordedAt"><code>$recordedAt</code></td>
 <td class="type"><code>Event</code></td>
-<td class="description">The Event where the CreativeWork was recorded. The CreativeWork may capture
+<td class="description">The Event where the <code>@class.CreativeWork</code> was recorded. The <code>@class.CreativeWork</code> may capture
  all or part of the event. Inverse property: recordedIn.</td>
 </tr>
 <tr class="property">
@@ -603,7 +610,7 @@ code, samp {
 <td class="name" id="var-schemaVersion"><code>$schemaVersion</code></td>
 <td class="type"><code>string|URL</code></td>
 <td class="description">Indicates (by URL or string) a particular version of a schema used
- in some CreativeWork. For example, a document could declare a
+ in some <code>@class.CreativeWork</code>. For example, a document could declare a
  schemaVersion using an URL such as http://schema.org/version/2.0/ if
  precise indication of schema version was required by some application.</td>
 </tr>
@@ -649,7 +656,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-spatialCoverage"><code>$spatialCoverage</code></td>
 <td class="type"><code>Place</code></td>
-<td class="description">The spatialCoverage of a CreativeWork indicates the place(s) which are
+<td class="description">The spatialCoverage of a <code>@class.CreativeWork</code> indicates the place(s) which are
  the focus of the content. It is a subproperty of contentLocation intended
  primarily for more technical and detailed materials. For example with a
  Dataset, it indicates areas that the dataset describes: a dataset of
@@ -673,7 +680,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-temporalCoverage"><code>$temporalCoverage</code></td>
 <td class="type"><code>DateTime|string|URL</code></td>
-<td class="description">The temporalCoverage of a CreativeWork indicates the period that the
+<td class="description">The temporalCoverage of a <code>@class.CreativeWork</code> indicates the period that the
  content applies to, i.e. that it describes, either as a DateTime or as a
  textual string indicating a time period in ISO 8601 time interval format.
  In the case of a Dataset it will typically indicate the relevant time
@@ -693,7 +700,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-text"><code>$text</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The textual content of this CreativeWork.</td>
+<td class="description">The textual content of this <code>@class.CreativeWork</code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-thumbnailUrl"><code>$thumbnailUrl</code></td>
@@ -732,7 +739,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-version"><code>$version</code></td>
 <td class="type"><code>Number|string</code></td>
-<td class="description">The version of the CreativeWork embodied by a specified resource.</td>
+<td class="description">The version of the <code>@class.CreativeWork</code> embodied by a specified resource.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-video"><code>$video</code></td>
@@ -783,14 +790,18 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szHome"><code>$szHome</code></td>
+<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Home of the class. Optional.</td>
+<td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
 <hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -37,6 +35,7 @@
     {*cdate                 28-08-2020 16:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -55,17 +54,14 @@
 /****************************************************************************************/
 namespace trql\schedule;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\intangible\Intangible    as Intangible;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\intangible\Intangible     as Intangible;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'INTANGIBLE_CLASS_VERSION' ) )
     require_once( 'trql.intangible.class.php' );
-
-
 
 defined( 'SCHEDULE_CLASS_VERSION' ) or define( 'SCHEDULE_CLASS_VERSION','0.1' );
 
@@ -98,6 +94,8 @@ defined( 'SCHEDULE_CLASS_VERSION' ) or define( 'SCHEDULE_CLASS_VERSION','0.1' );
         on 28-08-2020 16:30.
     *}
 
+    *}}
+
  */
 /* ==================================================================================== */
 class Schedule extends Intangible
@@ -112,13 +110,6 @@ class Schedule extends Intangible
                                'UIKey'  => null         ,
                              );
 
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
     public      $byDay                          = null;             /* {*property   $byDay                          (DayOfWeek|string)              Defines the day(s) of the week on which a recurring Event takes place.
                                                                                                                                                     May be specified using either DayOfWeek, or alternatively Text
                                                                                                                                                     conforming to iCal's syntax for byDay recurrence rules *} */
@@ -130,11 +121,6 @@ class Schedule extends Intangible
                                                                                                                                                     place. Specified as an Integer between 1-5. For clarity, byMonthWeek
                                                                                                                                                     is best used in conjunction with byDay to indicate concepts like the
                                                                                                                                                     first and third Mondays of a month. *} */
-    public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
     public      $duration                       = null;             /* {*property   $duration                       (Duration)                      The duration of the item (movie, audio recording, event, etc.) in ISO
                                                                                                                                                     8601 date format. *} */
     public      $endDate                        = null;             /* {*property   $endDate                        (Date|DateTime)                 The end date and time of the item (in ISO 8601 date format). *} */
@@ -154,24 +140,10 @@ class Schedule extends Intangible
                                                                                                                                                     then any event that is scheduled for that 24 hour period should be
                                                                                                                                                     excluded from the schedule. This allows a whole day to be excluded
                                                                                                                                                     from the schedule without having to itemise every scheduled event. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
     public      $repeatCount                    = null;             /* {*property   $repeatCount                    (int)                           Defines the number of times a recurring Event will take place *} */
     public      $repeatFrequency                = null;             /* {*property   $repeatFrequency                (string|Duration)               Defines the frequency at which Events will occur according to a
                                                                                                                                                     schedule Schedule. The intervals between events should be defined as a
                                                                                                                                                     Duration of time. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
     public      $scheduleTimezone               = null;             /* {*property   $scheduleTimezone               (string)                        Indicates the timezone for which the time(s) indicated in the Schedule
                                                                                                                                                     are given. The value provided should be among those listed in the IANA
                                                                                                                                                     Time Zone Database. *} */
@@ -184,12 +156,9 @@ class Schedule extends Intangible
                                                                                                                                                     larger file.Note that Event uses startDate/endDate instead of
                                                                                                                                                     startTime/endTime, even when describing dates with times. This
                                                                                                                                                     situation may be clarified in future revisions. *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
-
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                     = null;             /* {*property   $wikidataId     (string)                                        Wikidata ID. NOT CHECKED SO FAR *} */
 
 
     /* ================================================================================ */
@@ -205,6 +174,10 @@ class Schedule extends Intangible
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -214,10 +187,8 @@ class Schedule extends Intangible
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of Schedule.__construct() ========================================== */
+    }   /* End of Schedule.__construct() ============================================== */
     /* ================================================================================ */
 
 
@@ -233,6 +204,10 @@ class Schedule extends Intangible
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -244,10 +219,7 @@ class Schedule extends Intangible
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of Schedule.__destruct() =========================================== */
+    }   /* End of Schedule.__destruct() =============================================== */
     /* ================================================================================ */
-
-}   /* End of class Schedule ====================================================== */
+}   /* End of class Schedule ========================================================== */
 /* ==================================================================================== */
-
-?>

@@ -235,6 +235,10 @@ class Product extends Thing
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -260,6 +264,10 @@ class Product extends Thing
         {*return
             (void)      No return
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
     */

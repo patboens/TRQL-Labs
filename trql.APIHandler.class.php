@@ -38,6 +38,7 @@
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
     {*UTF-8                 Quel bel été *}
+    {*keywords              APIGateway *}
 
     {*remark                A source of inspiration may come from the following Wikipedia
                             page [url]https://en.wikipedia.org/wiki/API_management[/url] *}
@@ -118,6 +119,10 @@ class APIHandler extends Thing
         {*return
             (self)      The current instance of the class
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
 
         *}}
     */
@@ -2518,6 +2523,11 @@ class APIHandler extends Thing
         *}
 
         *}}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
     */
     /* ================================================================================ */
     public function __destruct()
@@ -2528,11 +2538,7 @@ class APIHandler extends Thing
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of APIHandler.__destruct() ============================================= */
     /* ================================================================================ */
-
 }   /* End of class APIHandler ======================================================== */
 /* ==================================================================================== */
-
-?>

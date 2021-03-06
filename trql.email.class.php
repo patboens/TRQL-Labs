@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 19-01-21 07:14 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -40,7 +39,6 @@
         {*desc              1)  Original creation
         *}
     *}
-
 
     *}}} */
 /****************************************************************************************/
@@ -88,7 +86,6 @@ if ( ! defined( 'EMAIL_RET_CODES' ) )                               /* If email 
     define( 'EMAIL_RET_CODE_MAIL_NOT_SENT'  ,EMAIL_RET_CODES - 200 );
 }
 
-
 defined( 'EMAIL_CLASS_VERSION' ) or define( 'EMAIL_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
@@ -100,6 +97,8 @@ defined( 'EMAIL_CLASS_VERSION' ) or define( 'EMAIL_CLASS_VERSION','0.1' );
 
     *}
 
+    *}}
+ 
  */
 /* ==================================================================================== */
 class Email extends Utility
@@ -113,7 +112,6 @@ class Email extends Utility
                                'family' => null         ,
                                'UIKey'  => null         ,
                              );
-
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId         = 'Q30070439';                  /* {*property   $wikidataId                     (string)                Wikidata ID. A single message, sent by email *} */
@@ -147,6 +145,10 @@ class Email extends Utility
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -161,8 +163,8 @@ class Email extends Utility
     /* ================================================================================ */
 
 
-    public function send():int
-    /*-----------------------*/
+    public function send() : int
+    /*------------------------*/
     {
         $iRetVal = EMAIL_RET_CODE_OK;                               /* Return value of the method */
 
@@ -303,25 +305,23 @@ class Email extends Utility
             }
         }
 
-        // Adding a BCC causes a weird B in front of the message!
-        // That's the reason why it has been commented out
-        //if ( ! is_null( $this->szBCC ) )
-        //{
-        //    if  ( is_string( $this->szBCC ) )
-        //    {
-        //        $this->szBCC = trim( $this->szBCC );
-        //
-        //        if ( strlen( $this->szBCC ) > 0 )
-        //        {
-        //            $this->szBCC = trim( str_replace( ';',',',$this->szBCC ) );
-        //
-        //            if ( strlen( $this->szBCC ) > 0 )
-        //            {
-        //                $szRetVal .= "BCC: {$this->szBCC}" . PHP_EOL;
-        //            }
-        //        }
-        //    }
-        //}
+        if ( ! is_null( $this->szBCC ) )
+        {
+            if  ( is_string( $this->szBCC ) )
+            {
+                $this->szBCC = trim( $this->szBCC );
+        
+                if ( strlen( $this->szBCC ) > 0 )
+                {
+                    $this->szBCC = trim( str_replace( ';',',',$this->szBCC ) );
+        
+                    if ( strlen( $this->szBCC ) > 0 )
+                    {
+                        $szRetVal .= "BCC: {$this->szBCC}" . PHP_EOL;
+                    }
+                }
+            }
+        }
 
         $this->szHeaders = $szRetVal;                               /* Save headers */
         return ( $szRetVal );                                       /* Return result to caller */
@@ -329,12 +329,11 @@ class Email extends Utility
     /* ================================================================================ */
 
 
-    public function __toHTML(): string
+    public function __toForm(): string
     /*------------------------------*/
     {
         $oForm                  = new Form();
         $oForm->szClass         = $this->szClass;
-
 
         $oForm->settings['withBR'] = false;
 
@@ -404,9 +403,16 @@ class Email extends Utility
         }   /* Create a fieldset and add the field set to the form */
 
         return ( (string) $oForm );
-    }   /* End of Email.__toHTML() ==================================================== */
+    }   /* End of Email.__toForm() ==================================================== */
     /* ================================================================================ */
 
+
+    public function __toHTML(): string
+    /*------------------------------*/
+    {
+        return ( '' );
+    }   /* End of Email.__toHTML() ==================================================== */
+    /* ================================================================================ */
 
     public function __toString()
     /*------------------------*/
@@ -416,6 +422,27 @@ class Email extends Utility
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*isEmail( $szEmail[,$szRecord] )=
+
+        Checks whether an email address exists
+
+        {*params
+            $szEmail            (string)        The email address to check
+        *}
+
+        {*return
+            (array)     Associative array if method is successful; [c]null[/c]
+                        otherwise.
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function isEmail( $szEmail, $szRecord = 'MX' )
     /*-----------------------------------------------*/
     {
@@ -432,10 +459,33 @@ class Email extends Utility
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*DNSRecord( $szDomain )=
+
+        Return the DNS record of a domain
+
+        {*params
+            $szDomain       (string)        The domain to get the DNS Record of
+        *}
+
+        {*return
+            (array)     Associative array if method is successful; [c]null[/c]
+                        otherwise.
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function DNSRecord( $szDomain )
     /*---------------------------------*/
     {
-        return ( dns_get_record( $szDomain,DNS_ANY ) );
+        $aRetVal = dns_get_record( $szDomain,DNS_ANY );
+
+        return (  is_array( $aRetVal ) ? $aRetVal : null );
     }   /* End of Email.DNSRecord() =================================================== */
     /* ================================================================================ */
 
@@ -452,6 +502,10 @@ class Email extends Utility
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -465,7 +519,5 @@ class Email extends Utility
         $this->necroSignaling();
     }   /* End of Email.__destruct() ================================================== */
     /* ================================================================================ */
-
 }   /* End of class Email ============================================================= */
 /* ==================================================================================== */
-?>

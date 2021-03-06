@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 10-01-21 12:27 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -88,6 +87,7 @@ defined( 'TASK_CLASS_VERSION' ) or define( 'TASK_CLASS_VERSION' ,'0.1' );
 
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Task extends Activity
@@ -101,7 +101,6 @@ class Task extends Activity
                                'family' => null         ,
                                'UIKey'  => null         ,
                              );
-
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId             = 'Q759676';                /* {*property   $wikidataId                     (string)            Activity that needs to be accomplished within a
@@ -131,6 +130,10 @@ class Task extends Activity
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -153,7 +156,7 @@ class Task extends Activity
     /* ================================================================================ */
 
 
-    public function identity():string
+    public function identity() : string
     /*------------------------------*/
     {
         $szRetVal = '';
@@ -380,6 +383,10 @@ class Task extends Activity
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -393,7 +400,5 @@ class Task extends Activity
         $this->necroSignaling();
     }   /* End of Task.__destruct() =================================================== */
     /* ================================================================================ */
-
 }   /* End of class Task ============================================================== */
 /* ==================================================================================== */
-?>

@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -35,6 +33,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -62,8 +61,8 @@
 /****************************************************************************************/
 namespace trql\educationaloccupationalprogram;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\intangible\Intangible    as Intangible;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\intangible\Intangible     as Intangible;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -71,8 +70,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'INTANGIBLE_CLASS_VERSION' ) )
     require_once( 'trql.intangible.class.php' );
-
-
 
 defined( 'EDUCATIONALOCCUPATIONALPROGRAM_CLASS_VERSION' ) or define( 'EDUCATIONALOCCUPATIONALPROGRAM_CLASS_VERSION','0.1' );
 
@@ -103,10 +100,11 @@ defined( 'EDUCATIONALOCCUPATIONALPROGRAM_CLASS_VERSION' ) or define( 'EDUCATIONA
         on 26-08-2020 18:46.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class EducationalOccupationalProgram extends Intangible
-/*--------------------------------------*/
+/*---------------------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -117,13 +115,6 @@ class EducationalOccupationalProgram extends Intangible
                                'UIKey'  => null         ,
                              );
 
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
     public      $applicationDeadline            = null;             /* {*property   $applicationDeadline            (Date)                          The date at which the program stops collecting applications for the
                                                                                                                                                     next enrollment cycle. *} */
     public      $applicationStartDate           = null;             /* {*property   $applicationStartDate           (Date)                          The date at which the program begins collecting applications for the
@@ -145,16 +136,12 @@ class EducationalOccupationalProgram extends Intangible
     public      $endDate                        = null;             /* {*property   $endDate                        (Date|DateTime)                 The end date and time of the item (in ISO 8601 date format). *} */
     public      $financialAidEligible           = null;             /* {*property   $financialAidEligible           (DefinedTerm|string)            A financial aid type or program which students may use to pay for
                                                                                                                                                     tuition or fees associated with the program. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
+    public      $hasCourse                      = null;             /* {*property   $hasCourse                      (Course)                        A course or class that is one of the learning opportunities that 
+                                                                                                                                                    constitute an educational / occupational program. No information is 
+                                                                                                                                                    implied about whether the course is mandatory or optional; no guarantee 
+                                                                                                                                                    is implied about whether the course will be available to everyone 
+                                                                                                                                                    on the program. *} */
     public      $maximumEnrollment              = null;             /* {*property   $maximumEnrollment              (int)                           The maximum number of students who may be enrolled in the program. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
     public      $numberOfCredits                = null;             /* {*property   $numberOfCredits                (StructuredValue|int)           The number of credits or units awarded by a Course or required to
                                                                                                                                                     complete an EducationalOccupationalProgram. *} */
     public      $occupationalCategory           = null;             /* {*property   $occupationalCategory           (CategoryCode|string)           A category describing the job, preferably using a term from a taxonomy
@@ -174,8 +161,6 @@ class EducationalOccupationalProgram extends Intangible
                                                                                                                                                     on a number of common types, it can be used in others. In that case,
                                                                                                                                                     using a second type, such as Product or a subtype of Product, can
                                                                                                                                                     clarify the nature of the offer. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
     public      $programPrerequisites           = null;             /* {*property   $programPrerequisites           (Course|AlignmentObject|string|EducationalOccupationalCredential)Prerequisites for enrolling in the program. *} */
     public      $programType                    = null;             /* {*property   $programType                    (string|DefinedTerm)            The type of educational or occupational program. For example,
                                                                                                                                                     classroom, internship, alternance, etc.. *} */
@@ -184,11 +169,7 @@ class EducationalOccupationalProgram extends Intangible
                                                                                                                                                     goods on behalf of the provider. A provider may also serve as the
                                                                                                                                                     seller. *} */
     public      $salaryUponCompletion           = null;             /* {*property   $salaryUponCompletion           (MonetaryAmountDistribution)    The expected salary upon completing the training. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
     public      $startDate                      = null;             /* {*property   $startDate                      (DateTime|Date)                 The start date and time of the item (in ISO 8601 date format). *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
     public      $termDuration                   = null;             /* {*property   $termDuration                   (Duration)                      The amount of time in a term as defined by the institution. A term is
                                                                                                                                                     a length of time where students take one or more classes. Semesters
                                                                                                                                                     and quarters are common units for term. *} */
@@ -202,10 +183,10 @@ class EducationalOccupationalProgram extends Intangible
     public      $trainingSalary                 = null;             /* {*property   $trainingSalary                 (MonetaryAmountDistribution)    The estimated salary earned while in the program. *} */
     public      $typicalCreditsPerTerm          = null;             /* {*property   $typicalCreditsPerTerm          (StructuredValue|int)           The number of credits or units a full-time student would be expected
                                                                                                                                                     to take in 1 term however 'term' is defined by the institution. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId     (string)                                        Wikidata ID. NOT CHECKED SO FAR *} */
 
 
     /* ================================================================================ */
@@ -221,6 +202,10 @@ class EducationalOccupationalProgram extends Intangible
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -230,10 +215,8 @@ class EducationalOccupationalProgram extends Intangible
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of EducationalOccupationalProgram.__construct() ========================================== */
+    }   /* End of EducationalOccupationalProgram.__construct() ======================== */
     /* ================================================================================ */
 
 
@@ -249,6 +232,10 @@ class EducationalOccupationalProgram extends Intangible
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -260,10 +247,7 @@ class EducationalOccupationalProgram extends Intangible
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of EducationalOccupationalProgram.__destruct() =========================================== */
+    }   /* End of EducationalOccupationalProgram.__destruct() ========================= */
     /* ================================================================================ */
-
-}   /* End of class EducationalOccupationalProgram ====================================================== */
+}   /* End of class EducationalOccupationalProgram ==================================== */
 /* ==================================================================================== */
-
-?>

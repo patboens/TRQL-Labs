@@ -27,6 +27,7 @@
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
     {*UTF-8                 Quel bel été *}
+    {*keywords              Agility *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -121,6 +122,43 @@ class Portfolio extends Catalog
         {*return
             (self)      The current instance of the class
         *}
+
+        {*example
+            use \trql\vaesoli\VaeSoli           as VaeSoli;
+            use \trql\kanbanboard\KanbanBoard   as KanbanBoard;
+            [b]use \trql\portfolio\Portfolio       as Portfolio;[/b]
+            use \trql\project\Aspiration        as Aspiration;
+
+            if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+                require_once( 'trql.vaesoli.class.php' );
+
+            if ( ! defined( 'KANBANBOARD_CLASS_VERSION' ) )
+                require_once( 'trql.kanbanboard.class.php' );
+
+            [b]if ( ! defined( 'PORTFOLIO_CLASS_VERSION' ) )
+                require_once( 'trql.portfolio.class.php' );[/b]
+
+            if ( ! defined( 'ASPIRATION_CLASS_VERSION' ) )
+                require_once( 'trql.project.class.php' );
+
+            [b]$oPortfolio = new Portfolio();          // Create a portfolio
+            $oPortfolio->szCodeName = 'openpmo';    // Give the code name of this portfolio
+            $oPortfolio->load();                    // Now load the portfolio
+            $oPortfolio->findAspirations();         // Find all Aspirations (projects, initiatives, ...) belonging to this portfolio
+
+            if ( is_array( $oPortfolio->aAspirations ) && count( $oPortfolio->aAspirations ) > 0 )
+            {
+                foreach( $oPortfolio->aAspirations as $oAspiration )
+                {
+                    // Do something 
+                }
+            }[/b]
+
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
 
         *}}
     */
@@ -570,6 +608,10 @@ class Portfolio extends Catalog
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -585,4 +627,3 @@ class Portfolio extends Catalog
     /* ================================================================================ */
 }   /* End of class Portfolio ========================================================= */
 /* ==================================================================================== */
-?>

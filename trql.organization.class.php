@@ -60,7 +60,6 @@ use \trql\context\Context               as Context;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\thing\Thing                   as Thing;
 
-
 use DOMDocument;
 use DOMXPath;
 
@@ -120,7 +119,7 @@ class Organization extends Thing implements iContext
     public      $brand                      = null;                 /* {*property   $brand                      (Brand|Organization)                        The brand(s) associated with a product or service, or the brand(s)
                                                                                                                                                             maintained by an organization or business person. *} */
     public      $contactPoint               = null;                 /* {*property   $contactPoint               (ContactPoint)                              A contact point for a person or organization. Supersedes contactPoints. *} */
-    public      $correctionsPolicy          = null;                 /* {*property   $correctionsPolicy          (CreativeWork|URL)                          For an Organization (e.g. NewsMediaOrganization), a statement describing
+    public      $correctionsPolicy          = null;                 /* {*property   $correctionsPolicy          (CreativeWork|URL)                          For an [c]Organization[/c] (e.g. NewsMediaOrganization), a statement describing
                                                                                                                                                             (in news media, the newsroom’s) disclosure and correction policy for errors. *} */
     public      $department                 = null;                 /* {*property   $department                 (Organization)                              A relationship between an organization and a department of that
                                                                                                                                                             organization, also described as an organization (allowing different
@@ -131,7 +130,7 @@ class Organization extends Thing implements iContext
                                                                                                                                                             e.g. a NewsMediaOrganization. For a NewsMediaOrganization, a statement
                                                                                                                                                             describing the newsroom’s diversity policy on both staffing and sources,
                                                                                                                                                             typically providing staffing data. *} */
-    public      $diversityStaffingReport    = null;                 /* {*property   $diversityStaffingReport    (Article|URL)                               For an Organization (often but not necessarily a NewsMediaOrganization),
+    public      $diversityStaffingReport    = null;                 /* {*property   $diversityStaffingReport    (Article|URL)                               For an [c]Organization[/c] (often but not necessarily a NewsMediaOrganization),
                                                                                                                                                             a report on staffing diversity issues. In a news context this might be
                                                                                                                                                             for example ASNE or RTDNA (US) reports, or self-reported. *} */
     public      $duns                       = null;                 /* {*property   $duns                       (string)                                    The Dun & Bradstreet DUNS number for identifying an organization or
@@ -148,7 +147,7 @@ class Organization extends Thing implements iContext
     public      $faxNumber                  = null;                 /* {*property   $faxNumber                  (string)                                    The fax number. *} */
     public      $founder                    = null;                 /* {*property   $founder                    (Person)                                    A person who founded this organization. Supersedes founders. *} */
     public      $foundingDate               = null;                 /* {*property   $foundingDate               (Date)                                      The date that this organization was founded. *} */
-    public      $foundingLocation           = null;                 /* {*property   $foundingLocation           (Place)                                     The place where the Organization was founded. *} */
+    public      $foundingLocation           = null;                 /* {*property   $foundingLocation           (Place)                                     The place where the [c]Organization[/c] was founded. *} */
     public      $funder                     = null;                 /* {*property   $funder                     (Organization|Person)                       A person or organization that supports (sponsors) something through some kind
                                                                                                                                                             of financial contribution. *} */
     public      $globalLocationNumber       = null;                 /* {*property   $globalLocationNumber       (string)                                    The Global Location Number (GLN, sometimes also referred to as
@@ -178,17 +177,17 @@ class Organization extends Thing implements iContext
     public      $logo                       = null;                 /* {*property   $logo                       (ImageObject|URL)                           An associated logo. *} */
     public      $makesOffer                 = null;                 /* {*property   $makesOffer                 (Offer)                                     A pointer to products or services offered by the organization or person.
                                                                                                                                                             Inverse property: offeredBy. *} */
-    public      $member                     = null;                 /* {*property   $member                     (Organization|Person)                       A member of an Organization or a ProgramMembership. Organizations can be
+    public      $member                     = null;                 /* {*property   $member                     (Organization|Person)                       A member of an [c]Organization[/c] or a ProgramMembership. Organizations can be
                                                                                                                                                             members of organizations; ProgramMembership is typically for individuals.
                                                                                                                                                             Supersedes members, musicGroupMember. Inverse property: memberOf. *} */
-    public      $memberOf                   = null;                 /* {*property   $memberOf                   (Organization|ProgramMembership)            An Organization (or ProgramMembership) to which this Person or Organization
+    public      $memberOf                   = null;                 /* {*property   $memberOf                   (Organization|ProgramMembership)            An [c]Organization[/c] (or ProgramMembership) to which this Person or Organization
                                                                                                                                                             belongs. Inverse property: member. *} */
     public      $naics                      = null;                 /* {*property   $naics                      (string)                                    The North American Industry Classification System (NAICS) code for a
                                                                                                                                                             particular organization or business person. *} */
     public      $nonprofitStatus            = null;                 /* {*property   $nonprofitStatus            (NonprofitType)                             nonprofit Status indicates the legal status of a non-profit organization
                                                                                                                                                             in its primary place of business. *} */
     public      $numberOfEmployees          = null;                 /* {*property   $numberOfEmployees          (QuantitativeValue)                         The number of employees in an organization e.g. business. *} */
-    public      $ownershipFundingInfo       = null;                 /* {*property   $ownershipFundingInfo       (AboutPage|CreativeWork|string|URL)         For an Organization (often but not necessarily a NewsMediaOrganization),
+    public      $ownershipFundingInfo       = null;                 /* {*property   $ownershipFundingInfo       (AboutPage|CreativeWork|string|URL)         For an [c]Organization[/c] (often but not necessarily a NewsMediaOrganization),
                                                                                                                                                             a description of organizational ownership structure; funding and grants.
                                                                                                                                                             In a news/media setting, this is with particular reference to editorial
                                                                                                                                                             independence. Note that the funder is also available and can be used to
@@ -219,7 +218,7 @@ class Organization extends Thing implements iContext
     public      $taxID                      = null;                 /* {*propert    $taxID                      (string)                                    The Tax / Fiscal ID of the organization or person, e.g. the TIN in the
                                                                                                                                                             US or the CIF/NIF in Spain. *} */
     public      $telephone                  = null;                 /* {*propert    $telephone                  (string)                                    The telephone number. *} */
-    public      $unnamedSourcesPolicy       = null;                 /* {*propert    $unnamedSourcesPolicy       (CreativeWork|URL)                          For an Organization (typically a NewsMediaOrganization), a statement
+    public      $unnamedSourcesPolicy       = null;                 /* {*propert    $unnamedSourcesPolicy       (CreativeWork|URL)                          For an [c]Organization[/c] (typically a NewsMediaOrganization), a statement
                                                                                                                                                             about policy on use of unnamed sources and the decision process required. *} */
     public      $vatID                      = null;                 /* {*propert    $vatID                      (string)                                    The Value-added Tax ID of the organization or person. *} */
 
@@ -241,6 +240,10 @@ class Organization extends Thing implements iContext
         {*return
             (self)      The current instance of the class
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
 
         *}}
     */
@@ -309,6 +312,10 @@ class Organization extends Thing implements iContext
         {*return
             (void)      No return
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
     */

@@ -88,7 +88,7 @@ defined( 'DEFINEDTERMSET_CLASS_VERSION' ) or define( 'DEFINEDTERMSET_CLASS_VERSI
  */
 /* ==================================================================================== */
 class DefinedTermSet extends CreativeWork
-/*--------------------------------------*/
+/*-------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -122,6 +122,63 @@ class DefinedTermSet extends CreativeWork
 
         {*return
             (self)      The current instance of the class
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
+        {*example
+
+        |** The [c]Glossary[/c] class is defined below. It exposes a static 
+           method: [c]speak()[/c] which is then used to display a result
+        **|
+        
+        echo glossary::speak('API','$t &#8211; $v' );
+
+        class Glossary
+        {
+            public static function speak( $szTerm,$szFormat = '<span class="term">$t</span> &#8212; <span class="definition">$v</span>' )
+            {
+                $szRetVal           = null;
+                static $aTerms      = null;
+                static $oGlossary   = null;
+
+                if ( is_null( $oGlossary ) )
+                {
+                    if ( ! defined( 'DEFINEDTERMSET_CLASS_VERSION' ) )
+                        require_once( $_SERVER[ 'SNIPPET_CENTER_DIR' ] . 'trql.definedtermset.class.php' );
+
+                    [b]$oGlossary = new DefinedTermSet();
+                    $oGlossary->load();[/b]
+                }
+
+                |** Format the result **|
+                if ( ! is_null( $aRetVal = [b]$oGlossary->search( $szTerm )[/b] ) )
+                {
+                    $szRetVal = str_replace( array( '$t'                            ,   |** Term **|
+                                                    '$v'                            ,   |** Value **|
+                                                    '$d'                            ,   |** Date **|
+                                                    '$i'                            ,   |** ID **|
+                                                    '$k'                            ,   |** Keyword **|
+                                                    '$c'                            ,   |** Class **|
+                                                  ),
+                                             array( $szTerm                         ,   |** Term **|
+                                                    $aRetVal[0]['value'     ] ?? '' ,   |** Value **|
+                                                    $aRetVal[0]['date'      ] ?? '' ,   |** Date **|
+                                                    $aRetVal[0]['id'        ] ?? '' ,   |** Date **|
+                                                    $aRetVal[0]['keywords'  ] ?? '' ,   |** Keywords **|
+                                                    $aRetVal[0]['class'     ] ?? '' ,   |** Class **|
+                                                  ),
+                                             $szFormat );
+
+                }
+
+                end:
+                return ( $szRetVal );
+            }
+        }
+
         *}
 
         *}}
@@ -166,11 +223,11 @@ class DefinedTermSet extends CreativeWork
         *}
 
         {*example
-            use \trql\vaesoli\Vaesoli                   as Vaesoli;
-            use \trql\definedtermset\DefinedTermSet     as DefinedTermSet;
-
-            $oGlossary = new DefinedTermSet();
-            $oGlossary->load();
+        use \trql\vaesoli\Vaesoli                   as Vaesoli;
+        use \trql\definedtermset\DefinedTermSet     as DefinedTermSet;
+        
+        $oGlossary = new DefinedTermSet();
+        [b]$oGlossary->load();[/b]
 
         *}
 
@@ -222,17 +279,17 @@ class DefinedTermSet extends CreativeWork
         *}
 
         {*example
-            use \trql\vaesoli\Vaesoli                   as Vaesoli;
-            use \trql\definedtermset\DefinedTermSet     as DefinedTermSet;
+        use \trql\vaesoli\Vaesoli                   as Vaesoli;
+        use \trql\definedtermset\DefinedTermSet     as DefinedTermSet;
 
-            $oGlossary = new DefinedTermSet();
-            $oGlossary->load();
+        $oGlossary = new DefinedTermSet();
+        $oGlossary->load();
 
-            if ( ! is_null( $aRetVal = $oGlossary->search( 'API' ) ) )
-            {
-                foreach( $aRetVal as $aReturn )
-                    var_dump( $aReturn );
-            }
+        [b]if ( ! is_null( $aRetVal = $oGlossary->search( 'RPC' ) ) )
+        {
+            foreach( $aRetVal as $aReturn )
+                var_dump( $aReturn );
+        }[/b]
         *}
 
         *}}
@@ -352,6 +409,10 @@ class DefinedTermSet extends CreativeWork
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -365,8 +426,5 @@ class DefinedTermSet extends CreativeWork
         $this->necroSignaling();
     }   /* End of DefinedTermSet.__destruct() ========================================= */
     /* ================================================================================ */
-
 }   /* End of class DefinedTermSet ==================================================== */
 /* ==================================================================================== */
-
-?>

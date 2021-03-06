@@ -6,10 +6,23 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
-code, .filename { color: crimson; font-family: Consolas,"courier new" }
+code,samp, .filename {color: #800 !important;
+   font-family: Consolas,"courier new";
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
+.seealso code a {text-decoration:none;
+   color: #800 !important;
+   font-weight: bold;
+   font-style: italic;
+   }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
 table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
 table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
 table.properties thead th.description { width:60%; }
@@ -27,12 +40,6 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
    border: 1px solid #999;
    box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
    border: 1px solid #888; }
-code, samp {
-   color: #800;
-   background: rgba(240, 240, 240, 0.5);
-   border: 1px solid silver;
-   border-radius: 3px;
-   padding: 0px 5px; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
@@ -139,7 +146,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-correctionsPolicy"><code>$correctionsPolicy</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
-<td class="description">For an Organization (e.g. NewsMediaOrganization), a statement describing
+<td class="description">For an <code>Organization</code> (e.g. NewsMediaOrganization), a statement describing
  (in news media, the newsroom’s) disclosure and correction policy for errors.</td>
 </tr>
 <tr class="property">
@@ -192,7 +199,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-diversityStaffingReport"><code>$diversityStaffingReport</code></td>
 <td class="type"><code>Article|URL</code></td>
-<td class="description">For an Organization (often but not necessarily a NewsMediaOrganization),
+<td class="description">For an <code>Organization</code> (often but not necessarily a NewsMediaOrganization),
  a report on staffing diversity issues. In a news context this might be
  for example ASNE or RTDNA (US) reports, or self-reported.</td>
 </tr>
@@ -245,7 +252,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-foundingLocation"><code>$foundingLocation</code></td>
 <td class="type"><code>Place</code></td>
-<td class="description">The place where the Organization was founded.</td>
+<td class="description">The place where the <code>Organization</code> was founded.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-funder"><code>$funder</code></td>
@@ -364,14 +371,14 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-member"><code>$member</code></td>
 <td class="type"><code>Organization|Person</code></td>
-<td class="description">A member of an Organization or a ProgramMembership. Organizations can be
+<td class="description">A member of an <code>Organization</code> or a ProgramMembership. Organizations can be
  members of organizations; ProgramMembership is typically for individuals.
  Supersedes members, musicGroupMember. Inverse property: memberOf.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var-memberOf"><code>$memberOf</code></td>
 <td class="type"><code>Organization|ProgramMembership</code></td>
-<td class="description">An Organization (or ProgramMembership) to which this Person or Organization
+<td class="description">An <code>Organization</code> (or ProgramMembership) to which this Person or Organization
  belongs. Inverse property: member.</td>
 </tr>
 <tr class="property">
@@ -418,7 +425,7 @@ code, samp {
 <tr class="property">
 <td class="name" id="var-ownershipFundingInfo"><code>$ownershipFundingInfo</code></td>
 <td class="type"><code>AboutPage|CreativeWork|string|URL</code></td>
-<td class="description">For an Organization (often but not necessarily a NewsMediaOrganization),
+<td class="description">For an <code>Organization</code> (often but not necessarily a NewsMediaOrganization),
  a description of organizational ownership structure; funding and grants.
  In a news/media setting, this is with particular reference to editorial
  independence. Note that the funder is also available and can be used to
@@ -502,14 +509,18 @@ code, samp {
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-szHome"><code>$szHome</code></td>
+<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Home of the class. Optional.</td>
+<td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
 <hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

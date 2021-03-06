@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,8 @@
     {*cdate                 06-01-21 19:23 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
+    {*keywords              Agility *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -46,8 +46,8 @@
 /****************************************************************************************/
 namespace trql\kanbanboard;
 
-use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\taskboard\TaskBoard       as TaskBoard;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\taskboard\TaskBoard   as TaskBoard;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -85,7 +85,6 @@ class KanbanBoard extends TaskBoard
     public      $wikidataId                     = 'Q6360939';       /* {*property   $wikidataId         (string)        Wikidata ID. Main tool used to implement the 
                                                                                                                         Kanban project management methodology. *} */
 
-
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 
@@ -98,6 +97,10 @@ class KanbanBoard extends TaskBoard
         {*return
             (self)      The current instance of the class
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
 
         *}}
     */
@@ -117,17 +120,19 @@ class KanbanBoard extends TaskBoard
     /* ================================================================================ */
     /** {{*render( [$szType] )=
 
-        Renders the form
+        Renders the kanbanboard in XML or in HTML (default)
 
         {*params
-            $szType         (string)        Output type. Optional. 'HTML' by default.
+            $szType         (string)        Output type. Optional. [c]'HTML'[/c] by 
+                                            default.
         *}
 
         {*return
             (string)        HTML Code
-        *}
 
-        {*warning
+            [br][br][br] Can produce the following rendering:[br][br]
+            [img]https://raw.githubusercontent.com/patboens/TRQL-Labs/63c894e349e2b41753ce4027c47fcd28f3210b89/images/kanban-board-b26ece14-fbc7-4586-a049-84a6878d1e92.jpg[/img]
+            [br][br]
 
         *}
 
@@ -156,7 +161,7 @@ class KanbanBoard extends TaskBoard
     /* ================================================================================ */
     /** {{*save( $szFile )=
 
-        Saves the form to $szFile
+        Saves the %class% object to $szFile
 
         {*params
             $szFile         (string)        The file the form must be saved to.
@@ -204,7 +209,7 @@ class KanbanBoard extends TaskBoard
     /* ================================================================================ */
     /** {{*__toHTML()=
 
-        Renders the form in HTML
+        Renders %class% in HTML
 
         {*params
         *}
@@ -223,10 +228,7 @@ class KanbanBoard extends TaskBoard
     public function __toHTML(): string
     /*------------------------------*/
     {
-        $szRetVal = parent::__toHTML();
-
-        end:
-        return ( $szRetVal );
+        return ( parent::__toHTML() );
     }   /* End of KanbanBoard.__toHTML() ============================================== */
     /* ================================================================================ */
 
@@ -291,6 +293,100 @@ class KanbanBoard extends TaskBoard
             Private   properties are formatted as: [c]'&#0;trql\form\Form&#0;<property>'[/c] (e.g. [c]'&#0;trql\form\Form&#0;test'[/c])[br]
         *}
 
+        {*example
+
+        $o = new KanbanBoard();
+        var_dump( [b]$o->__toArray()[/b] );
+
+        |** This produces the following output:
+
+          array (size=29)
+            '�*�self' => 
+              array (size=10)
+                'file' => string 'D:\websites\snippet-center\trql.kanbanboard.class.php' (length=53)
+                'class' => string 'trql\kanbanboard\KanbanBoard' (length=28)
+                'name' => string 'kanbanboard' (length=11)
+                'birth' => float 1615017947.7907
+                'home' => string 'D:\websites\snippet-center\q\common\trql.classes.home\trql.kanbanboard.class' (length=76)
+                'family' => 
+                  array (size=934)
+                    0 => string 'D:\websites\snippet-center\trql.APIHandler.class.php' (length=52)
+                    1 => string 'D:\websites\snippet-center\trql.aboutpage.class.php' (length=51)
+                    2 => string 'D:\websites\snippet-center\trql.academicdiscipline.class.php' (length=60)
+                    3 => string 'D:\websites\snippet-center\trql.acceptaction.class.php' (length=54)
+                    4 => string 'D:\websites\snippet-center\trql.accommodation.class.php' (length=55)
+                    5 => string 'D:\websites\snippet-center\trql.accountingregister.class.php' (length=60)
+                    6 => string 'D:\websites\snippet-center\trql.accountingservice.class.php' (length=59)
+                    7 => string 'D:\websites\snippet-center\trql.achieveaction.class.php' (length=55)
+                    8 => string 'D:\websites\snippet-center\trql.action.class.php' (length=48)
+                    9 => string 'D:\websites\snippet-center\trql.actionaccessspecification.class.php' (length=67)
+                    10 => string 'D:\websites\snippet-center\trql.actionstatustype.class.php' (length=58)
+                    more elements...
+                'UIKey' => string 'trql\kanbanboard\KanbanBoard' (length=28)
+                'common' => string 'D:\websites\snippet-center\q\common' (length=35)
+                'resources' => string 'D:\websites\snippet-center\q\common\resources' (length=45)
+                'icon' => string 'D:\websites\snippet-center\q\common\resources\icons\kanbanboard.png' (length=67)
+            'wikidataId' => string 'Q6360939' (length=8)
+            '�*�aColumns' => null
+            'itemHyperlink' => null
+            'szECMAScript' => null
+            'additionalType' => null
+            'alternateName' => null
+            'description' => null
+            'disambiguatingDescription' => null
+            'image' => null
+            'identifier' => null
+            'mainEntityOfPage' => null
+            'name' => null
+            'potentialAction' => null
+            'sameAs' => null
+            'subjectOf' => null
+            'url' => null
+            'lastInfo' => 
+              array (size=4)
+                0 => 
+                  array (size=2)
+                    'time' => int 1615017947
+                    'info' => string 'trql\mother\Mother::updateSelf(): 'D:\websites\snippet-center\q\common\trql.classes.home\trql.mother.class' FOUND' (length=113)
+                1 => 
+                  array (size=2)
+                    'time' => int 1615017947
+                    'info' => string 'trql\mother\Mother::updateSelf(): 'D:\websites\snippet-center\q\common\trql.classes.home\trql.thing.class' FOUND' (length=112)
+                2 => 
+                  array (size=2)
+                    'time' => int 1615017947
+                    'info' => string 'trql\mother\Mother::updateSelf(): 'D:\websites\snippet-center\q\common\trql.classes.home\trql.taskboard.class' FOUND' (length=116)
+                3 => 
+                  array (size=2)
+                    'time' => int 1615017947
+                    'info' => string 'trql\mother\Mother::updateSelf(): 'D:\websites\snippet-center\q\common\trql.classes.home\trql.kanbanboard.class' FOUND' (length=118)
+            'learning' => boolean true
+            'remembering' => boolean true
+            'storing' => boolean true
+            '�*�szHome' => string 'D:\websites\snippet-center\q\common\trql.classes.home\trql.kanbanboard.class' (length=76)
+            '�*�memory' => null
+            '�*�pain' => int 0
+            '�*�feelPain' => boolean true
+            '�*�family' => 
+              array (size=934)
+                0 => string 'D:\websites\snippet-center\trql.APIHandler.class.php' (length=52)
+                1 => string 'D:\websites\snippet-center\trql.aboutpage.class.php' (length=51)
+                2 => string 'D:\websites\snippet-center\trql.academicdiscipline.class.php' (length=60)
+                3 => string 'D:\websites\snippet-center\trql.acceptaction.class.php' (length=54)
+                4 => string 'D:\websites\snippet-center\trql.accommodation.class.php' (length=55)
+                5 => string 'D:\websites\snippet-center\trql.accountingregister.class.php' (length=60)
+                6 => string 'D:\websites\snippet-center\trql.accountingservice.class.php' (length=59)
+                7 => string 'D:\websites\snippet-center\trql.achieveaction.class.php' (length=55)
+                8 => string 'D:\websites\snippet-center\trql.action.class.php' (length=48)
+                9 => string 'D:\websites\snippet-center\trql.actionaccessspecification.class.php' (length=67)
+                10 => string 'D:\websites\snippet-center\trql.actionstatustype.class.php' (length=58)
+                more elements...
+            'backupRequired' => boolean true
+            'autodocRequired' => boolean true
+            'classIcon' => string 'D:\websites\snippet-center\q\common\resources\icons\mother.png' (length=62)
+          **|
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -305,13 +401,13 @@ class KanbanBoard extends TaskBoard
     /* ================================================================================ */
     /** {{*__toString()=
 
-        Renders the form in HTML
+        Renders %class% as a string
 
         {*params
         *}
 
         {*return
-            (string)        XML Code
+            (string)        HTML Code (same as calling [c]__toHTML()[/c])
         *}
 
         *}}
@@ -337,6 +433,10 @@ class KanbanBoard extends TaskBoard
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -348,11 +448,7 @@ class KanbanBoard extends TaskBoard
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of KanbanBoard.__destruct() ============================================ */
     /* ================================================================================ */
-
 }   /* End of class KanbanBoard ======================================================= */
 /* ==================================================================================== */
-
-?>

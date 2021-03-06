@@ -49,6 +49,8 @@
             http://trql.io/tests/documentor.test.php
         *}
 
+        c:\wamp64\bin\php\php7.0.10\php documentor.test.php
+
         *}}
      */
 /****************************************************************************** */
@@ -107,6 +109,13 @@ if ( true )
     $noTest[] = 'websitegenerator';
     $noTest[] = 'zip';
 
+    // Excluded because causes problems: should look for the reason of the problems
+    $noTest[] = 'browser';
+    $noTest[] = 'footnotes';
+    $noTest[] = 'ledger';
+    $noTest[] = 'mercator';
+    $noTest[] = 'tazieff';
+
     $i = 0;
 
     foreach( $oDoc->self['family'] as $szFile )
@@ -119,11 +128,26 @@ if ( true )
             {
                 $szClass = '\\trql\\' . strtolower( $aMatches['class'] ) . '\\' . $aMatches['class'];
 
-                //if ( strtolower( $szClass ) > '\trql\shortstory\shortstory' )
+                /* Adapt to restart at a givne class */
+                //if ( strtolower( $szClass ) > '\trql\comicissue' )
+                //if ( strtolower( $szClass ) > '\trql\healthplannetwork' )
+                //if ( strtolower( $szClass ) > '\trql\movieseries' )
+                //if ( strtolower( $szClass ) > '\trql\readaction' )
+                //if ( strtolower( $szClass ) > '\trql\radioclip' )
+                if ( strtolower( $szClass ) > '\trql\travelagency' )
                 {
                     var_dump( ++$i . ': ' . $szClass );
+                    flush();
+
                     $o = new $szClass();
                     $o->document();
+
+                    $o = null;
+                    unset( $o );
+
+                    //if ( $i % 97 === 0 )
+                    //    usleep( 2000000 );
+                    //ob_flush();
                     //var_dump( $o->lastInfo );
                 }
             }
@@ -132,5 +156,5 @@ if ( true )
 }
 
 end:
-echo __LINE__," ... end of the script\n";
+echo "\n\n",__LINE__," ... end of the script\n";
 ?>

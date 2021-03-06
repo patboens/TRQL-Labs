@@ -64,6 +64,7 @@ defined( 'PERSON_CLASS_VERSION' ) or define( 'PERSON_CLASS_VERSION','0.1' );
     {*doc [url]http://schema.org/Person[/url] *}
 
     *}}
+ 
  */
 /* ==================================================================================== */
 class Person extends Thing implements iContext
@@ -191,6 +192,10 @@ class Person extends Thing implements iContext
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -266,6 +271,11 @@ class Person extends Thing implements iContext
         *}
 
         *}}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
     */
     /* ================================================================================ */
     public function __destruct()

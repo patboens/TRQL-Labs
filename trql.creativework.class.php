@@ -135,11 +135,11 @@ class CreativeWork extends Thing implements iContext
                                                                                                                                                 for non-visual users" or "short descriptions are present and
                                                                                                                                                 no long descriptions are needed." *} */
     public      $accountablePerson          = null;                 /* {*property   $accountablePerson          (Person)                        Specifies the Person that is legally accountable for the
-                                                                                                                                                CreativeWork. *} */
+                                                                                                                                                [c]@class.CreativeWork[/c]. *} */
     public      $aggregateRating            = null;                 /* {*property   $aggregateRating            (AggregateRating)               The overall rating, based on a collection of reviews or ratings,
                                                                                                                                                 of the item. *} */
-    public      $alternativeHeadline        = null;                 /* {*property   $alternativeHeadline        (string)                        A secondary title of the CreativeWork. *} */
-    public      $associatedMedia            = null;                 /* {*property   $associatedMedia            (MediaObject)                   A media object that encodes this CreativeWork. This property
+    public      $alternativeHeadline        = null;                 /* {*property   $alternativeHeadline        (string)                        A secondary title of the [c]@class.CreativeWork[/c]. *} */
+    public      $associatedMedia            = null;                 /* {*property   $associatedMedia            (MediaObject)                   A media object that encodes this [c]@class.CreativeWork[/c]. This property
                                                                                                                                                 is a synonym for encoding. *} */
     public      $audience                   = null;                 /* {*property   $audience                   (Audience)                      An intended audience, i.e. a group for whom something was
                                                                                                                                                 created. *} */
@@ -153,7 +153,7 @@ class CreativeWork extends Thing implements iContext
     public      $citation                   = null;                 /* {*property   $citation                   (CreativeWork|string)           A citation or reference to another creative work, such
                                                                                                                                                 as another publication, web page, scholarly article, etc. *} */
     public      $comment                    = null;                 /* {*property   $comment                    (Comment)                       Comments, typically from users. *} */
-    public      $commentCount               = null;                 /* {*property   $commentCount               (int)                           The number of comments this CreativeWork (e.g. Article,
+    public      $commentCount               = null;                 /* {*property   $commentCount               (int)                           The number of comments this [c]@class.CreativeWork[/c] (e.g. Article,
                                                                                                                                                 Question or Answer) has received. This is most applicable to
                                                                                                                                                 works published in Web sites with commenting system;
                                                                                                                                                 additional comments may exist elsewhere. *} */
@@ -168,31 +168,31 @@ class CreativeWork extends Thing implements iContext
     public      $contentReferenceTime       = null;                 /* {*property   $contentReferenceTime       (DateTime)                      The specific time described by a creative work, for works
                                                                                                                                                 (e.g. articles, video objects etc.) that emphasise a
                                                                                                                                                 particular moment within an Event. *} */
-    public      $contributor                = null;                 /* {*property   $contributor                (Organization|Person)           A secondary contributor to the CreativeWork or Event. *} */
-    public      $copyrightHolder            = null;                 /* {*property   $copyrightHolder            (Organization|Person)           The party holding the legal copyright to the CreativeWork. *} */
+    public      $contributor                = null;                 /* {*property   $contributor                (Organization|Person)           A secondary contributor to the [c]@class.CreativeWork[/c] or Event. *} */
+    public      $copyrightHolder            = null;                 /* {*property   $copyrightHolder            (Organization|Person)           The party holding the legal copyright to the [c]@class.CreativeWork[/c]. *} */
     public      $copyrightYear              = null;                 /* {*property   $copyrightYear              (Number)                        The year during which the claimed copyright for the
-                                                                                                                                                CreativeWork was first asserted. *} */
-    public      $correction                 = null;                 /* {*property   $correction                 (CorrectionComment|string|URL)  Indicates a correction to a CreativeWork, either via a
-                                                                                                                                                CorrectionComment, textually or in another document. *} */
+                                                                                                                                                [c]@class.CreativeWork[/c] was first asserted. *} */
+    public      $correction                 = null;                 /* {*property   $correction                 (CorrectionComment|string|URL)  Indicates a correction to a [c]@class.CreativeWork[/c], either via a
+                                                                                                                                                [c]@class.CorrectionComment[/c], textually or in another document. *} */
     public      $creativeWorkStatus         = null;                 /* {*property   $creativeWorkStatus         (DefinedTerm|string)            The status of a creative work in terms of its stage in a lifecycle.
                                                                                                                                                 Example terms include Incomplete, Draft, Published, Obsolete.
                                                                                                                                                 Some organizations define a set of terms for the stages of their
                                                                                                                                                 publication lifecycle. *} */
-    public      $creator                    = null;                 /* {*property   $creator                    (Organization|Person)           The creator/author of this CreativeWork. This is the same as
-                                                                                                                                                the Author property for CreativeWork. *} */
-    public      $dateCreated                = null;                 /* {*property   $dateCreated                (Date|DateTime)                 The date on which the CreativeWork was created or the item was
+    public      $creator                    = null;                 /* {*property   $creator                    (Organization|Person)           The creator/author of this [c]@class.CreativeWork[/c]. This is the same as
+                                                                                                                                                the Author property for [c]@class.CreativeWork[/c]. *} */
+    public      $dateCreated                = null;                 /* {*property   $dateCreated                (Date|DateTime)                 The date on which the [c]@class.CreativeWork[/c] was created or the item was
                                                                                                                                                 added to a DataFeed. *} */
-    public      $dateModified               = null;                 /* {*property   $dateModified               (Date|DateTime)                 The date on which the CreativeWork was most recently modified or
+    public      $dateModified               = null;                 /* {*property   $dateModified               (Date|DateTime)                 The date on which the [c]@class.CreativeWork[/c] was most recently modified or
                                                                                                                                                 when the item's entry was modified within a DataFeed. *} */
     public      $datePublished              = null;                 /* {*property   $datePublished              (Date)                          Date of first broadcast/publication. *} */
-    public      $discussionUrl              = null;                 /* {*property   $discussionUrl              (URL)                           A link to the page containing the comments of the CreativeWork. *} */
-    public      $editor                     = null;                 /* {*property   $editor                     (Person)                        Specifies the Person who edited the CreativeWork. *} */
+    public      $discussionUrl              = null;                 /* {*property   $discussionUrl              (URL)                           A link to the page containing the comments of the [c]@class.CreativeWork[/c]. *} */
+    public      $editor                     = null;                 /* {*property   $editor                     (Person)                        Specifies the Person who edited the [c]@class.CreativeWork[/c]. *} */
     public      $educationalAlignment       = null;                 /* {*property   $educationalAlignment       (AlignmentObject)               An alignment to an established educational framework. *} */
     public      $educationalUse             = null;                 /* {*property   $educationalUse             (string)                        The purpose of a work in the context of education;
                                                                                                                                                 for example, 'assignment', 'group work'. *} */
-    public      $encoding                   = null;                 /* {*property   $encoding                   (MediaObject)                   A media object that encodes this CreativeWork. This property is
+    public      $encoding                   = null;                 /* {*property   $encoding                   (MediaObject)                   A media object that encodes this [c]@class.CreativeWork[/c]. This property is
                                                                                                                                                 a synonym for associatedMedia. Supersedes encodings.
-                                                                                                                                                Inverse property: encodesCreativeWork. *} */
+                                                                                                                                                Inverse property: encodes[c]@class.CreativeWork[/c]. *} */
     public      $encodingFormat             = null;                 /* {*property   $encodingFormat             (string|URL)                    Media type typically expressed using a MIME format
                                                                                                                                                 (see IANA site and MDN reference) e.g. application/zip for
                                                                                                                                                 a SoftwareApplication binary, audio/mpeg for .mp3 etc.). *} */
@@ -207,14 +207,14 @@ class CreativeWork extends Thing implements iContext
     public      $funder                     = null;                 /* {*property   $funder                     (Organization|Person)           A person or organization that supports (sponsors) something
                                                                                                                                                 through some kind of financial contribution. *} */
     public      $genre                      = null;                 /* {*property   $genre                      (string|URL)                    Genre of the creative work, broadcast channel or group. *} */
-    public      $hasPart                    = null;                 /* {*property   $hasPart                    (CreativeWork)                  Indicates an item or CreativeWork that is part of this item,
-                                                                                                                                                or CreativeWork (in some sense). Inverse property: isPartOf. *} */
+    public      $hasPart                    = null;                 /* {*property   $hasPart                    (CreativeWork)                  Indicates an item or [c]@class.CreativeWork[/c] that is part of this item,
+                                                                                                                                                or [c]@class.CreativeWork[/c] (in some sense). Inverse property: isPartOf. *} */
     public      $headline                   = null;                 /* {*property   $headline                   (string)                        Headline of the article. *} */
     public      $inLanguage                 = null;                 /* {*property   $inLanguage                 (Language|string)               The language of the content or performance or used in an
                                                                                                                                                 action. Please use one of the language codes from the
                                                                                                                                                 IETF BCP 47 standard. See also availableLanguage.
                                                                                                                                                 Supersedes language. *} */
-    public      $interactionStatistic       = null;                 /* {*property   $interactionStatistic       (InteractionCounter)            The number of interactions for the CreativeWork using the
+    public      $interactionStatistic       = null;                 /* {*property   $interactionStatistic       (InteractionCounter)            The number of interactions for the [c]@class.CreativeWork[/c] using the
                                                                                                                                                 WebSite or SoftwareApplication. The most specific child
                                                                                                                                                 type of InteractionCounter should be used.
                                                                                                                                                 Supersedes interactionCount. *} */
@@ -226,8 +226,8 @@ class CreativeWork extends Thing implements iContext
     public      $isBasedOn                  = null;                 /* {*property   $isBasedOn                  (CreativeWork|Product|URL)      A resource from which this work is derived or from which it
                                                                                                                                                 is a modification or adaption. Supersedes isBasedOnUrl. *} */
     public      $isFamilyFriendly           = null;                 /* {*property   $isFamilyFriendly           (Boolean)                       Indicates whether this content is family friendly. *} */
-    public      $isPartOf                   = null;                 /* {*property   $isPartOf                   (CreativeWork)                  Indicates an item or CreativeWork that this item, or
-                                                                                                                                                CreativeWork (in some sense), is part of.
+    public      $isPartOf                   = null;                 /* {*property   $isPartOf                   (CreativeWork)                  Indicates an item or [c]@class.CreativeWork[/c] that this item, or
+                                                                                                                                                [c]@class.CreativeWork[/c] (in some sense), is part of.
                                                                                                                                                 Inverse property: hasPart. *} */
     public      $keywords                   = null;                 /* {*property   $keywords                   (string)                        Keywords or tags used to describe this content. Multiple
                                                                                                                                                 entries in a keywords list are typically delimited by commas. *} */
@@ -235,15 +235,15 @@ class CreativeWork extends Thing implements iContext
                                                                                                                                                 resource. For example, 'presentation', 'handout'. *} */
     public      $license                    = null;                 /* {*property   $license                    (CreativeWork|URL)              A license document that applies to this content, typically
                                                                                                                                                 indicated by URL. *} */
-    public      $locationCreated            = null;                 /* {*property   $locationCreated            (Place)                         The location where the CreativeWork was created, which may
-                                                                                                                                                not be the same as the location depicted in the CreativeWork. *} */
+    public      $locationCreated            = null;                 /* {*property   $locationCreated            (Place)                         The location where the [c]@class.CreativeWork[/c] was created, which may
+                                                                                                                                                not be the same as the location depicted in the [c]@class.CreativeWork[/c]. *} */
     public      $mainEntity                 = null;                 /* {*property   $mainEntity                 (Thing)                         Indicates the primary entity described in some page or
-                                                                                                                                                other CreativeWork. Inverse property: mainEntityOfPage. *} */
+                                                                                                                                                other [c]@class.CreativeWork[/c]. Inverse property: mainEntityOfPage. *} */
     public      $material                   = null;                 /* {*property   $material                   (Product|string|URL)            A material that something is made from,
                                                                                                                                                 e.g. leather, wool, cotton, paper. *} */
     public      $materialExtent             = null;                 /* {*property   $materialExtent             (QuantitativeValue|string)      The quantity of the materials being described or an expression
                                                                                                                                                 of the physical space they occupy. *} */
-    public      $mentions                   = null;                 /* {*property   $mentions                   (Thing)                         Indicates that the CreativeWork contains a reference to, but
+    public      $mentions                   = null;                 /* {*property   $mentions                   (Thing)                         Indicates that the [c]@class.CreativeWork[/c] contains a reference to, but
                                                                                                                                                 is not necessarily about a concept. *} */
     public      $offers                     = null;                 /* {*property   $offers                     (Offer)                         An offer to provide this item—for example, an offer to sell
                                                                                                                                                 a product, rent the DVD of a movie, perform a service, or
@@ -262,20 +262,20 @@ class CreativeWork extends Thing implements iContext
                                                                                                                                                 a document describing the editorial principles of an Organization
                                                                                                                                                 (or individual e.g. a Person writing a blog) that relate to their
                                                                                                                                                 activities as a publisher, e.g. ethics or diversity policies.
-                                                                                                                                                When applied to a CreativeWork (e.g. NewsArticle) the principles
+                                                                                                                                                When applied to a [c]@class.CreativeWork[/c] (e.g. NewsArticle) the principles
                                                                                                                                                 are those of the party primarily responsible for the creation of
-                                                                                                                                                the CreativeWork.
+                                                                                                                                                the [c]@class.CreativeWork[/c].
                 
                                                                                                                                                 While such policies are most typically expressed in natural
                                                                                                                                                 language, sometimes related information (e.g. indicating a funder)
                                                                                                                                                 can be expressed using schema.org terminology. *} */
                 
-    public      $recordedAt                 = null;                 /* {*property   $recordedAt                 (Event)                         The Event where the CreativeWork was recorded. The CreativeWork may capture
+    public      $recordedAt                 = null;                 /* {*property   $recordedAt                 (Event)                         The Event where the [c]@class.CreativeWork[/c] was recorded. The [c]@class.CreativeWork[/c] may capture
                                                                                                                                                 all or part of the event. Inverse property: recordedIn. *} */
     public      $releasedEvent              = null;                 /* {*property   $releasedEvent              (PublicationEvent)              The place and time the release was issued, expressed as a PublicationEvent. *} */
     public      $review                     = null;                 /* {*property   $review                     (Review)                        A review of the item. Supersedes reviews. *} */
     public      $schemaVersion              = null;                 /* {*property   $schemaVersion              (string|URL)                    Indicates (by URL or string) a particular version of a schema used
-                                                                                                                                                in some CreativeWork. For example, a document could declare a
+                                                                                                                                                in some [c]@class.CreativeWork[/c]. For example, a document could declare a
                                                                                                                                                 schemaVersion using an URL such as http://schema.org/version/2.0/ if
                                                                                                                                                 precise indication of schema version was required by some application. *} */
     public      $sdDatePublished            = null;                 /* {*property   $sdDatePublished            (Date)                          Indicates the date on which the current structured data was
@@ -292,7 +292,7 @@ class CreativeWork extends Thing implements iContext
     public      $spatial                    = null;                 /* {*property   $spatial                    (Place)                         The "spatial" property can be used in cases when more specific properties
                                                                                                                                                 (e.g. locationCreated, spatialCoverage, contentLocation) are not known
                                                                                                                                                 to be appropriate. *} */
-    public      $spatialCoverage            = null;                 /* {*property   $spatialCoverage            (Place)                         The spatialCoverage of a CreativeWork indicates the place(s) which are
+    public      $spatialCoverage            = null;                 /* {*property   $spatialCoverage            (Place)                         The spatialCoverage of a [c]@class.CreativeWork[/c] indicates the place(s) which are
                                                                                                                                                 the focus of the content. It is a subproperty of contentLocation intended
                                                                                                                                                 primarily for more technical and detailed materials. For example with a
                                                                                                                                                 Dataset, it indicates areas that the dataset describes: a dataset of
@@ -304,7 +304,7 @@ class CreativeWork extends Thing implements iContext
     public      $temporal                   = null;                 /* {*property   $temporal                   (DateTime|string)               The "temporal" property can be used in cases where more specific
                                                                                                                                                 properties (e.g. temporalCoverage, dateCreated, dateModified, datePublished)
                                                                                                                                                 are not known to be appropriate. *} */
-    public      $temporalCoverage           = null;                 /* {*property   $temporalCoverage           (DateTime|string|URL)           The temporalCoverage of a CreativeWork indicates the period that the
+    public      $temporalCoverage           = null;                 /* {*property   $temporalCoverage           (DateTime|string|URL)           The temporalCoverage of a [c]@class.CreativeWork[/c] indicates the period that the
                                                                                                                                                 content applies to, i.e. that it describes, either as a DateTime or as a
                                                                                                                                                 textual string indicating a time period in ISO 8601 time interval format.
                                                                                                                                                 In the case of a Dataset it will typically indicate the relevant time
@@ -321,7 +321,7 @@ class CreativeWork extends Thing implements iContext
                                                                                                                                                 with no specified final date. This is tentative and might be updated in
                                                                                                                                                 future when ISO 8601 is officially updated. Supersedes datasetTimeInterval. *} */
                 
-    public      $text                       = null;                 /* {*property   $text                       (string)                        The textual content of this CreativeWork. *} */
+    public      $text                       = null;                 /* {*property   $text                       (string)                        The textual content of this [c]@class.CreativeWork[/c]. *} */
     public      $thumbnailUrl               = null;                 /* {*property   $thumbnailUrl               (URL)                           A thumbnail image relevant to the Thing. *} */
     public      $timeRequired               = null;                 /* {*property   $timeRequired               (Duration)                      Approximate or typical time it takes to work with or through this learning
                                                                                                                                                 resource for the typical intended target audience, e.g. 'PT30M', 'PT1H25M'. *} */
@@ -331,7 +331,7 @@ class CreativeWork extends Thing implements iContext
                                                                                                                                                 regional differences and technical requirements of a target market, or that
                                                                                                                                                 translates during some event. *} */
     public      $typicalAgeRange            = null;                 /* {*property   $typicalAgeRange            (string)                        The typical expected age range, e.g. '7-9', '11-'. *} */
-    public      $version                    = null;                 /* {*property   $version                    (Number|string)                 The version of the CreativeWork embodied by a specified resource. *} */
+    public      $version                    = null;                 /* {*property   $version                    (Number|string)                 The version of the [c]@class.CreativeWork[/c] embodied by a specified resource. *} */
     public      $video                      = null;                 /* {*property   $video                      (Clip|VideoObject)              An embedded video object. *} */
     public      $workExample                = null;                 /* {*property   $workExample                (CreativeWork)                  Example/instance/realization/derivation of the concept of this creative
                                                                                                                                                 work. eg. The paperback edition, first edition, or eBook.
@@ -361,6 +361,7 @@ class CreativeWork extends Thing implements iContext
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = 'Q17537576';      /* {*property   $wikidataId                     (string)                        Wikidata ID. Distinct artistic creation such as 
                                                                                                                                                     artwork, literature, music, and paintings. *} */
+
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 
@@ -373,6 +374,10 @@ class CreativeWork extends Thing implements iContext
         {*return
             (self)      The current instance of the class
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
 
         *}}
     */
@@ -416,6 +421,10 @@ class CreativeWork extends Thing implements iContext
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -431,4 +440,3 @@ class CreativeWork extends Thing implements iContext
     /* ================================================================================ */
 }   /* End of class CreativeWork ====================================================== */
 /* ==================================================================================== */
-?>

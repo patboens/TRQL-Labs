@@ -27,6 +27,7 @@
     {*cdate                 27/06/2012 - 18:12 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -68,9 +69,9 @@
 /****************************************************************************************/
 namespace trql\file;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\utility\Utility                           as Utility;
+use \trql\mother\Mother         as Mother;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\utility\Utility       as Utility;
 
 use DOMDocument;
 use DOMXPath;
@@ -86,7 +87,6 @@ if ( ! defined( 'UTILITY_CLASS_VERSION' ) )
 
 defined( 'FILE_CLASS_VERSION' ) or define( 'FILE_CLASS_VERSION','0.1' );
 
-
 /* ==================================================================================== */
 /** {{*class File=
 
@@ -99,7 +99,6 @@ defined( 'FILE_CLASS_VERSION' ) or define( 'FILE_CLASS_VERSION','0.1' );
     {*warning
         This class must still be tested extensively in the context of TRQL Labs
     *}
-
 
     *}}
  */
@@ -159,6 +158,10 @@ class File extends Utility
             As such the class cannot be used in a command line context
 
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
      */
@@ -513,7 +516,5 @@ class File extends Utility
 
     }   /* End of File.__destruct() =================================================== */
     /* ================================================================================ */
-
 }   /* End of class File ============================================================== */
 /* ==================================================================================== */
-?>

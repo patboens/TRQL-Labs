@@ -145,16 +145,23 @@ class Sprint extends CyclicProcess
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
         {*seealso @fnc.__destruct *}
 
         {*example
-        // Example #1
+
+        |** ============================================== **|
+        |** All such classes are often used in conjunction **|
+        |** ============================================== **|
         use \trql\vaesoli\VaeSoli           as VaeSoli;
         use \trql\kanbanboard\KanbanBoard   as KanbanBoard;
         use \trql\portfolio\Portfolio       as Portfolio;
         use \trql\project\Aspiration        as Aspiration;
         [b]use \trql\sprint\Sprint             as Sprint;[/b]
         use \trql\task\Task                 as Task;
+
+        |** They are used in the [url]https://www.openpmo.site[/url] initiative **|
 
         if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
             require_once( '/trql.vaesoli.class.php' );
@@ -831,7 +838,24 @@ class Sprint extends CyclicProcess
         *}
 
         {*return
-            (bool)      [c]true[/c] if $szFile loaded successfully; [c]false[/c] if not
+            (bool)      [c]true[/c] if @param.$szFile loaded successfully; [c]false[/c] if not
+        *}
+
+        {*example
+        use \trql\sprint\Sprint as Sprint;
+
+        if ( ! defined( 'SPRINT_CLASS_VERSION' ) )
+            require_once( 'trql.sprint.class.php' );
+
+        $oSprint       = new Sprint();
+        $oSprint->name = 'My second sprint';
+        $szFile        = "sprint.00002.xml";
+
+        [b]if ( $oSprint->load( $szFile ) )
+        {
+            // Do something
+        }[/b]
+
         *}
 
         {*seealso @fnc.save *}
@@ -1223,14 +1247,16 @@ class Sprint extends CyclicProcess
         *}
 
         {*example
-        [b]use \trql\sprint\Sprint as Sprint;[/b]
+        use \trql\sprint\Sprint as Sprint;
 
-        [b]if ( ! defined( 'SPRINT_CLASS_VERSION' ) )
-            require_once( 'trql.sprint.class.php' );[/b]
+        if ( ! defined( 'SPRINT_CLASS_VERSION' ) )
+            require_once( 'trql.sprint.class.php' );
 
-        [b]$oSprint = new Sprint();
+        $oSprint       = new Sprint();
         $oSprint->name = 'My sprint';
-        echo $oSprint->__toHTML();[/b]
+
+        [b]echo $oSprint->__toHTML();[/b]
+
         *}
 
         {*seealso @fnc.__toString *}
@@ -1260,14 +1286,15 @@ class Sprint extends CyclicProcess
         *}
 
         {*example
-        [b]use \trql\sprint\Sprint as Sprint;[/b]
+        |** Comment **|
+        use \trql\sprint\Sprint as Sprint;
 
-        [b]if ( ! defined( 'SPRINT_CLASS_VERSION' ) )
-            require_once( 'trql.sprint.class.php' );[/b]
+        if ( ! defined( 'SPRINT_CLASS_VERSION' ) )
+            require_once( 'trql.sprint.class.php' );
 
-        [b]$oSprint = new Sprint();
+        $oSprint = new Sprint();
         $oSprint->name = 'My sprint';
-        echo $oSprint;[/b]
+        [b]echo $oSprint;[/b]   // Invokes __toString()
         *}
 
         {*seealso @fnc.__toHTML *}
