@@ -6,6 +6,9 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 code,samp, .filename {color: #800 !important;
    font-family: Consolas,"courier new";
    background: rgba(240, 240, 240, 0.5);
@@ -17,9 +20,7 @@ code,samp, .filename {color: #800 !important;
    font-weight: bold;
    font-style: italic;
    }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
-.constrained { max-width: 100%; height: auto; }
-.center { text-align:center; }
+.property.inheritance code { border: none !important; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
 img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
@@ -63,7 +64,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  exclusive, announcement by an organization or person to seek a certain type of 
  goods or services. For describing demand using this type, the very same 
  properties used for Offer apply.</span>
-<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Thing &gt; Intangible &gt; Demand</code></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="/?src=Mother">Mother</a> &gt; <a href="/?src=Thing">Thing</a> &gt; <a href="/?src=Intangible">Intangible</a> &gt; Demand</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Demand extends Intangible</code></span>
 <span class="DocumentorLabel">Keywords: </span><span class="property keywords">constructors, destructors</span>
 <span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
@@ -81,12 +82,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="property">
-<td class="name" id="var-acceptedPaymentMethod"><code>$acceptedPaymentMethod</code></td>
+<td class="name" id="var.acceptedPaymentMethod"><code>$acceptedPaymentMethod</code></td>
 <td class="type"><code>LoanOrCredit|PaymentMethod</code></td>
 <td class="description">The payment method(s) accepted by seller for this offer.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-additionalType"><code>$additionalType</code></td>
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An additional type for the item,
  typically used for adding more
@@ -100,71 +101,71 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  - for multiple types.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-advanceBookingRequirement"><code>$advanceBookingRequirement</code></td>
+<td class="name" id="var.advanceBookingRequirement"><code>$advanceBookingRequirement</code></td>
 <td class="type"><code>QuantitativeValue</code></td>
 <td class="description">The amount of time that is required between accepting the offer 
  and the actual usage of the resource or service.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-alternateName"><code>$alternateName</code></td>
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An alias for the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-areaServed"><code>$areaServed</code></td>
+<td class="name" id="var.areaServed"><code>$areaServed</code></td>
 <td class="type"><code>AdministrativeArea|GeoShape|Place|string</code></td>
 <td class="description">The geographic area where a service or offered item is provided.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-availability"><code>$availability</code></td>
+<td class="name" id="var.availability"><code>$availability</code></td>
 <td class="type"><code>ItemAvailability</code></td>
 <td class="description">The availability of this item-for example In stock, Out of stock, 
  Pre-order, etc.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-availabilityEnds"><code>$availabilityEnds</code></td>
+<td class="name" id="var.availabilityEnds"><code>$availabilityEnds</code></td>
 <td class="type"><code>Date|DateTime|Time</code></td>
 <td class="description">The end of the availability of the product or service included 
  in the offer.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-availabilityStarts"><code>$availabilityStarts</code></td>
+<td class="name" id="var.availabilityStarts"><code>$availabilityStarts</code></td>
 <td class="type"><code>Date|DateTime|Time</code></td>
 <td class="description">The beginning of the availability of the product or service 
  included in the offer.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-availableAtOrFrom"><code>$availableAtOrFrom</code></td>
+<td class="name" id="var.availableAtOrFrom"><code>$availableAtOrFrom</code></td>
 <td class="type"><code>Place</code></td>
 <td class="description">The place(s) from which the offer can be obtained 
  (e.g. store locations).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-availableDeliveryMethod"><code>$availableDeliveryMethod</code></td>
+<td class="name" id="var.availableDeliveryMethod"><code>$availableDeliveryMethod</code></td>
 <td class="type"><code>DeliveryMethod</code></td>
 <td class="description">The delivery method(s) available for this offer.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-businessFunction"><code>$businessFunction</code></td>
+<td class="name" id="var.businessFunction"><code>$businessFunction</code></td>
 <td class="type"><code>BusinessFunction</code></td>
 <td class="description">The business function (e.g. sell, lease, repair, dispose) of the 
  offer or component of a bundle (TypeAndQuantityNode). The default 
  is http://purl.org/goodrelations/v1#Sell.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-deliveryLeadTime"><code>$deliveryLeadTime</code></td>
+<td class="name" id="var.deliveryLeadTime"><code>$deliveryLeadTime</code></td>
 <td class="type"><code>QuantitativeValue</code></td>
 <td class="description">The typical delay between the receipt of the order and the goods 
  either leaving the warehouse or being prepared for pickup, in case 
  the delivery method is on site pickup.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-description"><code>$description</code></td>
+<td class="name" id="var.description"><code>$description</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A short description of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A sub property of description. A
  short description of the item used
@@ -175,31 +176,31 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-eligibleCustomerType"><code>$eligibleCustomerType</code></td>
+<td class="name" id="var.eligibleCustomerType"><code>$eligibleCustomerType</code></td>
 <td class="type"><code>BusinessEntityType</code></td>
 <td class="description">The type(s) of customers for which the given offer is valid.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-eligibleDuration"><code>$eligibleDuration</code></td>
+<td class="name" id="var.eligibleDuration"><code>$eligibleDuration</code></td>
 <td class="type"><code>QuantitativeValue</code></td>
 <td class="description">The duration for which the given offer is valid.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-eligibleQuantity"><code>$eligibleQuantity</code></td>
+<td class="name" id="var.eligibleQuantity"><code>$eligibleQuantity</code></td>
 <td class="type"><code>QuantitativeValue</code></td>
 <td class="description">The interval and unit of measurement of ordering quantities for which 
  the offer or price specification is valid. This allows e.g. specifying 
  that a certain freight charge is valid only for a certain quantity.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-eligibleRegion"><code>$eligibleRegion</code></td>
+<td class="name" id="var.eligibleRegion"><code>$eligibleRegion</code></td>
 <td class="type"><code>GeoShape|Place|string</code></td>
 <td class="description">The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, 
  or the GeoShape for the geo-political region(s) for which the offer 
  or delivery charge specification is valid.See also ineligibleRegion.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-eligibleTransactionVolume"><code>$eligibleTransactionVolume</code></td>
+<td class="name" id="var.eligibleTransactionVolume"><code>$eligibleTransactionVolume</code></td>
 <td class="type"><code>PriceSpecification</code></td>
 <td class="description">The transaction volume, in a monetary unit, for which the offer or 
  price specification is valid, e.g. for indicating a minimal purchasing 
@@ -208,7 +209,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  minimal amount.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-gtin"><code>$gtin</code></td>
+<td class="name" id="var.gtin"><code>$gtin</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A Global Trade Item Number (GTIN). GTINs identify trade items, including 
  products and services, using numeric identification codes. The gtin 
@@ -222,7 +223,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  Left-padding of the gtin values is not required or encouraged.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-gtin12"><code>$gtin12</code></td>
+<td class="name" id="var.gtin12"><code>$gtin12</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The GTIN-12 code of the product, or the product to which the offer refers. 
  The GTIN-12 is the 12-digit GS1 Identification Key composed of a U.P.C. 
@@ -230,7 +231,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  items. See GS1 GTIN Summary for more details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-gtin13"><code>$gtin13</code></td>
+<td class="name" id="var.gtin13"><code>$gtin13</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The GTIN-13 code of the product, or the product to which the offer refers. 
  This is equivalent to 13-digit ISBN codes and EAN UCC-13. Former 
@@ -238,20 +239,20 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  adding a preceeding zero. See GS1 GTIN Summary for more details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-gtin14"><code>$gtin14</code></td>
+<td class="name" id="var.gtin14"><code>$gtin14</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The GTIN-14 code of the product, or the product to which the offer 
  refers. See GS1 GTIN Summary for more details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-gtin8"><code>$gtin8</code></td>
+<td class="name" id="var.gtin8"><code>$gtin8</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The GTIN-8 code of the product, or the product to which the offer 
  refers. This code is also known as EAN/UCC-8 or 8-digit EAN. See GS1 
  GTIN Summary for more details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-identifier"><code>$identifier</code></td>
+<td class="name" id="var.identifier"><code>$identifier</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The identifier property represents any
  kind of identifier for any kind of Thing,
@@ -265,18 +266,18 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  for more details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-image"><code>$image</code></td>
+<td class="name" id="var.image"><code>$image</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">URL of an image of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-includesObject"><code>$includesObject</code></td>
+<td class="name" id="var.includesObject"><code>$includesObject</code></td>
 <td class="type"><code>TypeAndQuantityNode</code></td>
 <td class="description">This links to a node or nodes indicating the exact quantity of the 
  products included in an Offer or ProductCollection.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-ineligibleRegion"><code>$ineligibleRegion</code></td>
+<td class="name" id="var.ineligibleRegion"><code>$ineligibleRegion</code></td>
 <td class="type"><code>GeoShape|Place|string</code></td>
 <td class="description">The ISO 3166-1 (ISO 3166-1 alpha-2) or ISO 3166-2 code, the place, 
  or the GeoShape for the geo-political region(s) for which the offer 
@@ -284,19 +285,19 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  the transaction is not allowed.See also eligibleRegion.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-inventoryLevel"><code>$inventoryLevel</code></td>
+<td class="name" id="var.inventoryLevel"><code>$inventoryLevel</code></td>
 <td class="type"><code>QuantitativeValue</code></td>
 <td class="description">The current approximate inventory level for the item or items.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-itemCondition"><code>$itemCondition</code></td>
+<td class="name" id="var.itemCondition"><code>$itemCondition</code></td>
 <td class="type"><code>OfferItemCondition</code></td>
 <td class="description">A predefined value from OfferItemCondition or a textual description of 
  the condition of the product or service, or the products or services 
  included in the offer.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-itemOffered"><code>$itemOffered</code></td>
+<td class="name" id="var.itemOffered"><code>$itemOffered</code></td>
 <td class="type"><code>AggregateOffer|CreativeWork|Event|MenuItem|Product|Service|Trip</code></td>
 <td class="description">An item being offered (or demanded). The 
  transactional nature of the offer or demand is documented using 
@@ -306,99 +307,108 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  can clarify the nature of the offer.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Indicates a page (or other <code>CreativeWork</code>)
+<td class="description">Indicates a page (or other <code><a href="/?src=CreativeWork">CreativeWork</a></code>, <code><a href="/?src=Event">Event</a></code>)
  for which this thing is the main entity
  being described. See <a
  href="https://schema.org/docs/datamodel.html#mainEntityBackground">
  background notes</a> for details.
- Inverse property: mainEntity.</td>
+ Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-mpn"><code>$mpn</code></td>
+<td class="name" id="var.mpn"><code>$mpn</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The Manufacturer Part Number (MPN) of the product, or the product to 
  which the offer refers.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-name"><code>$name</code></td>
+<td class="name" id="var.name"><code>$name</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The name of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-potentialAction"><code>$potentialAction</code></td>
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
-<td class="description">Indicates a potential Action, which
+<td class="description">Indicates a potential <code><a href="/?src=Action">Action</a></code>, which
  describes an idealized action in which
  this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-priceSpecification"><code>$priceSpecification</code></td>
+<td class="name" id="var.priceSpecification"><code>$priceSpecification</code></td>
 <td class="type"><code>PriceSpecification</code></td>
 <td class="description">One or more detailed price specifications, indicating the unit price 
  and delivery or payment charges.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sameAs"><code>$sameAs</code></td>
-<td class="type"><code>CreativeWork|Event</code></td>
-<td class="description">A <code>CreativeWork</code> or <code>Event</code> about this <code>Thing</code>. 
- Inverse property: <code>about</code>.</td>
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+ unambiguously indicates the item's
+ identity. E.g. the URL of the
+ item's Wikipedia page, Freebase
+ page, or official website.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-self"><code>$self</code></td>
+<td class="name" id="var.self"><code>$self</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-seller"><code>$seller</code></td>
+<td class="name" id="var.seller"><code>$seller</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">An entity which offers (sells / leases / lends / loans) the 
  services/goods. A seller may also be a provider.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-serialNumber"><code>$serialNumber</code></td>
+<td class="name" id="var.serialNumber"><code>$serialNumber</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The serial number or any alphanumeric identifier of a particular 
  product. When attached to an offer, it is a shortcut for the 
  serial number of the product included in the offer.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sku"><code>$sku</code></td>
+<td class="name" id="var.sku"><code>$sku</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for 
  a product or service, or the product to which the offer refers.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-url"><code>$url</code></td>
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A <code><a href="/?src=CreativeWork">CreativeWork</a></code> or <code><a href="/?src=Event">Event</a></code> about this <code><a href="/?src=Thing">Thing</a></code>. 
+ Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.url"><code>$url</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">URL of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-validFrom"><code>$validFrom</code></td>
+<td class="name" id="var.validFrom"><code>$validFrom</code></td>
 <td class="type"><code>Date|DateTime</code></td>
 <td class="description">The date when the item becomes valid.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-validThrough"><code>$validThrough</code></td>
+<td class="name" id="var.validThrough"><code>$validThrough</code></td>
 <td class="type"><code>Date|DateTime</code></td>
 <td class="description">The date after when the item is not valid. For example the end of an 
  offer, salary period, or a period of opening hours.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-warranty"><code>$warranty</code></td>
+<td class="name" id="var.warranty"><code>$warranty</code></td>
 <td class="type"><code>WarrantyPromise</code></td>
 <td class="description">The warranty promise(s) included in the offer.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Wikidata ID. Economic principle (the closest I can get).</td>
 </tr>
 </table>
-<span class="DocumentorLabel">See also: </span><span class="property seealso"><a href="#fnc-__destruct">__destruct()</a></span>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__destruct">__destruct()</a></code></span>
 <h2 class="DocumentorLabel">Methods of <code>Demand</code></h2>
-<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Keywords:</p>
 <p>constructors, destructors</p>
 <p class="property">Syntax:</p>
@@ -413,22 +423,22 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
-<span class="DocumentorLabel">See also: </span><span class="property seealso"><a href="#fnc-__destruct">__destruct()</a></span>
-<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__destruct">__destruct()</a></code></span>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Keywords:</p>
 <p>constructors, destructors</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return</p>
-<span class="DocumentorLabel">See also: </span><span class="property seealso"><a href="#fnc-__construct">__construct()</a></span>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

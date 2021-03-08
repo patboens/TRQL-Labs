@@ -128,7 +128,7 @@ class FinancialProduct extends Service
                                                                                                                                                     class of financial product, or by a financial service organization. *} */
     public      $interestRate                       = null;         /* {*property   $interestRate                       (float|QuantitativeValue)   The interest rate, charged or paid, applicable to the financial
                                                                                                                                                     product. Note: This is different from the calculated
-                                                                                                                                                    annualPercentageRate. *} */
+                                                                                                                                                    @var.annualPercentageRate. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                         = 'Q15809678';  /* {*property   $wikidataId                         (string)                    Wikidata ID. Financial service marketed and sold as a packaged 

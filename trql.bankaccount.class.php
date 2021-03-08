@@ -6,7 +6,7 @@
     {COMPANY} is a shortcut to "Lato Sensu Management"
 
     {RIGHTS} is a shortcut used by trql.documentor.class.php. In general the material
-    presented here is available under the conditions of 
+    presented here is available under the conditions of
     https://creativecommons.org/licenses/by-sa/4.0/
 
     Other shortcuts exist. They exist to make it simple to change the formulation
@@ -15,8 +15,6 @@
     It does not change the undisputed truth that ALL code has been created by
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
-
-
 
 */
 
@@ -66,13 +64,18 @@
 /****************************************************************************************/
 namespace trql\bankaccount;
 
-use \trql\vaesoli\Vaesoli                       as v;
-use \trql\financialproduct\FinancialProduct     as FinancialProduct;
-use \trql\ledger\Ledger                         as Ledger;
+use \trql\vaesoli\Vaesoli                               as v;
+use \trql\account\Account                               as Account;
+use \trql\financialproduct\FinancialProduct             as FinancialProduct;
+use \trql\ledger\Ledger                                 as Ledger;
+use \trql\personororganization\PersonOrOrganization     as PersonOrOrganization;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
+
+if ( ! defined( 'ACCOUNT_CLASS_VERSION' ) )
+    require_once( 'trql.account.class.php' );
 
 if ( ! defined( 'FINANCIALPRODUCT_CLASS_VERSION' ) )
     require_once( 'trql.financialproduct.class.php' );
@@ -80,6 +83,8 @@ if ( ! defined( 'FINANCIALPRODUCT_CLASS_VERSION' ) )
 if ( ! defined( 'LEDGER_CLASS_VERSION' ) )
     require_once( 'trql.ledger.class.php' );
 
+if ( ! defined( 'PERSONORORGANIZATION_CLASS_VERSION' ) )
+    require_once( 'trql.personororganization.class.php' );
 
 defined( 'BANKACCOUNT_CLASS_VERSION' ) or define( 'BANKACCOUNT_CLASS_VERSION','0.1' );
 
@@ -104,12 +109,15 @@ defined( 'BANKACCOUNT_CLASS_VERSION' ) or define( 'BANKACCOUNT_CLASS_VERSION','0
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
         on 26-08-2020 18:36.
+
+        The %class% class is EXPERIMENTAL.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
-class BankAccount extends FinancialProduct
-/*--------------------------------------*/
+class BankAccount extends Account
+/*------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -129,27 +137,30 @@ class BankAccount extends FinancialProduct
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q676459';        /* {*property   $wikidataId                     (string)                        Wikidata ID. Collective name for all account types, credit 
+    public      $wikidataId                     = 'Q676459';        /* {*property   $wikidataId                     (string)                        Wikidata ID. Collective name for all account types, credit
                                                                                                                                                     institutions  operates for their clients bank accounts *} */
 
     public      $balance                        = 0.0;              /* {*property   $balance                        (float)                         Amount of money present in the acoount (Wikidata (Q1365641): amount of
                                                                                                                                                     money that remains in a deposit account. *} */
-    public      $currency                       = 'EUR';            /* {*property   $currency                       (string)                        The 3-letter currency code as defined in ISO_4217 
+    public      $currency                       = 'EUR';            /* {*property   $currency                       (string)                        The 3-letter currency code as defined in ISO_4217
                                                                                                                                                     ([url]https://fr.wikipedia.org/wiki/ISO_4217[/url]). 'EUR' by default.
                                                                                                                                                     The list of currencies can be obtained by RESTFul service on trql.io:
-                                                                                                                                                    "https://www.trql.io/v1/currencies/" which links to 
+                                                                                                                                                    "https://www.trql.io/v1/currencies/" which links to
                                                                                                                                                     /vaesoli/resources/XML/currencies.xml *} */
     public      $szPersistenceFolder            = null;             /* {*property   $szPersistenceFolder            (string)                        Folder in which the files pertaining to the account will be saved/located *} */
     public      $oLedger                        = null;             /* {*property   $oLedger                        (Ledger)                        Ledger of the account *} */
+    protected   $szFolder                       = null;             /* {*property   $szFolder                       (string)                        A global folder where accounts are stored *} */
+    public      $oOwner                         = null;             /* {*property   $oOwner                         (Agent)                         A Person or Organization (@class.Agent) that owns the account. NOT USED SO FAR! *} */
+
 
     /* ================================================================================ */
-    /** {{*__construct( $szID,$szFolder )=
+    /** {{*__construct( [$szID[,$szFolder]] )=
 
         Class constructor
 
         {*params
             $szID       (string)        Bank Account ID.
-            $szFolder   (string)        Folder in which the persistence files of the 
+            $szFolder   (string)        Folder in which the persistence files of the
                                         account will be saved
         *}
 
@@ -157,170 +168,46 @@ class BankAccount extends FinancialProduct
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
-    public function __construct( $szID,$szFolder )
-    /*------------------------------------------*/
+    public function __construct( $szID = null,$szFolder = null )
+    /*--------------------------------------------------------*/
     {
-        parent::__construct();
+        parent::__construct( $szID,$szFolder );
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-        $this->identifier = $szID ?? null;
-
-        if ( ! empty( $this->identifier ) )
-        {
-            $a = $this->Map( $this->identifier );
-            //var_dump( $a );
-
-            $this->szPersistenceFolder = v::FIL_RealPath( $szFolder . '/' . $a['level1'] . '/' .
-                                                                            $a['level2'] . '/' .
-                                                                            $a['level3'] . '/' .
-                                                                            $a['level4'] );
-
-            if ( ! is_dir( $this->szPersistenceFolder ) )
-                v::FIL_MkDir( $this->szPersistenceFolder );
-
-            $this->balance = $this->readBalance();
-            //var_dump( "POSITION",$this->szPersistenceFolder,$this->balance );
-
-            $this->oLedger = new Ledger( $this->identifier,$this->szPersistenceFolder );
-        }
-        else
-        {
-            // SHOULD THROW AN EXCEPTION
-        }
 
         return ( $this );
     }   /* End of BankAccount.__construct() =========================================== */
     /* ================================================================================ */
 
+    // Il faut implémenter la méthode Statement
+    // Il faut que toutes les opérations enregistrées sur 1 journée soient stockées à part
+    //   pour que nous puissions faire des extraits/statements séparés
 
     /* ================================================================================ */
-    /** {{*balanceFile()=
+    /** {{*__toString()=
 
-        Get the normalized balance filename (persistence layer)
+        Renders a simplified view of the balance of the account
 
         {*params
         *}
 
         {*return
-            (string)        The name of the "balance" file
+            (string)        HTML Code
         *}
 
         *}}
     */
     /* ================================================================================ */
-    protected function balanceFile()
-    /*----------------------------*/
+    public function __toString() : string
+    /*---------------------------------*/
     {
-        return ( v::FIL_RealPath( $this->szPersistenceFolder . '/' . v::STR_StripAccents( v::FIL_KeepValidCharacters( $this->identifier . '.balance.txt' ) ) ) );
-    }   /* End of BankAccount.balanceFile() =========================================== */
-    /* ================================================================================ */
-
-
-    /* ================================================================================ */
-    /** {{*readBalance()=
-
-        Reads the account balance from its persistence layer
-
-        {*params
-        *}
-
-        {*return
-            (float)         The current account balance
-        *}
-
-        *}}
-    */
-    /* ================================================================================ */
-    protected function readBalance()
-    /*----------------------------*/
-    {
-        $fRetVal    = 0.0;
-        $szFile     = $this->balanceFile();
-
-        //var_dump( "Will read from",$szFile );
-
-        if ( is_file( $szFile ) )
-        {
-            $szAmount = v::FIL_FileToStr( $szFile );
-            $fRetVal = (float) $szAmount;
-        }
-        else
-        {
-            v::FIL_StrToFile( '0.0',$szFile );
-        }
-
-        return ( $fRetVal );
-    }   /* End of BankAccount.readBalance() =========================================== */
-    /* ================================================================================ */
-
-
-    /* ================================================================================ */
-    /** {{*saveBalance()=
-
-        Saves the account balance to its persistence layer
-
-        {*params
-        *}
-
-        {*return
-            (bool)      [c]true[/c] if the balance was saved successfully; [c]false[/c]
-                        if not.
-        *}
-
-        *}}
-    */
-    /* ================================================================================ */
-    protected function saveBalance()
-    /*----------------------------*/
-    {
-        return ( v::FIL_StrToFile( (string) $this->balance,$this->balanceFile() ) );
-    }   /* End of BankAccount.saveBalance() =========================================== */
-    /* ================================================================================ */
-
-
-    // ***********************************************************************************
-    // ***********************************************************************************
-    // ***********************************************************************************
-    // Il faut s'inspirer de ce que fait Mollie en ayant un mode de travail
-    // "test" et un mode "live"
-    //
-    // Chaque deposit ou chaque withdrawal sur le compte devrait aussi pouvoir s'accompagner 
-    //  1) d'un commentaire
-    //  2) d'un ID unique d'opération (aussi à sauver dans le ledger ?)
-    //  3) et chaque opération doit faire l'objet d'un log (le ledger n'est pas un log!)
-    // ***********************************************************************************
-    // ***********************************************************************************
-    // ***********************************************************************************
-
-    public function deposit( $x )
-    /*-------------------------*/
-    {
-        $fAmount = ( is_numeric( $x ) ? abs( $x ) : 0 );
-        $this->balance += $fAmount;
-        $this->saveBalance();
-        $this->oLedger->log( '+',$fAmount,$this->currency );
-    }   /* End of BankAccount.deposit() =============================================== */
-    /* ================================================================================ */
-
-
-    public function withdraw( $x )
-    /*-------------------------*/
-    {
-        $fAmount = ( is_numeric( $x ) ? abs( $x ) : 0 );
-        $this->balance -= $fAmount;
-        $this->saveBalance();
-        $this->oLedger->log( '-',$fAmount,$this->currency );
-    }   /* End of BankAccount.withdraw() ============================================== */
-    /* ================================================================================ */
-
-
-    public function __toString():string
-    /*-------------------------------*/
-    {
-        return ( "<p>ID: {$this->identifier}; Balance: {$this->balance} {$this->currency}</p>" );
+        return ( "<p>ID: {$this->identifier}; Balance: " . round( $this->balance,4 ) . "{$this->currency}</p>" );
     }   /* End of BankAccount.__toString() ============================================ */
     /* ================================================================================ */
 
@@ -337,6 +224,10 @@ class BankAccount extends FinancialProduct
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -350,7 +241,5 @@ class BankAccount extends FinancialProduct
         $this->necroSignaling();
     }   /* End of BankAccount.__destruct() ============================================ */
     /* ================================================================================ */
-
 }   /* End of class BankAccount ======================================================= */
 /* ==================================================================================== */
-?>

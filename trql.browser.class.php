@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -81,6 +79,7 @@ defined( 'BROWSER_CLASS_VERSION' ) or define( 'BROWSER_CLASS_VERSION','0.1' );
 
     *}
 
+    **}
  */
 /* ==================================================================================== */
 class Browser extends Thing
@@ -117,7 +116,7 @@ class Browser extends Thing
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q6368';  // Web Browser
+    public      $wikidataId                     = 'Q6368';   // Web Browser
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=

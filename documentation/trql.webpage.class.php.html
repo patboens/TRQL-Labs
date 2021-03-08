@@ -6,6 +6,9 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 code,samp, .filename {color: #800 !important;
    font-family: Consolas,"courier new";
    background: rgba(240, 240, 240, 0.5);
@@ -17,9 +20,7 @@ code,samp, .filename {color: #800 !important;
    font-weight: bold;
    font-style: italic;
    }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
-.constrained { max-width: 100%; height: auto; }
-.center { text-align:center; }
+.property.inheritance code { border: none !important; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
 img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
@@ -71,7 +72,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  breadcrumb may be used. We recommend explicit declaration if these
  properties are specified, but if they are found outside of an itemscope,
  they will be assumed to be about the page.</span>
-<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Thing &gt; CreativeWork &gt; WebPage</code></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="/?src=Mother">Mother</a> &gt; <a href="/?src=Thing">Thing</a> &gt; <a href="/?src=CreativeWork">CreativeWork</a> &gt; WebPage</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class WebPage extends CreativeWork implements iContext</code></span>
 <span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
  under the terms of their license:
@@ -87,39 +88,49 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="property">
-<td class="name" id="var-about"><code>$about</code></td>
+<td class="name" id="var.about"><code>$about</code></td>
 <td class="type"><code>Thing</code></td>
-<td class="description">The subject matter of the content. Inverse property: <code>subjectOf</code></td>
+<td class="description">The subject matter of the content. Inverse property: <code><a href="#var-subjectOf">$subjectOf</a></code></td>
 </tr>
 <tr class="property">
-<td class="name" id="var-accessibilityAPI"><code>$accessibilityAPI</code></td>
+<td class="name" id="var.abstract"><code>$abstract</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An abstract is a short description that summarizes a <code><a href="/?src=CreativeWork">CreativeWork</a></code> */
+ public $accessMode = null; /* {*property $accessMode (string) The human sensory perceptual system or cognitive faculty
+ through which a person may process or perceive information.
+ Expected values include: auditory, tactile, textual, visual,
+ colorDependent, chartOnVisual, chemOnVisual, diagramOnVisual,
+ mathOnVisual, musicOnVisual, textOnVisual.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.accessibilityAPI"><code>$accessibilityAPI</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Indicates that the resource is compatible with the referenced
  accessibility API (WebSchemas wiki lists possible values).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-accessibilityControl"><code>$accessibilityControl</code></td>
+<td class="name" id="var.accessibilityControl"><code>$accessibilityControl</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Identifies input methods that are sufficient to fully
  control the described resource (WebSchemas wiki lists
  possible values).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-accessibilityFeature"><code>$accessibilityFeature</code></td>
+<td class="name" id="var.accessibilityFeature"><code>$accessibilityFeature</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Content features of the resource, such as accessible media,
  alternatives and supported enhancements for accessibility
  (WebSchemas wiki lists possible values).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-accessibilityHazard"><code>$accessibilityHazard</code></td>
+<td class="name" id="var.accessibilityHazard"><code>$accessibilityHazard</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A characteristic of the described resource that is
  physiologically dangerous to some users. Related to WCAG 2.0
  guideline 2.3 (WebSchemas wiki lists possible values).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-accessibilitySummary"><code>$accessibilitySummary</code></td>
+<td class="name" id="var.accessibilitySummary"><code>$accessibilitySummary</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A human-readable summary of specific accessibility features
  or deficiencies, consistent with the other accessibility
@@ -129,29 +140,20 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  no long descriptions are needed."</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-accessMode"><code>$accessMode</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The human sensory perceptual system or cognitive faculty
- through which a person may process or perceive information.
- Expected values include: auditory, tactile, textual, visual,
- colorDependent, chartOnVisual, chemOnVisual, diagramOnVisual,
- mathOnVisual, musicOnVisual, textOnVisual.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var-accessModeSufficient"><code>$accessModeSufficient</code></td>
+<td class="name" id="var.accessModeSufficient"><code>$accessModeSufficient</code></td>
 <td class="type"><code>ItemList</code></td>
 <td class="description">A list of single or combined accessModes that are sufficient
  to understand all the intellectual content of a resource.
  Expected values include: auditory, tactile, textual, visual.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-accountablePerson"><code>$accountablePerson</code></td>
+<td class="name" id="var.accountablePerson"><code>$accountablePerson</code></td>
 <td class="type"><code>Person</code></td>
 <td class="description">Specifies the Person that is legally accountable for the
- <code>@class.CreativeWork</code>.</td>
+ <code>CreativeWork.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-additionalType"><code>$additionalType</code></td>
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An additional type for the item,
  typically used for adding more
@@ -165,40 +167,40 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  - for multiple types.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-aggregateRating"><code>$aggregateRating</code></td>
+<td class="name" id="var.aggregateRating"><code>$aggregateRating</code></td>
 <td class="type"><code>AggregateRating</code></td>
 <td class="description">The overall rating, based on a collection of reviews or ratings,
  of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-alternateName"><code>$alternateName</code></td>
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An alias for the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-alternativeHeadline"><code>$alternativeHeadline</code></td>
+<td class="name" id="var.alternativeHeadline"><code>$alternativeHeadline</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">A secondary title of the <code>@class.CreativeWork</code>.</td>
+<td class="description">A secondary title of the <code><a href="/?src=CreativeWork">CreativeWork</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-associatedMedia"><code>$associatedMedia</code></td>
+<td class="name" id="var.associatedMedia"><code>$associatedMedia</code></td>
 <td class="type"><code>MediaObject</code></td>
-<td class="description">A media object that encodes this <code>@class.CreativeWork</code>. This property
+<td class="description">A media object that encodes this <code><a href="/?src=CreativeWork">CreativeWork</a></code>. This property
  is a synonym for encoding.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-audience"><code>$audience</code></td>
+<td class="name" id="var.audience"><code>$audience</code></td>
 <td class="type"><code>Audience</code></td>
 <td class="description">An intended audience, i.e. a group for whom something was
  created.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-audio"><code>$audio</code></td>
+<td class="name" id="var.audio"><code>$audio</code></td>
 <td class="type"><code>AudioObject|Clip</code></td>
 <td class="description">An embedded audio object.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-author"><code>$author</code></td>
+<td class="name" id="var.author"><code>$author</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">The author of this content or rating. Please note that author
  is special in that HTML 5 provides a special mechanism for
@@ -206,86 +208,89 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  this and may be used interchangeably.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-award"><code>$award</code></td>
+<td class="name" id="var.award"><code>$award</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An award won by or for this item. Supersedes awards.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-breadcrumb"><code>$breadcrumb</code></td>
+<td class="name" id="var.breadcrumb"><code>$breadcrumb</code></td>
 <td class="type"><code>BreadcrumbList|string</code></td>
 <td class="description">A set of links that can help a user understand and
  navigate a website hierarchy.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-citation"><code>$citation</code></td>
+<td class="name" id="var.citation"><code>$citation</code></td>
 <td class="type"><code>CreativeWork|string</code></td>
 <td class="description">A citation or reference to another creative work, such
  as another publication, web page, scholarly article, etc.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-comment"><code>$comment</code></td>
+<td class="name" id="var.comment"><code>$comment</code></td>
 <td class="type"><code>Comment</code></td>
 <td class="description">Comments, typically from users.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-commentCount"><code>$commentCount</code></td>
+<td class="name" id="var.commentCount"><code>$commentCount</code></td>
 <td class="type"><code>int</code></td>
-<td class="description">The number of comments this <code>@class.CreativeWork</code> (e.g. Article,
- Question or Answer) has received. This is most applicable to
+<td class="description">The number of comments this <code><a href="/?src=CreativeWork">CreativeWork</a></code> (e.g. <code><a href="/?src=Article">Article</a></code>,
+ <code><a href="/?src=Question">Question</a></code> or <code><a href="/?src=Answer">Answer</a></code>) has received. This is most applicable to
  works published in Web sites with commenting system;
  additional comments may exist elsewhere.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-conditionsOfAccess"><code>$conditionsOfAccess</code></td>
+<td class="name" id="var.conditionsOfAccess"><code>$conditionsOfAccess</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Conditions that affect the availability of, or method(s) of
  access to, an item. Typically used for real world items such
- as an ArchiveComponent held by an ArchiveOrganization.
+ as an <code><a href="/?src=ArchiveComponent">ArchiveComponent</a></code> held by an <code><a href="/?src=ArchiveOrganization">ArchiveOrganization</a></code>.
  This property is not suitable for use as a general Web access
- control mechanism. It is expressed only in natural language.</td>
+ control mechanism. It is expressed only in natural language.<br />
+ 
+ For example "Available by appointment from the Reading Room" or 
+ "Accessible only from logged-in accounts ".</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-contentLocation"><code>$contentLocation</code></td>
+<td class="name" id="var.contentLocation"><code>$contentLocation</code></td>
 <td class="type"><code>Place</code></td>
 <td class="description">The location depicted or described in the content. For example,
  the location in a photograph or painting.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-contentRating"><code>$contentRating</code></td>
+<td class="name" id="var.contentRating"><code>$contentRating</code></td>
 <td class="type"><code>Rating|string</code></td>
 <td class="description">Official rating of a piece of content—for example,'MPAA PG-13'.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-contentReferenceTime"><code>$contentReferenceTime</code></td>
+<td class="name" id="var.contentReferenceTime"><code>$contentReferenceTime</code></td>
 <td class="type"><code>DateTime</code></td>
 <td class="description">The specific time described by a creative work, for works
  (e.g. articles, video objects etc.) that emphasise a
- particular moment within an Event.</td>
+ particular moment within an <code><a href="/?src=Event">Event</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-contributor"><code>$contributor</code></td>
+<td class="name" id="var.contributor"><code>$contributor</code></td>
 <td class="type"><code>Organization|Person</code></td>
-<td class="description">A secondary contributor to the <code>@class.CreativeWork</code> or Event.</td>
+<td class="description">A secondary contributor to the <code><a href="/?src=CreativeWork">CreativeWork</a></code> or <code><a href="/?src=Event">Event</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-copyrightHolder"><code>$copyrightHolder</code></td>
+<td class="name" id="var.copyrightHolder"><code>$copyrightHolder</code></td>
 <td class="type"><code>Organization|Person</code></td>
-<td class="description">The party holding the legal copyright to the <code>@class.CreativeWork</code>.</td>
+<td class="description">The party holding the legal copyright to the <code><a href="/?src=CreativeWork">CreativeWork</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-copyrightYear"><code>$copyrightYear</code></td>
+<td class="name" id="var.copyrightYear"><code>$copyrightYear</code></td>
 <td class="type"><code>Number</code></td>
 <td class="description">The year during which the claimed copyright for the
- <code>@class.CreativeWork</code> was first asserted.</td>
+ <code><a href="/?src=CreativeWork">CreativeWork</a></code> was first asserted.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-correction"><code>$correction</code></td>
+<td class="name" id="var.correction"><code>$correction</code></td>
 <td class="type"><code>CorrectionComment|string|URL</code></td>
-<td class="description">Indicates a correction to a <code>@class.CreativeWork</code>, either via a
- <code>@class.CorrectionComment</code>, textually or in another document.</td>
+<td class="description">Indicates a correction to a <code><a href="/?src=CreativeWork">CreativeWork</a></code>, either via a
+ <code><a href="/?src=CorrectionComment">CorrectionComment</a></code>, textually or in another document.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-creativeWorkStatus"><code>$creativeWorkStatus</code></td>
+<td class="name" id="var.creativeWorkStatus"><code>$creativeWorkStatus</code></td>
 <td class="type"><code>DefinedTerm|string</code></td>
 <td class="description">The status of a creative work in terms of its stage in a lifecycle.
  Example terms include Incomplete, Draft, Published, Obsolete.
@@ -293,35 +298,35 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  publication lifecycle.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-creator"><code>$creator</code></td>
+<td class="name" id="var.creator"><code>$creator</code></td>
 <td class="type"><code>Organization|Person</code></td>
-<td class="description">The creator/author of this <code>@class.CreativeWork</code>. This is the same as
- the Author property for <code>@class.CreativeWork</code>.</td>
+<td class="description">The creator/author of this <code><a href="/?src=CreativeWork">CreativeWork</a></code>. This is the same as
+ the Author property for <code><a href="/?src=CreativeWork">CreativeWork</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-dateCreated"><code>$dateCreated</code></td>
+<td class="name" id="var.dateCreated"><code>$dateCreated</code></td>
 <td class="type"><code>Date|DateTime</code></td>
-<td class="description">The date on which the <code>@class.CreativeWork</code> was created or the item was
+<td class="description">The date on which the <code><a href="/?src=CreativeWork">CreativeWork</a></code> was created or the item was
  added to a DataFeed.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-dateModified"><code>$dateModified</code></td>
+<td class="name" id="var.dateModified"><code>$dateModified</code></td>
 <td class="type"><code>Date|DateTime</code></td>
-<td class="description">The date on which the <code>@class.CreativeWork</code> was most recently modified or
+<td class="description">The date on which the <code><a href="/?src=CreativeWork">CreativeWork</a></code> was most recently modified or
  when the item's entry was modified within a DataFeed.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-datePublished"><code>$datePublished</code></td>
+<td class="name" id="var.datePublished"><code>$datePublished</code></td>
 <td class="type"><code>Date</code></td>
 <td class="description">Date of first broadcast/publication.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-description"><code>$description</code></td>
+<td class="name" id="var.description"><code>$description</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A short description of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A sub property of description. A
  short description of the item used
@@ -332,80 +337,80 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-discussionUrl"><code>$discussionUrl</code></td>
+<td class="name" id="var.discussionUrl"><code>$discussionUrl</code></td>
 <td class="type"><code>URL</code></td>
-<td class="description">A link to the page containing the comments of the <code>@class.CreativeWork</code>.</td>
+<td class="description">A link to the page containing the comments of the <code><a href="/?src=CreativeWork">CreativeWork</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-editor"><code>$editor</code></td>
+<td class="name" id="var.editor"><code>$editor</code></td>
 <td class="type"><code>Person</code></td>
-<td class="description">Specifies the Person who edited the <code>@class.CreativeWork</code>.</td>
+<td class="description">Specifies the Person who edited the <code><a href="/?src=CreativeWork">CreativeWork</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-educationalAlignment"><code>$educationalAlignment</code></td>
+<td class="name" id="var.educationalAlignment"><code>$educationalAlignment</code></td>
 <td class="type"><code>AlignmentObject</code></td>
 <td class="description">An alignment to an established educational framework.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-educationalUse"><code>$educationalUse</code></td>
+<td class="name" id="var.educationalUse"><code>$educationalUse</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The purpose of a work in the context of education;
  for example, 'assignment', 'group work'.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-encoding"><code>$encoding</code></td>
+<td class="name" id="var.encoding"><code>$encoding</code></td>
 <td class="type"><code>MediaObject</code></td>
-<td class="description">A media object that encodes this <code>@class.CreativeWork</code>. This property is
- a synonym for associatedMedia. Supersedes encodings.
- Inverse property: encodes<code>@class.CreativeWork</code>.</td>
+<td class="description">A media object that encodes this <code><a href="/?src=CreativeWork">CreativeWork</a></code>. This property is
+ a synonym for associatedMedia. Supersedes <code>encodings</code>.
+ Inverse property: <code>encodesCreativeWork</code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-encodingFormat"><code>$encodingFormat</code></td>
+<td class="name" id="var.encodingFormat"><code>$encodingFormat</code></td>
 <td class="type"><code>string|URL</code></td>
 <td class="description">Media type typically expressed using a MIME format
  (see IANA site and MDN reference) e.g. application/zip for
  a SoftwareApplication binary, audio/mpeg for .mp3 etc.).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-exampleOfWork"><code>$exampleOfWork</code></td>
+<td class="name" id="var.exampleOfWork"><code>$exampleOfWork</code></td>
 <td class="type"><code>CreativeWork</code></td>
 <td class="description">A creative work that this work is an
  example/instance/realization/derivation of.
  Inverse property: workExample.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-expires"><code>$expires</code></td>
+<td class="name" id="var.expires"><code>$expires</code></td>
 <td class="type"><code>Date</code></td>
 <td class="description">Date the content expires and is no longer useful or available.
  For example a VideoObject or NewsArticle whose availability or
- relevance is time-limited, or a ClaimReview fact check whose
+ relevance is time-limited, or a <code><a href="/?src=ClaimReview">ClaimReview</a></code> fact check whose
  publisher wants to indicate that it may no longer be relevant
  (or helpful to highlight) after some date.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-funder"><code>$funder</code></td>
+<td class="name" id="var.funder"><code>$funder</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">A person or organization that supports (sponsors) something
  through some kind of financial contribution.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-genre"><code>$genre</code></td>
+<td class="name" id="var.genre"><code>$genre</code></td>
 <td class="type"><code>string|URL</code></td>
 <td class="description">Genre of the creative work, broadcast channel or group.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-hasPart"><code>$hasPart</code></td>
+<td class="name" id="var.hasPart"><code>$hasPart</code></td>
 <td class="type"><code>CreativeWork</code></td>
-<td class="description">Indicates an item or <code>@class.CreativeWork</code> that is part of this item,
- or <code>@class.CreativeWork</code> (in some sense). Inverse property: isPartOf.</td>
+<td class="description">Indicates an item or <code><a href="/?src=CreativeWork">CreativeWork</a></code> that is part of this item,
+ or <code><a href="/?src=CreativeWork">CreativeWork</a></code> (in some sense). Inverse property: <code><a href="#var-isPartOf">$isPartOf</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-headline"><code>$headline</code></td>
+<td class="name" id="var.headline"><code>$headline</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Headline of the article.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-identifier"><code>$identifier</code></td>
+<td class="name" id="var.identifier"><code>$identifier</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The identifier property represents any
  kind of identifier for any kind of Thing,
@@ -419,169 +424,169 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  for more details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-image"><code>$image</code></td>
+<td class="name" id="var.image"><code>$image</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">URL of an image of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-inLanguage"><code>$inLanguage</code></td>
+<td class="name" id="var.inLanguage"><code>$inLanguage</code></td>
 <td class="type"><code>Language|string</code></td>
 <td class="description">The language of the content or performance or used in an
  action. Please use one of the language codes from the
- IETF BCP 47 standard. See also availableLanguage.
- Supersedes language.</td>
+ IETF BCP 47 standard. See also <code>availableLanguage</code>.
+ Supersedes <code>language</code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-interactionStatistic"><code>$interactionStatistic</code></td>
+<td class="name" id="var.interactionStatistic"><code>$interactionStatistic</code></td>
 <td class="type"><code>InteractionCounter</code></td>
-<td class="description">The number of interactions for the <code>@class.CreativeWork</code> using the
- WebSite or SoftwareApplication. The most specific child
- type of InteractionCounter should be used.
- Supersedes interactionCount.</td>
+<td class="description">The number of interactions for the <code><a href="/?src=CreativeWork">CreativeWork</a></code> using the
+ <code><a href="/?src=WebSite">WebSite</a></code> or <code><a href="/?src=SoftwareApplication">SoftwareApplication</a></code>. The most specific child
+ type of <code><a href="/?src=InteractionCounter">InteractionCounter</a></code> should be used.
+ Supersedes <code>interactionCount</code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-interactivityType"><code>$interactivityType</code></td>
+<td class="name" id="var.interactivityType"><code>$interactivityType</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The predominant mode of learning supported by the learning
  resource. Acceptable values are 'active',
  'expositive', or 'mixed'.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-isAccessibleForFree"><code>$isAccessibleForFree</code></td>
+<td class="name" id="var.isAccessibleForFree"><code>$isAccessibleForFree</code></td>
 <td class="type"><code>Boolean</code></td>
 <td class="description">A flag to signal that the item, event, or place is accessible
- for free. Supersedes free.</td>
+ for free. Supersedes <code>free</code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-isBasedOn"><code>$isBasedOn</code></td>
+<td class="name" id="var.isBasedOn"><code>$isBasedOn</code></td>
 <td class="type"><code>CreativeWork|Product|URL</code></td>
 <td class="description">A resource from which this work is derived or from which it
- is a modification or adaption. Supersedes isBasedOnUrl.</td>
+ is a modification or adaption. Supersedes <code>isBasedOnUrl</code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-isFamilyFriendly"><code>$isFamilyFriendly</code></td>
+<td class="name" id="var.isFamilyFriendly"><code>$isFamilyFriendly</code></td>
 <td class="type"><code>Boolean</code></td>
 <td class="description">Indicates whether this content is family friendly.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-isPartOf"><code>$isPartOf</code></td>
+<td class="name" id="var.isPartOf"><code>$isPartOf</code></td>
 <td class="type"><code>CreativeWork</code></td>
-<td class="description">Indicates an item or <code>@class.CreativeWork</code> that this item, or
- <code>@class.CreativeWork</code> (in some sense), is part of.
- Inverse property: hasPart.</td>
+<td class="description">Indicates an item or <code><a href="/?src=CreativeWork">CreativeWork</a></code> that this item, or
+ <code><a href="/?src=CreativeWork">CreativeWork</a></code> (in some sense), is part of.
+ Inverse property: <code><a href="#var-hasPart">$hasPart</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-keywords"><code>$keywords</code></td>
+<td class="name" id="var.keywords"><code>$keywords</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Keywords or tags used to describe this content. Multiple
  entries in a keywords list are typically delimited by commas.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-lastReviewed"><code>$lastReviewed</code></td>
+<td class="name" id="var.lastReviewed"><code>$lastReviewed</code></td>
 <td class="type"><code>Date</code></td>
 <td class="description">Date on which the content on this web page was last
  reviewed for accuracy and/or completeness.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-learningResourceType"><code>$learningResourceType</code></td>
+<td class="name" id="var.learningResourceType"><code>$learningResourceType</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The predominant type or kind characterizing the learning
  resource. For example, 'presentation', 'handout'.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-license"><code>$license</code></td>
+<td class="name" id="var.license"><code>$license</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
 <td class="description">A license document that applies to this content, typically
  indicated by URL.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-locationCreated"><code>$locationCreated</code></td>
+<td class="name" id="var.locationCreated"><code>$locationCreated</code></td>
 <td class="type"><code>Place</code></td>
-<td class="description">The location where the <code>@class.CreativeWork</code> was created, which may
- not be the same as the location depicted in the <code>@class.CreativeWork</code>.</td>
+<td class="description">The location where the <code><a href="/?src=CreativeWork">CreativeWork</a></code> was created, which may
+ not be the same as the location depicted in the <code><a href="/?src=CreativeWork">CreativeWork</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-mainContentOfPage"><code>$mainContentOfPage</code></td>
+<td class="name" id="var.mainContentOfPage"><code>$mainContentOfPage</code></td>
 <td class="type"><code>WebPageElement</code></td>
 <td class="description">Indicates if this web page element is the main subject
  of the page. Supersedes aspect.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-mainEntity"><code>$mainEntity</code></td>
+<td class="name" id="var.mainEntity"><code>$mainEntity</code></td>
 <td class="type"><code>Thing</code></td>
 <td class="description">Indicates the primary entity described in some page or
- other <code>@class.CreativeWork</code>. Inverse property: mainEntityOfPage.</td>
+ other <code><a href="/?src=CreativeWork">CreativeWork</a></code>. Inverse property: <code><a href="#var-mainEntityOfPage">$mainEntityOfPage</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Indicates a page (or other <code>CreativeWork</code>)
+<td class="description">Indicates a page (or other <code><a href="/?src=CreativeWork">CreativeWork</a></code>, <code><a href="/?src=Event">Event</a></code>)
  for which this thing is the main entity
  being described. See <a
  href="https://schema.org/docs/datamodel.html#mainEntityBackground">
  background notes</a> for details.
- Inverse property: mainEntity.</td>
+ Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-material"><code>$material</code></td>
+<td class="name" id="var.material"><code>$material</code></td>
 <td class="type"><code>Product|string|URL</code></td>
 <td class="description">A material that something is made from,
  e.g. leather, wool, cotton, paper.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-materialExtent"><code>$materialExtent</code></td>
+<td class="name" id="var.materialExtent"><code>$materialExtent</code></td>
 <td class="type"><code>QuantitativeValue|string</code></td>
 <td class="description">The quantity of the materials being described or an expression
  of the physical space they occupy.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-mentions"><code>$mentions</code></td>
+<td class="name" id="var.mentions"><code>$mentions</code></td>
 <td class="type"><code>Thing</code></td>
-<td class="description">Indicates that the <code>@class.CreativeWork</code> contains a reference to, but
+<td class="description">Indicates that the <code><a href="/?src=CreativeWork">CreativeWork</a></code> contains a reference to, but
  is not necessarily about a concept.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-name"><code>$name</code></td>
+<td class="name" id="var.name"><code>$name</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The name of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-obsolete"><code>$obsolete</code></td>
+<td class="name" id="var.obsolete"><code>$obsolete</code></td>
 <td class="type"><code>boolean</code></td>
 <td class="description">Is this page obsolete or not? <code>false</code> by default.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-offers"><code>$offers</code></td>
+<td class="name" id="var.offers"><code>$offers</code></td>
 <td class="type"><code>Offer</code></td>
 <td class="description">An offer to provide this item—for example, an offer to sell
  a product, rent the DVD of a movie, perform a service, or
  give away tickets to an event.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-position"><code>$position</code></td>
+<td class="name" id="var.position"><code>$position</code></td>
 <td class="type"><code>int|string</code></td>
 <td class="description">The position of an item in a series or sequence of items.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-potentialAction"><code>$potentialAction</code></td>
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
-<td class="description">Indicates a potential Action, which
+<td class="description">Indicates a potential <code><a href="/?src=Action">Action</a></code>, which
  describes an idealized action in which
  this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-primaryImageOfPage"><code>$primaryImageOfPage</code></td>
+<td class="name" id="var.primaryImageOfPage"><code>$primaryImageOfPage</code></td>
 <td class="type"><code>ImageObject</code></td>
 <td class="description">Indicates the main image on the page.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-producer"><code>$producer</code></td>
+<td class="name" id="var.producer"><code>$producer</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">The person or organization who produced the work
  (e.g. music album, movie, tv/radio series etc.).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-provider"><code>$provider</code></td>
+<td class="name" id="var.provider"><code>$provider</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">The service provider, service operator, or service performer;
  the goods producer. Another party (a seller) may offer those
@@ -589,135 +594,138 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  also serve as the seller. Supersedes carrier.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-publication"><code>$publication</code></td>
+<td class="name" id="var.publication"><code>$publication</code></td>
 <td class="type"><code>PublicationEvent</code></td>
 <td class="description">A publication event associated with the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-publisher"><code>$publisher</code></td>
+<td class="name" id="var.publisher"><code>$publisher</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">The publisher of the creative work.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-publisherImprint"><code>$publisherImprint</code></td>
+<td class="name" id="var.publisherImprint"><code>$publisherImprint</code></td>
 <td class="type"><code>Organization</code></td>
 <td class="description">The publishing division which published the comic.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-publishingPrinciples"><code>$publishingPrinciples</code></td>
+<td class="name" id="var.publishingPrinciples"><code>$publishingPrinciples</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
 <td class="description">The publishingPrinciples property indicates (typically via URL)
  a document describing the editorial principles of an Organization
  (or individual e.g. a Person writing a blog) that relate to their
  activities as a publisher, e.g. ethics or diversity policies.
- When applied to a <code>@class.CreativeWork</code> (e.g. NewsArticle) the principles
+ When applied to a <code><a href="/?src=CreativeWork">CreativeWork</a></code> (e.g. <code><a href="/?src=NewsArticle">NewsArticle</a></code>) the principles
  are those of the party primarily responsible for the creation of
- the <code>@class.CreativeWork</code>.
- 
+ the <code><a href="/?src=CreativeWork">CreativeWork</a></code>.
+
  While such policies are most typically expressed in natural
  language, sometimes related information (e.g. indicating a funder)
  can be expressed using schema.org terminology.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-recordedAt"><code>$recordedAt</code></td>
+<td class="name" id="var.recordedAt"><code>$recordedAt</code></td>
 <td class="type"><code>Event</code></td>
-<td class="description">The Event where the <code>@class.CreativeWork</code> was recorded. The <code>@class.CreativeWork</code> may capture
- all or part of the event. Inverse property: recordedIn.</td>
+<td class="description">The Event where the <code><a href="/?src=CreativeWork">CreativeWork</a></code> was recorded. The <code><a href="/?src=CreativeWork">CreativeWork</a></code>
+ may capture all or part of the event. Inverse property: <code><a href="#var-recordedIn">$recordedIn</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-relatedLink"><code>$relatedLink</code></td>
+<td class="name" id="var.relatedLink"><code>$relatedLink</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">A link related to this web page, for example to
  other related web pages.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-releasedEvent"><code>$releasedEvent</code></td>
+<td class="name" id="var.releasedEvent"><code>$releasedEvent</code></td>
 <td class="type"><code>PublicationEvent</code></td>
-<td class="description">The place and time the release was issued, expressed as a PublicationEvent.</td>
+<td class="description">The place and time the release was issued, expressed as a <code><a href="/?src=PublicationEvent">PublicationEvent</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-review"><code>$review</code></td>
+<td class="name" id="var.review"><code>$review</code></td>
 <td class="type"><code>Review</code></td>
-<td class="description">A review of the item. Supersedes reviews.</td>
+<td class="description">A review of the item. Supersedes <code>reviews</code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-reviewedBy"><code>$reviewedBy</code></td>
+<td class="name" id="var.reviewedBy"><code>$reviewedBy</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">People or organizations that have reviewed the content
  on this web page for accuracy and/or completeness.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sameAs"><code>$sameAs</code></td>
-<td class="type"><code>CreativeWork|Event</code></td>
-<td class="description">A <code>CreativeWork</code> or <code>Event</code> about this <code>Thing</code>. 
- Inverse property: <code>about</code>.</td>
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+ unambiguously indicates the item's
+ identity. E.g. the URL of the
+ item's Wikipedia page, Freebase
+ page, or official website.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-schemaVersion"><code>$schemaVersion</code></td>
+<td class="name" id="var.schemaVersion"><code>$schemaVersion</code></td>
 <td class="type"><code>string|URL</code></td>
 <td class="description">Indicates (by URL or string) a particular version of a schema used
- in some <code>@class.CreativeWork</code>. For example, a document could declare a
+ in some <code><a href="/?src=CreativeWork">CreativeWork</a></code>. For example, a document could declare a
  schemaVersion using an URL such as http://schema.org/version/2.0/ if
  precise indication of schema version was required by some application.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sdDatePublished"><code>$sdDatePublished</code></td>
+<td class="name" id="var.sdDatePublished"><code>$sdDatePublished</code></td>
 <td class="type"><code>Date</code></td>
 <td class="description">Indicates the date on which the current structured data was
  generated / published. Typically used alongside sdPublisher</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sdLicense"><code>$sdLicense</code></td>
+<td class="name" id="var.sdLicense"><code>$sdLicense</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
 <td class="description">A license document that applies to this structured data, typically
  indicated by URL.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sdPublisher"><code>$sdPublisher</code></td>
+<td class="name" id="var.sdPublisher"><code>$sdPublisher</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">Indicates the party responsible for generating and publishing the current
  structured data markup, typically in cases where the structured data is
  derived automatically from existing published content but published on a
  different site. For example, student projects and open data initiatives
  often re-publish existing content with more explicitly structured metadata.
- The sdPublisher property helps make such practices more explicit.</td>
+ The <code>sdPublisher</code> property helps make such practices more explicit.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-self"><code>$self</code></td>
+<td class="name" id="var.self"><code>$self</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-significantLink"><code>$significantLink</code></td>
+<td class="name" id="var.significantLink"><code>$significantLink</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">One of the more significant URLs on the page. Typically,
  these are the non-navigation links that are clicked
  on the most. Supersedes significantLinks.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sourceOrganization"><code>$sourceOrganization</code></td>
+<td class="name" id="var.sourceOrganization"><code>$sourceOrganization</code></td>
 <td class="type"><code>Organization</code></td>
-<td class="description">The Organization on whose behalf the creator was working.</td>
+<td class="description">The <code><a href="/?src=Organization">Organization</a></code> on whose behalf the creator was working.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-spatial"><code>$spatial</code></td>
+<td class="name" id="var.spatial"><code>$spatial</code></td>
 <td class="type"><code>Place</code></td>
 <td class="description">The "spatial" property can be used in cases when more specific properties
  (e.g. locationCreated, spatialCoverage, contentLocation) are not known
  to be appropriate.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-spatialCoverage"><code>$spatialCoverage</code></td>
+<td class="name" id="var.spatialCoverage"><code>$spatialCoverage</code></td>
 <td class="type"><code>Place</code></td>
-<td class="description">The spatialCoverage of a <code>@class.CreativeWork</code> indicates the place(s) which are
+<td class="description">The <code>spatialCoverage</code> of a <code><a href="/?src=CreativeWork">CreativeWork</a></code> indicates the place(s) which are
  the focus of the content. It is a subproperty of contentLocation intended
  primarily for more technical and detailed materials. For example with a
  Dataset, it indicates areas that the dataset describes: a dataset of
- New York weather would have spatialCoverage which was the place:
+ New York weather would have <code>spatialCoverage</code> which was the place:
  the state of New York.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-speakable"><code>$speakable</code></td>
+<td class="name" id="var.speakable"><code>$speakable</code></td>
 <td class="type"><code>SpeakableSpecification|URL</code></td>
 <td class="description">Indicates sections of a Web page that are particularly
  'speakable' in the sense of being highlighted as being
@@ -752,40 +760,46 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  possible value of the speakable property.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-specialty"><code>$specialty</code></td>
+<td class="name" id="var.specialty"><code>$specialty</code></td>
 <td class="type"><code>Specialty</code></td>
 <td class="description">One of the domain specialities to which this web
  page's content applies.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sponsor"><code>$sponsor</code></td>
+<td class="name" id="var.sponsor"><code>$sponsor</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">A person or organization that supports a thing through a pledge, promise,
  or financial contribution. e.g. a sponsor of a Medical Study or a corporate
  sponsor of an event.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-szAuthor"><code>$szAuthor</code></td>
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A <code><a href="/?src=CreativeWork">CreativeWork</a></code> or <code><a href="/?src=Event">Event</a></code> about this <code><a href="/?src=Thing">Thing</a></code>. 
+ Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szAuthor"><code>$szAuthor</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Name of the author of the page</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-szBody"><code>$szBody</code></td>
+<td class="name" id="var.szBody"><code>$szBody</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Main body of a page</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-szCanonical"><code>$szCanonical</code></td>
+<td class="name" id="var.szCanonical"><code>$szCanonical</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Canonical URL of the page.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-szComment"><code>$szComment</code></td>
+<td class="name" id="var.szComment"><code>$szComment</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Comments set for that page (not published)</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-szPageImage"><code>$szPageImage</code></td>
+<td class="name" id="var.szPageImage"><code>$szPageImage</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Image that represents the page (EXCELLENT for SEO)
  // <meta itemscope itemtype="https://schema.org/WebPage" 
@@ -796,125 +810,125 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  //</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-szShelter"><code>$szShelter</code></td>
+<td class="name" id="var.szShelter"><code>$szShelter</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The name of the file where the XML definition of the page is stored</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-temporal"><code>$temporal</code></td>
+<td class="name" id="var.temporal"><code>$temporal</code></td>
 <td class="type"><code>DateTime|string</code></td>
 <td class="description">The "temporal" property can be used in cases where more specific
- properties (e.g. temporalCoverage, dateCreated, dateModified, datePublished)
- are not known to be appropriate.</td>
+ properties (e.g. <code><a href="#var-temporalCoverage">$temporalCoverage</a></code>, <code><a href="#var-dateCreated">$dateCreated</a></code>, <code><a href="#var-dateModified">$dateModified</a></code>,
+ <code><a href="#var-datePublished">$datePublished</a></code>) are not known to be appropriate.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-temporalCoverage"><code>$temporalCoverage</code></td>
+<td class="name" id="var.temporalCoverage"><code>$temporalCoverage</code></td>
 <td class="type"><code>DateTime|string|URL</code></td>
-<td class="description">The temporalCoverage of a <code>@class.CreativeWork</code> indicates the period that the
+<td class="description">The <code>temporalCoverage</code> of a <code><a href="/?src=CreativeWork">CreativeWork</a></code> indicates the period that the
  content applies to, i.e. that it describes, either as a DateTime or as a
  textual string indicating a time period in ISO 8601 time interval format.
- In the case of a Dataset it will typically indicate the relevant time
+ In the case of a <code><a href="/?src=Dataset">Dataset</a></code> it will typically indicate the relevant time
  period in a precise notation (e.g. for a 2011 census dataset, the year 2011
- would be written "2011/2012"). Other forms of content e.g. ScholarlyArticle,
- Book, TVSeries or TVEpisode may indicate their temporalCoverage in broader
- terms - textually or via well-known URL. Written works such as books may
+ would be written "2011/2012"). Other forms of content e.g. <code><a href="/?src=ScholarlyArticle">ScholarlyArticle</a></code>,
+ <code><a href="/?src=Book">Book</a></code>, <code><a href="/?src=TVSeries">TVSeries</a></code> or <code><a href="/?src=TVEpisode">TVEpisode</a></code> may indicate their <code>temporalCoverage</code>
+ in broader terms - textually or via well-known URL. Written works such as books may
  sometimes have precise temporal coverage too, e.g. a work set in
  1939 - 1945 can be indicated in ISO 8601 interval format format via
  "1939/1945".
- 
+
  Open-ended date ranges can be written with ".." in place of the end date.
  For example, "2015-11/.." indicates a range beginning in November 2015 and
  with no specified final date. This is tentative and might be updated in
- future when ISO 8601 is officially updated. Supersedes datasetTimeInterval.</td>
+ future when ISO 8601 is officially updated. Supersedes <code>datasetTimeInterval</code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-text"><code>$text</code></td>
+<td class="name" id="var.text"><code>$text</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The textual content of this <code>@class.CreativeWork</code>.</td>
+<td class="description">The textual content of this <code><a href="/?src=CreativeWork">CreativeWork</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-thumbnailUrl"><code>$thumbnailUrl</code></td>
+<td class="name" id="var.thumbnailUrl"><code>$thumbnailUrl</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">A thumbnail image relevant to the Thing.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-timeRequired"><code>$timeRequired</code></td>
+<td class="name" id="var.timeRequired"><code>$timeRequired</code></td>
 <td class="type"><code>Duration</code></td>
 <td class="description">Approximate or typical time it takes to work with or through this learning
  resource for the typical intended target audience, e.g. 'PT30M', 'PT1H25M'.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-translationOfWork"><code>$translationOfWork</code></td>
+<td class="name" id="var.translationOfWork"><code>$translationOfWork</code></td>
 <td class="type"><code>CreativeWork</code></td>
 <td class="description">The work that this work has been translated from. e.g. 物种起源 is a
  translationOf “On the Origin of Species” Inverse property: workTranslation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-translator"><code>$translator</code></td>
+<td class="name" id="var.translator"><code>$translator</code></td>
 <td class="type"><code>Organization|Person</code></td>
-<td class="description">Organization |Person) who adapts a creative work to different languages,
+<td class="description"><code><a href="/?src=Organization">Organization</a></code> or <code><a href="/?src=Person">Person</a></code> who adapts a creative work to different languages,
  regional differences and technical requirements of a target market, or that
  translates during some event.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-typicalAgeRange"><code>$typicalAgeRange</code></td>
+<td class="name" id="var.typicalAgeRange"><code>$typicalAgeRange</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The typical expected age range, e.g. '7-9', '11-'.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-UnderConstruction"><code>$UnderConstruction</code></td>
+<td class="name" id="var.UnderConstruction"><code>$UnderConstruction</code></td>
 <td class="type"><code>boolean</code></td>
 <td class="description">Is this page still under construction ? <code>false</code> by default</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-url"><code>$url</code></td>
+<td class="name" id="var.url"><code>$url</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">URL of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-version"><code>$version</code></td>
+<td class="name" id="var.version"><code>$version</code></td>
 <td class="type"><code>Number|string</code></td>
-<td class="description">The version of the <code>@class.CreativeWork</code> embodied by a specified resource.</td>
+<td class="description">The version of the <code><a href="/?src=CreativeWork">CreativeWork</a></code> embodied by a specified resource.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-video"><code>$video</code></td>
+<td class="name" id="var.video"><code>$video</code></td>
 <td class="type"><code>Clip|VideoObject</code></td>
 <td class="description">An embedded video object.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Wikidata ID: Single document that is directly viewable
  via the World Wide Web and web browsers</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-WithLupdate"><code>$WithLupdate</code></td>
+<td class="name" id="var.WithLupdate"><code>$WithLupdate</code></td>
 <td class="type"><code>boolean</code></td>
 <td class="description">Must we display a lupdate tage on the page or not ? <code>true</code> by default</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-WithSocialNetworks"><code>$WithSocialNetworks</code></td>
+<td class="name" id="var.WithSocialNetworks"><code>$WithSocialNetworks</code></td>
 <td class="type"><code>boolean</code></td>
 <td class="description">Should social networks be displayed on that page?</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-workExample"><code>$workExample</code></td>
+<td class="name" id="var.workExample"><code>$workExample</code></td>
 <td class="type"><code>CreativeWork</code></td>
 <td class="description">Example/instance/realization/derivation of the concept of this creative
  work. eg. The paperback edition, first edition, or eBook.
- Inverse property: exampleOfWork.</td>
+ Inverse property: <code><a href="#var-exampleOfWork">$exampleOfWork</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-workTranslation"><code>$workTranslation</code></td>
+<td class="name" id="var.workTranslation"><code>$workTranslation</code></td>
 <td class="type"><code>CreativeWork</code></td>
 <td class="description">A work that is a translation of the content of this work. e.g. 西遊記 has
- an English workTranslation “Journey to the West”,a German workTranslation
+ an English <code>workTranslation</code> “Journey to the West”,a German workTranslation
  “Monkeys Pilgerfahrt” and a Vietnamese translation Tây du ký bình khảo.
- Inverse property: translationOfWork.</td>
+ Inverse property: <code><a href="#var-translationOfWork">$translationOfWork</a></code>.</td>
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>WebPage</code></h2>
-<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
 <p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -927,19 +941,19 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
-<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return</p>
-<hr /><p class="property func" id="fnc-readDescription"><span class="name"><strong><code>readDescription()</code></strong></span>: The page meta data is maintained in a XML file. This method permits to read the
+<hr /><p class="property func" id="fnc.readDescription"><span class="name"><strong><code>readDescription()</code></strong></span>: The page meta data is maintained in a XML file. This method permits to read the
  XML file and to populate internal properties based on what is in the XML file.</p>
 <p class="property">Syntax:</p>
 <p><code>readDescription( $szFile )</code></p>
@@ -953,14 +967,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-readDescription.szFile"><code>$szFile</code></td>
+<td class="name" id="param.readDescription.szFile"><code>$szFile</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">XML file that holds the description of the page</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
-<hr /><p class="property func" id="fnc-renderComments"><span class="name"><strong><code>renderComments()</code></strong></span>: Renders all comments of the page</p>
+<hr /><p class="property func" id="fnc.renderComments"><span class="name"><strong><code>renderComments()</code></strong></span>: Renders all comments of the page</p>
 <p class="property">Warning:</p>
 <p>This method is experimental</p>
 <p class="property">Syntax:</p>
@@ -975,7 +989,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-renderComments.szHome"><code>$szHome</code></td>
+<td class="name" id="param.renderComments.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">Home of the class. Optional.</td>
 </tr>

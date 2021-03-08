@@ -44,20 +44,16 @@
 /****************************************************************************************/
 namespace trql\thing;
 
-use \trql\mother\Mother         as Mother;
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-
-use DOMDocument;
-use DOMXPath;
-
-if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) )
-    require_once( 'trql.mother.class.php' );
+use \trql\mother\Mother         as Mother;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-defined( 'THING_CLASS_VERSION' ) or define( 'THING_CLASS_VERSION','0.1' );
+if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) )
+    require_once( 'trql.mother.class.php' );
 
+defined( 'THING_CLASS_VERSION' ) or define( 'THING_CLASS_VERSION','0.1' );
 
 /* ================================================================================== */
 /** {{*class Thing=
@@ -124,15 +120,15 @@ class Thing extends Mother
                                                                                                                                         background notes</a>
                                                                                                                                         for more details. *} */
                                                                     
-    public      $mainEntityOfPage           = null;                 /* {*property   $mainEntityOfPage           (string)                Indicates a page (or other [c]CreativeWork[/c])
+    public      $mainEntityOfPage           = null;                 /* {*property   $mainEntityOfPage           (string)                Indicates a page (or other @class.CreativeWork, @class.Event)
                                                                                                                                         for which this thing is the main entity
                                                                                                                                         being described. See <a
                                                                                                                                         href="https://schema.org/docs/datamodel.html#mainEntityBackground">
                                                                                                                                         background notes</a> for details.
-                                                                                                                                        Inverse property: mainEntity. *} */
+                                                                                                                                        Inverse property: @var.mainEntity. *} */
     public      $name                       = null;                 /* {*property   $name                       (string)                The name of the item. *} */
                                                                     
-    public      $potentialAction            = null;                 /* {*property   $potentialAction            (Action)                Indicates a potential Action, which
+    public      $potentialAction            = null;                 /* {*property   $potentialAction            (Action)                Indicates a potential @class.Action, which
                                                                                                                                         describes an idealized action in which
                                                                                                                                         this thing would play an 'object' role. *} */
                                                                     
@@ -142,8 +138,8 @@ class Thing extends Mother
                                                                                                                                         item's Wikipedia page, Freebase
                                                                                                                                         page, or official website. *} */
                 
-    public      $subjectOf                  = null;                 /* {*property   $sameAs                     (CreativeWork|Event)    A [c]CreativeWork[/c] or [c]Event[/c] about this [c]Thing[/c]. 
-                                                                                                                                        Inverse property: [c]about[/c]. *} */
+    public      $subjectOf                  = null;                 /* {*property   $subjectOf                  (CreativeWork|Event)    A @class.CreativeWork or @class.Event about this @class.Thing. 
+                                                                                                                                        Inverse property: @var.about. *} */
                 
     public      $url                        = null;                 /* {*property   $url                        (string)                URL of the item. *} */
 
@@ -167,6 +163,10 @@ class Thing extends Mother
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -180,6 +180,25 @@ class Thing extends Mother
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __destruct()
     /*------------------------*/
     {
@@ -190,7 +209,5 @@ class Thing extends Mother
         $this->necroSignaling();
     }   /* End of Thing.__destruct() ================================================== */
     /* ================================================================================ */
-
 }   /* End of class Thing ============================================================= */
 /* ==================================================================================== */
-?>

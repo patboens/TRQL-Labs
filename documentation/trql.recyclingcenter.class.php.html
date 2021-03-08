@@ -6,6 +6,9 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 code,samp, .filename {color: #800 !important;
    font-family: Consolas,"courier new";
    background: rgba(240, 240, 240, 0.5);
@@ -17,9 +20,7 @@ code,samp, .filename {color: #800 !important;
    font-weight: bold;
    font-style: italic;
    }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
-.constrained { max-width: 100%; height: auto; }
-.center { text-align:center; }
+.property.inheritance code { border: none !important; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
 img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
@@ -56,7 +57,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>RecyclingCenter</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">A recycling center.</span>
-<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Thing &gt; Organization &gt; LocalBusiness &gt; RecyclingCenter</code></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="/?src=Mother">Mother</a> &gt; <a href="/?src=Thing">Thing</a> &gt; <a href="/?src=Organization">Organization</a> &gt; <a href="/?src=LocalBusiness">LocalBusiness</a> &gt; RecyclingCenter</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class RecyclingCenter extends LocalBusiness</code></span>
 <span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
  under the terms of their license:
@@ -74,7 +75,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="property">
-<td class="name" id="var-actionableFeedbackPolicy"><code>$actionableFeedbackPolicy</code></td>
+<td class="name" id="var.actionableFeedbackPolicy"><code>$actionableFeedbackPolicy</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
 <td class="description">For a NewsMediaOrganization or other news-related Organization, a
  statement about public engagement activities (for news media, the
@@ -83,7 +84,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  after publication.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-additionalType"><code>$additionalType</code></td>
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An additional type for the item,
  typically used for adding more
@@ -97,55 +98,55 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  - for multiple types.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-address"><code>$address</code></td>
+<td class="name" id="var.address"><code>$address</code></td>
 <td class="type"><code>PostalAddress|string</code></td>
 <td class="description">Physical address of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-aggregateRating"><code>$aggregateRating</code></td>
+<td class="name" id="var.aggregateRating"><code>$aggregateRating</code></td>
 <td class="type"><code>AggregateRating</code></td>
 <td class="description">The overall rating, based on a collection of reviews or ratings, of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-alternateName"><code>$alternateName</code></td>
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An alias for the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-alumni"><code>$alumni</code></td>
+<td class="name" id="var.alumni"><code>$alumni</code></td>
 <td class="type"><code>Person</code></td>
 <td class="description">Alumni of an organization. Inverse property: alumniOf.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-areaServed"><code>$areaServed</code></td>
+<td class="name" id="var.areaServed"><code>$areaServed</code></td>
 <td class="type"><code>AdministrativeArea|GeoShape|Place|string</code></td>
 <td class="description">The geographic area where a service or offered item is provided.
  Supersedes serviceArea.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-award"><code>$award</code></td>
+<td class="name" id="var.award"><code>$award</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An award won by or for this item. Supersedes awards.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-brand"><code>$brand</code></td>
+<td class="name" id="var.brand"><code>$brand</code></td>
 <td class="type"><code>Brand|Organization</code></td>
 <td class="description">The brand(s) associated with a product or service, or the brand(s)
  maintained by an organization or business person.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-contactPoint"><code>$contactPoint</code></td>
+<td class="name" id="var.contactPoint"><code>$contactPoint</code></td>
 <td class="type"><code>ContactPoint</code></td>
 <td class="description">A contact point for a person or organization. Supersedes contactPoints.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-correctionsPolicy"><code>$correctionsPolicy</code></td>
+<td class="name" id="var.correctionsPolicy"><code>$correctionsPolicy</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
 <td class="description">For an <code>Organization</code> (e.g. NewsMediaOrganization), a statement describing
  (in news media, the newsroom’s) disclosure and correction policy for errors.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-currenciesAccepted"><code>$currenciesAccepted</code></td>
+<td class="name" id="var.currenciesAccepted"><code>$currenciesAccepted</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The currency accepted.
  
@@ -155,7 +156,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  Systems (LETS) and other currency types e.g. "Ithaca HOUR".</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-department"><code>$department</code></td>
+<td class="name" id="var.department"><code>$department</code></td>
 <td class="type"><code>Organization</code></td>
 <td class="description">A relationship between an organization and a department of that
  organization, also described as an organization (allowing different
@@ -163,12 +164,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  a bakery with a cafe.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-description"><code>$description</code></td>
+<td class="name" id="var.description"><code>$description</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A short description of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A sub property of description. A
  short description of the item used
@@ -179,12 +180,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-dissolutionDate"><code>$dissolutionDate</code></td>
+<td class="name" id="var.dissolutionDate"><code>$dissolutionDate</code></td>
 <td class="type"><code>Date</code></td>
 <td class="description">The date that this organization was dissolved.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-diversityPolicy"><code>$diversityPolicy</code></td>
+<td class="name" id="var.diversityPolicy"><code>$diversityPolicy</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
 <td class="description">Statement on diversity policy by an Organization
  e.g. a NewsMediaOrganization. For a NewsMediaOrganization, a statement
@@ -192,30 +193,30 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  typically providing staffing data.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-diversityStaffingReport"><code>$diversityStaffingReport</code></td>
+<td class="name" id="var.diversityStaffingReport"><code>$diversityStaffingReport</code></td>
 <td class="type"><code>Article|URL</code></td>
 <td class="description">For an <code>Organization</code> (often but not necessarily a NewsMediaOrganization),
  a report on staffing diversity issues. In a news context this might be
  for example ASNE or RTDNA (US) reports, or self-reported.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-duns"><code>$duns</code></td>
+<td class="name" id="var.duns"><code>$duns</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The Dun & Bradstreet DUNS number for identifying an organization or
  business person.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-email"><code>$email</code></td>
+<td class="name" id="var.email"><code>$email</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Email address.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-employee"><code>$employee</code></td>
+<td class="name" id="var.employee"><code>$employee</code></td>
 <td class="type"><code>Person</code></td>
 <td class="description">Someone working for this organization. Supersedes employees.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-ethicsPolicy"><code>$ethicsPolicy</code></td>
+<td class="name" id="var.ethicsPolicy"><code>$ethicsPolicy</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
 <td class="description">Statement about ethics policy, e.g. of a NewsMediaOrganization regarding
  journalistic and publishing practices, or of a Restaurant, a page describing
@@ -224,39 +225,39 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  corporate standards of behavior expected by the organization.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-event"><code>$event</code></td>
+<td class="name" id="var.event"><code>$event</code></td>
 <td class="type"><code>Event</code></td>
 <td class="description">Upcoming or past event associated with this place, organization, or action.
  Supersedes events.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-faxNumber"><code>$faxNumber</code></td>
+<td class="name" id="var.faxNumber"><code>$faxNumber</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The fax number.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-founder"><code>$founder</code></td>
+<td class="name" id="var.founder"><code>$founder</code></td>
 <td class="type"><code>Person</code></td>
 <td class="description">A person who founded this organization. Supersedes founders.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-foundingDate"><code>$foundingDate</code></td>
+<td class="name" id="var.foundingDate"><code>$foundingDate</code></td>
 <td class="type"><code>Date</code></td>
 <td class="description">The date that this organization was founded.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-foundingLocation"><code>$foundingLocation</code></td>
+<td class="name" id="var.foundingLocation"><code>$foundingLocation</code></td>
 <td class="type"><code>Place</code></td>
 <td class="description">The place where the <code>Organization</code> was founded.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-funder"><code>$funder</code></td>
+<td class="name" id="var.funder"><code>$funder</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">A person or organization that supports (sponsors) something through some kind
  of financial contribution.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-globalLocationNumber"><code>$globalLocationNumber</code></td>
+<td class="name" id="var.globalLocationNumber"><code>$globalLocationNumber</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The Global Location Number (GLN, sometimes also referred to as
  International Location Number or ILN) of the respective organization,
@@ -264,27 +265,27 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  parties and physical locations.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-hasCredential"><code>$hasCredential</code></td>
+<td class="name" id="var.hasCredential"><code>$hasCredential</code></td>
 <td class="type"><code>EducationalOccupationalCredential</code></td>
 <td class="description">A credential awarded to the Person or Organization.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-hasOfferCatalog"><code>$hasOfferCatalog</code></td>
+<td class="name" id="var.hasOfferCatalog"><code>$hasOfferCatalog</code></td>
 <td class="type"><code>OfferCatalog</code></td>
 <td class="description">Indicates an OfferCatalog listing for this Organization, Person, or Service.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-hasPOS"><code>$hasPOS</code></td>
+<td class="name" id="var.hasPOS"><code>$hasPOS</code></td>
 <td class="type"><code>Place</code></td>
 <td class="description">Points-of-Sales operated by the organization or person.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-hasProductReturnPolicy"><code>$hasProductReturnPolicy</code></td>
+<td class="name" id="var.hasProductReturnPolicy"><code>$hasProductReturnPolicy</code></td>
 <td class="type"><code>ProductReturnPolicy</code></td>
 <td class="description">Indicates a ProductReturnPolicy that may be applicable.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-identifier"><code>$identifier</code></td>
+<td class="name" id="var.identifier"><code>$identifier</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The identifier property represents any
  kind of identifier for any kind of Thing,
@@ -298,19 +299,19 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  for more details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-image"><code>$image</code></td>
+<td class="name" id="var.image"><code>$image</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">URL of an image of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-isicV4"><code>$isicV4</code></td>
+<td class="name" id="var.isicV4"><code>$isicV4</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The International Standard of Industrial Classification of All Economic
  Activities (ISIC), Revision 4 code for a particular organization, business
  person, or place.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-knowsAbout"><code>$knowsAbout</code></td>
+<td class="name" id="var.knowsAbout"><code>$knowsAbout</code></td>
 <td class="type"><code>string|Thing|URL</code></td>
 <td class="description">Of a Person, and less typically of an Organization, to indicate a topic
  that is known about - suggesting possible expertise but not implying it.
@@ -318,7 +319,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  content, events, objectives or JobPosting descriptions.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-knowsLanguage"><code>$knowsLanguage</code></td>
+<td class="name" id="var.knowsLanguage"><code>$knowsLanguage</code></td>
 <td class="type"><code>Language|string</code></td>
 <td class="description">Of a Person, and less typically of an Organization, to indicate a known
  language. We do not distinguish skill levels or
@@ -326,80 +327,80 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  IETF BCP 47 standard.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-legalName"><code>$legalName</code></td>
+<td class="name" id="var.legalName"><code>$legalName</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The official name of the organization, e.g. the registered company name.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-leiCode"><code>$leiCode</code></td>
+<td class="name" id="var.leiCode"><code>$leiCode</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An organization identifier that uniquely identifies a legal entity as
  defined in ISO 17442.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-location"><code>$location</code></td>
+<td class="name" id="var.location"><code>$location</code></td>
 <td class="type"><code>Place|PostalAddress|string</code></td>
 <td class="description">The location of for example where the event is happening, an organization
  is located, or where an action takes place.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-logo"><code>$logo</code></td>
+<td class="name" id="var.logo"><code>$logo</code></td>
 <td class="type"><code>ImageObject|URL</code></td>
 <td class="description">An associated logo.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Indicates a page (or other <code>CreativeWork</code>)
+<td class="description">Indicates a page (or other <code><a href="/?src=CreativeWork">CreativeWork</a></code>, <code><a href="/?src=Event">Event</a></code>)
  for which this thing is the main entity
  being described. See <a
  href="https://schema.org/docs/datamodel.html#mainEntityBackground">
  background notes</a> for details.
- Inverse property: mainEntity.</td>
+ Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-makesOffer"><code>$makesOffer</code></td>
+<td class="name" id="var.makesOffer"><code>$makesOffer</code></td>
 <td class="type"><code>Offer</code></td>
 <td class="description">A pointer to products or services offered by the organization or person.
  Inverse property: offeredBy.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-member"><code>$member</code></td>
+<td class="name" id="var.member"><code>$member</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">A member of an <code>Organization</code> or a ProgramMembership. Organizations can be
  members of organizations; ProgramMembership is typically for individuals.
  Supersedes members, musicGroupMember. Inverse property: memberOf.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-memberOf"><code>$memberOf</code></td>
+<td class="name" id="var.memberOf"><code>$memberOf</code></td>
 <td class="type"><code>Organization|ProgramMembership</code></td>
 <td class="description">An <code>Organization</code> (or ProgramMembership) to which this Person or Organization
  belongs. Inverse property: member.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-naics"><code>$naics</code></td>
+<td class="name" id="var.naics"><code>$naics</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The North American Industry Classification System (NAICS) code for a
  particular organization or business person.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-name"><code>$name</code></td>
+<td class="name" id="var.name"><code>$name</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The name of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-nonprofitStatus"><code>$nonprofitStatus</code></td>
+<td class="name" id="var.nonprofitStatus"><code>$nonprofitStatus</code></td>
 <td class="type"><code>NonprofitType</code></td>
 <td class="description">nonprofit Status indicates the legal status of a non-profit organization
  in its primary place of business.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-numberOfEmployees"><code>$numberOfEmployees</code></td>
+<td class="name" id="var.numberOfEmployees"><code>$numberOfEmployees</code></td>
 <td class="type"><code>QuantitativeValue</code></td>
 <td class="description">The number of employees in an organization e.g. business.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-openingHours"><code>$openingHours</code></td>
+<td class="name" id="var.openingHours"><code>$openingHours</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The general opening hours for a business. Opening hours can be specified
  as a weekly time range, starting with days, then times per day.
@@ -418,7 +419,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-ownershipFundingInfo"><code>$ownershipFundingInfo</code></td>
+<td class="name" id="var.ownershipFundingInfo"><code>$ownershipFundingInfo</code></td>
 <td class="type"><code>AboutPage|CreativeWork|string|URL</code></td>
 <td class="description">For an <code>Organization</code> (often but not necessarily a NewsMediaOrganization),
  a description of organizational ownership structure; funding and grants.
@@ -427,35 +428,35 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  make basic funder information machine-readable.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-owns"><code>$owns</code></td>
+<td class="name" id="var.owns"><code>$owns</code></td>
 <td class="type"><code>OwnershipInfo|Product</code></td>
 <td class="description">Products owned by the organization or person.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-parentOrganization"><code>$parentOrganization</code></td>
+<td class="name" id="var.parentOrganization"><code>$parentOrganization</code></td>
 <td class="type"><code>Organization</code></td>
 <td class="description">The larger organization that this organization is a subOrganization of,
  if any. Supersedes branchOf. Inverse property: subOrganization.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-paymentAccepted"><code>$paymentAccepted</code></td>
+<td class="name" id="var.paymentAccepted"><code>$paymentAccepted</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-potentialAction"><code>$potentialAction</code></td>
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
-<td class="description">Indicates a potential Action, which
+<td class="description">Indicates a potential <code><a href="/?src=Action">Action</a></code>, which
  describes an idealized action in which
  this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-priceRange"><code>$priceRange</code></td>
+<td class="name" id="var.priceRange"><code>$priceRange</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The price range of the business, for example $$$.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-publishingPrinciples"><code>$publishingPrinciples</code></td>
+<td class="name" id="var.publishingPrinciples"><code>$publishingPrinciples</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
 <td class="description">The publishingPrinciples property indicates (typically via URL) a
  document describing the editorial principles of an Organization
@@ -469,29 +470,38 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  expressed using schema.org terminology.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sameAs"><code>$sameAs</code></td>
-<td class="type"><code>CreativeWork|Event</code></td>
-<td class="description">A <code>CreativeWork</code> or <code>Event</code> about this <code>Thing</code>. 
- Inverse property: <code>about</code>.</td>
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+ unambiguously indicates the item's
+ identity. E.g. the URL of the
+ item's Wikipedia page, Freebase
+ page, or official website.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-self"><code>$self</code></td>
+<td class="name" id="var.self"><code>$self</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-url"><code>$url</code></td>
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A <code><a href="/?src=CreativeWork">CreativeWork</a></code> or <code><a href="/?src=Event">Event</a></code> about this <code><a href="/?src=Thing">Thing</a></code>. 
+ Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.url"><code>$url</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">URL of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Wikidata ID. NOT CHECKED SO FAR</td>
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>RecyclingCenter</code></h2>
-<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
 <p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -504,14 +514,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
-<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
 <p class="property return">Return:</p>

@@ -295,32 +295,64 @@ Trait Utils
     /* ================================================================================ */
 
 
-    public function changeSeealso( $szStr,$szMethodName )
-    /*-------------------------------------------------*/
+    public function assembleRegex( $a1,$a2 )
+    /*------------------------------------*/
+    {
+        $aRetVal = null;
+
+        if ( ( $iCount = count( $a1 ) ) === count( $a2 ) )
+        {
+            for ( $i=0;$i<$iCount;$i++ )
+                $aRetVal[$i] = array( $a1[$i],$a2[$i] );
+        }   /* if ( ( $iCount = count( $aArgs ) ) === count( $aValues ) ) */
+
+        return ( $aRetVal );
+    }   /* End of Utils.assembleArgs() ================================================ */
+    /* ================================================================================ */
+
+
+    public function changeSeealso( $szStr,$szMethodName = '')
+    /*-----------------------------------------------------*/
     {
         $szRetVal = $szStr;
 
         //var_dump( $szStr );
 
-        if ( preg_match( '/@(?P<type>var|fnc|param)\.\$?(?P<term>[[:word:]]*)(\s|\z|[[:space:][:punct:]])/si',$szStr,$aMatches ) )
+        //if ( preg_match( '/@(?P<type>var|fnc|param|class)\.\$?(?P<term>[[:word:]]*)(\s|\z|[[:space:][:punct:]])/si',$szStr,$aMatches ) )
+        if ( preg_match_all( '/@(?P<type>var|fnc|param|class)\.\$?(?P<term>[[:word:]]*)(\s|\z|[[:space:][:punct:]])/si',$szStr,$aMatches ) )
         {
-            $szToReplace    = trim( $aMatches[0] );
-            $szType         = $aMatches['type'];
-            $szTerm         = $aMatches['term'];
-            $szSubstitute   = "[c]<a href=\"#{$szType}-{$szMethodName}.{$szTerm}\">$" . $szTerm . "</a>[/c]";
-            //var_dump( $szToReplace,$szSubstitute );
-
-            $szRetVal       = STR_replace( $szToReplace,$szSubstitute,$szRetVal );
-            //var_dump( __METHOD__,$szRetVal );
+            $aReplacements = $this->assembleRegex( $aMatches['type'],$aMatches['term'] );
+            //var_dump( $szStr );
+            foreach( $aReplacements as $aReplacement )
+            {
+                // IL faudra adapter le makeID()
+                $szToReplace = '@' . $aReplacement[0] . '.' . ( ! empty( $szMethodName ) ? $szMethodName . '.' : '' ) . $aReplacement[1];
+                switch ( $aReplacement[0] )
+                {
+                    case 'class':
+                        {
+                            $szSubstitute   = "[c]<a href=\"/?src={$aReplacement[1]}\">{$aReplacement[1]}</a>[/c]";
+                        }
+                        break;
+                    default     :
+                        {
+                            $szSubstitute   = "[c]<a href=\"#{$aReplacement[0]}-" . ( ! empty( $szMethodName ) ? $szMethodName . '.' : '' ) . "{$aReplacement[1]}\">$" . $aReplacement[1] . "</a>[/c]";
+                        }
+                }
+                //var_dump( $aReplacement,$szToReplace,$szSubstitute );
+                $szRetVal = STR_replace( $szToReplace,$szSubstitute,$szRetVal );
+                //var_dump( $szRetVal );
+            }
+            //die();
         }
-        
+
         return ( $szRetVal );
     }
 
     public function removeStartingBlanks( $szStr )
     /*------------------------------------------*/
     {
-        return ( preg_replace( '/^\d{1,8}/im','  ',$szStr ) );
+        return ( preg_replace( '/^ {1,8}/im','  ',$szStr ) );
     }   /* End of Utils.removeStartingBlanks() ======================================== */
     /* ================================================================================ */
 
@@ -339,7 +371,7 @@ Trait Utils
                 {
                     $szType = $aMatches['type'];
                     $szTerm = $aMatches['term'];
-                    $szSeeAlsos .= "<a href=\"#{$szType}-{$szTerm}\">{$szTerm}" . ( $szType === 'fnc' ? '()' : '' ) . "</a>, ";
+                    $szSeeAlsos .= "[c]<a href=\"#{$szType}.{$szTerm}\">{$szTerm}" . ( $szType === 'fnc' ? '()' : '' ) . "</a>[/c], ";
                 }
                 else
                 {
@@ -383,7 +415,7 @@ Trait Utils
     {
         $szRetVal = '';
 
-        $szRetVal = $szType . '-' . str_replace( array('$'),'',$szStr );
+        $szRetVal = $szType . '.' . str_replace( array('$'),'',$szStr );
 
         return ( $szRetVal );
     }   /* End of Utils.makeID() ====================================================== */
@@ -588,6 +620,8 @@ class Documentor extends CreativeWork implements iContext
         if ( is_null( $szMask ) )
             $szMask = '/.*/i';
 
+        $i = 0;
+
         if ( is_array( $this->family ) )
         {
             /* For each file found in the family (of files) of this class */
@@ -595,6 +629,8 @@ class Documentor extends CreativeWork implements iContext
             {
                 if ( preg_match( $szMask,$szFile,$aMatches ) )
                 {
+                    if ( $this->isCommandLine() )
+                        echo ++$i,'...',$szFile,"\n";
                     //echo "should document {$szFile}",$this->nl();
                     $this->document( $szFile );
                 }   /* if ( preg_match( $szMask,$szFile,$aMatches ) ) */
@@ -1395,7 +1431,7 @@ Class DocumentorSourceFile extends DocumentorFile
     /* ================================================================================ */
     /** {{*s( $szStr )=
 
-        Apply the private substitutions 
+        Apply the private substitutions
 
         {*params
             $szStr      (string)    The string in which we need to apply the private
@@ -1417,7 +1453,7 @@ Class DocumentorSourceFile extends DocumentorFile
         return ( str_replace( array_keys( $this->aSubstitutions ),array_values( $this->aSubstitutions ),$szStr ) );
     }   /* End of DocumentorSourceFile.s() ============================================ */
     /* ================================================================================ */
-    
+
 
     /* ================================================================================ */
     /** {{*document( [$szFile])=
@@ -1473,6 +1509,10 @@ Class DocumentorSourceFile extends DocumentorFile
                     $szHTML .= ".DocumentorLabel { font-style: italic; display: block; margin-top:1em; }\n";
                     $szHTML .= ".property { font-weight: bold;}\n";
 
+                    $szHTML .= ".shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }\n";
+                    $szHTML .= ".constrained { max-width: 100%; height: auto; }\n";
+                    $szHTML .= ".center { text-align:center; }\n";
+
                     $szHTML .= "code,samp, .filename {color: #800 !important;\n"    .
                                "   font-family: Consolas,\"courier new\";\n"        .
                                "   background: rgba(240, 240, 240, 0.5);\n"         .
@@ -1486,9 +1526,8 @@ Class DocumentorSourceFile extends DocumentorFile
                                "   font-style: italic;\n" .
                                "   }\n";
 
-                    $szHTML .= ".shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }\n";
-                    $szHTML .= ".constrained { max-width: 100%; height: auto; }\n";
-                    $szHTML .= ".center { text-align:center; }\n";
+                    $szHTML     .= ".property.inheritance code { border: none !important; }\n";
+
 
                     //$szHTML .= ".seealso code a:before {content: \"\\2221 \" ;\n }";
                     //$szHTML .= ".seealso code { background-color: #800 !important;}\n";
@@ -1497,7 +1536,7 @@ Class DocumentorSourceFile extends DocumentorFile
                     $szHTML .= "section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }\n";
 
                     $szHTML .= "img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}\n";
-        
+
                     $szHTML .= "table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }\n";
                     $szHTML .= "table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }\n";
                     $szHTML .= "table.properties thead th.description { width:60%; }\n";
@@ -1571,13 +1610,13 @@ Class DocumentorSourceFile extends DocumentorFile
                                     foreach( $oClass->aParentClasses as $aClass )
                                     {
                                         $a = explode( '\\',$aClass['name'] );
-                                        $szBreadcrumb .= end( $a ) . ' &gt; ';
+                                        $szBreadcrumb .= '@class.' . end( $a ) . ' &gt; ';
                                     }
 
                                     // Finish the breadcrumb with the name of the class we're busy with
-                                    $szBreadcrumb .= $oClass->name;
+                                    $szBreadcrumb = str_replace( array('[c]','[/c]'),'',$this->changeSeealso( $szBreadcrumb ) ). $oClass->name;
 
-                                    $szHTML     .= "<span class=\"DocumentorLabel\">Inheritance: </span><span class=\"property declaration\">"  . $this->squareToAngle( say( '[c]' .   $szBreadcrumb           . '[/c]'           ) ) . "</span>\n";
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Inheritance: </span><span class=\"property inheritance\">"  . $this->squareToAngle( say( '[c]' .   $szBreadcrumb           . '[/c]'           ) ) . "</span>\n";
                                 }
 
                                 if ( ! empty( $oClass->szDeclaration ) )
@@ -1656,9 +1695,9 @@ Class DocumentorSourceFile extends DocumentorFile
                                         //var_dump( $oProperty );
                                         //die();
                                         $szHTML .= "<tr class=\"property\">\n";
-                                            $szHTML .= "<td class=\"name\" id=\"" . $this->makeID( 'var',$oProperty->name ) . "\">" . trim(                      $this->squareToAngle( '[c]' . $oProperty->name        . '[/c]' )   ) . "</td>\n";
-                                            $szHTML .= "<td class=\"type\">"                                                        . trim(                      $this->squareToAngle( '[c]' . $oProperty->szTypes     . '[/c]' )   ) . "</td>\n";
-                                            $szHTML .= "<td class=\"description\">"                                                 . trim( vaesoli::STR_Reduce( $this->squareToAngle(         $oProperty->description          ) ) ) . "</td>\n";
+                                            $szHTML .= "<td class=\"name\" id=\"" . $this->makeID( 'var',$oProperty->name ) . "\">" . trim( $this->squareToAngle(                                     '[c]' . $oProperty->name        . '[/c]' )   ) . "</td>\n";
+                                            $szHTML .= "<td class=\"type\">"                                                        . trim( $this->squareToAngle(                                     '[c]' . $oProperty->szTypes     . '[/c]' )   ) . "</td>\n";
+                                            $szHTML .= "<td class=\"description\">"                                                 . trim( $this->squareToAngle(  $this->changeSeealso( vaesoli::STR_Reduce( $oProperty->description ),'' ) ) ) . "</td>\n";
                                         $szHTML .= "</tr>\n";
                                         //$szHTML     .= "<span class=\"property prop\">" . $this->squareToAngle( '[c]' . $oProperty->name . '[/c]') . "</span>, \n";
                                     }
@@ -3882,7 +3921,7 @@ Class DocumentorFunctionReturn extends DocumentorSourceFileObject
         *}
 
         {*example
-            new 
+            new
         *}
 
         *}}

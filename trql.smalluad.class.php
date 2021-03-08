@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 14-01-21 16:33 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -70,6 +69,8 @@ defined( 'SMALLUAD_CLASS_VERSION' ) or define( 'SMALLUAD_CLASS_VERSION' ,'0.1' )
 
     *}
 
+    *}}
+
  */
 /* ==================================================================================== */
 class SmallUAD extends Dataset
@@ -92,8 +93,8 @@ class SmallUAD extends Dataset
                                                                                                                                         enough *} */
     protected   $oDom                           = null;
     public      $isLoaded                       = false;
-    protected   $aUsers                         = null;
-    public      $szStorage                      = null;
+    protected   $aUsers                         = null;             /* {*property   $aUsers                         (array)             Array of users *} */
+    public      $szStorage                      = null;             /* {*property   $szStorage                      (string)            The physical file where Users Accounts are stored *} */
 
 
     /* ================================================================================ */
@@ -107,6 +108,43 @@ class SmallUAD extends Dataset
 
         {*return
             (self)      The current instance of the class
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
+        {*example
+        use \trql\vaesoli\Vaesoli           as Vaesoli;
+        use \trql\user\User                 as User;
+        [b]use \trql\smalluad\SmallUAD         as SmallUAD;[/b]
+
+        if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+            require_once( 'trql.vaesoli.class.php' );
+
+        if ( ! defined( 'USER_CLASS_VERSION' ) )
+            require_once( 'trql.user.class.php' );
+
+        [b]if ( ! defined( 'SMALLUAD_CLASS_VERSION' ) )
+            require_once( 'trql.smalluad.class.php' );[/b]
+
+        $szUserName = $_POST['txtUserName'] ?? null;
+        $szPWD      = $_POST['pwdPassword'] ?? null;
+
+        $oUser      = new User();
+        [b]$oUAD       = new SmallUAD();[/b]
+
+        [b]if ( $oUAD->load( vaesoli::FIL_RealPath( vaesoli::FIL_ResolveRoot( '/../databases/uad.xml' ) ) ) )
+        {
+            if ( ! is_null( $oUser = $oUAD->seek( $szUserName ) ) )[/b]
+            {
+                if ( $oUser->accessCode === <cryptmethod>( $szPWD ) )
+                {
+                    echo "All OK";
+                }
+            }
+        }
+
         *}
 
         *}}
@@ -123,6 +161,55 @@ class SmallUAD extends Dataset
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*load()=
+
+        Loads the Small User Account Database
+
+        {*params
+        *}
+
+        {*return
+            (bool)      [c]true[/c] if the [c]%class%[/c] was loaded successfully; [c]false[/c]
+                        otherwise
+        *}
+
+        {*example
+        use \trql\vaesoli\Vaesoli           as Vaesoli;
+        use \trql\user\User                 as User;
+        use \trql\smalluad\SmallUAD         as SmallUAD;
+
+        if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+            require_once( 'trql.vaesoli.class.php' );
+
+        if ( ! defined( 'USER_CLASS_VERSION' ) )
+            require_once( 'trql.user.class.php' );
+
+        if ( ! defined( 'SMALLUAD_CLASS_VERSION' ) )
+            require_once( 'trql.smalluad.class.php' );
+
+        $szUserName = $_POST['txtUserName'] ?? null;
+        $szPWD      = $_POST['pwdPassword'] ?? null;
+
+        $oUser      = new User();
+        [b]$oUAD       = new SmallUAD();[/b]
+
+        [b]if ( $oUAD->load( vaesoli::FIL_RealPath( vaesoli::FIL_ResolveRoot( '/../databases/uad.xml' ) ) ) )[/b]
+        {
+            if ( ! is_null( $oUser = $oUAD->seek( $szUserName ) ) )
+            {
+                if ( $oUser->accessCode === <cryptmethod>( $szPWD ) )
+                {
+                    echo "All OK";
+                }
+            }
+        }
+
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function load( $szFile ): bool
     /*---------------------------------*/
     {
@@ -243,6 +330,11 @@ class SmallUAD extends Dataset
             (void)      No return
         *}
 
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -256,7 +348,5 @@ class SmallUAD extends Dataset
         $this->necroSignaling();
     }   /* End of SmallUAD.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class SmallUAD ========================================================== */
 /* ==================================================================================== */
-?>

@@ -6,6 +6,9 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 code,samp, .filename {color: #800 !important;
    font-family: Consolas,"courier new";
    background: rgba(240, 240, 240, 0.5);
@@ -17,9 +20,7 @@ code,samp, .filename {color: #800 !important;
    font-weight: bold;
    font-style: italic;
    }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
-.constrained { max-width: 100%; height: auto; }
-.center { text-align:center; }
+.property.inheritance code { border: none !important; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
 img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
@@ -61,7 +62,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <span class="DocumentorLabel">Description: </span><span class="property description">A reservation for a taxi.Note: This type is for information about actual
  reservations, e.g. in confirmation emails or HTML pages with individual
  confirmations of reservations. For offers of tickets, use Offer.</span>
-<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Thing &gt; Intangible &gt; Reservation &gt; TaxiReservation</code></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="/?src=Mother">Mother</a> &gt; <a href="/?src=Thing">Thing</a> &gt; <a href="/?src=Intangible">Intangible</a> &gt; <a href="/?src=Reservation">Reservation</a> &gt; TaxiReservation</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class TaxiReservation extends Reservation</code></span>
 <span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
  under the terms of their license:
@@ -79,7 +80,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="property">
-<td class="name" id="var-additionalType"><code>$additionalType</code></td>
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">An additional type for the item, typically used for adding more
  specific types from external vocabularies in microdata syntax. This is
@@ -89,23 +90,23 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  understanding of extra types, in particular those defined externally.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-alternateName"><code>$alternateName</code></td>
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An alias for the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-bookingAgent"><code>$bookingAgent</code></td>
+<td class="name" id="var.bookingAgent"><code>$bookingAgent</code></td>
 <td class="type"><code>Organization|Person</code></td>
 <td class="description">'bookingAgent' is an out-dated term indicating a 'broker' that serves
  as a booking agent.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-bookingTime"><code>$bookingTime</code></td>
+<td class="name" id="var.bookingTime"><code>$bookingTime</code></td>
 <td class="type"><code>DateTime</code></td>
 <td class="description">The date and time the reservation was booked.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-broker"><code>$broker</code></td>
+<td class="name" id="var.broker"><code>$broker</code></td>
 <td class="type"><code>Person|Organization</code></td>
 <td class="description">An entity that arranges for an exchange between a buyer and a seller.
  In most cases a broker never acquires or releases ownership of a
@@ -114,12 +115,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  preferred.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-description"><code>$description</code></td>
+<td class="name" id="var.description"><code>$description</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A description of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A sub property of description. A short description of the item used to
  disambiguate from other, similar items. Information from other
@@ -127,7 +128,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-identifier"><code>$identifier</code></td>
+<td class="name" id="var.identifier"><code>$identifier</code></td>
 <td class="type"><code>URL|string|PropertyValue</code></td>
 <td class="description">The identifier property represents any kind of identifier for any kind
  of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
@@ -135,51 +136,51 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  strings or as URL (URI) links. See background notes for more details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-image"><code>$image</code></td>
+<td class="name" id="var.image"><code>$image</code></td>
 <td class="type"><code>ImageObject|URL</code></td>
 <td class="description">An image of the item. This can be a URL or a fully described
  ImageObject.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
 <td class="description">Indicates a page (or other CreativeWork) for which this thing is the
  main entity being described. See background notes for details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-modifiedTime"><code>$modifiedTime</code></td>
+<td class="name" id="var.modifiedTime"><code>$modifiedTime</code></td>
 <td class="type"><code>DateTime</code></td>
 <td class="description">The date and time the reservation was modified.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-name"><code>$name</code></td>
+<td class="name" id="var.name"><code>$name</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The name of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-partySize"><code>$partySize</code></td>
+<td class="name" id="var.partySize"><code>$partySize</code></td>
 <td class="type"><code>int|QuantitativeValue</code></td>
 <td class="description">Number of people the reservation should accommodate.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-pickupLocation"><code>$pickupLocation</code></td>
+<td class="name" id="var.pickupLocation"><code>$pickupLocation</code></td>
 <td class="type"><code>Place</code></td>
 <td class="description">Where a taxi will pick up a passenger or a rental car can be picked
  up.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-pickupTime"><code>$pickupTime</code></td>
+<td class="name" id="var.pickupTime"><code>$pickupTime</code></td>
 <td class="type"><code>DateTime</code></td>
 <td class="description">When a taxi will pickup a passenger or a rental car can be picked up.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-potentialAction"><code>$potentialAction</code></td>
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
 <td class="description">Indicates a potential Action, which describes an idealized action in
  which this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-priceCurrency"><code>$priceCurrency</code></td>
+<td class="name" id="var.priceCurrency"><code>$priceCurrency</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The currency of the price, or a price component when attached to
  PriceSpecification and its subtypes.Use standard formats: ISO 4217
@@ -188,13 +189,13 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  other currency types e.g. "Ithaca HOUR".</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-programMembershipUsed"><code>$programMembershipUsed</code></td>
+<td class="name" id="var.programMembershipUsed"><code>$programMembershipUsed</code></td>
 <td class="type"><code>ProgramMembership</code></td>
 <td class="description">Any membership in a frequent flyer, hotel loyalty program, etc. being
  applied to the reservation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-provider"><code>$provider</code></td>
+<td class="name" id="var.provider"><code>$provider</code></td>
 <td class="type"><code>Person|Organization</code></td>
 <td class="description">The service provider, service operator, or service performer; the
  goods producer. Another party (a seller) may offer those services or
@@ -202,44 +203,44 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  seller.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-reservationFor"><code>$reservationFor</code></td>
+<td class="name" id="var.reservationFor"><code>$reservationFor</code></td>
 <td class="type"><code>Thing</code></td>
 <td class="description">The thing -- flight, event, restaurant,etc. being reserved.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-reservationId"><code>$reservationId</code></td>
+<td class="name" id="var.reservationId"><code>$reservationId</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A unique identifier for the reservation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-reservationStatus"><code>$reservationStatus</code></td>
+<td class="name" id="var.reservationStatus"><code>$reservationStatus</code></td>
 <td class="type"><code>ReservationStatusType</code></td>
 <td class="description">The current status of the reservation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-reservedTicket"><code>$reservedTicket</code></td>
+<td class="name" id="var.reservedTicket"><code>$reservedTicket</code></td>
 <td class="type"><code>Ticket</code></td>
 <td class="description">A ticket associated with the reservation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sameAs"><code>$sameAs</code></td>
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">URL of a reference Web page that unambiguously indicates the item's
  identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
  or official website.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-self"><code>$self</code></td>
+<td class="name" id="var.self"><code>$self</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-subjectOf"><code>$subjectOf</code></td>
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
 <td class="type"><code>Event|CreativeWork</code></td>
 <td class="description">A CreativeWork or Event about this Thing.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-totalPrice"><code>$totalPrice</code></td>
+<td class="name" id="var.totalPrice"><code>$totalPrice</code></td>
 <td class="type"><code>PriceSpecification|float|string</code></td>
 <td class="description">The total price for the reservation or ticket, including applicable
  taxes, shipping, etc.Usage guidelines:Use values from 0123456789
@@ -249,24 +250,24 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  these symbols as a readability separator.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-underName"><code>$underName</code></td>
+<td class="name" id="var.underName"><code>$underName</code></td>
 <td class="type"><code>Person|Organization</code></td>
 <td class="description">The person or organization the reservation or ticket is for.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-url"><code>$url</code></td>
+<td class="name" id="var.url"><code>$url</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">URL of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Wikidata ID. Booking ... scheduling of a service, such as accommodation
  in an hotel</td>
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>TaxiReservation</code></h2>
-<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
 <p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -279,14 +280,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
-<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
 <p class="property return">Return:</p>

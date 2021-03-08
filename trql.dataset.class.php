@@ -124,7 +124,7 @@ class Dataset extends CreativeWork
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = 'Q1172284';       /* {*property   $wikidataId                     (string)                        Wikidata ID. Collection of data: dataset, database, db, data stock,
                                                                                                                                                     data pool, data corpus *} */
-    public      $aItems                         = null;             /* {*property   $aItems                         (array)                         Set of items composing the dataset */
+    public      $aItems                         = null;             /* {*property   $aItems                         (array)                         Set of items composing the dataset *} */
 
 
     /* ================================================================================ */

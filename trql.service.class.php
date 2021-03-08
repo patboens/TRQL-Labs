@@ -28,6 +28,7 @@
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
     {*UTF-8                 Quel bel été *}
+    {*keywords              service *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -79,6 +80,8 @@ defined( 'SERVICE_CLASS_VERSION' ) or define( 'SERVICE_CLASS_VERSION','0.1' );
 
     *}
 
+    *}}
+
  */
 /* ==================================================================================== */
 class Service extends Intangible
@@ -112,8 +115,8 @@ class Service extends Intangible
                                                                                                                                                         preferred. *} */
     public      $category               = null;                     /* {*property   $category           (PhysicalActivityCategory|string|Thing|URL)     A category for the item. Greater signs or slashes can
                                                                                                                                                         be used to informally indicate a category hierarchy. *} */
-    public      $hasOfferCatalog        = null;                     /* {*property   $hasOfferCatalog    (OfferCatalog)                                  Indicates an OfferCatalog listing for this Organization,
-                                                                                                                                                        Person, or Service. *} */
+    public      $hasOfferCatalog        = null;                     /* {*property   $hasOfferCatalog    (OfferCatalog)                                  Indicates an @class.OfferCatalog listing for this @class.Organization,
+                                                                                                                                                        @class.Person, or @class.Service. *} */
     public      $hoursAvailable         = null;                     /* {*property   $hoursAvailable     (OpeningHoursSpecification)                     The hours during which this service or contact is available. *} */
     public      $isRelatedTo            = null;                     /* {*property   $isRelatedTo        (Product|Service)                               A pointer to another, somehow related product
                                                                                                                                                         (or multiple products). *} */
@@ -127,7 +130,7 @@ class Service extends Intangible
                                                                                                                                                         property can also be used to describe a Demand. While this
                                                                                                                                                         property is listed as expected on a number of common types,
                                                                                                                                                         it can be used in others. In that case, using a second type,
-                                                                                                                                                        such as Product or a subtype of Product, can clarify the
+                                                                                                                                                        such as @class.Product or a subtype of @class.Product, can clarify the
                                                                                                                                                         nature of the offer. *} */
     public      $provider               = null;                     /* {*property   $provider           (Organization|Person)                           The service provider, service operator, or service performer;
                                                                                                                                                         the goods producer. Another party (a seller) may offer those
@@ -162,6 +165,10 @@ class Service extends Intangible
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -188,6 +195,10 @@ class Service extends Intangible
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -203,4 +214,3 @@ class Service extends Intangible
     /* ================================================================================ */
 }   /* End of class Service =========================================================== */
 /* ==================================================================================== */
-?>

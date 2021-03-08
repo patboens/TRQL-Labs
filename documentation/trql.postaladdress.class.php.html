@@ -6,6 +6,9 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 code,samp, .filename {color: #800 !important;
    font-family: Consolas,"courier new";
    background: rgba(240, 240, 240, 0.5);
@@ -17,9 +20,7 @@ code,samp, .filename {color: #800 !important;
    font-weight: bold;
    font-style: italic;
    }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
-.constrained { max-width: 100%; height: auto; }
-.center { text-align:center; }
+.property.inheritance code { border: none !important; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
 img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
@@ -56,7 +57,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>PostalAddress</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">The mailing address.</span>
-<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Thing &gt; ContactPoint &gt; PostalAddress</code></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="/?src=Mother">Mother</a> &gt; <a href="/?src=Thing">Thing</a> &gt; <a href="/?src=ContactPoint">ContactPoint</a> &gt; PostalAddress</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class PostalAddress extends ContactPoint implements iContext</code></span>
 <span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
  under the terms of their license:
@@ -76,7 +77,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="property">
-<td class="name" id="var-additionalType"><code>$additionalType</code></td>
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An additional type for the item,
  typically used for adding more
@@ -90,50 +91,50 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  - for multiple types.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-addressCountry"><code>$addressCountry</code></td>
+<td class="name" id="var.addressCountry"><code>$addressCountry</code></td>
 <td class="type"><code>Country|string</code></td>
 <td class="description">The country. For example, USA. You can also provide the
  two-letter ISO 3166-1 alpha-2 country code.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-addressLocality"><code>$addressLocality</code></td>
+<td class="name" id="var.addressLocality"><code>$addressLocality</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The locality in which the street address is, and which is
  in the region. For example, Mountain View.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-addressRegion"><code>$addressRegion</code></td>
+<td class="name" id="var.addressRegion"><code>$addressRegion</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The region in which the locality is, and which is in the
  country. For example, California or another appropriate
  first-level Administrative division</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-alternateName"><code>$alternateName</code></td>
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An alias for the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-areaServed"><code>$areaServed</code></td>
+<td class="name" id="var.areaServed"><code>$areaServed</code></td>
 <td class="type"><code>AdministrativeArea|GeoShape|Place|string</code></td>
 <td class="description">The geograpic area where a service or offered item is
  provided. Supersedes serviceArea.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-availableLanguage"><code>$availableLanguage</code></td>
+<td class="name" id="var.availableLanguage"><code>$availableLanguage</code></td>
 <td class="type"><code>Language|string</code></td>
 <td class="description">A language someone may use with or at the item, service
  or place. Please use one of the language codes from the
  IETF BCP 47 standard. See also inLanguage</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-contactOption"><code>$contactOption</code></td>
+<td class="name" id="var.contactOption"><code>$contactOption</code></td>
 <td class="type"><code>ContactPointOption</code></td>
 <td class="description">An option available on this contact point (e.g. a
  toll-free number or support for hearing-impaired callers).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-contactType"><code>$contactType</code></td>
+<td class="name" id="var.contactType"><code>$contactType</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A person or organization can have different contact
  points, for different purposes. For example, a sales
@@ -141,12 +142,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  is used to specify the kind of contact point.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-description"><code>$description</code></td>
+<td class="name" id="var.description"><code>$description</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A short description of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A sub property of description. A
  short description of the item used
@@ -157,22 +158,22 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-email"><code>$email</code></td>
+<td class="name" id="var.email"><code>$email</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Email address.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-faxNumber"><code>$faxNumber</code></td>
+<td class="name" id="var.faxNumber"><code>$faxNumber</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The fax number.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-hoursAvailable"><code>$hoursAvailable</code></td>
+<td class="name" id="var.hoursAvailable"><code>$hoursAvailable</code></td>
 <td class="type"><code>OpeningHoursSpecification</code></td>
 <td class="description">The hours during which this service or contact is available.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-identifier"><code>$identifier</code></td>
+<td class="name" id="var.identifier"><code>$identifier</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The identifier property represents any
  kind of identifier for any kind of Thing,
@@ -186,44 +187,44 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  for more details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-image"><code>$image</code></td>
+<td class="name" id="var.image"><code>$image</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">URL of an image of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Indicates a page (or other <code>CreativeWork</code>)
+<td class="description">Indicates a page (or other <code><a href="/?src=CreativeWork">CreativeWork</a></code>, <code><a href="/?src=Event">Event</a></code>)
  for which this thing is the main entity
  being described. See <a
  href="https://schema.org/docs/datamodel.html#mainEntityBackground">
  background notes</a> for details.
- Inverse property: mainEntity.</td>
+ Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-name"><code>$name</code></td>
+<td class="name" id="var.name"><code>$name</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The name of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-postalCode"><code>$postalCode</code></td>
+<td class="name" id="var.postalCode"><code>$postalCode</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The postal code. For example, 94043.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-postOfficeBoxNumber"><code>$postOfficeBoxNumber</code></td>
+<td class="name" id="var.postOfficeBoxNumber"><code>$postOfficeBoxNumber</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The post office box number for PO box addresses.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-potentialAction"><code>$potentialAction</code></td>
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
-<td class="description">Indicates a potential Action, which
+<td class="description">Indicates a potential <code><a href="/?src=Action">Action</a></code>, which
  describes an idealized action in which
  this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-productSupported"><code>$productSupported</code></td>
+<td class="name" id="var.productSupported"><code>$productSupported</code></td>
 <td class="type"><code>Product|string</code></td>
 <td class="description">The product or service this support contact point is
  related to (such as product support for a particular
@@ -232,33 +233,42 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  products or services (e.g. "smartphones").</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sameAs"><code>$sameAs</code></td>
-<td class="type"><code>CreativeWork|Event</code></td>
-<td class="description">A <code>CreativeWork</code> or <code>Event</code> about this <code>Thing</code>. 
- Inverse property: <code>about</code>.</td>
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+ unambiguously indicates the item's
+ identity. E.g. the URL of the
+ item's Wikipedia page, Freebase
+ page, or official website.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-self"><code>$self</code></td>
+<td class="name" id="var.self"><code>$self</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-streetAddress"><code>$streetAddress</code></td>
+<td class="name" id="var.streetAddress"><code>$streetAddress</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The street address. For example, 1600 Amphitheatre Pkwy.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-telephone"><code>$telephone</code></td>
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A <code><a href="/?src=CreativeWork">CreativeWork</a></code> or <code><a href="/?src=Event">Event</a></code> about this <code><a href="/?src=Thing">Thing</a></code>. 
+ Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.telephone"><code>$telephone</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The telephone number.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-url"><code>$url</code></td>
+<td class="name" id="var.url"><code>$url</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">URL of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">WikidataId ... pointing to "Collection of information
  that describes the location of a building, apartment, or
@@ -282,7 +292,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>PostalAddress</code></h2>
-<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
 <p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -295,19 +305,19 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
-<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return</p>
-<hr /><p class="property func" id="fnc-countriesIn"><span class="name"><strong><code>countriesIn()</code></strong></span>: Search a string for all occurrences of country names</p>
+<hr /><p class="property func" id="fnc.countriesIn"><span class="name"><strong><code>countriesIn()</code></strong></span>: Search a string for all occurrences of country names</p>
 <p class="property">Warning:</p>
 <p>This method has been imported from <code>trql.voltaire.class.php</code> and
  has NOT been tested yet in the context of the PostalAddress class.</p>
@@ -323,14 +333,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-countriesIn.szStr"><code>$szStr</code></td>
+<td class="name" id="param.countriesIn.szStr"><code>$szStr</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">The string to be examined</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(array):  An array of countries</p>
-<hr /><p class="property func" id="fnc-getAPIKey"><span class="name"><strong><code>getAPIKey()</code></strong></span>: Get the API Key for reverse geocoding</p>
+<hr /><p class="property func" id="fnc.getAPIKey"><span class="name"><strong><code>getAPIKey()</code></strong></span>: Get the API Key for reverse geocoding</p>
 <p class="property">Syntax:</p>
 <p><code>getAPIKey( $szSystem )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -343,14 +353,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-getAPIKey.szSystem"><code>$szSystem</code></td>
+<td class="name" id="param.getAPIKey.szSystem"><code>$szSystem</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">Optional. <code>null</code> by default</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(string):  The API Key or <code>null</code> if not found</p>
-<hr /><p class="property func" id="fnc-isAddressNumber"><span class="name"><strong><code>isAddressNumber()</code></strong></span>: Determines if</p>
+<hr /><p class="property func" id="fnc.isAddressNumber"><span class="name"><strong><code>isAddressNumber()</code></strong></span>: Determines if</p>
 <p class="property">Warning:</p>
 <p>This method has been imported from <code>trql.voltaire.class.php</code> and
  has NOT been tested yet in the context of the PostalAddress class.</p>
@@ -366,7 +376,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-isAddressNumber.szStr"><code>$szStr</code></td>
+<td class="name" id="param.isAddressNumber.szStr"><code>$szStr</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">The string to be examined</td>
 </tr>
@@ -374,7 +384,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property return">Return:</p>
 <p class="seealso">(boolean):  <code>true</code> if $szStr matches a street number; <code>false</code>
  otherwise.</p>
-<hr /><p class="property func" id="fnc-isCity"><span class="name"><strong><code>isCity()</code></strong></span>: Determines if $szWord is a city (WARNING: only Belgian cities for now -
+<hr /><p class="property func" id="fnc.isCity"><span class="name"><strong><code>isCity()</code></strong></span>: Determines if $szWord is a city (WARNING: only Belgian cities for now -
  06-09-20 07:21:20)</p>
 <p class="property">Warning:</p>
 <p>This method has been imported from <code>trql.voltaire.class.php</code> and
@@ -393,7 +403,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-isCity.szWord"><code>$szWord</code></td>
+<td class="name" id="param.isCity.szWord"><code>$szWord</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">The word to be examined</td>
 </tr>
@@ -401,7 +411,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property return">Return:</p>
 <p class="seealso">(boolean):  <code>true</code> if $szWord matches a belgian city; <code>false</code>
  otherwise.</p>
-<hr /><p class="property func" id="fnc-isCountry"><span class="name"><strong><code>isCountry()</code></strong></span>: Determines if $szWord is a country</p>
+<hr /><p class="property func" id="fnc.isCountry"><span class="name"><strong><code>isCountry()</code></strong></span>: Determines if $szWord is a country</p>
 <p class="property">Warning:</p>
 <p>This method has been imported from <code>trql.voltaire.class.php</code> and
  has NOT been tested yet in the context of the PostalAddress class.<br /></p>
@@ -417,7 +427,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-isCountry.szWord"><code>$szWord</code></td>
+<td class="name" id="param.isCountry.szWord"><code>$szWord</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">The word to be examined</td>
 </tr>
@@ -425,7 +435,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property return">Return:</p>
 <p class="seealso">(boolean):  <code>true</code> if $szWord is a country; <code>false</code>
  otherwise.</p>
-<hr /><p class="property func" id="fnc-parseAddress"><span class="name"><strong><code>parseAddress()</code></strong></span>: Parses an address to build a structured set of address blocks</p>
+<hr /><p class="property func" id="fnc.parseAddress"><span class="name"><strong><code>parseAddress()</code></strong></span>: Parses an address to build a structured set of address blocks</p>
 <p class="property">Warning:</p>
 <p>This method has been imported from <code>trql.voltaire.class.php</code> and
  has NOT been tested yet in the context of the PostalAddress class.<br /></p>
@@ -441,7 +451,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-parseAddress.szText"><code>$szText</code></td>
+<td class="name" id="param.parseAddress.szText"><code>$szText</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">The word to be examined</td>
 </tr>
@@ -449,7 +459,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property return">Return:</p>
 <p class="seealso">(array):  An associative array representing $szText in structured
  blocks.</p>
-<hr /><p class="property func" id="fnc-reverseGeo"><span class="name"><strong><code>reverseGeo()</code></strong></span>: Reverse geo an address (from street name to lat,lng)</p>
+<hr /><p class="property func" id="fnc.reverseGeo"><span class="name"><strong><code>reverseGeo()</code></strong></span>: Reverse geo an address (from street name to lat,lng)</p>
 <p class="property">Syntax:</p>
 <p><code>reverseGeo( $szAddress )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -462,19 +472,19 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-reverseGeo.szAddress"><code>$szAddress</code></td>
+<td class="name" id="param.reverseGeo.szAddress"><code>$szAddress</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">The address to process</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(string):  The API Key or <code>null</code> if not found</p>
-<hr /><p class="property func" id="fnc-sing"><span class="name"><strong><code>sing()</code></strong></span>: Generate a text-to-speech file corresponding to the class itself</p>
+<hr /><p class="property func" id="fnc.sing"><span class="name"><strong><code>sing()</code></strong></span>: Generate a text-to-speech file corresponding to the class itself</p>
 <p class="property">Syntax:</p>
 <p><code>sing()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(string):  A URL where the text-to-speech file (.mp3) is available</p>
-<hr /><p class="property func" id="fnc-speak"><span class="name"><strong><code>speak()</code></strong></span>: Generate a text about the class itself</p>
+<hr /><p class="property func" id="fnc.speak"><span class="name"><strong><code>speak()</code></strong></span>: Generate a text about the class itself</p>
 <p class="property">Syntax:</p>
 <p><code>speak()</code></p>
 <p class="property return">Return:</p>

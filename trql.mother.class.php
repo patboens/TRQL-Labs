@@ -53,11 +53,15 @@ namespace trql\mother;
 defined( 'MOTHER_ABSTRACT_CLASS' ) or define( 'MOTHER_ABSTRACT_CLASS','0.1' );
 
 /* Ici, je devrais définir toutes les erreurs standards : la plupart dont définies dans trql-radio.defines.inc MAIS ... ce xdevrait être celles-ci qui devraient primer */
-defined( "EXCEPTION_HASH_FILE_BASIS" )                          or define( "EXCEPTION_HASH_FILE_BASIS"                              ,1000 );
+defined( "EXCEPTION_BASIS" )                                    or define( "EXCEPTION_BASIS"                                        ,0 );
+
+
+defined( "EXCEPTION_HASH_FILE_BASIS" )                          or define( "EXCEPTION_HASH_FILE_BASIS"                              ,EXCEPTION_BASIS + 1000 );
 defined( "EXCEPTION_HASH_FILE_EMPTY" )                          or define( "EXCEPTION_HASH_FILE_EMPTY"                              ,EXCEPTION_HASH_FILE_BASIS + 0 );
 defined( "EXCEPTION_HASH_FILE_CANNOT_BE_UNSERIALIZED" )         or define( "EXCEPTION_HASH_FILE_CANNOT_BE_UNSERIALIZED"             ,EXCEPTION_HASH_FILE_BASIS + 1 );
 defined( "EXCEPTION_HASH_FILE_OUT_OF_MEMORY" )                  or define( "EXCEPTION_HASH_FILE_OUT_OF_MEMORY"                      ,EXCEPTION_HASH_FILE_BASIS + 2 );
 
+/* EXCEPTION_CODE class of errors */
 defined( "EXCEPTION_CODE_BASIS" )                               or define( "EXCEPTION_CODE_BASIS"                                   ,EXCEPTION_HASH_FILE_BASIS + 1000 );
 defined( "EXCEPTION_CODE_FUNCTIONS_NOT_FOUND" )                 or define( "EXCEPTION_CODE_FUNCTIONS_NOT_FOUND"                     ,EXCEPTION_CODE_BASIS + 0 );
 defined( "EXCEPTION_CODE_FUNCTION_UNDEFINED"  )                 or define( "EXCEPTION_CODE_FUNCTION_UNDEFINED"                      ,EXCEPTION_CODE_BASIS + 1 );
@@ -73,14 +77,23 @@ defined( "EXCEPTION_CODE_MISSING_PARAMETER" )                   or define( "EXCE
 defined( "EXCEPTION_CODE_RESOURCE_NOT_FOUND" )                  or define( "EXCEPTION_CODE_RESOURCE_NOT_FOUND"                      ,EXCEPTION_CODE_BASIS + 11 );
 defined( "EXCEPTION_CODE_UNAVAILABLE" )                         or define( "EXCEPTION_CODE_UNAVAILABLE"                             ,EXCEPTION_CODE_BASIS + 12 );
 
+/* EXCEPTION_CODE RSS class of errors */
 defined( "EXCEPTION_CODE_RSS_BASIS" )                           or define( "EXCEPTION_CODE_RSS_BASIS"                               ,EXCEPTION_CODE_BASIS + 1000 );
 defined( "EXCEPTION_CODE_RSS_NO_CHANNEL_FOUND" )                or define( "EXCEPTION_CODE_RSS_NO_CHANNEL_FOUND"                    ,EXCEPTION_CODE_RSS_BASIS + 0 );
 
+/* EXCEPTION_CODE XML class of errors */
 defined( "EXCEPTION_CODE_XML_BASIS" )                           or define( "EXCEPTION_CODE_XML_BASIS"                               ,EXCEPTION_CODE_RSS_BASIS + 1000 );
 defined( "EXCEPTION_CODE_XML_INVALID" )                         or define( "EXCEPTION_CODE_XML_INVALID"                             ,EXCEPTION_CODE_XML_BASIS + 0 );
 
+/* EXCEPTION_CODE WEBSITE class of errors */
 defined( "EXCEPTION_CODE_WEBSITE_BASIS" )                       or define( "EXCEPTION_CODE_WEBSITE_BASIS"                           ,EXCEPTION_CODE_XML_BASIS + 1000 );
 defined( "EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND" )                or define( "EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND"                    ,EXCEPTION_CODE_WEBSITE_BASIS + 1 );
+
+
+
+/* EXCEPTION_CODE Uncategorized class of errors (error codes are supposed to be defined in the source of each class */
+defined( "EXCEPTION_CLASS_BASIS" )                              or define( "EXCEPTION_CLASS_BASIS"                                  ,EXCEPTION_BASIS + 1000000 );
+
 
 
 

@@ -46,12 +46,9 @@
 /****************************************************************************************/
 namespace trql\personororganization;
 
-use \trql\mother\iContext                               as iContext;
-use \trql\vaesoli\Vaesoli                               as Vaesoli;
-use \trql\organization\Organization                     as Organization;
-
-use DOMDocument;
-use DOMXPath;
+use \trql\mother\iContext           as iContext;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\organization\Organization as Organization;
 
 if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) )
     require_once( 'trql.mother.class.php' );
@@ -64,13 +61,12 @@ if ( ! defined( 'ORGANIZATION_CLASS_VERSION' ) )
 
 defined( 'PERSONORORGANIZATION_CLASS_VERSION' ) or define( 'PERSONORORGANIZATION_CLASS_VERSION','0.1' );
 
-
 /* ==================================================================================== */
 /** {{*class PersonOrOrganization=
 
     {*desc
 
-        Abstract class (not defined as such though)
+        Abstract class to mention a Person or Organization
 
     *}
 
@@ -133,7 +129,7 @@ abstract class PersonOrOrganization extends Organization
                                                                                                                                                             reading/writing/speaking/signing here. Use language codes from the
                                                                                                                                                             IETF BCP 47 standard. *} */
     public  $memberOf                   = null;                     /* {*property   $memberOf                   (Organization|ProgramMembership)            An Organization (or ProgramMembership) to which this Person or
-                                                                                                                                                            Organization belongs. Inverse property: member. *} */
+                                                                                                                                                            Organization belongs. Inverse property: @var.member. *} */
     public  $nationality                = null;                     /* {*property   $nationality                (Country)                                   Nationality of the person. *} */
     public  $netWorth                   = null;                     /* {*property   $netWorth                   (MonetaryAmount|PriceSpecification)         The total financial value of the person as calculated by subtracting
                                                                                                                                                             assets from liabilities. *} */

@@ -6,6 +6,9 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 code,samp, .filename {color: #800 !important;
    font-family: Consolas,"courier new";
    background: rgba(240, 240, 240, 0.5);
@@ -17,9 +20,7 @@ code,samp, .filename {color: #800 !important;
    font-weight: bold;
    font-style: italic;
    }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
-.constrained { max-width: 100%; height: auto; }
-.center { text-align:center; }
+.property.inheritance code { border: none !important; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
 img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
@@ -65,7 +66,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  such as bays, peninsulas, seas and so forth, including sub-aqueous terrain
  features such as submersed mountain ranges, volcanoes, and the great ocean
  basins.</span>
-<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Thing &gt; Place &gt; Landform</code></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="/?src=Mother">Mother</a> &gt; <a href="/?src=Thing">Thing</a> &gt; <a href="/?src=Place">Place</a> &gt; Landform</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Landform extends Place</code></span>
 <span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
  under the terms of their license:
@@ -83,19 +84,22 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="property">
-<td class="name" id="var-additionalProperty"><code>$additionalProperty</code></td>
+<td class="name" id="var.additionalProperty"><code>$additionalProperty</code></td>
 <td class="type"><code>PropertyValue</code></td>
-<td class="description">A property-value pair representing an additional characteristics of the entitity,
- e.g. a product feature or another characteristic for which there is no matching 
+<td class="description">A property-value pair representing an additional
+
+ characteristics of the entitity, e.g. a product feature
+ or another characteristic for which there is no matching
  property in schema.org.
- 
- Note: Publishers should be aware that applications designed to use specific 
- schema.org properties (e.g. http://schema.org/width, http://schema.org/color,
- http://schema.org/gtin13, ...) will typically expect such data to be provided
- using those properties, rather than using the generic property/value mechanism.</td>
+
+ Note: Publishers should be aware that applications designed
+ to use specific schema.org properties (e.g. http://schema.org/width,
+ http://schema.org/color, http://schema.org/gtin13, ...) will
+ typically expect such data to be provided using those properties,
+ rather than using the generic property/value mechanism.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-additionalType"><code>$additionalType</code></td>
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An additional type for the item,
  typically used for adding more
@@ -109,56 +113,56 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  - for multiple types.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-address"><code>$address</code></td>
+<td class="name" id="var.address"><code>$address</code></td>
 <td class="type"><code>PostalAddress|string</code></td>
 <td class="description">Physical address of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-aggregateRating"><code>$aggregateRating</code></td>
+<td class="name" id="var.aggregateRating"><code>$aggregateRating</code></td>
 <td class="type"><code>AggregateRating</code></td>
 <td class="description">The overall rating, based on a collection of reviews or ratings, of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-alternateName"><code>$alternateName</code></td>
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An alias for the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-amenityFeature"><code>$amenityFeature</code></td>
+<td class="name" id="var.amenityFeature"><code>$amenityFeature</code></td>
 <td class="type"><code>LocationFeatureSpecification</code></td>
-<td class="description">An amenity feature (e.g. a characteristic or service) of the Accommodation. 
- This generic property does not make a statement about whether the feature is 
+<td class="description">An amenity feature (e.g. a characteristic or service) of the Accommodation.
+ This generic property does not make a statement about whether the feature is
  included in an offer for the main accommodation or available at extra costs.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-branchCode"><code>$branchCode</code></td>
+<td class="name" id="var.branchCode"><code>$branchCode</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">A short textual code (also called "store code") that uniquely identifies a place of 
- business. The code is typically assigned by the parentOrganization and used in 
+<td class="description">A short textual code (also called "store code") that uniquely identifies a place of
+ business. The code is typically assigned by the parentOrganization and used in
  structured URLs.
- 
- For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047 
+
+ For example, in the URL http://www.starbucks.co.uk/store-locator/etc/detail/3047
  the code "3047" is a branchCode for a particular branch.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-containedInPlace"><code>$containedInPlace</code></td>
+<td class="name" id="var.containedInPlace"><code>$containedInPlace</code></td>
 <td class="type"><code>Place</code></td>
-<td class="description">The basic containment relation between a place and one that contains it. 
+<td class="description">The basic containment relation between a place and one that contains it.
  Supersedes containedIn. Inverse property: containsPlace.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-containsPlace"><code>$containsPlace</code></td>
+<td class="name" id="var.containsPlace"><code>$containsPlace</code></td>
 <td class="type"><code>Place</code></td>
-<td class="description">The basic containment relation between a place and another that it contains. 
+<td class="description">The basic containment relation between a place and another that it contains.
  Inverse property: containedInPlace.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-description"><code>$description</code></td>
+<td class="name" id="var.description"><code>$description</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A short description of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A sub property of description. A
  short description of the item used
@@ -169,113 +173,113 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-event"><code>$event</code></td>
+<td class="name" id="var.event"><code>$event</code></td>
 <td class="type"><code>Event</code></td>
 <td class="description">Upcoming or past event associated with this place, organization, or action.
  Supersedes events.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-faxNumber"><code>$faxNumber</code></td>
+<td class="name" id="var.faxNumber"><code>$faxNumber</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The fax number.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-geo"><code>$geo</code></td>
+<td class="name" id="var.geo"><code>$geo</code></td>
 <td class="type"><code>GeoCoordinates|GeoShape</code></td>
 <td class="description">The geo coordinates of the place.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-geoContains"><code>$geoContains</code></td>
+<td class="name" id="var.geoContains"><code>$geoContains</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), 
- relating a containing geometry to a contained geometry. "a contains b iff no points of b 
- lie in the exterior of a, and at least one point of the interior of b lies in the 
+<td class="description">Represents a relationship between two geometries (or the places they represent),
+ relating a containing geometry to a contained geometry. "a contains b iff no points of b
+ lie in the exterior of a, and at least one point of the interior of b lies in the
  interior of a". As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-geoCoveredBy"><code>$geoCoveredBy</code></td>
+<td class="name" id="var.geoCoveredBy"><code>$geoCoveredBy</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), 
+<td class="description">Represents a relationship between two geometries (or the places they represent),
  relating a geometry to another that covers it. As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-geoCovers"><code>$geoCovers</code></td>
+<td class="name" id="var.geoCovers"><code>$geoCovers</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), 
- relating a covering geometry to a covered geometry. "Every point of b is a point of 
+<td class="description">Represents a relationship between two geometries (or the places they represent),
+ relating a covering geometry to a covered geometry. "Every point of b is a point of
  (the interior or boundary of) a". As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-geoCrosses"><code>$geoCrosses</code></td>
+<td class="name" id="var.geoCrosses"><code>$geoCrosses</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), 
- relating a geometry to another that crosses it: "a crosses b: they have some but not 
+<td class="description">Represents a relationship between two geometries (or the places they represent),
+ relating a geometry to another that crosses it: "a crosses b: they have some but not
  all interior points in common, and the dimension of the intersection is less than that
  of at least one of them". As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-geoDisjoint"><code>$geoDisjoint</code></td>
+<td class="name" id="var.geoDisjoint"><code>$geoDisjoint</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents spatial relations in which two geometries (or the places they represent) 
- are topologically disjoint: they have no point in common. They form a set of disconnected 
+<td class="description">Represents spatial relations in which two geometries (or the places they represent)
+ are topologically disjoint: they have no point in common. They form a set of disconnected
  geometries." (a symmetric relationship, as defined in DE-9IM)</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-geoEquals"><code>$geoEquals</code></td>
+<td class="name" id="var.geoEquals"><code>$geoEquals</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents spatial relations in which two geometries (or the places they represent) 
- are topologically equal, as defined in DE-9IM. "Two geometries are topologically equal 
- if their interiors intersect and no part of the interior or boundary of one geometry 
+<td class="description">Represents spatial relations in which two geometries (or the places they represent)
+ are topologically equal, as defined in DE-9IM. "Two geometries are topologically equal
+ if their interiors intersect and no part of the interior or boundary of one geometry
  intersects the exterior of the other" (a symmetric relationship)</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-geoIntersects"><code>$geoIntersects</code></td>
+<td class="name" id="var.geoIntersects"><code>$geoIntersects</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents spatial relations in which two geometries (or the places they represent) have 
+<td class="description">Represents spatial relations in which two geometries (or the places they represent) have
  at least one point in common. As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-geoOverlaps"><code>$geoOverlaps</code></td>
+<td class="name" id="var.geoOverlaps"><code>$geoOverlaps</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), relating 
+<td class="description">Represents a relationship between two geometries (or the places they represent), relating
  a geometry to another that geospatially overlaps it, i.e. they have some but not all points
  in common. As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-geoTouches"><code>$geoTouches</code></td>
+<td class="name" id="var.geoTouches"><code>$geoTouches</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents spatial relations in which two geometries (or the places they represent) touch: 
- they have at least one boundary point in common, but no interior points." (a symmetric 
+<td class="description">Represents spatial relations in which two geometries (or the places they represent) touch:
+ they have at least one boundary point in common, but no interior points." (a symmetric
  relationship, as defined in DE-9IM )</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-geoWithin"><code>$geoWithin</code></td>
+<td class="name" id="var.geoWithin"><code>$geoWithin</code></td>
 <td class="type"><code>GeospatialGeometry|Place</code></td>
-<td class="description">Represents a relationship between two geometries (or the places they represent), relating a 
- geometry to one that contains it, i.e. it is inside (i.e. within) its interior. 
+<td class="description">Represents a relationship between two geometries (or the places they represent), relating a
+ geometry to one that contains it, i.e. it is inside (i.e. within) its interior.
  As defined in DE-9IM.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-globalLocationNumber"><code>$globalLocationNumber</code></td>
+<td class="name" id="var.globalLocationNumber"><code>$globalLocationNumber</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The Global Location Number (GLN, sometimes also referred to as International Location Number or 
- ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify 
+<td class="description">The Global Location Number (GLN, sometimes also referred to as International Location Number or
+ ILN) of the respective organization, person, or place. The GLN is a 13-digit number used to identify
  parties and physical locations.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-hasDriveThroughService"><code>$hasDriveThroughService</code></td>
+<td class="name" id="var.hasDriveThroughService"><code>$hasDriveThroughService</code></td>
 <td class="type"><code>Boolean</code></td>
-<td class="description">Indicates whether some facility (e.g. FoodEstablishment, CovidTestingFacility) offers a service that 
- can be used by driving through in a car. In the case of CovidTestingFacility such facilities could 
+<td class="description">Indicates whether some facility (e.g. FoodEstablishment, CovidTestingFacility) offers a service that
+ can be used by driving through in a car. In the case of CovidTestingFacility such facilities could
  potentially help with social distancing from other potentially-infected users.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-hasMap"><code>$hasMap</code></td>
+<td class="name" id="var.hasMap"><code>$hasMap</code></td>
 <td class="type"><code>Map|URL</code></td>
 <td class="description">A URL to a map of the place. Supersedes map, maps.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-identifier"><code>$identifier</code></td>
+<td class="name" id="var.identifier"><code>$identifier</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The identifier property represents any
  kind of identifier for any kind of Thing,
@@ -289,145 +293,146 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  for more details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-image"><code>$image</code></td>
+<td class="name" id="var.image"><code>$image</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">URL of an image of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-isAccessibleForFree"><code>$isAccessibleForFree</code></td>
+<td class="name" id="var.isAccessibleForFree"><code>$isAccessibleForFree</code></td>
 <td class="type"><code>Boolean</code></td>
 <td class="description">A flag to signal that the item, event, or place is accessible for free. Supersedes free.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-isicV4"><code>$isicV4</code></td>
+<td class="name" id="var.isicV4"><code>$isicV4</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision 
+<td class="description">The International Standard of Industrial Classification of All Economic Activities (ISIC), Revision
  4 code for a particular organization, business person, or place.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-latitude"><code>$latitude</code></td>
+<td class="name" id="var.latitude"><code>$latitude</code></td>
 <td class="type"><code>Number|string</code></td>
 <td class="description">The latitude of a location. For example 37.42242 (WGS 84).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-logo"><code>$logo</code></td>
+<td class="name" id="var.logo"><code>$logo</code></td>
 <td class="type"><code>ImageObject|URL</code></td>
 <td class="description">An associated logo.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-longitude"><code>$longitude</code></td>
+<td class="name" id="var.longitude"><code>$longitude</code></td>
 <td class="type"><code>Number|string</code></td>
 <td class="description">The longitude of a location. For example -122.08585 (WGS 84).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Indicates a page (or other <code>CreativeWork</code>)
+<td class="description">Indicates a page (or other <code><a href="/?src=CreativeWork">CreativeWork</a></code>, <code><a href="/?src=Event">Event</a></code>)
  for which this thing is the main entity
  being described. See <a
  href="https://schema.org/docs/datamodel.html#mainEntityBackground">
  background notes</a> for details.
- Inverse property: mainEntity.</td>
+ Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-maximumAttendeeCapacity"><code>$maximumAttendeeCapacity</code></td>
+<td class="name" id="var.maximumAttendeeCapacity"><code>$maximumAttendeeCapacity</code></td>
 <td class="type"><code>Integer</code></td>
 <td class="description">The total number of individuals that may attend an event or venue.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-name"><code>$name</code></td>
+<td class="name" id="var.name"><code>$name</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The name of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-openingHoursSpecification"><code>$openingHoursSpecification</code></td>
+<td class="name" id="var.openingHoursSpecification"><code>$openingHoursSpecification</code></td>
 <td class="type"><code>OpeningHoursSpecification</code></td>
 <td class="description">The opening hours of a certain place.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-photo"><code>$photo</code></td>
+<td class="name" id="var.photo"><code>$photo</code></td>
 <td class="type"><code>ImageObject|Photograph</code></td>
 <td class="description">A photograph of this place. Supersedes photos.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-potentialAction"><code>$potentialAction</code></td>
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
-<td class="description">Indicates a potential Action, which
+<td class="description">Indicates a potential <code><a href="/?src=Action">Action</a></code>, which
  describes an idealized action in which
  this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-publicAccess"><code>$publicAccess</code></td>
+<td class="name" id="var.publicAccess"><code>$publicAccess</code></td>
 <td class="type"><code>Boolean</code></td>
-<td class="description">A flag to signal that the Place is open to public visitors. If this property is omitted there is no 
+<td class="description">A flag to signal that the Place is open to public visitors. If this property is omitted there is no
  assumed default boolean value</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-review"><code>$review</code></td>
+<td class="name" id="var.review"><code>$review</code></td>
 <td class="type"><code>Review</code></td>
 <td class="description">A review of the item. Supersedes reviews.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sameAs"><code>$sameAs</code></td>
-<td class="type"><code>CreativeWork|Event</code></td>
-<td class="description">A <code>CreativeWork</code> or <code>Event</code> about this <code>Thing</code>. 
- Inverse property: <code>about</code>.</td>
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+ unambiguously indicates the item's
+ identity. E.g. the URL of the
+ item's Wikipedia page, Freebase
+ page, or official website.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-self"><code>$self</code></td>
+<td class="name" id="var.self"><code>$self</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-slogan"><code>$slogan</code></td>
+<td class="name" id="var.slogan"><code>$slogan</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A slogan or motto associated with the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-smokingAllowed"><code>$smokingAllowed</code></td>
+<td class="name" id="var.smokingAllowed"><code>$smokingAllowed</code></td>
 <td class="type"><code>Boolean</code></td>
 <td class="description">Indicates whether it is allowed to smoke in the place, e.g. in the restaurant, hotel or hotel room.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-specialOpeningHoursSpecification"><code>$specialOpeningHoursSpecification</code></td>
+<td class="name" id="var.specialOpeningHoursSpecification"><code>$specialOpeningHoursSpecification</code></td>
 <td class="type"><code>OpeningHoursSpecification</code></td>
 <td class="description">The special opening hours of a certain place.
- 
- Use this to explicitly override general opening hours brought in scope by openingHoursSpecification 
+
+ Use this to explicitly override general opening hours brought in scope by openingHoursSpecification
  or openingHours.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-telephone"><code>$telephone</code></td>
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A <code><a href="/?src=CreativeWork">CreativeWork</a></code> or <code><a href="/?src=Event">Event</a></code> about this <code><a href="/?src=Thing">Thing</a></code>. 
+ Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.telephone"><code>$telephone</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The telephone number.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-tourBookingPage"><code>$tourBookingPage</code></td>
+<td class="name" id="var.tourBookingPage"><code>$tourBookingPage</code></td>
 <td class="type"><code>URL</code></td>
-<td class="description">A page providing information on how to book a tour of some Place, such as an Accommodation or 
-
-
- /* ================================================================================ */
- /** {{*__construct( [$szHome] )=
-
- Class constructor
-
- {*params
- $szHome (string) Home of the class. Optional.</td>
+<td class="description">A page providing information on how to book a tour of some Place, such as an Accommodation or
+ ApartmentComplex in a real estate setting, as well as other kinds of tours as appropriate.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-url"><code>$url</code></td>
+<td class="name" id="var.url"><code>$url</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">URL of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Wikidata ID. NOT LOOKED AT IT YET.</td>
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>Landform</code></h2>
-<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
 <p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -440,14 +445,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
-<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
 <p class="property return">Return:</p>

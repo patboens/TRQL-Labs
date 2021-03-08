@@ -6,6 +6,9 @@
 .trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
 code,samp, .filename {color: #800 !important;
    font-family: Consolas,"courier new";
    background: rgba(240, 240, 240, 0.5);
@@ -17,9 +20,7 @@ code,samp, .filename {color: #800 !important;
    font-weight: bold;
    font-style: italic;
    }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
-.constrained { max-width: 100%; height: auto; }
-.center { text-align:center; }
+.property.inheritance code { border: none !important; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
 img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
@@ -59,7 +60,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>MedicalSign</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">Any physical manifestation of a person's medical condition discoverable by
  objective diagnostic tests or physical examination.</span>
-<span class="DocumentorLabel">Inheritance: </span><span class="property declaration"><code>Mother &gt; Thing &gt; MedicalEntity &gt; MedicalCondition &gt; MedicalSignOrSymptom &gt; MedicalSign</code></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="/?src=Mother">Mother</a> &gt; <a href="/?src=Thing">Thing</a> &gt; <a href="/?src=MedicalEntity">MedicalEntity</a> &gt; <a href="/?src=MedicalCondition">MedicalCondition</a> &gt; <a href="/?src=MedicalSignOrSymptom">MedicalSignOrSymptom</a> &gt; MedicalSign</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class MedicalSign extends MedicalSignOrSymptom</code></span>
 <span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
  under the terms of their license:
@@ -77,7 +78,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="property">
-<td class="name" id="var-additionalType"><code>$additionalType</code></td>
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">An additional type for the item, typically used for adding more
  specific types from external vocabularies in microdata syntax. This is
@@ -87,29 +88,29 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  understanding of extra types, in particular those defined externally.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-alternateName"><code>$alternateName</code></td>
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An alias for the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-associatedAnatomy"><code>$associatedAnatomy</code></td>
+<td class="name" id="var.associatedAnatomy"><code>$associatedAnatomy</code></td>
 <td class="type"><code>SuperficialAnatomy|AnatomicalStructure|AnatomicalSystem</code></td>
 <td class="description">The anatomy of the underlying organ system or structures associated
  with this entity.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-code"><code>$code</code></td>
+<td class="name" id="var.code"><code>$code</code></td>
 <td class="type"><code>MedicalCode</code></td>
 <td class="description">A medical code for the entity, taken from a controlled vocabulary or
  ontology such as ICD-9, DiseasesDB, MeSH, SNOMED-CT, RxNorm, etc.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-description"><code>$description</code></td>
+<td class="name" id="var.description"><code>$description</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A description of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-differentialDiagnosis"><code>$differentialDiagnosis</code></td>
+<td class="name" id="var.differentialDiagnosis"><code>$differentialDiagnosis</code></td>
 <td class="type"><code>DDxElement</code></td>
 <td class="description">One of a set of differential diagnoses for the condition.
  Specifically, a closely-related or competing diagnosis typically
@@ -119,7 +120,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  parsimonious diagnosis or diagnoses in a patient.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A sub property of description. A short description of the item used to
  disambiguate from other, similar items. Information from other
@@ -127,29 +128,29 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-drug"><code>$drug</code></td>
+<td class="name" id="var.drug"><code>$drug</code></td>
 <td class="type"><code>Drug</code></td>
 <td class="description">Specifying a drug or medicine used in a medication procedure</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-epidemiology"><code>$epidemiology</code></td>
+<td class="name" id="var.epidemiology"><code>$epidemiology</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The characteristics of associated patients, such as age, gender, race
  etc.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-expectedPrognosis"><code>$expectedPrognosis</code></td>
+<td class="name" id="var.expectedPrognosis"><code>$expectedPrognosis</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The likely outcome in either the short term or long term of the
  medical condition.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-guideline"><code>$guideline</code></td>
+<td class="name" id="var.guideline"><code>$guideline</code></td>
 <td class="type"><code>MedicalGuideline</code></td>
 <td class="description">A medical guideline related to this entity.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-identifier"><code>$identifier</code></td>
+<td class="name" id="var.identifier"><code>$identifier</code></td>
 <td class="type"><code>URL|string|PropertyValue</code></td>
 <td class="description">The identifier property represents any kind of identifier for any kind
  of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
@@ -157,58 +158,58 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  strings or as URL (URI) links. See background notes for more details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-identifyingExam"><code>$identifyingExam</code></td>
+<td class="name" id="var.identifyingExam"><code>$identifyingExam</code></td>
 <td class="type"><code>PhysicalExam</code></td>
 <td class="description">A physical examination that can identify this sign.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-identifyingTest"><code>$identifyingTest</code></td>
+<td class="name" id="var.identifyingTest"><code>$identifyingTest</code></td>
 <td class="type"><code>MedicalTest</code></td>
 <td class="description">A diagnostic test that can identify this sign.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-image"><code>$image</code></td>
+<td class="name" id="var.image"><code>$image</code></td>
 <td class="type"><code>ImageObject|URL</code></td>
 <td class="description">An image of the item. This can be a URL or a fully described
  ImageObject.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-legalStatus"><code>$legalStatus</code></td>
+<td class="name" id="var.legalStatus"><code>$legalStatus</code></td>
 <td class="type"><code>string|DrugLegalStatus|MedicalEnumeration</code></td>
 <td class="description">The drug or supplement's legal status, including any controlled
  substance schedules that apply.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>CreativeWork|URL</code></td>
 <td class="description">Indicates a page (or other CreativeWork) for which this thing is the
  main entity being described. See background notes for details.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-medicineSystem"><code>$medicineSystem</code></td>
+<td class="name" id="var.medicineSystem"><code>$medicineSystem</code></td>
 <td class="type"><code>MedicineSystem</code></td>
 <td class="description">The system of medicine that includes this MedicalEntity, for example
  'evidence-based', 'homeopathic', 'chiropractic', etc.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-name"><code>$name</code></td>
+<td class="name" id="var.name"><code>$name</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The name of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-naturalProgression"><code>$naturalProgression</code></td>
+<td class="name" id="var.naturalProgression"><code>$naturalProgression</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The expected progression of the condition if it is not treated and
  allowed to progress naturally.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-pathophysiology"><code>$pathophysiology</code></td>
+<td class="name" id="var.pathophysiology"><code>$pathophysiology</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Changes in the normal mechanical, physical, and biochemical functions
  that are associated with this activity or condition.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-possibleComplication"><code>$possibleComplication</code></td>
+<td class="name" id="var.possibleComplication"><code>$possibleComplication</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A possible unexpected and unfavorable evolution of a medical
  condition. Complications may include worsening of the signs or
@@ -216,102 +217,102 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  systems, etc.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-possibleTreatment"><code>$possibleTreatment</code></td>
+<td class="name" id="var.possibleTreatment"><code>$possibleTreatment</code></td>
 <td class="type"><code>MedicalTherapy</code></td>
 <td class="description">A possible treatment to address this condition, sign or symptom.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-potentialAction"><code>$potentialAction</code></td>
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
 <td class="description">Indicates a potential Action, which describes an idealized action in
  which this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-primaryPrevention"><code>$primaryPrevention</code></td>
+<td class="name" id="var.primaryPrevention"><code>$primaryPrevention</code></td>
 <td class="type"><code>MedicalTherapy</code></td>
 <td class="description">A preventative therapy used to prevent an initial occurrence of the
  medical condition, such as vaccination.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-recognizingAuthority"><code>$recognizingAuthority</code></td>
+<td class="name" id="var.recognizingAuthority"><code>$recognizingAuthority</code></td>
 <td class="type"><code>Organization</code></td>
 <td class="description">If applicable, the organization that officially recognizes this entity
  as part of its endorsed system of medicine.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-relevantSpecialty"><code>$relevantSpecialty</code></td>
+<td class="name" id="var.relevantSpecialty"><code>$relevantSpecialty</code></td>
 <td class="type"><code>MedicalSpecialty</code></td>
 <td class="description">If applicable, a medical specialty in which this entity is relevant.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-riskFactor"><code>$riskFactor</code></td>
+<td class="name" id="var.riskFactor"><code>$riskFactor</code></td>
 <td class="type"><code>MedicalRiskFactor</code></td>
 <td class="description">A modifiable or non-modifiable factor that increases the risk of a
  patient contracting this condition, e.g. age, coexisting condition.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-sameAs"><code>$sameAs</code></td>
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">URL of a reference Web page that unambiguously indicates the item's
  identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
  or official website.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-secondaryPrevention"><code>$secondaryPrevention</code></td>
+<td class="name" id="var.secondaryPrevention"><code>$secondaryPrevention</code></td>
 <td class="type"><code>MedicalTherapy</code></td>
 <td class="description">A preventative therapy used to prevent reoccurrence of the medical
  condition after an initial episode of the condition.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-self"><code>$self</code></td>
+<td class="name" id="var.self"><code>$self</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-signOrSymptom"><code>$signOrSymptom</code></td>
+<td class="name" id="var.signOrSymptom"><code>$signOrSymptom</code></td>
 <td class="type"><code>MedicalSignOrSymptom</code></td>
 <td class="description">A sign or symptom of this condition. Signs are objective or physically
  observable manifestations of the medical condition while symptoms are
  the subjective experience of the medical condition.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-stage"><code>$stage</code></td>
+<td class="name" id="var.stage"><code>$stage</code></td>
 <td class="type"><code>MedicalConditionStage</code></td>
 <td class="description">The stage of the condition, if applicable.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-status"><code>$status</code></td>
+<td class="name" id="var.status"><code>$status</code></td>
 <td class="type"><code>string|EventStatusType|MedicalStudyStatus</code></td>
 <td class="description">The status of the study (enumerated).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-study"><code>$study</code></td>
+<td class="name" id="var.study"><code>$study</code></td>
 <td class="type"><code>MedicalStudy</code></td>
 <td class="description">A medical study or trial related to this entity.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-subjectOf"><code>$subjectOf</code></td>
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
 <td class="type"><code>Event|CreativeWork</code></td>
 <td class="description">A CreativeWork or Event about this Thing.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-typicalTest"><code>$typicalTest</code></td>
+<td class="name" id="var.typicalTest"><code>$typicalTest</code></td>
 <td class="type"><code>MedicalTest</code></td>
 <td class="description">A medical test typically performed given this condition.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-url"><code>$url</code></td>
+<td class="name" id="var.url"><code>$url</code></td>
 <td class="type"><code>URL</code></td>
 <td class="description">URL of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var-wikidataId"><code>$wikidataId</code></td>
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Wikidata ID. No equivalent</td>
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>MedicalSign</code></h2>
-<p class="property func" id="fnc-__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
 <p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -324,14 +325,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param-__construct.szHome"><code>$szHome</code></td>
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
-<hr /><p class="property func" id="fnc-__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
 <p class="property return">Return:</p>
