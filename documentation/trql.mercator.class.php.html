@@ -1,0 +1,92 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.mercator.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">Set of Utility geocoordinates-oriented services (mostly based
+                            on geonames.org)</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company"><br />Lato Sensu Management<br />
+                            Rue Bois des Mazuis, 47<br />
+                            5070 Vitrival<br />
+                            Belgium<br />
+                            <a href="http://www.latosensu.be" class="DocumentorLink" title="Go to http://www.latosensu.be" itemprop="url">http://www.latosensu.be</a><br />
+                            Vae Soli! : <a href="http://www.vaesoli.org" class="DocumentorLink" title="Go to http://www.vaesoli.org" itemprop="url">http://www.vaesoli.org</a></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">15-08-20 12:38</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">25/02/2021 - 17:50:31</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Submitted to intellectual property rights (see
+                            author)</span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Mercator</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Geo coordinates services</span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Mercator extends Utility implements iContext</code></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">Many of the services of the Mercator class are still not-finalized
+ and come in non-final implemenations.</span>
+<span class="DocumentorLabel">Remarks: </span><span class="property remark">Gerard De Kremer, known in the Republic of Letters under his Latinized
+ name of Gerardus Mercator and in French books as Gérard Mercator, born
+ on 5 March 1512 in Rupelmonde and dead on 2 December 1594 in Duisburg,
+ was a Flemish mathematician, GEOGRAPHER and CARTOGRAPHER, inventor of
+ the map projection that bears his name.</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. No equivalent.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$ttl</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Time-to-Live in sec; 1 full day by default</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aCities</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">A list of predefined cities (name, lat, long and geonameId)</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$aCountrySynonyms</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Countryname to country code</td>
+</tr>
+<tr class="property">
+<td class="name"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. No equivalent.</td>
+</tr>
+</table>
+</section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

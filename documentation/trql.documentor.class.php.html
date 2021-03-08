@@ -1,0 +1,128 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description { width: 60%; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<p><img src="https://www.trql.fm/images/logos/trql.documentor.jpg" style="display:block;float:left;width:130px; height:auto;margin-right: 20px;" class="shadow constrained"/></p>
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.documentor.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">TRQL Labs Classes Documentor</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">16-08-20 19:19</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">28/02/2021 - 10:00:07</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+<span class="DocumentorLabel">Abstract: </span><span class="property abstract">The <code>Documentor</code> class helps document ALL TRQL Labs classes
+                            defined in <a href="?file=d:\websites\snippet-center\" title="View d:\websites\snippet-center\">d:\websites\snippet-center\</a>.<br /><br />
+
+                            All TRQL classes share a common naming convention:
+                            <code>trql.<classname>.class.php</code>. Because the
+                            <code>Documentor</code> is itself a TRQL Labs class, it documents
+                            itself. Because the <code>Documentor</code> is based on the most
+                            basic class, <code>Thing</code>, itself based on<code>Mother</code>, the
+                            <code>mother</code> of all TRQL classes (the foundation of the
+                            foundation), we share a common behavior that is consistent
+                            across all the classes defined.<br /><br />
+
+                            To document all the classes &#8213; meaning &hellip;
+                            generating the documentation of each class &#8213; there is
+                            little effort:<br /><br />
+
+                            <pre><br />
+                                $o = new Documentor();<br />
+                                $o->documentAll();<br />
+                            </pre><br /><br />
+
+                            There is no need to tell the <code>Documentor</code> class what
+                            must be documented. It goes without saying as it knows it!<br /><br />
+
+                            Many of the classes of TRQL Labs have been based on the fabulous
+                            work available at <a href="https://www.schema.org/" class="DocumentorLink" title="Go to https://www.schema.org/" itemprop="url">https://www.schema.org/</a>. Therefore,
+                            it the present documentation is lacky on some parts, please head
+                            to schema.org to benefit from additional information.</span>
+<span class="DocumentorLabel">TODOs: </span><span class="property todo"><ol>
+                                <li>Document <code>trql.tazieff.class.php</code></li>
+                                <li>Implement the <code>trql.uikey.class.php</code> class</li>
+                                <li>Implement the <code>trql.cursor.class.php</code> class</li>
+                                <li>De même qu'une classe fait son propre backup, il serait
+                                utile qu'une classe s'autodocumente. Le résultat de cette
+                                documentation devrait être un fichier XML et on peut même
+                                envisager que chaque doc soit sauvée dans un .zip pour disposer
+                                d'un historique.</li>
+                                <li>Je devrais utiliser les labels (<code>trql.label.class.php</code>)</li>
+                                <li>Create the <code>trql.radio.class.php</code> which must be based
+                                    on <code>trql.radiostation.class.php</code> AND on
+                                    <code>trql-radio.radio.class.php</code>. This work will be huge
+                                    as it will probably imply many associated classes to be
+                                    imported as well :playlist, track, ...</li>
+                                <li>When documenting a class, we must create an instance of
+                                    the class in order to get the name of all defined
+                                    properties, even the one of the parent class. Use
+                                    <code>get_class_vars()</code></li>
+                                <li>When documenting a class, we must create an instance of
+                                    the class in order to get the name of the parent class
+                                    OR ... we take what "extends" mentions (can also use
+                                    <code>get_parent_class()</code>)</li>
+                                <li>Properties of a class must be sorted alphabetically</li>
+                                <li>Methods of a class must be sorted alphabetically</li>
+                                <li>Extract warning and remark from file header and publish</li>
+                            </ol></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Documentor</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Self-documentation class for the entirety of TRQL.</span>
+</section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorFile</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A file</span>
+</section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorSourceFile</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A source file. There is also a class called SoftwareSourceCode. We have decided
+        not to use it so far and prefer to use the DocumentorFile class.</span>
+</section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorSourceFileObject</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">An object that is found in a DocumentorSourceFile: a history block, a class, a
+        function, a parameter, a comment, a method, a property, a constant, a variable,
+        ...</span>
+</section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorClass</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A class</span>
+</section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorClassProperty</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A property of a class</span>
+</section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorFileHeader</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">File header block</span>
+</section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorHistory</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Change History block (can be pertaining to header, class, trait, interface,
+        function or method)</span>
+</section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorFunction</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A function or a method</span>
+</section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>DocumentorFunctionParameter</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">A paramater of a function or method (both work the same way)</span>
+</section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

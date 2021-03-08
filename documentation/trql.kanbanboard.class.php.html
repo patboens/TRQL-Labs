@@ -1,0 +1,425 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile hr { border-top: 4px solid #800 !important; margin:2em 0; box-shadow: 0 6px 10px 1px rgba(0,0,0,.2); }
+.trql_documentor_DocumentorSourceFile pre { background: #c001; }
+.trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
+code,samp, .filename {color: #800 !important;
+   font-family: Consolas,"courier new";
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
+.seealso code a {text-decoration:none;
+   color: #800 !important;
+   font-weight: bold;
+   font-style: italic;
+   }
+.property.inheritance code { border: none !important; }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
+table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td,
+table.properties tr.parameter td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description,
+table.properties tr.parameter td.description { width: 60%; }
+p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
+   letter-spacing: 3px;
+   width: 100%;
+   margin: 0 0 15px 0;
+   padding: 5px;
+   color: rgb(255,128,0);
+   padding: 1em;
+   border: 1px solid #999;
+   box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
+   border: 1px solid #888; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.kanbanboard.class.php</span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">Main tool used to implement the Kanban project management 
+ methodology.</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">06-01-21 19:23</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">06/03/2021 - 11:53:06</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>KanbanBoard</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Main tool used to implement the Kanban project management methodology.</span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="/?src=Mother">Mother</a> &gt; <a href="/?src=Thing">Thing</a> &gt; <a href="/?src=TaskBoard">TaskBoard</a> &gt; KanbanBoard</code></span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class KanbanBoard extends TaskBoard</code></span>
+<span class="DocumentorLabel">Keywords: </span><span class="property keywords">constructors, destructors</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name" id="var.aColumns"><code>$aColumns</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">The columns of the taskboard.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An additional type for the item,
+ typically used for adding more
+ specific types from external
+ vocabularies in microdata syntax.
+ This is a relationship between
+ something and a class that the
+ thing is in. In RDFa syntax, it is
+ better to use the native RDFa
+ syntax - the 'typeof' attribute
+ - for multiple types.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.description"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A short description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A
+ short description of the item used
+ to disambiguate from other, similar
+ items. Information from other
+ properties (in particular, name)
+ may be necessary for the description
+ to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.identifier"><code>$identifier</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The identifier property represents any
+ kind of identifier for any kind of Thing,
+ such as ISBNs, GTIN codes, UUIDs etc.
+ http://schema.org provides dedicated
+ properties for representing many of these,
+ either as textual strings or as URL (URI)
+ links. See <a
+ href="https://schema.org/docs/datamodel.html#identifierBg">
+ background notes</a>
+ for more details.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.image"><code>$image</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of an image of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.itemHyperlink"><code>$itemHyperlink</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The link that must be followed when the user clicks on an item of the taskboard.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates a page (or other <code><a href="/?src=CreativeWork">CreativeWork</a></code>, <code><a href="/?src=Event">Event</a></code>)
+ for which this thing is the main entity
+ being described. See <a
+ href="https://schema.org/docs/datamodel.html#mainEntityBackground">
+ background notes</a> for details.
+ Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential <code><a href="/?src=Action">Action</a></code>, which
+ describes an idealized action in which
+ this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+ unambiguously indicates the item's
+ identity. E.g. the URL of the
+ item's Wikipedia page, Freebase
+ page, or official website.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.self"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A <code><a href="/?src=CreativeWork">CreativeWork</a></code> or <code><a href="/?src=Event">Event</a></code> about this <code><a href="/?src=Thing">Thing</a></code>. 
+ Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szECMAScript"><code>$szECMAScript</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of an ECMA Script that must be included when rendering the Taskboard</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.url"><code>$url</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Wikidata ID. Main tool used to implement the 
+ Kanban project management methodology.</td>
+</tr>
+</table>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__destruct">__destruct()</a></code></span>
+<h2 class="DocumentorLabel">Methods of <code>KanbanBoard</code></h2>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>__construct( $szHome )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Home of the class. Optional.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__destruct">__destruct()</a></code></span>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
+<hr /><p class="property func" id="fnc.__toArray"><span class="name"><strong><code>__toArray()</code></strong></span>: Turns the object into an array</p>
+<p class="property">Remark:</p>
+<p>Protected properties are formatted as: <code>'&#0;*&#0;<property>'</code> (e.g. <code>'&#0;*&#0;self'</code>)<br />
+ Private properties are formatted as: <code>'&#0;trql\form\Form&#0;<property>'</code> (e.g. <code>'&#0;trql\form\Form&#0;test'</code>)<br /></p>
+<p class="property">Syntax:</p>
+<p><code>__toArray()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  The array corresponding to the object</p>
+<p class="property">Example(s):</p>
+<pre>
+
+
+  $o = new KanbanBoard();
+  var_dump( <strong>$o->__toArray()</strong> );
+
+  /* This produces the following output:
+
+    array (size=29)
+      '�*�self' => 
+        array (size=10)
+          'file' => string 'D:\websites\snippet-center\trql.kanbanboard.class.php' (length=53)
+          'class' => string 'trql\kanbanboard\KanbanBoard' (length=28)
+          'name' => string 'kanbanboard' (length=11)
+          'birth' => float 1615017947.7907
+          'home' => string 'D:\websites\snippet-center\q\common\trql.classes.home\trql.kanbanboard.class' (length=76)
+          'family' => 
+            array (size=934)
+              0 => string 'D:\websites\snippet-center\trql.APIHandler.class.php' (length=52)
+              1 => string 'D:\websites\snippet-center\trql.aboutpage.class.php' (length=51)
+              2 => string 'D:\websites\snippet-center\trql.academicdiscipline.class.php' (length=60)
+              3 => string 'D:\websites\snippet-center\trql.acceptaction.class.php' (length=54)
+              4 => string 'D:\websites\snippet-center\trql.accommodation.class.php' (length=55)
+              5 => string 'D:\websites\snippet-center\trql.accountingregister.class.php' (length=60)
+              6 => string 'D:\websites\snippet-center\trql.accountingservice.class.php' (length=59)
+              7 => string 'D:\websites\snippet-center\trql.achieveaction.class.php' (length=55)
+              8 => string 'D:\websites\snippet-center\trql.action.class.php' (length=48)
+              9 => string 'D:\websites\snippet-center\trql.actionaccessspecification.class.php' (length=67)
+              10 => string 'D:\websites\snippet-center\trql.actionstatustype.class.php' (length=58)
+              more elements...
+          'UIKey' => string 'trql\kanbanboard\KanbanBoard' (length=28)
+          'common' => string 'D:\websites\snippet-center\q\common' (length=35)
+          'resources' => string 'D:\websites\snippet-center\q\common\resources' (length=45)
+          'icon' => string 'D:\websites\snippet-center\q\common\resources\icons\kanbanboard.png' (length=67)
+      'wikidataId' => string 'Q6360939' (length=8)
+      '�*�aColumns' => null
+      'itemHyperlink' => null
+      'szECMAScript' => null
+      'additionalType' => null
+      'alternateName' => null
+      'description' => null
+      'disambiguatingDescription' => null
+      'image' => null
+      'identifier' => null
+      'mainEntityOfPage' => null
+      'name' => null
+      'potentialAction' => null
+      'sameAs' => null
+      'subjectOf' => null
+      'url' => null
+      'lastInfo' => 
+        array (size=4)
+          0 => 
+            array (size=2)
+              'time' => int 1615017947
+              'info' => string 'trql\mother\Mother::updateSelf(): 'D:\websites\snippet-center\q\common\trql.classes.home\trql.mother.class' FOUND' (length=113)
+          1 => 
+            array (size=2)
+              'time' => int 1615017947
+              'info' => string 'trql\mother\Mother::updateSelf(): 'D:\websites\snippet-center\q\common\trql.classes.home\trql.thing.class' FOUND' (length=112)
+          2 => 
+            array (size=2)
+              'time' => int 1615017947
+              'info' => string 'trql\mother\Mother::updateSelf(): 'D:\websites\snippet-center\q\common\trql.classes.home\trql.taskboard.class' FOUND' (length=116)
+          3 => 
+            array (size=2)
+              'time' => int 1615017947
+              'info' => string 'trql\mother\Mother::updateSelf(): 'D:\websites\snippet-center\q\common\trql.classes.home\trql.kanbanboard.class' FOUND' (length=118)
+      'learning' => boolean true
+      'remembering' => boolean true
+      'storing' => boolean true
+      '�*�szHome' => string 'D:\websites\snippet-center\q\common\trql.classes.home\trql.kanbanboard.class' (length=76)
+      '�*�memory' => null
+      '�*�pain' => int 0
+      '�*�feelPain' => boolean true
+      '�*�family' => 
+        array (size=934)
+          0 => string 'D:\websites\snippet-center\trql.APIHandler.class.php' (length=52)
+          1 => string 'D:\websites\snippet-center\trql.aboutpage.class.php' (length=51)
+          2 => string 'D:\websites\snippet-center\trql.academicdiscipline.class.php' (length=60)
+          3 => string 'D:\websites\snippet-center\trql.acceptaction.class.php' (length=54)
+          4 => string 'D:\websites\snippet-center\trql.accommodation.class.php' (length=55)
+          5 => string 'D:\websites\snippet-center\trql.accountingregister.class.php' (length=60)
+          6 => string 'D:\websites\snippet-center\trql.accountingservice.class.php' (length=59)
+          7 => string 'D:\websites\snippet-center\trql.achieveaction.class.php' (length=55)
+          8 => string 'D:\websites\snippet-center\trql.action.class.php' (length=48)
+          9 => string 'D:\websites\snippet-center\trql.actionaccessspecification.class.php' (length=67)
+          10 => string 'D:\websites\snippet-center\trql.actionstatustype.class.php' (length=58)
+          more elements...
+      'backupRequired' => boolean true
+      'autodocRequired' => boolean true
+      'classIcon' => string 'D:\websites\snippet-center\q\common\resources\icons\mother.png' (length=62)
+    */
+  </pre>
+<hr /><p class="property func" id="fnc.__toHTML"><span class="name"><strong><code>__toHTML()</code></strong></span>: Renders KanbanBoard in HTML</p>
+<p class="property">Warning:</p>
+<p>So far (25-12-20 13:29:10), the form is NOT rendered</p>
+<p class="property">Syntax:</p>
+<p><code>__toHTML()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  HTML Code</p>
+<hr /><p class="property func" id="fnc.__toString"><span class="name"><strong><code>__toString()</code></strong></span>: Renders KanbanBoard as a string</p>
+<p class="property">Syntax:</p>
+<p><code>__toString()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  HTML Code (same as calling <code>__toHTML()</code>)</p>
+<hr /><p class="property func" id="fnc.__toXML"><span class="name"><strong><code>__toXML()</code></strong></span>: Renders the form in XML</p>
+<p class="property">Warning:</p>
+<p>So far (25-12-20 13:29:10), the form is NOT rendered</p>
+<p class="property">Syntax:</p>
+<p><code>__toXML()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  XML Code</p>
+<hr /><p class="property func" id="fnc.addColumn"><span class="name"><strong><code>addColumn()</code></strong></span>: Add a column to the set of columns of the taskboard</p>
+<p class="property">Syntax:</p>
+<p><code>addColumn( $aColumn )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.addColumn.aColumn"><code>$aColumn</code></td>
+<td class="type"><code>array</code></td>
+<td class="description seealso">Associative array representing a column</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class is returned</p>
+<hr /><p class="property func" id="fnc.render"><span class="name"><strong><code>render()</code></strong></span>: Renders the kanbanboard in XML or in HTML (default)</p>
+<p class="property">Syntax:</p>
+<p><code>render( $szType )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.render.szType"><code>$szType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Output type. Optional. <code>'HTML'</code> by default.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  HTML Code
+
+ <br /><br /><br /> Can produce the following rendering:<br /><br />
+ <img class="vaesoli-image shadow constrained" src="https://raw.githubusercontent.com/patboens/TRQL-Labs/63c894e349e2b41753ce4027c47fcd28f3210b89/images/kanban-board-b26ece14-fbc7-4586-a049-84a6878d1e92.jpg" />
+ <br /><br /></p>
+<hr /><p class="property func" id="fnc.save"><span class="name"><strong><code>save()</code></strong></span>: Saves the KanbanBoard object to $szFile</p>
+<p class="property">Warning:</p>
+<p>Totalement expérimental ! Bien que la modification manuelle soit possible
+ directement dans le fichier sauvé, je trouve qu'il y a trop de propriétés
+ qui sont dépendantes de mes classes. Le format de sortie n'est donc pas
+ suffisamment neutre. Il ne faudrait sauver que quelques propriétés du
+ formulaire dont aItems. Par la suite, nous récupérons juste les données
+ dont nous avons besoin et on reconstitue le formulaire.</p>
+<p class="property">Syntax:</p>
+<p><code>save( $szFile )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.save.szFile"><code>$szFile</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The file the form must be saved to.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(boolean):  <code>true</code> if the form was successfully saved; <code>false</code>
+ if not.</p>
+<hr /></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->
