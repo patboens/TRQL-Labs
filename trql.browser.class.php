@@ -20,12 +20,13 @@
 
 /** {{{*fheader
     {*file                  trql.browser.class.php *}
-    {*purpose               Browser class (Internet navigator) *}
+    {*purpose               Internet navigator *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
     {*cdate                 24/06/2012 - 11:25 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -35,7 +36,7 @@
         {*mdate 05-09-20 18:31 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
-        {*desc              0)  This code is based on Vae Soli LSBrowser.class.php
+        {*desc              0)  This code is based on Vae Soli [c]LSBrowser[/c]
                             1)  Original creation
         *}
     *}
@@ -72,7 +73,7 @@ defined( 'BROWSER_CLASS_VERSION' ) or define( 'BROWSER_CLASS_VERSION','0.1' );
 
     {*desc
 
-        Navigator/Browser class. Comes with an extensive set of parsing routines
+        Navigator/Browser. Comes with an extensive set of parsing routines
         based on more than 15000 User Agents.
 
     *}
@@ -211,15 +212,17 @@ class Browser extends Thing
     }   /* End of Browser.setUA() ===================================================== */
     /* ================================================================================ */
 
+    /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+    /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 
     /* ================================================================================ */
-    /** {{*ParseUA( [$szUA] )=
+    /** {{*parseUA( [$szUA] )=
 
         Parses the User Agent string and places all findings in the properties
         of the object.
 
         {*params
-            $szUA       (string)        Optional User Agent. $this->szUA by default.
+            $szUA       (string)        Optional User Agent. @var.szUA by default.
         *}
 
         {*cdate 24/06/2012 11:25 *}
@@ -229,53 +232,16 @@ class Browser extends Thing
         {*return
             (void)
         *}
+
         *}}
-     */
+    */
     /* ================================================================================ */
-    function ParseUA( $szUA = null )
+    function parseUA( $szUA = null )
     /*----------------------------*/
     {
-        $this->szName               = null;
-        $this->szType               = null;
-        $this->szPlatform           = null;
-        $this->szPlatformVersion    = null;
-        $this->iMajor               = null;
-        $this->iMinor               = null;
-        $this->iRevision            = null;
-        $this->szBuild              = null;
-        $this->szMobility           = null;
-        $this->szDevice             = null;
-        $this->szModel              = null;
-        $this->fStart               = 0.0;
-        $this->fStop                = 0.0;
-        $this->iDanger              = -1;
-        $this->iLineMatch           = -1;
-        $this->aProperties          = array();
-
-        if ( ! is_null( $szUA ) )
-            $this->szUA = $szUA;
-
-        $this->aProperties['technical-specs'        ] = null;           // 'http://wap.samsungmobile.com/uaprof/GT-I9505.xml';
-        $this->aProperties['keyboard'               ] = null;           // azerty, qwerty, ...
-        $this->aProperties['pointing'               ] = null;           // touchscreen, ...
-        $this->aProperties['company'                ] = null;           // nokia, samsung, apple, amazon, ...
-        $this->aProperties['camera'                 ] = null;           // 5MP; 8MP; 12MP; ...
-        $this->aProperties['storage'                ] = null;           // 22Mb; 32Gb; ...
-        $this->aProperties['html-version'           ] = null;           // 4.0, ...
-        $this->aProperties['java-enabled'           ] = null;           // true | false
-        $this->aProperties['javascript-enabled'     ] = null;           // true | false
-        $this->aProperties['tables-capable'         ] = null;           // true | false
-        $this->aProperties['frames-capable'         ] = null;           // true | false
-        $this->aProperties['pixel-ratio'            ] = null;           // 1x1, ...
-        $this->aProperties['screen-size'            ] = null;           // 1024x600
-        $this->aProperties['screen-size-char'       ] = null;           // 25x21
-        $this->aProperties['color-capable'          ] = null;           // true | false
-        $this->aProperties['bits-per-pixel'         ] = null;           // 8, 16, 24, ...
-        $this->aProperties['image-capable'          ] = null;           // true | false
-        $this->aProperties['sound-output-capable'   ] = null;           // true | false
-        $this->aProperties['voice-input-capable'    ] = null;           // true | false
-
         $this->fStart   = (float) microtime( true );                /* Parsing start time */
+
+        $this->setDefaultPropertiesBeforeParsing();
 
         if ( ! is_null( $this->szUA ) && $this->szUA !== 'illegal' )
         {
@@ -4335,10 +4301,62 @@ class Browser extends Thing
         //    echo "<p>User agent NULL</p>\n";
         //}
 
-        $this->fStop    = (float) microtime( true );
+
+
+
+
+
+        $this->fStop    = (float) microtime( true );                /* Finish time */
+
         return ( $this );
     }   /* == End of Browser.parseUA() ===============================================  */
     /* ================================================================================ */
+
+    /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+    /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+
+    protected function setDefaultPropertiesBeforeParsing()
+    {
+        $this->szName               = null;
+        $this->szType               = null;
+        $this->szPlatform           = null;
+        $this->szPlatformVersion    = null;
+        $this->iMajor               = null;
+        $this->iMinor               = null;
+        $this->iRevision            = null;
+        $this->szBuild              = null;
+        $this->szMobility           = null;
+        $this->szDevice             = null;
+        $this->szModel              = null;
+        $this->fStart               = 0.0;
+        $this->fStop                = 0.0;
+        $this->iDanger              = -1;
+        $this->iLineMatch           = -1;
+        $this->aProperties          = array();
+
+        if ( ! is_null( $szUA ) )
+            $this->szUA = $szUA;
+
+        $this->aProperties['technical-specs'        ] = null;           // 'http://wap.samsungmobile.com/uaprof/GT-I9505.xml';
+        $this->aProperties['keyboard'               ] = null;           // azerty, qwerty, ...
+        $this->aProperties['pointing'               ] = null;           // touchscreen, ...
+        $this->aProperties['company'                ] = null;           // nokia, samsung, apple, amazon, ...
+        $this->aProperties['camera'                 ] = null;           // 5MP; 8MP; 12MP; ...
+        $this->aProperties['storage'                ] = null;           // 22Mb; 32Gb; ...
+        $this->aProperties['html-version'           ] = null;           // 4.0, ...
+        $this->aProperties['java-enabled'           ] = null;           // true | false
+        $this->aProperties['javascript-enabled'     ] = null;           // true | false
+        $this->aProperties['tables-capable'         ] = null;           // true | false
+        $this->aProperties['frames-capable'         ] = null;           // true | false
+        $this->aProperties['pixel-ratio'            ] = null;           // 1x1, ...
+        $this->aProperties['screen-size'            ] = null;           // 1024x600
+        $this->aProperties['screen-size-char'       ] = null;           // 25x21
+        $this->aProperties['color-capable'          ] = null;           // true | false
+        $this->aProperties['bits-per-pixel'         ] = null;           // 8, 16, 24, ...
+        $this->aProperties['image-capable'          ] = null;           // true | false
+        $this->aProperties['sound-output-capable'   ] = null;           // true | false
+        $this->aProperties['voice-input-capable'    ] = null;           // true | false
+    }
 
 
     /* ================================================================================ */
