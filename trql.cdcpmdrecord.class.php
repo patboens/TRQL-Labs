@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -31,6 +29,7 @@
     {*cdate                 26-08-2020 18:40 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -59,16 +58,13 @@
 namespace trql\cdcpmdrecord;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\structuredvalue\StructuredValue    as StructuredValue;
-
+use \trql\structuredvalue\StructuredValue   as StructuredValue;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'STRUCTUREDVALUE_CLASS_VERSION' ) )
     require_once( 'trql.structuredvalue.class.php' );
-
-
 
 defined( 'CDCPMDRECORD_CLASS_VERSION' ) or define( 'CDCPMDRECORD_CLASS_VERSION','0.1' );
 
@@ -97,6 +93,8 @@ defined( 'CDCPMDRECORD_CLASS_VERSION' ) or define( 'CDCPMDRECORD_CLASS_VERSION',
         on 26-08-2020 18:40.
     *}
 
+    *}}
+
  */
 /* ==================================================================================== */
 class CDCPMDRecord extends StructuredValue
@@ -111,13 +109,6 @@ class CDCPMDRecord extends StructuredValue
                                'UIKey'  => null         ,
                              );
 
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
     public      $cvdCollectionDate              = null;             /* {*property   $cvdCollectionDate              (DateTime|string)               collectiondate - Date for which patient counts are reported. *} */
     public      $cvdFacilityCounty              = null;             /* {*property   $cvdFacilityCounty              (string)                        Name of the County of the NHSN facility that this data record applies
                                                                                                                                                     to. Use cvdFacilityId to identify the facility. To provide other
@@ -157,30 +148,10 @@ class CDCPMDRecord extends StructuredValue
     public      $cvdNumVentUse                  = null;             /* {*property   $cvdNumVentUse                  (float)                         numventuse - MECHANICAL VENTILATORS IN USE: Total number of
                                                                                                                                                     ventilators in use. *} */
     public      $datePosted                     = null;             /* {*property   $datePosted                     (Date|DateTime)                 Publication date of an online listing. *} */
-    public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId     (string)                                        Wikidata ID. NOT CHECKED SO FAR *} */
 
 
     /* ================================================================================ */
@@ -196,6 +167,10 @@ class CDCPMDRecord extends StructuredValue
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -204,8 +179,6 @@ class CDCPMDRecord extends StructuredValue
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of CDCPMDRecord.__construct() ========================================== */
@@ -224,6 +197,10 @@ class CDCPMDRecord extends StructuredValue
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -237,8 +214,5 @@ class CDCPMDRecord extends StructuredValue
         $this->necroSignaling();
     }   /* End of CDCPMDRecord.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class CDCPMDRecord ====================================================== */
 /* ==================================================================================== */
-
-?>

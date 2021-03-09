@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -31,6 +29,7 @@
     {*cdate                 26-08-2020 21:40 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -108,10 +107,12 @@ defined( 'NEWSARTICLE_CLASS_VERSION' ) or define( 'NEWSARTICLE_CLASS_VERSION','0
         on 26-08-2020 21:40.
     *}
 
+    *}}
+
  */
 /* ==================================================================================== */
 class NewsArticle extends Article
-/*------------------------------*/
+/*-----------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -162,6 +163,10 @@ class NewsArticle extends Article
         {*return
             (self)      The current instance of the class
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
 
         *}}
     */
@@ -383,6 +388,10 @@ class NewsArticle extends Article
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -396,8 +405,5 @@ class NewsArticle extends Article
         $this->necroSignaling();
     }   /* End of NewsArticle.__destruct() ============================================ */
     /* ================================================================================ */
-
 }   /* End of class NewsArticle ======================================================= */
 /* ==================================================================================== */
-
-?>

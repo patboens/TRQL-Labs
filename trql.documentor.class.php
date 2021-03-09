@@ -202,12 +202,9 @@ if ( ! defined( 'POSTALADDRESS_CLASS_VERSION' ) )
 if ( ! defined( 'SOFTWARESOURCECODE_CLASS_VERSION' ) )
     require_once( 'trql.softwaresourcecode.class.php' );
 
-
 defined( 'DOCUMENTOR_CLASS_VERSION' ) or define( 'DOCUMENTOR_CLASS_VERSION','0.1' );
 define( 'OPENING_CURLY_BRACE','{' );
 define( 'CLOSING_CURLY_BRACE','}' );
-
-
 
 function say( $szStr )
 /*------------------*/
@@ -541,7 +538,6 @@ class Documentor extends CreativeWork implements iContext
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
     public      $szCurrentFile                  = null;             /* The current file we're documenting : TEMPORARY */
-
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -932,6 +928,8 @@ Class DocumentorSourceFile extends DocumentorFile
     {
         $szRetVal = '';
 
+        //var_dump( $szClassName );
+
         if ( preg_match('%/\*\* *?\{\{\*(abstract)? *?class *?' . $szClassName . '=(.*?)\*\}\}%si',$this->content,$aMatches ) )
             $szRetVal = $aMatches[0];
 
@@ -981,23 +979,28 @@ Class DocumentorSourceFile extends DocumentorFile
         $iLevel         = -1;                                       /* Curly brace level ({ and }) : invalid value for now */
 
         //var_dump( "Parsing " . $this->szFileName );
-        //var_dump( $this->content );
+        //var_dump( $iLength,$this->content );
+        //$this->die();
 
+        /****************************************************************/
+        /* PARSING LOOP, PARSING LOOP, PARSING LOOP, ...                */
+        /****************************************************************/
         while ( $iPos < $iLength )                                  /* While we haven't treated the whole source code */
         {
             //echo $iPos;
-            $c = $this->content[$iPos++];                                       /* Character we just read */
+            $c = $this->content[$iPos++];                           /* Character we just read */
+            //echo $c . ' at ' . $iPos,'<br />';
             //echo $iPos;
             //echo $c;
 
             /* If we're in a ONE-LINE comment and char is a CR or LF */
             if ( $OneLineComment && ( $c === chr(13) || $c === chr(10) ) )
             {
-                $InComment      = false;                                /* This terminates the comment */
+                $InComment      = false;                            /* This terminates the comment */
                 $OneLineComment = false;
             }
 
-            if ( ! $InString )                                          /* If we are NOT in the middle of a string */
+            if ( ! $InString )                                      /* If we are NOT in the middle of a string */
             {
                 /* If character is a forward slash AND next char is a star */
                 if     ( $c === '/' && $iPos < $iLength && $this->content[$iPos] === '*' )
@@ -1019,27 +1022,27 @@ Class DocumentorSourceFile extends DocumentorFile
 
                 if ( ! $InComment )                                     /* If we're NOT in a comment - and also NOT in a string */
                 {
-                    if ( $c === "'" || $c === '"' ) /* If we just read a ' or a " */
+                    if ( $c === "'" || $c === '"' )                     /* If we just read a ' or a " */
                     {
                         //echo "<p>Start of a string with $c</p>";
                         $InString = true;                               /* Then a string starts */
                         $cBal = $c;                                     /* Remember that this string must be balanced with exactly the same char */
-                    }
-                }
-            }
-            else    /* MIDDLE OF A STRING ... MIDDLE OF A STRING ... MIDDLE OF A STRING ...  */
+                    }   /* if ( $c === "'" || $c === '"' ) */
+                }   /* if ( ! $InComment ) */
+            }   /* if ( ! $InString ) */
+            else    /* if ( ! $InString ) ........ MIDDLE OF A STRING ... MIDDLE OF A STRING ... MIDDLE OF A STRING ...  */
             {
-                if ( $c === $cBal && true )                    /* If char == string balancer AND char before not a backslash */
+                if ( $c === $cBal && true )                             /* If char == string balancer AND char before not a backslash */
                 {
                     //echo "<p>Potential end of a string with $c</p>";
                     if ( $cBef != '\\' || $this->content[$iPos-3] == '\\' )
                     {
                         //echo "<p>End of a string with $c</p>";
-                        $InString = false;                                  /* This is the end of the string */
-                        $cBal = null;                                       /* Reset the string balancer */
-                    }
-                }
-            }
+                        $InString = false;                              /* This is the end of the string */
+                        $cBal = null;                                   /* Reset the string balancer */
+                    }   /* if ( $cBef != '\\' || $this->content[$iPos-3] == '\\' ) */
+                }   /* if ( $c === $cBal && true ) */
+            }   /* End of ... Else of ... if ( ! $InString ) ........ MIDDLE OF A STRING ... MIDDLE OF A STRING ... MIDDLE OF A STRING ...  */
 
             if ( ! $InString && ! $InComment )                          /* NOW ... we're NOT in a string and NOT in a comment ... this must be code!!! */
             {
@@ -1066,12 +1069,12 @@ Class DocumentorSourceFile extends DocumentorFile
                                 $iLevel++;
                                 //echo "<p>Niveau {$iLevel} des {}</p>";
                             }
-                        }
+                        }   /* if ( $c === '{' ) */
                         elseif ( $c === '}' )
                         {
                             $iLevel--;
                             //echo "<p>Niveau {$iLevel} des {}</p>";
-                        }
+                        }   /* elseif ( $c === '}' ) */
 
                         if ( $iLevel === 0 )
                         {
@@ -1079,10 +1082,10 @@ Class DocumentorSourceFile extends DocumentorFile
                             $aTmp[count($aTmp)-1] = array($aTmp[count($aTmp)-1][0],$iPos - 1);
                             $iLevel = -1;
                             $InClass = false;
-                        }
-                    }
-                }
-                else                                                    /* We have read a token stopper (a blank, a tab, a ...) */
+                        }   /* if ( $iLevel === 0 ) */
+                    }   /* if ( $InClass ) */
+                }   /* if ( $c != ' ' && $c != chr(9) && $c != chr(10) && $c != chr(13) && $c != '-' && $c != '+' && $c != '/' && $c != '\\' && $c != '*' ) */
+                else    /* Else of ...  if ( $c != ' ' && $c != chr(9) && ..... We have read a token stopper (a blank, a tab, a ...) */
                 {
                     //echo 'TOKEN STOPPER met; current word is <code>',$szWord,'</code></br>';
                     if ( $szWord === $szKeyword && ! $InClass )         /* If the full word we just read is 'class' or 'interface' or 'trait' AND if not already in a class */
@@ -1095,11 +1098,14 @@ Class DocumentorSourceFile extends DocumentorFile
                     }   /* if ( $szWord === $szKeyword ) */
 
                     $szWord = '';                                       /* We've read a token stopper ... reset word */
-                }
+                }   /* End of Else of ... if ( $c != ' ' && $c != chr(9) && ..... We have read a token stopper (a blank, a tab, a ...) */
             }   /* if ( ! $InString && ! $InComment ) */
 
             $cBef = $c;                                                 /* Character before is the one we just read ! */
         }   /* while ( $iPos < $iLength ) */
+        /****************************************************************/
+        /* PARSING LOOP, PARSING LOOP, PARSING LOOP, ...                */
+        /****************************************************************/
 
         /* OK, we found a number of classes in the code; now, let's qualify
            each class we found (abstract, class name, parent class, implements) */
@@ -1128,7 +1134,7 @@ Class DocumentorSourceFile extends DocumentorFile
             }   /* foreach( $aTmp as $aClassLines ) */
         }   /* if ( is_array( $aTmp ) && count( $aTmp ) > 0 ) */
 
-        if ( is_array( $aClasses ) && count( $aClasses ) > 0 )
+        if ( isset( $aClasses ) && is_array( $aClasses ) && count( $aClasses ) > 0 )
         {
             $this->aDefinedClasses = null;
 
@@ -1202,9 +1208,8 @@ Class DocumentorSourceFile extends DocumentorFile
         contained in a file source code
 
         {*params
-            $$szDeclaration     (string)    The class declaration
+            $szDeclaration  (string)    The class declaration
         *}
-
 
         {*return
             (array)     An associative array that holds the parts of the class
@@ -1409,7 +1414,6 @@ Class DocumentorSourceFile extends DocumentorFile
     /*---------------------*/
     {
         $this->readFile();                                      /* Reads the file */
-
         $this->getHeader();                                     /* Get the file header */
         $this->getNamespace();                                  /* Get the namespace of the source file: ONLY 1 namespace (limitation) */
         $this->getUses();                                       /* Get the top-level uses */
@@ -1422,11 +1426,41 @@ Class DocumentorSourceFile extends DocumentorFile
         $this->getInterfacesDefinedInCode();                    /* Get the interfaces defined in the code of the source file */
         //$this->getClassesDocumented();                          /* Get the classes documented in the source file (NOT ALL classes are documented -> different from getClassesDefinedInCode())*/
         $this->getClassesDefinedInCode();                       /* Get the classes defined in the source code (NOT ALL classes are documented -> different from getClassesDocumented()) */
+        //var_dump( "CLASSES DEFINED IN CODE OBTAINED" );
+        //$this->die();
         $this->getFunctionsDocumented();                        /* Get the functions documented in the source file */
         $this->getFunctionsDefinedInCode();                     /* Get the functions defined in the code of the source file */
         $this->getTODOs();                                      /* Get {*todo ... *} in the entire source code */
+
     }   /* End of DocumentorSourceFile.analyze() ====================================== */
     /* ================================================================================ */
+
+    /* ================================================================================ */
+    /** {{*s( $szStr )=
+
+        Apply the private substitutions
+
+        {*params
+            $szStr      (string)    The string in which we need to apply the private
+                                    substitutions (e.g. [c]%class%[/c] is, for example,
+                                    transformed into the class name we are currently
+                                    documenting)
+        *}
+
+        {*return
+            (string)    Returns [c]$szStr[/c] with subsitutions applied
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    protected function s( $szStr )
+    /*--------------------------*/
+    {
+        return ( str_replace( array_keys( $this->aSubstitutions ),array_values( $this->aSubstitutions ),$szStr ) );
+    }   /* End of DocumentorSourceFile.s() ============================================ */
+    /* ================================================================================ */
+
 
     /* ================================================================================ */
     /** {{*s( $szStr )=
@@ -2525,7 +2559,6 @@ Class DocumentorSourceFile extends DocumentorFile
         $this->necroSignaling();
     }   /* End of DocumentorSourceFileObject.__destruct() ============================= */
     /* ================================================================================ */
-
 }   /* End of class DocumentorSourceFile ============================================== */
 /* ==================================================================================== */
 
@@ -3107,18 +3140,6 @@ Class DocumentorClass extends DocumentorSourceFileObject
                         $oReturn->parseDefinition( $szReturn );
 
                         //var_dump( $szReturn,$oReturn );
-
-                        if ( ! is_null( $oReturn->szType ) )
-                        {
-                            $oFnc->oReturn = $oReturn;
-                            //var_dump( $oFnc->oReturn );
-                        }
-                    }   /* if ( ! empty( $szReturn   = trim( vaesoli::STR_Reduce( $this->property( '{*return' ... ) */
-                    /* TAG EXTRACTION ================================================================================= */
-                    /* TAG EXTRACTION ================================================================================= */
-
-                    if ( preg_match( '/\{\*params(?P<params>.*?)\*\}/si',$szFncDef,$aParts2 ) )
-                    {
                         $oFnc->parseArgs( $aParts2['params'] );
                     }   /* if ( preg_match( '/\{\*params(.*?)\*\}/si',$szFncDef,$aParts2 ) ) */
 

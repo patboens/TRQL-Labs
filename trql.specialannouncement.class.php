@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -91,6 +89,7 @@
     {*cdate                 28-08-2020 16:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel �t� *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -109,17 +108,14 @@
 /****************************************************************************************/
 namespace trql\specialannouncement;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\creativework\CreativeWork    as CreativeWork;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\creativework\CreativeWork     as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
-
-
 
 defined( 'SPECIALANNOUNCEMENT_CLASS_VERSION' ) or define( 'SPECIALANNOUNCEMENT_CLASS_VERSION','0.1' );
 
@@ -195,10 +191,12 @@ defined( 'SPECIALANNOUNCEMENT_CLASS_VERSION' ) or define( 'SPECIALANNOUNCEMENT_C
         on 28-08-2020 16:30.
     *}
 
+    *}}
+
  */
 /* ==================================================================================== */
 class SpecialAnnouncement extends CreativeWork
-/*--------------------------------------*/
+/*------------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -236,9 +234,8 @@ class SpecialAnnouncement extends CreativeWork
     public      $webFeed                        = null;             /* {*property   $webFeed                        (DataFeed|URL)                  The URL for a feed, e.g. associated with a podcast series, blog, or
                                                                                                                                                     series of date-stamped updates. This is usually RSS or Atom. *} */
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId             = null;                     /* {*property   $wikidataId                 (string)                Wikidata ID. No equivalent. *} */
+    public      $wikidataId             = null;                     /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */
@@ -254,6 +251,10 @@ class SpecialAnnouncement extends CreativeWork
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -262,8 +263,6 @@ class SpecialAnnouncement extends CreativeWork
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of SpecialAnnouncement.__construct() =================================== */
@@ -282,6 +281,10 @@ class SpecialAnnouncement extends CreativeWork
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -297,5 +300,3 @@ class SpecialAnnouncement extends CreativeWork
     /* ================================================================================ */
 }   /* End of class SpecialAnnouncement =============================================== */
 /* ==================================================================================== */
-
-?>

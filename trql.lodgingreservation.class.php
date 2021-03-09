@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -31,6 +29,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,6 +43,13 @@
         *}
     *}
 
+    {*chist
+        {*mdate 14-02-21 10:44 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
 
     {*chist
         {*mdate 14-02-21 10:44 *}
@@ -58,17 +64,14 @@
 /****************************************************************************************/
 namespace trql\lodgingreservation;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\reservation\Reservation    as Reservation;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\reservation\Reservation   as Reservation;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'RESERVATION_CLASS_VERSION' ) )
     require_once( 'trql.reservation.class.php' );
-
-
 
 defined( 'LODGINGRESERVATION_CLASS_VERSION' ) or define( 'LODGINGRESERVATION_CLASS_VERSION','0.1' );
 
@@ -96,10 +99,11 @@ defined( 'LODGINGRESERVATION_CLASS_VERSION' ) or define( 'LODGINGRESERVATION_CLA
         on 26-08-2020 18:49.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class LodgingReservation extends Reservation
-/*--------------------------------------*/
+/*----------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -110,75 +114,16 @@ class LodgingReservation extends Reservation
                                'UIKey'  => null         ,
                              );
 
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
-    public      $bookingAgent                   = null;             /* {*property   $bookingAgent                   (Organization|Person)           'bookingAgent' is an out-dated term indicating a 'broker' that serves
-                                                                                                                                                    as a booking agent. *} */
-    public      $bookingTime                    = null;             /* {*property   $bookingTime                    (DateTime)                      The date and time the reservation was booked. *} */
-    public      $broker                         = null;             /* {*property   $broker                         (Person|Organization)           An entity that arranges for an exchange between a buyer and a seller.
-                                                                                                                                                    In most cases a broker never acquires or releases ownership of a
-                                                                                                                                                    product or service involved in an exchange. If it is not clear whether
-                                                                                                                                                    an entity is a broker, seller, or buyer, the latter two terms are
-                                                                                                                                                    preferred. *} */
     public      $checkinTime                    = null;             /* {*property   $checkinTime                    (Time|DateTime)                 The earliest someone may check into a lodging establishment. *} */
     public      $checkoutTime                   = null;             /* {*property   $checkoutTime                   (Time|DateTime)                 The latest someone may check out of a lodging establishment. *} */
-    public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
     public      $lodgingUnitDescription         = null;             /* {*property   $lodgingUnitDescription         (string)                        A full description of the lodging unit. *} */
     public      $lodgingUnitType                = null;             /* {*property   $lodgingUnitType                (string|QualitativeValue)       Textual description of the unit type (including suite vs. room, size
                                                                                                                                                     of bed, etc.). *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
-    public      $modifiedTime                   = null;             /* {*property   $modifiedTime                   (DateTime)                      The date and time the reservation was modified. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
     public      $numAdults                      = null;             /* {*property   $numAdults                      (QuantitativeValue|int)         The number of adults staying in the unit. *} */
     public      $numChildren                    = null;             /* {*property   $numChildren                    (int|QuantitativeValue)         The number of children staying in the unit. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
-    public      $priceCurrency                  = null;             /* {*property   $priceCurrency                  (string)                        The currency of the price, or a price component when attached to
-                                                                                                                                                    PriceSpecification and its subtypes.Use standard formats: ISO 4217
-                                                                                                                                                    currency format e.g. "USD"; Ticker symbol for cryptocurrencies e.g.
-                                                                                                                                                    "BTC"; well known names for Local Exchange Tradings Systems (LETS) and
-                                                                                                                                                    other currency types e.g. "Ithaca HOUR". *} */
-    public      $programMembershipUsed          = null;             /* {*property   $programMembershipUsed          (ProgramMembership)             Any membership in a frequent flyer, hotel loyalty program, etc. being
-                                                                                                                                                    applied to the reservation. *} */
-    public      $provider                       = null;             /* {*property   $provider                       (Person|Organization)           The service provider, service operator, or service performer; the
-                                                                                                                                                    goods producer. Another party (a seller) may offer those services or
-                                                                                                                                                    goods on behalf of the provider. A provider may also serve as the
-                                                                                                                                                    seller. *} */
-    public      $reservationFor                 = null;             /* {*property   $reservationFor                 (Thing)                         The thing -- flight, event, restaurant,etc. being reserved. *} */
-    public      $reservationId                  = null;             /* {*property   $reservationId                  (string)                        A unique identifier for the reservation. *} */
-    public      $reservationStatus              = null;             /* {*property   $reservationStatus              (ReservationStatusType)         The current status of the reservation. *} */
-    public      $reservedTicket                 = null;             /* {*property   $reservedTicket                 (Ticket)                        A ticket associated with the reservation. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
-    public      $totalPrice                     = null;             /* {*property   $totalPrice                     (PriceSpecification|float|string)The total price for the reservation or ticket, including applicable
-                                                                                                                                                    taxes, shipping, etc.Usage guidelines:Use values from 0123456789
-                                                                                                                                                    (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT NINE' (U+0039)) rather than
-                                                                                                                                                    superficially similiar Unicode symbols.Use '.' (Unicode 'FULL STOP'
-                                                                                                                                                    (U+002E)) rather than ',' to indicate a decimal point. Avoid using
-                                                                                                                                                    these symbols as a readability separator. *} */
-    public      $underName                      = null;             /* {*property   $underName                      (Person|Organization)           The person or organization the reservation or ticket is for. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
-
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NO SEARCH YET. *} */
 
 
     /* ================================================================================ */
@@ -194,6 +139,9 @@ class LodgingReservation extends Reservation
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
         *}}
     */
     /* ================================================================================ */
@@ -203,10 +151,8 @@ class LodgingReservation extends Reservation
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of LodgingReservation.__construct() ========================================== */
+    }   /* End of LodgingReservation.__construct() ==================================== */
     /* ================================================================================ */
 
 
@@ -222,6 +168,10 @@ class LodgingReservation extends Reservation
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -233,10 +183,7 @@ class LodgingReservation extends Reservation
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of LodgingReservation.__destruct() =========================================== */
+    }   /* End of LodgingReservation.__destruct() ===================================== */
     /* ================================================================================ */
-
-}   /* End of class LodgingReservation ====================================================== */
+}   /* End of class LodgingReservation ================================================ */
 /* ==================================================================================== */
-
-?>

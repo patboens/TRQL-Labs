@@ -64,7 +64,6 @@ namespace trql\educationaloccupationalprogram;
 use \trql\vaesoli\Vaesoli           as Vaesoli;
 use \trql\intangible\Intangible     as Intangible;
 
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
@@ -120,12 +119,7 @@ class EducationalOccupationalProgram extends Intangible
     public      $applicationStartDate           = null;             /* {*property   $applicationStartDate           (Date)                          The date at which the program begins collecting applications for the
                                                                                                                                                     next enrollment cycle. *} */
     public      $dayOfWeek                      = null;             /* {*property   $dayOfWeek                      (DayOfWeek)                     The day of the week for which these opening hours are valid. *} */
-    public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
-    public      $educationalCredentialAwarded   = null;             /* {*property   $educationalCredentialAwarded   (EducationalOccupationalCredential|URL|string)A description of the qualification, award, certificate, diploma or
+    public      $educationalCredentialAwarded   = null;             /* {*property   $educationalCredentialAwarded   (EducationalOccupationalCredential|URL|string)      A description of the qualification, award, certificate, diploma or
                                                                                                                                                     other educational credential awarded as a consequence of successful
                                                                                                                                                     completion of this course or program. *} */
     public      $educationalProgramMode         = null;             /* {*property   $educationalProgramMode         (URL|string)                    Similar to courseMode, The medium or means of delivery of the program
@@ -150,7 +144,7 @@ class EducationalOccupationalProgram extends Intangible
                                                                                                                                                     and both the textual label and formal code for the category should be
                                                                                                                                                     provided.Note: for historical reasons, any textual label and formal
                                                                                                                                                     code provided as a literal may be assumed to be from O*NET-SOC. *} */
-    public      $occupationalCredentialAwarded  = null;             /* {*property   $occupationalCredentialAwarded  (string|EducationalOccupationalCredential|URL)A description of the qualification, award, certificate, diploma or
+    public      $occupationalCredentialAwarded  = null;             /* {*property   $occupationalCredentialAwarded  (string|EducationalOccupationalCredential|URL)  A description of the qualification, award, certificate, diploma or
                                                                                                                                                     other occupational credential awarded as a consequence of successful
                                                                                                                                                     completion of this course or program. *} */
     public      $offers                         = null;             /* {*property   $offers                         (Offer|Demand)                  An offer to provide this item&#x2014;for example, an offer to sell a
@@ -161,7 +155,7 @@ class EducationalOccupationalProgram extends Intangible
                                                                                                                                                     on a number of common types, it can be used in others. In that case,
                                                                                                                                                     using a second type, such as Product or a subtype of Product, can
                                                                                                                                                     clarify the nature of the offer. *} */
-    public      $programPrerequisites           = null;             /* {*property   $programPrerequisites           (Course|AlignmentObject|string|EducationalOccupationalCredential)Prerequisites for enrolling in the program. *} */
+    public      $programPrerequisites           = null;             /* {*property   $programPrerequisites           (Course|AlignmentObject|string|EducationalOccupationalCredential)   Prerequisites for enrolling in the program. *} */
     public      $programType                    = null;             /* {*property   $programType                    (string|DefinedTerm)            The type of educational or occupational program. For example,
                                                                                                                                                     classroom, internship, alternance, etc.. *} */
     public      $provider                       = null;             /* {*property   $provider                       (Person|Organization)           The service provider, service operator, or service performer; the
