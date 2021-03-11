@@ -128,7 +128,8 @@ class ScholarlyArticle extends Article
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (25-02-21 18:17:24). *} */
+    public      $wikidataId                     = 'Q13442814';      /* {*property   $wikidataId                     (string)                        Wikidata ID. Scholarly article ... Article in an academic publication, 
+                                                                                                                                                    usually peer reviewed *} */
 
 
 
