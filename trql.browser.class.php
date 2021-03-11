@@ -172,7 +172,7 @@ class Browser extends Thing
             $oBrowser = new LSBrowser();
             $oBrowset->setUA(  trim( $_SERVER['HTTP_USER_AGENT'] ) );
             $oBrowser->ParseUA();
-
+            
             $szXML  = '';
             $szXML .= "<Request><![CDATA[{$szUA}]]></Request>\n";
             $szXML .= "<Response>\n";
@@ -4316,6 +4316,10 @@ class Browser extends Thing
     /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 
     protected function setDefaultPropertiesBeforeParsing()
+<<<<<<< Updated upstream
+=======
+    /*---------*/
+>>>>>>> Stashed changes
     {
         $this->szName               = null;
         $this->szType               = null;
@@ -4377,7 +4381,7 @@ class Browser extends Thing
         *}
 
         {*return
-            (self)      Returns self; [c]$szType[/c] is updated
+            (self)      Returns self; @var.szType is updated
         *}
 
         {*cdate 02/02/2013 23:17 *}
@@ -4519,8 +4523,8 @@ class Browser extends Thing
         *}
 
         {*return
-            (void)  No return; [c]$iMajor[/c], [c]$iMinor[/c] and
-                    [c]$iRevision[/c] and [c]$szBuild[/c] updated
+            (void)  No return; @var.iMajor, @var.iMinor and
+                    @var.iRevision and @var.szBuild updated
         *}
 
         {*cdate 24/06/2012 11:25 *}
@@ -4567,7 +4571,7 @@ class Browser extends Thing
         *}
 
         {*caution
-            Use this method after a successful call to [c]ParseUA()[/c]
+            Use this method after a successful call to @fnc.ParseUA
         *}
 
         {*remark
@@ -4583,31 +4587,31 @@ class Browser extends Thing
         *}
 
         {*exec
-            // Imagine this being the UA that we need to examine
-            $oBrowser = new Browser( 'Mozilla/5.0 (iPhone; U; CPU iPhone ' .
-                                     'OS 4_1 like Mac OS X; en-us) ' .
-                                     'AppleWebKit/532.9 (KHTML, like Gecko) ' .
-                                     'Version/4.0.5 Mobile/8B117 Safari/6531.22.7 ' .
-                                     '(compatible; Googlebot-Mobile/2.1; ' .
-                                     '+http://www.google.com/bot.html)' );
+        // Imagine this being the UA that we need to examine
+        $oBrowser = new Browser( 'Mozilla/5.0 (iPhone; U; CPU iPhone ' .
+                                 'OS 4_1 like Mac OS X; en-us) ' .
+                                 'AppleWebKit/532.9 (KHTML, like Gecko) ' .
+                                 'Version/4.0.5 Mobile/8B117 Safari/6531.22.7 ' .
+                                 '(compatible; Googlebot-Mobile/2.1; ' .
+                                 '+http://www.google.com/bot.html)' );
 
-            // Parse it now
-            $oBrowser->ParseUA();
+        // Parse it now
+        $oBrowser->ParseUA();
 
-            // Imagine the request to come from '66.249.73.39'
-            $szIP = '66.249.73.39';
+        // Imagine the request to come from '66.249.73.39'
+        $szIP = '66.249.73.39';
 
-            $szHost = $oBrowser->GetHost( $szIP );
-            echo '<p>Host: ',$szHost,'</p>';
+        $szHost = $oBrowser->GetHost( $szIP );
+        echo '<p>Host: ',$szHost,'</p>';
 
-            if ( $oBrowser->IsReally( 'google',$szHost,$szIP ) )
-            {
-                echo "<p>Sane request from {$szHost} using the '{$szIP}' IP address</p>";
-            }
-            else
-            {
-                echo "<p>{$szHost} does not correspond to '{$szIP}': you caught a cheater!</p>";
-            }
+        if ( $oBrowser->IsReally( 'google',$szHost,$szIP ) )
+        {
+            echo "<p>Sane request from {$szHost} using the '{$szIP}' IP address</p>";
+        }
+        else
+        {
+            echo "<p>{$szHost} does not correspond to '{$szIP}': you caught a cheater!</p>";
+        }
         *}
 
         *}}
@@ -4660,7 +4664,7 @@ class Browser extends Thing
     /* ================================================================================ */
     /** {{*Render( $szType )=
 
-        Renders the data grabbed by the Browser object
+        Renders the data grabbed by the %class% object
 
         {*params
             $szType         (string)    Type of desired output. Optional.
@@ -4814,12 +4818,8 @@ class Browser extends Thing
         {*version 5.6.0004 *}
 
         {*return
-            (bool)      [c]true[/c] is $szIP cooresponds to $szHost; [c]if
-                        not[/c].
-        *}
-
-        {*exec
-            // Ici, il faudrait que je me mette un exemple rÚel
+            (bool)      [c]true[/c] is @param.szIP corresponds to @param.szHost; 
+                        [c]false[/c] if not.
         *}
 
         *}}

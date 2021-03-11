@@ -174,6 +174,31 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">The end date and time of the item (in ISO 8601 date format).</td>
 </tr>
 <tr class="property">
+<<<<<<< Updated upstream
+=======
+<td class="name" id="var.eventAttendanceMode"><code>$eventAttendanceMode</code></td>
+<td class="type"><code>EventAttendanceModeEnumeration</code></td>
+<td class="description">The eventAttendanceMode of an event indicates whether it occurs
+ online, offline, or a mix.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.eventSchedule"><code>$eventSchedule</code></td>
+<td class="type"><code>Schedule</code></td>
+<td class="description">Associates an Event with a Schedule. There are circumstances where it
+ is preferable to share a schedule for a series of repeating events
+ rather than data on the individual events themselves. For example,
+ a website or application might prefer to publish a schedule for a
+ weekly gym class rather than provide data on every event. A schedule
+ could be processed by applications to add forthcoming events to a
+ calendar. An Event that is associated with a Schedule using this
+ property should not have startDate or endDate properties. These are
+ instead defined within the associated Schedule, this avoids any
+ ambiguity for clients using the data. The property might have
+ repeated values to specify different schedules, e.g. for different
+ months or seasons.</td>
+</tr>
+<tr class="property">
+>>>>>>> Stashed changes
 <td class="name" id="var.eventStatus"><code>$eventStatus</code></td>
 <td class="type"><code>EventStatusType</code></td>
 <td class="description">An eventStatus of an event represents its status; particularly useful
@@ -239,6 +264,23 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">The total number of individuals that may attend an event or venue.</td>
 </tr>
 <tr class="property">
+<<<<<<< Updated upstream
+=======
+<td class="name" id="var.maximumPhysicalAttendeeCapacity"><code>$maximumPhysicalAttendeeCapacity</code></td>
+<td class="type"><code>Integer</code></td>
+<td class="description">The maximum physical attendee capacity of an Event whose
+ eventAttendanceMode is OfflineEventAttendanceMode (or the offline
+ aspects, in the case of a MixedEventAttendanceMode).</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.maximumVirtualAttendeeCapacity"><code>$maximumVirtualAttendeeCapacity</code></td>
+<td class="type"><code>Integer</code></td>
+<td class="description">The maximum physical attendee capacity of an Event whose
+ eventAttendanceMode is OnlineEventAttendanceMode (or the online
+ aspects, in the case of a MixedEventAttendanceMode).</td>
+</tr>
+<tr class="property">
+>>>>>>> Stashed changes
 <td class="name" id="var.name"><code>$name</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The name of the item.</td>
@@ -378,6 +420,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <h2 class="DocumentorLabel">Methods of <code>VisualArtsEvent</code></h2>
 <p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
+<<<<<<< Updated upstream
 <p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
@@ -396,6 +439,9 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
+=======
+<p><code>__construct()</code></p>
+>>>>>>> Stashed changes
 <hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>

@@ -170,6 +170,31 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">The end date and time of the item (in ISO 8601 date format).</td>
 </tr>
 <tr class="property">
+<<<<<<< Updated upstream
+=======
+<td class="name" id="var.eventAttendanceMode"><code>$eventAttendanceMode</code></td>
+<td class="type"><code>EventAttendanceModeEnumeration</code></td>
+<td class="description">The eventAttendanceMode of an event indicates whether it occurs
+ online, offline, or a mix.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.eventSchedule"><code>$eventSchedule</code></td>
+<td class="type"><code>Schedule</code></td>
+<td class="description">Associates an Event with a Schedule. There are circumstances where it
+ is preferable to share a schedule for a series of repeating events
+ rather than data on the individual events themselves. For example,
+ a website or application might prefer to publish a schedule for a
+ weekly gym class rather than provide data on every event. A schedule
+ could be processed by applications to add forthcoming events to a
+ calendar. An Event that is associated with a Schedule using this
+ property should not have startDate or endDate properties. These are
+ instead defined within the associated Schedule, this avoids any
+ ambiguity for clients using the data. The property might have
+ repeated values to specify different schedules, e.g. for different
+ months or seasons.</td>
+</tr>
+<tr class="property">
+>>>>>>> Stashed changes
 <td class="name" id="var.eventStatus"><code>$eventStatus</code></td>
 <td class="type"><code>EventStatusType</code></td>
 <td class="description">An eventStatus of an event represents its status; particularly useful
@@ -240,6 +265,23 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">The total number of individuals that may attend an event or venue.</td>
 </tr>
 <tr class="property">
+<<<<<<< Updated upstream
+=======
+<td class="name" id="var.maximumPhysicalAttendeeCapacity"><code>$maximumPhysicalAttendeeCapacity</code></td>
+<td class="type"><code>Integer</code></td>
+<td class="description">The maximum physical attendee capacity of an Event whose
+ eventAttendanceMode is OfflineEventAttendanceMode (or the offline
+ aspects, in the case of a MixedEventAttendanceMode).</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.maximumVirtualAttendeeCapacity"><code>$maximumVirtualAttendeeCapacity</code></td>
+<td class="type"><code>Integer</code></td>
+<td class="description">The maximum physical attendee capacity of an Event whose
+ eventAttendanceMode is OnlineEventAttendanceMode (or the online
+ aspects, in the case of a MixedEventAttendanceMode).</td>
+</tr>
+<tr class="property">
+>>>>>>> Stashed changes
 <td class="name" id="var.name"><code>$name</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The name of the item.</td>
@@ -393,6 +435,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property">Keywords:</p>
 <p>constructors, destructors</p>
 <p class="property">Syntax:</p>
+<<<<<<< Updated upstream
 <p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
@@ -411,27 +454,39 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
+=======
+<p><code>__construct()</code></p>
+>>>>>>> Stashed changes
 <span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__destruct">__destruct()</a></code></span>
 <hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Keywords:</p>
 <p>constructors, destructors</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return</p>
+=======
+>>>>>>> Stashed changes
 <span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
 <hr /><p class="property func" id="fnc.__toForm"><span class="name"><strong><code>__toForm()</code></strong></span>: Provides a standardized form for capturing the the main properties of a steerco
  meeting.</p>
 <p class="property">Syntax:</p>
 <p><code>__toForm()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(string):  The stringified version of the Steerco Meeting</p>
+=======
+>>>>>>> Stashed changes
 <hr /><p class="property func" id="fnc.__toString"><span class="name"><strong><code>__toString()</code></strong></span>: Allows the steerco class to decide how it will react when it is treated like a
  string.</p>
 <p class="property">Syntax:</p>
 <p><code>__toString()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(string):  The stringified version of the Steerco Meeting</p>
+=======
+>>>>>>> Stashed changes
 <hr /><p class="property func" id="fnc.help"><span class="name"><strong><code>help()</code></strong></span>: Redirects page to a help page maintained on LVID.ORG (if help provided)</p>
 <p class="property">Warning:</p>
 <p><strong>EXPERIMENTAL METHOD</strong>. May be standardized later on if we think the 
@@ -440,12 +495,16 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p>There is a heavy dependency on LVID, which is definitely NOT a good thing!</p>
 <p class="property">Syntax:</p>
 <p><code>help()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return provided. Possibly, leaving the site.</p>
+=======
+>>>>>>> Stashed changes
 <hr /><p class="property func" id="fnc.render"><span class="name"><strong><code>render()</code></strong></span>: Renders the Steerco in one of two modes:
  - edit (a forms is displayed)
  - view</p>
 <p class="property">Syntax:</p>
+<<<<<<< Updated upstream
 <p><code>render( $szMode )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
@@ -464,6 +523,9 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(string):  The rendering of the Steerco Meeting</p>
+=======
+<p><code>render()</code></p>
+>>>>>>> Stashed changes
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

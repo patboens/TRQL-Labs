@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 28-08-2020 16:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -40,7 +39,6 @@
         {*desc              1)  Original creation
         *}
     *}
-
 
     *}}} */
 /****************************************************************************************/
@@ -80,6 +78,8 @@ defined( 'SCHOLARLYARTICLE_CLASS_VERSION' ) or define( 'SCHOLARLYARTICLE_CLASS_V
         on 28-08-2020 16:30.
     *}
 
+    *}}
+
  */
 /* ==================================================================================== */
 class ScholarlyArticle extends Article
@@ -97,7 +97,7 @@ class ScholarlyArticle extends Article
     public      $articleBody                    = null;             /* {*property   $articleBody                    (string)                        The actual body of the article. *} */
     public      $articleSection                 = null;             /* {*property   $articleSection                 (string)                        Articles may belong to one or more 'sections' in a magazine or
                                                                                                                                                     newspaper, such as Sports, Lifestyle, etc. *} */
-    public      $backstory                      = null;             /* {*property   $backstory                      (string|CreativeWork)           For an Article, typically a NewsArticle, the backstory property
+    public      $backstory                      = null;             /* {*property   $backstory                      (string|CreativeWork)           For an @class.Article, typically a @class.NewsArticle, the backstory property
                                                                                                                                                     provides a textual summary giving a brief explanation of why and how
                                                                                                                                                     an article was created. In a journalistic setting this could include
                                                                                                                                                     information about reporting process, methods, interviews, data
@@ -122,9 +122,9 @@ class ScholarlyArticle extends Article
                                                                                                                                                     Use the xpath property.For more sophisticated markup of speakable
                                                                                                                                                     sections beyond simple ID references, either CSS selectors or XPath
                                                                                                                                                     expressions to pick out document section(s) as speakable. For thiswe
-                                                                                                                                                    define a supporting type, SpeakableSpecification which is defined to
+                                                                                                                                                    define a supporting type, @class.SpeakableSpecification which is defined to
                                                                                                                                                     be a possible value of the speakable property. *} */
-    public      $wordCount                      = null;             /* {*property   $wordCount                      (int)                           The number of words in the text of the Article. *} */
+    public      $wordCount                      = null;             /* {*property   $wordCount                      (int)                           The number of words in the text of the @class.Article. *} */
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
@@ -153,8 +153,6 @@ class ScholarlyArticle extends Article
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of ScholarlyArticle.__construct() ====================================== */
@@ -188,4 +186,3 @@ class ScholarlyArticle extends Article
     /* ================================================================================ */
 }   /* End of class ScholarlyArticle ================================================== */
 /* ==================================================================================== */
-?>

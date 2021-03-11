@@ -982,6 +982,7 @@ Class DocumentorSourceFile extends DocumentorFile
         //var_dump( $iLength,$this->content );
         //$this->die();
 
+<<<<<<< Updated upstream
         /****************************************************************/
         /* PARSING LOOP, PARSING LOOP, PARSING LOOP, ...                */
         /****************************************************************/
@@ -1010,18 +1011,32 @@ Class DocumentorSourceFile extends DocumentorFile
                 }
                 /* If character is a star AND next char is a forward slash */
                 elseif ( $c === '*' && $iPos < $iLength && $this->content[$iPos] === '/' )
+=======
+        //var_dump( "BEFORE PARSING LOOP" );
+        //$this->die();
+        /****************************************************************/
+        /* PARSING LOOP, PARSING LOOP, PARSING LOOP, ...                */
+        /****************************************************************/
+        {
+            while ( $iPos < $iLength )                                  /* While we haven't treated the whole source code */
+            {
+                //echo $iPos;
+                $c = $this->content[$iPos++];                           /* Character we just read */
+                //echo $c . ' at ' . $iPos,'<br />';
+                //echo $iPos;
+                //echo $c;
+
+                /* If we're in a ONE-LINE comment and char is a CR or LF */
+                if ( $OneLineComment && ( $c === chr(13) || $c === chr(10) ) )
+>>>>>>> Stashed changes
                 {
-                    $InComment = false;                                 /* Then ... the comment just stopped */
-                }
-                elseif ( ( ! $InComment && ( ( $c === '/' && $iPos < $iLength && $this->content[$iPos] === '/' ) || $c === '#' ) ) ) /* If // or # */
-                {
-                    //echo "<p>Start of a comment with $c</p>";
-                    $InComment = true;                                  /* Then ... the comment just started */
-                    $OneLineComment = true;                             /* Remember it is a ONE-LINE comment */
+                    $InComment      = false;                            /* This terminates the comment */
+                    $OneLineComment = false;
                 }
 
-                if ( ! $InComment )                                     /* If we're NOT in a comment - and also NOT in a string */
+                if ( ! $InString )                                      /* If we are NOT in the middle of a string */
                 {
+<<<<<<< Updated upstream
                     if ( $c === "'" || $c === '"' )                     /* If we just read a ' or a " */
                     {
                         //echo "<p>Start of a string with $c</p>";
@@ -1043,31 +1058,81 @@ Class DocumentorSourceFile extends DocumentorFile
                     }   /* if ( $cBef != '\\' || $this->content[$iPos-3] == '\\' ) */
                 }   /* if ( $c === $cBal && true ) */
             }   /* End of ... Else of ... if ( ! $InString ) ........ MIDDLE OF A STRING ... MIDDLE OF A STRING ... MIDDLE OF A STRING ...  */
-
-            if ( ! $InString && ! $InComment )                          /* NOW ... we're NOT in a string and NOT in a comment ... this must be code!!! */
-            {
-                /* If char not a blank, not a tab, not a CR, not a LF,
-                   not a minus sign, not a plus sign, not a slash,
-                   not a backslash, not a star ...
-                */
-                if ( $c != ' ' && $c != chr(9) && $c != chr(10) && $c != chr(13) && $c != '-' && $c != '+' && $c != '/' && $c != '\\' && $c != '*' )
-                {
-                    $szWord .= $c;                                      /* Concatenate full word (no need to use further intelligence) */
-
-                    if ( $InClass )                                     /* If we're in a class */
+=======
+                    /* If character is a forward slash AND next char is a star */
+                    if     ( $c === '/' && $iPos < $iLength && $this->content[$iPos] === '*' )
                     {
-                        //echo "In class";
-                        if ( $c === '{' )
+                        //echo "<p>Start of a comment with $c</p>";
+                        $InComment = true;                                  /* Then ... we start a comment */
+                    }
+                    /* If character is a star AND next char is a forward slash */
+                    elseif ( $c === '*' && $iPos < $iLength && $this->content[$iPos] === '/' )
+                    {
+                        $InComment = false;                                 /* Then ... the comment just stopped */
+                    }
+                    elseif ( ( ! $InComment && ( ( $c === '/' && $iPos < $iLength && $this->content[$iPos] === '/' ) || $c === '#' ) ) ) /* If // or # */
+                    {
+                        //echo "<p>Start of a comment with $c</p>";
+                        $InComment = true;                                  /* Then ... the comment just started */
+                        $OneLineComment = true;                             /* Remember it is a ONE-LINE comment */
+                    }
+>>>>>>> Stashed changes
+
+                    if ( ! $InComment )                                     /* If we're NOT in a comment - and also NOT in a string */
+                    {
+                        if ( $c === "'" || $c === '"' )                     /* If we just read a ' or a " */
                         {
-                            if ( $iLevel === -1 )
+                            //echo "<p>Start of a string with $c</p>";
+                            $InString = true;                               /* Then a string starts */
+                            $cBal = $c;                                     /* Remember that this string must be balanced with exactly the same char */
+                        }   /* if ( $c === "'" || $c === '"' ) */
+                    }   /* if ( ! $InComment ) */
+                }   /* if ( ! $InString ) */
+                else    /* if ( ! $InString ) ........ MIDDLE OF A STRING ... MIDDLE OF A STRING ... MIDDLE OF A STRING ...  */
+                {
+                    if ( $c === $cBal && true )                             /* If char == string balancer AND char before not a backslash */
+                    {
+                        //echo "<p>Potential end of a string with $c</p>";
+                        if ( $cBef != '\\' || $this->content[$iPos-3] == '\\' )
+                        {
+                            //echo "<p>End of a string with $c</p>";
+                            $InString = false;                              /* This is the end of the string */
+                            $cBal = null;                                   /* Reset the string balancer */
+                        }   /* if ( $cBef != '\\' || $this->content[$iPos-3] == '\\' ) */
+                    }   /* if ( $c === $cBal && true ) */
+                }   /* End of ... Else of ... if ( ! $InString ) ........ MIDDLE OF A STRING ... MIDDLE OF A STRING ... MIDDLE OF A STRING ...  */
+
+                if ( ! $InString && ! $InComment )                          /* NOW ... we're NOT in a string and NOT in a comment ... this must be code!!! */
+                {
+                    /* If char not a blank, not a tab, not a CR, not a LF,
+                       not a minus sign, not a plus sign, not a slash,
+                       not a backslash, not a star ...
+                    */
+                    if ( $c != ' ' && $c != chr(9) && $c != chr(10) && $c != chr(13) && $c != '-' && $c != '+' && $c != '/' && $c != '\\' && $c != '*' )
+                    {
+                        $szWord .= $c;                                      /* Concatenate full word (no need to use further intelligence) */
+
+                        if ( $InClass )                                     /* If we're in a class */
+                        {
+                            //echo "In class";
+                            if ( $c === '{' )
                             {
-                                $iLevel = 1;
-                                //echo "<p>Niveau 1 des {}</p>";
-                            }
-                            else
+                                if ( $iLevel === -1 )
+                                {
+                                    $iLevel = 1;
+                                    //echo "<p>Niveau 1 des {}</p>";
+                                }
+                                else
+                                {
+                                    $iLevel++;
+                                    //echo "<p>Niveau {$iLevel} des {}</p>";
+                                }
+                            }   /* if ( $c === '{' ) */
+                            elseif ( $c === '}' )
                             {
-                                $iLevel++;
+                                $iLevel--;
                                 //echo "<p>Niveau {$iLevel} des {}</p>";
+<<<<<<< Updated upstream
                             }
                         }   /* if ( $c === '{' ) */
                         elseif ( $c === '}' )
@@ -1106,88 +1171,170 @@ Class DocumentorSourceFile extends DocumentorFile
         /****************************************************************/
         /* PARSING LOOP, PARSING LOOP, PARSING LOOP, ...                */
         /****************************************************************/
+=======
+                            }   /* elseif ( $c === '}' ) */
 
-        /* OK, we found a number of classes in the code; now, let's qualify
-           each class we found (abstract, class name, parent class, implements) */
-        if ( is_array( $aTmp ) && count( $aTmp ) > 0 )
-        {
-            foreach( $aTmp as $aClassLines )
-            {
-                $szCode = substr( $this->content,$aClassLines[0],$aClassLines[1] - $aClassLines[0] ) . '}';
-                $aLines = explode( "\n",str_replace( array("\r","\n"),"\n",$szCode ) );
-
-                if ( isset( $aLines[0] ) )
-                {
-                    $aDef = $this->parseClassDeclaration( $aLines[0] );
-
-                    //var_dump( $aDef );
-
-                    if ( ! empty( $aDef['name'] ) )
+                            if ( $iLevel === 0 )
+                            {
+                                //die("BOUM");
+                                $aTmp[count($aTmp)-1] = array($aTmp[count($aTmp)-1][0],$iPos - 1);
+                                $iLevel = -1;
+                                $InClass = false;
+                            }   /* if ( $iLevel === 0 ) */
+                        }   /* if ( $InClass ) */
+                    }   /* if ( $c != ' ' && $c != chr(9) && $c != chr(10) && $c != chr(13) && $c != '-' && $c != '+' && $c != '/' && $c != '\\' && $c != '*' ) */
+                    else    /* Else of ...  if ( $c != ' ' && $c != chr(9) && ..... We have read a token stopper (a blank, a tab, a ...) */
                     {
-                        $aClasses[$aDef['name']] = array( 'definition'  => $aDef            ,
-                                                          'sourcecode'  => $szCode          ,
-                                                          'startoffset' => $aClassLines[0]  ,
-                                                          'endoffset'   => $aClassLines[1]  ,
-                                                        );
-                    }
-                }   /* if ( isset( $aLines[0] ) ) */
-            }   /* foreach( $aTmp as $aClassLines ) */
-        }   /* if ( is_array( $aTmp ) && count( $aTmp ) > 0 ) */
+                        //echo 'TOKEN STOPPER met; current word is <code>',$szWord,'</code></br>';
+                        if ( $szWord === $szKeyword && ! $InClass )         /* If the full word we just read is 'class' or 'interface' or 'trait' AND if not already in a class */
+                        {
+                            //echo 'KEYWORD MATCH: STORE POSITION!!!<br/>';
+                            /* Store where this class starts -- no need to know its name */
+                            $aTmp[] = array( $iPos - strlen( $szWord ) - 1,-1 );
+                            $InClass = true;                                /* Remember that we're in a class now */
+                            $iLevel = -1;                                   /* And set the { and } level to an invalid value */
+                        }   /* if ( $szWord === $szKeyword ) */
 
+                        $szWord = '';                                       /* We've read a token stopper ... reset word */
+                    }   /* End of Else of ... if ( $c != ' ' && $c != chr(9) && ..... We have read a token stopper (a blank, a tab, a ...) */
+                }   /* if ( ! $InString && ! $InComment ) */
+
+                $cBef = $c;                                                 /* Character before is the one we just read ! */
+            }   /* while ( $iPos < $iLength ) */
+        }
+        /****************************************************************/
+        /* PARSING LOOP, PARSING LOOP, PARSING LOOP, ...                */
+        /****************************************************************/
+        //var_dump( "AFTER PARSING LOOP" );
+        //$this->die();
+
+>>>>>>> Stashed changes
+
+        /****************************************************************/
+        /* QUALIFY EACH CLASS, QUALIFY EACH CLASS, QUALIFY EACH CLASS   */
+        /* OK, we found a number of classes in the code; now, let's     */
+        /* qualify each class we found (abstract, class name, parent    */
+        /* class, implements)                                           */
+        /****************************************************************/
+        if ( true )
+        {
+            if ( isset( $aTmp) && is_array( $aTmp ) && count( $aTmp ) > 0 )
+            {
+                foreach( $aTmp as $aClassLines )
+                {
+                    $szCode = substr( $this->content,$aClassLines[0],$aClassLines[1] - $aClassLines[0] ) . '}';
+                    $aLines = explode( "\n",str_replace( array("\r","\n"),"\n",$szCode ) );
+
+                    if ( isset( $aLines[0] ) )
+                    {
+                        $aDef = $this->parseClassDeclaration( $aLines[0] );
+
+<<<<<<< Updated upstream
         if ( isset( $aClasses ) && is_array( $aClasses ) && count( $aClasses ) > 0 )
         {
             $this->aDefinedClasses = null;
+=======
+                        //var_dump( $aDef );
+>>>>>>> Stashed changes
 
-            //var_dump( $aClasses );
-            //$this->die();
+                        if ( ! empty( $aDef['name'] ) )
+                        {
+                            $aClasses[$aDef['name']] = array( 'definition'  => $aDef            ,
+                                                              'sourcecode'  => $szCode          ,
+                                                              'startoffset' => $aClassLines[0]  ,
+                                                              'endoffset'   => $aClassLines[1]  ,
+                                                            );
+                        }
+                    }   /* if ( isset( $aLines[0] ) ) */
+                }   /* foreach( $aTmp as $aClassLines ) */
+            }   /* if ( is_array( $aTmp ) && count( $aTmp ) > 0 ) */
+        }
+        /****************************************************************/
+        /* QUALIFY EACH CLASS, QUALIFY EACH CLASS, QUALIFY EACH CLASS   */
+        /****************************************************************/
+        //var_dump( "AFTER CLASS QUALIFICATION" );
+        //$this->die();
 
-            foreach( $aClasses as $szName => $aClass )
+        /****************************************************************/
+        /* EXTRACT CLASS DETAILS, EXTRACT CLASS DETAILS, ...            */
+        /****************************************************************/
+        if ( true )
+        {
+            if ( isset( $aClasses ) && is_array( $aClasses ) && count( $aClasses ) > 0 )
             {
-                $szDefinitionComments   = ''; // Like all comments extracted by The Documentor ( "/** {{*__construct( $szName,$szDef,$oSourceFile )=*/ ... ") */
-                //var_dump( "Will create a new DocumentorClass" );
-                $oClass                 = new DocumentorClass( $szName,$szDefinitionComments,$this );
-                $oClass->content        = $oClass->szSourceCode = $aClass['sourcecode'];
+                $this->aDefinedClasses = null;
 
-                $oClass->szNamespace    = $this->szNamespace;
+                foreach( $aClasses as $szName => $aClass )
+                {
+                    $szDefinitionComments   = ''; // Like all comments extracted by The Documentor ( "/** {{*__construct( $szName,$szDef,$oSourceFile )=*/ ... ") */
+                    //var_dump( "Will create a new DocumentorClass" );
+                    $oClass                 = new DocumentorClass( $szName,$szDefinitionComments,$this );
+                    $oClass->content        = $oClass->szSourceCode = $aClass['sourcecode'];
 
-                /* What we have in $aClass
-                    'declaration' => string 'class WarrantyScope extends Enumeration' (length=39)
-                    'name' => string 'WarrantyScope' (length=13)
-                    'abstract' => boolean false
-                    'parent' => string '' (length=0)
-                    'implements' => null
-                */
+                    $oClass->szNamespace    = $this->szNamespace;
 
-                $oClass->szDeclaration  = $aClass['definition']['declaration'];
-                $oClass->isAbstract     = $aClass['definition']['abstract'];
-                $oClass->szParent       = $aClass['definition']['parent'];
-                $oClass->implements     = is_array( $aClass['definition']['implements'] ) ? $aClass['definition']['implements'] : null;
+                    /* What we have in $aClass
+                        'declaration' => string 'class WarrantyScope extends Enumeration' (length=39)
+                        'name' => string 'WarrantyScope' (length=13)
+                        'abstract' => boolean false
+                        'parent' => string '' (length=0)
+                        'implements' => null
+                    */
 
-                $oClass->szDefinition   = $this->getClassDefinition( $oClass->name );         /* Extracts everything that is betweeen {{* and *}} */
+                    $oClass->szDeclaration  = $aClass['definition']['declaration'];
+                    $oClass->isAbstract     = $aClass['definition']['abstract'];
+                    $oClass->szParent       = $aClass['definition']['parent'];
+                    $oClass->implements     = is_array( $aClass['definition']['implements'] ) ? $aClass['definition']['implements'] : null;
 
-                //var_dump( "CLASS DEFINITION",$oClass );
-                //$this->die();
-                // getProperties() et getMethods() MAIS il faudra que je distincte
-                // les propriétés et les méthodes qui sont DÉFINIES de celles qui
-                // sont DOCUMENTÉES
 
-                //var_dump( 'Calling parseDefinition()' );
-                $oClass->parseDefinition();                         /* Parses the meta information contained in the comment block of the class */
+                    $oClass->szDefinition   = $this->getClassDefinition( $oClass->name );         /* Extracts everything that is betweeen {{* and *}} */
 
-                //var_dump( $oClass->szTODOs );
-                //var_dump( $oClass->implements );
-                //var_dump( $aClass['definition'] );
-                //$this->die();
+                    //var_dump( "CLASS DEFINITION",$oClass );
+                    //$this->die();
+                    // getProperties() et getMethods() MAIS il faudra que je distincte
+                    // les propriétés et les méthodes qui sont DÉFINIES de celles qui
+                    // sont DOCUMENTÉES
 
-                $oClass->getDocumentedProperties();     /* Gets all the documented properties found in the class */
-                $oClass->getDocumentedMethods();        /* Gets all the documented methods found in the class */
+                    //var_dump( 'Calling parseDefinition()' );
+                    $oClass->parseDefinition();                         /* Parses the meta information contained in the comment block of the class */
 
-                $this->aDefinedClasses[] = $oClass;
-                //var_dump( "AJOUT DE LA CLASSE" );
+                    //var_dump( $oClass->szTODOs );
+                    //var_dump( $oClass->implements );
+                    //var_dump( $aClass['definition'] );
+                    //$this->die();
 
-                //var_dump( $oClass );
-            }   /* foreach( $aClasses as $szName => $aClass ) */
-        }   /* if ( is_array( $aClasses ) && count( $aClasses ) > 0 ) */
+                    $oClass->getDocumentedProperties();     /* Gets all the documented properties found in the class */
+
+
+                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                    $oClass->getDocumentedMethods();        /* Gets all the documented methods found in the class */
+                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+
+                    // JUSQU'ICI ... TOUT VA BIEN!!!
+                    //var_dump( $oClass->szDeclaration,"JUSQU'ICI ... TOUT VA BIEN!!!" );
+                    //$this->die();
+
+                    $this->aDefinedClasses[] = $oClass;
+                    //var_dump( "AJOUT DE LA CLASSE" );
+
+                    //var_dump( $oClass );
+                }   /* foreach( $aClasses as $szName => $aClass ) */
+            }   /* if ( is_array( $aClasses ) && count( $aClasses ) > 0 ) */
+        }
+        /****************************************************************/
+        /* EXTRACT CLASS DETAILS, EXTRACT CLASS DETAILS, ...            */
+        /****************************************************************/
+        //var_dump( "AFTER CLASS DETAILS" );
+        //$this->die();
+
 
         //var_dump( $this->aDefinedClasses[0]->aProperties );
         //var_dump( $this->aDocumentedClasses );
@@ -1425,8 +1572,14 @@ Class DocumentorSourceFile extends DocumentorFile
         $this->getInterfacesDocumented();                       /* Get the interfaces documented in the source file */
         $this->getInterfacesDefinedInCode();                    /* Get the interfaces defined in the code of the source file */
         //$this->getClassesDocumented();                          /* Get the classes documented in the source file (NOT ALL classes are documented -> different from getClassesDefinedInCode())*/
+        //var_dump( "BEFORE getClassesDefinedInCode()" );
+        //$this->die();
         $this->getClassesDefinedInCode();                       /* Get the classes defined in the source code (NOT ALL classes are documented -> different from getClassesDocumented()) */
+<<<<<<< Updated upstream
         //var_dump( "CLASSES DEFINED IN CODE OBTAINED" );
+=======
+        //var_dump( "CLASSE DEFINED IN CODE OBTAINED" );
+>>>>>>> Stashed changes
         //$this->die();
         $this->getFunctionsDocumented();                        /* Get the functions documented in the source file */
         $this->getFunctionsDefinedInCode();                     /* Get the functions defined in the code of the source file */
@@ -1490,6 +1643,33 @@ Class DocumentorSourceFile extends DocumentorFile
 
 
     /* ================================================================================ */
+    /** {{*s( $szStr )=
+
+        Apply the private substitutions
+
+        {*params
+            $szStr      (string)    The string in which we need to apply the private
+                                    substitutions (e.g. [c]%class%[/c] is, for example,
+                                    transformed into the class name we are currently
+                                    documenting)
+        *}
+
+        {*return
+            (string)    Returns @param.szStr with subsitutions applied
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    protected function s( $szStr )
+    /*--------------------------*/
+    {
+        return ( str_replace( array_keys( $this->aSubstitutions ),array_values( $this->aSubstitutions ),$szStr ) );
+    }   /* End of DocumentorSourceFile.s() ============================================ */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
     /** {{*document( [$szFile])=
 
         Documents the Source File
@@ -1530,7 +1710,23 @@ Class DocumentorSourceFile extends DocumentorFile
             //var_dump( date( 'd-m-Y H:i:s',vaesoli::FIL_MDate( $szFile   ,'int' ) ),
             //          date( 'd-m-Y H:i:s',vaesoli::FIL_MDate( $szDocFile,'int' ) ) );
 
+            //$this->die( "BEFORE ANALYZING" );
+
+
+            /* ======================================================================== */
+            /* ======================================================================== */
+            /* ======================================================================== */
+            /* ======================================================================== */
+            /* MAIN MACHINERY (ANALYZE),  MAIN MACHINERY (ANALYZE), MAIN MACHINERY ...  */
+            /* ======================================================================== */
             $this->analyze();                                       /* Reads the file, get its namespace, read all USEs, the constants, etc. */
+            /* ======================================================================== */
+            /* MAIN MACHINERY (ANALYZE),  MAIN MACHINERY (ANALYZE), MAIN MACHINERY ...  */
+            /* ======================================================================== */
+            /* ======================================================================== */
+            /* ======================================================================== */
+            /* ======================================================================== */
+            //$this->die( "AFTER ANALYZING" );
 
             /* GRAND RENDERING ======================================================== */
             {   /* Style */
@@ -1624,25 +1820,33 @@ Class DocumentorSourceFile extends DocumentorFile
                         // dans la programmation.
                         // {*todo résoudre confusion entre "this->aDefinedClasses" et "this->aDocumentedClasses" *}
 
-                        foreach( $this->aDefinedClasses as $oClass )
-                        //foreach( $this->aDocumentedClasses as $oClass )
+                        if ( is_array( $this->aDefinedClasses ) )
                         {
-                            //var_dump( $oClass->aParentClasses );
-                            //var_dump( $oClass->szDeclaration );
-                            //var_dump( $oClass->description );
-                            //$this->die();
+                            //foreach( $this->aDocumentedClasses as $oClass )
+                            foreach( $this->aDefinedClasses as $oClass )
+                            {
+                                //var_dump( $oClass->aParentClasses );
+                                //var_dump( $oClass->szDeclaration );
+                                //var_dump( $oClass->description );
+                                //$this->die();
 
+<<<<<<< Updated upstream
                             $this->aSubstitutions['%class%'] = $oClass->name;
 
                             $szHTML    .= "<section class=\"class shadow\">\n";
                                 $szHTML     .= "<span class=\"DocumentorLabel\">Class: </span><span class=\"property classname\">"              . $this->squareToAngle( say( '[c]' .   $oClass->name  . '[/c]' ) ) . "</span>\n";
                                 $szHTML     .= "<span class=\"DocumentorLabel\">Description: </span><span class=\"property description\">"      . $this->squareToAngle( say( $this->s( $oClass->description  ) ) ) . "</span>\n";
+=======
+                                $this->aSubstitutions['%class%'] = $oClass->name;
+>>>>>>> Stashed changes
 
-                                if ( is_array( $oClass->aParentClasses ) && count( $oClass->aParentClasses ) > 0 )
-                                {
-                                    $szBreadcrumb = '';
-                                    foreach( $oClass->aParentClasses as $aClass )
+                                $szHTML    .= "<section class=\"class shadow\">\n";
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Class: </span><span class=\"property classname\">"              . $this->squareToAngle( say( '[c]' .   $oClass->name  . '[/c]' ) ) . "</span>\n";
+                                    $szHTML     .= "<span class=\"DocumentorLabel\">Description: </span><span class=\"property description\">"      . $this->squareToAngle( say( $this->s( $oClass->description  ) ) ) . "</span>\n";
+
+                                    if ( is_array( $oClass->aParentClasses ) && count( $oClass->aParentClasses ) > 0 )
                                     {
+<<<<<<< Updated upstream
                                         $a = explode( '\\',$aClass['name'] );
                                         $szBreadcrumb .= '@class.' . end( $a ) . ' &gt; ';
                                     }
@@ -1781,62 +1985,226 @@ Class DocumentorSourceFile extends DocumentorFile
                                         {
                                             $szHTML     .= "<p class=\"property\">Warning:</p>\n";
                                             $szHTML  .= "<p>" . $this->squareToAngle( say( $this->s( $oMethod->szWarning ) ) ) . "</p>\n";
+=======
+                                        $szBreadcrumb = '';
+                                        foreach( $oClass->aParentClasses as $aClass )
+                                        {
+                                            $a = explode( '\\',$aClass['name'] );
+                                            $szBreadcrumb .= '@class.' . end( $a ) . ' &gt; ';
                                         }
 
-                                        if ( ! empty( $oMethod->szRemark ) )
+                                        // Finish the breadcrumb with the name of the class we're busy with
+                                        $szBreadcrumb = str_replace( array('[c]','[/c]'),'',$this->changeSeealso( $szBreadcrumb ) ). $oClass->name;
+
+                                        $szHTML     .= "<span class=\"DocumentorLabel\">Inheritance: </span><span class=\"property inheritance\">"  . $this->squareToAngle( say( '[c]' .   $szBreadcrumb           . '[/c]'           ) ) . "</span>\n";
+                                    }
+
+                                    if ( ! empty( $oClass->szDeclaration ) )
+                                        $szHTML     .= "<span class=\"DocumentorLabel\">Declaration: </span><span class=\"property declaration\">"  . $this->squareToAngle( say( '[c]' .   $oClass->szDeclaration  . '[/c]'           ) ) . "</span>\n";
+
+                                    if ( ! empty( $oClass->keywords ) )
+                                        $szHTML     .= "<span class=\"DocumentorLabel\">Keywords: </span><span class=\"property keywords\">"        . $this->squareToAngle( say(           $oClass->keywords                          ) ) . "</span>\n";
+
+                                    if ( ! empty( $oClass->szCredits ) )
+                                        $szHTML     .= "<span class=\"DocumentorLabel\">Credits: </span><span class=\"property credits\">"          . $this->squareToAngle( say( $this->s( $oClass->szCredits ) ) ) . "</span>\n";
+
+                                    if ( ! empty( $oClass->szDoc ) )
+                                        $szHTML     .= "<span class=\"DocumentorLabel\">Doc: </span><span class=\"property doc\">"                  . $this->squareToAngle( say(           $oClass->szDoc . '?utm_source=TRQLLabs'    ) ) . "</span>\n";
+
+                                    if ( ! empty( $oClass->szWarning ) )
+                                        $szHTML .= "<span class=\"DocumentorLabel\">Warning: </span><span class=\"property warning\">"              . $this->squareToAngle( say( $this->s( $oClass->szWarning ) ) ) . "</span>\n";
+
+                                    if ( ! empty( $oClass->szRemark ) )
+                                        $szHTML .= "<span class=\"DocumentorLabel\">Remarks: </span><span class=\"property remark\">"               . $this->squareToAngle( say( $this->s( $oClass->szRemark ) ) ) . "</span>\n";
+
+                                    if ( ! empty( $oClass->szTODOs ) )
+                                        $szHTML .= "<span class=\"DocumentorLabel\">TODOs: </span><span class=\"property todo\">"                   . $this->squareToAngle( say( $this->s( $oClass->szTODOs ) ) ) . "</span>\n";
+
+
+                                    /* Bon, ici ... ce que je cherchee à faire c'est de créer un objet
+                                       de la classe qu'on documente ($oClass->name) afin d'en trouver
+                                       toutes les propriétés grâce à get_object_vars() */
+                                    if ( ! class_exists( $oClass->name ) )
+                                    {
+                                        //var_dump( $oClass->name );
+                                        /* Ceci est le fichier dans lequel la classe est définie */
+                                        //var_dump( $oClass->oSourceFile->szFileName );
+                                        /* Ceci est le namespace que j'ai détecté */
+                                        //var_dump( $oClass->oSourceFile->szNamespace );
+                                        //$this->die();
+
+                                        /* Je fais donc un require du fichier source */
+                                        //require_once( $oClass->oSourceFile->szFileName );
+
+                                        /* Et je crée un objet de la classe en question */
+                                        /* Exemple:    '\trql\AdministrativeArea\AdministrativeArea' */
+                                        $szClassName = "\\{$oClass->oSourceFile->szNamespace}\\{$oClass->name}";
+                                        //$o = new \trql\AdministrativeArea\AdministrativeArea();
+                                        //$o = new $szClassName();
+                                        //$aProps = get_object_vars( $o );
+                                        //var_dump( $aProps );
+                                    }   /* if ( ! class_exists( $oClass->name ) ) */
+
+                                    //var_dump( $oClass->aProperties );
+                                    usort( $oClass->aProperties,function( $a,$b )
+                                                                {
+                                                                    if     ( strtolower( $a->name ) === strtolower( $b->name ) )
+                                                                        return 0;
+                                                                    elseif ( strtolower( $a->name )  >  strtolower( $b->name ) )
+                                                                        return 1;
+                                                                    else
+                                                                        return -1;
+                                                                } );
+
+                                    /* **************************************************************************** */
+                                    /* **************************************************************************** */
+                                    /* Display ALL the properties of the class */
+                                    if ( is_array( $oClass->aProperties ) && count( $oClass->aProperties ) > 0 )
+                                    {
+                                        $szHTML     .= "<span class=\"DocumentorLabel\">Properties: </span>\n";
+                                        $szHTML     .= "<table class=\"properties\">\n";
+                                        $szHTML     .= "<thead>\n";
+                                            $szHTML .= "<tr>\n";
+                                                $szHTML .= "<th class=\"name\">Name</th>\n";
+                                                $szHTML .= "<th class=\"type\">Type</th>\n";
+                                                $szHTML .= "<th class=\"description\">Description</th>\n";
+                                            $szHTML .= "</tr>\n";
+                                        $szHTML     .= "</thead>\n";
+                                        foreach( $oClass->aProperties as $oProperty )
                                         {
+                                            //var_dump( $oProperty );
+                                            //die();
+                                            $szHTML .= "<tr class=\"property\">\n";
+                                                $szHTML .= "<td class=\"name\" id=\"" . $this->makeID( 'var',$oProperty->name ) . "\">" . trim( $this->squareToAngle(                                     '[c]' . $oProperty->name        . '[/c]' )   ) . "</td>\n";
+                                                $szHTML .= "<td class=\"type\">"                                                        . trim( $this->squareToAngle(                                     '[c]' . $oProperty->szTypes     . '[/c]' )   ) . "</td>\n";
+                                                $szHTML .= "<td class=\"description\">"                                                 . trim( $this->squareToAngle(  $this->changeSeealso( vaesoli::STR_Reduce( $oProperty->description ),'' ) ) ) . "</td>\n";
+                                            $szHTML .= "</tr>\n";
+                                            //$szHTML     .= "<span class=\"property prop\">" . $this->squareToAngle( '[c]' . $oProperty->name . '[/c]') . "</span>, \n";
+>>>>>>> Stashed changes
+                                        }
+                                        $szHTML     .= "</table>\n";
+
+                                        /* Get rid of the last ',' */
+                                        //$szHTML = preg_replace( '/, *?[\r\n]\z/si','',$szHTML );
+                                    }   /* if ( is_array( $oClass->aProperties ) && count( $oClass->aProperties ) > 0 ) */
+                                    /* **************************************************************************** */
+                                    /* **************************************************************************** */
+
+                                    if ( ! empty( $szSeeAlsos = $this->resolveSeealso( $oClass->aSeeAlsos ) ) )
+                                        $szHTML .= "<span class=\"DocumentorLabel\">See also: </span><span class=\"property seealso\">" . $this->squareToAngle( say( $szSeeAlsos ) ) . "</span>\n";
+
+                                    usort( $oClass->aMethods,function( $a,$b )
+                                                                {
+                                                                    if     ( strtolower( $a->name ) === strtolower( $b->name ) )
+                                                                        return 0;
+                                                                    elseif ( strtolower( $a->name )  >  strtolower( $b->name ) )
+                                                                        return 1;
+                                                                    else
+                                                                        return -1;
+                                                                } );
+
+                                    /* **************************************************************************** */
+                                    /* **************************************************************************** */
+                                    /* Display ALL the methods */
+                                    if ( is_array( $oClass->aMethods ) && count( $oClass->aMethods ) > 0 )
+                                    {
+                                        //$oFnc->szCredits      = trim( vaesoli::STR_Reduce( $this->property( '{*credits'   ,$szFncDef ) ) );
+                                        //$oFnc->szDoc          = trim( vaesoli::STR_Reduce( $this->property( '{*doc'       ,$szFncDef ) ) );
+                                        //$oFnc->szTODOs        = trim( vaesoli::STR_Reduce( $this->property( '{*todo'      ,$szFncDef ) ) );
+                                        //$oFnc->szRemark       = trim( vaesoli::STR_Reduce( $this->property( '{*remark'    ,$szFncDef ) ) );
+                                        //$oFnc->author         = trim( vaesoli::STR_Reduce( $this->property( '{*author'    ,$szFncDef ) ) );
+
+                                        $szHTML     .= "<h2 class=\"DocumentorLabel\">Methods of <code>{$oClass->name}</code></h2>\n";
+                                        //$szHTML     .= "<span class=\"DocumentorLabel\">Methods: </span>\n";
+                                        foreach( $oClass->aMethods as $oMethod )
+                                        {
+<<<<<<< Updated upstream
                                             $szHTML     .= "<p class=\"property\">Remark:</p>\n";
                                             $szHTML  .= "<p>" . $this->squareToAngle( say( $this->s( $oMethod->szRemark ) ) ) . "</p>\n";
                                         }   /* if ( ! empty( $oMethod->szRemark ) ) */
+=======
+                                            $szHTML .= "<p class=\"property func\" id=\"" . $this->makeID( 'fnc',$oMethod->name ) . "\"><span class=\"name\">" . $this->squareToAngle( '[b][c]' . $oMethod->name . '()[/c][/b]</span>: ' ) .
+                                                       $this->squareToAngle( $this->s( $oMethod->szDescription ) ) ."</p>\n";
+>>>>>>> Stashed changes
 
-                                        if ( ! empty( $oMethod->keywords ) )
-                                        {
-                                            $szHTML     .= "<p class=\"property\">Keywords:</p>\n";
-                                            $szHTML  .= "<p>" . $this->squareToAngle( say( $oMethod->keywords ) ) . "</p>\n";
-                                        }   /* if ( ! empty( $oMethod->keywords ) ) */
+                                            // Here, it would be nice to include the source code of the method
+                                            // once it will be extracted!
 
-                                        $szHTML     .= "<p class=\"property\">Syntax:</p>\n";
+                                            if ( ! empty( $oMethod->szWarning ) )
+                                            {
+                                                $szHTML     .= "<p class=\"property\">Warning:</p>\n";
+                                                $szHTML  .= "<p>" . $this->squareToAngle( say( $this->s( $oMethod->szWarning ) ) ) . "</p>\n";
+                                            }
 
-                                        {   /* Generate a string of parameters (if any) and displays it */
-                                            $szParams = '';
+                                            if ( ! empty( $oMethod->szRemark ) )
+                                            {
+                                                $szHTML     .= "<p class=\"property\">Remark:</p>\n";
+                                                $szHTML  .= "<p>" . $this->squareToAngle( say( $this->s( $oMethod->szRemark ) ) ) . "</p>\n";
+                                            }   /* if ( ! empty( $oMethod->szRemark ) ) */
+
+                                            if ( ! empty( $oMethod->keywords ) )
+                                            {
+                                                $szHTML     .= "<p class=\"property\">Keywords:</p>\n";
+                                                $szHTML  .= "<p>" . $this->squareToAngle( say( $oMethod->keywords ) ) . "</p>\n";
+                                            }   /* if ( ! empty( $oMethod->keywords ) ) */
+
+                                            $szHTML     .= "<p class=\"property\">Syntax:</p>\n";
+
+                                            {   /* Generate a string of parameters (if any) and displays it */
+                                                $szParams = '';
+
+                                                if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 )
+                                                {
+                                                    foreach( $oMethod->aParams as $oParam )
+                                                    {
+                                                        $szParams = $oParam->name . ',';
+                                                    }
+                                                    $szParams = vaesoli::STR_strin( $szParams );
+                                                }   /* if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 ) */
+
+                                                if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 )
+                                                    $szHTML     .= "<p><code>{$oMethod->name}( {$szParams} )</code></p>\n";
+                                                else
+                                                    $szHTML     .= "<p><code>" . $oMethod->name . "()</code></p>\n";
+                                            }   /* Generate a string of parameters */
 
                                             if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 )
                                             {
+                                                $szHTML     .= "<span class=\"DocumentorLabel\">Parameters: </span>\n";
+                                                $szHTML     .= "<table class=\"properties\">\n";
+                                                $szHTML     .= "<thead>\n";
+                                                    $szHTML .= "<tr>\n";
+                                                        $szHTML .= "<th class=\"name\">Name</th>\n";
+                                                        $szHTML .= "<th class=\"type\">Type</th>\n";
+                                                        $szHTML .= "<th class=\"description\">Description</th>\n";
+                                                    $szHTML .= "</tr>\n";
+                                                $szHTML     .= "</thead>\n";
                                                 foreach( $oMethod->aParams as $oParam )
                                                 {
-                                                    $szParams = $oParam->name . ',';
+                                                    $szHTML .= "<tr class=\"parameter\">\n";
+                                                        $szHTML .= "<td class=\"name\" id=\"" . $this->makeID( 'param',$oMethod->name . '.' . $oParam->name ) . "\">"  . $this->squareToAngle(                    '[c]' . $oParam->name                . '[/c]' )   . "</td>\n";
+                                                        $szHTML .= "<td class=\"type\">"                                                                               . $this->squareToAngle(                    '[c]' . $oParam->types               . '[/c]' )   . "</td>\n";
+                                                        $szHTML .= "<td class=\"description seealso\">"                                                                . $this->squareToAngle( say( $this->s( $this->changeSeealso( $oParam->description,$oMethod->name ) ) ) ) . "</td>\n";
+                                                    $szHTML .= "</tr>\n";
                                                 }
-                                                $szParams = vaesoli::STR_strin( $szParams );
+                                                $szHTML     .= "</table>\n";
                                             }   /* if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 ) */
 
-                                            if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 )
-                                                $szHTML     .= "<p><code>{$oMethod->name}( {$szParams} )</code></p>\n";
-                                            else
-                                                $szHTML     .= "<p><code>" . $oMethod->name . "()</code></p>\n";
-                                        }   /* Generate a string of parameters */
-
-                                        if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 )
-                                        {
-                                            $szHTML     .= "<span class=\"DocumentorLabel\">Parameters: </span>\n";
-                                            $szHTML     .= "<table class=\"properties\">\n";
-                                            $szHTML     .= "<thead>\n";
-                                                $szHTML .= "<tr>\n";
-                                                    $szHTML .= "<th class=\"name\">Name</th>\n";
-                                                    $szHTML .= "<th class=\"type\">Type</th>\n";
-                                                    $szHTML .= "<th class=\"description\">Description</th>\n";
-                                                $szHTML .= "</tr>\n";
-                                            $szHTML     .= "</thead>\n";
-                                            foreach( $oMethod->aParams as $oParam )
+                                            if ( ! empty( $oMethod->oReturn ) )
                                             {
+<<<<<<< Updated upstream
                                                 $szHTML .= "<tr class=\"parameter\">\n";
                                                     $szHTML .= "<td class=\"name\" id=\"" . $this->makeID( 'param',$oMethod->name . '.' . $oParam->name ) . "\">"  . $this->squareToAngle(                    '[c]' . $oParam->name                . '[/c]' )   . "</td>\n";
                                                     $szHTML .= "<td class=\"type\">"                                                                               . $this->squareToAngle(                    '[c]' . $oParam->types               . '[/c]' )   . "</td>\n";
                                                     $szHTML .= "<td class=\"description seealso\">"                                                                . $this->squareToAngle( say( $this->s( $this->changeSeealso( $oParam->description,$oMethod->name ) ) ) ) . "</td>\n";
                                                 $szHTML .= "</tr>\n";
+=======
+                                                $szHTML     .= "<p class=\"property return\">Return:</p>\n";
+                                                $szHTML  .= "<p class=\"seealso\">({$oMethod->oReturn->szType}): " . $this->squareToAngle( say( $this->s( $this->changeSeealso( $oMethod->oReturn->description,$oMethod->name ) ) ) ) . "</p>\n";
+>>>>>>> Stashed changes
                                             }
-                                            $szHTML     .= "</table>\n";
-                                        }   /* if ( is_array( $oMethod->aParams ) && count( $oMethod->aParams ) > 0 ) */
 
+<<<<<<< Updated upstream
                                         if ( ! empty( $oMethod->oReturn ) )
                                         {
                                             $szHTML     .= "<p class=\"property return\">Return:</p>\n";
@@ -1865,6 +2233,31 @@ Class DocumentorSourceFile extends DocumentorFile
                             //var_dump( $oClass );
                             //$this->die();
                         }   /* foreach( $this->aDocumentedClasses as $oClass ) */
+=======
+                                            if ( ! empty( $oMethod->szExamples ) )
+                                            {
+                                                $szHTML     .= "<p class=\"property\">Example(s):</p>\n";
+                                                $szHTML     .= "<pre>\n";
+                                                    $szHTML .= $this->squareToAngle( say( $this->s( $this->removeStartingBlanks( $oMethod->szExamples ) ) ) );
+                                                $szHTML     .= "</pre>\n";
+                                            }   /* if ( ! empty( $oMethod->szExamples ) ) */
+
+                                            if ( ! empty( $szSeeAlsos = $this->resolveSeealso( $oMethod->aSeeAlsos ) ) )
+                                                $szHTML .= "<span class=\"DocumentorLabel\">See also: </span><span class=\"property seealso\">" . $this->squareToAngle( say( $this->s( $szSeeAlsos ) ) ) . "</span>\n";
+
+                                            $szHTML .= "<hr />";
+                                        }   /* foreach( $oClass->aMethods as $oMethod ) */
+                                        /* Get rid of the last ',' */
+                                        //$szHTML = preg_replace( '/, *?[\r\n]\z/si','',$szHTML );
+                                    }   /* if ( is_array( $oClass->aMethods ) && count( $oClass->aMethods ) > 0 ) */
+                                    /* **************************************************************************** */
+                                    /* **************************************************************************** */
+                                $szHTML    .= "</section> <!-- .class -->\n";
+                                //var_dump( $oClass );
+                                //$this->die();
+                            }   /* foreach( $this->aDocumentedClasses as $oClass ) */
+                        }   /* if ( is_array( $this->aDefinedClasses ) ) */
+>>>>>>> Stashed changes
                     $szHTML    .= "</section> <!-- .classes -->\n";
                 $szHTML .= "</div> <!-- End of " . $this->safeName( __CLASS__ ) . "-->\n";
             }   /* HTML */
@@ -3061,6 +3454,8 @@ Class DocumentorClass extends DocumentorSourceFileObject
         $szHomeOfDocumentation  = vaesoli::FIL_RealPath( __DIR__ . '/q/common/trql.classes.home/DOCUMENTATION/' );
         $szTargetFile           = $szHomeOfDocumentation . basename( $this->oSourceFile->szFileName ) . '.' . md5( str_replace( array( '\\','/' ),'-',$szClass ) ) . '.methods.cache';
 
+        //var_dump( __METHOD__ . "()" );
+
         /* ******************************************************************************** */
         {   /* Let's try to load all the methods of the parent classes FIRST */
             if ( is_file( vaesoli::FIL_RealPath( __DIR__ . '/' . $this->oSourceFile->oHeader->szFileName ) ) )
@@ -3090,7 +3485,6 @@ Class DocumentorClass extends DocumentorSourceFileObject
         }   /* Let's try to load all the methods of the parent classes FIRST */
         /* ******************************************************************************** */
 
-
         /* ******************************************************************************** */
         /* Extract the methods now                                                          */
         /* ******************************************************************************** */
@@ -3098,21 +3492,18 @@ Class DocumentorClass extends DocumentorSourceFileObject
         {
             $aMethodsOfThisClass = array();
 
-            foreach( $aMatches[0] as $szFncDef )
+            //var_dump( $aMatches[0] );
+            //ob_flush();
+            //flush();
+
+            if ( true )
             {
-                if ( preg_match( '/\{\{\*(public|protected)?.*?(static)?(?P<name>.*)\((?P<args>.*?)\)=/si',$szFncDef,$aParts ) )
+                foreach( $aMatches[0] as $szFncDef )
                 {
-                    $szName = trim( $aParts['name'] );
-                    $szArgs = trim( $aParts['args'] );
-                    //var_dump( $szName,$szArgs );
-                    // STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE;
+                    //var_dump( $this->szDeclaration,$szFncDef,"JUSQU'ICI, TOUT VA BIEN" );
+                    //$this->die();
 
-                    // IL FAUT PARSER LA DEFINITION DE
-                    // CHAQUE METHODE POUR EN TROUVER
-                    // - LA VALEUR DE RETOUR
-                    // - LES CDATE ET MDATE
-                    // - ...
-
+<<<<<<< Updated upstream
                     $oFnc = new DocumentorClassMethod( $szName,$szFncDef,$szArgs );
 
                     if ( preg_match('%/\*\* \{\{\*.*\(.*?\)=(?P<desc>.*?)\{\*%si',$szFncDef,$aParts2 ) )
@@ -3142,27 +3533,108 @@ Class DocumentorClass extends DocumentorSourceFileObject
                         //var_dump( $szReturn,$oReturn );
                         $oFnc->parseArgs( $aParts2['params'] );
                     }   /* if ( preg_match( '/\{\*params(.*?)\*\}/si',$szFncDef,$aParts2 ) ) */
+=======
+                    if ( true && preg_match( '/\{\{\*(public|protected|private)?.*?(static)?(?P<name>.*)\((?P<args>.*?)\)=/si',$szFncDef,$aParts ) )
+                    {
+                        $szName = trim( $aParts['name'] );
+                        $szArgs = trim( $aParts['args'] );
 
-                    // - LES PARAMETRES
-                    // - LA VALEUR DE RETOUR
+                        //var_dump( $aParts );
+                        //var_dump( $szName,$szArgs );
+                        //ob_flush();
+                        //flush();
+                        //var_dump( $this->szDeclaration,$szFncDef,"JUSQU'ICI, TOUT VA BIEN" );
+                        //$this->die();
 
-                    $aMethodsOfThisClass[$szName] = $oFnc;
-                }   /* if ( preg_match( '/\{\{\*(public|protected)?.*?(static)?(?P<name>.*)\((?P<args>.*?)\)=/si',$szFncDef,$aParts ) ) */
-            }   /* foreach( $aMatches[0] as $szFncDef ) */
+                        //var_dump( $szName,$szArgs );
+                        // STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE; STOP HERE;
 
-            /* ******************************************************************************** */
-            /* Cache the methods found in THIS CLASS FILE (CAN LEAD TO SOME CONFUSION
-               WHEN SEVERAL CLASSES ARE CONTAINED IN THE SAME FILE!!!) */
-            /* ******************************************************************************** */
-            if ( is_array( $aMethodsOfThisClass ) && count( $aMethodsOfThisClass ) > 0 )
-            {
-                $this->saveHashFile( $szTargetFile,$aMethodsOfThisClass );
-                $this->aMethods = array_merge( $this->aMethods,$aMethodsOfThisClass );
-            }   /* if ( is_array( $aMethodsOfThisClass ) && count( $aMethodsOfThisClass ) > 0 ) */
+                        // IL FAUT PARSER LA DEFINITION DE
+                        // CHAQUE METHODE POUR EN TROUVER
+                        // - LA VALEUR DE RETOUR
+                        // - LES CDATE ET MDATE
+                        // - ...
 
+                        $oFnc = new DocumentorClassMethod( $szName,$szFncDef,$szArgs );
+                        //var_dump( $this->szDeclaration,$szFncDef,"JUSQU'ICI, TOUT VA BIEN" );
+                        //$this->die();
+
+                        if ( true )
+                        {
+                            if ( preg_match('%/\*\* \{\{\*.*\(.*?\)=(?P<desc>.*?)\{\*%si',$szFncDef,$aParts2 ) )
+                            {
+                                //var_dump( "DESCRIPTION FOUND" );
+                                //var_dump( $aParts2 );
+                                $oFnc->szDescription  = trim( vaesoli::STR_Reduce( $aParts2['desc'] ) );
+                                //var_dump( $oFnc->szDescription,"JUSQU'ICI, TOUT VA BIEN" );
+                                //$this->die();
+                            }   /* if ( preg_match('%/\*\* \{\{\*.*\(.*?\)=(?P<desc>.*?)\{\*%si',$szFncDef,$aParts2 ) ) */
+
+                            /* TAG EXTRACTION ================================================================================= */
+                            /* TAG EXTRACTION ================================================================================= */
+                            $oFnc->szCredits    =       trim( vaesoli::STR_Reduce( $this->property( '{*credits'   ,$szFncDef ) ) );
+                            $oFnc->szDoc        =       trim( vaesoli::STR_Reduce( $this->property( '{*doc'       ,$szFncDef ) ) );
+                            $oFnc->szTODOs      =       trim( vaesoli::STR_Reduce( $this->property( '{*todo'      ,$szFncDef ) ) );
+                            $oFnc->szWarning    =       trim( vaesoli::STR_Reduce( $this->property( '{*warning'   ,$szFncDef ) ) );
+                            $oFnc->szRemark     =       trim( vaesoli::STR_Reduce( $this->property( '{*remark'    ,$szFncDef ) ) );
+                            $oFnc->author       =       trim( vaesoli::STR_Reduce( $this->property( '{*author'    ,$szFncDef ) ) );
+                            $oFnc->szExamples   =                                  $this->property( '{*example'   ,$szFncDef );
+                            $oFnc->keywords     =       trim( vaesoli::STR_Reduce( $this->property( '{*keywords'  ,$szFncDef ) ) );
+                            if ( ! empty( $szSeeAlsos = trim( vaesoli::STR_Reduce( $this->property( '{*seealso'   ,$szFncDef ) ) ) ) )
+                                $oFnc->aSeeAlsos = explode( ',',str_replace( ';',',',$szSeeAlsos ) );     /* All seealso's (array) */
+
+                            if ( true && ! empty( $szReturn =   trim( vaesoli::STR_Reduce( $this->property( '{*return'    ,$szFncDef ) ) ) ) )
+                            {
+                                $oReturn = new DocumentorFunctionReturn();
+                                //var_dump( $this->szDeclaration,$szReturn,"JUSQU'ICI, TOUT VA BIEN" );
+                                //ob_flush();
+                                //flush();
+                                //$this->die();
+                                if ( true )
+                                {
+                                    $oReturn->parseDefinition( $szReturn );
+                                    //var_dump( $szReturn,$oReturn );
+                                    //var_dump( $aParts2['params'] );
+                                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                                    if ( isset( $aParts2['params'] ) )
+                                        $oFnc->parseArgs( $aParts2['params'] );
+                                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                                    // THIS IS WHERE WE HAVE A PROBLEM, THIS IS WHERE WE HAVE A PROBLEM!!!
+                                }
+                            }   /* if ( preg_match( '/\{\*params(.*?)\*\}/si',$szFncDef,$aParts2 ) ) */
+>>>>>>> Stashed changes
+
+                            /* TAG EXTRACTION ================================================================================= */
+                            /* TAG EXTRACTION ================================================================================= */
+                        }   /* if ( true ) */
+
+                        //var_dump( $this->szDeclaration,"JUSQU'ICI, TOUT VA BIEN" );
+                        //$this->die();
+
+                        // - LES PARAMETRES
+
+                        $aMethodsOfThisClass[$szName] = $oFnc;
+                    }   /* if ( preg_match( '/\{\{\*(public|protected)?.*?(static)?(?P<name>.*)\((?P<args>.*?)\)=/si',$szFncDef,$aParts ) ) */
+                }   /* foreach( $aMatches[0] as $szFncDef ) */
+
+                /* ******************************************************************************** */
+                /* Cache the methods found in THIS CLASS FILE (CAN LEAD TO SOME CONFUSION
+                   WHEN SEVERAL CLASSES ARE CONTAINED IN THE SAME FILE!!!) */
+                /* ******************************************************************************** */
+                if ( is_array( $aMethodsOfThisClass ) && count( $aMethodsOfThisClass ) > 0 )
+                {
+                    $this->saveHashFile( $szTargetFile,$aMethodsOfThisClass );
+                    $this->aMethods = array_merge( $this->aMethods,$aMethodsOfThisClass );
+                }   /* if ( is_array( $aMethodsOfThisClass ) && count( $aMethodsOfThisClass ) > 0 ) */
+            }   /* if ( true ) */
         }   /* if ( preg_match_all('%/\*\* \{\{\* *?(?P<fnc>.*?)\((?P<args>.*?)\)=(.*?)\*\}\}%si' ..., PREG_PATTERN_ORDER ) ) */
         /* ******************************************************************************** */
         /* ******************************************************************************** */
+
+        //var_dump( __METHOD__ . "()" );
 
         //var_dump( $this->aMethods );
         //$this->die();
@@ -3951,7 +4423,16 @@ Class DocumentorFunctionReturn extends DocumentorSourceFileObject
     public function parseDefinition( $szDefinition )
     /*--------------------------------------------*/
     {
+<<<<<<< Updated upstream
         if ( preg_match( '/\((?P<type>.*?)\)(?P<desc>.*)/si',$szDefinition,$aMatches ) )
+=======
+        //var_dump( "Parsing definition",$szDefinition,"JUSQU'ICI, TOUT VA BIEN" );
+        //ob_flush();
+        //flush();
+        //$this->die();
+
+        if ( is_string( $szDefinition ) && preg_match( '/\((?P<type>.*?)\)(?P<desc>.*)/si',$szDefinition,$aMatches ) )
+>>>>>>> Stashed changes
         {
             $this->szType       = $aMatches['type'];
             $this->description  = $aMatches['desc'];

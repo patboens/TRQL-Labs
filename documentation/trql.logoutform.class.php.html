@@ -79,6 +79,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="name" id="var.about"><code>$about</code></td>
 <td class="type"><code>Thing</code></td>
 <td class="description">The subject matter of the content. Inverse property: <code><a href="#var-subjectOf">$subjectOf</a></code></td>
+<<<<<<< Updated upstream
 </tr>
 <tr class="property">
 <td class="name" id="var.abstract"><code>$abstract</code></td>
@@ -91,6 +92,20 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  mathOnVisual, musicOnVisual, textOnVisual.</td>
 </tr>
 <tr class="property">
+=======
+</tr>
+<tr class="property">
+<td class="name" id="var.abstract"><code>$abstract</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An abstract is a short description that summarizes a <code><a href="/?src=CreativeWork">CreativeWork</a></code> */
+ public $accessMode = null; /* {*property $accessMode (string) The human sensory perceptual system or cognitive faculty
+ through which a person may process or perceive information.
+ Expected values include: auditory, tactile, textual, visual,
+ colorDependent, chartOnVisual, chemOnVisual, diagramOnVisual,
+ mathOnVisual, musicOnVisual, textOnVisual.</td>
+</tr>
+<tr class="property">
+>>>>>>> Stashed changes
 <td class="name" id="var.accessibilityAPI"><code>$accessibilityAPI</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Indicates that the resource is compatible with the referenced
@@ -1077,6 +1092,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <h2 class="DocumentorLabel">Methods of <code>LogoutForm</code></h2>
 <p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
 <p class="property">Syntax:</p>
+<<<<<<< Updated upstream
 <p><code>__construct( $szHome )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
@@ -1122,19 +1138,33 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property return">Return:</p>
 <p class="seealso">(mixed):  The value of <code>$szVar</code> or throwing an exception if
  <code>$szVar</code> NOT found.</p>
+=======
+<p><code>__construct()</code></p>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<p class="property">Syntax:</p>
+<p><code>__destruct()</code></p>
+<hr /><p class="property func" id="fnc.__get"><span class="name"><strong><code>__get()</code></strong></span>: Used for reading data from inaccessible (protected or private) or
+ non-existing properties.</p>
+<p class="property">Syntax:</p>
+<p><code>__get()</code></p>
+>>>>>>> Stashed changes
 <hr /><p class="property func" id="fnc.__toArray"><span class="name"><strong><code>__toArray()</code></strong></span>: Turns the object into an array</p>
 <p class="property">Remark:</p>
 <p>Protected properties are formatted as: <code>'&#0;*&#0;<property>'</code> (e.g. <code>'&#0;*&#0;self'</code>)<br />
  Private properties are formatted as: <code>'&#0;trql\form\Form&#0;<property>'</code> (e.g. <code>'&#0;trql\form\Form&#0;test'</code>)<br /></p>
 <p class="property">Syntax:</p>
 <p><code>__toArray()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(array):  The array corresponding to the object</p>
+=======
+>>>>>>> Stashed changes
 <hr /><p class="property func" id="fnc.__toHTML"><span class="name"><strong><code>__toHTML()</code></strong></span>: Renders the form in HTML</p>
 <p class="property">Warning:</p>
 <p>So far (25-12-20 13:29:10), the form is NOT rendered</p>
 <p class="property">Syntax:</p>
 <p><code>__toHTML()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(string):  HTML Code</p>
 <hr /><p class="property func" id="fnc.__toString"><span class="name"><strong><code>__toString()</code></strong></span>: Renders the form in HTML</p>
@@ -1142,11 +1172,17 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p><code>__toString()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(string):  XML Code</p>
+=======
+<hr /><p class="property func" id="fnc.__toString"><span class="name"><strong><code>__toString()</code></strong></span>: Renders the form in HTML</p>
+<p class="property">Syntax:</p>
+<p><code>__toString()</code></p>
+>>>>>>> Stashed changes
 <hr /><p class="property func" id="fnc.__toXML"><span class="name"><strong><code>__toXML()</code></strong></span>: Renders the form in XML</p>
 <p class="property">Warning:</p>
 <p>So far (25-12-20 13:29:10), the form is NOT rendered</p>
 <p class="property">Syntax:</p>
 <p><code>__toXML()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(string):  XML Code</p>
 <hr /><p class="property func" id="fnc.add"><span class="name"><strong><code>add()</code></strong></span>: Adds an item to the form</p>
@@ -1170,6 +1206,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property return">Return:</p>
 <p class="seealso">(boolean):  <code>true</code> if $oItem successfully added to the form;
  <code>false</code> otherwise.</p>
+=======
+<hr /><p class="property func" id="fnc.add"><span class="name"><strong><code>add()</code></strong></span>: Adds an item to the form</p>
+<p class="property">Syntax:</p>
+<p><code>add()</code></p>
+>>>>>>> Stashed changes
 <hr /><p class="property func" id="fnc.buildClass"><span class="name"><strong><code>buildClass()</code></strong></span>: Builds the class attribute of the tag</p>
 <p class="property">Syntax:</p>
 <p><code>buildClass()</code></p>
@@ -1178,8 +1219,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <hr /><p class="property func" id="fnc.buildEnctype"><span class="name"><strong><code>buildEnctype()</code></strong></span>: Builds the encoding-type part of the form (needed if 'file' input)</p>
 <p class="property">Syntax:</p>
 <p><code>buildEnctype()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(string):  The encoding-type attribute of the form</p>
+=======
+>>>>>>> Stashed changes
 <hr /><p class="property func" id="fnc.buildID"><span class="name"><strong><code>buildID()</code></strong></span>: Generates the ID of the tag (if any)</p>
 <p class="property">Syntax:</p>
 <p><code>buildID()</code></p>
@@ -1188,8 +1232,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <hr /><p class="property func" id="fnc.buildTarget"><span class="name"><strong><code>buildTarget()</code></strong></span>: Builds the target attribute of a form</p>
 <p class="property">Syntax:</p>
 <p><code>buildTarget()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(string):  The target attribute of the form</p>
+=======
+>>>>>>> Stashed changes
 <hr /><p class="property func" id="fnc.get"><span class="name"><strong><code>get()</code></strong></span>: Gets a form as saved in $szFile</p>
 <p class="property">Warning:</p>
 <p>Totalement expérimental ! Bien que la modification manuelle soit possible
@@ -1199,6 +1246,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  formulaire dont aItems. Par la suite, nous récupérons juste les données
  dont nous avons besoin et on reconstitue le formulaire.</p>
 <p class="property">Syntax:</p>
+<<<<<<< Updated upstream
 <p><code>get( $szFile )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
@@ -1237,6 +1285,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(string):  HTML Code</p>
+=======
+<p><code>get()</code></p>
+<hr /><p class="property func" id="fnc.render"><span class="name"><strong><code>render()</code></strong></span>: Renders the form</p>
+<p class="property">Syntax:</p>
+<p><code>render()</code></p>
+>>>>>>> Stashed changes
 <hr /><p class="property func" id="fnc.save"><span class="name"><strong><code>save()</code></strong></span>: Saves the form to $szFile</p>
 <p class="property">Warning:</p>
 <p>Totalement expérimental ! Bien que la modification manuelle soit possible
@@ -1246,6 +1300,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  formulaire dont aItems. Par la suite, nous récupérons juste les données
  dont nous avons besoin et on reconstitue le formulaire.</p>
 <p class="property">Syntax:</p>
+<<<<<<< Updated upstream
 <p><code>save( $szFile )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
@@ -1265,6 +1320,9 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property return">Return:</p>
 <p class="seealso">(boolean):  <code>true</code> if the form was successfully saved; <code>false</code>
  if not.</p>
+=======
+<p><code>save()</code></p>
+>>>>>>> Stashed changes
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->
