@@ -390,6 +390,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property">Keywords:</p>
 <p>constructors, destructors</p>
 <p class="property">Syntax:</p>
+<<<<<<< Updated upstream
 <p><code>__construct( $szFolder )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
@@ -413,18 +414,25 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
+=======
+<p><code>__construct()</code></p>
+>>>>>>> Stashed changes
 <span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__destruct">__destruct()</a></code></span>
 <hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Keywords:</p>
 <p>constructors, destructors</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return</p>
+=======
+>>>>>>> Stashed changes
 <span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
 <hr /><p class="property func" id="fnc.balanceFile"><span class="name"><strong><code>balanceFile()</code></strong></span>: Get the normalized balance filename (persistence layer)</p>
 <p class="property">Syntax:</p>
 <p><code>balanceFile()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(string):  The name of the "balance" file</p>
 <span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.saveBalance">saveBalance()</a></code>, <code><a href="#fnc.readBalance">readBalance()</a></code></span>
@@ -454,6 +462,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property return">Return:</p>
 <p class="seealso">(bool):  <code>true</code> if the account was created successfully; <code>false</code>
  otherwise.</p>
+=======
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.saveBalance">saveBalance()</a></code>, <code><a href="#fnc.readBalance">readBalance()</a></code></span>
+<hr /><p class="property func" id="fnc.create"><span class="name"><strong><code>create()</code></strong></span>: Persist the creation of an account in a given folder</p>
+<p class="property">Syntax:</p>
+<p><code>create()</code></p>
+>>>>>>> Stashed changes
 <p class="property">Example(s):</p>
 <pre>
 
@@ -498,6 +512,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
   </pre>
 <hr /><p class="property func" id="fnc.deposit"><span class="name"><strong><code>deposit()</code></strong></span>: Put a sum of money into the account</p>
 <p class="property">Syntax:</p>
+<<<<<<< Updated upstream
 <p><code>deposit( $x )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
@@ -516,6 +531,9 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  Current instance of the class</p>
+=======
+<p><code>deposit()</code></p>
+>>>>>>> Stashed changes
 <p class="property">Example(s):</p>
 <pre>
 
@@ -562,8 +580,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <hr /><p class="property func" id="fnc.exists"><span class="name"><strong><code>exists()</code></strong></span>: Determines whether the account exists or not</p>
 <p class="property">Syntax:</p>
 <p><code>exists()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(bool):  <code>true</code> if the account exists; <code>false</code> if not</p>
+=======
+>>>>>>> Stashed changes
 <p class="property">Example(s):</p>
 <pre>
 
@@ -607,6 +628,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
   </pre>
 <hr /><p class="property func" id="fnc.persistenceFolder"><span class="name"><strong><code>persistenceFolder()</code></strong></span>: Determines the persistence layer folder pertaining to this account</p>
 <p class="property">Syntax:</p>
+<<<<<<< Updated upstream
 <p><code>persistenceFolder( $szFolder )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
@@ -635,18 +657,28 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p><code>readBalance()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(float):  The current account balance</p>
+=======
+<p><code>persistenceFolder()</code></p>
+<hr /><p class="property func" id="fnc.readBalance"><span class="name"><strong><code>readBalance()</code></strong></span>: Reads the account balance from its persistence layer</p>
+<p class="property">Syntax:</p>
+<p><code>readBalance()</code></p>
+>>>>>>> Stashed changes
 <span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.saveBalance">saveBalance()</a></code></span>
 <hr /><p class="property func" id="fnc.saveBalance"><span class="name"><strong><code>saveBalance()</code></strong></span>: Saves the account balance to its persistence layer</p>
 <p class="property">Syntax:</p>
 <p><code>saveBalance()</code></p>
+<<<<<<< Updated upstream
 <p class="property return">Return:</p>
 <p class="seealso">(bool):  <code>true</code> if the balance was saved successfully; <code>false</code>
  if not.</p>
+=======
+>>>>>>> Stashed changes
 <span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.readBalance">readBalance()</a></code></span>
 <hr /><p class="property func" id="fnc.transfer"><span class="name"><strong><code>transfer()</code></strong></span>: Transfer a amount of money to another Bank Account</p>
 <p class="property">Warning:</p>
 <p>Incomplete implementation. DO NOT USE IN PRODUCTION</p>
 <p class="property">Syntax:</p>
+<<<<<<< Updated upstream
 <p><code>transfer( $szID )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
@@ -691,6 +723,13 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  Current instance of the class</p>
+=======
+<p><code>transfer()</code></p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.deposit">deposit()</a></code>, <code><a href="#fnc.withdraw">withdraw()</a></code></span>
+<hr /><p class="property func" id="fnc.withdraw"><span class="name"><strong><code>withdraw()</code></strong></span>: Withdraw a sum of money from the bank account</p>
+<p class="property">Syntax:</p>
+<p><code>withdraw()</code></p>
+>>>>>>> Stashed changes
 <p class="property">Example(s):</p>
 <pre>
 
