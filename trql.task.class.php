@@ -174,7 +174,7 @@ class Task extends Activity
     /* ================================================================================ */
     /** {{*identity()=
 
-        Returns a brief HTML HHHH
+        Returns a brief HTML
 
         {*params
         *}
