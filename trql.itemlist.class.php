@@ -78,6 +78,7 @@ defined( 'ITEMLIST_CLASS_VERSION' ) or define( 'ITEMLIST_CLASS_VERSION','0.1' );
 
     {*doc [url]http://schema.org/ItemList[/url] *}
 
+    *}}
  */
 /* ==================================================================================== */
 class ItemList extends Intangible

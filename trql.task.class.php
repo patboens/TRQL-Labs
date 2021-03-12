@@ -108,13 +108,13 @@ class Task extends Activity
 
     public      $szProgress             = null;                     /* {*property   $szProgress                     (string)            Free enumeration type (e.g. 'bubble', 'to-start', 'started', 'done', ...) *} */
     public      $szStorage              = null;
-    public      $credits                = 0.0;                      /* {*property   $credits                        (float)             Number of credits required by this task (1 credit = 1 hours of undisturbed work) *} */
+    public      $credits                = 0.0;                      /* {*property   $credits                        (float)             Number of credits required by this task (1 credit = 1 hour of undisturbed work) *} */
     public      $szClass                = null;                     /* {*property   $szClass                        (string)            CSS class of the task when it needs to be rendered *} */
     public      $dateCreated            = null;                     /* {*property   $dateCreated                    (Date|DateTime)     The date on which the task was created *} */
     public      $active                 = null;                     /* {*property   $active                         (bool)              Is the task active or not? *} */
     public      $attention              = false;                    /* {*property   $attention                      (bool)              Requires attention or not? *} */
     public      $late                   = false;                    /* {*property   $late                           (bool)              Late or not? *} */
-    public      $szOnSubmit             = null;                     /* {*property   $szOnSubmit                     (string)            Submit clause of the form ([c]__toForm()[/c] *} */
+    public      $szOnSubmit             = null;                     /* {*property   $szOnSubmit                     (string)            Submit clause of the form ([c]__toForm()[/c]) *} */
 
 
     /* ================================================================================ */
@@ -148,16 +148,48 @@ class Task extends Activity
     /* ================================================================================ */
 
 
-    public function WhoAmI()
-    /*--------------------*/
+    /* ================================================================================ */
+    /** {{*whoAmI()=
+
+        Returns the name of the class
+
+        {*params
+        *}
+
+        {*return
+            (string)        The name of the class (with no namespace)
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function whoAmI() : string
+    /*-----------------------------*/
     {
         return ( $this->self['name'] );
-    }   /* End of Task.WhoAmI() ======================================================= */
+    }   /* End of Task.whoAmI() ======================================================= */
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*identity()=
+
+        Returns a brief HTML HHHH
+
+        {*params
+        *}
+
+        {*return
+            (string)        HTML Code corresponding to the current object. Used when 
+                            rendering a task/user story in a @class.TaskBoard or 
+                            @class.KanbanBoard.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function identity() : string
-    /*------------------------------*/
+    /*-------------------------------*/
     {
         $szRetVal = '';
 
@@ -213,6 +245,21 @@ class Task extends Activity
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__toForm()=
+
+        Returns the object as a form
+
+        {*params
+        *}
+
+        {*return
+            (string)        HTML Code corresponding to a form of the object
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __toForm(): string
     /*------------------------------*/
     {

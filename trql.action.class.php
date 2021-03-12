@@ -52,9 +52,8 @@
 /****************************************************************************************/
 namespace trql\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\thing\Thing                       as Thing;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\thing\Thing           as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -100,17 +99,17 @@ class Action extends Thing
                                'family' => null         ,
                              );
 
-    public      $actionStatus                   = null;             /* {*property   $actionStatus                   (ActionStatusType)                              Indicates the current disposition of the Action. *} */
+    public      $actionStatus                   = null;             /* {*property   $actionStatus                   (ActionStatusType)                              Indicates the current disposition of the @class.Action. *} */
     public      $agent                          = null;             /* {*property   $agent                          (Organization|Person)                           The direct performer or driver of the action (animate or inanimate).
                                                                                                                                                                     e.g. John wrote a book. *} */
-    public      $endTime                        = null;             /* {*property   $endTime                        (DateTime|Time)                                 The endTime of something. For a reserved event or service (e.g.
+    public      $endTime                        = null;             /* {*property   $endTime                        (DateTime|Time)                                 The @var.endTime of something. For a reserved event or service (e.g.
                                                                                                                                                                     FoodEstablishmentReservation), the time that it is expected to end.
                                                                                                                                                                     For actions that span a period of time, when the action was performed.
                                                                                                                                                                     e.g. John wrote a book from January to December. For media, including
                                                                                                                                                                     audio and video, it's the time offset of the end of a clip within a
-                                                                                                                                                                    larger file.Note that Event uses startDate/endDate instead of
-                                                                                                                                                                    startTime/endTime, even when describing dates with times. This
-                                                                                                                                                                    situation may be clarified in future revisions. *} */
+                                                                                                                                                                    larger file. Note that Event uses @var.startDate / @var.endDate instead of
+                                                                                                                                                                    @var.startTime / @var.endTime, even when describing dates with times. This
+                                                                                                                                                                    situation may be clarified in future revisions (12-03-21 07:05:31). *} */
     public      $error                          = null;             /* {*property   $error                          (Thing)                                         For failed actions, more information on the cause of the failure. *} */
     public      $instrument                     = null;             /* {*property   $instrument                     (Thing)                                         The object that helped the agent perform the action. e.g. John wrote a
                                                                                                                                                                     book with a pen. *} */
@@ -124,14 +123,14 @@ class Action extends Thing
                                                                                                                                                                     wrote a book with Steve. *} */
     public      $result                         = null;             /* {*property   $result                         (Thing)                                         The result produced in the action. e.g. John wrote a book. *} */
     public      $startTime                      = null;             /* {*property   $startTime                      (DateTime|Time)                                 The startTime of something. For a reserved event or service (e.g.
-                                                                                                                                                                    FoodEstablishmentReservation), the time that it is expected to start.
+                                                                                                                                                                    @class.FoodEstablishmentReservation), the time that it is expected to start.
                                                                                                                                                                     For actions that span a period of time, when the action was performed.
                                                                                                                                                                     e.g. John wrote a book from January to December. For media, including
                                                                                                                                                                     audio and video, it's the time offset of the start of a clip within a
-                                                                                                                                                                    larger file.Note that Event uses startDate/endDate instead of
-                                                                                                                                                                    startTime/endTime, even when describing dates with times. This
-                                                                                                                                                                    situation may be clarified in future revisions. *} */
-    public      $target                         = null;             /* {*property   $target                         (EntryPoint)                                    Indicates a target EntryPoint for an Action. *} */
+                                                                                                                                                                    larger file. Note that @class.Event uses @var.startDate / @var.endDate 
+                                                                                                                                                                    instead of @var.startTime /@var. endTime, even when describing dates 
+                                                                                                                                                                    with times. This situation may be clarified in future revisions. *} */
+    public      $target                         = null;             /* {*property   $target                         (EntryPoint)                                    Indicates a target @class.EntryPoint for an [c]Action[/c]. *} */
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */

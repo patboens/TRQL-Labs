@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 10-01-21 12:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -180,7 +179,5 @@ class Activity extends Action
         $this->necroSignaling();
     }   /* End of Activity.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class Activity ========================================================== */
 /* ==================================================================================== */
-?>

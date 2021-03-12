@@ -1246,10 +1246,16 @@ abstract class Mother
         Returns the value of a parameter
 
         {*params
+            $szParam    (string)        The name of the parameter to look for
+            $xDefault   (mixed)         The default value of the parameter. Optional.
+                                        [c]null[/c] by default.
+            $aParams    (array)         The list of parameters to search. Optional.
+                                        [c]_SERVER['argv'][/c] in CLI mode; [c]_GET[/c]
+                                        in Web mode.
         *}
 
         {*return
-            (string)    GUID
+            (string)    The value of the parameter or @param.xDefault if not found
         *}
 
         {*exec
@@ -1270,8 +1276,8 @@ abstract class Mother
         *}}
      */
     /* ================================================================================ */
-    function getParam( $szParameter,$xDefault,$aParams = null )
-    /*-------------------------------------------------------*/
+    function getParam( $szParameter,$xDefault = null,$aParams = null )
+    /*--------------------------------------------------------------*/
     {
         $szRetVal = $xDefault;
 

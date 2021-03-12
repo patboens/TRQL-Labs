@@ -241,7 +241,7 @@ class Browser extends Thing
     {
         $this->fStart   = (float) microtime( true );                /* Parsing start time */
 
-        $this->setDefaultPropertiesBeforeParsing();
+        $this->setDefaultPropertiesBeforeParsing( $szUA );
 
         if ( ! is_null( $this->szUA ) && $this->szUA !== 'illegal' )
         {
@@ -4312,14 +4312,26 @@ class Browser extends Thing
     }   /* == End of Browser.parseUA() ===============================================  */
     /* ================================================================================ */
 
-    /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
-    /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
 
-    protected function setDefaultPropertiesBeforeParsing()
-<<<<<<< Updated upstream
-=======
-    /*---------*/
->>>>>>> Stashed changes
+    /* ================================================================================ */
+    /** {{*setDefaultPropertiesBeforeParsing( [$szUA] )=
+
+        (Re)set internal properties before parsing UA
+
+        {*params
+            $szUA       (string)            User Agent to parse. Optional. [c]null[/c]
+                                            by default.
+        *}
+
+        {*return
+            (self)      Returns self;
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    protected function setDefaultPropertiesBeforeParsing( $szUA = null )
+    /*----------------------------------------------------------------*/
     {
         $this->szName               = null;
         $this->szType               = null;
@@ -4338,8 +4350,7 @@ class Browser extends Thing
         $this->iLineMatch           = -1;
         $this->aProperties          = array();
 
-        if ( ! is_null( $szUA ) )
-            $this->szUA = $szUA;
+        $this->szUA = $szUA ?? null;
 
         $this->aProperties['technical-specs'        ] = null;           // 'http://wap.samsungmobile.com/uaprof/GT-I9505.xml';
         $this->aProperties['keyboard'               ] = null;           // azerty, qwerty, ...
@@ -4360,6 +4371,8 @@ class Browser extends Thing
         $this->aProperties['image-capable'          ] = null;           // true | false
         $this->aProperties['sound-output-capable'   ] = null;           // true | false
         $this->aProperties['voice-input-capable'    ] = null;           // true | false
+        
+        return ( $this );
     }
 
 

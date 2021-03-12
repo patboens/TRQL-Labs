@@ -46,14 +46,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <div class="trql_documentor_DocumentorSourceFile">
 <section class="header">
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.userstory.class.php</span>
-<span class="DocumentorLabel">Purpose: </span><span class="property purpose">An informal, natural language description of one or more 
- features of a software system, often written from the 
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">An informal, natural language description of one or more
+ features of a software system, often written from the
  perspective of either an end user or system user</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">11-03-21 08:10</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">11/03/2021 - 08:17:59</span>
-<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">12/03/2021 - 09:33:42</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
 <section class="class shadow">
@@ -61,7 +61,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <span class="DocumentorLabel">Description: </span><span class="property description">An informal, natural language description of one or more features of a
  software system, often written from the perspective of either an end
  user or system user</span>
-<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="/?src=Mother">Mother</a> &gt; <a href="/?src=Thing">Thing</a> &gt; <a href="/?src=Action">Action</a> &gt; <a href="/?src=Activity">Activity</a> &gt; <a href="/?src=Task">Task</a> &gt; UserStory</code></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="?src=Mother">Mother</a> &gt; <a href="?src=Thing">Thing</a> &gt; <a href="?src=Action">Action</a> &gt; <a href="?src=Activity">Activity</a> &gt; <a href="?src=Task">Task</a> &gt; UserStory</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class UserStory extends Task</code></span>
 <span class="DocumentorLabel">Properties: </span>
 <table class="properties">
@@ -75,7 +75,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.actionStatus"><code>$actionStatus</code></td>
 <td class="type"><code>ActionStatusType</code></td>
-<td class="description">Indicates the current disposition of the Action.</td>
+<td class="description">Indicates the current disposition of the <code><a href="?src=Action">Action</a></code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.active"><code>$active</code></td>
@@ -108,14 +108,34 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">An alias for the item.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.attachments"><code>$attachments</code></td>
+<td class="type"><code>DigitalDocument</code></td>
+<td class="description">An array of electronic files or documents.</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.attention"><code>$attention</code></td>
 <td class="type"><code>bool</code></td>
 <td class="description">Requires attention or not?</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.checklist"><code>$checklist</code></td>
+<td class="type"><code>Checklist</code></td>
+<td class="description">A list of items of any sort.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.comments"><code>$comments</code></td>
+<td class="type"><code>ItemList</code></td>
+<td class="description">A list of comments.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.cover"><code>$cover</code></td>
+<td class="type"><code>ImageObject|URL</code></td>
+<td class="description">An image of the item</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.credits"><code>$credits</code></td>
 <td class="type"><code>float</code></td>
-<td class="description">Number of credits required by this task (1 credit = 1 hours of undisturbed work)</td>
+<td class="description">Number of credits required by this task (1 credit = 1 hour of undisturbed work)</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.dateCreated"><code>$dateCreated</code></td>
@@ -139,16 +159,22 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.dueDate"><code>$dueDate</code></td>
+<td class="type"><code>Date|DateTime</code></td>
+<td class="description">The end date and time of the item (in ISO 8601 date format):
+ the date that it is expected to end, date the item is due.</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.endTime"><code>$endTime</code></td>
 <td class="type"><code>DateTime|Time</code></td>
-<td class="description">The endTime of something. For a reserved event or service (e.g.
+<td class="description">The <code><a href="#var-endTime">$endTime</a></code> of something. For a reserved event or service (e.g.
  FoodEstablishmentReservation), the time that it is expected to end.
  For actions that span a period of time, when the action was performed.
  e.g. John wrote a book from January to December. For media, including
  audio and video, it's the time offset of the end of a clip within a
- larger file.Note that Event uses startDate/endDate instead of
- startTime/endTime, even when describing dates with times. This
- situation may be clarified in future revisions.</td>
+ larger file. Note that Event uses <code><a href="#var-startDate">$startDate</a></code> / <code><a href="#var-endDate">$endDate</a></code> instead of
+ <code><a href="#var-startTime">$startTime</a></code> / <code><a href="#var-endTime">$endTime</a></code>, even when describing dates with times. This
+ situation may be clarified in future revisions (12-03-21 07:05:31).</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.error"><code>$error</code></td>
@@ -194,7 +220,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Indicates a page (or other <code><a href="/?src=CreativeWork">CreativeWork</a></code>, <code><a href="/?src=Event">Event</a></code>)
+<td class="description">Indicates a page (or other <code><a href="?src=CreativeWork">CreativeWork</a></code>, <code><a href="?src=Event">Event</a></code>)
  for which this thing is the main entity
  being described. See <a
  href="https://schema.org/docs/datamodel.html#mainEntityBackground">
@@ -223,7 +249,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
-<td class="description">Indicates a potential <code><a href="/?src=Action">Action</a></code>, which
+<td class="description">Indicates a potential <code><a href="?src=Action">Action</a></code>, which
  describes an idealized action in which
  this thing would play an 'object' role.</td>
 </tr>
@@ -259,18 +285,18 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="name" id="var.startTime"><code>$startTime</code></td>
 <td class="type"><code>DateTime|Time</code></td>
 <td class="description">The startTime of something. For a reserved event or service (e.g.
- FoodEstablishmentReservation), the time that it is expected to start.
+ <code><a href="?src=FoodEstablishmentReservation">FoodEstablishmentReservation</a></code>), the time that it is expected to start.
  For actions that span a period of time, when the action was performed.
  e.g. John wrote a book from January to December. For media, including
  audio and video, it's the time offset of the start of a clip within a
- larger file.Note that Event uses startDate/endDate instead of
- startTime/endTime, even when describing dates with times. This
- situation may be clarified in future revisions.</td>
+ larger file. Note that <code><a href="?src=Event">Event</a></code> uses <code><a href="#var-startDate">$startDate</a></code> / <code><a href="#var-endDate">$endDate</a></code> 
+ instead of <code><a href="#var-startTime">$startTime</a></code> /<code><a href="#var-">$</a></code> endTime, even when describing dates 
+ with times. This situation may be clarified in future revisions.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
 <td class="type"><code>CreativeWork|Event</code></td>
-<td class="description">A <code><a href="/?src=CreativeWork">CreativeWork</a></code> or <code><a href="/?src=Event">Event</a></code> about this <code><a href="/?src=Thing">Thing</a></code>. 
+<td class="description">A <code><a href="?src=CreativeWork">CreativeWork</a></code> or <code><a href="?src=Event">Event</a></code> about this <code><a href="?src=Thing">Thing</a></code>. 
  Inverse property: <code><a href="#var-about">$about</a></code>.</td>
 </tr>
 <tr class="property">
@@ -281,7 +307,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.szOnSubmit"><code>$szOnSubmit</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Submit clause of the form (<code>__toForm()</code></td>
+<td class="description">Submit clause of the form (<code>__toForm()</code>)</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.szProgress"><code>$szProgress</code></td>
@@ -289,9 +315,26 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">Free enumeration type (e.g. 'bubble', 'to-start', 'started', 'done', ...)</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.tags"><code>$tags</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">An array of tags (name + color) associated with the User Story</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.target"><code>$target</code></td>
 <td class="type"><code>EntryPoint</code></td>
-<td class="description">Indicates a target EntryPoint for an Action.</td>
+<td class="description">Indicates a target <code><a href="?src=EntryPoint">EntryPoint</a></code> for an <code>Action</code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.timeSpan"><code>$timeSpan</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Number of days the item remained in a column of a taskboard
+ or kanbanboard.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.urgent"><code>$urgent</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description"><code>true</code> if user story/task is urgent ("expedite" class in
+ Kanban); <code>false</code> if not</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.url"><code>$url</code></td>
@@ -299,10 +342,15 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">URL of the item.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.whowhatwhy"><code>$whowhatwhy</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">A triplet (Who, What, Why). Associative array.</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Wikidata ID. An informal, natural language description of 
- one or more features of a software system, often written 
+<td class="description">Wikidata ID. An informal, natural language description of
+ one or more features of a software system, often written
  from the perspective of either an end user or system user.</td>
 </tr>
 </table>
@@ -311,7 +359,22 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property">Keywords:</p>
 <p>constructors, destructors</p>
 <p class="property">Syntax:</p>
-<p><code>__construct()</code></p>
+<p><code>__construct( $szHome )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Home of the class. Optional.</td>
+</tr>
+</table>
 <span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
 <hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Keywords:</p>
@@ -322,6 +385,118 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <hr /><p class="property func" id="fnc.__toXML"><span class="name"><strong><code>__toXML()</code></strong></span>: Returns the Task in XML</p>
 <p class="property">Syntax:</p>
 <p><code>__toXML()</code></p>
+<hr /><p class="property func" id="fnc.addTag"><span class="name"><strong><code>addTag()</code></strong></span>: Add a tag to the collection of tags</p>
+<p class="property">Syntax:</p>
+<p><code>addTag( $szColor )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.addTag.szTitle"><code>$szTitle</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Title of the tag</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.addTag.szColor"><code>$szColor</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">An HTML Color (e.g. <br /> <code>"antiquewhite" &#8211; rgb(250,235,215); Hex:faebd7</code>,<br /> <code>"chartreuse" &#8211; rgb(127,255,0); Hex:7fff00</code>,<br /> <code>"cyan" &#8211; rgb(0,255,255); Hex:00ffff</code>,<br /> <code>"deeppink" &#8211; rgb(255,20,147); Hex:ff1493</code>,<br /> <code>"greenyellow" &#8211; rgb(173,255,47); Hex:adff2f</code>,<br /> etc.)</td>
+</tr>
+</table>
+<p class="property">Example(s):</p>
+<pre>
+
+  use \trql\vaesoli\Vaesoli       as v;
+  use \trql\userstory\UserStory   as UserStory;
+
+  if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+      require_once( 'd:/websites/snippet-center/trql.vaesoli.class.php' );
+
+  if ( ! defined( 'USERSTORY_CLASS_VERSION' ) )
+      require_once( 'd:/websites/snippet-center/trql.userstory.class.php' );
+
+  $o = new UserStory();
+
+  echo &quot;&lt;style&gt;\n&quot;;
+
+    echo "span.ustag { padding: 5px; border-radius:4px; margin-right: 3px;}\n";
+    echo "span.ustag::before { content : ' '}\n";
+    echo "span.ustag::after { content : ' '}\n";
+    echo "span.crimson { background: crimson; color: white;}\n";
+    echo "span.deeppink { background: deeppink;}\n";
+    echo "span.chartreuse{ background: chartreuse;}\n";
+    echo "span.aquamarine{ background: aquamarine;}\n";
+    echo "span.maroon{ background: maroon; color: white;}\n";
+    echo "span.Expedite::after,\n";
+    echo "span.Bug::after { content : '! '}\n";
+
+  echo &quot;&lt;/style&gt;\n&quot;;
+
+  <strong>$o->addtag( "Expedite"  ,"crimson"      );
+  $o->addtag( "Danger"    ,"deeppink"     );
+  $o->addtag( "OK"        ,"chartreuse"   );
+  $o->addtag( "Retest"    ,"aquamarine"   );
+  $o->addtag( "Bug"       ,"maroon"       );</strong>
+
+  echo $o->renderTags();
+  var_dump( $o->tags );
+  </pre>
+<hr /><p class="property func" id="fnc.renderTags"><span class="name"><strong><code>renderTags()</code></strong></span>: Render the HTML of the tags defined in the UserStory</p>
+<p class="property">Syntax:</p>
+<p><code>renderTags( $szTitle )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.renderTags.szTitle"><code>$szTitle</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Title of the tag to render or <code>null</code> if all tags must be rendered.</td>
+</tr>
+</table>
+<p class="property">Example(s):</p>
+<pre>
+
+  use \trql\vaesoli\Vaesoli       as v;
+  use \trql\userstory\UserStory   as UserStory;
+
+  if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+      require_once( 'trql.vaesoli.class.php' );
+
+  if ( ! defined( 'USERSTORY_CLASS_VERSION' ) )
+      require_once( 'trql.userstory.class.php' );
+
+  $o = new UserStory();
+
+  echo &quot;&lt;style&gt;\n&quot;;
+
+    echo "span.ustag { padding: 5px; border-radius:4px; margin-right: 3px;}\n";
+    echo "span.ustag::before,\n";
+    echo "span.ustag::after { content : ' '}\n";
+    echo "span.crimson { background: crimson; color: white;}\n";
+    echo "span.deeppink { background: deeppink;}\n";
+    echo "span.Expedite::after { content : '! '}\n";
+
+  echo &quot;&lt;/style&gt;\n&quot;;
+
+  $o->addtag( "Expedite","crimson"  );
+  $o->addtag( "Danger"  ,"deeppink" );
+
+  <strong>echo "&lt;p&gt;",$o->renderTags(),"&lt;/p&gt;\n;            // Render all tags
+  echo "&lt;p&gt;",$o->renderTags('Expedite'),"&lt;/p&gt;\n"; // Render the 'Expedite' tag</strong>
+
+  var_dump( $o->tags );
+  </pre>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->
