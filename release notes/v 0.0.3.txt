@@ -1,0 +1,44 @@
+1) All *store classes now share a global namespace : "store"
+
+    trql.autopartsstore.class.php
+    trql.bikestore.class.php
+    trql.bookstore.class.php
+    trql.clothingstore.class.php
+    trql.computerstore.class.php
+    trql.conveniencestore.class.php
+    trql.departmentstore.class.php
+    trql.electronicsstore.class.php
+    trql.hardwarestore.class.php
+    trql.homegoodsstore.class.php
+    trql.jewelrystore.class.php
+    trql.liquorstore.class.php
+    trql.mensclothingstore.class.php
+    trql.mobilephonestore.class.php
+    trql.movierentalstore.class.php
+    trql.musicstore.class.php
+    trql.officeequipmentstore.class.php
+    trql.outletstore.class.php
+    trql.petstore.class.php
+    trql.shoestore.class.php
+    trql.sportinggoodsstore.class.php
+    trql.store.class.php
+    trql.toystore.class.php
+    trql.wholesalestore.class.php
+
+2) The following classes share now a common namespace: "automotive"
+
+    trql.motorcyclerepair.class.php
+    trql.motorcycledealer.class.php
+    trql.autowash.class.php
+    trql.autorepair.class.php
+    trql.autorental.class.php
+    trql.automotivebusiness.class.php
+    trql.autodealer.class.php
+    trql.autobodyshop.class.php
+
+3) Review of the Mercator class : methods that are documented are final.
+   The documentation continues
+
+4) Review of the Anaximandre class  : methods that are documented are final. The
+   documentation continues
+    

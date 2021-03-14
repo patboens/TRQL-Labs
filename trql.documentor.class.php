@@ -1687,7 +1687,10 @@ Class DocumentorSourceFile extends DocumentorFile
                                         $szHTML     .= "<span class=\"DocumentorLabel\">Keywords: </span><span class=\"property keywords\">"        . $this->squareToAngle( say(           $oClass->keywords                          ) ) . "</span>\n";
 
                                     if ( ! empty( $oClass->szCredits ) )
-                                        $szHTML     .= "<span class=\"DocumentorLabel\">Credits: </span><span class=\"property credits\">"          . $this->squareToAngle( say( $this->s( $oClass->szCredits ) ) ) . "</span>\n";
+                                        $szHTML     .= "<span class=\"DocumentorLabel\">Credits: </span><span class=\"property credits\">"          . $this->squareToAngle( say( $this->s( $oClass->szCredits                         ) ) ) . "</span>\n";
+
+                                    if ( ! empty( $oClass->abstract ) )
+                                        $szHTML     .= "<span class=\"DocumentorLabel\">Abstract: </span><span class=\"property abstract\">"        . $this->squareToAngle( say( $this->s( $oClass->abstract                          ) ) ) . "</span>\n";
 
                                     if ( ! empty( $oClass->szDoc ) )
                                         $szHTML     .= "<span class=\"DocumentorLabel\">Doc: </span><span class=\"property doc\">"                  . $this->squareToAngle( say(           $oClass->szDoc . '?utm_source=TRQLLabs'    ) ) . "</span>\n";
@@ -1821,6 +1824,12 @@ Class DocumentorSourceFile extends DocumentorFile
                                                 $szHTML     .= "<p class=\"property\">Keywords:</p>\n";
                                                 $szHTML  .= "<p>" . $this->squareToAngle( say( $oMethod->keywords ) ) . "</p>\n";
                                             }   /* if ( ! empty( $oMethod->keywords ) ) */
+
+                                            if ( ! empty( $oMethod->abstract ) )
+                                            {
+                                                $szHTML     .= "<p class=\"property\">Abstract:</p>\n";
+                                                $szHTML  .= "<p>" . $this->squareToAngle( say( $this->s( $oMethod->abstract ) ) ) . "</p>\n";
+                                            }   /* if ( ! empty( $oMethod->abstract ) ) */
 
                                             $szHTML     .= "<p class=\"property\">Syntax:</p>\n";
 
@@ -2702,6 +2711,9 @@ Class DocumentorClass extends DocumentorSourceFileObject
     public      $author         = null;                             /* {*property       $author                 (Organization|Person|string)    The author of the class *} */
     public      $keywords       = null;                             /* {*property       $keywords               (string)                        A comma-delimited string where each token is a keyword *} */
     public      $aSeeAlsos      = null;                             /* {*property       $aSeeAlsos              (array)                         An array of seealso *} */
+    public      $abstract       = null;                             /* {*property       $abstract               (string)                        An abstract is a short high-level introduction that sketches the context of the class *} */
+
+
     public      $wikidataId     = 'Q4479242';                       /* {*property       $wikidataId             (string)                        Wikidata ID. In object-oriented programming, a definition that specifies
                                                                                                                                                 how an object works. *} */
 
@@ -2829,6 +2841,7 @@ Class DocumentorClass extends DocumentorSourceFileObject
         $this->szRemark     =       trim( vaesoli::STR_Reduce( $this->property( '{*remark'     ,$this->szDefinition ) ) );
         $this->author       =       trim( vaesoli::STR_Reduce( $this->property( '{*author'     ,$this->szDefinition ) ) );
         $this->keywords     =       trim( vaesoli::STR_Reduce( $this->property( '{*keywords'   ,$this->szDefinition ) ) );
+        $this->abstract     =       trim( vaesoli::STR_Reduce( $this->property( '{*abstract'   ,$this->szDefinition ) ) );
         if ( ! empty( $szSeeAlsos = trim( vaesoli::STR_Reduce( $this->property( '{*seealso'    ,$this->szDefinition ) ) ) ) )
             $this->aSeeAlsos = explode( ',',str_replace( ';',',',$szSeeAlsos ) );     /* All seealso's (array) */
 
@@ -3185,6 +3198,10 @@ Class DocumentorClass extends DocumentorSourceFileObject
                             $oFnc->author       =       trim( vaesoli::STR_Reduce( $this->property( '{*author'    ,$szFncDef ) ) );
                             $oFnc->szExamples   =                                  $this->property( '{*example'   ,$szFncDef );
                             $oFnc->keywords     =       trim( vaesoli::STR_Reduce( $this->property( '{*keywords'  ,$szFncDef ) ) );
+                            $oFnc->abstract     =       trim( vaesoli::STR_Reduce( $this->property( '{*abstract'  ,$szFncDef ) ) );
+                            //var_dump( $oFnc->abstract );
+                            //$this->die();
+
                             if ( ! empty( $szSeeAlsos = trim( vaesoli::STR_Reduce( $this->property( '{*seealso'   ,$szFncDef ) ) ) ) )
                                 $oFnc->aSeeAlsos = explode( ',',str_replace( ';',',',$szSeeAlsos ) );     /* All seealso's (array) */
 

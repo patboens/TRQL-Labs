@@ -217,6 +217,38 @@ class Anaximandre extends Thing implements iContext
 
 
     /* ================================================================================ */
+    /** {{*getAPIKey([$szSystem])=
+
+        Get the API Key related to the system we're dealing with
+
+        {*params
+            $szSystem       (string)        Optional. [c]null[/c] by default.
+        *}
+
+        {*return
+            (string)        The API Key or [c]null[/c] if not found
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    private function getAPIKey( $szSystem = null )
+    /*------------------------------------------*/
+    {
+        if ( ! is_null( $szSystem ) )
+            $szCave = "/api.{$szSystem}.key.txt";
+        else
+            $szCave = '/api.key.txt';
+
+        if ( is_file( $szFile = vaesoli::FIL_RealPath( $this->szHome . $szCave ) ) )
+            return ( vaesoli::FIL_FileToStr( $szFile ) );
+        else
+            return ( null );
+    }   /* End of Anaximandre.getAPIKey() ============================================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
     /** {{*getURL( $szURL[,$aParams] )=
 
         Get resources pointed to by $szURL
@@ -236,7 +268,7 @@ class Anaximandre extends Thing implements iContext
     */
     /* ================================================================================ */
     public function getURL( $szURL,$aParams = null )
-    /*-----------------------------------------------*/
+    /*--------------------------------------------*/
     {
         $szAccessKey = $this->getAPIKey( 'anaximandre' );
 

@@ -52,7 +52,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\electronicsstore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
 use \trql\store\Store       as Store;
@@ -87,6 +87,7 @@ defined( 'ELECTRONICSSTORE_CLASS_VERSION' ) or define( 'ELECTRONICSSTORE_CLASS_V
         on 26-08-2020 18:46.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class ElectronicsStore extends Store
@@ -159,4 +160,3 @@ class ElectronicsStore extends Store
     /* ================================================================================ */
 }   /* End of class ElectronicsStore ================================================== */
 /* ==================================================================================== */
-?>

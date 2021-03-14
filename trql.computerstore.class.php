@@ -52,7 +52,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\computerstore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\store\Store           as Store;
@@ -87,6 +87,7 @@ defined( 'COMPUTERSTORE_CLASS_VERSION' ) or define( 'COMPUTERSTORE_CLASS_VERSION
         on 26-08-2020 18:46.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class ComputerStore extends Store

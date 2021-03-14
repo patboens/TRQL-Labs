@@ -42,7 +42,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\toystore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
 use \trql\store\Store       as Store;

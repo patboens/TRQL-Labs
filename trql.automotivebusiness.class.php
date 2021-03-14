@@ -26,6 +26,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -42,11 +43,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\automotivebusiness;
+namespace trql\automotive;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\localbusiness\LocalBusiness   as LocalBusiness;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -78,6 +78,7 @@ defined( 'AUTOMOTIVEBUSINESS_CLASS_VERSION' ) or define( 'AUTOMOTIVEBUSINESS_CLA
         on 26-08-2020 18:36.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class AutomotiveBusiness extends LocalBusiness
@@ -151,4 +152,3 @@ class AutomotiveBusiness extends LocalBusiness
     /* ================================================================================ */
 }   /* End of class AutomotiveBusiness ================================================ */
 /* ==================================================================================== */
-?>

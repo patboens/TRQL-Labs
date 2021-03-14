@@ -51,7 +51,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\jewelrystore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
 use \trql\store\Store       as Store;
@@ -86,6 +86,7 @@ defined( 'JEWELRYSTORE_CLASS_VERSION' ) or define( 'JEWELRYSTORE_CLASS_VERSION',
         on 26-08-2020 18:49.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class JewelryStore extends Store
@@ -158,4 +159,3 @@ class JewelryStore extends Store
     /* ================================================================================ */
 }   /* End of class JewelryStore ====================================================== */
 /* ==================================================================================== */
-?>

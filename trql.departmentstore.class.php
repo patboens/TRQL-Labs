@@ -51,7 +51,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\departmentstore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
 use \trql\store\Store       as Store;
@@ -86,6 +86,7 @@ defined( 'DEPARTMENTSTORE_CLASS_VERSION' ) or define( 'DEPARTMENTSTORE_CLASS_VER
         on 26-08-2020 18:46.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class DepartmentStore extends Store

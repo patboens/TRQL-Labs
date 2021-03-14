@@ -26,6 +26,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,10 +52,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\autorepair;
+namespace trql\automotive;
 
-use \trql\vaesoli\Vaesoli                       as Vaesoli;
-use \trql\automotivebusiness\AutomotiveBusiness as AutomotiveBusiness;
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\automotive\AutomotiveBusiness     as AutomotiveBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -85,6 +86,8 @@ defined( 'AUTOREPAIR_CLASS_VERSION' ) or define( 'AUTOREPAIR_CLASS_VERSION','0.1
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
         on 26-08-2020 18:36.
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -157,4 +160,3 @@ class AutoRepair extends AutomotiveBusiness
     /* ================================================================================ */
 }   /* End of class AutoRepair ======================================================== */
 /* ==================================================================================== */
-?>

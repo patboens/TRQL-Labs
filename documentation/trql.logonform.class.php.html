@@ -1097,9 +1097,13 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
 <hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
 <hr /><p class="property func" id="fnc.__get"><span class="name"><strong><code>__get()</code></strong></span>: Used for reading data from inaccessible (protected or private) or
  non-existing properties.</p>
 <p class="property">Syntax:</p>
@@ -1119,25 +1123,36 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">The name of the properties to access</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  The value of <code>$szVar</code> or throwing an exception if
+ <code>$szVar</code> NOT found.</p>
 <hr /><p class="property func" id="fnc.__toArray"><span class="name"><strong><code>__toArray()</code></strong></span>: Turns the object into an array</p>
 <p class="property">Remark:</p>
 <p>Protected properties are formatted as: <code>'&#0;*&#0;<property>'</code> (e.g. <code>'&#0;*&#0;self'</code>)<br />
  Private properties are formatted as: <code>'&#0;trql\form\Form&#0;<property>'</code> (e.g. <code>'&#0;trql\form\Form&#0;test'</code>)<br /></p>
 <p class="property">Syntax:</p>
 <p><code>__toArray()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  The array corresponding to the object</p>
 <hr /><p class="property func" id="fnc.__toHTML"><span class="name"><strong><code>__toHTML()</code></strong></span>: Renders the form in HTML</p>
 <p class="property">Warning:</p>
 <p>So far (25-12-20 13:29:10), the form is NOT rendered</p>
 <p class="property">Syntax:</p>
 <p><code>__toHTML()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  HTML Code</p>
 <hr /><p class="property func" id="fnc.__toString"><span class="name"><strong><code>__toString()</code></strong></span>: Renders the form in HTML</p>
 <p class="property">Syntax:</p>
 <p><code>__toString()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  XML Code</p>
 <hr /><p class="property func" id="fnc.__toXML"><span class="name"><strong><code>__toXML()</code></strong></span>: Renders the form in XML</p>
 <p class="property">Warning:</p>
 <p>So far (25-12-20 13:29:10), the form is NOT rendered</p>
 <p class="property">Syntax:</p>
 <p><code>__toXML()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  XML Code</p>
 <hr /><p class="property func" id="fnc.add"><span class="name"><strong><code>add()</code></strong></span>: Adds an item to the form</p>
 <p class="property">Syntax:</p>
 <p><code>add( $oItem )</code></p>
@@ -1156,18 +1171,29 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">An instance of a "Tag"</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(boolean):  <code>true</code> if $oItem successfully added to the form;
+ <code>false</code> otherwise.</p>
 <hr /><p class="property func" id="fnc.buildClass"><span class="name"><strong><code>buildClass()</code></strong></span>: Builds the class attribute of the tag</p>
 <p class="property">Syntax:</p>
 <p><code>buildClass()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The <code>' class="..."'</code> attribute</p>
 <hr /><p class="property func" id="fnc.buildEnctype"><span class="name"><strong><code>buildEnctype()</code></strong></span>: Builds the encoding-type part of the form (needed if 'file' input)</p>
 <p class="property">Syntax:</p>
 <p><code>buildEnctype()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The encoding-type attribute of the form</p>
 <hr /><p class="property func" id="fnc.buildID"><span class="name"><strong><code>buildID()</code></strong></span>: Generates the ID of the tag (if any)</p>
 <p class="property">Syntax:</p>
 <p><code>buildID()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
 <hr /><p class="property func" id="fnc.buildTarget"><span class="name"><strong><code>buildTarget()</code></strong></span>: Builds the target attribute of a form</p>
 <p class="property">Syntax:</p>
 <p><code>buildTarget()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The target attribute of the form</p>
 <hr /><p class="property func" id="fnc.get"><span class="name"><strong><code>get()</code></strong></span>: Gets a form as saved in $szFile</p>
 <p class="property">Warning:</p>
 <p>Totalement expérimental ! Bien que la modification manuelle soit possible
@@ -1193,6 +1219,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">The file that contains the definition of the form .</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
 <hr /><p class="property func" id="fnc.render"><span class="name"><strong><code>render()</code></strong></span>: Renders the form</p>
 <p class="property">Syntax:</p>
 <p><code>render( $szType )</code></p>
@@ -1211,6 +1239,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">Output type. Optional. 'HTML' by default.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  HTML Code</p>
 <hr /><p class="property func" id="fnc.save"><span class="name"><strong><code>save()</code></strong></span>: Saves the form to $szFile</p>
 <p class="property">Warning:</p>
 <p>Totalement expérimental ! Bien que la modification manuelle soit possible
@@ -1236,6 +1266,9 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">The file the form must be saved to.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(boolean):  <code>true</code> if the form was successfully saved; <code>false</code>
+ if not.</p>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

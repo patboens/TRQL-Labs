@@ -130,6 +130,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
 <hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
@@ -137,10 +139,17 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  string.</p>
 <p class="property">Syntax:</p>
 <p><code>__toString()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  Returns the last translation.</p>
 <hr /><p class="property func" id="fnc.destruct"><span class="name"><strong><code>destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return.</p>
 <hr /><p class="property func" id="fnc.getAPIKey"><span class="name"><strong><code>getAPIKey()</code></strong></span>: Get the API Key related to the system we're dealing with</p>
+<p class="property">Abstract:</p>
+<p>As we are dealing with possibly multiple external API calls, we may have
+ several API keys to consider. That's what the "system" parameter is for.</p>
 <p class="property">Syntax:</p>
 <p><code>getAPIKey( $szSystem )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -158,6 +167,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">Optional. <code>null</code> by default.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The API Key or <code>null</code> if not found</p>
 <hr /><p class="property func" id="fnc.translate"><span class="name"><strong><code>translate()</code></strong></span>: Translate text</p>
 <p class="property">Syntax:</p>
 <p><code>translate( $szTargetLang )</code></p>
@@ -186,6 +197,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">Target language. Optional. <code>this->szTargetLang</code> by default</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Associative array with translation results
+
+ array( 'text' => Original text to be translated,
+ 'source_lang' => Source language,
+ 'detected_lang' => Detected langiage,
+ 'translation' => Text translated
+ );</p>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

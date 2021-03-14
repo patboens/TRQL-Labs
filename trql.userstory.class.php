@@ -282,7 +282,22 @@ class UserStory extends Task
         return ( $szRetVal );
     }
 
-    public function WhoAmI()
+    /* ================================================================================ */
+    /** {{*whoAmI()=
+
+        Returns the name of the class
+
+        {*params
+        *}
+
+        {*return
+            (string)        The name of the class (with no namespace)
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function whoAmI() : string
     /*--------------------*/
     {
         return ( $this->self['name'] );
@@ -290,6 +305,23 @@ class UserStory extends Task
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*identity()=
+
+        Returns a brief HTML
+
+        {*params
+        *}
+
+        {*return
+            (string)        HTML Code corresponding to the current object. Used when 
+                            rendering a task/user story in a @class.TaskBoard or 
+                            @class.KanbanBoard.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function identity() : string
     /*------------------------------*/
     {

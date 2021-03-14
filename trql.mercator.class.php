@@ -6,7 +6,7 @@
     {COMPANY} is a shortcut to "Lato Sensu Management"
 
     {RIGHTS} is a shortcut used by trql.documentor.class.php. In general the material
-    presented here is available under the conditions of 
+    presented here is available under the conditions of
     https://creativecommons.org/licenses/by-sa/4.0/
 
     Other shortcuts exist. They exist to make it simple to change the formulation
@@ -183,8 +183,8 @@ class Mercator extends Utility implements iContext
         *}
 
         {*abstract
-            As we are dealing with possibly multiple external API calls, we may have
-            several API keys to consider. That's what the "system" parameter is for.
+            As we are dealing possibly with multiple external API calls, we may have
+            several API keys to consider. That's what the @param.system parameter is for.
         *}
 
         *}}
@@ -207,22 +207,77 @@ class Mercator extends Utility implements iContext
 
 
     /* ================================================================================ */
-    /** {{*geoIP([$szSystem])=
+    /** {{*geoIP([$szIP])=
 
-        Get the API Key related to the system we're dealing with
+        Get geo details from an IP address
 
         {*params
             $szIP           (string)        IP address to check. Optional.
-                                            [c]$_SERVER['REMOTE_ADDR'][/c] by default.
+                                            [c]SERVER['REMOTE_ADDR'][/c] by default.
         *}
 
         {*return
-            (string)        The API Key or [c]null[/c] if not found
+            (array)     Associative array with the geocoordinates details
         *}
 
-        {*abstract
-            As we are dealing with possibly multiple external API calls, we may have
-            several API keys to consider. That's what the "system" parameter is for.
+        {*example
+            use \trql\vaesoli\Vaesoli       as v;
+            use \trql\mercator\Mercator     as mercator;
+
+            if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+                require_once( 'trql.vaesoli.class.php' );
+
+            if ( ! defined( 'MERCATOR_CLASS_VERSION' ) )
+                require_once( 'trql.mercator.class.php' );
+
+            $o = new Mercator();
+            $o->remembering = true;     // This will use cache if any
+
+            $szIP = null;
+
+            if ( ! empty( $szJSON = v::HTTP_GetURL( 'https://api.ipify.org/?format=json' ) ) )
+            {
+                $oJSON = json_decode( $szJSON );
+                $szIP = $oJSON->ip ?? null;
+            }
+
+            var_dump( [b]$o->geoIP( $szIP )[/b] );
+
+            // This gives a result similar to:
+            // array (size=2)
+            //   'service' => string 'geoIP' (length=5)
+            //   'results' =>
+            //     array (size=14)
+            //       'type' => string 'ipv4' (length=4)
+            //       'continentCode' => string 'EU' (length=2)
+            //       'continentName' => string 'Europe' (length=6)
+            //       'countryCode' => string 'BE' (length=2)
+            //       'countryName' => string 'Belgium' (length=7)
+            //       'regionCode' => string 'VLG' (length=3)
+            //       'regionName' => string 'Flanders' (length=8)
+            //       'locality' => string 'Sint-Truiden' (length=12)
+            //       'postalcode' => string '3800' (length=4)
+            //       'latitude' => float 50.815460205078
+            //       'longitude' => float 5.1866598129272
+            //       'geonameId' => int 2786545
+            //       'capital' => string 'Brussels' (length=8)
+            //       'languages' =>
+            //         array (size=3)
+            //           0 =>
+            //             array (size=3)
+            //               'code' => string 'nl' (length=2)
+            //               'name' => string 'Dutch' (length=5)
+            //               'native' => string 'Nederlands' (length=10)
+            //           1 =>
+            //             array (size=3)
+            //               'code' => string 'fr' (length=2)
+            //               'name' => string 'French' (length=6)
+            //               'native' => string 'Français' (length=9)
+            //           2 =>
+            //             array (size=3)
+            //               'code' => string 'de' (length=2)
+            //               'name' => string 'German' (length=6)
+            //               'native' => string 'Deutsch' (length=7)
         *}
 
         *}}
@@ -253,11 +308,12 @@ class Mercator extends Utility implements iContext
                 if ( $oJSON = json_decode( $szJSON ) )
                 {
                     //var_dump( $oJSON );
+                    //$this->die();
                     //var_dump( $oJSON->location );
 
                     $aLanguages = null;
 
-                    if ( isset( $oJSON->location ) && isset( $oJSON->location->langauges ) )
+                    if ( isset( $oJSON->location ) && isset( $oJSON->location->languages ) )
                     {
                         foreach( $oJSON->location->languages as $oLanguage )
                         {
@@ -269,21 +325,22 @@ class Mercator extends Utility implements iContext
                         }   /* foreach( $oJSON->location->languages => $aLanguage ) */
                     }   /* if ( isset( $oJSON->location ) && isset( $oJSON->location->langauges ) ) */
 
-                    $aRetVal = array( 'type'            => $oJSON->type                 ,
-                                      'continentCode'   => $oJSON->continent_code       ,
-                                      'continentName'   => $oJSON->continent_name       ,
-                                      'countryCode'     => $oJSON->country_code         ,
-                                      'countryName'     => $oJSON->country_name         ,
-                                      'regionCode'      => $oJSON->region_code          ,
-                                      'regionName'      => $oJSON->region_name          ,
-                                      'locality'        => $oJSON->city                 ,
-                                      'postalcode'      => $oJSON->zip                  ,
-                                      'latitude'        => $oJSON->latitude             ,
-                                      'longitude'       => $oJSON->longitude            ,
-                                      'geonameId'       => $oJSON->location->geoname_id ,
-                                      'capital'         => $oJSON->location->capital    ,
-                                      'languages'       => $aLanguages                  ,
-                                    );
+                    $aRetVal['service'] = 'geoIP';
+                    $aRetVal['results'] = array( 'type'            => $oJSON->type                 ,
+                                                 'continentCode'   => $oJSON->continent_code       ,
+                                                 'continentName'   => $oJSON->continent_name       ,
+                                                 'countryCode'     => $oJSON->country_code         ,
+                                                 'countryName'     => $oJSON->country_name         ,
+                                                 'regionCode'      => $oJSON->region_code          ,
+                                                 'regionName'      => $oJSON->region_name          ,
+                                                 'locality'        => $oJSON->city                 ,
+                                                 'postalcode'      => $oJSON->zip                  ,
+                                                 'latitude'        => $oJSON->latitude             ,
+                                                 'longitude'       => $oJSON->longitude            ,
+                                                 'geonameId'       => $oJSON->location->geoname_id ,
+                                                 'capital'         => $oJSON->location->capital    ,
+                                                 'languages'       => $aLanguages                  ,
+                                               );
 
                     if ( $this->storing && is_array( $aRetVal ) && count( $aRetVal ) > 0 )
                     {
@@ -371,7 +428,8 @@ class Mercator extends Utility implements iContext
         }
 
         return ( $aRetVal );
-    }
+    }   /* End of Mercator.searchAddress() ============================================ */
+    /* ================================================================================ */
 
 
     // /* Cette méthode n'est pas utilisée. Elle a servi à construire des fichiers intermédiaires */
@@ -382,22 +440,22 @@ class Mercator extends Utility implements iContext
     //     {
     //         $aHeaders   = null;                                     // Le nom des champs (1ère ligne du fichier CSV)
     //         $aFields    = null;                                     // Ensemble de champs (ligne par ligne)
-    // 
+    //
     //         $aFields = fgetcsv( $handle,1000,',');                  // Lisons la première ligne
     //         $iFields = count( $aFields );                           // Comptons le nombre de champs (avec le temps, la structure du fichier .CSV a évolué ... et donc le nb de champs n'est pas toujours le même)
-    // 
+    //
     //         if ( $iFields > 0 )                                     // Si on est sur la première ligne (c'est la ligne du nom des champs)
     //             $aHeaders = $aFields;
-    // 
+    //
     //         var_dump( $aHeaders );
-    // 
+    //
     //         $i = 1;
-    // 
+    //
     //         if ( is_array( $aHeaders ) )                            // Si on a des headers
     //         {
     //             $szOutputFileNL = $szFile . '.nl.2.txt';
     //             $szOutputFileFR = $szFile . '.fr.2.txt';
-    // 
+    //
     //             if ( ( ( $handleNL = fopen( $szOutputFileNL,"a+" ) ) !== false ) &&
     //                  ( ( $handleFR = fopen( $szOutputFileFR,"a+" ) ) !== false )
     //                )
@@ -419,9 +477,9 @@ class Mercator extends Utility implements iContext
     //                     //                    'ExtraAddressInfo'  => $aFields[11],
     //                     //                    'DateStrikingOff'   => $aFields[12],
     //                     //                   );
-    // 
+    //
     //                     $this->echo( $i++ . "\n" );
-    // 
+    //
     //                     if ( ! empty( $aFields[4] ) && preg_match( '/\d{4}/',$aFields[4] ) )
     //                     {
     //                         if ( ! empty( $aFields[5] ) && ! empty( $aFields[7] ) )
@@ -429,40 +487,40 @@ class Mercator extends Utility implements iContext
     //                             $aFields[7] = preg_replace( '/\(.*?\)/','',$aFields[7] );
     //                             fwrite( $handleNL,$aFields[4] . "\t" . $aFields[5] . "\t" . $aFields[7] . "\n" );
     //                         }
-    // 
+    //
     //                         if ( ! empty( $aFields[6] ) && ! empty( $aFields[8] ) )
     //                         {
     //                             $aFields[8] = preg_replace( '/\(.*?\)/','',$aFields[8] );
     //                             fwrite( $handleFR,$aFields[4] . "\t" . $aFields[6] . "\t" . $aFields[8] . "\n" );
     //                         }
     //                     }
-    // 
+    //
     //                     //if ( $i > 100 )
     //                     //    break;
-    // 
+    //
     //                     //$aValues[] = $aFields;
     //                     //var_dump( $aFields );
     //                     //break;
     //                 }
     //                 $tEnd = microtime( true );
     //                 $this->echo( "Took " . round( $tEnd - $tStart,5 ) . " secs to process the file" );
-    // 
-    // 
+    //
+    //
     //                 fclose( $handleNL );
     //                 fclose( $handleFR );
-    // 
+    //
     //             }
     //             else
     //             {
     //                 $this->Echo( "Cannot open OUTPUT files\n" );
     //             }
     //         }   /* if ( is_array( $aHeaders ) ) */
-    // 
+    //
     //         fclose( $handle );                                      // Fermons le fichier de données CSV
     //     }   /* if ( ( $handle = fopen( $szFile,"r" ) ) !== false ) */
-    // 
+    //
     //     var_dump( $aValues ?? null );
-    // 
+    //
     //     $this->die( "TRAITEMENT DES ADRESSES BELGES: " . $szFile );
     // }   /* End of Mercator.csv() ====================================================== */
     // /* ================================================================================ */
@@ -497,7 +555,127 @@ class Mercator extends Utility implements iContext
     /* ================================================================================ */
 
 
-    /* Final */
+    /* ================================================================================ */
+    /** {{*nearby( $aParams|)=
+
+        Find nearby toponym / reverse geocoding
+
+        {*params
+            $aParams    (array)         An associative array with latitude and longitude
+                                        array( 'latitude'  => &lt;...&gt;,[br]
+                                               'longitude' => &lt;...&gt; )
+                                        or ...
+            $latitude   (float)         Latitude
+            $longitude  (float)         Longitude
+        *}
+
+        {*return
+            (array)     An associative array or [c]null[/c] if nothing found
+        *}
+
+        {*example
+            use \trql\mercator\Mercator as Mercator;
+
+            if ( ! defined( 'MERCATOR_CLASS_VERSION' ) )
+                require_once( 'trql.mercator.class.php' );
+
+            [b]$o = new Mercator();[/b]
+            $o->remembering = true;     // This will use cache if any
+            $o->remembering = false;    // This will disregard cache
+
+            // The geonameId "8520400" is the one of Lato Sensu Management
+            // Let's get all geonames details about this ID
+            $a = $o->get( array( "geonameId" => "8520400" ) );
+            var_dump( $a );
+
+            // This gives the following result:
+            // array (size=2)
+            //   'service' => string 'get' (length=3)
+            //   'results' =>
+            //     array (size=1)
+            //       0 =>
+            //         array (size=31)
+            //           'toponymName' => string 'Lato Sensu Management' (length=21)
+            //           'name' => string 'Lato Sensu Management' (length=21)
+            //           'lat' => float 50.38518
+            //           'lng' => float 4.66052
+            //           'geonameId' => string '8520400' (length=7)
+            //           'countryCode' => string 'BE' (length=2)
+            //           'countryName' => string 'Belgium' (length=7)
+            //           'fcl' => string 'S' (length=1)
+            //           'fcode' => string 'STNB' (length=4)
+            //           'fclName' => string 'spot, building, farm' (length=20)
+            //           'fcodeName' => string 'scientific research base' (length=24)
+            //           'population' => int 0
+            //           'adminCode1' => string 'WAL' (length=3)
+            //           'adminName1' => string 'Wallonia' (length=8)
+            //           'asciiName' => string 'Lato Sensu Management' (length=21)
+            //           'alternateNames' => string '' (length=0)
+            //           'elevation' => int 0
+            //           'srtm3' => string '216' (length=3)
+            //           'astergdem' => int 197
+            //           'continentCode' => string 'EU' (length=2)
+            //           'adminTypeName' => null
+            //           'adminCode2' => string 'WNA' (length=3)
+            //           'adminName2' => string 'Namur Province' (length=14)
+            //           'adminCode3' => string '92' (length=2)
+            //           'adminName3' => string 'Arrondissement de Namur' (length=23)
+            //           'adminCode4' => string '92048' (length=5)
+            //           'adminName4' => string 'Fosses-la-Ville' (length=15)
+            //           'timezone' => string 'Europe/Brussels' (length=15)
+            //           'score' => float 0
+            //           'latitude' => float 50.38518
+            //           'longitude' => float 4.66052
+
+            // Then, let's try to find what's nearby this location:
+            $fLatitude  = $a['results'][0]['latitude'];
+            $fLongitude = $a['results'][0]['longitude'];
+            [b]var_dump( $o->nearby( $fLatitude,$fLongitude ) );[/b]
+
+            // This gives the following result:
+            // array (size=2)
+            //   'service' => string 'nearby' (length=6)
+            //   'results' =>
+            //     array (size=1)
+            //       0 =>
+            //         array (size=31)
+            //           'toponymName' => string 'Lato Sensu Management' (length=21)
+            //           'name' => string 'Lato Sensu Management' (length=21)
+            //           'lat' => float 50.38518
+            //           'lng' => float 4.66052
+            //           'geonameId' => string '8520400' (length=7)
+            //           'countryCode' => string 'BE' (length=2)
+            //           'countryName' => string 'Belgium' (length=7)
+            //           'fcl' => string 'S' (length=1)
+            //           'fcode' => string 'STNB' (length=4)
+            //           'fclName' => null
+            //           'fcodeName' => null
+            //           'population' => int 0
+            //           'adminCode1' => null
+            //           'adminName1' => null
+            //           'asciiName' => null
+            //           'alternateNames' => null
+            //           'elevation' => int 0
+            //           'srtm3' => null
+            //           'astergdem' => int 0
+            //           'continentCode' => null
+            //           'adminTypeName' => null
+            //           'adminCode2' => null
+            //           'adminName2' => null
+            //           'adminCode3' => null
+            //           'adminName3' => null
+            //           'adminCode4' => null
+            //           'adminName4' => null
+            //           'timezone' => null
+            //           'score' => float 0
+            //           'latitude' => float 50.38518
+            //           'longitude' => float 4.66052
+
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function nearby()
     /*--------------------*/
     {
@@ -525,7 +703,6 @@ class Mercator extends Utility implements iContext
                 {
                     $fLatitude  = func_get_arg( 0 );
                     $fLongitude = func_get_arg( 1 );
-
                     //$this->__echo( "Received 2 parameters" );
                 }
                 break;
@@ -545,11 +722,10 @@ class Mercator extends Utility implements iContext
         {
             if ( ! empty( $szXML = $this->call( 'findNearby',$aParams ) ) )
             {
-                if ( is_array( $aRetVal = $this->parse( $szXML,'nearby' ) ) )
+                if ( is_array( $a = $this->parse( $szXML,'nearby' ) ) )
                 {
-                    //var_dump( $aRetVal );
-                    //$this->die();
-
+                    $aRetVal['service'] = 'nearby';
+                    $aRetVal['results'] = $a['results'];
                     if ( $this->storing )
                     {
                         $this->saveHashFile( $szCacheFile,$aRetVal );
@@ -560,7 +736,6 @@ class Mercator extends Utility implements iContext
         }    /* End of ... Else of ... if ( true && $this->remembering && is_file( $szCacheFile ) ) */
 
         end:
-
         return ( $aRetVal );
     }   /* End of Mercator.nearby() =================================================== */
     /* ================================================================================ */
@@ -1722,12 +1897,11 @@ class Mercator extends Utility implements iContext
     /* ================================================================================ */
 
 
-    /* Final */
     /* http://api.geonames.org/get?geonameId=1&username=demo. */
     /* ================================================================================ */
     /** {{*get( $aParams )=
 
-        Get geonames info via theit 'get' service
+        Get geonames info via their [c]get[/c] service
 
         {*params
             $aParams        (array)     Array of parameters that are sent to geonames when
@@ -1737,6 +1911,62 @@ class Mercator extends Utility implements iContext
         {*return
             (array)         Associative array with all results coming from geonames, get
                             service
+        *}
+
+        {*example
+            use \trql\mercator\Mercator as Mercator;
+
+            if ( ! defined( 'MERCATOR_CLASS_VERSION' ) )
+                require_once( 'trql.mercator.class.php' );
+
+            [b]$o = new Mercator();[/b]
+            $o->remembering = true;     // This will use cache if any
+            $o->remembering = false;    // This will disregard cache
+
+            // The geonameId "8520400" is the one of Lato Sensu Management
+            // Let's get all geonames details about this ID
+            [b]$a = $o->get( array( "geonameId" => "8520400" ) );
+            var_dump( $a );[/b]
+
+            // This gives the following result:
+            // array (size=2)
+            //   'service' => string 'get' (length=3)
+            //   'results' =>
+            //     array (size=1)
+            //       0 =>
+            //         array (size=31)
+            //           'toponymName' => string 'Lato Sensu Management' (length=21)
+            //           'name' => string 'Lato Sensu Management' (length=21)
+            //           'lat' => float 50.38518
+            //           'lng' => float 4.66052
+            //           'geonameId' => string '8520400' (length=7)
+            //           'countryCode' => string 'BE' (length=2)
+            //           'countryName' => string 'Belgium' (length=7)
+            //           'fcl' => string 'S' (length=1)
+            //           'fcode' => string 'STNB' (length=4)
+            //           'fclName' => string 'spot, building, farm' (length=20)
+            //           'fcodeName' => string 'scientific research base' (length=24)
+            //           'population' => int 0
+            //           'adminCode1' => string 'WAL' (length=3)
+            //           'adminName1' => string 'Wallonia' (length=8)
+            //           'asciiName' => string 'Lato Sensu Management' (length=21)
+            //           'alternateNames' => string '' (length=0)
+            //           'elevation' => int 0
+            //           'srtm3' => string '216' (length=3)
+            //           'astergdem' => int 197
+            //           'continentCode' => string 'EU' (length=2)
+            //           'adminTypeName' => null
+            //           'adminCode2' => string 'WNA' (length=3)
+            //           'adminName2' => string 'Namur Province' (length=14)
+            //           'adminCode3' => string '92' (length=2)
+            //           'adminName3' => string 'Arrondissement de Namur' (length=23)
+            //           'adminCode4' => string '92048' (length=5)
+            //           'adminName4' => string 'Fosses-la-Ville' (length=15)
+            //           'timezone' => string 'Europe/Brussels' (length=15)
+            //           'score' => float 0
+            //           'latitude' => float 50.38518
+            //           'longitude' => float 4.66052
+
         *}
 
         *}}
@@ -1771,7 +2001,7 @@ class Mercator extends Utility implements iContext
             if ( ! empty( $szXML = $this->call( $szService = 'get',$aParams ) ) )
             {
                 //var_dump( "AFTER call()" );
-                var_dump( $szXML );
+                //var_dump( $szXML );
                 //die( "Dying at " . __LINE__ );
 
                 $aRetVal = array_merge( array( 'service' => 'get' ),$this->parse( $szXML,'get' ) );
@@ -1787,14 +2017,82 @@ class Mercator extends Utility implements iContext
         }    /* End of ... Else of ... if ( is_file( $szCacheFile ) ) */
 
         end:
-
         return ( $aRetVal );
     }   /* End of Mercator.get() ====================================================== */
     /* ================================================================================ */
 
 
-    /* Final */
     /* https://www.geonames.org/export/wikipedia-webservice.html#wikipediaSearch */
+    /* ================================================================================ */
+    /** {{*wikipedia( $szTerm )=
+
+        Get points of interest pertaining to @param.szTerm found on Wikipedi
+
+        {*params
+            $szTerm         (string)    The term to search for geonames details on
+                                        Wikipedia
+        *}
+
+        {*return
+            (array)         Associative array with all results coming from
+                            geonames/wikipedia
+        *}
+
+        {*example
+            use \trql\mercator\Mercator as Mercator;
+
+            if ( ! defined( 'MERCATOR_CLASS_VERSION' ) )
+                require_once( 'trql.mercator.class.php' );
+
+            [b]$o = new Mercator();
+            var_dump( $o->wikipedia( 'namur' ) );[/b]
+            // array (size=4)
+            //   'service' => string 'wikipedia' (length=9)
+            //   'term' => string 'namur' (length=5)
+            //   'lupdate' => int 1615638113
+            //   'results' =>
+            //     array (size=435)
+            //       0 =>
+            //         array (size=13)
+            //           'lang' => string 'en' (length=2)
+            //           'title' => string 'Namur' (length=5)
+            //           'summary' => string 'Namur (Dutch: Namen, Nameur in Walloon) is a city and municipality in Wallonia, Belgium.
+            //                               It is both the capital of the province of Namur and of Wallonia. It hosts the Walloon Parliament.
+            //                               Namur stands at the confluence of the Sambre and Meuse rivers and straddles three different
+            //                               regions &ndash; (...)' (length=300)
+            //           'feature' => string 'city' (length=4)
+            //           'countryCode' => string 'BE' (length=2)
+            //           'elevation' => int 88
+            //           'lat' => float 50.4639
+            //           'lng' => float 4.8603
+            //           'wikipediaUrl' => string 'https://en.wikipedia.org/wiki/Namur' (length=35)
+            //           'thumbnailImg' => string 'http://www.geonames.org/img/wikipedia/8000/thumb-7214-100.jpg' (length=61)
+            //           'rank' => float 100
+            //           'latitude' => float 50.4639
+            //           'longitude' => float 4.8603
+            //       1 =>
+            //         array (size=13)
+            //           'lang' => string 'en' (length=2)
+            //           'title' => string 'Namur (province)' (length=16)
+            //           'summary' => string 'Namur (Dutch: Namen) is a province of Wallonia, one of the three regions of Belgium. It borders
+            //                               (clockwise from the West) on the Walloon provinces of Hainaut, Walloon Brabant, Liège and Luxembourg
+            //                               in Belgium, and on France. Its capital is the city of Namur.  (...)' (length=265)
+            //           'feature' => string '' (length=0)
+            //           'countryCode' => string 'BE' (length=2)
+            //           'elevation' => int 91
+            //           'lat' => float 50.4665
+            //           'lng' => float 4.8662
+            //           'wikipediaUrl' => string 'https://en.wikipedia.org/wiki/Namur_%28province%29' (length=50)
+            //           'thumbnailImg' => string '' (length=0)
+            //           'rank' => float 100
+            //           'latitude' => float 50.4665
+            //           'longitude' => float 4.8662
+            //      ... and more elements !
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function wikipedia( $szTerm )
     /*--------------------------------*/
     {
@@ -1819,7 +2117,7 @@ class Mercator extends Utility implements iContext
         {
             if ( ! empty( $szXML = $this->call( $szService = 'wikipediaSearch',$aParams ) ) )
             {
-                if ( is_array( $aTmp = $this->parse( $szXML ) ) )
+                if ( is_array( $aTmp = $this->parse( $szXML,'wikipedia' ) ) )
                     $aRetVal = array_merge( array( 'service'    => 'wikipedia'  ,
                                                    'term'       => $aParams['q'],
                                                    'lupdate'    => time()       ,
@@ -3080,7 +3378,5 @@ class Mercator extends Utility implements iContext
         $this->necroSignaling();
     }   /* End of Mercator.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class Mercator ========================================================== */
 /* ==================================================================================== */
-?>

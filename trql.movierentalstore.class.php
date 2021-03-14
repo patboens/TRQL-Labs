@@ -50,7 +50,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\movierentalstore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
 use \trql\store\Store       as Store;
@@ -85,6 +85,7 @@ defined( 'MOVIERENTALSTORE_CLASS_VERSION' ) or define( 'MOVIERENTALSTORE_CLASS_V
         on 26-08-2020 18:50.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class MovieRentalStore extends Store

@@ -43,7 +43,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\sportinggoodsstore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\store\Store           as Store;
@@ -78,6 +78,7 @@ defined( 'SPORTINGGOODSSTORE_CLASS_VERSION' ) or define( 'SPORTINGGOODSSTORE_CLA
         on 28-08-2020 16:30.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class SportingGoodsStore extends Store
@@ -150,4 +151,3 @@ class SportingGoodsStore extends Store
     /* ================================================================================ */
 }   /* End of class SportingGoodsStore ================================================ */
 /* ==================================================================================== */
-?>

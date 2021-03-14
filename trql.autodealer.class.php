@@ -52,11 +52,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\autodealer;
+namespace trql\automotive;
 
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\automotivebusiness\AutomotiveBusiness     as AutomotiveBusiness;
-
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\automotive\AutomotiveBusiness     as AutomotiveBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -71,7 +70,7 @@ defined( 'AUTODEALER_CLASS_VERSION' ) or define( 'AUTODEALER_CLASS_VERSION','0.1
 
     {*desc
 
-        An car dealership.
+        Car dealership.
 
     *}
 
@@ -87,6 +86,8 @@ defined( 'AUTODEALER_CLASS_VERSION' ) or define( 'AUTODEALER_CLASS_VERSION','0.1
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
         on 26-08-2020 18:36.
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -162,5 +163,3 @@ class AutoDealer extends AutomotiveBusiness
     /* ================================================================================ */
 }   /* End of class AutoDealer ======================================================== */
 /* ==================================================================================== */
-
-?>

@@ -1023,6 +1023,27 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </table>
 <h2 class="DocumentorLabel">Methods of <code>Input</code></h2>
 <p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: EVERYTHING MUST BE DOCUMENTED!!!!!!!!!!!!!!!</p>
+<p class="property">Abstract:</p>
+<p>Contextual help is related to a unique ID in a given module. For example
+ if there is a zone called "edtMemo" in the form of the "invoices" module
+ then the combination of the module and the name of the input zone forms
+ a unique ID that corresponds to a help file stored in the Quitus - TRQL
+ Snippet Center:
+
+ d:\websites\snippet-center\q\common\resources\help\invoices.edtMemo.html
+
+ Help is provided in function of the language that is used in TRQL when
+ help is requested. In the former example, if the current language was
+ set to French ('fr'), then we would look for a file called invoices.edtMemo.fr.html.
+ If this file is not found, we fallback on other strategies:
+
+ invoices.edtMemo.fr.html
+ invoices.edtMemo.html
+ edtMemo.fr.html
+ edtMemo.html
+
+ If none of these strategies yield a positive result, then we abandon : no
+ help found !</p>
 <p class="property">Syntax:</p>
 <p><code>__construct( $szLang )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -1055,16 +1076,46 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">The language to consider</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The HTML code that corresponds to the help attached to an
+ input zone</p>
 <hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
 <hr /><p class="property func" id="fnc.buildClass"><span class="name"><strong><code>buildClass()</code></strong></span>: Builds the class attribute of the tag</p>
 <p class="property">Syntax:</p>
 <p><code>buildClass()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The <code>' class="..."'</code> attribute</p>
 <hr /><p class="property func" id="fnc.buildID"><span class="name"><strong><code>buildID()</code></strong></span>: Generates the ID of the tag (if any)</p>
 <p class="property">Syntax:</p>
 <p><code>buildID()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
 <hr /><p class="property func" id="fnc.q_getInputZoneHelp"><span class="name"><strong><code>q_getInputZoneHelp()</code></strong></span>: Get the contextual help attched to a zone</p>
+<p class="property">Abstract:</p>
+<p>Contextual help is related to a unique ID in a given module. For example
+ if there is a zone called "edtMemo" in the form of the "invoices" module
+ then the combination of the module and the name of the input zone forms
+ a unique ID that corresponds to a help file stored in the Quitus - TRQL
+ Snippet Center:
+
+ d:\websites\snippet-center\q\common\resources\help\invoices.edtMemo.html
+
+ Help is provided in function of the language that is used in TRQL when
+ help is requested. In the former example, if the current language was
+ set to French ('fr'), then we would look for a file called invoices.edtMemo.fr.html.
+ If this file is not found, we fallback on other strategies:
+
+ invoices.edtMemo.fr.html
+ invoices.edtMemo.html
+ edtMemo.fr.html
+ edtMemo.html
+
+ If none of these strategies yield a positive result, then we abandon : no
+ help found !</p>
 <p class="property">Syntax:</p>
 <p><code>q_getInputZoneHelp( $szLang )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -1097,6 +1148,9 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">The language to consider</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The HTML code that corresponds to the help attached to an
+ input zone</p>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

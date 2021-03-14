@@ -52,7 +52,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\hardwarestore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\store\Store           as Store;
@@ -87,6 +87,7 @@ defined( 'HARDWARESTORE_CLASS_VERSION' ) or define( 'HARDWARESTORE_CLASS_VERSION
         on 26-08-2020 18:48.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class HardwareStore extends Store
@@ -159,5 +160,3 @@ class HardwareStore extends Store
     /* ================================================================================ */
 }   /* End of class HardwareStore ===================================================== */
 /* ==================================================================================== */
-
-?>

@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 18:50 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,19 +43,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\motorcyclerepair;
+namespace trql\automotive;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\automotivebusiness\AutomotiveBusiness    as AutomotiveBusiness;
-
+use \trql\automotive\AutomotiveBusiness     as AutomotiveBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'AUTOMOTIVEBUSINESS_CLASS_VERSION' ) )
     require_once( 'trql.automotivebusiness.class.php' );
-
-
 
 defined( 'MOTORCYCLEREPAIR_CLASS_VERSION' ) or define( 'MOTORCYCLEREPAIR_CLASS_VERSION','0.1' );
 
@@ -81,6 +77,8 @@ defined( 'MOTORCYCLEREPAIR_CLASS_VERSION' ) or define( 'MOTORCYCLEREPAIR_CLASS_V
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
         on 26-08-2020 18:50.
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -156,8 +154,5 @@ class MotorcycleRepair extends AutomotiveBusiness
         $this->necroSignaling();
     }   /* End of MotorcycleRepair.__destruct() ======================================= */
     /* ================================================================================ */
-
 }   /* End of class MotorcycleRepair ================================================== */
 /* ==================================================================================== */
-
-?>

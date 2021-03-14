@@ -50,7 +50,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\mobilephonestore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\store\Store           as Store;
@@ -85,6 +85,7 @@ defined( 'MOBILEPHONESTORE_CLASS_VERSION' ) or define( 'MOBILEPHONESTORE_CLASS_V
         on 26-08-2020 18:49.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class MobilePhoneStore extends Store
@@ -157,4 +158,3 @@ class MobilePhoneStore extends Store
     /* ================================================================================ */
 }   /* End of class MobilePhoneStore ================================================== */
 /* ==================================================================================== */
-?>

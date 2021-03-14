@@ -52,7 +52,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\conveniencestore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\store\Store           as Store;
@@ -87,6 +87,7 @@ defined( 'CONVENIENCESTORE_CLASS_VERSION' ) or define( 'CONVENIENCESTORE_CLASS_V
         on 26-08-2020 18:46.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class ConvenienceStore extends Store

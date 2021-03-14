@@ -43,7 +43,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\shoestore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
 use \trql\store\Store       as Store;
@@ -78,6 +78,7 @@ defined( 'SHOESTORE_CLASS_VERSION' ) or define( 'SHOESTORE_CLASS_VERSION','0.1' 
         on 28-08-2020 16:30.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class ShoeStore extends Store
@@ -149,4 +150,3 @@ class ShoeStore extends Store
     /* ================================================================================ */
 }   /* End of class ShoeStore ========================================================= */
 /* ==================================================================================== */
-?>

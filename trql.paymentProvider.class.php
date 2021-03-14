@@ -1,5 +1,23 @@
 <?php
 /**************************************************************************************/
+/*
+    {PYB} is a shortcut for Patrick Boens
+
+    {COMPANY} is a shortcut to "Lato Sensu Management"
+
+    {RIGHTS} is a shortcut used by trql.documentor.class.php. In general the material
+    presented here is available under the conditions of 
+    https://creativecommons.org/licenses/by-sa/4.0/
+
+    Other shortcuts exist. They exist to make it simple to change the formulation
+    of parts that can vary over time.
+
+    It does not change the undisputed truth that ALL code has been created by
+    Patrick Boens, the author, who owns ALL the intellectual property of what
+    he created.
+
+*/
+
 /** {{{*fheader
     {*file                  trql.paymentProvider.class.php *}
     {*purpose               TRQL Labs - Payment Provider Abstraction *}
@@ -8,6 +26,7 @@
     {*cdate                 01/04/2017 - 00:00 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -20,13 +39,13 @@
         *}
     *}
 
-
-    *}}} */
+    *}}}
+*/
 /**************************************************************************************/
 namespace trql\paymentProvider;
 
-use \trql\vaesoli\Vaesoli       as v;
-use \trql\thing\Thing           as Thing;
+use \trql\vaesoli\Vaesoli   as v;
+use \trql\thing\Thing       as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -34,15 +53,29 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 if ( ! defined( 'THING_CLASS_VERSION' ) )
     require_once( 'trql.thing.class.php' );
 
+defined( 'PAYMENTPROVIDER_CLASS_VERSION' ) or define( 'PAYMENTPROVIDER_CLASS_VERSION','0.1' );
+
 interface iPaymentProvider
 /*-----------------------*/
 {
     public function init( $aData );
-}   /* End of interface iPaymentProvider ============================================ */
-/* ================================================================================== */
+}   /* End of interface iPaymentProvider ============================================== */
+/* ==================================================================================== */
 
 
-class paymentProvider extends Thing implements iPaymentProvider
+/* ==================================================================================== */
+/** {{*class PaymentProvider=
+
+    {*desc
+
+        Online Payment Provider System.
+
+    *}
+
+    *}}
+ */
+/* ==================================================================================== */
+class PaymentProvider extends Thing implements iPaymentProvider
 /*-----------------------------------------------------------*/
 {
     public $aProperties = null;
@@ -51,8 +84,9 @@ class paymentProvider extends Thing implements iPaymentProvider
     /*--------------------------*/
     {
         var_dump( 'Tu veux initialiser ton paymentProvider mais c\'est pas encore programmé dans ' . __FILE__  . " à la ligne " . __LINE__ );
-    }   /* End of paymentProvider.init() ============================================ */
-    /* ============================================================================== */
+    }   /* End of PaymentProvider.init() ============================================== */
+    /* ================================================================================ */
+
 
     protected function redirect( $szURL )
     /*---------------------------------*/
@@ -61,10 +95,11 @@ class paymentProvider extends Thing implements iPaymentProvider
         header('Location: '. $szURL );
         ob_end_flush();
         die();
-    }   /* End of paymentProvider.redirect() ======================================== */
-    /* ============================================================================== */
+    }   /* End of PaymentProvider.redirect() ========================================== */
+    /* ================================================================================ */
 
 
+    /* Should check if not already in Mother or Thing */
     public function guid()
     /*------------------*/
     {
@@ -82,32 +117,42 @@ class paymentProvider extends Thing implements iPaymentProvider
                           mt_rand( 0,65535 )                    ,
                           mt_rand( 0,65535 )                    ,
                           mt_rand( 0,65535 ) ) );
-    }   /* End of paymentProvider.guid() ============================================ */
-    /* ============================================================================== */
+    }   /* End of PaymentProvider.guid() ============================================== */
+    /* ================================================================================ */
+}   /* End of class PaymentProvider =================================================== */
+/* ==================================================================================== */
 
 
-}   /* End of class paymentProvider ================================================= */
-/* ================================================================================== */
+/* ==================================================================================== */
+/** {{*class PaymentProviderFactory=
 
+    {*desc
 
-class paymentProviderFactory
-/*-------------------------*/
+        Online Payment Provider System.
+
+    *}
+
+    *}}
+ */
+/* ==================================================================================== */
+class PaymentProviderFactory
+/*------------------------*/
 {
     public static function create( $szType )
     /*------------------------------------*/
     {
-        switch( $szType )
+        switch( strtolower( $szType ) )
         {
-            case 'mollie'       : return new mollie();
+            case 'mollie'       : return new Mollie();
             default             : throw new Exception( 'Invalid paymentProvider: ' . $szType );
-        }
-    }   /* End of paymentProviderFactory.create() =================================== */
-    /* ============================================================================== */
-}   /* End of class paymentProviderFactory ========================================== */
-/* ================================================================================== */
+        }   /* switch( $szType ) */
+    }   /* End of paymentProviderFactory.create() ===================================== */
+    /* ================================================================================ */
+}   /* End of class PaymentProviderFactory ============================================ */
+/* ==================================================================================== */
 
 
-class mollie extends paymentProvider
+class Mollie extends PaymentProvider
 /*--------------------------------*/
 {
     public      $szMode                 = 'test';
@@ -124,9 +169,35 @@ class mollie extends paymentProvider
 
         return ( $this );
         //var_dump( "Salut ... je suis Mollie" );
-    }   /* End of mollie.__construct() ================================================ */
+    }   /* End of Mollie.__construct() ================================================ */
     /* ================================================================================ */
 
+    public function loadObject( $o )
+    {
+        if ( isset( $o->szMode ) )
+            $this->szMode = $o->szMode;
+
+        if ( isset( $o->aAPIKeys['test'] ) )
+            $this->aAPIKeys['test'] = $o->aAPIKeys['test'];
+
+        if ( isset( $o->aAPIKeys['live'] ) )
+            $this->aAPIKeys['live'] = $o->aAPIKeys['live'];
+
+        if ( isset( $o->aURLs['redirect'] ) )
+            $this->aURLs['redirect'] = $o->aURLs['redirect'];
+
+        if ( isset( $o->aURLs['hook'] ) )
+            $this->aURLs['hook'] = $o->aURLs['hook'];
+
+        if ( isset( $o->szContactOption ) )
+            $this->szContactOption = $o->szContactOption;
+
+        if ( isset( $o->szContactDestination ) )
+            $this->szContactDestination = $o->szContactDestination;
+
+        if ( isset( $o->aProperties ) )
+            $this->aProperties = $o->aProperties;
+    }
 
     /* ================================================================================ */
     /** {{*getPIKeys()=
@@ -155,7 +226,7 @@ class mollie extends paymentProvider
 
         return ( $this );
 
-    }   /* End of mollie.getAPIKeys() ================================================= */
+    }   /* End of Mollie.getAPIKeys() ================================================= */
     /* ================================================================================ */
 
 
@@ -190,7 +261,7 @@ class mollie extends paymentProvider
         $this->aURLs['redirect'] = $this->getAPIKey( 'hook'     );
 
         return ( $this );
-    }   /* End of mollie.getURLs() ==================================================== */
+    }   /* End of Mollie.getURLs() ==================================================== */
     /* ================================================================================ */
 
 
@@ -227,7 +298,7 @@ class mollie extends paymentProvider
             return ( v::FIL_FileToStr( $szFile ) );
         else
             return ( null );
-    }   /* End of mollie.getAPIKey() ================================================== */
+    }   /* End of Mollie.getAPIKey() ================================================== */
     /* ================================================================================ */
 
 
@@ -269,7 +340,7 @@ class mollie extends paymentProvider
         }   /* if ( isset( $aData['live'] ) ) */
 
         return ( $aRetVal );
-    }   /* End of mollie.setAPIKeys() ================================================= */
+    }   /* End of Mollie.setAPIKeys() ================================================= */
     /* ================================================================================ */
 
 
@@ -284,7 +355,7 @@ class mollie extends paymentProvider
         }   /* if ( ! is_null( $szValue ) ) */
 
         return ( $szRetVal );
-    }   /* End of mollie.setRedirect() ================================================ */
+    }   /* End of Mollie.setRedirect() ================================================ */
     /* ================================================================================ */
 
 
@@ -299,7 +370,7 @@ class mollie extends paymentProvider
         }   /* if ( ! is_null( $szValue ) ) */
 
         return ( $szRetVal );
-    }   /* End of mollie.setHook() ==================================================== */
+    }   /* End of Mollie.setHook() ==================================================== */
     /* ================================================================================ */
 
 
@@ -314,7 +385,7 @@ class mollie extends paymentProvider
         }   /* if ( ! is_null( $szValue ) ) */
 
         return ( $szRetVal );
-    }   /* End of mollie.setContactOption() =========================================== */
+    }   /* End of Mollie.setContactOption() =========================================== */
     /* ================================================================================ */
 
 
@@ -329,7 +400,7 @@ class mollie extends paymentProvider
         }   /* if ( ! is_null( $szValue ) ) */
 
         return ( $szRetVal );
-    }   /* End of mollie.setContactDestination() ====================================== */
+    }   /* End of Mollie.setContactDestination() ====================================== */
     /* ================================================================================ */
 
 
@@ -418,7 +489,7 @@ class mollie extends paymentProvider
             curl_close( $ch );
 
         return ( $oJSON );
-    }   /* End of mollie.call() ======================================================= */
+    }   /* End of Mollie.call() ======================================================= */
     /* ================================================================================ */
 
 
@@ -473,7 +544,7 @@ class mollie extends paymentProvider
         }   /* if ( ! is_null( $aParams ) ) */
 
         return ( $oRetVal );
-    }   /* End of mollie.createPayment() ============================================== */
+    }   /* End of Mollie.createPayment() ============================================== */
     /* ================================================================================ */
 
 
@@ -578,7 +649,7 @@ class mollie extends paymentProvider
 
         return ( $aRetVal );
 
-    }   /* End of mollie.listPayments() =============================================== */
+    }   /* End of Mollie.listPayments() =============================================== */
     /* ================================================================================ */
 
 
@@ -590,7 +661,7 @@ class mollie extends paymentProvider
         // Il pourrait être intéressant de standardiser les statuts de paiement
         // avec ce qu'en dit schema.org: https://schema.org/PaymentStatusType
 
-    }   /* End of mollie.checkPaymentStatus() ========================================= */
+    }   /* End of Mollie.checkPaymentStatus() ========================================= */
     /* ================================================================================ */
 
 
@@ -626,7 +697,7 @@ class mollie extends paymentProvider
 
         return ( false );                                           /* Si on arrive ici, c'est que c'est pas bon ! */
 
-    }   /* End of mollie.chekcout() =================================================== */
+    }   /* End of Mollie.chekcout() =================================================== */
     /* ================================================================================ */
 
 
@@ -657,7 +728,7 @@ class mollie extends paymentProvider
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of mollie.__destruct() ================================================= */
+    }   /* End of Mollie.__destruct() ================================================= */
     /* ================================================================================ */
-}   /* End of class mollie ============================================================ */
-?>
+}   /* End of class Mollie ============================================================ */
+/* ==================================================================================== */

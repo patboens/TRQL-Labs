@@ -112,7 +112,7 @@ defined( 'RSSITEM_CLASS_VERSION'        ) or define( 'RSSITEM_CLASS_VERSION'    
 
     {*desc
 
-        Reads an RSS feed
+        Implements the reading of a RSS feed
 
     *}
 
@@ -139,7 +139,6 @@ class RSS extends Utility implements iContext
 
     public      $oForm          = null;                             /* {*property   $oForm                      (Form)                  Form that is generated via [c]__toForm()[/c] *} */
     public      $szClass        = null;                             /* {*property   $szClass                    (string)                CSS class of the RSS form ([c]__toForm()[/c]) *} */
-
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -231,6 +230,61 @@ class RSS extends Utility implements iContext
         https://www.lifewire.com/google-news-custom-rss-feed-3486648
 
     */
+
+
+    /* ================================================================================ */
+    /** {{*read( $szURL[,$aCategories] )=
+
+        Read a RSS feed
+
+        {*params
+            $szHome     (string)        Home of the class. Optional.
+        *}
+
+        {*return
+            (array)     An array of items read from the RSS feed
+        *}
+
+        {*example
+        use \trql\vaesoli\VaeSoli           as v;
+        use \trql\rss\RSS                   as RSS;
+        use \trql\rss\RSSChannel            as RSSChannel;
+        use \trql\rss\RSSItem               as RSSItem;
+        use \trql\person\Person             as Person;
+        use \trql\user\User                 as User;
+
+        if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+            require_once( 'trql.vaesoli.class.php' );
+
+        if ( ! defined( 'RSS_CLASS_VERSION' ) )
+            require_once( 'trql.rss.class.php' );
+
+        if ( ! defined( 'PERSON_CLASS_VERSION' ) )
+            require_once( 'trql.person.class.php' );
+
+        if ( ! defined( 'USER_CLASS_VERSION' ) )
+            require_once( 'trql.user.class.php' );
+
+        $oRSS               = new RSS();
+        $oRSS->remembering  = true;             // This helps the RSS class to remember what it just read
+        $oRSS->ttl          = 86400 / 2;        // ... and it will assign it a TTL of ½ day
+
+        [b]$aRetVal = $oRSS->read( $szURL = 'https://csdl-api.computer.org/api/rss/periodicals/mags/cs/rss.xml' );[/b]
+
+        // If results returned
+        if ( is_array( $aRetVal ) && isset( $aRetVal['results'] )
+        {
+            // Display each result
+            foreach( $aRetVal['results'] as $aResult )
+            {
+                var_dump( $aResult );
+            }
+        }
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function read( $szURL,$aCategories = null )
     /*----------------------------------------------*/
     {

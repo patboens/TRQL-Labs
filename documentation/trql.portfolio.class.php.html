@@ -835,6 +835,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">Portfolio identifier. Optional.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
 <p class="property">Example(s):</p>
 <pre>
 
@@ -875,25 +877,37 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p>constructors, destructors</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
 <span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
 <hr /><p class="property func" id="fnc.__toHTML"><span class="name"><strong><code>__toHTML()</code></strong></span>: Renders the Portfolio in HTML (very limited set of properties are rendered)</p>
 <p class="property">Syntax:</p>
 <p><code>__toHTML()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  HTML Code</p>
 <hr /><p class="property func" id="fnc.__toString"><span class="name"><strong><code>__toString()</code></strong></span>: Allows a class to decide how it will react when it is treated like a
  string.</p>
 <p class="property">Syntax:</p>
 <p><code>__toString()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  Returns the HTML rendering</p>
 <hr /><p class="property func" id="fnc.__toXML"><span class="name"><strong><code>__toXML()</code></strong></span>: Renders the Portfolio in XML</p>
 <p class="property">Syntax:</p>
 <p><code>__toXML()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  XML Code</p>
 <hr /><p class="property func" id="fnc.findAspirations"><span class="name"><strong><code>findAspirations()</code></strong></span>: Find all aspirations (a generic term for a project, an initiative, an idea, an
  ambition, ...) belonging to this portfolio.</p>
 <p class="property">Syntax:</p>
 <p><code>findAspirations()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Array of aspirations objects or <code>null</code> if none found.</p>
 <hr /><p class="property func" id="fnc.getFolder"><span class="name"><strong><code>getFolder()</code></strong></span>: Get the exact tree structure from which THIS portfolio is supposed to be retrieved
  and saved to</p>
 <p class="property">Syntax:</p>
 <p><code>getFolder()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The tree structure where the Portfolio is stored</p>
 <hr /><p class="property func" id="fnc.load"><span class="name"><strong><code>load()</code></strong></span>: Loads a Portfolio file</p>
 <p class="property">Syntax:</p>
 <p><code>load( $szFile )</code></p>
@@ -912,6 +926,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">The file the portfolio must be loaded from. Optional. If not passed, the name of the file is determined from the codeName of the portfolio.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if $szFile successfully loaded; <code>false</code> otherwise</p>
 <hr /><p class="property func" id="fnc.save"><span class="name"><strong><code>save()</code></strong></span>: Saves Portfolio to a file</p>
 <p class="property">Syntax:</p>
 <p><code>save( $szFile )</code></p>
@@ -930,6 +946,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">The file the portfolio must be saved to. Optional. When NOT passed, the Portfolio is saved in its natural folder (see this->getFolder()) using its identifier. (e.g. D:\websites\openpmo.site\www\databases\PMO\00256\00406\00006\00054\delhaize.portfolio.xml')</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if $szFile successfully saved; <code>false</code> otherwise</p>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

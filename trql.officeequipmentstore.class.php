@@ -50,7 +50,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\officeequipmentstore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\store\Store           as Store;
@@ -85,6 +85,7 @@ defined( 'OFFICEEQUIPMENTSTORE_CLASS_VERSION' ) or define( 'OFFICEEQUIPMENTSTORE
 
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class OfficeEquipmentStore extends Store

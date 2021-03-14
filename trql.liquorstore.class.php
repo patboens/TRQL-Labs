@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,7 +53,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\liquorstore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
 use \trql\store\Store       as Store;
@@ -90,6 +89,7 @@ defined( 'LIQUORSTORE_CLASS_VERSION' ) or define( 'LIQUORSTORE_CLASS_VERSION','0
         on 26-08-2020 18:49.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class LiquorStore extends Store
@@ -162,4 +162,3 @@ class LiquorStore extends Store
     /* ================================================================================ */
 }   /* End of class LiquorStore ======================================================= */
 /* ==================================================================================== */
-?>

@@ -26,6 +26,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,10 +52,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\autorental;
+namespace trql\automotive;
 
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\automotivebusiness\AutomotiveBusiness     as AutomotiveBusiness;
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\automotive\AutomotiveBusiness     as AutomotiveBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -86,10 +87,11 @@ defined( 'AUTORENTAL_CLASS_VERSION' ) or define( 'AUTORENTAL_CLASS_VERSION','0.1
         on 26-08-2020 18:36.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class AutoRental extends AutomotiveBusiness
-/*--------------------------------------*/
+/*---------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -158,4 +160,3 @@ class AutoRental extends AutomotiveBusiness
     /* ================================================================================ */
 }   /* End of class AutoRental ======================================================== */
 /* ==================================================================================== */
-?>

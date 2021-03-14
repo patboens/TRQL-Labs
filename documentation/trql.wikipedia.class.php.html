@@ -105,11 +105,20 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">Home of the class. Optional.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
 <hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
 <hr /><p class="property func" id="fnc.__parse1"><span class="name"><strong><code>__parse1()</code></strong></span>: Parses the first set of results from Wikipedia (a list of URLs that correspond
  to the term that is looked for</p>
+<p class="property">Abstract:</p>
+<p>Retrieving information from Wikipedia is performed in 2 steps :
+
+ 1) Get potential results (list of potential URLs - max 500)
+ 2) Get access to the real content (<code>parse2()</code>)</p>
 <p class="property">Syntax:</p>
 <p><code>__parse1( $szXML )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -127,7 +136,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">The XML to parse</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc.__parse2"><span class="name"><strong><code>__parse2()</code></strong></span>: Parses the second set of results from Wikipedia (the real content of a page)</p>
+<p class="property">Abstract:</p>
+<p>Retrieving information from Wikipedia is performed in 2 steps :
+
+ 1) Get potential results (list of potential URLs - max 500) (<code>parse1()</code>)
+ 2) Get access to the real content (<code>parse2()</code>)</p>
 <p class="property">Syntax:</p>
 <p><code>__parse2( $szXML )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -145,6 +161,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">The XML to parse</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc.__parse3"><span class="name"><strong><code>__parse3()</code></strong></span>: Parses the resulting XML of a call to searchEntities()</p>
 <p class="property">Syntax:</p>
 <p><code>__parse3( $szXML )</code></p>
@@ -168,6 +186,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">The XML to parse</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc.__parse4"><span class="name"><strong><code>__parse4()</code></strong></span>: Parses the return of an entity (get entity based on its ID) from WikiData</p>
 <p class="property">Syntax:</p>
 <p><code>__parse4( $szXML )</code></p>
@@ -191,6 +211,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">The XML to parse</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc.call"><span class="name"><strong><code>call()</code></strong></span>: Calls Wikipedia via its dedicated URL</p>
 <p class="property">Syntax:</p>
 <p><code>call( $aParams )</code></p>
@@ -209,10 +231,22 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">Associative array to pass parameters in the URL that must be called ("opensearch" is the main verb)</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  Result returned by the call to <code>getURL(...)</code></p>
 <hr /><p class="property func" id="fnc.destruct"><span class="name"><strong><code>destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return.</p>
 <hr /><p class="property func" id="fnc.getEntity"><span class="name"><strong><code>getEntity()</code></strong></span>: Parses the return of an entity (get entity based on its ID) from WikiData</p>
+<p class="property">Abstract:</p>
+<p>Entities are like "concepts". Stevie Nicks is known as an entity on Wikidata:
+ <a href="https://www.wikidata.org/wiki/Q234691" class="DocumentorLink" title="Go to https://www.wikidata.org/wiki/Q234691" itemprop="url">https://www.wikidata.org/wiki/Q234691</a>. Getting all info pertaining
+ to entity <code>Q234691</code> corresponds to <code>$oWiki->getEntity( 'Q234691' )</code> or
+ <a href="https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q234691&format=xml" class="DocumentorLink" title="Go to https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q234691&format=xml" itemprop="url">https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q234691&format=xml</a><br />
+
+ For Fleetwood Mac (Q106648):[br[
+ [url]https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q106648&format=xml[/ulr]</p>
 <p class="property">Syntax:</p>
 <p><code>getEntity( $szID )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -230,6 +264,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">Entity ID (e.g. "<code>Q234691</code>")</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc.search"><span class="name"><strong><code>search()</code></strong></span>: Performs an open search on <code>$szTerm</code></p>
 <p class="property">Warning:</p>
 <p>Will onky work on the basis of English terms</p>
@@ -255,7 +291,33 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">Number of results. Optional. <code>All</code> by default.</td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /><p class="property func" id="fnc.searchEntities"><span class="name"><strong><code>searchEntities()</code></strong></span>: Returns the entities corresponding to <code>$szTerm</code></p>
+<p class="property">Abstract:</p>
+<p>Entities are like "concepts". Stevie Nicks is known as an entity on Wikidata:
+ <a href="https://www.wikidata.org/wiki/Q234691" class="DocumentorLink" title="Go to https://www.wikidata.org/wiki/Q234691" itemprop="url">https://www.wikidata.org/wiki/Q234691</a>. Getting all info pertaining
+ to entity <code>Q234691</code> corresponds to <code>$oWiki->getEntity( 'Q234691' )</code> or
+ <a href="https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q234691&format=xml" class="DocumentorLink" title="Go to https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q234691&format=xml" itemprop="url">https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q234691&format=xml</a><br />
+
+ For Fleetwood Mac (Q106648):[br[
+ [url]https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q106648&format=xml[/ulr]<br />
+
+ Before we know which entity ID we must use in <code>getEntity()</code> we must get
+ the entity ID : example ... what is the entity ID of "<code>Fleetwood Mac</code>"?
+ This is what <code>searchEntities(à</code> is for! : <br />
+ <code>$oWiki->searchEntities("Fleetwood Mac")</code><br />
+
+ There may be several entities to return. For example,
+ <code>$aRetVal = $oWiki->searchEntities( 'Proximus',50 );</code> returns 39 results.
+ Which is the one that makes most sense? It's up to you to decide. For example,
+ when we update the birthdate, date of death, etc. in the Wikipedia structure
+ of an Artist file, we loo, for all the entities pertaining to an artist:
+ <code>$aRetVal = $oWiki->searchEntities( $szArtist,50 );</code> after which, we check
+ whether each result seems to be pertaining to an artist; we use a function of
+ our own that scans all the results:
+ <code>if ( ! is_null( $aResult = isSinger( $aRetVal ) ) )</code> that contains all the
+ intelligence of an artist detection.</p>
 <p class="property">Syntax:</p>
 <p><code>searchEntities( $iResults )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
@@ -278,6 +340,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description seealso">Number of entities to return. Optional. <code>1</code> by default. <strong>No longer used!</strong></td>
 </tr>
 </table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An array of results</p>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

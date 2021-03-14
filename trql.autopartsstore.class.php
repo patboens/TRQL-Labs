@@ -52,7 +52,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\autopartsstore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\store\Store           as Store;
@@ -87,6 +87,7 @@ defined( 'AUTOPARTSSTORE_CLASS_VERSION' ) or define( 'AUTOPARTSSTORE_CLASS_VERSI
         on 26-08-2020 18:36.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class AutoPartsStore extends Store
@@ -158,4 +159,3 @@ class AutoPartsStore extends Store
     /* ================================================================================ */
 }   /* End of class AutoPartsStore ==================================================== */
 /* ==================================================================================== */
-?>

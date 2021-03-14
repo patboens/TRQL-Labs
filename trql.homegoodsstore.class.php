@@ -52,7 +52,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\homegoodsstore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
 use \trql\store\Store       as Store;
@@ -87,6 +87,7 @@ defined( 'HOMEGOODSSTORE_CLASS_VERSION' ) or define( 'HOMEGOODSSTORE_CLASS_VERSI
         on 26-08-2020 18:49.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class HomeGoodsStore extends Store
@@ -158,4 +159,3 @@ class HomeGoodsStore extends Store
     /* ================================================================================ */
 }   /* End of class HomeGoodsStore ==================================================== */
 /* ==================================================================================== */
-?>

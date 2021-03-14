@@ -1,39 +1,64 @@
 <style>
-.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; }
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile hr { border-top: 4px solid #800 !important; margin:2em 0; box-shadow: 0 6px 10px 1px rgba(0,0,0,.2); }
+.trql_documentor_DocumentorSourceFile pre { background: #c001; }
+.trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
 .DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
 .property { font-weight: bold;}
-code, .filename { color: crimson; font-family: Consolas,"courier new" }
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
+code,samp, .filename {color: #800 !important;
+   font-family: Consolas,"courier new";
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
+.seealso code a {text-decoration:none;
+   color: #800 !important;
+   font-weight: bold;
+   font-style: italic;
+   }
+.property.inheritance code { border: none !important; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
-.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
 table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
 table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
 table.properties thead th.description { width:60%; }
-table.properties tr.property td { border:1px solid silver;padding: .5em; width:20%; }
-table.properties tr.property td.description { width: 60%; }
+table.properties tr.property td,
+table.properties tr.parameter td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description,
+table.properties tr.parameter td.description { width: 60%; }
+p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
+   letter-spacing: 3px;
+   width: 100%;
+   margin: 0 0 15px 0;
+   padding: 5px;
+   color: rgb(255,128,0);
+   padding: 1em;
+   border: 1px solid #999;
+   box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
+   border: 1px solid #888; }
 </style>
 
 <div class="trql_documentor_DocumentorSourceFile">
 <section class="header">
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.mercator.class.php</span>
 <span class="DocumentorLabel">Purpose: </span><span class="property purpose">Set of Utility geocoordinates-oriented services (mostly based
-                            on geonames.org)</span>
+ on geonames.org)</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
-<span class="DocumentorLabel">Company: </span><span class="property company"><br />Lato Sensu Management<br />
-                            Rue Bois des Mazuis, 47<br />
-                            5070 Vitrival<br />
-                            Belgium<br />
-                            <a href="http://www.latosensu.be" class="DocumentorLink" title="Go to http://www.latosensu.be" itemprop="url">http://www.latosensu.be</a><br />
-                            Vae Soli! : <a href="http://www.vaesoli.org" class="DocumentorLink" title="Go to http://www.vaesoli.org" itemprop="url">http://www.vaesoli.org</a></span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">15-08-20 12:38</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">25/02/2021 - 17:50:31</span>
-<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Submitted to intellectual property rights (see
-                            author)</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">13/03/2021 - 16:14:53</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>Mercator</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">Geo coordinates services</span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="?src=Mother">Mother</a> &gt; <a href="?src=Utility">Utility</a> &gt; Mercator</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Mercator extends Utility implements iContext</code></span>
 <span class="DocumentorLabel">Warning: </span><span class="property warning">Many of the services of the Mercator class are still not-finalized
  and come in non-final implemenations.</span>
@@ -52,41 +77,444 @@ table.properties tr.property td.description { width: 60%; }
 </tr>
 </thead>
 <tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$wikidataId</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Wikidata ID. No equivalent.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$ttl</code></td>
-<td class="type"><code>int</code></td>
-<td class="description">Time-to-Live in sec; 1 full day by default</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$self</code></td>
-<td class="type"><code>array</code></td>
-<td class="description">Fixed 'class' information.</td>
-</tr>
-<tr class="property">
-<td class="name"><code>$aCities</code></td>
+<td class="name" id="var.aCities"><code>$aCities</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">A list of predefined cities (name, lat, long and geonameId)</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$aCountrySynonyms</code></td>
+<td class="name" id="var.aCountrySynonyms"><code>$aCountrySynonyms</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Countryname to country code</td>
 </tr>
 <tr class="property">
-<td class="name"><code>$wikidataId</code></td>
+<td class="name" id="var.self"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.ttl"><code>$ttl</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Time-to-Live in sec; 1 full day by default</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Wikidata ID. No equivalent.</td>
 </tr>
 </table>
-</section> <!-- .class -->
+<h2 class="DocumentorLabel">Methods of <code>Mercator</code></h2>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property">Syntax:</p>
+<p><code>__construct( $szHome )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Home of the class. Optional.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<p class="property">Syntax:</p>
+<p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
+<hr /><p class="property func" id="fnc.geoIP"><span class="name"><strong><code>geoIP()</code></strong></span>: Get geo details from an IP address</p>
+<p class="property">Syntax:</p>
+<p><code>geoIP( $szIP )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.geoIP.szIP"><code>$szIP</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">IP address to check. Optional. <code>SERVER['REMOTE_ADDR']</code> by default.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Associative array with the geocoordinates details</p>
+<p class="property">Example(s):</p>
+<pre>
+
+      use \trql\vaesoli\Vaesoli       as v;
+      use \trql\mercator\Mercator     as mercator;
+
+      if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+          require_once( 'trql.vaesoli.class.php' );
+
+      if ( ! defined( 'MERCATOR_CLASS_VERSION' ) )
+          require_once( 'trql.mercator.class.php' );
+
+      $o = new Mercator();
+      $o->remembering = true;     // This will use cache if any
+
+      $szIP = null;
+
+      if ( ! empty( $szJSON = v::HTTP_GetURL( 'https://api.ipify.org/?format=json' ) ) )
+      {
+          $oJSON = json_decode( $szJSON );
+          $szIP = $oJSON->ip ?? null;
+      }
+
+      var_dump( <strong>$o->geoIP( $szIP )</strong> );
+
+      // This gives a result similar to:
+      // array (size=2)
+      //   'service' => string 'geoIP' (length=5)
+      //   'results' =>
+      //     array (size=14)
+      //       'type' => string 'ipv4' (length=4)
+      //       'continentCode' => string 'EU' (length=2)
+      //       'continentName' => string 'Europe' (length=6)
+      //       'countryCode' => string 'BE' (length=2)
+      //       'countryName' => string 'Belgium' (length=7)
+      //       'regionCode' => string 'VLG' (length=3)
+      //       'regionName' => string 'Flanders' (length=8)
+      //       'locality' => string 'Sint-Truiden' (length=12)
+      //       'postalcode' => string '3800' (length=4)
+      //       'latitude' => float 50.815460205078
+      //       'longitude' => float 5.1866598129272
+      //       'geonameId' => int 2786545
+      //       'capital' => string 'Brussels' (length=8)
+      //       'languages' =>
+      //         array (size=3)
+      //           0 =>
+      //             array (size=3)
+      //               'code' => string 'nl' (length=2)
+      //               'name' => string 'Dutch' (length=5)
+      //               'native' => string 'Nederlands' (length=10)
+      //           1 =>
+      //             array (size=3)
+      //               'code' => string 'fr' (length=2)
+      //               'name' => string 'French' (length=6)
+      //               'native' => string 'Français' (length=9)
+      //           2 =>
+      //             array (size=3)
+      //               'code' => string 'de' (length=2)
+      //               'name' => string 'German' (length=6)
+      //               'native' => string 'Deutsch' (length=7)
+  </pre>
+<hr /><p class="property func" id="fnc.get"><span class="name"><strong><code>get()</code></strong></span>: Get geonames info via their <code>get</code> service</p>
+<p class="property">Syntax:</p>
+<p><code>get( $aParams )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.get.aParams"><code>$aParams</code></td>
+<td class="type"><code>array</code></td>
+<td class="description seealso">Array of parameters that are sent to geonames when invoking THEIR 'get' service</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Associative array with all results coming from geonames, get
+ service</p>
+<p class="property">Example(s):</p>
+<pre>
+
+      use \trql\mercator\Mercator as Mercator;
+
+      if ( ! defined( 'MERCATOR_CLASS_VERSION' ) )
+          require_once( 'trql.mercator.class.php' );
+
+      <strong>$o = new Mercator();</strong>
+      $o->remembering = true;     // This will use cache if any
+      $o->remembering = false;    // This will disregard cache
+
+      // The geonameId "8520400" is the one of Lato Sensu Management
+      // Let's get all geonames details about this ID
+      <strong>$a = $o->get( array( "geonameId" => "8520400" ) );
+      var_dump( $a );</strong>
+
+      // This gives the following result:
+      // array (size=2)
+      //   'service' => string 'get' (length=3)
+      //   'results' =>
+      //     array (size=1)
+      //       0 =>
+      //         array (size=31)
+      //           'toponymName' => string 'Lato Sensu Management' (length=21)
+      //           'name' => string 'Lato Sensu Management' (length=21)
+      //           'lat' => float 50.38518
+      //           'lng' => float 4.66052
+      //           'geonameId' => string '8520400' (length=7)
+      //           'countryCode' => string 'BE' (length=2)
+      //           'countryName' => string 'Belgium' (length=7)
+      //           'fcl' => string 'S' (length=1)
+      //           'fcode' => string 'STNB' (length=4)
+      //           'fclName' => string 'spot, building, farm' (length=20)
+      //           'fcodeName' => string 'scientific research base' (length=24)
+      //           'population' => int 0
+      //           'adminCode1' => string 'WAL' (length=3)
+      //           'adminName1' => string 'Wallonia' (length=8)
+      //           'asciiName' => string 'Lato Sensu Management' (length=21)
+      //           'alternateNames' => string '' (length=0)
+      //           'elevation' => int 0
+      //           'srtm3' => string '216' (length=3)
+      //           'astergdem' => int 197
+      //           'continentCode' => string 'EU' (length=2)
+      //           'adminTypeName' => null
+      //           'adminCode2' => string 'WNA' (length=3)
+      //           'adminName2' => string 'Namur Province' (length=14)
+      //           'adminCode3' => string '92' (length=2)
+      //           'adminName3' => string 'Arrondissement de Namur' (length=23)
+      //           'adminCode4' => string '92048' (length=5)
+      //           'adminName4' => string 'Fosses-la-Ville' (length=15)
+      //           'timezone' => string 'Europe/Brussels' (length=15)
+      //           'score' => float 0
+      //           'latitude' => float 50.38518
+      //           'longitude' => float 4.66052
+
+  </pre>
+<hr /><p class="property func" id="fnc.getAPIKey"><span class="name"><strong><code>getAPIKey()</code></strong></span>: Get the API Key related to the system we're dealing with</p>
+<p class="property">Abstract:</p>
+<p>As we are dealing possibly with multiple external API calls, we may have
+ several API keys to consider. That's what the @param.system parameter is for.</p>
+<p class="property">Syntax:</p>
+<p><code>getAPIKey( $szSystem )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.getAPIKey.szSystem"><code>$szSystem</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Optional. <code>null</code> by default.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The API Key or <code>null</code> if not found</p>
+<hr /><p class="property func" id="fnc.nearby"><span class="name"><strong><code>nearby()</code></strong></span>: Find nearby toponym / reverse geocoding</p>
+<p class="property">Syntax:</p>
+<p><code>nearby( $longitude )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.nearby.aParams"><code>$aParams</code></td>
+<td class="type"><code>array</code></td>
+<td class="description seealso">An associative array with latitude and longitude array( 'latitude' => &lt;...&gt;,<br /> 'longitude' => &lt;...&gt; ) or ...</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.nearby.latitude"><code>$latitude</code></td>
+<td class="type"><code>float</code></td>
+<td class="description seealso">Latitude</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.nearby.longitude"><code>$longitude</code></td>
+<td class="type"><code>float</code></td>
+<td class="description seealso">Longitude</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  An associative array or <code>null</code> if nothing found</p>
+<p class="property">Example(s):</p>
+<pre>
+
+      use \trql\mercator\Mercator as Mercator;
+
+      if ( ! defined( 'MERCATOR_CLASS_VERSION' ) )
+          require_once( 'trql.mercator.class.php' );
+
+      <strong>$o = new Mercator();</strong>
+      $o->remembering = true;     // This will use cache if any
+      $o->remembering = false;    // This will disregard cache
+
+      // The geonameId "8520400" is the one of Lato Sensu Management
+      // Let's get all geonames details about this ID
+      $a = $o->get( array( "geonameId" => "8520400" ) );
+      var_dump( $a );
+
+      // This gives the following result:
+      // array (size=2)
+      //   'service' => string 'get' (length=3)
+      //   'results' =>
+      //     array (size=1)
+      //       0 =>
+      //         array (size=31)
+      //           'toponymName' => string 'Lato Sensu Management' (length=21)
+      //           'name' => string 'Lato Sensu Management' (length=21)
+      //           'lat' => float 50.38518
+      //           'lng' => float 4.66052
+      //           'geonameId' => string '8520400' (length=7)
+      //           'countryCode' => string 'BE' (length=2)
+      //           'countryName' => string 'Belgium' (length=7)
+      //           'fcl' => string 'S' (length=1)
+      //           'fcode' => string 'STNB' (length=4)
+      //           'fclName' => string 'spot, building, farm' (length=20)
+      //           'fcodeName' => string 'scientific research base' (length=24)
+      //           'population' => int 0
+      //           'adminCode1' => string 'WAL' (length=3)
+      //           'adminName1' => string 'Wallonia' (length=8)
+      //           'asciiName' => string 'Lato Sensu Management' (length=21)
+      //           'alternateNames' => string '' (length=0)
+      //           'elevation' => int 0
+      //           'srtm3' => string '216' (length=3)
+      //           'astergdem' => int 197
+      //           'continentCode' => string 'EU' (length=2)
+      //           'adminTypeName' => null
+      //           'adminCode2' => string 'WNA' (length=3)
+      //           'adminName2' => string 'Namur Province' (length=14)
+      //           'adminCode3' => string '92' (length=2)
+      //           'adminName3' => string 'Arrondissement de Namur' (length=23)
+      //           'adminCode4' => string '92048' (length=5)
+      //           'adminName4' => string 'Fosses-la-Ville' (length=15)
+      //           'timezone' => string 'Europe/Brussels' (length=15)
+      //           'score' => float 0
+      //           'latitude' => float 50.38518
+      //           'longitude' => float 4.66052
+
+      // Then, let's try to find what's nearby this location:
+      $fLatitude  = $a['results'][0]['latitude'];
+      $fLongitude = $a['results'][0]['longitude'];
+      <strong>var_dump( $o->nearby( $fLatitude,$fLongitude ) );</strong>
+
+      // This gives the following result:
+      // array (size=2)
+      //   'service' => string 'nearby' (length=6)
+      //   'results' =>
+      //     array (size=1)
+      //       0 =>
+      //         array (size=31)
+      //           'toponymName' => string 'Lato Sensu Management' (length=21)
+      //           'name' => string 'Lato Sensu Management' (length=21)
+      //           'lat' => float 50.38518
+      //           'lng' => float 4.66052
+      //           'geonameId' => string '8520400' (length=7)
+      //           'countryCode' => string 'BE' (length=2)
+      //           'countryName' => string 'Belgium' (length=7)
+      //           'fcl' => string 'S' (length=1)
+      //           'fcode' => string 'STNB' (length=4)
+      //           'fclName' => null
+      //           'fcodeName' => null
+      //           'population' => int 0
+      //           'adminCode1' => null
+      //           'adminName1' => null
+      //           'asciiName' => null
+      //           'alternateNames' => null
+      //           'elevation' => int 0
+      //           'srtm3' => null
+      //           'astergdem' => int 0
+      //           'continentCode' => null
+      //           'adminTypeName' => null
+      //           'adminCode2' => null
+      //           'adminName2' => null
+      //           'adminCode3' => null
+      //           'adminName3' => null
+      //           'adminCode4' => null
+      //           'adminName4' => null
+      //           'timezone' => null
+      //           'score' => float 0
+      //           'latitude' => float 50.38518
+      //           'longitude' => float 4.66052
+
+  </pre>
+<hr /><p class="property func" id="fnc.wikipedia"><span class="name"><strong><code>wikipedia()</code></strong></span>: Get points of interest pertaining to @param.szTerm found on Wikipedi</p>
+<p class="property">Syntax:</p>
+<p><code>wikipedia( $szTerm )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.wikipedia.szTerm"><code>$szTerm</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The term to search for geonames details on Wikipedia</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Associative array with all results coming from
+ geonames/wikipedia</p>
+<p class="property">Example(s):</p>
+<pre>
+
+      use \trql\mercator\Mercator as Mercator;
+
+      if ( ! defined( 'MERCATOR_CLASS_VERSION' ) )
+          require_once( 'trql.mercator.class.php' );
+
+      <strong>$o = new Mercator();
+      var_dump( $o->wikipedia( 'namur' ) );</strong>
+      // array (size=4)
+      //   'service' => string 'wikipedia' (length=9)
+      //   'term' => string 'namur' (length=5)
+      //   'lupdate' => int 1615638113
+      //   'results' =>
+      //     array (size=435)
+      //       0 =>
+      //         array (size=13)
+      //           'lang' => string 'en' (length=2)
+      //           'title' => string 'Namur' (length=5)
+      //           'summary' => string 'Namur (Dutch: Namen, Nameur in Walloon) is a city and municipality in Wallonia, Belgium.
+      //                               It is both the capital of the province of Namur and of Wallonia. It hosts the Walloon Parliament.
+      //                               Namur stands at the confluence of the Sambre and Meuse rivers and straddles three different
+      //                               regions &ndash; (...)' (length=300)
+      //           'feature' => string 'city' (length=4)
+      //           'countryCode' => string 'BE' (length=2)
+      //           'elevation' => int 88
+      //           'lat' => float 50.4639
+      //           'lng' => float 4.8603
+      //           'wikipediaUrl' => string 'https://en.wikipedia.org/wiki/Namur' (length=35)
+      //           'thumbnailImg' => string 'http://www.geonames.org/img/wikipedia/8000/thumb-7214-100.jpg' (length=61)
+      //           'rank' => float 100
+      //           'latitude' => float 50.4639
+      //           'longitude' => float 4.8603
+      //       1 =>
+      //         array (size=13)
+      //           'lang' => string 'en' (length=2)
+      //           'title' => string 'Namur (province)' (length=16)
+      //           'summary' => string 'Namur (Dutch: Namen) is a province of Wallonia, one of the three regions of Belgium. It borders
+      //                               (clockwise from the West) on the Walloon provinces of Hainaut, Walloon Brabant, Liège and Luxembourg
+      //                               in Belgium, and on France. Its capital is the city of Namur.  (...)' (length=265)
+      //           'feature' => string '' (length=0)
+      //           'countryCode' => string 'BE' (length=2)
+      //           'elevation' => int 91
+      //           'lat' => float 50.4665
+      //           'lng' => float 4.8662
+      //           'wikipediaUrl' => string 'https://en.wikipedia.org/wiki/Namur_%28province%29' (length=50)
+      //           'thumbnailImg' => string '' (length=0)
+      //           'rank' => float 100
+      //           'latitude' => float 50.4665
+      //           'longitude' => float 4.8662
+      //      ... and more elements !
+  </pre>
+<hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

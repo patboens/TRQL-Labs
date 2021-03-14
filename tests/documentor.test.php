@@ -88,8 +88,25 @@ if ( false )
 
 if ( true )
 {
-    $oDoc = new Documentor();
+    $oDoc   = new Documentor();
+    //$oDoc->documentAll();
+    //goto end;
     //var_dump( $oDoc->self['family'] );
+
+    //$o      = new \trql\thing\Thing();
+    //$o->document();
+    //
+    //$o      = new \trql\creativework\CreativeWork();
+    //$o->document();
+
+    //var_dump( $oDoc->changeSeeAlso( 'The subject matter of the content. Inverse property: @var.subjectOf' ) );
+    //var_dump( $oDoc->changeSeeAlso( 'A @.classCreativeWork or @class.Event about this @class.Thing. Inverse property: @var.about.' ) );
+    //goto end;
+
+    //$noTest[] = 'mother';
+    //$noTest[] = 'thing';
+    //$noTest[] = 'creativework';
+
 
     $noTest[] = 'backgroundprocess';
     $noTest[] = '3dmodel';
@@ -100,7 +117,7 @@ if ( true )
     $noTest[] = 'french';
     $noTest[] = 'mail';
     $noTest[] = 'mother';
-    $noTest[] = 'paradeigma';
+    //$noTest[] = 'paradeigma';
     $noTest[] = 'personororganization';
     $noTest[] = 'pulse';
     $noTest[] = 'uikey';
@@ -109,18 +126,35 @@ if ( true )
     $noTest[] = 'websitegenerator';
     $noTest[] = 'zip';
 
+
     // Excluded because causes problems: should look for the reason of the problems
     $noTest[] = 'browser';
     $noTest[] = 'footnotes';
     $noTest[] = 'ledger';
-    $noTest[] = 'mercator';
-    $noTest[] = 'tazieff';
+    //$noTest[] = 'mercator';
+    //$noTest[] = 'tazieff';
 
     $i = 0;
 
+    if ( empty( $szStartingClass = $oDoc->getParam( 'start','' ) ) )
+    {
+        //$szStartingClass =  '\\trql\\comics';
+        //$szStartingClass =  '\\trql\\hom';
+        //$szStartingClass =  '\\trql\\mus';
+        //$szStartingClass =  '\\trql\\recei';
+        //$szStartingClass =  '\\trql\\userc';
+    }
+    else
+    {
+        $szStartingClass = strtolower( '\\trql\\' . $szStartingClass );
+    }
+
+    //var_dump( $szStartingClass );
+    //die();
+
     foreach( $oDoc->self['family'] as $szFile )
     {
-        if ( preg_match('/trql\.(?P<class>.*?)\.class\.php/i',$szFile,$aMatches ) )
+        if ( preg_match( '/trql\.(?P<class>.*?)\.class\.php/i',$szFile,$aMatches ) )
         {
             $szClass = strtolower( $aMatches['class'] );
 
@@ -128,27 +162,28 @@ if ( true )
             {
                 $szClass = '\\trql\\' . strtolower( $aMatches['class'] ) . '\\' . $aMatches['class'];
 
-                /* Adapt to restart at a givne class */
-                //if ( strtolower( $szClass ) > '\trql\comicissue' )
-                //if ( strtolower( $szClass ) > '\trql\healthplannetwork' )
-                //if ( strtolower( $szClass ) > '\trql\movieseries' )
-                //if ( strtolower( $szClass ) > '\trql\readaction' )
-                //if ( strtolower( $szClass ) > '\trql\radioclip' )
-                if ( strtolower( $szClass ) > '\trql\travelagency' )
+                /* Adapt to restart at a given class */
+
+                //if ( strtolower( $szClass ) > '\trql\comics' )
+                //if ( strtolower( $szClass ) > '\trql\hom' )
+                //if ( strtolower( $szClass ) > '\trql\mus' )
+                //if ( strtolower( $szClass ) > '\trql\recei' )
+                //if ( strtolower( $szClass ) > '\trql\userc' )
+                if ( empty( $szStartingClass ) || strtolower( $szClass ) > strtolower( $szStartingClass ) )
                 {
-                    var_dump( ++$i . ': ' . $szClass );
+                    if ( $oDoc->isCommandLine() )
+                    {
+                        echo ++$i . ': ' . $szClass . "\n";
+                    }
+                    else
+                    {
+                        var_dump( ++$i . ': ' . $szClass );
+                        ob_flush();
+                    }
+
                     flush();
-
-                    $o = new $szClass();
-                    $o->document();
-
-                    $o = null;
-                    unset( $o );
-
-                    //if ( $i % 97 === 0 )
-                    //    usleep( 2000000 );
-                    //ob_flush();
-                    //var_dump( $o->lastInfo );
+                    $oDoc->document( $szFile );
+                    //die();
                 }
             }
         }

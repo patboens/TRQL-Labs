@@ -52,7 +52,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\bookstore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\store\Store           as Store;
@@ -87,6 +87,7 @@ defined( 'BOOKSTORE_CLASS_VERSION' ) or define( 'BOOKSTORE_CLASS_VERSION','0.1' 
         on 26-08-2020 18:37.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class BookStore extends Store
@@ -159,4 +160,3 @@ class BookStore extends Store
     /* ================================================================================ */
 }   /* End of class BookStore ========================================================= */
 /* ==================================================================================== */
-?>

@@ -50,10 +50,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\motorcycledealer;
+namespace trql\automotive;
 
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\automotivebusiness\AutomotiveBusiness     as AutomotiveBusiness;
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\automotive\AutomotiveBusiness     as AutomotiveBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -84,6 +84,8 @@ defined( 'MOTORCYCLEDEALER_CLASS_VERSION' ) or define( 'MOTORCYCLEDEALER_CLASS_V
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
         on 26-08-2020 18:50.
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -157,4 +159,3 @@ class MotorcycleDealer extends AutomotiveBusiness
     /* ================================================================================ */
 }   /* End of class MotorcycleDealer ================================================== */
 /* ==================================================================================== */
-?>

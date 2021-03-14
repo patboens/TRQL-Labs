@@ -164,7 +164,7 @@ class Tazieff extends Utility implements iContext
     /* ================================================================================ */
     /** {{*parse( $szXML )=
 
-        Parses an XML return from https://earthquake.usgs.gov/
+        Parses an XML return from [url]https://earthquake.usgs.gov/[/url]
 
         {*params
             $szXML      (string)        The XML to parse
@@ -319,11 +319,11 @@ class Tazieff extends Utility implements iContext
 
         {*params
             $szService      (string)        The service to call
-            $aParams        (array)         Parameters to be sent for $szService
+            $aParams        (array)         Parameters to be sent for @param.szService
         *}
 
         {*return
-            (string)        The result of the [c]getURL()[/c] call, which then will need
+            (string)        The result of the @fnc.getURL call, which then will need
                             to be parsed
         *}
 
@@ -530,4 +530,3 @@ class Tazieff extends Utility implements iContext
     /* ================================================================================ */
 }   /* End of class Tazieff =========================================================== */
 /* ==================================================================================== */
-?>

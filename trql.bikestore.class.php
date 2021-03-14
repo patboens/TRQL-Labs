@@ -51,7 +51,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\bikestore;
+namespace trql\store;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
 use \trql\store\Store       as Store;
@@ -86,6 +86,7 @@ defined( 'BIKESTORE_CLASS_VERSION' ) or define( 'BIKESTORE_CLASS_VERSION','0.1' 
         on 26-08-2020 18:37.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class BikeStore extends Store
@@ -158,4 +159,3 @@ class BikeStore extends Store
     /* ================================================================================ */
 }   /* End of class BikeStore ========================================================= */
 /* ==================================================================================== */
-?>
