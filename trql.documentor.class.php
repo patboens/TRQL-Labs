@@ -1616,7 +1616,6 @@ Class DocumentorSourceFile extends DocumentorFile
                                "   border: 1px solid #888; }\n";
                     //$szHTML .= "p.property.func span.name { border:1px solid red; padding:6px; }\n";
 
-
                 $szHTML .= "</style>\n\n";
             }   /* Style */
             /* GRAND RENDERING ======================================================== */
@@ -3693,6 +3692,7 @@ URL 	Indicates a page documenting how licenses can be purchased or otherwise acq
                 if ( ! empty( $this->image ) )
                     $szRetVal .= "<p><img src=\"{$this->image}\" style=\"display:block;float:left;width:130px; height:auto;margin-right: 20px;\" class=\"shadow constrained\"/></p>\n";
                 $szRetVal .= "<span class=\"DocumentorLabel\">Filename: </span><span class=\"property filename\">"              . $this->squareToAngle( say(                      $this->szFileName )   ) . "</span>\n";
+                $szRetVal .= "<span class=\"DocumentorLabel\">Namespace: </span><span class=\"property namespace\">"            . $this->squareToAngle( say( '[c]' . $this->oSourceFile->szNamespace . '[/c]' )  ) . "</span>\n";
                 $szRetVal .= "<span class=\"DocumentorLabel\">Purpose: </span><span class=\"property purpose\">"                . $this->squareToAngle( say( vaesoli::STR_Reduce( $this->szPurpose  ) ) ) . "</span>\n";
                 $szRetVal .= "<span class=\"DocumentorLabel\">Author: </span><span class=\"property author\">"                  . $this->squareToAngle( say(                      $this->author     )   ) . "</span>\n";
                 $szRetVal .= "<span class=\"DocumentorLabel\">Company: </span><span class=\"property company\">"                . $this->squareToAngle( say(                      $this->szCompany  )   ) . "</span>\n";
