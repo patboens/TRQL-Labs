@@ -42,18 +42,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\webpageelement;
+namespace trql\web;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\creativework\CreativeWork         as CreativeWork;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\creativework\CreativeWork     as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
-
 
 defined( 'WEBPAGEELEMENT_CLASS_VERSION' ) or define( 'WEBPAGEELEMENT_CLASS_VERSION','0.1' );
 
@@ -76,11 +74,11 @@ defined( 'WEBPAGEELEMENT_CLASS_VERSION' ) or define( 'WEBPAGEELEMENT_CLASS_VERSI
 
     {*warning
         This class has been generated automatically by
-        [c]trql.schemaclassgenerator.class.php[/c] and as such HAS NOT BEEN
-        TESTED YET!
+        [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
-
+    *}}
+ 
  */
 /* ==================================================================================== */
 class WebPageElement extends CreativeWork
@@ -153,8 +151,5 @@ class WebPageElement extends CreativeWork
         $this->necroSignaling();
     }   /* End of WebPageElement.__destruct() ========================================= */
     /* ================================================================================ */
-
 }   /* End of class WebPageElement ==================================================== */
 /* ==================================================================================== */
-
-?>

@@ -42,19 +42,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\wpsidebar;
+namespace trql\web;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webpageelement\WebPageElement    as WebPageElement;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\web\WebPageElement        as WebPageElement;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'WEBPAGEELEMENT_CLASS_VERSION' ) )
     require_once( 'trql.webpageelement.class.php' );
-
-
 
 defined( 'WPSIDEBAR_CLASS_VERSION' ) or define( 'WPSIDEBAR_CLASS_VERSION','0.1' );
 
@@ -79,6 +76,8 @@ defined( 'WPSIDEBAR_CLASS_VERSION' ) or define( 'WPSIDEBAR_CLASS_VERSION','0.1' 
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
         on 28-08-2020 16:41.
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -153,4 +152,3 @@ class WPSideBar extends WebPageElement
     /* ================================================================================ */
 }   /* End of class WPSideBar ========================================================= */
 /* ==================================================================================== */
-?>

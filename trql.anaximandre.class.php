@@ -965,11 +965,12 @@ class Anaximandre extends Thing implements iContext
     public function __destruct()
     /*------------------------*/
     {
-        //parent::__destruct();
         $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
     }   /* End of Anaximandre.__destruct() ============================================ */
     /* ================================================================================ */
-
 }   /* End of class Anaximandre ======================================================= */
 /* ==================================================================================== */
-?>

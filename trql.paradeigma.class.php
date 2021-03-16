@@ -56,12 +56,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\paradeigma;
+namespace trql\web;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\webpage\WebPage                           as WebPage;
+use \trql\mother\iContext       as iContext;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\web\WebPage           as WebPage;
 
 use DOMDocument;
 use DOMXPath;
@@ -77,19 +76,12 @@ if ( ! defined( 'WEBPAGE_CLASS_VERSION' ) )
 
 defined( 'PARADEIGMA_CLASS_VERSION' ) or define( 'PARADEIGMA_CLASS_VERSION','0.1' );
 
-/* Note (16-07-20 23:27:50):
-
-    Le code doit se sauver lui-même dans une sorte de DB. Il doit se compresser
-    lui-même et sauver au moins une dizaine de versions de lui-même.
-
-*/
-
 /* ================================================================================== */
 /** {{*class Paradeigma=
 
     {*desc
 
-        A paradeigma is a web page template.
+        A paradeigma (web page template).
 
     *}
 
@@ -131,7 +123,7 @@ class Paradeigma extends WebPage implements iContext
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( __CLASS__ . ' NOT YET FUNCTIONAL' );
+        //$this->die( __CLASS__ . ' NOT YET FUNCTIONAL' );
 
         return ( $this );
     }   /* End of Paradeigma.__construct() ============================================ */
@@ -166,4 +158,3 @@ class Paradeigma extends WebPage implements iContext
     /* ================================================================================ */
 }   /* End of class Paradeigma ======================================================== */
 /* ==================================================================================== */
-?>

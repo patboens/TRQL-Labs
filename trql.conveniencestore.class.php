@@ -119,6 +119,14 @@ class ConvenienceStore extends Store
             (self)      The current instance of the class
         *}
 
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__destruct
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -143,6 +151,14 @@ class ConvenienceStore extends Store
 
         {*return
             (void)      No return
+        *}
+
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__construct
         *}
 
         *}}

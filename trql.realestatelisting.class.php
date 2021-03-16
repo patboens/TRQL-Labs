@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -32,6 +30,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -45,22 +44,18 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
 namespace trql\realestatelisting;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webpage\WebPage    as WebPage;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\web\WebPage       as WebPage;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'WEBPAGE_CLASS_VERSION' ) )
     require_once( 'trql.webpage.class.php' );
-
-
 
 defined( 'REALESTATELISTING_CLASS_VERSION' ) or define( 'REALESTATELISTING_CLASS_VERSION','0.1' );
 
@@ -89,7 +84,8 @@ defined( 'REALESTATELISTING_CLASS_VERSION' ) or define( 'REALESTATELISTING_CLASS
         on 28-08-2020 16:28.
     *}
 
- */
+    *}}
+*/
 /* ==================================================================================== */
 class RealEstateListing extends WebPage
 /*-----------------------------------*/
@@ -133,8 +129,6 @@ class RealEstateListing extends WebPage
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
     }   /* End of RealEstateListing.__construct() ===================================== */
     /* ================================================================================ */
@@ -167,4 +161,3 @@ class RealEstateListing extends WebPage
     /* ================================================================================ */
 }   /* End of class RealEstateListing ================================================= */
 /* ==================================================================================== */
-?>

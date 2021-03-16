@@ -54,11 +54,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\aboutpage;
+namespace trql\web;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\webpage\WebPage       as WebPage;
-
+use \trql\web\WebPage           as WebPage;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -90,6 +89,7 @@ defined( 'ABOUTPAGE_CLASS_VERSION' ) or define( 'ABOUTPAGE_CLASS_VERSION','0.1' 
         on 25-08-2020 13:14.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class AboutPage extends WebPage
@@ -161,4 +161,3 @@ class AboutPage extends WebPage
     /* ================================================================================ */
 }   /* End of class AboutPage ========================================================= */
 /* ==================================================================================== */
-?>

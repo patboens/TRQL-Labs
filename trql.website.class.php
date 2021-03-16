@@ -60,7 +60,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\website;
+namespace trql\web;
 
 use \trql\mother\Mother                             as Mother;
 use \trql\mother\iContext                           as iContext;
@@ -380,7 +380,5 @@ class WebSite extends CreativeWork implements iContext
         public 'workTranslation' => null
 
     */
-
 }   /* End of class WebSite =========================================================== */
 /* ==================================================================================== */
-?>

@@ -53,7 +53,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\webpage;
+namespace trql\web;
 
 use \trql\mother\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
@@ -504,4 +504,3 @@ class WebPage extends CreativeWork implements iContext
     /* ================================================================================ */
 }   /* End of class WebPage =========================================================== */
 /* ==================================================================================== */
-?>

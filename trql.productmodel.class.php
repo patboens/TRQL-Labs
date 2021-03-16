@@ -43,19 +43,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\productmodel;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\product\Product    as Product;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\quitus\Product        as Product;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'PRODUCT_CLASS_VERSION' ) )
     require_once( 'trql.product.class.php' );
-
-
 
 defined( 'PRODUCTMODEL_CLASS_VERSION' ) or define( 'PRODUCTMODEL_CLASS_VERSION','0.1' );
 
@@ -87,7 +84,7 @@ defined( 'PRODUCTMODEL_CLASS_VERSION' ) or define( 'PRODUCTMODEL_CLASS_VERSION',
  */
 /* ==================================================================================== */
 class ProductModel extends Product
-/*--------------------------------------*/
+/*------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -131,6 +128,14 @@ class ProductModel extends Product
             (self)      The current instance of the class
         *}
 
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__destruct
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -157,6 +162,14 @@ class ProductModel extends Product
             (void)      No return
         *}
 
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__construct
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -172,4 +185,3 @@ class ProductModel extends Product
     /* ================================================================================ */
 }   /* End of class ProductModel ====================================================== */
 /* ==================================================================================== */
-?>

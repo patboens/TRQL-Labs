@@ -109,7 +109,7 @@ if ( true )
 
 
     $noTest[] = 'backgroundprocess';
-    $noTest[] = '3dmodel';
+    //$noTest[] = '3dmodel';
     $noTest[] = 'bankaccount';
     $noTest[] = 'class';
     $noTest[] = 'cursor';

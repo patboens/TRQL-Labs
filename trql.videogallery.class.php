@@ -50,10 +50,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\videogallery;
+namespace trql\web;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\mediagallery\MediaGallery         as MediaGallery;
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\web\MediaGallery  as MediaGallery;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -125,8 +125,6 @@ class VideoGallery extends MediaGallery
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
     }   /* End of VideoGallery.__construct() ========================================== */
     /* ================================================================================ */
@@ -157,8 +155,5 @@ class VideoGallery extends MediaGallery
         $this->necroSignaling();
     }   /* End of VideoGallery.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class VideoGallery ====================================================== */
 /* ==================================================================================== */
-
-?>

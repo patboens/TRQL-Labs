@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -30,6 +28,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -48,17 +47,14 @@
 /****************************************************************************************/
 namespace trql\qapage;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webpage\WebPage    as WebPage;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\web\WebPage       as WebPage;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'WEBPAGE_CLASS_VERSION' ) )
     require_once( 'trql.webpage.class.php' );
-
-
 
 defined( 'QAPAGE_CLASS_VERSION' ) or define( 'QAPAGE_CLASS_VERSION','0.1' );
 
@@ -86,10 +82,11 @@ defined( 'QAPAGE_CLASS_VERSION' ) or define( 'QAPAGE_CLASS_VERSION','0.1' );
         on 28-08-2020 16:28.
     *}
 
- */
+    *}}
+*/
 /* ==================================================================================== */
 class QAPage extends WebPage
-/*--------------------------------------*/
+/*------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -99,39 +96,6 @@ class QAPage extends WebPage
                                'family' => null         ,
                                'UIKey'  => null         ,
                              );
-
-    public      $breadcrumb                     = null;             /* {*property   $breadcrumb                     (BreadcrumbList|string)         A set of links that can help a user understand and navigate a website
-                                                                                                                                                    hierarchy. *} */
-    public      $lastReviewed                   = null;             /* {*property   $lastReviewed                   (Date)                          Date on which the content on this web page was last reviewed for
-                                                                                                                                                    accuracy and/or completeness. *} */
-    public      $mainContentOfPage              = null;             /* {*property   $mainContentOfPage              (WebPageElement)                Indicates if this web page element is the main subject of the page. *} */
-    public      $primaryImageOfPage             = null;             /* {*property   $primaryImageOfPage             (ImageObject)                   Indicates the main image on the page. *} */
-    public      $relatedLink                    = null;             /* {*property   $relatedLink                    (URL)                           A link related to this web page, for example to other related web
-                                                                                                                                                    pages. *} */
-    public      $reviewedBy                     = null;             /* {*property   $reviewedBy                     (Person|Organization)           People or organizations that have reviewed the content on this web
-                                                                                                                                                    page for accuracy and/or completeness. *} */
-    public      $significantLink                = null;             /* {*property   $significantLink                (URL)                           One of the more significant URLs on the page. Typically, these are the
-                                                                                                                                                    non-navigation links that are clicked on the most. *} */
-    public      $speakable                      = null;             /* {*property   $speakable                      (URL|SpeakableSpecification)    Indicates sections of a Web page that are particularly 'speakable' in
-                                                                                                                                                    the sense of being highlighted as being especially appropriate for
-                                                                                                                                                    text-to-speech conversion. Other sections of a page may also be
-                                                                                                                                                    usefully spoken in particular circumstances; the 'speakable' property
-                                                                                                                                                    serves to indicate the parts most likely to be generally useful for
-                                                                                                                                                    speech.The speakable property can be repeated an arbitrary number of
-                                                                                                                                                    times, with three kinds of possible 'content-locator' values:1.)
-                                                                                                                                                    id-value URL references - uses id-value of an element in the page
-                                                                                                                                                    being annotated. The simplest use of speakable has (potentially
-                                                                                                                                                    relative) URL values, referencing identified sections of the document
-                                                                                                                                                    concerned.2.) CSS Selectors - addresses content in the annotated page,
-                                                                                                                                                    eg. via class attribute. Use the cssSelector property.3.) XPaths -
-                                                                                                                                                    addresses content via XPaths (assuming an XML view of the content).
-                                                                                                                                                    Use the xpath property.For more sophisticated markup of speakable
-                                                                                                                                                    sections beyond simple ID references, either CSS selectors or XPath
-                                                                                                                                                    expressions to pick out document section(s) as speakable. For thiswe
-                                                                                                                                                    define a supporting type, SpeakableSpecification which is defined to
-                                                                                                                                                    be a possible value of the speakable property. *} */
-    public      $specialty                      = null;             /* {*property   $specialty                      (Specialty)                     One of the domain specialities to which this web page's content
-                                                                                                                                                    applies. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR (25-02-21 18:17:24). *} */
@@ -159,10 +123,8 @@ class QAPage extends WebPage
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of QAPage.__construct() ========================================== */
+    }   /* End of QAPage.__construct() ================================================ */
     /* ================================================================================ */
 
 
@@ -189,10 +151,7 @@ class QAPage extends WebPage
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of QAPage.__destruct() =========================================== */
+    }   /* End of QAPage.__destruct() ================================================= */
     /* ================================================================================ */
-
-}   /* End of class QAPage ====================================================== */
+}   /* End of class QAPage ============================================================ */
 /* ==================================================================================== */
-
-?>

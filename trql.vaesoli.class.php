@@ -485,6 +485,7 @@ class Vaesoli
     }   /* End of vaesoli.DAT_Bom() ============================================= */
     /* ========================================================================== */
 
+
     public static function DAT_Dow( $xDate = null )
     /*-------------------------------------------*/
     {
@@ -830,7 +831,7 @@ class Vaesoli
     {
     	if     ( defined( 'STDIN' ) )
     	    $bCommandLine = true;
-        elseif ( empty( $_SERVER['REMOTE_ADDR'] ) && ! isset( $_SERVER['HTTP_USER_AGENT'] ) && count( $_SERVER['argv'] ) > 0 )
+        elseif ( self::empty( $_SERVER['REMOTE_ADDR'] ) && ! isset( $_SERVER['HTTP_USER_AGENT'] ) && count( $_SERVER['argv'] ) > 0 )
             $bCommandLine = true;
         else
             $bCommandLine = false;
@@ -1289,7 +1290,7 @@ class Vaesoli
                 }
 
                 $szLast .= $token . '/';                                /* Concatenate directories */
-            }   /* if ( ( ! empty( $token ) && ... */
+            }   /* if ( ( ! self::empty( $token ) && ... */
 
             $token = strtok( '/' );                                     /* Get next token */
         }   /* while ( $token ) */
@@ -1388,7 +1389,7 @@ class Vaesoli
         }   /* if ( strtoupper( PHP_OS ) == 'DARWIN' ) */
 
         /* If starting slash ... this must be the root of the site */
-        if ( ! is_null( $szFileSpec ) && ! empty( $szFileSpec ) && ( $szFileSpec[0] == '/' || $szFileSpec[0] == '\\' ) )
+        if ( ! is_null( $szFileSpec ) && ! self::empty( $szFileSpec ) && ( $szFileSpec[0] == '/' || $szFileSpec[0] == '\\' ) )
         {                                                               /* then it must be evaluated towards the root of the site */
             //echo "<p>On commence par un slash</p>";
             $iFileSpecLength = strlen( $szFileSpec );                   /* Length of the Filename */
@@ -1517,7 +1518,7 @@ class Vaesoli
     {
         $szRetVal   = '';                                               /* Return value of the function (empty by default) */
 
-        if ( ! empty( $szFile ) && ( $rh = @fopen( $szFile,'r' ) ) == true )    /* If file could be opened */
+        if ( ! self::empty( $szFile ) && ( $rh = @fopen( $szFile,'r' ) ) == true )    /* If file could be opened */
         {
             $aFileStats = stat( $szFile );                              /* File stats */
             $szRetVal   = @fread( $rh,$iBytes );                        /* Read X bytes */
@@ -1536,7 +1537,7 @@ class Vaesoli
         $bRetVal = false;                                               /* Ready to return a logical false */
 
         /* Open file (create if does not exist). If Append mode ... open in 'a+' */
-        if ( ! empty( $szFile ) && ( $handle = @fopen( $szFile,( $bAppend ? 'a+' : 'w+' ) ) ) == true )
+        if ( ! self::empty( $szFile ) && ( $handle = @fopen( $szFile,( $bAppend ? 'a+' : 'w+' ) ) ) == true )
         {
             if ( flock( $handle,LOCK_EX ) )                             /* Lock the file EXCLUSIVELY */
             {
@@ -2858,7 +2859,29 @@ class Vaesoli
         }
 
         return ( $szResult );
-    }   /* == End of function STR_htos() ======================================== */
+    }   /* == End of function STR_htos() ============================================== */
+    /* ================================================================================ */
+
+
+    public static function STR_Password( $iLength = 8 ) : string
+    /*--------------------------------------------------------*/
+    {
+        $szPassword = '';
+
+        while ( strlen( $szPassword ) < $iLength )
+        {
+            if ( $iEven = ( random_int( 1,10 ) % 2 === 0 ) )
+                $c = chr( random_int( 33,90 ) );
+            else
+                $c = chr( mt_rand( 97,126) );
+
+            if ( $c !== '"' && $c !== "'" && $c !== '.' && $c !== '<' && $c !== '>' )
+                $szPassword .= $c;
+        }   /* while ( strlen( $szPassword ) < $iLength ) */
+        
+        return ( $szPassword );
+    }   /* == End of function STR_password() ========================================== */
+    /* ================================================================================ */
 
 
     public static function STR_Phonetique( $sIn,$iLength = 16 )
@@ -3157,6 +3180,70 @@ class Vaesoli
     }   /* End of vaesoli.STR_iPos() ================================================== */
     /* ================================================================================ */
 
+    /* ================================================================================ */
+    /** {{*empty( $x )=
+
+        Determine whether a variable is empty
+
+        {*params
+            $x          (mixed)     Variable to be checked
+        *}
+
+        {*return
+            (bool)      Returns [c]false[/c] if @param.x exists and has a non-empty,
+                        non-zero value, aka falsey. Otherwise returns [c]true[/c]
+        *}
+
+        {*assert
+            v::empty( null ) == true
+        *}
+
+        {*assert
+            v::empty( 0 ) == true
+        *}
+
+        {*assert
+            v::empty( false ) == true
+        *}
+
+        {*assert
+            v::empty( true ) == false
+        *}
+
+        {*assert
+            v::empty( '' ) == true
+        *}
+
+        {*assert
+            v::empty( '0' ) == false
+        *}
+
+        {*remark
+            The retun value of v::empty( '0' ) yields a [c]false[/c] to the 
+            contrary of PHP.
+        *}
+
+        {*example
+            var_dump( v::empty( null  ),empty( null  ) );  // Expecting: true            
+            var_dump( v::empty( 0     ),empty( 0     ) );  // Expecting: true
+            var_dump( v::empty( false ),empty( false ) );  // Expecting: true
+            var_dump( v::empty( true  ),empty( true  ) );  // Expecting: false 
+            var_dump( v::empty( ''    ),empty( ''    ) );  // Expecting: true 
+            var_dump( v::empty( '0'   ),empty( '0'   ) );  // Expecting: false (PHP returns true!)
+            var_dump( v::empty( ' 0'  ),empty( ' 0'  ) );  // Expecting: false
+            var_dump( v::empty( '0 '  ),empty( '0 '  ) );  // Expecting: false
+            var_dump( v::empty( ' 0 ' ),empty( ' 0 ' ) );  // Expecting: false
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function empty( $x )
+    /*------------------------------*/
+    {
+        return ( $x !== '0' && empty( $x ) );
+    }   /* End of vaesoli.empty() ===================================================== */
+    /* ================================================================================ */
 
     /* ================================================================================ */
     /** {{*STR_Reduce2( $szStr )=
@@ -3199,7 +3286,7 @@ class Vaesoli
         $szRetVal = '';                                             /* Return value of the function */
         $cPrev = '';
 
-        if ( ! empty( $szStr ) )                                    /* If strings not empty */
+        if ( ! self::empty( $szStr ) )                                    /* If strings not empty */
         {
             $szStr = mb_convert_encoding( trim( $szStr ),'Windows-1252' );
 
@@ -3292,7 +3379,7 @@ class Vaesoli
                 echo "</pre>\n";
             }
 
-            if ( ! empty( $szStr ) && isset( $szStr[0] ) )
+            if ( ! self::empty( $szStr ) && isset( $szStr[0] ) )
             {
                 $szStr = $szStr[0] . str_replace( array( 'E','I','O','U' ),'A',substr( $szStr,1 ) );
 
@@ -3413,8 +3500,8 @@ class Vaesoli
         }
 
         return ( $szStr );
-    }   /* End of vaesoli.STR_SoundexFr() ========================================= */
-    /* ============================================================================ */
+    }   /* End of vaesoli.STR_SoundexFr() ============================================= */
+    /* ================================================================================ */
 
 
     public static function STR_stripAccents( $szStr )
@@ -3552,7 +3639,7 @@ class Vaesoli
     {
         $szRetVal = '';                                             /* Return value of the function */
 
-        if ( ! empty( $szStr ) && ! empty( $cChar ) )               /* If strings not empty */
+        if ( ! self::empty( $szStr ) && ! self::empty( $cChar ) )               /* If strings not empty */
         {
             $cChar = $cChar[0];
 

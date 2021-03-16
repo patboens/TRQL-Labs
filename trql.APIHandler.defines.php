@@ -128,8 +128,10 @@ defined( "API_ERROR_NOT_FOUND" )                        or define( "API_ERROR_NO
 defined( "API_ERROR_NOT_ACCEPTABLE" )                   or define( "API_ERROR_NOT_ACCEPTABLE"                               ,API_BASIS + RET_CODE_NOT_ACCEPTABLE );
 defined( "API_ERROR_INTERNAL_SERVER_ERROR" )            or define( "API_ERROR_INTERNAL_SERVER_ERROR"                        ,API_BASIS + RET_CODE_INTERNAL_SERVER_ERROR );
 defined( "API_ERROR_BAD_REQUEST" )                      or define( "API_ERROR_BAD_REQUEST"                                  ,API_BASIS + RET_CODE_BAD_REQUEST );
+defined( "API_ERROR_FORBIDDEN" )                        or define( "API_ERROR_FORBIDDEN"                                    ,API_BASIS + RET_CODE_FORBIDDEN );
 defined( "API_ERROR_NOT_IMPLEMENTED" )                  or define( "API_ERROR_NOT_IMPLEMENTED"                              ,API_BASIS + RET_CODE_NOT_IMPLEMENTED );
 defined( "API_ERROR_CONFLICT" )                         or define( "API_ERROR_CONFLICT"                                     ,API_BASIS + RET_CODE_CONFLICT );
 defined( "API_ERROR_UNAUTHORIZED" )                     or define( "API_ERROR_UNAUTHORIZED"                                 ,API_BASIS + RET_CODE_UNAUTHORIZED );
-
+defined( "API_ERROR_PRECONDITION_FAILED" )              or define( "API_ERROR_PRECONDITION_FAILED"                          ,API_BASIS + RET_CODE_PRECONDITION_FAILED );
+defined( "API_ERROR_INTERNAL_SERVER_ERROR" )            or define( "API_ERROR_INTERNAL_SERVER_ERROR"                        ,API_BASIS + RET_CODE_INTERNAL_SERVER_ERROR );
 ?>

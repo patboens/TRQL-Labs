@@ -51,10 +51,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\webapi;
+namespace trql\web;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\service\Service                   as Service;
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\service\Service   as Service;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -161,4 +161,3 @@ class WebAPI extends Service
     /* ================================================================================ */
 }   /* End of class WebAPI ============================================================ */
 /* ==================================================================================== */
-?>

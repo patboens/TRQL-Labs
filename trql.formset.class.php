@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 30-12-20 17:23 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,12 +43,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\formset;
+namespace trql\html;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\dataset\Dataset               as Dataset;
-use \trql\form\Form                     as Form;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\dataset\Dataset   as Dataset;
+use \trql\html\Form         as Form;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -59,7 +57,6 @@ if ( ! defined( 'DATASET_CLASS_VERSION' ) )
 
 if ( ! defined( 'FORM_CLASS_VERSION' ) )
     require_once( 'd:/websites/snippet-center/trql.form.class.php' );
-
 
 defined( 'FORMSET_CLASS_VERSION' ) or define( 'FORMSET_CLASS_VERSION','0.1' );
 
@@ -72,6 +69,7 @@ defined( 'FORMSET_CLASS_VERSION' ) or define( 'FORMSET_CLASS_VERSION','0.1' );
 
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Formset extends Dataset
@@ -208,5 +206,3 @@ class Formset extends Dataset
     /* ================================================================================ */
 }   /* End of class Formset =========================================================== */
 /* ==================================================================================== */
-
-?>

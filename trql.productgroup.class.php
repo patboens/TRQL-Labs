@@ -64,7 +64,7 @@
 namespace trql\productgroup;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\product\Product       as Product;
+use \trql\quitus\Product        as Product;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -105,6 +105,7 @@ defined( 'PRODUCTGROUP_CLASS_VERSION' ) or define( 'PRODUCTGROUP_CLASS_VERSION',
         on 25-08-2020 11:16.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class ProductGroup extends Product
@@ -185,4 +186,3 @@ class ProductGroup extends Product
     /* ================================================================================ */
 }   /* End of class ProductGroup ====================================================== */
 /* ==================================================================================== */
-?>

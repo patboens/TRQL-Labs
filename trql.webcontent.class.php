@@ -34,6 +34,7 @@
     {*cdate                 24-08-2020 03:29 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -50,19 +51,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\webcontent;
+namespace trql\web;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\creativework\CreativeWork         as CreativeWork;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
-
-
 
 defined( 'WEBCONTENT_CLASS_VERSION' ) or define( 'WEBCONTENT_CLASS_VERSION','0.1' );
 
@@ -91,9 +89,9 @@ defined( 'WEBCONTENT_CLASS_VERSION' ) or define( 'WEBCONTENT_CLASS_VERSION','0.1
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class WebContent extends CreativeWork
@@ -277,8 +275,5 @@ class WebContent extends CreativeWork
 
     }   /* End of WebContent.__destruct() ============================================= */
     /* ================================================================================ */
-
 }   /* End of class WebContent ======================================================== */
 /* ==================================================================================== */
-
-?>

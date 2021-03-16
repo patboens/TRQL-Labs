@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -41,22 +40,18 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
 namespace trql\profilepage;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webpage\WebPage    as WebPage;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\web\WebPage       as WebPage;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'WEBPAGE_CLASS_VERSION' ) )
     require_once( 'trql.webpage.class.php' );
-
-
 
 defined( 'PROFILEPAGE_CLASS_VERSION' ) or define( 'PROFILEPAGE_CLASS_VERSION','0.1' );
 
@@ -85,7 +80,7 @@ defined( 'PROFILEPAGE_CLASS_VERSION' ) or define( 'PROFILEPAGE_CLASS_VERSION','0
  */
 /* ==================================================================================== */
 class ProfilePage extends WebPage
-/*--------------------------------------*/
+/*-----------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                     Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -156,4 +151,3 @@ class ProfilePage extends WebPage
     /* ================================================================================ */
 }   /* End of class ProfilePage ======================================================= */
 /* ==================================================================================== */
-?>

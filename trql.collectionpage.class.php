@@ -50,10 +50,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\collectionpage;
+namespace trql\web;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\webpage\WebPage       as WebPage;
+use \trql\web\WebPage           as WebPage;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -80,6 +80,7 @@ defined( 'COLLECTIONPAGE_CLASS_VERSION' ) or define( 'COLLECTIONPAGE_CLASS_VERSI
 
     {*doc [url]http://schema.org/CollectionPage[/url] *}
 
+    *}}
  */
 /* ==================================================================================== */
 class CollectionPage extends WebPage
@@ -150,5 +151,3 @@ class CollectionPage extends WebPage
     /* ================================================================================ */
 }   /* End of class CollectionPage ==================================================== */
 /* ==================================================================================== */
-
-?>

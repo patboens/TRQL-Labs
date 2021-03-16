@@ -34,6 +34,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -59,19 +60,16 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\healthtopiccontent;
+namespace trql\web;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webcontent\WebContent    as WebContent;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\web\WebContent    as WebContent;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'WEBCONTENT_CLASS_VERSION' ) )
     require_once( 'trql.webcontent.class.php' );
-
-
 
 defined( 'HEALTHTOPICCONTENT_CLASS_VERSION' ) or define( 'HEALTHTOPICCONTENT_CLASS_VERSION','0.1' );
 
@@ -103,6 +101,7 @@ defined( 'HEALTHTOPICCONTENT_CLASS_VERSION' ) or define( 'HEALTHTOPICCONTENT_CLA
         on 26-08-2020 18:49.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class HealthTopicContent extends WebContent
@@ -180,4 +179,3 @@ class HealthTopicContent extends WebContent
     /* ================================================================================ */
 }   /* End of class HealthTopicContent ================================================ */
 /* ==================================================================================== */
-?>

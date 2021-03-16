@@ -147,6 +147,14 @@ class Tazieff extends Utility implements iContext
             (self)      The current instance of the class
         *}
 
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__destruct
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -306,7 +314,6 @@ class Tazieff extends Utility implements iContext
         }
 
         end:
-
         return ( $aRetVal );
     }   /* End of Tazieff.parse() ===================================================== */
     /* ================================================================================ */
@@ -439,7 +446,6 @@ class Tazieff extends Utility implements iContext
         }    /* End of ... Else of ... if ( is_file( $szCacheFile ) ) */
 
         end:
-
         return ( $aRetVal );
     }   /* End of Tazieff.search() ==================================================== */
     /* ================================================================================ */
@@ -513,6 +519,14 @@ class Tazieff extends Utility implements iContext
 
         {*return
             (void)      No return.
+        *}
+
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__costruct
         *}
 
         *}}

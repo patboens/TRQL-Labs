@@ -117,6 +117,14 @@ class MusicStore extends Store
             (self)      The current instance of the class
         *}
 
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__destruct
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -141,6 +149,14 @@ class MusicStore extends Store
 
         {*return
             (void)      No return
+        *}
+
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__construct
         *}
 
         *}}

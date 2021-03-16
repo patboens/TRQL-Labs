@@ -50,11 +50,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\contactpage;
+namespace trql\web;
 
-use \trql\mother\iContext       as iContext;
-use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\webpage\WebPage       as WebPage;
+use \trql\mother\iContext   as iContext;
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\web\WebPage       as WebPage;
 
 use DOMDocument;
 use DOMXPath;
@@ -174,4 +174,3 @@ class ContactPage extends WebPage implements iContext
     /* ================================================================================ */
 }   /* End of class ContactPage ======================================================= */
 /* ==================================================================================== */
-?>

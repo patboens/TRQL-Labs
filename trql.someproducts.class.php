@@ -46,17 +46,14 @@
 /****************************************************************************************/
 namespace trql\someproducts;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\product\Product    as Product;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\quitus\Product        as Product;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'PRODUCT_CLASS_VERSION' ) )
     require_once( 'trql.product.class.php' );
-
-
 
 defined( 'SOMEPRODUCTS_CLASS_VERSION' ) or define( 'SOMEPRODUCTS_CLASS_VERSION','0.1' );
 
@@ -159,4 +156,3 @@ class SomeProducts extends Product
     /* ================================================================================ */
 }   /* End of class SomeProducts ====================================================== */
 /* ==================================================================================== */
-?>

@@ -52,7 +52,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\product;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\thing\Thing           as Thing;
@@ -85,7 +85,6 @@ defined( 'PRODUCT_CLASS_VERSION' ) or define( 'PRODUCT_CLASS_VERSION','0.1' );
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-
     *}
 
     *}}
@@ -284,4 +283,3 @@ class Product extends Thing
     /* ================================================================================ */
 }   /* End of class Product =========================================================== */
 /* ==================================================================================== */
-?>

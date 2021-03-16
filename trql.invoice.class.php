@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -41,10 +40,9 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
-namespace trql\invoice;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli           as V;
 use \trql\intangible\Intangible     as Intangible;
@@ -75,11 +73,13 @@ defined( 'INVOICE_CLASS_VERSION' ) or define( 'INVOICE_CLASS_VERSION','0.1' );
     {*doc [url]http://schema.org/Invoice[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 18:49. It must still be completed by a number of properties such as
-        the ones we use in Quitus|TRQL (lines of detail, ...)
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c]
+        on 26-08-2020 18:49. It must still be completed by a number of properties 
+        such as the ones we use in Quitus|TRQL (lines of detail, ...)
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Invoice extends Intangible
@@ -140,6 +140,14 @@ class Invoice extends Intangible
             (self)      The current instance of the class
         *}
 
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__destruct
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -155,35 +163,36 @@ class Invoice extends Intangible
 
 
     /* ================================================================================ */
-    /** {{*WebForm()=
+    /** {{*__toForm()=
 
-        Creates a generic WebForm (<form>...</form>) that corresponds to all the
-        properties of the class
+        Returns a form representing an invoice
 
         {*params
         *}
 
         {*return
-            (void)      No return
+            (string)      No return
         *}
 
         {*warning
-            This method is EXPERIMENTAL. It is not supposed to be here ! It is FAR from
-            being finished. Once done, it will be transferred to the Mother class to be
-            applied on all TRQL Labs classes.
+            This method is EXPERIMENTAL.
+        *}
+
+        {*remark
+            If the properties are filled, their values will be reflected in the XML
         *}
 
         *}}
     */
     /* ================================================================================ */
-    public function WebForm()
-    /*---------------------*/
+    public function __toForm()
+    /*----------------------*/
     {
         $aProperties = get_object_vars( $this );
         //var_dump( $aProperties );
 
         return ( $this );
-    }   /* End of Invoice.WebForm() =================================================== */
+    }   /* End of Invoice.__toForm() ================================================== */
     /* ================================================================================ */
 
 
@@ -211,6 +220,33 @@ class Invoice extends Intangible
 
 
     /* ================================================================================ */
+    /** {{*__toXML()=
+
+        Turns the class into an XML structure
+
+        {*params
+        *}
+
+        {*return
+            (string)    XML representation of an invoice
+        *}
+
+        {*remark
+            If the properties are filled, their values will be reflected in the XML
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __toXML() : string
+    /*------------------------------*/
+    {
+        return ( v::ObjectToXML( $this ) );
+    }   /* End of Invoice.__toXML() =================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
     /** {{*__destruct()=
 
         Class destructor
@@ -220,6 +256,14 @@ class Invoice extends Intangible
 
         {*return
             (void)      No return
+        *}
+
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__construct
         *}
 
         *}}
@@ -237,4 +281,3 @@ class Invoice extends Intangible
     /* ================================================================================ */
 }   /* End of class Invoice =========================================================== */
 /* ==================================================================================== */
-?>

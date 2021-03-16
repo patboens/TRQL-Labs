@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,17 +53,16 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\faqpage;
+namespace trql\web;
 
-use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\webpage\WebPage       as WebPage;
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\web\WebPage       as WebPage;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'WEBPAGE_CLASS_VERSION' ) )
     require_once( 'trql.webpage.class.php' );
-
 
 defined( 'FAQPAGE_CLASS_VERSION' ) or define( 'FAQPAGE_CLASS_VERSION','0.1' );
 
@@ -91,6 +89,7 @@ defined( 'FAQPAGE_CLASS_VERSION' ) or define( 'FAQPAGE_CLASS_VERSION','0.1' );
         on 26-08-2020 18:46.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class FAQPage extends WebPage
@@ -198,5 +197,3 @@ class FAQPage extends WebPage
     /* ================================================================================ */
 }   /* End of class FAQPage =========================================================== */
 /* ==================================================================================== */
-
-?>

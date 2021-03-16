@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 25-12-20 12:51 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -43,11 +42,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\fieldset;
+namespace trql\html;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\tag\Tag                       as Tag;
-use \trql\XML\XML                       as XML;
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\html\Tag          as Tag;
+use \trql\XML\XML           as XML;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -76,6 +75,7 @@ defined( 'FIELDSET_CLASS_VERSION' ) or define( 'FIELDSET_CLASS_VERSION','0.1' );
 
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Fieldset extends Tag
@@ -433,8 +433,6 @@ class Fieldset extends Tag
     /* ================================================================================ */
 
 
-
-
     /* ================================================================================ */
     /** {{*__destruct()=
 
@@ -461,8 +459,5 @@ class Fieldset extends Tag
 
     }   /* End of Fieldset.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class Fieldset ========================================================== */
 /* ==================================================================================== */
-
-?>

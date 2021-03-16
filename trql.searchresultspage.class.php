@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 28-08-2020 16:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -47,7 +46,7 @@
 namespace trql\searchresultspage;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\webpage\WebPage   as WebPage;
+use \trql\web\WebPage       as WebPage;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -154,8 +153,6 @@ class SearchResultsPage extends WebPage
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
     }   /* End of SearchResultsPage.__construct() ===================================== */
     /* ================================================================================ */
@@ -188,4 +185,3 @@ class SearchResultsPage extends WebPage
     /* ================================================================================ */
 }   /* End of class SearchResultsPage ================================================= */
 /* ==================================================================================== */
-?>

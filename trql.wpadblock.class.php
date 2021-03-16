@@ -50,10 +50,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\wpadblock;
+namespace trql\web;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webpageelement\WebPageElement     as WebPageElement;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\web\WebPageElement    as WebPageElement;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -82,10 +82,10 @@ defined( 'WPADBLOCK_CLASS_VERSION' ) or define( 'WPADBLOCK_CLASS_VERSION','0.1' 
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-
     *}
 
- */
+    *}}
+*/
 /* ==================================================================================== */
 class WPAdBlock extends WebPageElement
 /*-----------------------------------*/
@@ -156,4 +156,3 @@ class WPAdBlock extends WebPageElement
     /* ================================================================================ */
 }   /* End of class WPAdBlock ========================================================= */
 /* ==================================================================================== */
-?>

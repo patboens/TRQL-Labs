@@ -27,7 +27,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel Ã©tÃ© *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -46,7 +46,7 @@
 namespace trql\productcollection;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\product\Product   as Product;
+use \trql\quitus\Product    as Product;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -79,6 +79,7 @@ defined( 'PRODUCTCOLLECTION_CLASS_VERSION' ) or define( 'PRODUCTCOLLECTION_CLASS
         on 28-08-2020 16:28.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class ProductCollection extends Product
@@ -155,5 +156,3 @@ class ProductCollection extends Product
     /* ================================================================================ */
 }   /* End of class ProductCollection ================================================= */
 /* ==================================================================================== */
-
-?>

@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,10 +53,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\itempage;
+namespace trql\web;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\webpage\WebPage   as WebPage;
+use \trql\web\WebPage       as WebPage;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -89,6 +88,7 @@ defined( 'ITEMPAGE_CLASS_VERSION' ) or define( 'ITEMPAGE_CLASS_VERSION','0.1' );
         on 26-08-2020 18:49.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class ItemPage extends WebPage
@@ -162,8 +162,6 @@ class ItemPage extends WebPage
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
     }   /* End of ItemPage.__construct() ============================================== */
     /* ================================================================================ */
@@ -196,4 +194,3 @@ class ItemPage extends WebPage
     /* ================================================================================ */
 }   /* End of class ItemPage ========================================================== */
 /* ==================================================================================== */
-?>

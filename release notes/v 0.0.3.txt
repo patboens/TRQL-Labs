@@ -36,9 +36,58 @@
     trql.autodealer.class.php
     trql.autobodyshop.class.php
 
-3) Review of the Mercator class : methods that are documented are final.
-   The documentation continues
+3) The following classes share now a common namespace: "quitus"
 
-4) Review of the Anaximandre class  : methods that are documented are final. The
-   documentation continues
-    
+    trql.invoice.class.php
+    trql.product.class.php
+    trql.productmodel.class.php
+
+4)  The following classes share the "web" namespace
+
+    trql.aboutpage.class.php
+    trql.checkoutpage.class.php
+    trql.collectionpage.class.php
+    trql.contactpage.class.php
+    trql.faqpage.class.php
+    trql.healthtopiccontent.class.php
+    trql.webapi.class.php
+    trql.webapplication.class.php
+    trql.webcontent.class.php
+    trql.webpage.class.php
+    trql.webpageelement.class.php
+    trql.website.class.php
+    trql.websitegenerator.class.php
+    trql.wpadblock.class.php
+    trql.wpfooter.class.php
+    trql.wpheader.class.php
+    trql.wpsidebar.class.php
+    trql.mediagallery.class.php
+    trql.imagegallery.class.php
+    trql.itempage.class.php
+    trql.medicalwebpage.class.php
+    trql.profilepage.class.php
+    trql.qapage.class.php
+    trql.realestatelisting.class.php
+    trql.reference.class.php
+    trql.searchresultspage.class.php
+    trql.sitenavigationelement.class.php
+    trql.videogallery.class.php
+
+5)  The following classes share the "html" namespace
+
+    trql.input.class.php
+    trql.fieldset.class.php
+    trql.form.class.php
+    trql.formbuilder.class.php
+    trql.formset.class.php
+    trql.tag.class.php
+
+6) trql.vaesoli.class.php has a new empty() method to circumvent a "weird"
+   behavior of the native empty() function of PHP, which returns a true
+   for the '0' string. trql.vaesoli.class.php NOT really documented yet!
+
+7) Review of the Mercator class : methods that are documented are final.
+   The documentation continues!
+
+8) Review of the Anaximandre class  : methods that are documented are final. The
+   documentation continues!

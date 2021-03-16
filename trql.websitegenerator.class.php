@@ -46,7 +46,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\websitegenerator;
+namespace trql\web;
 
 use \trql\vaesoli\Vaesoli               as v;
 use \trql\utility\Utility               as Utility;
@@ -328,4 +328,3 @@ class WebSiteGenerator extends Utility
     /* ================================================================================ */
 }   /* End of class WebSiteGenerator ================================================== */
 /* ==================================================================================== */
-?>

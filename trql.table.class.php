@@ -42,10 +42,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\table;
+namespace trql\html;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webpageelement\WebPageElement    as WebPageElement;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\web\WebPageElement    as WebPageElement;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -158,4 +158,3 @@ class Table extends WebPageElement
     /* ================================================================================ */
 }   /* End of class Table ============================================================= */
 /* ==================================================================================== */
-?>

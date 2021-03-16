@@ -26,6 +26,7 @@
     {*cdate                 21-11-20 14:18:24 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -76,9 +77,8 @@
 /****************************************************************************************/
 namespace trql\reference;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webpageelement\webpageelement     as WebPageElement;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\web\WebPageElement    as WebPageElement;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -98,6 +98,7 @@ defined( 'REFERENCE_CLASS_VERSION' ) or define( 'REFERENCE_CLASS_VERSION','0.1' 
 
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Reference extends WebPageElement
@@ -381,8 +382,5 @@ class Reference extends WebPageElement
         $this->necroSignaling();
     }   /* End of Reference.__destruct() ============================================== */
     /* ================================================================================ */
-
 }   /* End of class Reference ========================================================= */
 /* ==================================================================================== */
-
-?>

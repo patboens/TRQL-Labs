@@ -47,7 +47,7 @@
 namespace trql\vehicle;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\product\Product   as Product;
+use \trql\quitus\Product    as Product;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -290,4 +290,3 @@ class Vehicle extends Product
     /* ================================================================================ */
 }   /* End of class Vehicle =========================================================== */
 /* ==================================================================================== */
-?>

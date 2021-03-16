@@ -23,19 +23,11 @@
     {*file                  trql.tag.class.php *}
     {*purpose               Provides a generic way to create a (X)HTML tag *}
     {*author                {PYB} *}
-    {*company               [br]Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 12/04/2006 - 11:23 *}
     {*mdate                 auto *}
-    {*license               [url]http://creativecommons.org/licenses/by-sa/2.0/be/[/url][br]
-
-                            To obtain detailed information about the license
-                            terms, please head to the full license text
-                            available in the [file]LSCopyright.php[/file] file *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -54,11 +46,10 @@
 
 *}}} */
 /**************************************************************************/
-namespace trql\tag;
+namespace trql\html;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webpageelement\webpageelement     as WebPageElement;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\web\WebPageElement    as WebPageElement;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -67,8 +58,6 @@ if ( ! defined( 'WEBPAGEELEMENT_CLASS_VERSION' ) )
     require_once( 'trql.webpageelement.class.php' );
 
 defined( 'TAG_CLASS_VERSION' ) or define( 'TAG_CLASS_VERSION','0.1' );
-
-
 
 /* ==================================================================================== */
 /** {{*class Tag=

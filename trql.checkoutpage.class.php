@@ -53,10 +53,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\checkoutpage;
+namespace trql\web;
 
-use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\webpage\WebPage       as WebPage;
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\web\WebPage       as WebPage;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -88,6 +88,7 @@ defined( 'CHECKOUTPAGE_CLASS_VERSION' ) or define( 'CHECKOUTPAGE_CLASS_VERSION',
         on 26-08-2020 18:40.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class CheckoutPage extends WebPage
@@ -196,4 +197,3 @@ class CheckoutPage extends WebPage
     /* ================================================================================ */
 }   /* End of class CheckoutPage ====================================================== */
 /* ==================================================================================== */
-?>

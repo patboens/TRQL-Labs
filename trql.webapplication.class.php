@@ -50,7 +50,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\webapplication;
+namespace trql\web;
 
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
 use \trql\softwareapplication\SoftwareApplication   as SoftwareApplication;
@@ -85,6 +85,7 @@ defined( 'WEBAPPLICATION_CLASS_VERSION' ) or define( 'WEBAPPLICATION_CLASS_VERSI
         [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class WebApplication extends SoftwareApplication
@@ -159,4 +160,3 @@ class WebApplication extends SoftwareApplication
     /* ================================================================================ */
 }   /* End of class WebApplication ==================================================== */
 /* ==================================================================================== */
-?>

@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /**************************************************************************/
@@ -25,20 +23,12 @@
     {*file                  trql.input.class.php *}
     {*purpose               Input class (and more) to use with forms
                             of TRQL Labs (trql.form.class.php) *}
-    {*author                {PYB} (Intellectual property) *}
-    {*company               [br]Lato Sensu Management - TRQL Labs[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            Lato Sensu: [url]http://www.latosensu.be[/url][br]
-                            TRQL: [url]http://www.trql.eu[/url][br]
-                            OpenLabels : [url]http://www.openlabels.org[/url][br]
-                            UIKey : [url]http://www.ui.tl[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*author                {PYB} *}
+    {*company               {COMPANY} *}
     {*cdate                 25-12-20 13:11 *}
     {*mdate                 auto *}
-    {*license               Submitted to intellectual property rights (see
-                            author) *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     {*remark                This class has been created based on
                             QUICKInput.class.php
@@ -58,8 +48,8 @@
 /****************************************************************************************/
 namespace trql\input;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\tag\Tag                       as Tag;
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\html\Tag          as Tag;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -69,6 +59,25 @@ if ( ! defined( 'TAG_CLASS_VERSION' ) )
 
 defined( 'INPUT_CLASS_VERSION' ) or define( 'INPUT_CLASS_VERSION','0.1' );
 
+/* ==================================================================================== */
+/** {{*class Input=
+
+    {*desc
+
+        <input> element
+
+    *}
+
+    {*remark
+
+        31-12-20 09:47:33: most of the implementation comes from
+        D:\websites\vaesoli.org\www\httpdocs\vaesoli\include\LSFieldset.class.php
+
+    *}
+
+    *}}
+ */
+/* ==================================================================================== */
 class Input extends Tag
 /*-------------------*/
 {
@@ -697,6 +706,4 @@ class Input extends Tag
 
     }   /* End of Input.__destruct() ================================================== */
     /* ================================================================================ */
-
 }   /* End of class Input */
-?>

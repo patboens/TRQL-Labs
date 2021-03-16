@@ -229,6 +229,37 @@ class SmallAPIGW extends Gateway
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*assembleArgs( $aArgs,$aValues )=
+
+        Assemble arguments and values
+
+        {*params
+            $aArgs          (array)     The arguments
+            $aValues        (array)     The values of the arguments
+        *}
+
+        {*return
+            (array)     The assembled arguments along with their values
+        *}
+
+        {*example
+            $aArgs      = array( 'param1','param2','param3' );
+            $aValues    = array( 'value1','value2','value3' );
+
+            $aParams    = assembleArgs( $aArgs,$aValues );
+            var_dump( $aParams );
+
+            // Result is
+            // array (size=3)
+            //   'param1' => string 'value1' (length=6)
+            //   'param2' => string 'value2' (length=6)
+            //   'param3' => string 'value3' (length=6)
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     protected function assembleArgs( $aArgs,$aValues )
     /*----------------------------------------------*/
     {
@@ -238,7 +269,7 @@ class SmallAPIGW extends Gateway
         {
             for ( $i=0;$i<$iCount;$i++ )
                 $aRetVal[$aArgs[$i]] = $aValues[$i];
-        }
+        }   /* if ( ( $iCount = count( $aArgs ) ) === count( $aValues ) ) */
 
         return ( $aRetVal );
     }   /* End of SmallAPIGW.assembleArgs() =========================================== */
@@ -519,15 +550,15 @@ class SmallAPIGW extends Gateway
                             :
                                "<Response "                                                                 .
                                   "match=\"{$aResponse['matchAt']}\" "                                      .
-                                  "perf=\"{$aResponse['perf']}\" "                                          .
-                                  "retcode=\"{$aResponse['retcode']}\" "                                    .
-                                  "unit=\"sec\">{$szResponse}"                                              .
+                                  "perf=\"{$aResponse['perf']}\" unit=\"sec\" "                             .
+                                  "retcode=\"{$aResponse['retcode']}\">"                                    .
+                                  "{$szResponse}"                                                           .
                                "</Response>\n"
                          )                                                                                  .
                          "</Service>\n"                                                                                                                                 .
                       "</TRQLLabs>";
 
-        //echo htmlentities( $szXML,ENT_QUOTES );
+        //echo htmlentities( $szRetVal,ENT_QUOTES );
         //$this->die();
 
         if ( $bSend )
@@ -733,7 +764,7 @@ class SmallAPIGW extends Gateway
                Let's try to find a generic one */
             foreach ( $this->aHandlers as $oHandler )
             {
-                if ( empty( $oHandler->class ) )
+                if ( $v::empty( $oHandler->class ) )
                     return ( $oHandler );
             }
         }
