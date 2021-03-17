@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 28-08-2020 16:43 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été cous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -41,22 +40,18 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
 namespace trql\writeaction;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\createaction\CreateAction    as CreateAction;
-
+use \trql\vaesoli\Vaesoli               as V;
+use \trql\createaction\CreateAction     as CreateAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATEACTION_CLASS_VERSION' ) )
     require_once( 'trql.createaction.class.php' );
-
-
 
 defined( 'WRITEACTION_CLASS_VERSION' ) or define( 'WRITEACTION_CLASS_VERSION','0.1' );
 

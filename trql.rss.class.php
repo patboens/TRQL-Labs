@@ -26,6 +26,7 @@
     {*cdate                 29-07-20 14:22 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,18 +52,18 @@
 /****************************************************************************************/
 namespace trql\rss;
 
-use \trql\mother\Mother                     as Mother;
-use \trql\mother\iContext                   as iContext;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\utility\Utility                   as Utility;
-use \trql\intangible\Intangible             as Intangible;
-use \trql\thing\Thing                       as Thing;
-use \trql\person\Person                     as Person;
-use \trql\form\Form                         as Form;
-use \trql\fieldset\Fieldset                 as Fieldset;
-use \trql\formset\Formset                   as Formset;
-use \trql\input\Input                       as Input;
-use \trql\comment\Comment                   as Comment;
+use \trql\mother\Mother         as Mother;
+use \trql\mother\iContext       as iContext;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\utility\Utility       as Utility;
+use \trql\intangible\Intangible as Intangible;
+use \trql\thing\Thing           as Thing;
+use \trql\person\Person         as Person;
+use \trql\html\Form             as Form;
+use \trql\html\Fieldset         as Fieldset;
+use \trql\html\Formset          as Formset;
+use \trql\html\Input            as Input;
+use \trql\comment\Comment       as Comment;
 
 use DOMDocument;
 use DOMXPath;

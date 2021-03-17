@@ -47,6 +47,234 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <section class="header">
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.formbuilder.class.php</span>
 <span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\html</code></span>
+<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\vaesoli\Vaesoli as Vaesoli,\trql\builder\Builder as Builder,*/
+{
+    pos:    function ( e )
+            /*----------*/
+            {
+                //console.log( 'in pos()' );
+
+                var posx    = 0;
+                var posy    = 0;
+
+                if (!e) var e = window.event;
+
+                if ( e )
+                {
+                    //var e = window.event;
+
+                    if ( e.pageX || e.pageY )
+                    {
+                        posx = e.pageX;
+                        posy = e.pageY;
+                    }
+                    else if ( e.clientX || e.clientY )
+                    {
+                        posx = e.clientX + document.body.scrollLeft
+                                         + document.documentElement.scrollLeft;
+                        posy = e.clientY + document.body.scrollTop
+                                         + document.documentElement.scrollTop;
+                    }
+
+                    return new Array( posx,posy );
+                }
+                else
+                {
+                    return ( null );
+                }
+            } /* End of Q.M.pos() */
+}
+
+function formBuilder( szHost = "/ajax.php" )
+/*----------------------------------------*/
+{
+    this.version                            =   '0.0.0999';
+    this.szHost                             =   szHost;
+
+    this.oXHR                               =   null;   /* XML Request */
+    this.requestAction                      =   function( szModule,szDomain,szAction,szLang,szID1,szID2,szID3 )
+                                                {
+                                                    var szURL;
+                                                    var bAsync = true;
+
+                                                    if ( undefined === szModule )
+                                                        szModule = 'formBuilder';
+                                                    if ( undefined === szDomain )
+                                                        szDomain = 'domain';
+                                                    if ( undefined === szLang   )
+                                                        szLang = 'en';
+                                                    if ( undefined === szID1    )
+                                                        szID1 = '';
+                                                    if ( undefined === szID2    )
+                                                        szID2 = '';
+                                                    if ( undefined === szID3    )
+                                                        szID3 = '';
+
+                                                    if ( this.szHost && this.szHost.length > 0 )
+                                                    {
+                                                        szURL = this.szHost + "?domain="    + szDomain   +
+                                                                         "&module="    + szModule   +
+                                                                         "&action="    + szAction   +
+                                                                         "&lang="      + szLang     +
+                                                                         "&csrf="      + ''         +   /* No CSRF for the time being */
+                                                                         "&id1="       + szID1      +
+                                                                         "&id2="       + szID2      +
+                                                                         "&id3="       + szID3;
+
+                                                        //console.log( "requestAction with URL: " + szURL );
+
+                                                        fnFnc = null;
+
+                                                        this.oXHR = new XMLHttpRequest();
+
+                                                        this.oXHR.open( 'GET',szURL,bAsync );
+
+
+                                                        // Cela ... c'est du code "EXEMPLE" avec un POST en Ajax
+                                                        // Doc: https://developer.mozilla.org/fr/docs/Web/API/XMLHttpRequest
+                                                        // this.oXHR.open( 'post','URL',false );
+                                                        // 
+                                                        // // Here, usually the parameters of the email form should be built
+                                                        // // as a,to save or retrieve forms
+oFormBuilder = new formBuilder( '{$this->szHost}' );
+//console.log( "HOST: " + oFormBuilder.szHost );
+
+
+function allowDrop( ev )
+/*--------------------*/
+{
+    ev.preventDefault();
+    //ev.cancelBubble = true;
+    //ev.stopPropagation();
+}
+
+function dropHandler( ev )
+/*----------------------*/
+{
+    ev.stopPropagation();
+    console.log( szControlType = ev.dataTransfer.getData('text') );
+
+    // Ajoutons un texte qui dit quel élément a été droppé dans le formulaire
+    ev.target.innerHTML += '<span data-control-type="' + szControlType + '" style="cursor:help;" cl as s,Down( oPopup )
+{
+    console.log("down");
+
+    oPopup.engaged          = true;
+
+    aPos                    = Q.M.pos();
+
+    console.log( aPos );
+    oPopup.XWhenMouseDown   = aPos[0];
+    oPopup.YWhenMouseDown   = aPos[1];
+
+    console.log( "Mouse position when popup clicked " + oPopup.XWhenMouseDown + ',' + oPopup.YWhenMouseDown );
+}
+
+function mouseMove( oPopup )
+{
+    if ( "undefined" != oPopup.engaged && oPopup.engaged )
+    {
+        aPos    = Q.M.pos();
+
+        newX    = aPos[0] - oPopup.XWhenMouseDown;
+        newY    = aPos[1] - oPopup.YWhenMouseDown;
+
+        if ( newX > 0 && newY > 0 )
+        {
+            oPopup.style.left = newX + 'px';
+            oPopup.style.top  = newY + 'px';
+
+            console.log( "Popup moved to " + newX + ',' + newY );
+        }
+    }
+}
+
+function mouseUp( oPopup )
+{
+    console.log("up");
+    oPopup.engaged = false;
+}
+
+function mouseOut( oPopup )
+{
+    console.log("out");
+    //oPopup.engaged = false;
+}
+
+function onlyLettersSpaceAndDigits()
+/*--------------------------------*/
+{
+    var c = event.charCode;
+
+    console.log( c );
+
+    return ( ( c > 47 && c <  58 ) ||   /* digits */
+             ( c > 64 && c <  91 ) ||   /* lower letters */
+             ( c > 96 && c < 123 ) ||   /* upper letters */
+             ( c == 32 )           ||   /* space */
+             ( c == 45 )           ||   /* hyphen */
+             ( c == 95 )                /* underscore */
+           );
+}
+
+function saveForm( szID )
+/*---------------------*/
+{
+    var oForm,i,szAttributes;
+
+    oForm = document.getElementById( szID );
+
+    if ( oControls = oForm.getElementsByCl as sName,down'     );
+        aProperties.push( 'onmousemove'     );
+        aProperties.push( 'onmouseout'      );
+        aProperties.push( 'onmouseup'       );
+        aProperties.push( 'pattern'         );
+        aProperties.push( 'placeholder'     );
+        aProperties.push( 'readonly'        );
+        aProperties.push( 'required'        );
+        aProperties.push( 'target'          );
+        aProperties.push( 'tooltip'         );
+        aProperties.push( 'title'           );
+        aProperties.push( 'type'            );
+        aProperties.push( 'value'           );
+
+
+        for( i = 0;i < aProperties.length;i++ )
+        {
+            szProperty = aProperties<i>;
+            if ( oProp = document.getElementById( 'property_' + szProperty ) )
+                oProp.value = o.getAttribute( 'data-control-' + szProperty );
+            else
+                console.log( szProperty + " NOT FOUND in the properties popup" );
+        }
+    }
+}
+
+function updateListOfProperties( o )
+/*--------------------------------*/
+{
+    var oTableBody;
+
+    oTableBody = document.getElementById('property-list');
+    oTableBody.innerHTML = szInnerHTML = '';
+
+    if ( o.getAttribute( 'id' ) === 'form' )
+    {
+        szInnerHTML += "<tr>";
+            szInnerHTML += "<td title=\"Action triggered when a submit button is hit\">action</td>";
+            szInnerHTML += "<td cl as s,down';
+        szInnerHTML += "<tr>";
+            szInnerHTML += "<td>" + szProperty + "</td>";
+            szInnerHTML += "<td cl as s,move';
+        szInnerHTML += "<tr>";
+            szInnerHTML += "<td>" + szProperty + "</td>";
+            szInnerHTML += "<td cl as s,out';
+        szInnerHTML += "<tr>";
+            szInnerHTML += "<td>" + szProperty + "</td>";
+            szInnerHTML += "<td cl as s,up';
+        szInnerHTML += "<tr>";
+            szInnerHTML += "<td>" + szProperty + "</td>";
+            szInnerHTML += "<td cl as s,down=\"mouseDown(this);\" " . "onmouseup=\"mouseUp(this);\" " . "onmousemove=\"mouseMove(this);\" " . "onmouseout=\"mouseOut(this)\";>\n"; $szRetVal .= "<p cl as s,down</td>\n"; $szRetVal .= "<td cl as s,down\"><input id=\"property_onmousedown\" cl as s,down' );\" /></td>\n"; $szRetVal .= "</tr>\n"; $szRetVal .= "<tr>\n"; $szRetVal .= "<td>onmousemove</td>\n"; $szRetVal .= "<td cl as s,move\"><input id=\"property_onmousemove\" cl as s,move' );\" /></td>\n"; $szRetVal .= "</tr>\n"; $szRetVal .= "<tr>\n"; $szRetVal .= "<td>onmouseout</td>\n"; $szRetVal .= "<td cl as s,out\"><input id=\"property_onmouseout\" cl as s,out' );\" /></td>\n"; $szRetVal .= "</tr>\n"; $szRetVal .= "<tr>\n"; $szRetVal .= "<td>onmouseup</td>\n"; $szRetVal .= "<td cl as s,up\"><input id=\"property_onmouseup\" cl as s,up' );\" /></td>\n"; $szRetVal .= "</tr>\n"; $szRetVal .= "<tr>\n"; $szRetVal .= "<td>type</td>\n"; $szRetVal .= "<td cl as s</code></span>
 <span class="DocumentorLabel">Purpose: </span><span class="property purpose">A tool that can be used to create forms.</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>

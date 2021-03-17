@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 08-01-21 11:50 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -46,11 +45,11 @@
 /****************************************************************************************/
 namespace trql\logoutform;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\form\Form                     as Form;
-use \trql\input\Input                   as Input;
-use \trql\tag\Tag                       as Tag;
-use \trql\XML\XML                       as XML;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\html\Form             as Form;
+use \trql\html\Input            as Input;
+use \trql\html\Tag              as Tag;
+use \trql\XML\XML               as XML;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -78,6 +77,8 @@ defined( 'LOGOUTFORM_CLASS_VERSION' ) or define( 'LOGOUTFORM_CLASS_VERSION','0.1
         information. A device for collecting data.
 
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */

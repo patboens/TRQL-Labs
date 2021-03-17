@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -83,6 +82,7 @@ defined( 'DATASET_CLASS_VERSION' ) or define( 'DATASET_CLASS_VERSION','0.1' );
         on 26-08-2020 18:46.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Dataset extends CreativeWork
@@ -179,8 +179,5 @@ class Dataset extends CreativeWork
         $this->necroSignaling();
     }   /* End of Dataset.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class Dataset =========================================================== */
 /* ==================================================================================== */
-
-?>

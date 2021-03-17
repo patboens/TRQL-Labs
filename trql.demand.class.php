@@ -56,8 +56,8 @@
 /****************************************************************************************/
 namespace trql\demand;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\intangible\Intangible             as Intangible;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\intangible\Intangible     as Intangible;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -91,6 +91,7 @@ defined( 'DEMAND_CLASS_VERSION' ) or define( 'DEMAND_CLASS_VERSION','0.1' );
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Demand extends Intangible
@@ -258,4 +259,3 @@ class Demand extends Intangible
     /* ================================================================================ */
 }   /* End of class Demand ============================================================ */
 /* ==================================================================================== */
-?>

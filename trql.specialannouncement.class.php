@@ -89,7 +89,7 @@
     {*cdate                 28-08-2020 16:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel �t� *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -207,35 +207,35 @@ class SpecialAnnouncement extends CreativeWork
                                'UIKey'  => null         ,
                              );
 
-    public      $announcementLocation           = null;             /* {*property   $announcementLocation           (CivicStructure|LocalBusiness)  Indicates a specific CivicStructure or LocalBusiness associated with
-                                                                                                                                                    the SpecialAnnouncement. For example, a specific testing facility or
-                                                                                                                                                    business with special opening hours. For a larger geographic region
-                                                                                                                                                    like a quarantine of an entire region, use spatialCoverage. *} */
-    public      $category                       = null;             /* {*property   $category                       (Thing|PhysicalActivityCategory|URL|string)A category for the item. Greater signs or slashes can be used to
-                                                                                                                                                    informally indicate a category hierarchy. *} */
-    public      $datePosted                     = null;             /* {*property   $datePosted                     (Date|DateTime)                 Publication date of an online listing. *} */
-    public      $diseasePreventionInfo          = null;             /* {*property   $diseasePreventionInfo          (URL|WebContent)                Information about disease prevention. *} */
-    public      $diseaseSpreadStatistics        = null;             /* {*property   $diseaseSpreadStatistics        (WebContent|URL|Observation|Dataset)Statistical information about the spread of a disease, either as
-                                                                                                                                                    WebContent, or described directly as a Dataset, or the specific
-                                                                                                                                                    Observations in the dataset. When a WebContent URL is provided, the
-                                                                                                                                                    page indicated might also contain more such markup. *} */
-    public      $gettingTestedInfo              = null;             /* {*property   $gettingTestedInfo              (URL|WebContent)                Information about getting tested (for a MedicalCondition), e.g. in the
-                                                                                                                                                    context of a pandemic. *} */
-    public      $governmentBenefitsInfo         = null;             /* {*property   $governmentBenefitsInfo         (GovernmentService)             governmentBenefitsInfo provides information about government benefits
-                                                                                                                                                    associated with a SpecialAnnouncement. *} */
-    public      $newsUpdatesAndGuidelines       = null;             /* {*property   $newsUpdatesAndGuidelines       (WebContent|URL)                Indicates a page with news updates and guidelines. This could often be
-                                                                                                                                                    (but is not required to be) the main page containing
-                                                                                                                                                    SpecialAnnouncement markup on a site. *} */
-    public      $publicTransportClosuresInfo    = null;             /* {*property   $publicTransportClosuresInfo    (URL|WebContent)                Information about public transport closures. *} */
-    public      $quarantineGuidelines           = null;             /* {*property   $quarantineGuidelines           (URL|WebContent)                Guidelines about quarantine rules, e.g. in the context of a pandemic. *} */
-    public      $schoolClosuresInfo             = null;             /* {*property   $schoolClosuresInfo             (WebContent|URL)                Information about school closures. *} */
-    public      $travelBans                     = null;             /* {*property   $travelBans                     (WebContent|URL)                Information about travel bans, e.g. in the context of a pandemic. *} */
-    public      $typicalAgeRange                = null;             /* {*property   $typicalAgeRange                (string)                        The typical expected age range, e.g. '7-9', '11-'. *} */
-    public      $webFeed                        = null;             /* {*property   $webFeed                        (DataFeed|URL)                  The URL for a feed, e.g. associated with a podcast series, blog, or
-                                                                                                                                                    series of date-stamped updates. This is usually RSS or Atom. *} */
+    public      $announcementLocation           = null;             /* {*property   $announcementLocation           (CivicStructure|LocalBusiness)                  Indicates a specific CivicStructure or LocalBusiness associated with
+                                                                                                                                                                    the SpecialAnnouncement. For example, a specific testing facility or
+                                                                                                                                                                    business with special opening hours. For a larger geographic region
+                                                                                                                                                                    like a quarantine of an entire region, use spatialCoverage. *} */
+    public      $category                       = null;             /* {*property   $category                       (Thing|PhysicalActivityCategory|URL|string)     A category for the item. Greater signs or slashes can be used to
+                                                                                                                                                                    informally indicate a category hierarchy. *} */
+    public      $datePosted                     = null;             /* {*property   $datePosted                     (Date|DateTime)                                 Publication date of an online listing. *} */
+    public      $diseasePreventionInfo          = null;             /* {*property   $diseasePreventionInfo          (URL|WebContent)                                Information about disease prevention. *} */
+    public      $diseaseSpreadStatistics        = null;             /* {*property   $diseaseSpreadStatistics        (WebContent|URL|Observation|Dataset)            Statistical information about the spread of a disease, either as
+                                                                                                                                                                    WebContent, or described directly as a Dataset, or the specific
+                                                                                                                                                                    Observations in the dataset. When a WebContent URL is provided, the
+                                                                                                                                                                    page indicated might also contain more such markup. *} */
+    public      $gettingTestedInfo              = null;             /* {*property   $gettingTestedInfo              (URL|WebContent)                                Information about getting tested (for a MedicalCondition), e.g. in the
+                                                                                                                                                                    context of a pandemic. *} */
+    public      $governmentBenefitsInfo         = null;             /* {*property   $governmentBenefitsInfo         (GovernmentService)                             governmentBenefitsInfo provides information about government benefits
+                                                                                                                                                                    associated with a SpecialAnnouncement. *} */
+    public      $newsUpdatesAndGuidelines       = null;             /* {*property   $newsUpdatesAndGuidelines       (WebContent|URL)                                Indicates a page with news updates and guidelines. This could often be
+                                                                                                                                                                    (but is not required to be) the main page containing
+                                                                                                                                                                    SpecialAnnouncement markup on a site. *} */
+    public      $publicTransportClosuresInfo    = null;             /* {*property   $publicTransportClosuresInfo    (URL|WebContent)                                Information about public transport closures. *} */
+    public      $quarantineGuidelines           = null;             /* {*property   $quarantineGuidelines           (URL|WebContent)                                Guidelines about quarantine rules, e.g. in the context of a pandemic. *} */
+    public      $schoolClosuresInfo             = null;             /* {*property   $schoolClosuresInfo             (WebContent|URL)                                Information about school closures. *} */
+    public      $travelBans                     = null;             /* {*property   $travelBans                     (WebContent|URL)                                Information about travel bans, e.g. in the context of a pandemic. *} */
+    public      $typicalAgeRange                = null;             /* {*property   $typicalAgeRange                (string)                                        The typical expected age range, e.g. '7-9', '11-'. *} */
+    public      $webFeed                        = null;             /* {*property   $webFeed                        (DataFeed|URL)                                  The URL for a feed, e.g. associated with a podcast series, blog, or
+                                                                                                                                                                    series of date-stamped updates. This is usually RSS or Atom. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId             = null;                     /* {*property   $wikidataId                     (string)                        Wikidata ID. No equivalent. *} */
+    public      $wikidataId             = null;                     /* {*property   $wikidataId                     (string)                                        Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */

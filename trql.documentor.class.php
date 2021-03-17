@@ -27,7 +27,7 @@
     {*cdate                 16-08-20 19:19 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     {*abstract              The [c]Documentor[/c] class helps document ALL TRQL Labs classes
                             defined in [file]d:\websites\snippet-center\[/file].[br][br]
@@ -790,7 +790,8 @@ Class DocumentorFile extends CreativeWork
         // Il faut encore résoudre des includes ... comme celui-ci
         // [include]C:\websites\vaesoli.org\www\httpdocs\vaesoli\include\LSClass.class.journal[/include]
 
-        $this->pure = preg_replace( '%/\*.*?\*/%si','',$this->content );
+        //$this->pure = preg_replace( '%/\*.*?\*/%si','',$this->content );
+        $this->pure = php_strip_whitespace( $this->szFileName );
 
         return ( $this );
     }   /* End of DocumentorFile.readFile() =========================================== */
@@ -841,6 +842,9 @@ Class DocumentorSourceFile extends DocumentorFile
     public      $szNamespace        = null;
     public      $aFunctions         = null;
     public      $aConstants         = null;
+    public      $aUses              = null;                         /* {*property   $aUses                      (array)                             An array of uses (e.g. "use \trql\mother\Mother as Mother;"), or 
+                                                                                                                                                    [c]null[/c] if none. Each "use" (if any) is structured as an 
+                                                                                                                                                    associative array: array( 'class' => $szClass,'alias' => $szAlias ) *} */
     public      $aDefines           = null;
     public      $aSubstitutions     = null;                         /* {*property   $aSubstitutions             (array)                             An array of substitutions *} */
 
@@ -2415,7 +2419,7 @@ Class DocumentorSourceFile extends DocumentorFile
         *}
 
         {*warning
-            We do not suppprt several namespaces yet.
+            We do not suppprt several namespaces yet !
         *}
 
         {*doc
@@ -2433,7 +2437,7 @@ Class DocumentorSourceFile extends DocumentorFile
         if ( ! empty( $this->content ) )
         {
             // Il faudrait chercher les namespace nsName { } dans le code source débarrassé de ces commentaires !
-            if ( preg_match( '/namespace(?P<namespace>.*?);/si',$this->content,$aMatches ) )
+            if ( preg_match( '/namespace(?P<namespace>.*?);/si',$this->pure,$aMatches ) )
                 $this->szNamespace = trim( $aMatches['namespace'] );
         }   /* if ( ! empty( $this->content ) ) */
 
@@ -2478,9 +2482,6 @@ Class DocumentorSourceFile extends DocumentorFile
         use \trql\vaesoli\Vaesoli   as Vaesoli;
         use \trql\thing\Thing       as Thing;
 
-        use DOMDocument;
-        use DOMXPath;
-
         {*params
         *}
 
@@ -2488,7 +2489,40 @@ Class DocumentorSourceFile extends DocumentorFile
             (self)      Returns self; object updated
         *}
 
+        {*warning
+            We do not suppprt several namespaces yet !
+            PHP can alias constants, functions, classes, interfaces, and namespaces.
+            ONLY classes declared at the top of the file are retrieved, and only if
+            written 1 use per line.
+
+            NOT SUPPORTED:
+
+            use Mizo\Web\ {
+               Php\WebSite,
+               Php\KeyWord,
+               Php\UnicodePrint,
+               JS\JavaScript,
+               function JS\printTotal,
+               function JS\printList,
+               const JS\BUAIKUM,
+               const JS\MAUTAM
+            };
+
+            use DOMDocument;
+            use DOMXPath;
+
+
+            SUPPORTED:
+
+            use \trql\mother\Mother     as Mother;
+            use \trql\mother\iContext   as iContext;
+            use \trql\vaesoli\Vaesoli   as Vaesoli;
+            use \trql\thing\Thing       as Thing;
+
+        *}
+
         {*doc
+            [url]https://www.php.net/manual/fr/language.namespaces.definitionmultiple.php[/url]
             [url]https://www.php.net/manual/en/language.namespaces.importing.php[/url]
         *}
 
@@ -2498,6 +2532,28 @@ Class DocumentorSourceFile extends DocumentorFile
     public function getUses()
     /*---------------------*/
     {
+        $szRetVal = null;
+
+        if ( ! empty( $this->content ) )
+        {
+            if ( preg_match_all( '/use *(?P<class>.*?) *(as *(?P<alias>[[:word:]]*))/sm',$this->pure,$aMatches,PREG_PATTERN_ORDER ) )
+            {
+                // NOT SUPPORTED YET !!! (see also warning in the method header)
+                // =============================================================
+                // use DOMDocument;
+                // use DOMXPath;
+
+                //$aMatches = $aMatches[0];
+                $aMatches = Vaesoli::assembleArrays( $aMatches['class'],$aMatches['alias'] );
+                foreach( $aMatches as $szClass => $szAlias )
+                {
+                    $this->aUses[] = array( 'class' => $szClass,'alias' => $szAlias );
+                }
+            }
+        }   /* if ( ! empty( $this->content ) ) */
+
+        //$this->die();
+
         return ( $this );
     }   /* End of DocumentorSourceFile.getUses() ====================================== */
     /* ================================================================================ */
@@ -3500,7 +3556,7 @@ Class DocumentorFunction extends DocumentorSourceFileObject
                 $i++;
             }
         }
-        
+
         //var_dump( "FOUND " . count( $this->aParams ) . ' parameters' );
 
         end:
@@ -3686,13 +3742,24 @@ URL 	Indicates a page documenting how licenses can be purchased or otherwise acq
         else
             $szType = 'HTML';
 
+        //$this->die();
+
         if ( $szType === 'HTML' )
         {
             $szRetVal .= "<section class=\"header\">\n";
                 if ( ! empty( $this->image ) )
                     $szRetVal .= "<p><img src=\"{$this->image}\" style=\"display:block;float:left;width:130px; height:auto;margin-right: 20px;\" class=\"shadow constrained\"/></p>\n";
+                if ( is_array( $this->oSourceFile->aUses ) )
+                {
+                    $szUses = '';
+                    foreach( $this->oSourceFile->aUses as $aUse )
+                        $szUses .= $aUse['class'] . ( ! empty( $aUse['alias'] ) ? ( ' as ' . $aUse['alias'] ) : '' ) . ',';
+                    $szUses = Vaesoli::STR_strin( trim( $szUses ) );
+                }
+
                 $szRetVal .= "<span class=\"DocumentorLabel\">Filename: </span><span class=\"property filename\">"              . $this->squareToAngle( say(                      $this->szFileName )   ) . "</span>\n";
                 $szRetVal .= "<span class=\"DocumentorLabel\">Namespace: </span><span class=\"property namespace\">"            . $this->squareToAngle( say( '[c]' . $this->oSourceFile->szNamespace . '[/c]' )  ) . "</span>\n";
+                $szRetVal .= "<span class=\"DocumentorLabel\">Class aliases: </span><span class=\"property aliases\">"          . $this->squareToAngle( say( '[c]' . $szUses . '[/c]' )  ) . "</span>\n";
                 $szRetVal .= "<span class=\"DocumentorLabel\">Purpose: </span><span class=\"property purpose\">"                . $this->squareToAngle( say( vaesoli::STR_Reduce( $this->szPurpose  ) ) ) . "</span>\n";
                 $szRetVal .= "<span class=\"DocumentorLabel\">Author: </span><span class=\"property author\">"                  . $this->squareToAngle( say(                      $this->author     )   ) . "</span>\n";
                 $szRetVal .= "<span class=\"DocumentorLabel\">Company: </span><span class=\"property company\">"                . $this->squareToAngle( say(                      $this->szCompany  )   ) . "</span>\n";

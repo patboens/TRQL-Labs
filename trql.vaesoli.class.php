@@ -73,6 +73,53 @@ if ( ! defined( 'VAESOLI_SLASH' ) )                                 /* If VAESOL
 class Vaesoli
 /*---------*/
 {
+    /* ================================================================================ */
+    /** {{*assembleArrays( $a,$b)=
+
+        Assemble arguments and values
+
+        {*params
+            $a      (array)     A linear array (a series of elements)
+            $b      (array)     A linear array (a series of elements)
+        *}
+
+        {*return
+            (array)     The assembled arrays
+        *}
+
+        {*example
+            $aArgs      = array( 'param1','param2','param3' );
+            $aValues    = array( 'value1','value2','value3' );
+
+            $aParams    = assembleArrays( $aArgs,$aValues );
+            var_dump( $aParams );
+
+            // Result is
+            // array (size=3)
+            //   'param1' => string 'value1' (length=6)
+            //   'param2' => string 'value2' (length=6)
+            //   'param3' => string 'value3' (length=6)
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public static function assembleArrays( $a,$b )
+    /*------------------------------------------*/
+    {
+        $aRetVal = null;
+
+        if ( ( $iCount = count( $a ) ) === count( $b ) )
+        {
+            for ( $i=0;$i<$iCount;$i++ )
+                $aRetVal[$a[$i]] = $b[$i];
+        }   /* if ( ( $iCount = count( $a ) ) === count( $b ) ) */
+
+        return ( $aRetVal );
+    }   /* End of vaesoli.assembleArrays() ============================================ */
+    /* ================================================================================ */
+
+
     public static function COLOR_rgb2hsv( $r,$g = null,$b = null )
     /*----------------------------------------------------------*/
     {
@@ -3656,15 +3703,15 @@ class Vaesoli
         }   /* if ( ! STR_Empty( $szStr ) && ! STR_Empty( $cChar ) ) */
 
         return ( $szRetVal );                                       /* Return result to caller */
-    }   /* End of vaesoli.STR_Reduce() =========================================== */
-    /* ============================================================================ */
+    }   /* End of vaesoli.STR_Reduce() ================================================ */
+    /* ================================================================================ */
 
 
     public static function STR_Tran( $szStr,$szToReplace,$szReplacement = '' )
     /*----------------------------------------------------------*/
     {
        return ( str_replace( $szToReplace,$szReplacement,$szStr ) );
-    }   /* End of vaesoli.STR_tran() =========================================== */
+    }   /* End of vaesoli.STR_tran() ================================================== */
 
 
     public static function STR_Empty( $szStr )

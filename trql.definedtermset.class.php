@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -30,6 +28,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -48,17 +47,14 @@
 /****************************************************************************************/
 namespace trql\definedtermset;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\creativework\CreativeWork    as CreativeWork;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\creativework\CreativeWork     as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
-
-
 
 defined( 'DEFINEDTERMSET_CLASS_VERSION' ) or define( 'DEFINEDTERMSET_CLASS_VERSION','0.1' );
 
@@ -85,6 +81,7 @@ defined( 'DEFINEDTERMSET_CLASS_VERSION' ) or define( 'DEFINEDTERMSET_CLASS_VERSI
         on 26-08-2020 18:46.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class DefinedTermSet extends CreativeWork

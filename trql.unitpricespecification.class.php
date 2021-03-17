@@ -27,7 +27,7 @@
     {*cdate                 28-08-2020 16:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été cous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -75,18 +75,18 @@ defined( 'UNITPRICESPECIFICATION_CLASS_VERSION' ) or define( 'UNITPRICESPECIFICA
     {*doc [url]http://schema.org/UnitPriceSpecification[/url] *}
 
     {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 28-08-2020 16:41.
+        This class has been generated automatically by 
+        [c]trql.schemaclassgenerator.class.php[/c] on 28-08-2020 16:41.
     *}
 
     *}}
 
- */
+*/
 /* ==================================================================================== */
 class UnitPriceSpecification extends PriceSpecification
 /*---------------------------------------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                                 Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
@@ -104,12 +104,11 @@ class UnitPriceSpecification extends PriceSpecification
     public      $billingIncrement               = null;             /* {*property   $billingIncrement               (float)                                 This property specifies the minimal quantity and rounding increment
                                                                                                                                                             that will be the basis for the billing. The unit of measurement is
                                                                                                                                                             specified by the unitCode property. *} */
-    public      $billingStart                   = null;             /* {*property   $billingStart                   (Number)                                Specifies after how much time this price (or price component)
+    public      $billingStart                   = null;             /* {*property   $billingStart                   (number)                                Specifies after how much time this price (or price component)
                                                                                                                                                             becomes valid and billing starts. Can be used, for example, to
                                                                                                                                                             model a price increase after the first year of a subscription.
-                                                                                                                                                            The unit of measurement is specified by the unitCode property. *} */
-
-    public      $priceComponentType             = null;             /* {*property   $priceComponentType             (PriceComponentTypeEnumeratio)          Identifies a price component (for example, a line item on an
+                                                                                                                                                            The unit of measurement is specified by the @var.unitCode property. *} */
+    public      $priceComponentType             = null;             /* {*property   $priceComponentType             (PriceComponentTypeEnumeration)         Identifies a price component (for example, a line item on an
                                                                                                                                                             invoice), part of the total price for an offer. *} */
     public      $priceType                      = null;             /* {*property   $priceType                      (string)                                A short text or acronym indicating multiple price specifications for
                                                                                                                                                             the same offer, e.g. SRP for the suggested retail price or INVOICE for
@@ -124,9 +123,8 @@ class UnitPriceSpecification extends PriceSpecification
     public      $unitText                       = null;             /* {*property   $unitText                       (string)                                A string or text indicating the unit of measurement. Useful if you
                                                                                                                                                             cannot provide a standard unit code forunitCode. *} */
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                                Wikidata ID. NO SEARCH YET *} */
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                                Wikidata ID. No equivalent. *} */
 
 
     /* ================================================================================ */

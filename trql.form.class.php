@@ -43,7 +43,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\form;
+namespace trql\html;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\html\Input            as Input;
@@ -727,28 +727,28 @@ class Form extends Tag
         {
             if ( is_array( $this->aItems ) && count( $this->aItems ) > 0 )
             {
-                foreach ( $this->aItems as $oItem )                     /* For each control found in the form */
+                foreach ( $this->aItems as $oItem )                 /* For each control found in the form */
                 {
-                    if ( $oItem instanceof Fieldset )                   /* If Fieldset ... it contains sub-controls */
+                    if ( $oItem instanceof Fieldset )               /* If Fieldset ... it contains sub-controls */
                     {
-                        foreach ( $oControl->aObjects as $oSubControl ) /* For each control of the fieldset */
+                        foreach ( $oItem->aObjects as $oSubControl )/* For each control of the fieldset */
                         {
-                            if ( $oSubControl instanceof LSInput )      /* If input */
+                            if ( $oSubControl instanceof Input )    /* If input */
                             {
                                 if ( $oSubControl->szType === 'file' )  /* If file input */
                                 {
-                                    $HasFile = true;                    /* It has files ... go no further */
-                                    break 2;                            /* Stop processing */
+                                    $HasFile = true;                /* It has files ... go no further */
+                                    break 2;                        /* Stop processing */
                                 }
                             }
                         }
                     }   /* if     ( $oItem instanceof Fieldset ) */
-                    elseif ( $oItem instanceof Input )                  /* If input */
+                    elseif ( $oItem instanceof Input )              /* If input */
                     {
-                        if ( $oItem->szType === 'file' )                /* If file input */
+                        if ( $oItem->szType === 'file' )            /* If file input */
                         {
-                            $HasFile = true;                            /* It has files ... go no further */
-                            break;                                      /* Stop processing */
+                            $HasFile = true;                        /* It has files ... go no further */
+                            break;                                  /* Stop processing */
                         }
                     }   /* elseif ( $oControl instanceof LSInput ) */
                 }   /* foreach ( $this->aObjects as $oControl ) */

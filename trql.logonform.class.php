@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 25-12-20 12:51 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,13 +43,13 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\logonform;
+namespace trql\html;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\form\Form                     as Form;
-use \trql\input\Input                   as Input;
-use \trql\tag\Tag                       as Tag;
-use \trql\XML\XML                       as XML;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\html\Form             as Form;
+use \trql\html\Input            as Input;
+use \trql\html\Tag              as Tag;
+use \trql\XML\XML               as XML;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -85,6 +84,8 @@ defined( 'LOGONFORM_CLASS_VERSION' ) or define( 'LOGONFORM_CLASS_VERSION','0.1' 
         D:\websites\vaesoli.org\www\httpdocs\vaesoli\include\LSForm.class.php
 
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -232,8 +233,5 @@ class LogonForm extends Form
 
     }   /* End of LogonForm.__destruct() ============================================== */
     /* ================================================================================ */
-
 }   /* End of class LogonForm ========================================================= */
 /* ==================================================================================== */
-
-?>

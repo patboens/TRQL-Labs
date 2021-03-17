@@ -26,6 +26,7 @@
     {*cdate                 24-08-2020 12:50 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel Ã©tÃ© sous le hÃªtre *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -44,9 +45,8 @@
 /****************************************************************************************/
 namespace trql\footnotes;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\webpageelement\webpageelement     as WebPageElement;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\web\WebPageElement    as WebPageElement;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -83,12 +83,12 @@ class Footnotes extends WebPageElement
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId         = 'Q59615872';                  /* {*property   $wikidataId                  (string)                        WikidataId. Footnote ... Note at the foot of a page *} */
     public      $aNotes             = array();                      /* {*property   $aNotes                      (array)                         An array of notes that must be rendered at some point *} */
     public      $szPrefix           = '';                           /* {*property   $szPrefix                    (string)                        A prefix that will be added to the note counter when it is rendered *} */
     public      $iTeaserLength      = 100;                          /* {*property   $iTeaserLength               (int)                           The length of the teaser *} */
     public      $iStart             = 0;                            /* {*property   $iStart                      (int)                           Counter start. [c]0[/c] by default. DO NOT USE NEGATIVE NUMBERS. *} */
 
-    public      $wikidataId         = null;
 
     /* ================================================================================ */
     /** {{*__construct( [$x] )=
@@ -217,8 +217,8 @@ class Footnotes extends WebPageElement
     {
         $szRetVal = '';
 
-        /* J'ai mis $x car je prÚvois aussi qu'on puisse ajouter des
-           rÚfÚrences, des citations, etc. ce qui demandera des traitements
+        /* J'ai mis $x car je prÃšvois aussi qu'on puisse ajouter des
+           rÃšfÃšrences, des citations, etc. ce qui demandera des traitements
            particuliers */
 
         if ( is_string( $x ) )                                      /* If string */
@@ -234,7 +234,7 @@ class Footnotes extends WebPageElement
                 $i = count( $this->aNotes ) + ( $this->iStart > 0 ? $this->iStart - 1 : 0 );        /* Note count */
                 $szTeaser = nl2br( trim( vaesoli::STR_Left( vaesoli::STR_Reduce( strip_tags( $x ),' ' ),$this->iTeaserLength ) ),'' );/* Little teaser */
 
-                if ( vaesoli::STR_right( $szTeaser,3 ) != '...' &&           /* If text not terminated by "..." or by "à" */
+                if ( vaesoli::STR_right( $szTeaser,3 ) != '...' &&           /* If text not terminated by "..." or by "Ã " */
                      vaesoli::STR_right( $szTeaser,1 ) != '&hellip;'
                    )
                 {
@@ -471,11 +471,5 @@ class Footnotes extends WebPageElement
         $this->necroSignaling();
     }   /* End of Footnotes.__destruct() ============================================== */
     /* ================================================================================ */
-
-
-
-
 }   /* End of class Footnotes ========================================================= */
 /* ==================================================================================== */
-
-?>

@@ -46,7 +46,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\input;
+namespace trql\html;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
 use \trql\html\Tag          as Tag;

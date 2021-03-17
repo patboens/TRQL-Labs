@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 09-02-21 08:58 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -46,12 +45,12 @@
 /****************************************************************************************/
 namespace trql\whatwasdone;
 
-use \trql\vaesoli\Vaesoli       as v;
-use \trql\form\Form             as Form;
-use \trql\fieldset\Fieldset     as Fieldset;
-use \trql\input\Input           as Input;
-use \trql\tag\Tag               as Tag;
-use \trql\XML\XML               as XML;
+use \trql\vaesoli\Vaesoli   as v;
+use \trql\html\Form         as Form;
+use \trql\html\Fieldset     as Fieldset;
+use \trql\html\Input        as Input;
+use \trql\html\Tag          as Tag;
+use \trql\XML\XML           as XML;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -87,6 +86,7 @@ defined( 'WHATWASDONE_CLASS_VERSION' ) or define( 'WHATWASDONE_CLASS_VERSION','0
 
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class WhatWasDone extends Form
@@ -299,7 +299,5 @@ class WhatWasDone extends Form
 
     }   /* End of WhatWasDone.__destruct() ============================================ */
     /* ================================================================================ */
-
 }   /* End of class WhatWasDone ======================================================= */
 /* ==================================================================================== */
-?>
