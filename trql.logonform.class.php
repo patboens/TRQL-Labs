@@ -109,7 +109,6 @@ class LogonForm extends Form
                                                                                                                         by identifying and authenticating the user through
                                                                                                                         the credentials presented by the user. *} */
 
-
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 
@@ -169,8 +168,6 @@ class LogonForm extends Form
                                       'help'          =>  false                                 ,
                                       'value'         =>  'Login'                               ,
                                     ) ) );
-
-
 
         return ( $this );
     }   /* End of LogonForm.__construct() ============================================= */

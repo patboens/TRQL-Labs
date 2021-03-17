@@ -235,7 +235,7 @@ class SpecialAnnouncement extends CreativeWork
                                                                                                                                                                     series of date-stamped updates. This is usually RSS or Atom. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId             = null;                     /* {*property   $wikidataId                     (string)                                        Wikidata ID. No equivalent. *} */
+    public      $wikidataId                     = 'Q58244868';      /* {*property   $wikidataId                     (string)                                        Wikidata ID. *} */
 
 
     /* ================================================================================ */

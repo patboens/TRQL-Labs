@@ -842,8 +842,8 @@ Class DocumentorSourceFile extends DocumentorFile
     public      $szNamespace        = null;
     public      $aFunctions         = null;
     public      $aConstants         = null;
-    public      $aUses              = null;                         /* {*property   $aUses                      (array)                             An array of uses (e.g. "use \trql\mother\Mother as Mother;"), or 
-                                                                                                                                                    [c]null[/c] if none. Each "use" (if any) is structured as an 
+    public      $aUses              = null;                         /* {*property   $aUses                      (array)                             An array of uses (e.g. "use \trql\mother\Mother as Mother;"), or
+                                                                                                                                                    [c]null[/c] if none. Each "use" (if any) is structured as an
                                                                                                                                                     associative array: array( 'class' => $szClass,'alias' => $szAlias ) *} */
     public      $aDefines           = null;
     public      $aSubstitutions     = null;                         /* {*property   $aSubstitutions             (array)                             An array of substitutions *} */
@@ -1590,7 +1590,9 @@ Class DocumentorSourceFile extends DocumentorFile
                                "   }\n";
 
                     $szHTML     .= ".property.inheritance code { border: none !important; }\n";
-
+                    $szHTML     .= ".assert.success { border: 2px solid green; padding: 5px; border-radius:3px; }\n";
+                    $szHTML     .= ".assert.failure { border: 2px solid red; padding: 5px; border-radius:3px; }\n";
+                    $szHTML     .= ".assert.success code, .assert.failure code { border: none !important; }\n";
 
                     //$szHTML .= ".seealso code a:before {content: \"\\2221 \" ;\n }";
                     //$szHTML .= ".seealso code { background-color: #800 !important;}\n";
@@ -1814,6 +1816,15 @@ Class DocumentorSourceFile extends DocumentorFile
                                             {
                                                 $szHTML     .= "<p class=\"property\">Warning:</p>\n";
                                                 $szHTML  .= "<p>" . $this->squareToAngle( say( $this->s( $oMethod->szWarning ) ) ) . "</p>\n";
+                                            }
+
+                                            if ( is_array( $oMethod->aAsserts ) && count( $oMethod->aAsserts ) > 0 )
+                                            {
+                                                $szHTML .= "<p class=\"property\">Assertions:</p>\n";
+                                                foreach( $oMethod->aAsserts as $szAssert => $bSuccess )
+                                                {
+                                                    $szHTML .= "<p><span class=\"assert " . ( $bSuccess ? 'success' : 'failure' ) . "\">" . $this->squareToAngle( "[c]{$szAssert}[/c]") . "</span></p>\n";
+                                                }
                                             }
 
                                             if ( ! empty( $oMethod->szRemark ) )
@@ -3254,8 +3265,8 @@ Class DocumentorClass extends DocumentorSourceFileObject
                             $oFnc->szExamples   =                                  $this->property( '{*example'   ,$szFncDef );
                             $oFnc->keywords     =       trim( vaesoli::STR_Reduce( $this->property( '{*keywords'  ,$szFncDef ) ) );
                             $oFnc->abstract     =       trim( vaesoli::STR_Reduce( $this->property( '{*abstract'  ,$szFncDef ) ) );
-                            //var_dump( $oFnc->abstract );
-                            //$this->die();
+
+                            $oFnc->getAsserts();
 
                             if ( ! empty( $szSeeAlsos = trim( vaesoli::STR_Reduce( $this->property( '{*seealso'   ,$szFncDef ) ) ) ) )
                                 $oFnc->aSeeAlsos = explode( ',',str_replace( ';',',',$szSeeAlsos ) );     /* All seealso's (array) */
@@ -3457,6 +3468,7 @@ Class DocumentorFunction extends DocumentorSourceFileObject
     public      $author         = null;                             /* {*property       $author                 (Organization|Person|string)    The author of the method *} */
     public      $aParams        = array();                          /* {*property       $aParams                (array)                         Array of parameters *} */
     public      $aAliases       = array();                          /* {*property       $aAliases               (array)                         Array of aliases *} */
+    public      $aAsserts       = null;                             /* {*property       $aAsserts               (array)                         Array of assert statements or [c]null[/c] if none *} */
     public      $szExamples     = null;                             /* {*property       $szExamples             (string)                        Set of examples for this function/method *} */
     public      $aExecs         = array();                          /* {*property       $aExecs                 (array)                         Array of code that must be executed *} */
     public      $oReturn        = null;                             /* {*property       $oReturn                (DocumentorReturn)              Return object *} */
@@ -3503,6 +3515,42 @@ Class DocumentorFunction extends DocumentorSourceFileObject
 
 
     /* ================================================================================ */
+    /** {{*getAsserts()=
+
+        Get all asserts defined in the header of a function/method
+
+        {*params
+        *}
+
+        {*return
+            (self)      The current instance of the class. @var.aAsserts updated
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function getAsserts()
+    /*------------------------*/
+    {
+        if ( preg_match_all( '/\{\*assert(?P<assert>.*?)\*\}/sim',$this->szDefinition,$aMatches,PREG_PATTERN_ORDER ) )
+        {
+            foreach( $aMatches['assert'] as $szAssert )
+            {
+                $szAssert = trim( $szAssert );
+                // Pfff ... don't like this AT ALL ... but the assert() function has changed as
+                // of PHP 7.2 ... and strings are no longer supported !!!
+                $x = @eval( 'return ( ' . trim( $szAssert ) . ');' );
+                $this->aAsserts[$szAssert] = is_bool( $x ) ? $x : false;
+            }
+        }
+
+        return ( $this );
+        
+    }   /* End of DocumentorFunction.getAsserts() ==================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
     /** {{*parseArgs( [$szArgs] )=
 
         Parses a set of parameters
@@ -3531,9 +3579,6 @@ Class DocumentorFunction extends DocumentorSourceFileObject
             $szArgs = $this->szArgs;
 
         $szArgs = trim( vaesoli::STR_Reduce( str_replace( array("\r","\n"),' ',$szArgs ),' ' ) );
-
-        //var_dump( "MUST PARSE " . $szArgs );
-        //goto end;
 
         $i = 0; /* Make it possible to stop looping */
         while ( ! empty( $szArgs ) && $szArgs !== '$' && $i < 30 )
@@ -3749,17 +3794,21 @@ URL 	Indicates a page documenting how licenses can be purchased or otherwise acq
             $szRetVal .= "<section class=\"header\">\n";
                 if ( ! empty( $this->image ) )
                     $szRetVal .= "<p><img src=\"{$this->image}\" style=\"display:block;float:left;width:130px; height:auto;margin-right: 20px;\" class=\"shadow constrained\"/></p>\n";
-                if ( is_array( $this->oSourceFile->aUses ) )
-                {
-                    $szUses = '';
-                    foreach( $this->oSourceFile->aUses as $aUse )
-                        $szUses .= $aUse['class'] . ( ! empty( $aUse['alias'] ) ? ( ' as ' . $aUse['alias'] ) : '' ) . ',';
-                    $szUses = Vaesoli::STR_strin( trim( $szUses ) );
-                }
 
                 $szRetVal .= "<span class=\"DocumentorLabel\">Filename: </span><span class=\"property filename\">"              . $this->squareToAngle( say(                      $this->szFileName )   ) . "</span>\n";
                 $szRetVal .= "<span class=\"DocumentorLabel\">Namespace: </span><span class=\"property namespace\">"            . $this->squareToAngle( say( '[c]' . $this->oSourceFile->szNamespace . '[/c]' )  ) . "</span>\n";
-                $szRetVal .= "<span class=\"DocumentorLabel\">Class aliases: </span><span class=\"property aliases\">"          . $this->squareToAngle( say( '[c]' . $szUses . '[/c]' )  ) . "</span>\n";
+
+                $szUses = '';
+
+                if ( is_array( $this->oSourceFile->aUses ) )
+                {
+                    foreach( $this->oSourceFile->aUses as $aUse )
+                        $szUses .= $aUse['class'] . ( ! empty( $aUse['alias'] ) ? ( ' as ' . $aUse['alias'] ) : '' ) . ',';
+                    $szUses = Vaesoli::STR_strin( trim( $szUses ) );
+
+                    $szRetVal .= "<span class=\"DocumentorLabel\">Class aliases: </span><span class=\"property aliases\">"      . $this->squareToAngle( say( '[c]' . $szUses . '[/c]' )  ) . "</span>\n";
+                }
+
                 $szRetVal .= "<span class=\"DocumentorLabel\">Purpose: </span><span class=\"property purpose\">"                . $this->squareToAngle( say( vaesoli::STR_Reduce( $this->szPurpose  ) ) ) . "</span>\n";
                 $szRetVal .= "<span class=\"DocumentorLabel\">Author: </span><span class=\"property author\">"                  . $this->squareToAngle( say(                      $this->author     )   ) . "</span>\n";
                 $szRetVal .= "<span class=\"DocumentorLabel\">Company: </span><span class=\"property company\">"                . $this->squareToAngle( say(                      $this->szCompany  )   ) . "</span>\n";

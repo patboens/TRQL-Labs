@@ -63,21 +63,19 @@
         *}
     *}
 
-
-if ( ! defined( 'XML_CLASS_VERSION' ) )
-    require_once( 'd:/websites/snippet-center/trql.xml.class.php' );
+    if ( ! defined( 'XML_CLASS_VERSION' ) )
+        require_once( 'd:/websites/snippet-center/trql.xml.class.php' );
 
 
     *}}} */
 /****************************************************************************************/
-namespace trql\smallAPIGW;
+namespace trql\apigateway;
 
 use \trql\vaesoli\Vaesoli           as v;
 use \trql\gateway\Gateway           as Gateway;
-use \trql\apihandler\APIHandler     as APIHandler;
+use \trql\apigateway\APIHandler     as APIHandler;
 use \trql\bankaccount\BankAccount   as BankAccount;
 use \trql\xml\XML                   as XML;
-
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -764,7 +762,7 @@ class SmallAPIGW extends Gateway
                Let's try to find a generic one */
             foreach ( $this->aHandlers as $oHandler )
             {
-                if ( $v::empty( $oHandler->class ) )
+                if ( v::empty( $oHandler->class ) )
                     return ( $oHandler );
             }
         }

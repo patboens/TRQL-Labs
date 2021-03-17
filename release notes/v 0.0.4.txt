@@ -1,0 +1,17 @@
+Change Log v 0.0.4
+==================
+
+1) APIHandler shares the "apigateway" namespace with SmallAPIGW
+
+3) APIHandler process : documented with (almost) real example
+
+4) SmallAPIGW (trql.smallAPIGW.class.php) uses the "apigateway" namespace
+
+5) Files where class aliases are declared (e.g. "use \trql\vaesoli\Vaesoli as v;")
+   now have this reflected in their documentation
+
+5) Multiple classes whose "use" mentioned obsolete namespaces have been
+   fixed according to the new namespace universe set for the TRQL Labs
+   classes. Future adaptations may need to be necessary. Better testing
+   is highly desirable.
+
