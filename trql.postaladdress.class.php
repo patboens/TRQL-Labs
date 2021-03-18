@@ -44,13 +44,13 @@
 /****************************************************************************************/
 namespace trql\postaladdress;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\place\Place                               as Place;
-use \trql\structuredvalue\StructuredValue           as StructuredValue;
-use \trql\contactpoint\ContactPoint                 as ContactPoint;
-use \trql\mercator\Mercator                         as Mercator;
+use \trql\mother\Mother                     as Mother;
+use \trql\mother\iContext                   as iContext;
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\place\Place                       as Place;
+use \trql\structuredvalue\StructuredValue   as StructuredValue;
+use \trql\contactpoint\ContactPoint         as ContactPoint;
+use \trql\mercator\Mercator                 as Mercator;
 
 use DOMDocument;
 use DOMXPath;
@@ -158,6 +158,14 @@ class PostalAddress extends ContactPoint implements iContext
 
         {*return
             (self)      The current instance of the class
+        *}
+
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__destruct
         *}
 
         *}}
@@ -981,6 +989,14 @@ class PostalAddress extends ContactPoint implements iContext
             (void)      No return
         *}
 
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__construct
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -996,4 +1012,3 @@ class PostalAddress extends ContactPoint implements iContext
     /* ================================================================================ */
 }   /* End of class PostalAddress ===================================================== */
 /* ==================================================================================== */
-?>

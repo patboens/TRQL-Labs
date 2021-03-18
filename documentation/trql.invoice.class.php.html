@@ -50,12 +50,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <section class="header">
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.invoice.class.php</span>
 <span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\quitus</code></span>
-<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\vaesoli\Vaesoli as V,\trql\intangible\Intangible as Intangible</code></span>
+<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\vaesoli\Vaesoli as V,\trql\intangible\Intangible as Intangible,\trql\quitus\Customer as Customer,\trql\postaladdress\PostalAddress as PostalAddress,\trql\quitus\Order as Order</code></span>
 <span class="DocumentorLabel">Purpose: </span><span class="property purpose">A statement of the money due for goods or services; a bill.</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">26-08-2020 18:49</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">14/03/2021 - 13:18:24</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">18/03/2021 - 18:39:01</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
@@ -68,9 +68,9 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  under the terms of their license:
  <a href="http://schema.org/docs/terms.html" class="DocumentorLink" title="Go to http://schema.org/docs/terms.html" itemprop="url">http://schema.org/docs/terms.html</a></span>
 <span class="DocumentorLabel">Doc: </span><span class="property doc"><a href="http://schema.org/Invoice" class="DocumentorLink" title="Go to http://schema.org/Invoice" itemprop="url">http://schema.org/Invoice</a>?utm_source=TRQLLabs</span>
-<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by 
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class has been generated automatically by
  <code>trql.schemaclassgenerator.class.php</code>
- on 26-08-2020 18:49. It must still be completed by a number of properties 
+ on 26-08-2020 18:49. It must still be completed by a number of properties
  such as the ones we use in Quitus|TRQL (lines of detail, ...)</span>
 <span class="DocumentorLabel">Properties: </span>
 <table class="properties">
@@ -87,6 +87,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">The identifier for the account the payment will be applied to.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.active"><code>$active</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description">Is the invoice active or not.</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.additionalType"><code>$additionalType</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An additional type for the item,
@@ -101,9 +106,19 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  - for multiple types.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.aLines"><code>$aLines</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Lines of detail or <code>null</code> if none found</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.alternateName"><code>$alternateName</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.billingAddress"><code>$billingAddress</code></td>
+<td class="type"><code>PostalAddress</code></td>
+<td class="description">Invoicing/Billing address</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.billingPeriod"><code>$billingPeriod</code></td>
@@ -120,6 +135,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  preferred.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.cancelled"><code>$cancelled</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description"><code>true</code> if the invoice is considered cancelled; <code>false</code> if not.</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.category"><code>$category</code></td>
 <td class="type"><code>Thing|PhysicalActivityCategory|URL|string</code></td>
 <td class="description">A category for the item. Greater signs or slashes can be used to
@@ -131,9 +151,20 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">A number that confirms the given order or payment has been received.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.currency"><code>$currency</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">3-character code (ISO 4217)
+ (<a href="https://docs.1010data.com/1010dataReferenceManual/DataTypesAndFormats/currencyUnitCodes.html" class="DocumentorLink" title="Go to https://docs.1010data.com/1010dataReferenceManual/DataTypesAndFormats/currencyUnitCodes.html" itemprop="url">https://docs.1010data.com/1010dataReferenceManual/DataTypesAndFormats/currencyUnitCodes.html</a>)</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.customer"><code>$customer</code></td>
 <td class="type"><code>Person|Organization</code></td>
 <td class="description">Party placing the order or paying the invoice.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.deliveryAddress"><code>$deliveryAddress</code></td>
+<td class="type"><code>PostalAddress</code></td>
+<td class="description">Delivery address</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.description"><code>$description</code></td>
@@ -150,6 +181,36 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  properties (in particular, name)
  may be necessary for the description
  to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.discountHTVA"><code>$discountHTVA</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">The discounted amount, tax excluded.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.discountTVA"><code>$discountTVA</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">The discounted amount, taxes only.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.discountTVAC"><code>$discountTVAC</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">The discounted amountdue, tax included.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.draft"><code>$draft</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description"><code>true</code> if the invoice is in draft mode; <code>false</code> if not.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.finalPaymentDate"><code>$finalPaymentDate</code></td>
+<td class="type"><code>Date|DateTime|string</code></td>
+<td class="description">The date the invoice was FULLY paid (<code>YYYYMMDD</code> format).</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.footer"><code>$footer</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A message that will be printed in the invoice footer</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.identifier"><code>$identifier</code></td>
@@ -171,6 +232,26 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">URL of an image of the item.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.iRounding"><code>$iRounding</code></td>
+<td class="type"><code>integer</code></td>
+<td class="description">The rounding that is applied for calculation on amounts</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.issueDate"><code>$issueDate</code></td>
+<td class="type"><code>Date|DateTime|string</code></td>
+<td class="description">The date the invoice was issued (<code>YYYYMMDD</code> format.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.lang"><code>$lang</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A 2-character string indicating the language (SO 639-1 Code)</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.lupdate"><code>$lupdate</code></td>
+<td class="type"><code>Date|DateTime|string</code></td>
+<td class="description">The date the invoice was last modified (<code>YYYYMMDDHHmmSS</code> format).</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Indicates a page (or other <code><a href="?src=CreativeWork">CreativeWork</a></code>, <code><a href="?src=Event">Event</a></code>)
@@ -179,6 +260,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  href="https://schema.org/docs/datamodel.html#mainEntityBackground">
  background notes</a> for details.
  Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.memo"><code>$memo</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A message that will be saved with the invoice (internal info)</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.minimumPaymentDue"><code>$minimumPaymentDue</code></td>
@@ -191,9 +277,15 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">The name of the item.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.paid"><code>$paid</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description"><code>true</code> if the invoice is FULLY paid (see also <code><a href="#var-finalPaymentDate">$finalPaymentDate</a></code>);
+ <code>false</code> if not. A partially paid invoice is considered NOT paid.</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.paymentDueDate"><code>$paymentDueDate</code></td>
 <td class="type"><code>Date|DateTime</code></td>
-<td class="description">The date that payment is due.</td>
+<td class="description">The date that payment is due (<code>YYYYMMDD</code> format).</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.paymentMethod"><code>$paymentMethod</code></td>
@@ -219,6 +311,22 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.prepayment"><code>$prepayment</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">Prepayment is an accounting term for the settlement of a
+ debt or installment loan in advance of its official due date.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.proforma"><code>$proforma</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description"><code>true</code> if the invoice is a proforma; <code>false</code> if not.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.projectID"><code>$projectID</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Project identifier the invoice is FULLY linked to</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.provider"><code>$provider</code></td>
 <td class="type"><code>Person|Organization</code></td>
 <td class="description">The service provider, service operator, or service performer; the
@@ -229,8 +337,22 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.referencesOrder"><code>$referencesOrder</code></td>
 <td class="type"><code>Order</code></td>
-<td class="description">The Order(s) related to this Invoice. One or more Orders may be
- combined into a single Invoice.</td>
+<td class="description">The Order(s) related to this invoice. One or more Orders may be
+ combined into a single Invoice. SINGLE ORDER SUPPORTED FOR NOW.
+ Confirmation of the transaction, which can contain multiple
+ line items, each represented by an <code><a href="?src=Offer">Offer</a></code> that has been accepted
+ by the <code><a href="?src=Customer">Customer</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.refNumber"><code>$refNumber</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Annually unique and sequential code that is systematically
+ assigned to invoices. Invoice numbers are one of the most
+ important aspects of invoicing as they ensure that income
+ is properly documented for tax and accounting purposes;
+ they also make it easier to track payments. See also
+ <code><a href="#var-identifier">$identifier</a></code>, a property that is UNIVOQUELY unique
+ between ALL invoices of a system.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.sameAs"><code>$sameAs</code></td>
@@ -252,10 +374,29 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.sent"><code>$sent</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description"><code>true</code> if the invoice was sent to the customer; <code>false</code> if not.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.structCommunication"><code>$structCommunication</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description"><code>true</code> if the invoice uses a Structured Communication; <code>false</code>
+ if not. There are two types of transfers: the ones with a free communication
+ (VCL - "Virement à Communication Libre", and VCS - "Virement à Communication
+ Structurée). When VCS is required, it needs to be printed on the invoice
+ (however ... this is NOT implemented yet).</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
 <td class="type"><code>CreativeWork|Event</code></td>
 <td class="description">A <code><a href="?src=CreativeWork">CreativeWork</a></code> or <code><a href="?src=Event">Event</a></code> about this <code><a href="?src=Thing">Thing</a></code>. 
  Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.totalHTVA"><code>$totalHTVA</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">The total amount due, tax excluded.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.totalPaymentDue"><code>$totalPaymentDue</code></td>
@@ -263,16 +404,37 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">The total amount due.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.totalTVA"><code>$totalTVA</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">The total amount due, taxes only.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.totalTVAC"><code>$totalTVAC</code></td>
+<td class="type"><code>float</code></td>
+<td class="description">The total amount due, tax included.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.type"><code>$type</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Invoice type: <code>I</code> for invoice; <code>P</code> for proforma</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.url"><code>$url</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">URL of the item.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.version"><code>$version</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Invoice version. <code>2.0</code> by default. Most recent version
+ is <code>3.0</code>, which is fully compatible with <code>2.0</code>.</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Wikidata ID. Commercial document issued by a seller to a buyer, 
- relating to a sale transaction and indicating the products, 
- quantities, and agreed prices for products or services the seller 
+<td class="description">Wikidata ID. Commercial document issued by a seller to a buyer,
+ relating to a sale transaction and indicating the products,
+ quantities, and agreed prices for products or services the seller
  has provided the buyer.</td>
 </tr>
 </table>
@@ -299,6 +461,69 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  use \trql\vaesoli\Vaesoli   as v;
+  use \trql\quitus\Invoice    as Invoice;
+
+  if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+      require_once( 'trql.vaesoli.class.php' );
+
+  if ( ! defined( 'INVOICE_CLASS_VERSION' ) )
+      require_once( 'trql.invoice.class.php' );
+
+  <strong>$o = new Invoice();</strong>
+
+  // Load an invoice to have it all filled
+  $o->load( $szFile = 'invoice.xml' )
+
+  // Now, let's reset everything
+  <strong>$o->reset();</strong>
+
+  // Check how it looks now (should be all empty)
+  var_dump( $o->__toXML() );
+
+  <strong><i>// Let's create the invoice from scratch all manually
+  $o->identifier                          = v::guid( true );
+  $o->name                                = 'This is an invoice that wa have created from scratch';
+  $o->description                         = 'Est plane, Piso, ut dicis, inquit. Nam me ipsum huc modo venientem convertebat '     .
+                                            'ad sese Coloneus ille locus, cuius incola Sophocles ob oculos versabatur, quem '     .
+                                            'scis quam admirer quemque eo delecter. Me quidem ad altiorem memoriam Oedipodis '    .
+                                            'huc venientis et illo mollissimo carmine quaenam essent ipsa haec loca '             .
+                                            'requirentis species quaedam commovit, inaniter scilicet, sed commovit tamen.';
+  $o->issueDate                           = date( 'Ymd' );
+  $o->paymentDueDate                      = date( 'Ymd',strtotime( $o->issueDate ) + ( 86400 * 30 ) );  // ± 1 month later
+  $o->refNumber                           = date('Y') . '/000001';
+
+  $o->customer->identifier                = '';
+  $o->customer->name                      = 'My beautiful customer';
+  $o->customer->vatID                     = 'BE0463.478.965';    // No check made
+
+  $o->billingAddress->streetAddress       = 'Rue des fleurs, 1';
+  $o->billingAddress->postalCode          = '1000';
+  $o->billingAddress->addressLocality     = 'Brussels';
+  $o->billingAddress->addressCountry      = 'BE';
+
+  $o->sent                                = true;
+  $o->footer                              = 'Please be aware that we will be closed next week';
+  $o->memo                                = 'To be sent to accounting bureau';
+
+  $o->addDetail( array( 'utc'         => time()   ,
+                        'id'          => ''       ,
+                        'desc'        => 'a desc' ,
+                        'qty'         => 1        ,
+                        'unitprice'   => 15       ,
+                        'vatpercent'  => 21.00    ,
+                      ) );
+
+  if ( $o->save( 'newinvoice.xml' ) )
+      var_dump( 'Invoice saved' );</i></strong>
+
+  // Check how it looks now (should be filled with all data we've given)
+  var_dump( $o->__toXML() );
+
+  </pre>
 <span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__destruct">__destruct()</a></code></span>
 <hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Keywords:</p>
@@ -322,6 +547,80 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p><code>__toJSON()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(string):  JSON representation of the invoice object</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  use \trql\vaesoli\Vaesoli   as v;
+  use \trql\quitus\Invoice    as Invoice;
+
+  if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+      require_once( 'trql.vaesoli.class.php' );
+
+  if ( ! defined( 'INVOICE_CLASS_VERSION' ) )
+      require_once( 'trql.invoice.class.php' );
+
+  <strong>$o = new Invoice();</strong>
+
+  // Let's create the invoice from scratch all manually
+  $o->identifier                          = v::guid( true );
+  $o->name                                = 'This is an invoice that wa have created from scratch';
+  $o->description                         = 'Est plane, Piso, ut dicis, inquit. Nam me ipsum huc modo venientem convertebat '     .
+                                            'ad sese Coloneus ille locus, cuius incola Sophocles ob oculos versabatur, quem '     .
+                                            'scis quam admirer quemque eo delecter. Me quidem ad altiorem memoriam Oedipodis '    .
+                                            'huc venientis et illo mollissimo carmine quaenam essent ipsa haec loca '             .
+                                            'requirentis species quaedam commovit, inaniter scilicet, sed commovit tamen.';
+  $o->issueDate                           = date( 'Ymd' );
+  $o->paymentDueDate                      = date( 'Ymd',strtotime( $o->issueDate ) + ( 86400 * 30 ) );  // ± 1 month later
+  $o->refNumber                           = date('Y') . '/000001';
+
+  $o->customer->identifier                = '';
+  $o->customer->name                      = 'My beautiful customer';
+  $o->customer->vatID                     = 'BE0463.478.965';    // No check made
+
+  $o->billingAddress->streetAddress       = 'Rue des fleurs, 1';
+  $o->billingAddress->postalCode          = '1000';
+  $o->billingAddress->addressLocality     = 'Brussels';
+  $o->billingAddress->addressCountry      = 'BE';
+
+  $o->sent                                = true;
+  $o->footer                              = 'Please be aware that we will be closed next week';
+  $o->memo                                = 'To be sent to accounting bureau';
+
+  $o->addDetail( array( 'utc'         => time()   ,
+                        'id'          => ''       ,
+                        'desc'        => 'a desc' ,
+                        'qty'         => 1        ,
+                        'unitprice'   => 15       ,
+                        'vatpercent'  => 21.00    ,
+                      ) );
+
+  // Check how it looks now (should be filled with all data we've given)
+  var_dump( <strong>$o->__toJSON()</strong> );
+
+  // Gives something like...
+  {"@attributes":{"id":"549c60f4-04c6-d185-f828-79f4d7e58d5e","active":"yes","lang":"fr","type":"I",&#8617;
+  "version":"2.0","currency":"EUR","date":"20210318","duedate":"20210417","ref":"2021\/000001",&#8617;
+  "prepayment":"0.0000","totaldue":"181.5000","htva":"165.0000","tva":"34.6500","tvac":"199.6500",&#8617;
+  "discounthtva":"0.0000","discounttva":"0.0000","discounttvac":"0.0000","cancelled":"no","proforma":"no",&#8617;
+  "draft":"no","vcs":"no","paiddate":"20140515","lupdate":"20150115153825","qver":"0.9.0001"},&#8617;
+  "Description":"Est plane, Piso, ut dicis, inquit. Nam me ipsum huc modo venientem convertebat ad sese &#8617;
+  Coloneus ille locus, cuius incola Sophocles ob oculos versabatur, quem scis quam admirer quemque eo &#8617;
+  delecter. Me quidem ad altiorem memoriam Oedipodis huc venientis et illo mollissimo carmine quaenam &#8617;
+  essent ipsa haec loca requirentis species quaedam commovit, inaniter scilicet, sed commovit tamen.",&#8617;
+  "InvoiceName":"This is an invoice that wa have created from scratch",&#8617;
+  "Customer":{"@attributes":{"id":""},"Name":"My beautiful customer","VATNumber":"BE0463.478.965"},&#8617;
+  "Project":{"@attributes":{"id":""}},"Order":{"@attributes":{"date":""},"ID":[],"Ref":[]},&#8617;
+  "Addresses":{"Billing":{"Street":"Rue des fleurs, 1","Zip":"1000","City":"Brussels","State":[],"Country":"BE"},&#8617;
+  "Delivery":{"Street":[],"Zip":[],"City":[],"State":[],"Country":[]}},&#8617;
+  "Management":{"Sent":"yes","Paid":"yes"},&#8617;
+  "Footer":"Please be aware that we will be closed next week",&#8617;
+  "Memo":"To be sent to accounting bureau",&#8617;
+  "Body":{"Line":[{"@attributes":{"update":"0"},"Desc":"Lump-sum amount","ID":[],&#8617;
+  "Qty":"1.0000","UnitPrice":"150.0000",&#8617;
+  "htva":"150.0000","VATPercent":"21.0000","tva":"31.5000","tvac":"181.5000"},&#8617;
+  {"@attributes":{"update":"1616086617"},"Desc":"a desc","ID":[],&#8617;
+  "Qty":"1.0000","UnitPrice":"15.0000","htva":"15.0000","VATPercent":"21.0000","tva":"3.1500","tvac":"18.1500"}]}}
+  </pre>
 <hr /><p class="property func" id="fnc.__toXML"><span class="name"><strong><code>__toXML()</code></strong></span>: Turns the class into an XML structure</p>
 <p class="property">Remark:</p>
 <p>If the properties are filled, their values will be reflected in the XML</p>
@@ -329,6 +628,323 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p><code>__toXML()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(string):  XML representation of an invoice</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  use \trql\vaesoli\Vaesoli   as v;
+  use \trql\quitus\Invoice    as Invoice;
+
+  if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+      require_once( 'trql.vaesoli.class.php' );
+
+  if ( ! defined( 'INVOICE_CLASS_VERSION' ) )
+      require_once( 'trql.invoice.class.php' );
+
+  <strong>$o = new Invoice();</strong>
+
+  // Let's create the invoice from scratch all manually
+  $o->identifier                          = v::guid( true );
+  $o->name                                = 'This is an invoice that wa have created from scratch';
+  $o->description                         = 'Est plane, Piso, ut dicis, inquit. Nam me ipsum huc modo venientem convertebat '     .
+                                            'ad sese Coloneus ille locus, cuius incola Sophocles ob oculos versabatur, quem '     .
+                                            'scis quam admirer quemque eo delecter. Me quidem ad altiorem memoriam Oedipodis '    .
+                                            'huc venientis et illo mollissimo carmine quaenam essent ipsa haec loca '             .
+                                            'requirentis species quaedam commovit, inaniter scilicet, sed commovit tamen.';
+  $o->issueDate                           = date( 'Ymd' );
+  $o->paymentDueDate                      = date( 'Ymd',strtotime( $o->issueDate ) + ( 86400 * 30 ) );  // ± 1 month later
+  $o->refNumber                           = date('Y') . '/000001';
+
+  $o->customer->identifier                = '';
+  $o->customer->name                      = 'My beautiful customer';
+  $o->customer->vatID                     = 'BE0463.478.965';    // No check made
+
+  $o->billingAddress->streetAddress       = 'Rue des fleurs, 1';
+  $o->billingAddress->postalCode          = '1000';
+  $o->billingAddress->addressLocality     = 'Brussels';
+  $o->billingAddress->addressCountry      = 'BE';
+
+  $o->sent                                = true;
+  $o->footer                              = 'Please be aware that we will be closed next week';
+  $o->memo                                = 'To be sent to accounting bureau';
+
+  $o->addDetail( array( 'utc'         => time()   ,
+                        'id'          => ''       ,
+                        'desc'        => 'a desc' ,
+                        'qty'         => 1        ,
+                        'unitprice'   => 15       ,
+                        'vatpercent'  => 21.00    ,
+                      ) );
+
+  // Check how it looks now (should be filled with all data we've given)
+  var_dump( <strong>$o->__toXML()</strong> );
+
+  // Gives something like...
+  // <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  // &lt;Invoice xmlns:xi=&quot;http://www.w3.org/2001/XInclude&quot;
+  //          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  //          xmlns:vae=&quot;urn:lato-sensu-management/Vaesoli&quot;
+  //          xmlns:quitus=&quot;urn:lato-sensu-management/Quitus&quot;
+  //          id=&quot;84f4870c-3697-2e8f-6f16-a85d5103d9f8&quot;
+  //          active=&quot;yes&quot;
+  //          lang=&quot;fr&quot;
+  //          type=&quot;I&quot;
+  //          version=&quot;2.0&quot;
+  //          currency=&quot;EUR&quot;
+  //          date=&quot;20210318&quot;
+  //          duedate=&quot;20210417&quot;
+  //          ref=&quot;2021/000001&quot;
+  //          prepayment=&quot;0.0000&quot;
+  //          totaldue=&quot;181.5000&quot;
+  //          htva=&quot;165.0000&quot;
+  //          tva=&quot;34.6500&quot;
+  //          tvac=&quot;199.6500&quot;
+  //          discounthtva=&quot;0.0000&quot;
+  //          discounttva=&quot;0.0000&quot;
+  //          discounttvac=&quot;0.0000&quot;
+  //          cancelled=&quot;no&quot;
+  //          proforma=&quot;no&quot;
+  //          draft=&quot;no&quot;
+  //          vcs=&quot;no&quot;
+  //          paiddate=&quot;20140515&quot;
+  //          lupdate=&quot;20150115153825&quot;
+  //          qver=&quot;0.9.0001&quot;&gt;
+  //    &lt;Description&gt;&lt;![CDATA[Est plane, Piso, ut dicis, inquit. Nam me ipsum huc ... ]]&gt;&lt;/Description&gt;
+  //    &lt;InvoiceName&gt;&lt;![CDATA[This is an invoice that wa have created from scratch]]&gt;&lt;/InvoiceName&gt;
+  //    &lt;Customer id=&quot;&quot;&gt;
+  //        &lt;Name&gt;&lt;![CDATA[My beautiful customer]]&gt;&lt;/Name&gt;
+  //        &lt;VATNumber&gt;&lt;![CDATA[BE0463.478.965]]&gt;&lt;/VATNumber&gt;
+  //    &lt;/Customer&gt;
+  //    &lt;Project id=&quot;&quot;/&gt;
+  //    &lt;Order date=&quot;&quot;&gt;
+  //        &lt;ID&gt;&lt;![CDATA[]]&gt;&lt;/ID&gt;
+  //        &lt;Ref&gt;&lt;![CDATA[]]&gt;&lt;/Ref&gt;
+  //    &lt;/Order&gt;
+  //    &lt;Addresses&gt;
+  //        &lt;Billing&gt;
+  //            &lt;Street&gt;&lt;![CDATA[Rue des fleurs, 1]]&gt;&lt;/Street&gt;
+  //            &lt;Zip&gt;&lt;![CDATA[1000]]&gt;&lt;/Zip&gt;
+  //            &lt;City&gt;&lt;![CDATA[Brussels]]&gt;&lt;/City&gt;
+  //            &lt;State&gt;&lt;![CDATA[]]&gt;&lt;/State&gt;
+  //            &lt;Country&gt;&lt;![CDATA[BE]]&gt;&lt;/Country&gt;
+  //        &lt;/Billing&gt;
+  //        &lt;Delivery&gt;
+  //            &lt;Street&gt;&lt;![CDATA[]]&gt;&lt;/Street&gt;
+  //            &lt;Zip&gt;&lt;![CDATA[]]&gt;&lt;/Zip&gt;
+  //            &lt;City&gt;&lt;![CDATA[]]&gt;&lt;/City&gt;
+  //            &lt;State&gt;&lt;![CDATA[]]&gt;&lt;/State&gt;
+  //            &lt;Country&gt;&lt;![CDATA[]]&gt;&lt;/Country&gt;
+  //        &lt;/Delivery&gt;
+  //    &lt;/Addresses&gt;
+  //    &lt;Management&gt;
+  //        &lt;Sent&gt;yes&lt;/Sent&gt;
+  //        &lt;Paid&gt;yes&lt;/Paid&gt;
+  //    &lt;/Management&gt;
+  //    &lt;Footer&gt;&lt;![CDATA[Please be aware that we will be closed next week]]&gt;&lt;/Footer&gt;
+  //    &lt;Memo&gt;&lt;![CDATA[To be sent to accounting bureau]]&gt;&lt;/Memo&gt;
+  //    &lt;Body&gt;
+  //       &lt;Line update=&quot;0&quot;&gt;
+  //          &lt;Desc&gt;&lt;![CDATA[Lump-sum amount]]&gt;&lt;/Desc&gt;
+  //          &lt;ID&gt;&lt;![CDATA[]]&gt;&lt;/ID&gt;
+  //          &lt;Qty&gt;&lt;![CDATA[1.0000]]&gt;&lt;/Qty&gt;
+  //          &lt;UnitPrice&gt;&lt;![CDATA[150.0000]]&gt;&lt;/UnitPrice&gt;
+  //          &lt;htva&gt;&lt;![CDATA[150.0000]]&gt;&lt;/htva&gt;
+  //          &lt;VATPercent&gt;&lt;![CDATA[21.0000]]&gt;&lt;/VATPercent&gt;
+  //          &lt;tva&gt;&lt;![CDATA[31.5000]]&gt;&lt;/tva&gt;
+  //          &lt;tvac&gt;&lt;![CDATA[181.5000]]&gt;&lt;/tvac&gt;
+  //       &lt;/Line&gt;
+  //
+  //       &lt;Line update=&quot;1616086124&quot;&gt;
+  //          &lt;Desc&gt;&lt;![CDATA[a desc]]&gt;&lt;/Desc&gt;
+  //          &lt;ID&gt;&lt;![CDATA[]]&gt;&lt;/ID&gt;
+  //          &lt;Qty&gt;&lt;![CDATA[1.0000]]&gt;&lt;/Qty&gt;
+  //          &lt;UnitPrice&gt;&lt;![CDATA[15.0000]]&gt;&lt;/UnitPrice&gt;
+  //          &lt;htva&gt;&lt;![CDATA[15.0000]]&gt;&lt;/htva&gt;
+  //          &lt;VATPercent&gt;&lt;![CDATA[21.0000]]&gt;&lt;/VATPercent&gt;
+  //          &lt;tva&gt;&lt;![CDATA[3.1500]]&gt;&lt;/tva&gt;
+  //          &lt;tvac&gt;&lt;![CDATA[18.1500]]&gt;&lt;/tvac&gt;
+  //       &lt;/Line&gt;
+  //    &lt;/Body&gt;
+  // &lt;/Invoice&gt;
+
+  </pre>
+<hr /><p class="property func" id="fnc.addDetail"><span class="name"><strong><code>addDetail()</code></strong></span>: Adds a line of detail</p>
+<p class="property">Remark:</p>
+<p>All internal amounts are refreshed</p>
+<p class="property">Syntax:</p>
+<p><code>addDetail( $a )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.addDetail.a"><code>$a</code></td>
+<td class="type"><code>array</code></td>
+<td class="description seealso">Associative array with at least these members:<br /><br /> @param.a['qty' ] ... the quantity<br /> @param.a['unitprice' ] ... the unit price<br /> @param.a['vatpercent'] ... the VAT percentage<br /><br /> Additional slots:<br /><br /> @param.a['utc' ] ... UTC<br /> @param.a['id' ] ... line ID<br /> @param.a['desc' ] ... line description<br /></td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  Current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__deleteDetail">__deleteDetail()</a></code>, <code><a href="#fnc.computeAll">computeAll()</a></code></span>
+<hr /><p class="property func" id="fnc.computeAll"><span class="name"><strong><code>computeAll()</code></strong></span>: Computes all internam amounts</p>
+<p class="property">Remark:</p>
+<p>All internal amounts are refreshed</p>
+<p class="property">Syntax:</p>
+<p><code>computeAll()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  Current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__deleteDetail">__deleteDetail()</a></code>, <code><a href="#fnc.addDetail">addDetail()</a></code></span>
+<hr /><p class="property func" id="fnc.load"><span class="name"><strong><code>load()</code></strong></span>: Loads an invoice from its persistent layer (an XML file)</p>
+<p class="property">Syntax:</p>
+<p><code>load( $szFile )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.load.szFile"><code>$szFile</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The file to load</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if @param.szFile was successfully loaded; <code>false</code>
+ if not.</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  use \trql\vaesoli\Vaesoli   as v;
+  use \trql\quitus\Invoice    as Invoice;
+
+  if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+      require_once( 'trql.vaesoli.class.php' );
+
+  if ( ! defined( 'INVOICE_CLASS_VERSION' ) )
+      require_once( 'trql.invoice.class.php' );
+
+  $o = new Invoice();
+
+  // Load an invoice that has the same name as the source code file
+  if ( <strong>$o->load( $szFile = str_replace( '.php','.xml',__FILE__ ) )</strong> )
+  {
+      // Let's see what it looks like in JSON
+      echo $o->__toJSON();
+
+      // Make a new file with the current date and time in it
+      $szFile = str_replace( '.php','.' . date( 'YmdHis' ) . '.xml',__FILE__ );
+
+      // Make just a few changes to see
+      // if they can be saved ...
+      $o->identifier  = v::guid( true );
+      $o->description = strrev( $o->description );
+      $o->name        = strrev( $o->name );
+
+      // Let's get the last line of detail
+      $aLine = end( $o->aLines );
+
+      // Modify few values (multiply by 2)
+      $aLine['qty' ] = $aLine['qty' ] * 2;
+      $aLine['htva'] = $aLine['htva'] * 2;
+      $aLine['tva' ] = $aLine['tva' ] * 2;
+      $aLine['tvac'] = $aLine['tvac'] * 2;
+
+      // Check how what the line looks like
+      var_dump( $aLine );
+
+      // Adding this line to the list of lines we already have
+      $o->addDetail( $aLine );
+
+      // Save this invoice to a new file now
+      if ( $o->save( $szFile ) )
+          var_dump( "Invoice successfully saved to {$szFile}" );
+  }
+  </pre>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.save">save()</a></code></span>
+<hr /><p class="property func" id="fnc.reset"><span class="name"><strong><code>reset()</code></strong></span>: Resets all internal properties</p>
+<p class="property">Syntax:</p>
+<p><code>reset()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  Current instance of the class</p>
+<hr /><p class="property func" id="fnc.save"><span class="name"><strong><code>save()</code></strong></span>: Saves an invoice to its persistent layer (an XML file)</p>
+<p class="property">Syntax:</p>
+<p><code>save( $szFile )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.save.szFile"><code>$szFile</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The file to save the invoice to</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if @param.szFile successfully saved; <code>false</code>
+ if not.</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  use \trql\vaesoli\Vaesoli   as v;
+  use \trql\quitus\Invoice    as Invoice;
+
+  if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+      require_once( 'trql.vaesoli.class.php' );
+
+  if ( ! defined( 'INVOICE_CLASS_VERSION' ) )
+      require_once( 'trql.invoice.class.php' );
+
+  $o = new Invoice();
+
+  // Load an invoice that has the same name as the source code file
+  if ( $o->load( $szFile = str_replace( '.php','.xml',__FILE__ ) ) )
+  {
+      // Let's see what it looks like in JSON
+      echo $o->__toJSON();
+
+      // Make a new file with the current date and time in it
+      $szFile = str_replace( '.php','.' . date( 'YmdHis' ) . '.xml',__FILE__ );
+
+      // Make just a few changes to see
+      // if they can be saved ...
+      $o->identifier  = v::guid( true );
+      $o->description = strrev( $o->description );
+      $o->name        = strrev( $o->name );
+
+      // Let's get the last line of detail
+      $aLine = end( $o->aLines );
+
+      // Modify few values (multiply by 2)
+      $aLine['qty' ] = $aLine['qty' ] * 2;
+      $aLine['htva'] = $aLine['htva'] * 2;
+      $aLine['tva' ] = $aLine['tva' ] * 2;
+      $aLine['tvac'] = $aLine['tvac'] * 2;
+
+      // Check how what the line looks like
+      var_dump( $aLine );
+
+      // Adding this line to the list of lines we already have
+      $o->addDetail( $aLine );
+
+      <strong>// Save this invoice to a new file now
+      if ( $o->save( $szFile ) )
+          var_dump( "Invoice successfully saved to {$szFile}" );</strong>
+  }
+  </pre>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.load">load()</a></code></span>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

@@ -109,12 +109,13 @@ class CreativeWork extends Thing implements iContext
                              );
 
     public      $about                      = null;                 /* {*property   $about                      (Thing)                         The subject matter of the content. Inverse property: @var.subjectOf *} */
-    public      $abstract                   = null;                 /* {*property   $abstract                   (string)                        An abstract is a short description that summarizes a @class.CreativeWork */
+    public      $abstract                   = null;                 /* {*property   $abstract                   (string)                        An abstract is a short description that summarizes a @class.CreativeWork *} */
     public      $accessMode                 = null;                 /* {*property   $accessMode                 (string)                        The human sensory perceptual system or cognitive faculty
                                                                                                                                                 through which a person may process or perceive information.
-                                                                                                                                                Expected values include: auditory, tactile, textual, visual,
-                                                                                                                                                colorDependent, chartOnVisual, chemOnVisual, diagramOnVisual,
-                                                                                                                                                mathOnVisual, musicOnVisual, textOnVisual. *} */
+                                                                                                                                                Expected values include: [c]auditory[/c], [c]tactile[/c], [c]textual[/c],
+                                                                                                                                                [c]visual[/c], [c]colorDependent[/c], [c]chartOnVisual[/c],
+                                                                                                                                                [c]chemOnVisual[/c], [c]diagramOnVisual[/c], [c]mathOnVisual[/c],
+                                                                                                                                                [c]musicOnVisual[/c], [c]textOnVisual[/c]. *} */
     public      $accessModeSufficient       = null;                 /* {*property   $accessModeSufficient       (ItemList)                      A list of single or combined accessModes that are sufficient
                                                                                                                                                 to understand all the intellectual content of a resource.
                                                                                                                                                 Expected values include: auditory, tactile, textual, visual. *} */

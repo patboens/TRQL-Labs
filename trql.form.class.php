@@ -172,7 +172,7 @@ class Form extends Tag
                                                                                                                                                                           files (can be set manually; otherwise, it is treated
                                                                                                                                                                           automatically by examining all controls) [br]
                                                                                                                         *} */
-    
+
     public      $szOnSubmit                     = null;             /* {*property   $szOnSubmit         (string)        Submit clause of the form *} */
 
     /* ================================================================================ */
@@ -186,6 +186,179 @@ class Form extends Tag
 
         {*return
             (self)      The current instance of the class
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
+        {*example
+        |** The example shows how to create a form made of 1 fieldset
+           that contains a number of input zones **|
+
+        use \trql\vaesoli\Vaesoli       as V;
+        use \trql\html\Form             as Form;
+        use \trql\html\Fieldset         as Fieldset;
+        use \trql\html\Input            as Input;
+
+        if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+            require_once( 'trql.vaesoli.class.php' );
+
+        if ( ! defined( 'FORM_CLASS_VERSION' ) )
+            require_once( 'trql.form.class.php' );
+
+        if ( ! defined( 'FIELDSET_CLASS_VERSION' ) )
+            require_once( 'trql.fieldset.class.php' );
+
+        if ( ! defined( 'INPUT_CLASS_VERSION' ) )
+            require_once( 'trql.input.class.php' );
+
+        [b]$oForm                      = new Form();
+        $oForm->szClass             = 'quitus shadow;   |** CSS class **|
+
+        $oForm->settings['withBR']  = false;            |** No line break after each zone **|
+        $oForm->settings['action']  = '/tasks/';        |** Action of the form **|
+        $oForm->settings['method']  = 'GET';            |** Method of the form **|
+
+
+        {   |** Create a fieldset and add the fieldset to the form **|
+            $oFieldset              = new Fieldset();
+            $oFieldset->szCaption   = 'Task';
+
+            {   |** Adding input zones to the fieldset **|
+                $oFieldset->add( new Input( array( 'name'           =>  'ID'                                            ,
+                                                   'type'           =>  'txt'                                           ,
+                                                   'label'          =>  'ID'                                            ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'ID of the task. Leave it empty for a new task.',
+                                                   'required'       =>  false                                           ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'value'          =>  $this->identifier                               ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Name'                                          ,
+                                                   'type'           =>  'txt'                                           ,
+                                                   'label'          =>  'Name'                                          ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Enter a name for this task'                    ,
+                                                   'required'       =>  true                                            ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'value'          =>  $this->name                                     ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Agent'                                         ,
+                                                   'type'           =>  'txt'                                           ,
+                                                   'label'          =>  'Assignee'                                      ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Who this task is assigned to'                  ,
+                                                   'required'       =>  false                                           ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'value'          =>  $this->agent                                    ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Type'                                          ,
+                                                   'type'           =>  'cbo'                                           ,
+                                                   'label'          =>  'Task type'                                     ,
+                                                   'options'        =>  '&lt;option value=&quot;change&quot;&gt;Change&lt;/option&gt;&lt;option value=&quot;defect&quot;&gt;Defect&lt;/option&gt;',
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Enter the type of task'                        ,
+                                                   'maxlength'      =>  3                                               ,
+                                                   'required'       =>  false                                           ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'step'           =>  1                                               ,
+                                                   'style'          =>  'max-width:11em;width:11em;min-width:11em;'     ,
+                                                   'value'          =>  'change'                                        ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Priority'                                      ,
+                                                   'type'           =>  'txt'                                           ,
+                                                   'label'          =>  'Priority'                                      ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Enter the priority of this task'               ,
+                                                   'maxlength'      =>  3                                               ,
+                                                   'required'       =>  true                                            ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'step'           =>  1                                               ,
+                                                   'style'          =>  'max-width:5em;width:5em;min-width:5em;'        ,
+                                                   'value'          =>  $this->priority                                 ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Credits'                                       ,
+                                                   'type'           =>  'num'                                           ,
+                                                   'label'          =>  'Credits'                                       ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Credits of the task'                           ,
+                                                   'required'       =>  false                                           ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'step'           =>  1                                               ,
+                                                   'style'          =>  'max-width:5em;width:5em;min-width:5em;'        ,
+                                                   'value'          =>  $this->credits                                  ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Due'                                           ,
+                                                   'type'           =>  'dat'                                           ,
+                                                   'label'          =>  'Due date'                                      ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Date the task is due'                          ,
+                                                   'required'       =>  false                                           ,
+                                                   'help'           =>  false                                           ,
+                                                   'style'          =>  'max-width:11em;width:11em;min-width:11em;'     ,
+                                                   'value'          =>  ''                                              ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Description'                                   ,
+                                                   'type'           =>  'edt'                                           ,
+                                                   'label'          =>  'Description'                                   ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Enter a name for this task'                    ,
+                                                   'required'       =>  true                                            ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'rows'           =>  8                                               ,
+                                                   'style'          =>  'resize:vertical;'                              ,
+                                                   'value'          =>  trim( $this->description )                      ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Late'                                          ,
+                                                   'type'           =>  'chk'                                           ,
+                                                   'label'          =>  'Late'                                          ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Is this task late?'                            ,
+                                                   'required'       =>  false                                           ,
+                                                   'style'          =>  'max-width:3em;width:3em;min-width:3em;'        ,
+                                                   'value'          =>  false                                           ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Attention'                                     ,
+                                                   'type'           =>  'chk'                                           ,
+                                                   'label'          =>  'Attention'                                     ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Requires attention?'                           ,
+                                                   'required'       =>  false                                           ,
+                                                   'style'          =>  'max-width:3em;width:3em;min-width:3em;'        ,
+                                                   'value'          =>  false                                           ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Submit'                                        ,
+                                                   'type'           =>  'cmd'                                           ,
+                                                   'class'          =>  'shadow'                                        ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Click to submit the values of a new task'      ,
+                                                   'value'          =>  'Create'                                        ,
+                                                 ) ) );
+            }   |** Adding zones to the fieldset **|
+
+            $oForm->add( $oFieldset );
+        }   |** Create a fieldset and add the fieldset to the form **|
+
+        echo (string) $oForm;[/b]
+
         *}
 
         *}}
@@ -277,7 +450,7 @@ class Form extends Tag
     //   'controlId' => string 'frmForm' (length=7)
     //   'controlLang' => string 'fr' (length=2)
     //   'controlMethod' => string 'get' (length=3)
-    // 
+    //
     // array (size=6)
     //   'controlType' => string 'date' (length=4)
     //   'controlLabel' => string 'Date de naissance' (length=17)
@@ -285,7 +458,7 @@ class Form extends Tag
     //   'controlClass' => string 'quitus' (length=6)
     //   'controlId' => string 'Birthdate' (length=9)
     //   'controlName' => string 'Birthdate' (length=9)
-    // 
+    //
     // array (size=6)
     //   'controlType' => string 'editbox' (length=7)
     //   'controlLang' => string 'fr' (length=2)
@@ -371,7 +544,7 @@ class Form extends Tag
     {
         for ( $i=0; $i < count( $aKeys );$i++ )
             $aRetVal[ $aKeys[$i] ] = $aValues[$i];
-    
+
         return ( $aRetVal );
     }   /* End of Form.mix() ========================================================== */
     /* ================================================================================ */
@@ -768,6 +941,7 @@ class Form extends Tag
     }   /* End of Form.buildEnctype() ================================================= */
     /* ================================================================================ */
 
+
     /* ================================================================================ */
     /** {{*__toHTML()=
 
@@ -986,8 +1160,6 @@ class Form extends Tag
     /* ================================================================================ */
 
 
-
-
     /* ================================================================================ */
     /** {{*__destruct()=
 
@@ -999,6 +1171,10 @@ class Form extends Tag
         {*return
             (void)      No return
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
 
         *}}
     */

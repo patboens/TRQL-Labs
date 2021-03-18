@@ -1,0 +1,6 @@
+Change Log v 0.0.5
+==================
+
+1) Invoice class modified and documented. Full of examples now
+
+

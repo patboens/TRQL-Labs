@@ -94,12 +94,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.abstract"><code>$abstract</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">An abstract is a short description that summarizes a <code><a href="?src=CreativeWork">CreativeWork</a></code> */
- public $accessMode = null; /* {*property $accessMode (string) The human sensory perceptual system or cognitive faculty
- through which a person may process or perceive information.
- Expected values include: auditory, tactile, textual, visual,
- colorDependent, chartOnVisual, chemOnVisual, diagramOnVisual,
- mathOnVisual, musicOnVisual, textOnVisual.</td>
+<td class="description">An abstract is a short description that summarizes a <code><a href="?src=CreativeWork">CreativeWork</a></code></td>
 </tr>
 <tr class="property">
 <td class="name" id="var.accessibilityAPI"><code>$accessibilityAPI</code></td>
@@ -137,6 +132,16 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  descriptions are present but long descriptions will be needed
  for non-visual users" or "short descriptions are present and
  no long descriptions are needed."</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.accessMode"><code>$accessMode</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The human sensory perceptual system or cognitive faculty
+ through which a person may process or perceive information.
+ Expected values include: <code>auditory</code>, <code>tactile</code>, <code>textual</code>,
+ <code>visual</code>, <code>colorDependent</code>, <code>chartOnVisual</code>,
+ <code>chemOnVisual</code>, <code>diagramOnVisual</code>, <code>mathOnVisual</code>,
+ <code>musicOnVisual</code>, <code>textOnVisual</code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.accessModeSufficient"><code>$accessModeSufficient</code></td>

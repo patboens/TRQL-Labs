@@ -26,6 +26,7 @@
     {*cdate                 24-08-2020 12:50 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -38,7 +39,6 @@
         {*desc              1)  Original creation
         *}
     *}
-
 
     *}}} */
 /****************************************************************************************/
@@ -98,6 +98,9 @@ class WebPageElement extends CreativeWork
     public      $xpath          = null;                             /* {*property   $xpath                      (XPathType )                    An XPath, e.g. of a SpeakableSpecification or WebPageElement.
                                                                                                                                                 In the latter case, multiple matches within a page can constitute
                                                                                                                                                 a single conceptual "Web page element". *} */
+
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public          $wikidataId     = null;                         /* {*property   $wikidataId                 (string)                        Wikidata ID. No equivalent *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=

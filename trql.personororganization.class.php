@@ -143,6 +143,7 @@ abstract class PersonOrOrganization extends Organization
     public  $weight                     = null;                     /* {*property   $weight                     (QuantitativeValue)                         The weight of the product or person. *} */
     public  $workLocation               = null;                     /* {*property   $workLocation               (ContactPoint|Place)                        A contact location for a person's place of work. *} */
     public  $worksFor                   = null;                     /* {*property   $worksFor                   (Organization)                              Organizations that the person works for. *} */
+    public  $vatID	                    = null;                     /* {*property   $vatID                      (string)                                    The Value-added Tax ID of the organization or person.*} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = null;

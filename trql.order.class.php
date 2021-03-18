@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -30,6 +28,7 @@
     {*cdate                 28-08-2020 14:01 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -46,19 +45,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\order;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\intangible\Intangible    as Intangible;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\intangible\Intangible     as Intangible;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'INTANGIBLE_CLASS_VERSION' ) )
     require_once( 'trql.intangible.class.php' );
-
-
 
 defined( 'ORDER_CLASS_VERSION' ) or define( 'ORDER_CLASS_VERSION','0.1' );
 
@@ -86,10 +82,11 @@ defined( 'ORDER_CLASS_VERSION' ) or define( 'ORDER_CLASS_VERSION','0.1' );
         on 28-08-2020 14:01.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Order extends Intangible
-/*--------------------------------------*/
+/*--------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -179,6 +176,14 @@ class Order extends Intangible
             (self)      The current instance of the class
         *}
 
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__destruct
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -188,10 +193,8 @@ class Order extends Intangible
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of Order.__construct() ========================================== */
+    }   /* End of Order.__construct() ================================================= */
     /* ================================================================================ */
 
 
@@ -207,6 +210,14 @@ class Order extends Intangible
             (void)      No return
         *}
 
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__construct
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -218,10 +229,7 @@ class Order extends Intangible
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of Order.__destruct() =========================================== */
+    }   /* End of Order.__destruct() ================================================== */
     /* ================================================================================ */
-
-}   /* End of class Order ====================================================== */
+}   /* End of class Order ============================================================= */
 /* ==================================================================================== */
-
-?>

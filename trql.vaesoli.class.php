@@ -1279,6 +1279,7 @@ class Vaesoli
 
         return ( null );
     }   /* End of vaesoli.FIL_getHashFile() =========================================== */
+    public static function getHashFile( $szFile ) { return( self::FIL_getHashFile( $szFile ) ); }
     /* ================================================================================ */
 
 

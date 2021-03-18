@@ -15,8 +15,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /****************************************************************************************/
@@ -29,6 +27,7 @@
     {*cdate                 28-08-2020 14:09 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,7 +43,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\customer;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli                               as Vaesoli;
 use \trql\personororganization\PersonOrOrganization     as PersonOrOrganization;
@@ -62,7 +61,6 @@ if ( ! defined( 'PERSONORORGANIZATION_CLASS_VERSION' ) )
     require_once( 'trql.personororganization.class.php' );
 
 defined( 'CUSTOMER_CLASS_VERSION' ) or define( 'CUSTOMER_CLASS_VERSION','0.1' );
-
 
 /* ==================================================================================== */
 /** {{*class Customer=
@@ -103,6 +101,14 @@ class Customer extends PersonOrOrganization
 
         {*return
             (self)      The current instance of the class
+        *}
+
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__destruct
         *}
 
         *}}
@@ -147,6 +153,14 @@ class Customer extends PersonOrOrganization
             (void)      No return
         *}
 
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__construct
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -160,7 +174,5 @@ class Customer extends PersonOrOrganization
         $this->necroSignaling();
     }   /* End of Customer.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class Customer ========================================================== */
 /* ==================================================================================== */
-?>

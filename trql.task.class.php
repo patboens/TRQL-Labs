@@ -46,13 +46,13 @@
 /****************************************************************************************/
 namespace trql\task;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\XML\XML                       as XML;
-use \trql\activity\Activity             as Activity;
-use \trql\form\Form                     as Form;
-use \trql\fieldset\Fieldset             as Fieldset;
-use \trql\formset\Formset               as Formset;
-use \trql\input\Input                   as Input;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\XML\XML               as XML;
+use \trql\activity\Activity     as Activity;
+use \trql\html\Form             as Form;
+use \trql\html\Fieldset         as Fieldset;
+use \trql\html\Formset          as Formset;
+use \trql\html\Input            as Input;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -70,11 +70,11 @@ if ( ! defined( 'FORM_CLASS_VERSION' ) )
 if ( ! defined( 'FIELDSET_CLASS_VERSION' ) )
     require_once( 'trql.fieldset.class.php' );
 
-if ( ! defined( 'INPUT_CLASS_VERSION' ) )
-    require_once( 'trql.input.class.php' );
-
 if ( ! defined( 'FORMSET_CLASS_VERSION' ) )
     require_once( 'trql.formset.class.php' );
+
+if ( ! defined( 'INPUT_CLASS_VERSION' ) )
+    require_once( 'trql.input.class.php' );
 
 defined( 'TASK_CLASS_VERSION' ) or define( 'TASK_CLASS_VERSION' ,'0.1' );
 

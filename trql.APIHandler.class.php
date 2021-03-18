@@ -19,7 +19,7 @@
 */
 
 /** {{{*fheader
-    {*file                  trql.smallAPIGW.class.php *}
+    {*file                  trql.APIHandler.class.php *}
 
     {*purpose               A server that acts as an API front-end, receives API
                             requests, enforces throttling and security policies, passes

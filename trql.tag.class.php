@@ -137,6 +137,9 @@ class Tag extends WebPageElement
                                                                                                                 at the time of the rendering (gene expression) of the container *} */
     public          $aCustomData    =   array();                    /* {*property   $aCustomData    (array)     Array of HTML5 "data-..." attributes *} */
 
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public          $wikidataId     = null;                         /* {*property   $wikidataId     (string)    Wikidata ID. No equivalent *} */
+
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
