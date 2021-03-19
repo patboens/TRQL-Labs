@@ -26,6 +26,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,7 +55,7 @@
 namespace trql\animalshelter;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\localbusiness\LocalBusiness   as LocalBusiness;
+use \trql\business\LocalBusiness   as LocalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

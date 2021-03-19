@@ -43,10 +43,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\store;
+namespace trql\business\store;
 
-use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\store\Store       as Store;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\business\store\Store  as Store;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -150,4 +150,3 @@ class OutletStore extends Store
     /* ================================================================================ */
 }   /* End of class OutletStore ======================================================= */
 /* ==================================================================================== */
-?>

@@ -55,7 +55,7 @@
 namespace trql\library;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\localbusiness\LocalBusiness       as LocalBusiness;
+use \trql\business\LocalBusiness       as LocalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

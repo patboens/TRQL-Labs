@@ -63,7 +63,7 @@ use \trql\mother\Mother                 as Mother;
 use \trql\mother\iContext               as iContext;
 use \trql\context\Context               as Context;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\localbusiness\LocalBusiness   as LocalBusiness;
+use \trql\business\LocalBusiness   as LocalBusiness;
 
 
 use DOMDocument;

@@ -26,7 +26,7 @@
     {*cdate                 26-08-2020 18:40 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,10 +51,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\store;
+namespace trql\business\store;
 
-use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\store\Store       as Store;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\business\store\Store      as Store;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -128,7 +128,7 @@ class ClothingStore extends Store
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of ClothingStore.__construct() ========================================== */
+    }   /* End of ClothingStore.__construct() ========================================= */
     /* ================================================================================ */
 
 
@@ -159,4 +159,3 @@ class ClothingStore extends Store
     /* ================================================================================ */
 }   /* End of class ClothingStore ===================================================== */
 /* ==================================================================================== */
-?>

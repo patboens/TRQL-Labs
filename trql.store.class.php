@@ -26,6 +26,7 @@
     {*cdate                 24-08-2020 07:38 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -49,10 +50,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\store;
+namespace trql\business\store;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\localbusiness\LocalBusiness       as LocalBusiness;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\business\LocalBusiness    as LocalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -84,6 +85,7 @@ defined( 'STORE_CLASS_VERSION' ) or define( 'STORE_CLASS_VERSION','0.1' );
 
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Store extends LocalBusiness
@@ -155,4 +157,3 @@ class Store extends LocalBusiness
     /* ================================================================================ */
 }   /* End of class Store ============================================================= */
 /* ==================================================================================== */
-?>

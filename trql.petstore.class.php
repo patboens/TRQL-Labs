@@ -43,10 +43,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\store;
+namespace trql\business\store;
 
-use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\store\Store       as Store;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\business\store\Store      as Store;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -82,7 +82,7 @@ defined( 'PETSTORE_CLASS_VERSION' ) or define( 'PETSTORE_CLASS_VERSION','0.1' );
  */
 /* ==================================================================================== */
 class PetStore extends Store
-/*--------------------------------------*/
+/*------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -151,4 +151,3 @@ class PetStore extends Store
     /* ================================================================================ */
 }   /* End of class PetStore ========================================================== */
 /* ==================================================================================== */
-?>

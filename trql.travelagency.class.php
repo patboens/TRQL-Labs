@@ -50,10 +50,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\travelagency;
+namespace trql\business;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\localbusiness\LocalBusiness       as LocalBusiness;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\business\LocalBusiness    as LocalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -82,9 +82,9 @@ defined( 'TRAVELAGENCY_CLASS_VERSION' ) or define( 'TRAVELAGENCY_CLASS_VERSION',
 
     {*warning
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class TravelAgency extends LocalBusiness
@@ -158,4 +158,3 @@ class TravelAgency extends LocalBusiness
     /* ================================================================================ */
 }   /* End of class TravelAgency ====================================================== */
 /* ==================================================================================== */
-?>

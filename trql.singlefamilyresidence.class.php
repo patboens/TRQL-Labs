@@ -45,17 +45,14 @@
 /****************************************************************************************/
 namespace trql\singlefamilyresidence;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\house\House    as House;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\house\House       as House;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'HOUSE_CLASS_VERSION' ) )
     require_once( 'trql.house.class.php' );
-
-
 
 defined( 'SINGLEFAMILYRESIDENCE_CLASS_VERSION' ) or define( 'SINGLEFAMILYRESIDENCE_CLASS_VERSION','0.1' );
 
@@ -171,4 +168,3 @@ class SingleFamilyResidence extends House
     /* ================================================================================ */
 }   /* End of class SingleFamilyResidence ============================================= */
 /* ==================================================================================== */
-?>

@@ -26,9 +26,10 @@
     {*cdate                 23-08-20 22:18 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     {*warning
-
+        The UIKey class is coming. Stay tuned!
     *}
 
     -------------------------------------------------------------------------------------
@@ -45,8 +46,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\uikey;
-
+namespace trql\quitus;
 
 use \trql\mother\Mother                             as Mother;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
@@ -115,7 +115,7 @@ class UIKey extends Utility
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-        $this->die( "The UIKey class does not do anything interesting yet" );
+        //$this->die( "The UIKey class does not do anything interesting yet" );
 
         return ( $this );
     }   /* End of UIKey.__construct() ================================================= */

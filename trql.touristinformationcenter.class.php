@@ -50,10 +50,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\touristinformationcenter;
+namespace trql\business;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\localbusiness\LocalBusiness       as LocalBusiness;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\business\LocalBusiness    as LocalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -85,6 +85,7 @@ defined( 'TOURISTINFORMATIONCENTER_CLASS_VERSION' ) or define( 'TOURISTINFORMATI
 
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class TouristInformationCenter extends LocalBusiness
@@ -157,4 +158,3 @@ class TouristInformationCenter extends LocalBusiness
     /* ================================================================================ */
 }   /* End of class TouristInformationCenter ========================================== */
 /* ==================================================================================== */
-?>

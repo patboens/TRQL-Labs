@@ -26,7 +26,7 @@
     {*cdate                 26-08-2020 18:48 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,7 +54,7 @@
 namespace trql\florist;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\store\Store           as Store;
+use trql\business\store\Store   as Store;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -86,6 +86,7 @@ defined( 'FLORIST_CLASS_VERSION' ) or define( 'FLORIST_CLASS_VERSION','0.1' );
         on 26-08-2020 18:48.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Florist extends Store
@@ -158,4 +159,3 @@ class Florist extends Store
     /* ================================================================================ */
 }   /* End of class Florist =========================================================== */
 /* ==================================================================================== */
-?>

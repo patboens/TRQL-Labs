@@ -1,0 +1,37 @@
+Change Log v 0.0.7
+==================
+
+1)  All the following classes now share the "business" namespace
+
+    trql.travelagency.class.php
+    trql.touristinformationcenter.class.php
+    trql.localbusiness.class.php
+    trql.televisionstation.class.php
+
+2)  All the following classes now share the "business\store" namespace
+
+    trql.autopartsstore.class.php
+    trql.bikestore.class.php
+    trql.bookstore.class.php
+    trql.clothingstore.class.php
+    trql.computerstore.class.php
+    trql.conveniencestore.class.php
+    trql.departmentstore.class.php
+    trql.electronicsstore.class.php
+    trql.hardwarestore.class.php
+    trql.homegoodsstore.class.php
+    trql.jewelrystore.class.php
+    trql.liquorstore.class.php
+    trql.mensclothingstore.class.php
+    trql.mobilephonestore.class.php
+    trql.movierentalstore.class.php
+    trql.musicstore.class.php
+    trql.officeequipmentstore.class.php
+    trql.outletstore.class.php
+    trql.petstore.class.php
+    trql.shoestore.class.php
+    trql.sportinggoodsstore.class.php
+    trql.store.class.php
+    trql.tireshop.class.php
+    trql.toystore.class.php
+    trql.wholesalestore.class.php

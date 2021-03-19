@@ -43,7 +43,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\localbusiness;
+namespace trql\business;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\mother\iContext               as iContext;

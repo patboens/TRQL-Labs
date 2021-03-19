@@ -15,8 +15,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /****************************************************************************************/
@@ -29,6 +27,7 @@
     {*cdate                 28-08-2020 14:09 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -48,7 +47,7 @@ namespace trql\supplier;
 
 use \trql\mother\iContext                as iContext;
 use \trql\vaesoli\Vaesoli                as Vaesoli;
-use \trql\localbusiness\LocalBusiness    as LocalBusiness;
+use \trql\business\LocalBusiness    as LocalBusiness;
 
 use DOMDocument;
 use DOMXPath;

@@ -43,10 +43,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\televisionstation;
+namespace trql\business;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\localbusiness\LocalBusiness       as LocalBusiness;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\business\LocalBusiness    as LocalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -78,6 +78,7 @@ defined( 'TELEVISIONSTATION_CLASS_VERSION' ) or define( 'TELEVISIONSTATION_CLASS
         on 28-08-2020 16:41.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class TelevisionStation extends LocalBusiness
@@ -150,4 +151,3 @@ class TelevisionStation extends LocalBusiness
     /* ================================================================================ */
 }   /* End of class TelevisionStation ================================================= */
 /* ==================================================================================== */
-?>
