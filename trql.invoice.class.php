@@ -437,6 +437,9 @@ class Invoice extends Intangible
                     if ( ( $o = $oXPath->query( 'LegalForm',$oIssuerNode ) ) && $o->length > 0 )
                         $this->issuer->legalForm  = $o->item(0)->nodeValue;
 
+                    if ( ( $o = $oXPath->query( 'TaxID',$oIssuerNode     ) ) && $o->length > 0 )
+                        $this->issuer->taxID = $o->item(0)->nodeValue;
+
                     if ( ( $o = $oXPath->query( 'Email',$oIssuerNode     ) ) && $o->length > 0 )
                         $this->issuer->email = $o->item(0)->nodeValue;
 
@@ -1410,12 +1413,18 @@ class Invoice extends Intangible
                     "       <Name><![CDATA["            . ( $this->issuer->name                      ?? '' ) . "]]></Name>\n"       .
                     "       <LegalName><![CDATA["       . ( $this->issuer->legalName                 ?? '' ) . "]]></LegalName>\n"  .
                     "       <LegalForm><![CDATA["       . ( $this->issuer->legalForm                 ?? '' ) . "]]></LegalForm>\n"  .
+                    "       <TaxID><![CDATA["           . ( $this->issuer->taxID                     ?? '' ) . "]]></TaxID>\n"      .
                     "       <VATNumber><![CDATA["       . ( $this->issuer->vatID                     ?? '' ) . "]]></VATNumber>\n"  .
                     "       <Email><![CDATA["           . ( $this->issuer->email                     ?? '' ) . "]]></Email>\n"      .
                     "       <Url><![CDATA["             . ( $this->issuer->url                       ?? '' ) . "]]></Url>\n"        .
                     "       <FaxNumber><![CDATA["       . ( $this->issuer->faxNumber                 ?? '' ) . "]]></FaxNumber>\n"  .
                     "       <Phone><![CDATA["           . ( $this->issuer->telephone                 ?? '' ) . "]]></Phone>\n"      .
                     "       <Image><![CDATA["           . ( $this->issuer->image                     ?? '' ) . "]]></Image>\n"      .
+                    "       <BankAccount>\n"                                                                                        .
+                    "           <Bank><![CDATA["       . ( $this->issuer->bankAccount->bank         ?? '' ) ."]]></Street>\n"       .
+                    "           <ID><![CDATA["         . ( $this->issuer->bankAccount->identifier   ?? '' ) ."]]></Zip>\n"          .
+                    "           <BIC><![CDATA["        . ( $this->issuer->bankAccount->BICCode      ?? '' ) ."]]></City>\n"         .
+                    "       </BankAccount>\n"                                                                                       .
                     "       <Address>\n"                                                                                            .
                     "           <Street><![CDATA["      . ( $this->issuer->address->streetAddress    ?? '' ) ."]]></Street>\n"      .
                     "           <Zip><![CDATA["         . ( $this->issuer->address->postalCode       ?? '' ) ."]]></Zip>\n"         .
@@ -1423,11 +1432,6 @@ class Invoice extends Intangible
                     "           <State><![CDATA["       . ( $this->issuer->address->addressRegion    ?? '' ) ."]]></State>\n"       .
                     "           <Country><![CDATA["     . ( $this->issuer->address->addressCountry   ?? '' ) ."]]></Country>\n"     .
                     "       </Address>\n"                                                                                           .
-                    "       <BankAccount>\n"                                                                                        .
-                    "           <Bank><![CDATA["       . ( $this->issuer->bankAccount->bank         ?? '' ) ."]]></Street>\n"       .
-                    "           <ID><![CDATA["         . ( $this->issuer->bankAccount->identifier   ?? '' ) ."]]></Zip>\n"          .
-                    "           <BIC><![CDATA["        . ( $this->issuer->bankAccount->BICCode      ?? '' ) ."]]></City>\n"         .
-                    "       </BankAccount>\n"                                                                                       .
                     "   </Issuer>\n"                                                                                                .
                     "   <Customer id=\""                . ( $this->customer->identifier ?? '' ) . "\">\n"                           .
                     "       <Name><![CDATA["            . ( $this->customer->name       ?? '' ) . "]]></Name>\n"                    .
@@ -1608,7 +1612,7 @@ class Invoice extends Intangible
 
         $szHTML .= "<article class=\"invoice\" vocab=\"https://schema.org/\" typeof=\"Invoice\">\n";
             $szHTML .= "  <section class=\"logo\" vocab=\"https://schema.org/\" typeof=\"Organization\">\n";
-            $szHTML .= "      <span class=\image\" property=\"image\">{$this->issuer->image}</span>\n";
+            $szHTML .= "      <span class=\image\" property=\"image\">" . ( ! empty( $this->issuer->image ) ? "<img src=\"{$this->issuer->image}\" />" : '' ) . "</span>\n";
             $szHTML .= "  </section> <!-- .logo -->\n\n";
 
             $szHTML .= "  <section class=\"Addresses\" vocab=\"https://schema.org/\" typeof=\"PostalAddress\">\n\n";
@@ -1668,12 +1672,22 @@ class Invoice extends Intangible
                 $szHTML .= "    </div> <!-- .lineOfDetail -->\n";
             }
 
-            $szHTML .= "  </section> <!-- .invoiceBody -->\n\n";
+            $szHTML .= "\n    <div class=\"totals\">\n";
+            $szHTML .= "       <span class=\"currency\">{$this->currency}</span>\n";
+            $szHTML .= "       <span class=\"totalHTVA\">"          . number_format( $this->totalHTVA       ,$this->iRounding,'.','' ) . "</span>\n";
+            $szHTML .= "       <span class=\"VATPercent\">&#160;</span>\n";
+            $szHTML .= "       <span class=\"totalTVA\">"           . number_format( $this->totalTVA        ,$this->iRounding,'.','' ) . "</span>\n";
+            $szHTML .= "       <span class=\"totalTVAC\">"          . number_format( $this->totalTVAC       ,$this->iRounding,'.','' ) . "</span>\n";
+            $szHTML .= "    </div> <!-- .totals -->\n\n";
 
-            $szHTML .= "  <section class=\"totalPaymentDue\" property=\"totalPaymentDue\" typeof=\"PriceSpecification\">\n";
-            $szHTML .= "    <span property=\"price\">" . number_format( $this->totalPaymentDue ,$this->iRounding,'.','' ) . "</span>\n";
-            $szHTML .= "    <span property=\"priceCurrency\">{$this->currency}</span>\n";
-            $szHTML .= "  </section> <!-- .totalPaymentDue -->\n\n";
+            $szHTML .= "    <section class=\"totalPaymentDue\" property=\"totalPaymentDue\" typeof=\"PriceSpecification\">\n";
+            $szHTML .= "       <span class=\"prepayment\">"         . number_format( $this->prepayment      ,$this->iRounding,'.','' ) . "</span>\n";
+            $szHTML .= "       <span class=\"prepayment currency\">{$this->currency}</span>\n";
+            $szHTML .= "       <span class=\"totalPaymentDue\">"    . number_format( $this->totalPaymentDue ,$this->iRounding,'.','' ) . "</span>\n";
+            $szHTML .= "       <span class=\"totalPaymentDue currency\">{$this->currency}</span>\n";
+            $szHTML .= "    </section> <!-- .totalPaymentDue -->\n\n";
+
+            $szHTML .= "  </section> <!-- .invoiceBody -->\n\n";
 
             $szHTML .= "  <section class=\"invoiceFooter\">\n";
             $szHTML .= "      <span class=\invoiceFooter\">{$this->footer}</span>\n";
@@ -1681,7 +1695,19 @@ class Invoice extends Intangible
             $szHTML .= "  </section> <!-- .invoiceFooter -->\n\n";
 
             $szHTML .= "  <section class=\"documentFooter\" vocab=\"https://schema.org/\" typeof=\"Organization\">\n";
-            $szHTML .= "    <span class=\name\" property=\"name\">{$this->issuer->legalName}</span>\n";
+            $szHTML .= "    <span class=\"name\" property=\"name\">{$this->issuer->legalName}</span>\n";
+            $szHTML .= "    <span class=\"legalForm\">{$this->issuer->legalForm}</span>\n";
+            $szHTML .= "    <span class=\"street\">{$this->issuer->address->streetAddress}</span>\n";
+            $szHTML .= "    <span class=\"zip\">{$this->issuer->address->postalCode}</span>\n";
+            $szHTML .= "    <span class=\"country\">{$this->issuer->address->addressCountry}</span>\n";
+            $szHTML .= "    <span class=\"phone\">{$this->issuer->telephone}</span>\n";
+            $szHTML .= "    <span class=\"email\">{$this->issuer->email}</span>\n";
+            $szHTML .= "    <span class=\"webSite\">{$this->issuer->url}</span>\n";
+            $szHTML .= "    <span class=\"vatID\">{$this->issuer->vatID}</span>\n";
+            $szHTML .= "    <span class=\"taxID\">{$this->issuer->taxID}</span>\n";
+            $szHTML .= "    <span class=\"bankName\">{$this->issuer->bankAccount->bank}</span>\n";
+            $szHTML .= "    <span class=\"bankAccountNumber\">{$this->issuer->bankAccount->identifier}</span>\n";
+            $szHTML .= "    <span class=\"bankAccountBIC\">{$this->issuer->bankAccount->BICCode}</span>\n";
             $szHTML .= "    <section class=\"address\" vocab=\"https://schema.org/\" typeof=\"PostalAddress\">\n";
             $szHTML .= "      <span class=\street\"     property=\"streetAddress\">"      . ( $this->issuer->address->streetAddress    ?? '' ) ."</span>\n";
             $szHTML .= "      <span class=\zip\"        property=\"postalCode\">"         . ( $this->issuer->address->postalCode       ?? '' ) ."</span>\n";
@@ -1692,12 +1718,6 @@ class Invoice extends Intangible
             
             $szHTML .= "  </section> <!-- .documentFooter -->\n\n";
         $szHTML .= "</article> <!-- .invoice -->\n";
-
-        //Il me faut le compte bancaire
-        //Il me faut la forme légale
-        //Il me faut le N° de TVA de l'émetteur
-        //Il me faut le N° de registre du commerce de l'émetteur
-
 
         end:
         return ( $szHTML);
@@ -1942,21 +1962,23 @@ class Invoice extends Intangible
                           'Issuer'          => array( 'id'          => $this->issuer->identifier                                                            ,
                                                       'Name'        => $this->issuer->name                                                                  ,
                                                       'LegalName'   => $this->issuer->legalName                                                             ,
+                                                      'LegalForm'   => $this->issuer->legalForm                                                             ,
+                                                      'TaxID'       => $this->issuer->taxID                                                                 ,
                                                       'VATNumber'   => $this->issuer->vatID                                                                 ,
                                                       'Email'       => $this->issuer->email                                                                 ,
                                                       'Url'         => $this->issuer->url                                                                   ,
                                                       'FaxNumber'   => $this->issuer->faxNumber                                                             ,
                                                       'Phone'       => $this->issuer->telephone                                                             ,
                                                       'Image'       => $this->issuer->image                                                                 ,
+                                                      'BankAccount' => array( 'Bank'    => $this->issuer->bankAccount->bank                                 ,
+                                                                              'ID'      => $this->issuer->bankAccount->identifier                           ,
+                                                                              'BIC'     => $this->issuer->bankAccount->BICCode                              ,
+                                                                            )                                                                               ,
                                                       'Address'     => array( 'Street'  => $this->issuer->address->streetAddress                            ,
                                                                               'Zip'     => $this->issuer->address->postalCode                               ,
                                                                               'City'    => $this->issuer->address->addressLocality                          ,
                                                                               'State'   => $this->issuer->address->addressRegion                            ,
                                                                               'Country' => $this->issuer->address->addressCountry                           ,
-                                                                            )                                                                               ,
-                                                      'BankAccount' => array( 'Bank'    => $this->issuer->bankAccount->bank                                 ,
-                                                                              'ID'      => $this->issuer->bankAccount->identifier                           ,
-                                                                              'BIC'     => $this->issuer->bankAccount->BICCode                              ,
                                                                             )                                                                               ,
                                                     )                                                                                                       ,
                           'Customer'        => array( 'id'          => $this->customer->identifier                                                          ,
