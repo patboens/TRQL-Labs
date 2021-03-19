@@ -49,14 +49,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <div class="trql_documentor_DocumentorSourceFile">
 <section class="header">
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.member.class.php</span>
-<span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\member</code></span>
-<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\mother\iContext as iContext,\trql\vaesoli\Vaesoli as Vaesoli,\trql\personororganization\PersonOrOrganization as PersonOrOrganization,DOMDocument; use DOMXPath; if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) ) require_once( 'trql.mother.cl as s</code></span>
+<span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\quitus</code></span>
+<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\mother\iContext as iContext,\trql\vaesoli\Vaesoli as Vaesoli,\trql\organization\PersonOrOrganization as PersonOrOrganization,DOMDocument; use DOMXPath; if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) ) require_once( 'trql.mother.cl as s</code></span>
 <span class="DocumentorLabel">Purpose: </span><span class="property purpose">Individual or organization with membership in a group; 
  constitutive components of a corporate body</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">28-08-2020 14:09</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">04/03/2021 - 11:15:01</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">19/03/2021 - 15:25:33</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
@@ -64,7 +64,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>Member</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">Individual or organization with membership in a group; constitutive 
  components of a corporate body</span>
-<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="?src=Mother">Mother</a> &gt; <a href="?src=Thing">Thing</a> &gt; <a href="?src=Organization">Organization</a> &gt; <a href="?src=PersonOrOrganization">PersonOrOrganization</a> &gt; Member</code></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="?src=Mother">Mother</a> &gt; <a href="?src=Thing">Thing</a> &gt; <a href="?src=PersonOrOrganization">PersonOrOrganization</a> &gt; Member</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Member extends PersonOrOrganization</code></span>
 <span class="DocumentorLabel">Properties: </span>
 <table class="properties">
@@ -76,13 +76,10 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="property">
-<td class="name" id="var.actionableFeedbackPolicy"><code>$actionableFeedbackPolicy</code></td>
-<td class="type"><code>CreativeWork|URL</code></td>
-<td class="description">For a NewsMediaOrganization or other news-related Organization, a
- statement about public engagement activities (for news media, the
- newsroom’s), including involving the public - digitally or
- otherwise -- in coverage decisions, reporting and activities
- after publication.</td>
+<td class="name" id="var.additionalName"><code>$additionalName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An additional name for a Person, can be used for
+ a middle name.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.additionalType"><code>$additionalType</code></td>
@@ -99,14 +96,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  - for multiple types.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.address"><code>$address</code></td>
-<td class="type"><code>PostalAddress|string</code></td>
-<td class="description">Physical address of the item.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.aggregateRating"><code>$aggregateRating</code></td>
-<td class="type"><code>AggregateRating</code></td>
-<td class="description">The overall rating, based on a collection of reviews or ratings, of the item.</td>
+<td class="name" id="var.affiliation"><code>$affiliation</code></td>
+<td class="type"><code>Organization</code></td>
+<td class="description">An organization that this person is affiliated
+ with. For example, a school/university, a club,
+ or a team.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.alternateName"><code>$alternateName</code></td>
@@ -114,45 +108,47 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">An alias for the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.alumni"><code>$alumni</code></td>
-<td class="type"><code>Person</code></td>
-<td class="description">Alumni of an organization. Inverse property: alumniOf.</td>
+<td class="name" id="var.alumniOf"><code>$alumniOf</code></td>
+<td class="type"><code>EducationalOrganization|Organization</code></td>
+<td class="description">An organization that the person is an alumni of.
+ Inverse property: alumni.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.areaServed"><code>$areaServed</code></td>
-<td class="type"><code>AdministrativeArea|GeoShape|Place|string</code></td>
-<td class="description">The geographic area where a service or offered item is provided.
- Supersedes serviceArea.</td>
+<td class="name" id="var.birthDate"><code>$birthDate</code></td>
+<td class="type"><code>Date</code></td>
+<td class="description">Date of birth.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.award"><code>$award</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">An award won by or for this item. Supersedes awards.</td>
+<td class="name" id="var.birthPlace"><code>$birthPlace</code></td>
+<td class="type"><code>Place</code></td>
+<td class="description">The place where the person was born.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.brand"><code>$brand</code></td>
 <td class="type"><code>Brand|Organization</code></td>
-<td class="description">The brand(s) associated with a product or service, or the brand(s)
- maintained by an organization or business person.</td>
+<td class="description">The brand(s) associated with a product or service,
+ or the brand(s) maintained by an organization
+ or business person.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.contactPoint"><code>$contactPoint</code></td>
-<td class="type"><code>ContactPoint</code></td>
-<td class="description">A contact point for a person or organization. Supersedes contactPoints.</td>
+<td class="name" id="var.children"><code>$children</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">A child of the person.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.correctionsPolicy"><code>$correctionsPolicy</code></td>
-<td class="type"><code>CreativeWork|URL</code></td>
-<td class="description">For an <code>Organization</code> (e.g. NewsMediaOrganization), a statement describing
- (in news media, the newsroom’s) disclosure and correction policy for errors.</td>
+<td class="name" id="var.colleague"><code>$colleague</code></td>
+<td class="type"><code>Person|URL</code></td>
+<td class="description">A colleague of the person. Supersedes colleagues.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.department"><code>$department</code></td>
-<td class="type"><code>Organization</code></td>
-<td class="description">A relationship between an organization and a department of that
- organization, also described as an organization (allowing different
- urls, logos, opening hours). For example: a store with a pharmacy, or
- a bakery with a cafe.</td>
+<td class="name" id="var.deathDate"><code>$deathDate</code></td>
+<td class="type"><code>Date</code></td>
+<td class="description">Date of death.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.deathPlace"><code>$deathPlace</code></td>
+<td class="type"><code>Place</code></td>
+<td class="description">The place where the person died.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.description"><code>$description</code></td>
@@ -171,109 +167,55 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  to be useful for disambiguation.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.dissolutionDate"><code>$dissolutionDate</code></td>
-<td class="type"><code>Date</code></td>
-<td class="description">The date that this organization was dissolved.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.diversityPolicy"><code>$diversityPolicy</code></td>
-<td class="type"><code>CreativeWork|URL</code></td>
-<td class="description">Statement on diversity policy by an Organization
- e.g. a NewsMediaOrganization. For a NewsMediaOrganization, a statement
- describing the newsroom’s diversity policy on both staffing and sources,
- typically providing staffing data.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.diversityStaffingReport"><code>$diversityStaffingReport</code></td>
-<td class="type"><code>Article|URL</code></td>
-<td class="description">For an <code>Organization</code> (often but not necessarily a NewsMediaOrganization),
- a report on staffing diversity issues. In a news context this might be
- for example ASNE or RTDNA (US) reports, or self-reported.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.duns"><code>$duns</code></td>
+<td class="name" id="var.familyName"><code>$familyName</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The Dun & Bradstreet DUNS number for identifying an organization or
- business person.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.email"><code>$email</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Email address.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.employee"><code>$employee</code></td>
-<td class="type"><code>Person</code></td>
-<td class="description">Someone working for this organization. Supersedes employees.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.ethicsPolicy"><code>$ethicsPolicy</code></td>
-<td class="type"><code>CreativeWork|URL</code></td>
-<td class="description">Statement about ethics policy, e.g. of a NewsMediaOrganization regarding
- journalistic and publishing practices, or of a Restaurant, a page describing
- food source policies. In the case of a NewsMediaOrganization, an ethicsPolicy
- is typically a statement describing the personal, organizational, and
- corporate standards of behavior expected by the organization.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.event"><code>$event</code></td>
-<td class="type"><code>Event</code></td>
-<td class="description">Upcoming or past event associated with this place, organization, or action.
- Supersedes events.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.faxNumber"><code>$faxNumber</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The fax number.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.founder"><code>$founder</code></td>
-<td class="type"><code>Person</code></td>
-<td class="description">A person who founded this organization. Supersedes founders.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.foundingDate"><code>$foundingDate</code></td>
-<td class="type"><code>Date</code></td>
-<td class="description">The date that this organization was founded.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.foundingLocation"><code>$foundingLocation</code></td>
-<td class="type"><code>Place</code></td>
-<td class="description">The place where the <code>Organization</code> was founded.</td>
+<td class="description">Family name. In the U.S., the last name of an Person. This can
+ be used along with givenName instead of the name property.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.funder"><code>$funder</code></td>
 <td class="type"><code>Organization|Person</code></td>
-<td class="description">A person or organization that supports (sponsors) something through some kind
- of financial contribution.</td>
+<td class="description">A person or organization that supports (sponsors) something
+ through some kind of financial contribution.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.globalLocationNumber"><code>$globalLocationNumber</code></td>
+<td class="name" id="var.gender"><code>$gender</code></td>
+<td class="type"><code>GenderType|string</code></td>
+<td class="description">Gender of the person. While http://schema.org/Male and
+ http://schema.org/Female may be used, text strings are
+ also acceptable for people who do not identify as a
+ binary gender.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.givenName"><code>$givenName</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The Global Location Number (GLN, sometimes also referred to as
- International Location Number or ILN) of the respective organization,
- person, or place. The GLN is a 13-digit number used to identify
- parties and physical locations.</td>
+<td class="description">Given name. In the U.S., the first name of a Person. This can
+ be used along with familyName instead of the name property.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.hasCredential"><code>$hasCredential</code></td>
-<td class="type"><code>EducationalOccupationalCredential</code></td>
-<td class="description">A credential awarded to the Person or Organization.</td>
+<td class="name" id="var.hasOccupation"><code>$hasOccupation</code></td>
+<td class="type"><code>Occupation</code></td>
+<td class="description">The Person's occupation. For past professions, use Role for expressing dates.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.hasOfferCatalog"><code>$hasOfferCatalog</code></td>
-<td class="type"><code>OfferCatalog</code></td>
-<td class="description">Indicates an OfferCatalog listing for this Organization, Person, or Service.</td>
+<td class="name" id="var.height"><code>$height</code></td>
+<td class="type"><code>Distance|QuantitativeValue</code></td>
+<td class="description">The height of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.hasPOS"><code>$hasPOS</code></td>
-<td class="type"><code>Place</code></td>
-<td class="description">Points-of-Sales operated by the organization or person.</td>
+<td class="name" id="var.homeLocation"><code>$homeLocation</code></td>
+<td class="type"><code>ContactPoint|Place</code></td>
+<td class="description">A contact location for a person's residence.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.hasProductReturnPolicy"><code>$hasProductReturnPolicy</code></td>
-<td class="type"><code>ProductReturnPolicy</code></td>
-<td class="description">Indicates a ProductReturnPolicy that may be applicable.</td>
+<td class="name" id="var.honorificPrefix"><code>$honorificPrefix</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.honorificSuffix"><code>$honorificSuffix</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An honorific suffix preceding a Person's name such as M.D. /PhD/MSCSW.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.identifier"><code>$identifier</code></td>
@@ -295,11 +237,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">URL of an image of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.isicV4"><code>$isicV4</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The International Standard of Industrial Classification of All Economic
- Activities (ISIC), Revision 4 code for a particular organization, business
- person, or place.</td>
+<td class="name" id="var.jobTitle"><code>$jobTitle</code></td>
+<td class="type"><code>DefinedTerm|string</code></td>
+<td class="description">The job title of the person (for example, Financial Manager).</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.knows"><code>$knows</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">The most generic bi-directional social/work relation.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.knowsAbout"><code>$knowsAbout</code></td>
@@ -318,28 +263,6 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  IETF BCP 47 standard.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.legalName"><code>$legalName</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The official name of the organization, e.g. the registered company name.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.leiCode"><code>$leiCode</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">An organization identifier that uniquely identifies a legal entity as
- defined in ISO 17442.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.location"><code>$location</code></td>
-<td class="type"><code>Place|PostalAddress|string</code></td>
-<td class="description">The location of for example where the event is happening, an organization
- is located, or where an action takes place.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.logo"><code>$logo</code></td>
-<td class="type"><code>ImageObject|URL</code></td>
-<td class="description">An associated logo.</td>
-</tr>
-<tr class="property">
 <td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Indicates a page (or other <code><a href="?src=CreativeWork">CreativeWork</a></code>, <code><a href="?src=Event">Event</a></code>)
@@ -350,29 +273,10 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.makesOffer"><code>$makesOffer</code></td>
-<td class="type"><code>Offer</code></td>
-<td class="description">A pointer to products or services offered by the organization or person.
- Inverse property: offeredBy.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.member"><code>$member</code></td>
-<td class="type"><code>Organization|Person</code></td>
-<td class="description">A member of an <code>Organization</code> or a ProgramMembership. Organizations can be
- members of organizations; ProgramMembership is typically for individuals.
- Supersedes members, musicGroupMember. Inverse property: memberOf.</td>
-</tr>
-<tr class="property">
 <td class="name" id="var.memberOf"><code>$memberOf</code></td>
 <td class="type"><code>Organization|ProgramMembership</code></td>
-<td class="description">An <code>Organization</code> (or ProgramMembership) to which this Person or Organization
- belongs. Inverse property: member.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.naics"><code>$naics</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The North American Industry Classification System (NAICS) code for a
- particular organization or business person.</td>
+<td class="description">An Organization (or ProgramMembership) to which this Person or
+ Organization belongs. Inverse property: <code><a href="#var-member">$member</a></code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.name"><code>$name</code></td>
@@ -380,24 +284,15 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">The name of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.nonprofitStatus"><code>$nonprofitStatus</code></td>
-<td class="type"><code>NonprofitType</code></td>
-<td class="description">nonprofit Status indicates the legal status of a non-profit organization
- in its primary place of business.</td>
+<td class="name" id="var.nationality"><code>$nationality</code></td>
+<td class="type"><code>Country</code></td>
+<td class="description">Nationality of the person.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.numberOfEmployees"><code>$numberOfEmployees</code></td>
-<td class="type"><code>QuantitativeValue</code></td>
-<td class="description">The number of employees in an organization e.g. business.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.ownershipFundingInfo"><code>$ownershipFundingInfo</code></td>
-<td class="type"><code>AboutPage|CreativeWork|string|URL</code></td>
-<td class="description">For an <code>Organization</code> (often but not necessarily a NewsMediaOrganization),
- a description of organizational ownership structure; funding and grants.
- In a news/media setting, this is with particular reference to editorial
- independence. Note that the funder is also available and can be used to
- make basic funder information machine-readable.</td>
+<td class="name" id="var.netWorth"><code>$netWorth</code></td>
+<td class="type"><code>MonetaryAmount|PriceSpecification</code></td>
+<td class="description">The total financial value of the person as calculated by subtracting
+ assets from liabilities.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.owns"><code>$owns</code></td>
@@ -405,10 +300,14 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">Products owned by the organization or person.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.parentOrganization"><code>$parentOrganization</code></td>
-<td class="type"><code>Organization</code></td>
-<td class="description">The larger organization that this organization is a subOrganization of,
- if any. Supersedes branchOf. Inverse property: subOrganization.</td>
+<td class="name" id="var.parent"><code>$parent</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">A parent of this person. Supersedes parents.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.performerIn"><code>$performerIn</code></td>
+<td class="type"><code>Event</code></td>
+<td class="description">Event that this person is a performer or participant in.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
@@ -418,18 +317,9 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  this thing would play an 'object' role.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.publishingPrinciples"><code>$publishingPrinciples</code></td>
-<td class="type"><code>CreativeWork|URL</code></td>
-<td class="description">The publishingPrinciples property indicates (typically via URL) a
- document describing the editorial principles of an Organization
- (or individual e.g. a Person writing a blog) that relate to their
- activities as a publisher, e.g. ethics or diversity policies. When
- applied to a CreativeWork (e.g. NewsArticle) the principles are those
- of the party primarily responsible for the creation of the CreativeWork.
-
- While such policies are most typically expressed in natural language,
- sometimes related information (e.g. indicating a funder) can be
- expressed using schema.org terminology.</td>
+<td class="name" id="var.relatedTo"><code>$relatedTo</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">The most generic familial relation.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.sameAs"><code>$sameAs</code></td>
@@ -441,9 +331,24 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  page, or official website.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.seeks"><code>$seeks</code></td>
+<td class="type"><code>Demand</code></td>
+<td class="description">A pointer to products or services sought by the organization or person (demand).</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.self"><code>$self</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.sibling"><code>$sibling</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">A sibling of the person. Supersedes siblings.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.spouse"><code>$spouse</code></td>
+<td class="type"><code>Person</code></td>
+<td class="description">The person's spouse.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
@@ -457,11 +362,30 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">URL of the item.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.vatID"><code>$vatID</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The Value-added Tax ID of the organization or person.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.weight"><code>$weight</code></td>
+<td class="type"><code>QuantitativeValue</code></td>
+<td class="description">The weight of the product or person.</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Wikidata ID. Social entity (not necessarily commercial) uniting people
- into a structured group managing shared means to meet some needs, or to
- pursue collective goals</td>
+<td class="description">WikidataId ... entity ... a thing with independent and 
+ distinct existence</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.workLocation"><code>$workLocation</code></td>
+<td class="type"><code>ContactPoint|Place</code></td>
+<td class="description">A contact location for a person's place of work.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.worksFor"><code>$worksFor</code></td>
+<td class="type"><code>Organization</code></td>
+<td class="description">Organizations that the person works for.</td>
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>Member</code></h2>

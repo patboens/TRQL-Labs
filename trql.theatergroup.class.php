@@ -44,10 +44,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\theatergroup;
+namespace trql\organization;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\performinggroup\PerformingGroup    as PerformingGroup;
+use \trql\organization\PerformingGroup      as PerformingGroup;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -152,4 +152,3 @@ class TheaterGroup extends PerformingGroup
     /* ================================================================================ */
 }   /* End of class TheaterGroup ====================================================== */
 /* ==================================================================================== */
-?>

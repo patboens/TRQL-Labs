@@ -23,16 +23,11 @@
     {*file                  trql.educationalorganization.class.php *}
     {*purpose               An educational organization, based on [c]CivicStructure[/c] *}
     {*author                {PYB} *}
-    {*company               [br]Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 29-07-20 12:12 *}
     {*mdate                 auto *}
-    {*license               Submitted to intellectual property rights (see
-                            author) *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre*}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -56,13 +51,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\educationalorganization;
+namespace trql\organization;
 
-use \trql\mother\Mother                 as Mother;
-use \trql\mother\iContext               as iContext;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\mother\iContext               as iContext;
 use \trql\civicstructure\CivicStructure as CivicStructure;
-
 
 use DOMDocument;
 use DOMXPath;
@@ -76,15 +69,7 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 if ( ! defined( 'CIVICSTRUCTURE_CLASS_VERSION' ) )
     require_once( 'trql.civicstructure.class.php' );
 
-
 defined( 'EDUCATIONALORGANIZATION_CLASS_VERSION' ) or define( 'EDUCATIONALORGANIZATION_CLASS_VERSION','0.1' );
-
-/* Note (16-07-20 23:27:50):
-
-    Le code doit se sauver lui-même dans une sorte de DB. Il doit se compresser
-    lui-même et sauver au moins une dizaine de versions de lui-même.
-
-*/
 
 /* ================================================================================== */
 /** {{*class EducationalOrganization=
@@ -117,7 +102,12 @@ class EducationalOrganization extends CivicStructure implements iContext
                                'family' => null         ,
                              );
 
-    public      $alumni                             = null;         /* {*property   $alumni                             (Person)            Alumni of an organization. Inverse property: alumniOf. *} */
+    public      $alumni                             = null;         /* {*property   $alumni                     (Person)                Alumni of an organization. Inverse property: alumniOf. *} */
+
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q5341295';       /* {*property   $wikidataId                 (string)                Wikidata ID. Body with an aim of education *} */
+
+
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -172,7 +162,5 @@ class EducationalOrganization extends CivicStructure implements iContext
         $this->necroSignaling();
     }   /* End of EducationalOrganization.__destruct() ================================ */
     /* ================================================================================ */
-
 }   /* End of class EducationalOrganization =========================================== */
 /* ==================================================================================== */
-?>

@@ -15,8 +15,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /****************************************************************************************/
@@ -29,6 +27,7 @@
     {*cdate                 28-08-2020 14:09 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,11 +43,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\member;
+namespace trql\quitus;
 
-use \trql\mother\iContext                               as iContext;
-use \trql\vaesoli\Vaesoli                               as Vaesoli;
-use \trql\personororganization\PersonOrOrganization     as PersonOrOrganization;
+use \trql\mother\iContext                       as iContext;
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\organization\PersonOrOrganization     as PersonOrOrganization;
 
 use DOMDocument;
 use DOMXPath;
@@ -160,7 +159,5 @@ class Member extends PersonOrOrganization
         $this->necroSignaling();
     }   /* End of Member.__destruct() ================================================= */
     /* ================================================================================ */
-
 }   /* End of class Member ============================================================ */
 /* ==================================================================================== */
-?>

@@ -26,7 +26,7 @@
     {*cdate                 29-07-20 11:47 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre*}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -50,11 +50,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\school;
+namespace trql\organization;
 
-use \trql\mother\iContext                                   as iContext;
-use \trql\vaesoli\Vaesoli                                   as Vaesoli;
-use \trql\educationalorganization\EducationalOrganization   as EducationalOrganization;
+use \trql\mother\iContext                           as iContext;
+use \trql\vaesoli\Vaesoli                           as Vaesoli;
+use \trql\organization\EducationalOrganization      as EducationalOrganization;
 
 use DOMDocument;
 use DOMXPath;
@@ -178,4 +178,3 @@ class School extends EducationalOrganization implements iContext
     /* ================================================================================ */
 }   /* End of class School ============================================================ */
 /* ==================================================================================== */
-?>

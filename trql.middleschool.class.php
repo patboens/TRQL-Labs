@@ -27,7 +27,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre*}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -41,7 +41,6 @@
         *}
     *}
 
-
     {*chist
         {*mdate 14-02-21 10:44 *}
         {*author {PYB} *}
@@ -53,19 +52,16 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\middleschool;
+namespace trql\organization;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\educationalorganization\EducationalOrganization    as EducationalOrganization;
-
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\organization\EducationalOrganization  as EducationalOrganization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'EDUCATIONALORGANIZATION_CLASS_VERSION' ) )
     require_once( 'trql.educationalorganization.class.php' );
-
-
 
 defined( 'MIDDLESCHOOL_CLASS_VERSION' ) or define( 'MIDDLESCHOOL_CLASS_VERSION','0.1' );
 
@@ -115,7 +111,8 @@ class MiddleSchool extends EducationalOrganization
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NO SEARCH. *} */
+    public      $wikidataId                     = 'Q149566';        /* {*property   $wikidataId                     (string)                        Wikidata ID. School which children attend between 
+                                                                                                                                                    primary school and secondary school. *} */
 
 
     /* ================================================================================ */
@@ -170,8 +167,5 @@ class MiddleSchool extends EducationalOrganization
         $this->necroSignaling();
     }   /* End of MiddleSchool.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class MiddleSchool ====================================================== */
 /* ==================================================================================== */
-
-?>

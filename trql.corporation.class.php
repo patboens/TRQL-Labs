@@ -26,6 +26,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre*}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,7 +52,7 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\corporation;
+namespace trql\organization;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\organization\Organization     as Organization;
@@ -89,7 +90,7 @@ defined( 'CORPORATION_CLASS_VERSION' ) or define( 'CORPORATION_CLASS_VERSION','0
  */
 /* ==================================================================================== */
 class Corporation extends Organization
-/*-----------------------------------*/
+/*----------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -165,4 +166,3 @@ class Corporation extends Organization
     /* ================================================================================ */
 }   /* End of class Corporation ======================================================= */
 /* ==================================================================================== */
-?>

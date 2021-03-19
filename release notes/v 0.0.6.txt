@@ -1,6 +1,44 @@
 Change Log v 0.0.6
 ==================
 
-1) Invoice class : new method __toArray()
+1) Invoice class : new methods
 
+    a) __toArray()
+    b) __toHTML()
+
+    Adding a bunch of internal properties as well
+
+2) Member defined in the "quitus" namespace
+
+3) Agent defined in the "quitus" namespace
+
+4) Modifications in 
+
+    trql.agent.class.php
+    trql.member.class.php
+
+    ... which instantiate a PersonOrOrganization,
+    an abstract class that represents a Person or
+    an Organization by combining both classes
+    into one
+    
+5) All the following classes now share the "organization" namespace
+
+    trql.collegeoruniversity.class.php
+    trql.corporation.class.php
+    trql.customer.class.php
+    trql.dancegroup.class.php
+    trql.educationalorganization.class.php
+    trql.elementaryschool.class.php
+    trql.governmentorganization.class.php
+    trql.highschool.class.php
+    trql.invoice.class.php
+    trql.middleschool.class.php
+    trql.musicgroup.class.php
+    trql.ngo.class.php
+    trql.performinggroup.class.php
+    trql.personororganization.class.php
+    trql.preschool.class.php
+    trql.school.class.php
+    trql.theatergroup.class.php
 

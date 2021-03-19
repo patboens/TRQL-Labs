@@ -50,13 +50,14 @@
         *}
     *}
 
-    *}}} */
+    *}}}
 
+*/
 /****************************************************************************************/
-namespace trql\dancegroup;
+namespace trql\organization;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\performinggroup\PerformingGroup   as PerformingGroup;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\organization\PerformingGroup  as PerformingGroup;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -89,7 +90,8 @@ defined( 'DANCEGROUP_CLASS_VERSION' ) or define( 'DANCEGROUP_CLASS_VERSION','0.1
         on 26-08-2020 18:46.
     *}
 
- */
+    *}}
+*/
 /* ==================================================================================== */
 class DanceGroup extends PerformingGroup
 /*--------------------------------------*/
@@ -161,5 +163,3 @@ class DanceGroup extends PerformingGroup
     /* ================================================================================ */
 }   /* End of class DanceGroup ======================================================== */
 /* ==================================================================================== */
-
-?>

@@ -21,6 +21,9 @@ code,samp, .filename {color: #800 !important;
    font-style: italic;
    }
 .property.inheritance code { border: none !important; }
+.assert.success { border: 2px solid green; padding: 5px; border-radius:3px; }
+.assert.failure { border: 2px solid red; padding: 5px; border-radius:3px; }
+.assert.success code, .assert.failure code { border: none !important; }
 .DocumentorLabel { font-style: italic; display: block;}
 section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
 img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
@@ -46,21 +49,23 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <div class="trql_documentor_DocumentorSourceFile">
 <section class="header">
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.bankaccount.class.php</span>
+<span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\bankaccount</code></span>
+<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\vaesoli\Vaesoli as v,\trql\account\Account as Account,\trql\financialproduct\FinancialProduct as FinancialProduct,\trql\ledger\Ledger as Ledger,\trql\personororganization\PersonOrOrganization as PersonOrOrganization</code></span>
 <span class="DocumentorLabel">Purpose: </span><span class="property purpose">A product or service offered by a bank whereby one may
  deposit, withdraw or transfer money and in some cases be
  paid interest.</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">26-08-2020 18:36</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">08/03/2021 - 07:24:36</span>
-<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br />Under the following terms:<br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">19/03/2021 - 11:52:17</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
 <section class="class shadow">
 <span class="DocumentorLabel">Class: </span><span class="property classname"><code>BankAccount</code></span>
 <span class="DocumentorLabel">Description: </span><span class="property description">A product or service offered by a bank whereby one may deposit, withdraw or
  transfer money and in some cases be paid interest.</span>
-<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="/?src=Mother">Mother</a> &gt; <a href="/?src=Thing">Thing</a> &gt; <a href="/?src=Intangible">Intangible</a> &gt; <a href="/?src=Service">Service</a> &gt; <a href="/?src=FinancialProduct">FinancialProduct</a> &gt; <a href="/?src=Account">Account</a> &gt; BankAccount</code></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="?src=Mother">Mother</a> &gt; <a href="?src=Thing">Thing</a> &gt; <a href="?src=Intangible">Intangible</a> &gt; <a href="?src=Service">Service</a> &gt; <a href="?src=FinancialProduct">FinancialProduct</a> &gt; <a href="?src=Account">Account</a> &gt; BankAccount</code></span>
 <span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class BankAccount extends Account</code></span>
 <span class="DocumentorLabel">Credits: </span><span class="property credits">The whole concept is derived from the fabulous work of Schema.org
  under the terms of their license:
@@ -160,9 +165,19 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  money that remains in a deposit account.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.bank"><code>$bank</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the Bank (e.g. "Nagelmackers")</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.bankAccountType"><code>$bankAccountType</code></td>
 <td class="type"><code>string|URL</code></td>
 <td class="description">The type of a bank account.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.BICCode"><code>$BICCode</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The BIC code of the BankAccount of the organization (if applicable)</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.brand"><code>$brand</code></td>
@@ -221,8 +236,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.hasOfferCatalog"><code>$hasOfferCatalog</code></td>
 <td class="type"><code>OfferCatalog</code></td>
-<td class="description">Indicates an <code><a href="/?src=OfferCatalog">OfferCatalog</a></code> listing for this <code><a href="/?src=Organization">Organization</a></code>,
- <code><a href="/?src=Person">Person</a></code>, or <code><a href="/?src=Service">Service</a></code>.</td>
+<td class="description">Indicates an <code><a href="?src=OfferCatalog">OfferCatalog</a></code> listing for this <code><a href="?src=Organization">Organization</a></code>,
+ <code><a href="?src=Person">Person</a></code>, or <code><a href="?src=Service">Service</a></code>.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.hoursAvailable"><code>$hoursAvailable</code></td>
@@ -275,7 +290,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Indicates a page (or other <code><a href="/?src=CreativeWork">CreativeWork</a></code>, <code><a href="/?src=Event">Event</a></code>)
+<td class="description">Indicates a page (or other <code><a href="?src=CreativeWork">CreativeWork</a></code>, <code><a href="?src=Event">Event</a></code>)
  for which this thing is the main entity
  being described. See <a
  href="https://schema.org/docs/datamodel.html#mainEntityBackground">
@@ -297,7 +312,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  property can also be used to describe a Demand. While this
  property is listed as expected on a number of common types,
  it can be used in others. In that case, using a second type,
- such as <code><a href="/?src=Product">Product</a></code> or a subtype of <code><a href="/?src=Product">Product</a></code>, can clarify the
+ such as <code><a href="?src=Product">Product</a></code> or a subtype of <code><a href="?src=Product">Product</a></code>, can clarify the
  nature of the offer.</td>
 </tr>
 <tr class="property">
@@ -308,12 +323,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.oOwner"><code>$oOwner</code></td>
 <td class="type"><code>Agent</code></td>
-<td class="description">A Person or Organization (<code><a href="/?src=Agent">Agent</a></code>) that owns the account. NOT USED SO FAR!</td>
+<td class="description">A Person or Organization (<code><a href="?src=Agent">Agent</a></code>) that owns the account. NOT USED SO FAR!</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
-<td class="description">Indicates a potential <code><a href="/?src=Action">Action</a></code>, which
+<td class="description">Indicates a potential <code><a href="?src=Action">Action</a></code>, which
  describes an idealized action in which
  this thing would play an 'object' role.</td>
 </tr>
@@ -370,7 +385,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
 <td class="type"><code>CreativeWork|Event</code></td>
-<td class="description">A <code><a href="/?src=CreativeWork">CreativeWork</a></code> or <code><a href="/?src=Event">Event</a></code> about this <code><a href="/?src=Thing">Thing</a></code>. 
+<td class="description">A <code><a href="?src=CreativeWork">CreativeWork</a></code> or <code><a href="?src=Event">Event</a></code> about this <code><a href="?src=Thing">Thing</a></code>. 
  Inverse property: <code><a href="#var-about">$about</a></code>.</td>
 </tr>
 <tr class="property">

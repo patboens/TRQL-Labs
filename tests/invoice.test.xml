@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Invoice xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:vae="urn:lato-sensu-management/Vaesoli"
+         xmlns:quitus="urn:lato-sensu-management/Quitus"
+         id="33d6ad86-a216-4233-a19b-b8b54fe90e33"
+         active="yes"
+         lang="fr"
+         type="I"
+         version="2.0"
+         currency="EUR"
+         date="20140516"
+         duedate="20140530"
+         ref="2014/000001"
+         prepayment="0.0000"
+         totaldue="181.5000"
+         htva="150.0000"
+         tva="31.5000"
+         tvac="181.5000"
+         discounthtva="0.0000"
+         discounttva="0.0000"
+         discounttvac="0.0000"
+         cancelled="no"
+         proforma="no"
+         draft="no"
+         vcs="no"
+         paiddate="20140515"
+         lupdate="20150115153825"
+         qver="0.9.0001">
+   <Description><![CDATA[Here we can have an extended description of the invoice]]></Description>
+   <InvoiceName><![CDATA[NEW TEST]]></InvoiceName>
+   <Issuer id="">
+       <Name><![CDATA[FW]]></Name>
+       <LegalName><![CDATA[FastWrite]]></LegalName>
+       <LegalForm><![CDATA[sprl/bvba]]></LegalForm>
+       <TaxID><![CDATA[RPR 0878.127.142 RPM]]></TaxID>
+       <VATNumber><![CDATA[BE0111.222.333]]></VATNumber>
+       <Email><![CDATA[pb@trql.fm]]></Email>
+       <Url><![CDATA[https://www.fastwrite.com]]></Url>
+       <FaxNumber><![CDATA[]]></FaxNumber>
+       <Phone><![CDATA[+32 2 111.22.33]]></Phone>
+       <Image>https://raw.githubusercontent.com/patboens/TRQL-Labs/main/images/LogoStationeryInvoiceQuitus.png</Image>
+       <BankAccount>
+            <Bank><![CDATA[Nagelmackers]]></Bank>
+            <ID><![CDATA[BE76 132 5143964 95]]></ID>
+            <BIC><![CDATA[BNAGBEBB]]></BIC>
+       </BankAccount>
+       <Address>
+           <Street><![CDATA[Rue Amédé Bracke, 9]]></Street>
+           <Zip><![CDATA[1950]]></Zip>
+           <City><![CDATA[Kraainem]]></City>
+           <State><![CDATA[]]></State>
+           <Country><![CDATA[BE]]></Country>
+       </Address>
+   </Issuer>
+   <Customer id="">
+       <Name><![CDATA[Any Company]]></Name>
+       <VATNumber><![CDATA[BE0463.478.965]]></VATNumber>
+       <Addresses>
+           <Billing>
+               <Street><![CDATA[Rue des chats, 100]]></Street>
+               <Zip><![CDATA[4000]]></Zip>
+               <City><![CDATA[Liège]]></City>
+               <State><![CDATA[]]></State>
+               <Country><![CDATA[BE]]></Country>
+           </Billing>
+           <Delivery>
+               <Street><![CDATA[]]></Street>
+               <Zip><![CDATA[]]></Zip>
+               <City><![CDATA[]]></City>
+               <State><![CDATA[]]></State>
+               <Country><![CDATA[]]></Country>
+           </Delivery>
+       </Addresses>
+   </Customer>
+   <Project id=""/>
+   <Order date="">
+       <ID><![CDATA[]]></ID>
+       <Ref><![CDATA[]]></Ref>
+   </Order>
+   <Management>
+       <Sent>yes</Sent>
+       <Paid>yes</Paid>
+   </Management>
+   <Footer><![CDATA[This will be printed in the footer of the invoice: it's information for the customer]]></Footer>
+   <Memo><![CDATA[This is a memo: it's information for the issuer of the invoice]]></Memo>
+   <Body>
+        <Line update="0">
+           <Desc><![CDATA[Lump-sum amount]]></Desc>
+           <ID><![CDATA[]]></ID>
+           <Qty><![CDATA[1.0000]]></Qty>
+           <UnitPrice><![CDATA[150.0000]]></UnitPrice>
+           <htva><![CDATA[150.0000]]></htva>
+           <VATPercent><![CDATA[21.0000]]></VATPercent>
+           <tva><![CDATA[31.5000]]></tva>
+           <tvac><![CDATA[181.5000]]></tvac>
+        </Line>
+   </Body>
+</Invoice>

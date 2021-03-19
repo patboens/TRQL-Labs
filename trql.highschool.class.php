@@ -26,7 +26,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre*}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -40,7 +40,6 @@
         *}
     *}
 
-
     {*chist
         {*mdate 14-02-21 10:44 *}
         {*author {PYB} *}
@@ -52,10 +51,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\highschool;
+namespace trql\organization;
 
-use \trql\vaesoli\Vaesoli                                   as Vaesoli;
-use \trql\educationalorganization\EducationalOrganization   as EducationalOrganization;
+use \trql\vaesoli\Vaesoli                           as Vaesoli;
+use \trql\organization\EducationalOrganization      as EducationalOrganization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -87,18 +86,12 @@ defined( 'HIGHSCHOOL_CLASS_VERSION' ) or define( 'HIGHSCHOOL_CLASS_VERSION','0.1
         on 26-08-2020 18:49.
     *}
 
-    {*todo
-        Search if there is any WikidataId corresponding to this class
-        (use the [c]wikidata[/c] method, which does not do anything at 
-        the moment)
-    *}
-
     *}}
 
  */
 /* ==================================================================================== */
 class HighSchool extends EducationalOrganization
-/*--------------------------------------*/
+/*--------------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -110,7 +103,8 @@ class HighSchool extends EducationalOrganization
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NO SEARCH. *} */
+    public      $wikidataId                     = 'Q9826';          /* {*property   $wikidataId                     (string)                        Wikidata ID. Institution which provides all or 
+                                                                                                                                                    part of secondary education. *} */
 
 
     /* ================================================================================ */
@@ -167,4 +161,3 @@ class HighSchool extends EducationalOrganization
     /* ================================================================================ */
 }   /* End of class HighSchool ======================================================== */
 /* ==================================================================================== */
-?>

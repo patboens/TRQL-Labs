@@ -26,7 +26,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre*}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -40,7 +40,6 @@
         *}
     *}
 
-
     {*chist
         {*mdate 14-02-21 10:44 *}
         {*author {PYB} *}
@@ -52,10 +51,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\elementaryschool;
+namespace trql\organization;
 
-use \trql\vaesoli\Vaesoli                                   as Vaesoli;
-use \trql\educationalorganization\EducationalOrganization   as EducationalOrganization;
+use \trql\vaesoli\Vaesoli                           as Vaesoli;
+use \trql\organization\EducationalOrganization      as EducationalOrganization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -87,11 +86,6 @@ defined( 'ELEMENTARYSCHOOL_CLASS_VERSION' ) or define( 'ELEMENTARYSCHOOL_CLASS_V
         on 26-08-2020 18:46.
     *}
 
-    {*todo
-        Search if there is any WikidataId corresponding to this class
-        (use the [c]wikidata[/c] method, which does not do anything at 
-        the moment)
-    *}
 
     *}}
 
@@ -110,7 +104,8 @@ class ElementarySchool extends EducationalOrganization
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NO SEARCH. *} */
+    public      $wikidataId                     = 'Q20950067';      /* {*property   $wikidataId                     (string)                        Wikidata ID. School for students at the ages of 
+                                                                                                                                                    3–12 to receive primary education. *} */
 
 
     /* ================================================================================ */
@@ -167,4 +162,3 @@ class ElementarySchool extends EducationalOrganization
     /* ================================================================================ */
 }   /* End of class ElementarySchool ================================================== */
 /* ==================================================================================== */
-?>

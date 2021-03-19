@@ -27,7 +27,7 @@
     {*cdate                 28-08-2020 14:09 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*UTF-8                 Quel bel Ã©tÃ© sous le hÃªtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -45,8 +45,8 @@
 /****************************************************************************************/
 namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli                               as Vaesoli;
-use \trql\personororganization\PersonOrOrganization     as PersonOrOrganization;
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\organization\PersonOrOrganization     as PersonOrOrganization;
 
 use DOMDocument;
 use DOMXPath;

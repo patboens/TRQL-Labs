@@ -26,7 +26,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre*}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -42,10 +42,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\preschool;
+namespace trql\organization;
 
-use \trql\vaesoli\Vaesoli                                   as Vaesoli;
-use \trql\educationalorganization\EducationalOrganization   as EducationalOrganization;
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\organization\EducationalOrganization  as EducationalOrganization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -88,7 +88,7 @@ defined( 'PRESCHOOL_CLASS_VERSION' ) or define( 'PRESCHOOL_CLASS_VERSION','0.1' 
  */
 /* ==================================================================================== */
 class Preschool extends EducationalOrganization
-/*--------------------------------------*/
+/*-------------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -100,7 +100,8 @@ class Preschool extends EducationalOrganization
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NO SEARCH. *} */
+    public      $wikidataId                     = 'Q1076052';       /* {*property   $wikidataId                     (string)                        Wikidata ID. Educational establishment offering 
+                                                                                                                                                    early childhood education to children *} */
 
 
     /* ================================================================================ */
@@ -157,4 +158,3 @@ class Preschool extends EducationalOrganization
     /* ================================================================================ */
 }   /* End of class Preschool ========================================================= */
 /* ==================================================================================== */
-?>

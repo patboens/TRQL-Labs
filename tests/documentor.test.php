@@ -110,7 +110,7 @@ if ( true )
 
     $noTest[] = 'backgroundprocess';
     //$noTest[] = '3dmodel';
-    $noTest[] = 'bankaccount';
+    //$noTest[] = 'bankaccount';
     $noTest[] = 'class';
     $noTest[] = 'cursor';
     $noTest[] = 'documentor';
@@ -128,7 +128,7 @@ if ( true )
 
 
     // Excluded because causes problems: should look for the reason of the problems
-    $noTest[] = 'browser';
+    //$noTest[] = 'browser';
     $noTest[] = 'footnotes';
     $noTest[] = 'ledger';
     //$noTest[] = 'mercator';

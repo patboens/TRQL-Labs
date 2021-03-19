@@ -1237,140 +1237,125 @@ class Invoice extends Intangible
         *}
 
         {*example
-        use \trql\vaesoli\Vaesoli   as v;
-        use \trql\quitus\Invoice    as Invoice;
+            use \trql\vaesoli\Vaesoli   as v;
+            use \trql\quitus\Invoice    as Invoice;
 
-        if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
-            require_once( 'trql.vaesoli.class.php' );
+            if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+                require_once( 'trql.vaesoli.class.php' );
 
-        if ( ! defined( 'INVOICE_CLASS_VERSION' ) )
-            require_once( 'trql.invoice.class.php' );
+            if ( ! defined( 'INVOICE_CLASS_VERSION' ) )
+                require_once( 'trql.invoice.class.php' );
 
-        [b]$o = new Invoice();[/b]
+            $o = new Invoice();
 
-        // Let's create the invoice from scratch all manually
-        $o->identifier                          = v::guid( true );
-        $o->name                                = 'This is an invoice that wa have created from scratch';
-        $o->description                         = 'Est plane, Piso, ut dicis, inquit. Nam me ipsum huc modo venientem convertebat '     .
-                                                  'ad sese Coloneus ille locus, cuius incola Sophocles ob oculos versabatur, quem '     .
-                                                  'scis quam admirer quemque eo delecter. Me quidem ad altiorem memoriam Oedipodis '    .
-                                                  'huc venientis et illo mollissimo carmine quaenam essent ipsa haec loca '             .
-                                                  'requirentis species quaedam commovit, inaniter scilicet, sed commovit tamen.';
-        $o->issueDate                           = date( 'Ymd' );
-        $o->paymentDueDate                      = date( 'Ymd',strtotime( $o->issueDate ) + ( 86400 * 30 ) );  // ± 1 month later
-        $o->refNumber                           = date('Y') . '/000001';
+            // Read an invoice from a file
+            if ( $o->load( $szFile = str_replace( '.php','.xml',__FILE__ ) ) )
+            {
+                // Check how it looks now (should be filled with all data we've given)
+                var_dump( [b]$o->__toXML()[/b] );
+            }        
 
-        $o->customer->identifier                = '';
-        $o->customer->name                      = 'My beautiful customer';
-        $o->customer->vatID                     = 'BE0463.478.965';    // No check made
-
-        $o->billingAddress->streetAddress       = 'Rue des fleurs, 1';
-        $o->billingAddress->postalCode          = '1000';
-        $o->billingAddress->addressLocality     = 'Brussels';
-        $o->billingAddress->addressCountry      = 'BE';
-
-        $o->sent                                = true;
-        $o->footer                              = 'Please be aware that we will be closed next week';
-        $o->memo                                = 'To be sent to accounting bureau';
-
-        $o->addDetail( array( 'utc'         => time()   ,
-                              'id'          => ''       ,
-                              'desc'        => 'a desc' ,
-                              'qty'         => 1        ,
-                              'unitprice'   => 15       ,
-                              'vatpercent'  => 21.00    ,
-                            ) );
-
-        // Check how it looks now (should be filled with all data we've given)
-        var_dump( [b]$o->__toXML()[/b] );
-
-        // Gives something like...
-        // <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-        // &lt;Invoice xmlns:xi=&quot;http://www.w3.org/2001/XInclude&quot;
-        //          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-        //          xmlns:vae=&quot;urn:lato-sensu-management/Vaesoli&quot;
-        //          xmlns:quitus=&quot;urn:lato-sensu-management/Quitus&quot;
-        //          id=&quot;84f4870c-3697-2e8f-6f16-a85d5103d9f8&quot;
-        //          active=&quot;yes&quot;
-        //          lang=&quot;fr&quot;
-        //          type=&quot;I&quot;
-        //          version=&quot;2.0&quot;
-        //          currency=&quot;EUR&quot;
-        //          date=&quot;20210318&quot;
-        //          duedate=&quot;20210417&quot;
-        //          ref=&quot;2021/000001&quot;
-        //          prepayment=&quot;0.0000&quot;
-        //          totaldue=&quot;181.5000&quot;
-        //          htva=&quot;165.0000&quot;
-        //          tva=&quot;34.6500&quot;
-        //          tvac=&quot;199.6500&quot;
-        //          discounthtva=&quot;0.0000&quot;
-        //          discounttva=&quot;0.0000&quot;
-        //          discounttvac=&quot;0.0000&quot;
-        //          cancelled=&quot;no&quot;
-        //          proforma=&quot;no&quot;
-        //          draft=&quot;no&quot;
-        //          vcs=&quot;no&quot;
-        //          paiddate=&quot;20140515&quot;
-        //          lupdate=&quot;20150115153825&quot;
-        //          qver=&quot;0.9.0001&quot;&gt;
-        //    &lt;Description&gt;&lt;![CDATA[Est plane, Piso, ut dicis, inquit. Nam me ipsum huc ... ]]&gt;&lt;/Description&gt;
-        //    &lt;InvoiceName&gt;&lt;![CDATA[This is an invoice that wa have created from scratch]]&gt;&lt;/InvoiceName&gt;
-        //    &lt;Customer id=&quot;&quot;&gt;
-        //        &lt;Name&gt;&lt;![CDATA[My beautiful customer]]&gt;&lt;/Name&gt;
-        //        &lt;VATNumber&gt;&lt;![CDATA[BE0463.478.965]]&gt;&lt;/VATNumber&gt;
-        //        &lt;Addresses&gt;
-        //            &lt;Billing&gt;
-        //                &lt;Street&gt;&lt;![CDATA[Rue des fleurs, 1]]&gt;&lt;/Street&gt;
-        //                &lt;Zip&gt;&lt;![CDATA[1000]]&gt;&lt;/Zip&gt;
-        //                &lt;City&gt;&lt;![CDATA[Brussels]]&gt;&lt;/City&gt;
-        //                &lt;State&gt;&lt;![CDATA[]]&gt;&lt;/State&gt;
-        //                &lt;Country&gt;&lt;![CDATA[BE]]&gt;&lt;/Country&gt;
-        //            &lt;/Billing&gt;
-        //            &lt;Delivery&gt;
-        //                &lt;Street&gt;&lt;![CDATA[]]&gt;&lt;/Street&gt;
-        //                &lt;Zip&gt;&lt;![CDATA[]]&gt;&lt;/Zip&gt;
-        //                &lt;City&gt;&lt;![CDATA[]]&gt;&lt;/City&gt;
-        //                &lt;State&gt;&lt;![CDATA[]]&gt;&lt;/State&gt;
-        //                &lt;Country&gt;&lt;![CDATA[]]&gt;&lt;/Country&gt;
-        //            &lt;/Delivery&gt;
-        //        &lt;/Addresses&gt;
-        //    &lt;/Customer&gt;
-        //    &lt;Project id=&quot;&quot;/&gt;
-        //    &lt;Order date=&quot;&quot;&gt;
-        //        &lt;ID&gt;&lt;![CDATA[]]&gt;&lt;/ID&gt;
-        //        &lt;Ref&gt;&lt;![CDATA[]]&gt;&lt;/Ref&gt;
-        //    &lt;/Order&gt;
-        //    &lt;Management&gt;
-        //        &lt;Sent&gt;yes&lt;/Sent&gt;
-        //        &lt;Paid&gt;yes&lt;/Paid&gt;
-        //    &lt;/Management&gt;
-        //    &lt;Footer&gt;&lt;![CDATA[Please be aware that we will be closed next week]]&gt;&lt;/Footer&gt;
-        //    &lt;Memo&gt;&lt;![CDATA[To be sent to accounting bureau]]&gt;&lt;/Memo&gt;
-        //    &lt;Body&gt;
-        //       &lt;Line update=&quot;0&quot;&gt;
-        //          &lt;Desc&gt;&lt;![CDATA[Lump-sum amount]]&gt;&lt;/Desc&gt;
-        //          &lt;ID&gt;&lt;![CDATA[]]&gt;&lt;/ID&gt;
-        //          &lt;Qty&gt;&lt;![CDATA[1.0000]]&gt;&lt;/Qty&gt;
-        //          &lt;UnitPrice&gt;&lt;![CDATA[150.0000]]&gt;&lt;/UnitPrice&gt;
-        //          &lt;htva&gt;&lt;![CDATA[150.0000]]&gt;&lt;/htva&gt;
-        //          &lt;VATPercent&gt;&lt;![CDATA[21.0000]]&gt;&lt;/VATPercent&gt;
-        //          &lt;tva&gt;&lt;![CDATA[31.5000]]&gt;&lt;/tva&gt;
-        //          &lt;tvac&gt;&lt;![CDATA[181.5000]]&gt;&lt;/tvac&gt;
-        //       &lt;/Line&gt;
-        //
-        //       &lt;Line update=&quot;1616086124&quot;&gt;
-        //          &lt;Desc&gt;&lt;![CDATA[a desc]]&gt;&lt;/Desc&gt;
-        //          &lt;ID&gt;&lt;![CDATA[]]&gt;&lt;/ID&gt;
-        //          &lt;Qty&gt;&lt;![CDATA[1.0000]]&gt;&lt;/Qty&gt;
-        //          &lt;UnitPrice&gt;&lt;![CDATA[15.0000]]&gt;&lt;/UnitPrice&gt;
-        //          &lt;htva&gt;&lt;![CDATA[15.0000]]&gt;&lt;/htva&gt;
-        //          &lt;VATPercent&gt;&lt;![CDATA[21.0000]]&gt;&lt;/VATPercent&gt;
-        //          &lt;tva&gt;&lt;![CDATA[3.1500]]&gt;&lt;/tva&gt;
-        //          &lt;tvac&gt;&lt;![CDATA[18.1500]]&gt;&lt;/tvac&gt;
-        //       &lt;/Line&gt;
-        //    &lt;/Body&gt;
-        // &lt;/Invoice&gt;
+            // Gives something like... &#8617;
+            // &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
+            // &lt;Invoice xmlns:xi=&quot;http://www.w3.org/2001/XInclude&quot;
+            //          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+            //          xmlns:vae=&quot;urn:lato-sensu-management/Vaesoli&quot;
+            //          xmlns:quitus=&quot;urn:lato-sensu-management/Quitus&quot;
+            //          id=&quot;33d6ad86-a216-4233-a19b-b8b54fe90e33&quot;
+            //          active=&quot;yes&quot;
+            //          lang=&quot;fr&quot;
+            //          type=&quot;I&quot;
+            //          version=&quot;2.0&quot;
+            //          currency=&quot;EUR&quot;
+            //          date=&quot;20140516&quot;
+            //          duedate=&quot;20140530&quot;
+            //          ref=&quot;2014/000001&quot;
+            //          prepayment=&quot;0.0000&quot;
+            //          totaldue=&quot;181.5000&quot;
+            //          htva=&quot;150.0000&quot;
+            //          tva=&quot;31.5000&quot;
+            //          tvac=&quot;181.5000&quot;
+            //          discounthtva=&quot;0.0000&quot;
+            //          discounttva=&quot;0.0000&quot;
+            //          discounttvac=&quot;0.0000&quot;
+            //          cancelled=&quot;no&quot;
+            //          proforma=&quot;no&quot;
+            //          draft=&quot;no&quot;
+            //          vcs=&quot;no&quot;
+            //          paiddate=&quot;20140515&quot;
+            //          lupdate=&quot;20150115153825&quot;
+            //          qver=&quot;0.9.0001&quot;&gt;
+            //    &lt;Description&gt;&lt;![CDATA[Here we can have an extended description of the invoice]]&gt;&lt;/Description&gt;
+            //    &lt;InvoiceName&gt;&lt;![CDATA[NEW TEST]]&gt;&lt;/InvoiceName&gt;
+            //    &lt;Issuer id=&quot;&quot;&gt;
+            //        &lt;Name&gt;&lt;![CDATA[FW]]&gt;&lt;/Name&gt;
+            //        &lt;LegalName&gt;&lt;![CDATA[FastWrite]]&gt;&lt;/LegalName&gt;
+            //        &lt;LegalForm&gt;&lt;![CDATA[sprl/bvba]]&gt;&lt;/LegalForm&gt;
+            //        &lt;TaxID&gt;&lt;![CDATA[RPR 0878.127.142 RPM]]&gt;&lt;/TaxID&gt;
+            //        &lt;VATNumber&gt;&lt;![CDATA[BE0111.222.333]]&gt;&lt;/VATNumber&gt;
+            //        &lt;Email&gt;&lt;![CDATA[pb@trql.fm]]&gt;&lt;/Email&gt;
+            //        &lt;Url&gt;&lt;![CDATA[https://www.fastwrite.com]]&gt;&lt;/Url&gt;
+            //        &lt;FaxNumber&gt;&lt;![CDATA[]]&gt;&lt;/FaxNumber&gt;
+            //        &lt;Phone&gt;&lt;![CDATA[+32 2 111.22.33]]&gt;&lt;/Phone&gt;
+            //        &lt;Image&gt;&lt;![CDATA[https://raw.githubusercontent.com/patboens/TRQL-Labs/main/images/LogoStationeryInvoiceQuitus.png]]&gt;&lt;/Image&gt;
+            //        &lt;BankAccount&gt;
+            //            &lt;Bank&gt;&lt;![CDATA[Nagelmackers]]&gt;&lt;/Bank&gt;
+            //            &lt;ID&gt;&lt;![CDATA[BE76 132 5143964 95]]&gt;&lt;/ID&gt;
+            //            &lt;BIC&gt;&lt;![CDATA[BNAGBEBB]]&gt;&lt;/BIC&gt;
+            //        &lt;/BankAccount&gt;
+            //        &lt;Address&gt;
+            //            &lt;Street&gt;&lt;![CDATA[Rue Amédé Bracke, 9]]&gt;&lt;/Street&gt;
+            //            &lt;Zip&gt;&lt;![CDATA[1950]]&gt;&lt;/Zip&gt;
+            //            &lt;City&gt;&lt;![CDATA[Kraainem]]&gt;&lt;/City&gt;
+            //            &lt;State&gt;&lt;![CDATA[]]&gt;&lt;/State&gt;
+            //            &lt;Country&gt;&lt;![CDATA[BE]]&gt;&lt;/Country&gt;
+            //        &lt;/Address&gt;
+            //    &lt;/Issuer&gt;
+            //    &lt;Customer id=&quot;&quot;&gt;
+            //        &lt;Name&gt;&lt;![CDATA[Any Company]]&gt;&lt;/Name&gt;
+            //        &lt;VATNumber&gt;&lt;![CDATA[BE0463.478.965]]&gt;&lt;/VATNumber&gt;
+            //        &lt;Addresses&gt;
+            //            &lt;Billing&gt;
+            //                &lt;Street&gt;&lt;![CDATA[Rue des chats, 100]]&gt;&lt;/Street&gt;
+            //                &lt;Zip&gt;&lt;![CDATA[4000]]&gt;&lt;/Zip&gt;
+            //                &lt;City&gt;&lt;![CDATA[Li&quot;&iquest;ge]]&gt;&lt;/City&gt;
+            //                &lt;State&gt;&lt;![CDATA[]]&gt;&lt;/State&gt;
+            //                &lt;Country&gt;&lt;![CDATA[BE]]&gt;&lt;/Country&gt;
+            //            &lt;/Billing&gt;
+            //            &lt;Delivery&gt;
+            //                &lt;Street&gt;&lt;![CDATA[]]&gt;&lt;/Street&gt;
+            //                &lt;Zip&gt;&lt;![CDATA[]]&gt;&lt;/Zip&gt;
+            //                &lt;City&gt;&lt;![CDATA[]]&gt;&lt;/City&gt;
+            //                &lt;State&gt;&lt;![CDATA[]]&gt;&lt;/State&gt;
+            //                &lt;Country&gt;&lt;![CDATA[]]&gt;&lt;/Country&gt;
+            //            &lt;/Delivery&gt;
+            //        &lt;/Addresses&gt;
+            //    &lt;/Customer&gt;
+            //    &lt;Project id=&quot;&quot;/&gt;
+            //    &lt;Order date=&quot;&quot;&gt;
+            //        &lt;ID&gt;&lt;![CDATA[]]&gt;&lt;/ID&gt;
+            //        &lt;Ref&gt;&lt;![CDATA[]]&gt;&lt;/Ref&gt;
+            //    &lt;/Order&gt;
+            //    &lt;Management&gt;
+            //        &lt;Sent&gt;yes&lt;/Sent&gt;
+            //        &lt;Paid&gt;yes&lt;/Paid&gt;
+            //    &lt;/Management&gt;
+            //    &lt;Footer&gt;&lt;![CDATA[This will be printed in the footer of the invoice: it's information for the customer]]&gt;&lt;/Footer&gt;
+            //    &lt;Memo&gt;&lt;![CDATA[This is a memo: it's information for the issuer of the invoice]]&gt;&lt;/Memo&gt;
+            //    &lt;Body&gt;
+            //         &lt;Line update=&quot;0&quot;&gt;
+            //            &lt;Desc&gt;&lt;![CDATA[Lump-sum amount]]&gt;&lt;/Desc&gt;
+            //            &lt;ID&gt;&lt;![CDATA[]]&gt;&lt;/ID&gt;
+            //            &lt;Qty&gt;&lt;![CDATA[1.0000]]&gt;&lt;/Qty&gt;
+            //            &lt;UnitPrice&gt;&lt;![CDATA[150.0000]]&gt;&lt;/UnitPrice&gt;
+            //            &lt;htva&gt;&lt;![CDATA[150.0000]]&gt;&lt;/htva&gt;
+            //            &lt;VATPercent&gt;&lt;![CDATA[21.0000]]&gt;&lt;/VATPercent&gt;
+            //            &lt;tva&gt;&lt;![CDATA[31.5000]]&gt;&lt;/tva&gt;
+            //            &lt;tvac&gt;&lt;![CDATA[181.5000]]&gt;&lt;/tvac&gt;
+            //         &lt;/Line&gt;
+            //    &lt;/Body&gt;
+            // &lt;/Invoice&gt;
+        *}
 
         *}}
     */
@@ -1421,9 +1406,9 @@ class Invoice extends Intangible
                     "       <Phone><![CDATA["           . ( $this->issuer->telephone                 ?? '' ) . "]]></Phone>\n"      .
                     "       <Image><![CDATA["           . ( $this->issuer->image                     ?? '' ) . "]]></Image>\n"      .
                     "       <BankAccount>\n"                                                                                        .
-                    "           <Bank><![CDATA["       . ( $this->issuer->bankAccount->bank         ?? '' ) ."]]></Street>\n"       .
-                    "           <ID><![CDATA["         . ( $this->issuer->bankAccount->identifier   ?? '' ) ."]]></Zip>\n"          .
-                    "           <BIC><![CDATA["        . ( $this->issuer->bankAccount->BICCode      ?? '' ) ."]]></City>\n"         .
+                    "           <Bank><![CDATA["       . ( $this->issuer->bankAccount->bank         ?? '' ) ."]]></Bank>\n"         .
+                    "           <ID><![CDATA["         . ( $this->issuer->bankAccount->identifier   ?? '' ) ."]]></ID>\n"           .
+                    "           <BIC><![CDATA["        . ( $this->issuer->bankAccount->BICCode      ?? '' ) ."]]></BIC>\n"          .
                     "       </BankAccount>\n"                                                                                       .
                     "       <Address>\n"                                                                                            .
                     "           <Street><![CDATA["      . ( $this->issuer->address->streetAddress    ?? '' ) ."]]></Street>\n"      .
@@ -1508,6 +1493,78 @@ class Invoice extends Intangible
         *}
 
         {*example
+            use \trql\vaesoli\Vaesoli   as v;
+            use \trql\quitus\Invoice    as Invoice;
+
+            if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+                require_once( 'trql.vaesoli.class.php' );
+
+            if ( ! defined( 'INVOICE_CLASS_VERSION' ) )
+                require_once( 'trql.invoice.class.php' );
+
+            $o = new Invoice();
+
+            // Read an invoice from a file
+            if ( $o->load( $szFile = str_replace( '.php','.xml',__FILE__ ) ) )
+            {
+                // Check how the JSON looks like...
+                var_dump( [b]$o->__toJSON()[/b] );
+            }        
+
+            // Gives something like... 
+            {"@attributes":{"id":"33d6ad86-a216-4233-a19b-b8b54fe90e33","active":"yes","lang":"fr",&#8617;
+            "type":"I","version":"2.0","currency":"EUR","date":"20140516","duedate":"20140530",&#8617;
+            "ref":"2014\/000001","prepayment":"0.0000","totaldue":"181.5000","htva":"150.0000",&#8617;
+            "tva":"31.5000","tvac":"181.5000","discounthtva":"0.0000","discounttva":"0.0000",&#8617;
+            "discounttvac":"0.0000","cancelled":"no","proforma":"no","draft":"no","vcs":"no",&#8617;
+            "paiddate":"20140515","lupdate":"20150115153825","qver":"0.9.0001"},&#8617;
+            "Description":"Here we can have an extended description of the invoice",&#8617;
+            "InvoiceName":"NEW TEST","Issuer":{"@attributes":{"id":""},"Name":"FW",&#8617;
+            "LegalName":"FastWrite","LegalForm":"sprl\/bvba","TaxID":"RPR 0878.127.142 RPM",&#8617;
+            "VATNumber":"BE0111.222.333","Email":"pb@trql.fm","Url":"https:\/\/www.fastwrite.com",&#8617;
+            "FaxNumber":[],"Phone":"+32 2 111.22.33",&#8617;
+            "Image":"https:\/\/raw.githubusercontent.com\/patboens\/TRQL-Labs\/main\/images\/LogoStationeryInvoiceQuitus.png",&#8617;
+            "BankAccount":{"Bank":"Nagelmackers","ID":"BE76 132 5143964 95","BIC":"BNAGBEBB"},&#8617;
+            "Address":{"Street":"Rue Am\u00e9d\u00e9 Bracke, 9","Zip":"1950","City":"Kraainem",&#8617;
+            "State":[],"Country":"BE"}},"Customer":{"@attributes":{"id":""},"Name":"Any Company",&#8617;
+            "VATNumber":"BE0463.478.965","Addresses":{"Billing":{"Street":"Rue des chats, 100",&#8617;
+            "Zip":"4000","City":"Li\u00e8ge","State":[],"Country":"BE"},"Delivery":{"Street":[],&#8617;
+            "Zip":[],"City":[],"State":[],"Country":[]}}},"Project":{"@attributes":{"id":""}},&#8617;
+            "Order":{"@attributes":{"date":""},"ID":[],"Ref":[]},"Management":{"Sent":"yes","Paid":"yes"},&#8617;
+            "Footer":"This will be printed in the footer of the invoice: it's information for the customer",&#8617;
+            "Memo":"This is a memo: it's information for the issuer of the invoice",&#8617;
+            "Body":{"Line":{"@attributes":{"update":"0"},"Desc":"Lump-sum amount","ID":[],&#8617;
+            "Qty":"1.0000","UnitPrice":"150.0000","htva":"150.0000","VATPercent":"21.0000","tva":"31.5000","tvac":"181.5000"}}}
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __toJSON() : string
+    /*-------------------------------*/
+    {
+        return ( v::XMLtoJSON( $this->__toXML() ) );
+    }   /* End of Invoice.__toJSON() ================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*__toArray()=
+
+        Turns the object into an associative array
+
+        {*params
+        *}
+
+        {*return
+            (array)     Array representing the object
+        *}
+
+        {*remark
+            If the properties are filled, their values will be reflected in the array
+        *}
+
+        {*example
         use \trql\vaesoli\Vaesoli   as v;
         use \trql\quitus\Invoice    as Invoice;
 
@@ -1517,75 +1574,192 @@ class Invoice extends Intangible
         if ( ! defined( 'INVOICE_CLASS_VERSION' ) )
             require_once( 'trql.invoice.class.php' );
 
-        [b]$o = new Invoice();[/b]
+        $o = new Invoice();
 
-        // Let's create the invoice from scratch all manually
-        $o->identifier                          = v::guid( true );
-        $o->name                                = 'This is an invoice that wa have created from scratch';
-        $o->description                         = 'Est plane, Piso, ut dicis, inquit. Nam me ipsum huc modo venientem convertebat '     .
-                                                  'ad sese Coloneus ille locus, cuius incola Sophocles ob oculos versabatur, quem '     .
-                                                  'scis quam admirer quemque eo delecter. Me quidem ad altiorem memoriam Oedipodis '    .
-                                                  'huc venientis et illo mollissimo carmine quaenam essent ipsa haec loca '             .
-                                                  'requirentis species quaedam commovit, inaniter scilicet, sed commovit tamen.';
-        $o->issueDate                           = date( 'Ymd' );
-        $o->paymentDueDate                      = date( 'Ymd',strtotime( $o->issueDate ) + ( 86400 * 30 ) );  // ± 1 month later
-        $o->refNumber                           = date('Y') . '/000001';
-
-        $o->customer->identifier                = '';
-        $o->customer->name                      = 'My beautiful customer';
-        $o->customer->vatID                     = 'BE0463.478.965';    // No check made
-
-        $o->billingAddress->streetAddress       = 'Rue des fleurs, 1';
-        $o->billingAddress->postalCode          = '1000';
-        $o->billingAddress->addressLocality     = 'Brussels';
-        $o->billingAddress->addressCountry      = 'BE';
-
-        $o->sent                                = true;
-        $o->footer                              = 'Please be aware that we will be closed next week';
-        $o->memo                                = 'To be sent to accounting bureau';
-
-        $o->addDetail( array( 'utc'         => time()   ,
-                              'id'          => ''       ,
-                              'desc'        => 'a desc' ,
-                              'qty'         => 1        ,
-                              'unitprice'   => 15       ,
-                              'vatpercent'  => 21.00    ,
-                            ) );
-
-        // Check how it looks now (should be filled with all data we've given)
-        var_dump( [b]$o->__toJSON()[/b] );
+        if ( $o->load( $szFile = str_replace( '.php','.xml',__FILE__ ) ) )
+        {
+            // Check how the Array looks like...
+            var_dump( [b]$o->__toArray()[/b] );
+        }        
 
         // Gives something like...
-        {"@attributes":{"id":"549c60f4-04c6-d185-f828-79f4d7e58d5e","active":"yes","lang":"fr","type":"I",&#8617;
-        "version":"2.0","currency":"EUR","date":"20210318","duedate":"20210417","ref":"2021\/000001",&#8617;
-        "prepayment":"0.0000","totaldue":"181.5000","htva":"165.0000","tva":"34.6500","tvac":"199.6500",&#8617;
-        "discounthtva":"0.0000","discounttva":"0.0000","discounttvac":"0.0000","cancelled":"no","proforma":"no",&#8617;
-        "draft":"no","vcs":"no","paiddate":"20140515","lupdate":"20150115153825","qver":"0.9.0001"},&#8617;
-        "Description":"Est plane, Piso, ut dicis, inquit. Nam me ipsum huc modo venientem convertebat ad sese &#8617;
-        Coloneus ille locus, cuius incola Sophocles ob oculos versabatur, quem scis quam admirer quemque eo &#8617;
-        delecter. Me quidem ad altiorem memoriam Oedipodis huc venientis et illo mollissimo carmine quaenam &#8617;
-        essent ipsa haec loca requirentis species quaedam commovit, inaniter scilicet, sed commovit tamen.",&#8617;
-        "InvoiceName":"This is an invoice that wa have created from scratch",&#8617;
-        "Customer":{"@attributes":{"id":""},"Name":"My beautiful customer","VATNumber":"BE0463.478.965"},&#8617;
-        "Project":{"@attributes":{"id":""}},"Order":{"@attributes":{"date":""},"ID":[],"Ref":[]},&#8617;
-        "Addresses":{"Billing":{"Street":"Rue des fleurs, 1","Zip":"1000","City":"Brussels","State":[],"Country":"BE"},&#8617;
-        "Delivery":{"Street":[],"Zip":[],"City":[],"State":[],"Country":[]}},&#8617;
-        "Management":{"Sent":"yes","Paid":"yes"},&#8617;
-        "Footer":"Please be aware that we will be closed next week",&#8617;
-        "Memo":"To be sent to accounting bureau",&#8617;
-        "Body":{"Line":[{"@attributes":{"update":"0"},"Desc":"Lump-sum amount","ID":[],&#8617;
-        "Qty":"1.0000","UnitPrice":"150.0000",&#8617;
-        "htva":"150.0000","VATPercent":"21.0000","tva":"31.5000","tvac":"181.5000"},&#8617;
-        {"@attributes":{"update":"1616086617"},"Desc":"a desc","ID":[],&#8617;
-        "Qty":"1.0000","UnitPrice":"15.0000","htva":"15.0000","VATPercent":"21.0000","tva":"3.1500","tvac":"18.1500"}]}}
+        //array (size=32)
+        //  'active' =&gt; boolean true
+        //  'lang' =&gt; string 'fr' (length=2)
+        //  'type' =&gt; string 'I' (length=1)
+        //  'version' =&gt; string '2.0' (length=3)
+        //  'currency' =&gt; string 'EUR' (length=3)
+        //  'date' =&gt; string '20140516' (length=8)
+        //  'duedate' =&gt; string '20140530' (length=8)
+        //  'ref' =&gt; string '2014/000001' (length=11)
+        //  'prepayment' =&gt; float 0
+        //  'totaldue' =&gt; float 181.5
+        //  'htva' =&gt; float 150
+        //  'tva' =&gt; float 31.5
+        //  'tvac' =&gt; float 181.5
+        //  'discounthtva' =&gt; float 0
+        //  'discounttva' =&gt; float 0
+        //  'discounttvac' =&gt; float 0
+        //  'cancelled' =&gt; boolean false
+        //  'proforma' =&gt; boolean false
+        //  'draft' =&gt; boolean false
+        //  'vcs' =&gt; boolean false
+        //  'paiddate' =&gt; string '20140515' (length=8)
+        //  'lupdate' =&gt; string '20150115153825' (length=14)
+        //  'Description' =&gt; string 'Here we can have an extended description of the invoice' (length=55)
+        //  'InvoiceName' =&gt; string 'NEW TEST' (length=8)
+        //  'Issuer' =&gt; 
+        //    array (size=13)
+        //      'id' =&gt; string '' (length=0)
+        //      'Name' =&gt; string 'FW' (length=2)
+        //      'LegalName' =&gt; string 'FastWrite' (length=9)
+        //      'LegalForm' =&gt; string 'sprl/bvba' (length=9)
+        //      'TaxID' =&gt; string 'RPR 0878.127.142 RPM' (length=20)
+        //      'VATNumber' =&gt; string 'BE0111.222.333' (length=14)
+        //      'Email' =&gt; string 'pb@trql.fm' (length=10)
+        //      'Url' =&gt; string 'https://www.fastwrite.com' (length=25)
+        //      'FaxNumber' =&gt; string '' (length=0)
+        //      'Phone' =&gt; string '+32 2 111.22.33' (length=15)
+        //      'Image' =&gt; string 'https://raw.githubusercontent.com/patboens/TRQL-Labs/main/images/LogoStationeryInvoiceQuitus.png' (length=96)
+        //      'BankAccount' =&gt; 
+        //        array (size=3)
+        //          'Bank' =&gt; string 'Nagelmackers' (length=12)
+        //          'ID' =&gt; string 'BE76 132 5143964 95' (length=19)
+        //          'BIC' =&gt; string 'BNAGBEBB' (length=8)
+        //      'Address' =&gt; 
+        //        array (size=5)
+        //          'Street' =&gt; string 'Rue Am&eacute;d&eacute; Bracke, 9' (length=21)
+        //          'Zip' =&gt; string '1950' (length=4)
+        //          'City' =&gt; string 'Kraainem' (length=8)
+        //          'State' =&gt; string '' (length=0)
+        //          'Country' =&gt; string 'BE' (length=2)
+        //  'Customer' =&gt; 
+        //    array (size=4)
+        //      'id' =&gt; string '' (length=0)
+        //      'Name' =&gt; string 'Any Company' (length=11)
+        //      'VATNumber' =&gt; string 'BE0463.478.965' (length=14)
+        //      'Addresses' =&gt; 
+        //        array (size=2)
+        //          'Billing' =&gt; 
+        //            array (size=5)
+        //              ...
+        //          'Delivery' =&gt; 
+        //            array (size=5)
+        //              ...
+        //  'Project' =&gt; 
+        //    array (size=1)
+        //      'id' =&gt; string '' (length=0)
+        //  'Order' =&gt; 
+        //    array (size=3)
+        //      'Date' =&gt; string '' (length=0)
+        //      'id' =&gt; string '' (length=0)
+        //      'Ref' =&gt; null
+        //  'Management' =&gt; 
+        //    array (size=2)
+        //      'Sent' =&gt; boolean true
+        //      'Paid' =&gt; boolean true
+        //  'aLines' =&gt; 
+        //    array (size=1)
+        //      0 =&gt; 
+        //        array (size=9)
+        //          'utc' =&gt; int 0
+        //          'id' =&gt; string '' (length=0)
+        //          'desc' =&gt; string 'Lump-sum amount' (length=15)
+        //          'qty' =&gt; float 1
+        //          'unitprice' =&gt; float 150
+        //          'htva' =&gt; float 150
+        //          'vatpercent' =&gt; float 21
+        //          'tva' =&gt; float 31.5
+        //          'tvac' =&gt; float 181.5
+        //  'Footer' =&gt; string 'This will be printed in the footer of the invoice: it's information for the customer' (length=84)
+        //  'Memo' =&gt; string 'This is a memo: it's information for the issuer of the invoice' (length=62)
+        *}
+
         *}}
     */
     /* ================================================================================ */
-    public function __toJSON() : string
+    public function __toArray() : array
     /*-------------------------------*/
     {
-        return ( v::XMLtoJSON( $this->__toXML() ) );
-    }   /* End of Invoice.__toJSON() ================================================== */
+        $aRetVal = array( 'active'          => $this->active                                                                                                ,
+                          'lang'            => $this->lang                                                                                                  ,
+                          'type'            => $this->type                                                                                                  ,
+                          'version'         => $this->version                                                                                               ,
+                          'currency'        => $this->currency                                                                                              ,
+                          'date'            => $this->issueDate                                                                                             ,
+                          'duedate'         => $this->paymentDueDate                                                                                        ,
+                          'ref'             => $this->refNumber                                                                                             ,
+                          'prepayment'      => $this->prepayment                                                                                            ,
+                          'totaldue'        => $this->totalPaymentDue                                                                                       ,
+                          'htva'            => $this->totalHTVA                                                                                             ,
+                          'tva'             => $this->totalTVA                                                                                              ,
+                          'tvac'            => $this->totalTVAC                                                                                             ,
+                          'discounthtva'    => $this->discountHTVA                                                                                          ,
+                          'discounttva'     => $this->discountTVA                                                                                           ,
+                          'discounttvac'    => $this->discountTVAC                                                                                          ,
+                          'cancelled'       => $this->cancelled                                                                                             ,
+                          'proforma'        => $this->proforma                                                                                              ,
+                          'draft'           => $this->draft                                                                                                 ,
+                          'vcs'             => $this->structCommunication                                                                                   ,
+                          'paiddate'        => $this->finalPaymentDate                                                                                      ,
+                          'lupdate'         => $this->lupdate                                                                                               ,
+                          'Description'     => $this->description                                                                                           ,
+                          'InvoiceName'     => $this->name                                                                                                  ,
+                          'Issuer'          => array( 'id'          => $this->issuer->identifier                                                            ,
+                                                      'Name'        => $this->issuer->name                                                                  ,
+                                                      'LegalName'   => $this->issuer->legalName                                                             ,
+                                                      'LegalForm'   => $this->issuer->legalForm                                                             ,
+                                                      'TaxID'       => $this->issuer->taxID                                                                 ,
+                                                      'VATNumber'   => $this->issuer->vatID                                                                 ,
+                                                      'Email'       => $this->issuer->email                                                                 ,
+                                                      'Url'         => $this->issuer->url                                                                   ,
+                                                      'FaxNumber'   => $this->issuer->faxNumber                                                             ,
+                                                      'Phone'       => $this->issuer->telephone                                                             ,
+                                                      'Image'       => $this->issuer->image                                                                 ,
+                                                      'BankAccount' => array( 'Bank'    => $this->issuer->bankAccount->bank                                 ,
+                                                                              'ID'      => $this->issuer->bankAccount->identifier                           ,
+                                                                              'BIC'     => $this->issuer->bankAccount->BICCode                              ,
+                                                                            )                                                                               ,
+                                                      'Address'     => array( 'Street'  => $this->issuer->address->streetAddress                            ,
+                                                                              'Zip'     => $this->issuer->address->postalCode                               ,
+                                                                              'City'    => $this->issuer->address->addressLocality                          ,
+                                                                              'State'   => $this->issuer->address->addressRegion                            ,
+                                                                              'Country' => $this->issuer->address->addressCountry                           ,
+                                                                            )                                                                               ,
+                                                    )                                                                                                       ,
+                          'Customer'        => array( 'id'          => $this->customer->identifier                                                          ,
+                                                      'Name'        => $this->customer->name                                                                ,
+                                                      'VATNumber'   => $this->customer->vatID                                                               ,
+                                                      'Addresses'   => array( 'Billing'     => array( 'Street'  => $this->billingAddress->streetAddress     ,
+                                                                                                      'Zip'     => $this->billingAddress->postalCode        ,
+                                                                                                      'City'    => $this->billingAddress->addressLocality   ,
+                                                                                                      'State'   => $this->billingAddress->addressRegion     ,
+                                                                                                      'Country' => $this->billingAddress->addressCountry    ,
+                                                                                                    )                                                       ,
+                                                                              'Delivery'    => array( 'Street'  => $this->deliveryAddress->streetAddress    ,
+                                                                                                      'Zip'     => $this->deliveryAddress->postalCode       ,
+                                                                                                      'City'    => $this->deliveryAddress->addressLocality  ,
+                                                                                                      'State'   => $this->deliveryAddress->addressRegion    ,
+                                                                                                      'Country' => $this->deliveryAddress->addressCountry   ,
+                                                                                                    )                                                       ,
+                                                                            )                                                                               ,
+                                                    )                                                                                                       ,
+                          'Project'         => array( 'id'          => $this->projectID                                                                     ,
+                                                    )                                                                                                       ,
+                          'Order'           => array( 'Date'        => $this->referencesOrder->orderDate                                                    ,
+                                                      'id'          => $this->referencesOrder->identifier                                                   ,
+                                                      'Ref'         => $this->referencesOrder->orderNumber                                                  ,
+                                                    )                                                                                                       ,
+                          'Management'      => array( 'Sent'        => $this->sent                                                                          ,
+                                                      'Paid'        => $this->paid                                                                          ,
+                                                    )                                                                                                       ,
+                          'aLines'          => $this->aLines                                                                                                ,
+                          'Footer'          => $this->footer                                                                                                ,
+                          'Memo'            => $this->memo );
+
+        end:
+        return ( $aRetVal );
+    }   /* End of Invoice.__toArray() ================================================= */
     /* ================================================================================ */
 
 
@@ -1601,6 +1775,130 @@ class Invoice extends Intangible
             (string)    HTML representation of an invoice
         *}
 
+        {*example
+        use \trql\vaesoli\Vaesoli   as v;
+        use \trql\quitus\Invoice    as Invoice;
+
+        if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
+            require_once( 'trql.vaesoli.class.php' );
+
+        if ( ! defined( 'INVOICE_CLASS_VERSION' ) )
+            require_once( 'trql.invoice.class.php' );
+
+        $o = new Invoice();
+
+        if ( $o->load( $szFile = str_replace( '.php','.xml',__FILE__ ) ) )
+        {
+            // Check how the HTML looks like...
+            var_dump( [b]$o->__toHTML()[/b] );
+        }        
+
+        // Gives something like...
+        // &lt;article class=&quot;invoice&quot; vocab=&quot;https://schema.org/&quot; typeof=&quot;Invoice&quot;&gt;
+        //   &lt;section class=&quot;logo&quot; vocab=&quot;https://schema.org/&quot; typeof=&quot;Organization&quot;&gt;
+        //       &lt;span class=\image&quot; property=&quot;image&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/patboens/TRQL-Labs/main/images/LogoStationeryInvoiceQuitus.png&quot; /&gt;&lt;/span&gt;
+        //   &lt;/section&gt; &lt;!-- .logo --&gt;
+        // 
+        //   &lt;section class=&quot;Addresses&quot; vocab=&quot;https://schema.org/&quot; typeof=&quot;PostalAddress&quot;&gt;
+        // 
+        //     &lt;section class=&quot;deliveryAddress&quot;&gt;
+        //       &lt;span class=\street&quot;     property=&quot;streetAddress&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=\zip&quot;        property=&quot;postalCode&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=\city&quot;       property=&quot;addressLocality&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=\state&quot;      property=&quot;addressRegion&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=\country&quot;    property=&quot;addressCountry&quot;&gt;&lt;/span&gt;
+        //     &lt;/section&gt; &lt;!-- .deliveryAddress --&gt;
+        // 
+        //     &lt;section class=&quot;billingAddress&quot;&gt;
+        //       &lt;span class=\street&quot;     property=&quot;streetAddress&quot;&gt;Rue des chats, 100&lt;/span&gt;
+        //       &lt;span class=\zip&quot;        property=&quot;postalCode&quot;&gt;4000&lt;/span&gt;
+        //       &lt;span class=\city&quot;       property=&quot;addressLocality&quot;&gt;Li&quot;&iquest;ge&lt;/span&gt;
+        //       &lt;span class=\state&quot;      property=&quot;addressRegion&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=\country&quot;    property=&quot;addressCountry&quot;&gt;BE&lt;/span&gt;
+        //     &lt;/section&gt; &lt;!-- .billingAddress --&gt;
+        //   &lt;/section&gt; &lt;!-- .Addresses --&gt;
+        // 
+        //   &lt;section class=&quot;invoiceHeader&quot;&gt;
+        //     &lt;section class=&quot;mandatory&quot;&gt;
+        //       &lt;span class=&quot;refNumber&quot;&gt;2014/000001&lt;/span&gt;
+        //       &lt;span class=&quot;vatID&quot;&gt;BE0463.478.965&lt;/span&gt;
+        //       &lt;span class=&quot;issueDate&quot;&gt;16-05-2014&lt;/span&gt;
+        //       &lt;span class=&quot;order&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=&quot;deliveryNote&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=&quot;paymentDueDate&quot;&gt;30-05-2014&lt;/span&gt;
+        //     &lt;/section&gt; &lt;!-- .mandatory --&gt;
+        // 
+        //     &lt;section class=&quot;miscellaneous&quot;&gt;
+        //       &lt;span class=&quot;name&quot; property=&quot;name&quot;&gt;NEW TEST&lt;/span&gt;
+        //       &lt;span class=&quot;description&quot; property=&quot;description&quot;&gt;Here we can have an extended description of the invoice&lt;/span&gt;
+        //       &lt;span class=&quot;lang&quot;&gt;fr&lt;/span&gt;
+        //       &lt;span class=&quot;type&quot;&gt;I&lt;/span&gt;
+        //       &lt;span class=&quot;version&quot;&gt;2.0&lt;/span&gt;
+        //       &lt;span class=&quot;proforma&quot;&gt;no&lt;/span&gt;
+        //       &lt;span class=&quot;draft&quot;&gt;no&lt;/span&gt;
+        //       &lt;span class=&quot;refNumber&quot;&gt;2014/000001&lt;/span&gt;
+        //     &lt;/section&gt; &lt;!-- .miscellaneous --&gt;
+        // 
+        //   &lt;/section&gt; &lt;!-- .invoiceHeader --&gt;
+        // 
+        //   &lt;section class=&quot;invoiceBody&quot;&gt;
+        //     &lt;div class=&quot;lineOfDetail&quot;&gt;
+        //       &lt;span class=&quot;quantity&quot;&gt;1&lt;/span&gt;
+        //       &lt;span class=&quot;unitPrice&quot; property=&quot;price&quot;&gt;150.0000&lt;/span&gt;
+        //       &lt;span class=&quot;description&quot;&gt;Lump-sum amount&lt;/span&gt;
+        //       &lt;span class=&quot;htva&quot; property=&quot;price&quot;&gt;150.0000&lt;/span&gt;
+        //       &lt;span class=&quot;vatpercent&quot;&gt;21.0000&lt;/span&gt;
+        //       &lt;span class=&quot;tva&quot;&gt;31.5000&lt;/span&gt;
+        //       &lt;span class=&quot;tvac&quot; property=&quot;price&quot;&gt;181.5000&lt;/span&gt;
+        //     &lt;/div&gt; &lt;!-- .lineOfDetail --&gt;
+        // 
+        //     &lt;div class=&quot;totals&quot;&gt;
+        //        &lt;span class=&quot;currency&quot;&gt;EUR&lt;/span&gt;
+        //        &lt;span class=&quot;totalHTVA&quot;&gt;150.0000&lt;/span&gt;
+        //        &lt;span class=&quot;VATPercent&quot;&gt;&amp;#160;&lt;/span&gt;
+        //        &lt;span class=&quot;totalTVA&quot;&gt;31.5000&lt;/span&gt;
+        //        &lt;span class=&quot;totalTVAC&quot;&gt;181.5000&lt;/span&gt;
+        //     &lt;/div&gt; &lt;!-- .totals --&gt;
+        // 
+        //     &lt;section class=&quot;totalPaymentDue&quot; property=&quot;totalPaymentDue&quot; typeof=&quot;PriceSpecification&quot;&gt;
+        //        &lt;span class=&quot;prepayment&quot;&gt;0.0000&lt;/span&gt;
+        //        &lt;span class=&quot;prepayment currency&quot;&gt;EUR&lt;/span&gt;
+        //        &lt;span class=&quot;totalPaymentDue&quot;&gt;181.5000&lt;/span&gt;
+        //        &lt;span class=&quot;totalPaymentDue currency&quot;&gt;EUR&lt;/span&gt;
+        //     &lt;/section&gt; &lt;!-- .totalPaymentDue --&gt;
+        // 
+        //   &lt;/section&gt; &lt;!-- .invoiceBody --&gt;
+        // 
+        //   &lt;section class=&quot;invoiceFooter&quot;&gt;
+        //       &lt;span class=\invoiceFooter&quot;&gt;This will be printed in the footer of the invoice: it's information for the customer&lt;/span&gt;
+        //       &lt;span class=\uniqueRef&quot;&gt;33d6ad86-a216-4233-a19b-b8b54fe90e33&lt;/span&gt;
+        //   &lt;/section&gt; &lt;!-- .invoiceFooter --&gt;
+        // 
+        //   &lt;section class=&quot;documentFooter&quot; vocab=&quot;https://schema.org/&quot; typeof=&quot;Organization&quot;&gt;
+        //     &lt;span class=&quot;name&quot; property=&quot;name&quot;&gt;FastWrite&lt;/span&gt;
+        //     &lt;span class=&quot;legalForm&quot;&gt;sprl/bvba&lt;/span&gt;
+        //     &lt;span class=&quot;street&quot;&gt;Rue Am&quot;d&quot; Bracke, 9&lt;/span&gt;
+        //     &lt;span class=&quot;zip&quot;&gt;1950&lt;/span&gt;
+        //     &lt;span class=&quot;country&quot;&gt;BE&lt;/span&gt;
+        //     &lt;span class=&quot;phone&quot;&gt;+32 2 111.22.33&lt;/span&gt;
+        //     &lt;span class=&quot;email&quot;&gt;pb@trql.fm&lt;/span&gt;
+        //     &lt;span class=&quot;webSite&quot;&gt;https://www.fastwrite.com&lt;/span&gt;
+        //     &lt;span class=&quot;vatID&quot;&gt;BE0111.222.333&lt;/span&gt;
+        //     &lt;span class=&quot;taxID&quot;&gt;RPR 0878.127.142 RPM&lt;/span&gt;
+        //     &lt;span class=&quot;bankName&quot;&gt;Nagelmackers&lt;/span&gt;
+        //     &lt;span class=&quot;bankAccountNumber&quot;&gt;BE76 132 5143964 95&lt;/span&gt;
+        //     &lt;span class=&quot;bankAccountBIC&quot;&gt;BNAGBEBB&lt;/span&gt;
+        //     &lt;section class=&quot;address&quot; vocab=&quot;https://schema.org/&quot; typeof=&quot;PostalAddress&quot;&gt;
+        //       &lt;span class=\street&quot;     property=&quot;streetAddress&quot;&gt;Rue Am&quot;d&quot; Bracke, 9&lt;/span&gt;
+        //       &lt;span class=\zip&quot;        property=&quot;postalCode&quot;&gt;1950&lt;/span&gt;
+        //       &lt;span class=\city&quot;       property=&quot;addressLocality&quot;&gt;Kraainem&lt;/span&gt;
+        //       &lt;span class=\state&quot;      property=&quot;addressRegion&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=\country&quot;    property=&quot;addressCountry&quot;&gt;BE&lt;/span&gt;
+        //     &lt;/section&gt; &lt;!-- .address --&gt;
+        //   &lt;/section&gt; &lt;!-- .documentFooter --&gt;
+        // 
+        // &lt;/article&gt; &lt;!-- .invoice --&gt;
+        *}
 
         *}}
     */
@@ -1722,298 +2020,6 @@ class Invoice extends Intangible
         end:
         return ( $szHTML);
     }   /* End of Invoice.__toHTML() ================================================== */
-    /* ================================================================================ */
-
-    /* ================================================================================ */
-    /** {{*__toArray()=
-
-        Turns the object into an associative array
-
-        {*params
-        *}
-
-        {*return
-            (array)     Array representing the object
-        *}
-
-        {*remark
-            If the properties are filled, their values will be reflected in the array
-        *}
-
-        {*example
-        use \trql\vaesoli\Vaesoli   as v;
-        use \trql\quitus\Invoice    as Invoice;
-
-        if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
-            require_once( 'trql.vaesoli.class.php' );
-
-        if ( ! defined( 'INVOICE_CLASS_VERSION' ) )
-            require_once( 'trql.invoice.class.php' );
-
-        [b]$o = new Invoice();[/b]
-
-        // Let's create the invoice from scratch all manually
-        $o->identifier                          = v::guid( true );
-        $o->name                                = 'This is an invoice that wa have created from scratch';
-        $o->description                         = 'Est plane, Piso, ut dicis, inquit. Nam me ipsum huc modo venientem convertebat '     .
-                                                  'ad sese Coloneus ille locus, cuius incola Sophocles ob oculos versabatur, quem '     .
-                                                  'scis quam admirer quemque eo delecter. Me quidem ad altiorem memoriam Oedipodis '    .
-                                                  'huc venientis et illo mollissimo carmine quaenam essent ipsa haec loca '             .
-                                                  'requirentis species quaedam commovit, inaniter scilicet, sed commovit tamen.';
-        $o->issueDate                           = date( 'Ymd' );
-        $o->paymentDueDate                      = date( 'Ymd',strtotime( $o->issueDate ) + ( 86400 * 30 ) );  // ± 1 month later
-        $o->refNumber                           = date('Y') . '/000001';
-
-        $o->customer->identifier                = '';
-        $o->customer->name                      = 'My beautiful customer';
-        $o->customer->vatID                     = 'BE0463.478.965';    // No check made
-
-        $o->billingAddress->streetAddress       = 'Rue des fleurs, 1';
-        $o->billingAddress->postalCode          = '1000';
-        $o->billingAddress->addressLocality     = 'Brussels';
-        $o->billingAddress->addressCountry      = 'BE';
-
-        $o->sent                                = true;
-        $o->footer                              = 'Please be aware that we will be closed next week';
-        $o->memo                                = 'To be sent to accounting bureau';
-
-        $o->addDetail( array( 'utc'         => time()   ,
-                              'id'          => ''       ,
-                              'desc'        => 'a desc' ,
-                              'qty'         => 1        ,
-                              'unitprice'   => 15       ,
-                              'vatpercent'  => 21.00    ,
-                            ) );
-
-        // Check how it looks now (should be filled with all data we've given)
-        var_dump( [b]$o->__toArray()[/b] );
-
-        // Gives something like...
-        // array(32) {
-        //   ["active"]=>
-        //   bool(false)
-        //   ["lang"]=>
-        //   string(2) "fr"
-        //   ["type"]=>
-        //   string(1) "I"
-        //   ["version"]=>
-        //   string(3) "3.0"
-        //   ["currency"]=>
-        //   string(3) "EUR"
-        //   ["date"]=>
-        //   string(8) "20210319"
-        //   ["duedate"]=>
-        //   string(8) "20210418"
-        //   ["ref"]=>
-        //   string(11) "2021/000001"
-        //   ["prepayment"]=>
-        //   string(3) "0.0"
-        //   ["totaldue"]=>
-        //   float(18.15)
-        //   ["htva"]=>
-        //   float(15)
-        //   ["tva"]=>
-        //   float(3.15)
-        //   ["tvac"]=>
-        //   float(18.15)
-        //   ["discounthtva"]=>
-        //   string(3) "0.0"
-        //   ["discounttva"]=>
-        //   string(3) "0.0"
-        //   ["discounttvac"]=>
-        //   string(3) "0.0"
-        //   ["cancelled"]=>
-        //   bool(false)
-        //   ["proforma"]=>
-        //   bool(false)
-        //   ["draft"]=>
-        //   bool(false)
-        //   ["vcs"]=>
-        //   bool(false)
-        //   ["paiddate"]=>
-        //   NULL
-        //   ["lupdate"]=>
-        //   NULL
-        //   ["Description"]=>
-        //   string(385) "Est plane, Piso, ut dicis, inquit. Nam me ipsum huc modo venientem convertebat ad sese &#8617;
-        //   Coloneus ille locus, cuius incola Sophocles ob oculos versabatur, quem scis quam admirer quemque eo &#8617;
-        //   delecter. Me quidem ad altiorem memoriam Oedipodis huc venientis et illo mollissimo carmine quaenam &#8617;
-        //   essent ipsa haec loca requirentis species quaedam commovit, inaniter scilicet, sed commovit tamen."
-        //   ["InvoiceName"]=>
-        //   string(52) "This is an invoice that wa have created from scratch"
-        //   ["Customer"]=>
-        //   array(3) {
-        //     ["id"]=>
-        //     string(0) ""
-        //     ["Name"]=>
-        //     string(21) "My beautiful customer"
-        //     ["VATNumner"]=>
-        //     string(14) "BE0463.478.965"
-        //   }
-        //   ["Project"]=>
-        //   array(1) {
-        //     ["id"]=>
-        //     NULL
-        //   }
-        //   ["Order"]=>
-        //   array(3) {
-        //     ["date"]=>
-        //     NULL
-        //     ["id"]=>
-        //     NULL
-        //     ["Ref"]=>
-        //     NULL
-        //   }
-        //   ["Addresses"]=>
-        //   array(2) {
-        //     ["Billing"]=>
-        //     array(5) {
-        //       ["Street"]=>
-        //       string(17) "Rue des fleurs, 1"
-        //       ["Zip"]=>
-        //       string(4) "1000"
-        //       ["City"]=>
-        //       string(8) "Brussels"
-        //       ["State"]=>
-        //       NULL
-        //       ["Country"]=>
-        //       string(2) "BE"
-        //     }
-        //     ["Delivery"]=>
-        //     array(5) {
-        //       ["Street"]=>
-        //       NULL
-        //       ["Zip"]=>
-        //       NULL
-        //       ["City"]=>
-        //       NULL
-        //       ["State"]=>
-        //       NULL
-        //       ["Country"]=>
-        //       NULL
-        //     }
-        //   }
-        //   ["Management"]=>
-        //   array(2) {
-        //     ["Sent"]=>
-        //     bool(true)
-        //     ["Paid"]=>
-        //     bool(false)
-        //   }
-        //   ["aLines"]=>
-        //   array(1) {
-        //     [0]=>
-        //     array(9) {
-        //       ["utc"]=>
-        //       int(1616127806)
-        //       ["id"]=>
-        //       string(0) ""
-        //       ["desc"]=>
-        //       string(6) "a desc"
-        //       ["qty"]=>
-        //       float(1)
-        //       ["unitprice"]=>
-        //       float(15)
-        //       ["vatpercent"]=>
-        //       float(21)
-        //       ["htva"]=>
-        //       float(15)
-        //       ["tva"]=>
-        //       float(3.15)
-        //       ["tvac"]=>
-        //       float(18.15)
-        //     }
-        //   }
-        //   ["Footer"]=>
-        //   string(48) "Please be aware that we will be closed next week"
-        //   ["Memo"]=>
-        //   string(31) "To be sent to accounting bureau"
-        // }
-        *}}
-    */
-    /* ================================================================================ */
-    public function __toArray() : array
-    /*-------------------------------*/
-    {
-        $aRetVal = array( 'active'          => $this->active                                                                                                ,
-                          'lang'            => $this->lang                                                                                                  ,
-                          'type'            => $this->type                                                                                                  ,
-                          'version'         => $this->version                                                                                               ,
-                          'currency'        => $this->currency                                                                                              ,
-                          'date'            => $this->issueDate                                                                                             ,
-                          'duedate'         => $this->paymentDueDate                                                                                        ,
-                          'ref'             => $this->refNumber                                                                                             ,
-                          'prepayment'      => $this->prepayment                                                                                            ,
-                          'totaldue'        => $this->totalPaymentDue                                                                                       ,
-                          'htva'            => $this->totalHTVA                                                                                             ,
-                          'tva'             => $this->totalTVA                                                                                              ,
-                          'tvac'            => $this->totalTVAC                                                                                             ,
-                          'discounthtva'    => $this->discountHTVA                                                                                          ,
-                          'discounttva'     => $this->discountTVA                                                                                           ,
-                          'discounttvac'    => $this->discountTVAC                                                                                          ,
-                          'cancelled'       => $this->cancelled                                                                                             ,
-                          'proforma'        => $this->proforma                                                                                              ,
-                          'draft'           => $this->draft                                                                                                 ,
-                          'vcs'             => $this->structCommunication                                                                                   ,
-                          'paiddate'        => $this->finalPaymentDate                                                                                      ,
-                          'lupdate'         => $this->lupdate                                                                                               ,
-                          'Description'     => $this->description                                                                                           ,
-                          'InvoiceName'     => $this->name                                                                                                  ,
-                          'Issuer'          => array( 'id'          => $this->issuer->identifier                                                            ,
-                                                      'Name'        => $this->issuer->name                                                                  ,
-                                                      'LegalName'   => $this->issuer->legalName                                                             ,
-                                                      'LegalForm'   => $this->issuer->legalForm                                                             ,
-                                                      'TaxID'       => $this->issuer->taxID                                                                 ,
-                                                      'VATNumber'   => $this->issuer->vatID                                                                 ,
-                                                      'Email'       => $this->issuer->email                                                                 ,
-                                                      'Url'         => $this->issuer->url                                                                   ,
-                                                      'FaxNumber'   => $this->issuer->faxNumber                                                             ,
-                                                      'Phone'       => $this->issuer->telephone                                                             ,
-                                                      'Image'       => $this->issuer->image                                                                 ,
-                                                      'BankAccount' => array( 'Bank'    => $this->issuer->bankAccount->bank                                 ,
-                                                                              'ID'      => $this->issuer->bankAccount->identifier                           ,
-                                                                              'BIC'     => $this->issuer->bankAccount->BICCode                              ,
-                                                                            )                                                                               ,
-                                                      'Address'     => array( 'Street'  => $this->issuer->address->streetAddress                            ,
-                                                                              'Zip'     => $this->issuer->address->postalCode                               ,
-                                                                              'City'    => $this->issuer->address->addressLocality                          ,
-                                                                              'State'   => $this->issuer->address->addressRegion                            ,
-                                                                              'Country' => $this->issuer->address->addressCountry                           ,
-                                                                            )                                                                               ,
-                                                    )                                                                                                       ,
-                          'Customer'        => array( 'id'          => $this->customer->identifier                                                          ,
-                                                      'Name'        => $this->customer->name                                                                ,
-                                                      'VATNumber'   => $this->customer->vatID                                                               ,
-                                                      'Addresses'   => array( 'Billing'     => array( 'Street'  => $this->billingAddress->streetAddress     ,
-                                                                                                      'Zip'     => $this->billingAddress->postalCode        ,
-                                                                                                      'City'    => $this->billingAddress->addressLocality   ,
-                                                                                                      'State'   => $this->billingAddress->addressRegion     ,
-                                                                                                      'Country' => $this->billingAddress->addressCountry    ,
-                                                                                                    )                                                       ,
-                                                                              'Delivery'    => array( 'Street'  => $this->deliveryAddress->streetAddress    ,
-                                                                                                      'Zip'     => $this->deliveryAddress->postalCode       ,
-                                                                                                      'City'    => $this->deliveryAddress->addressLocality  ,
-                                                                                                      'State'   => $this->deliveryAddress->addressRegion    ,
-                                                                                                      'Country' => $this->deliveryAddress->addressCountry   ,
-                                                                                                    )                                                       ,
-                                                                            )                                                                               ,
-                                                    )                                                                                                       ,
-                          'Project'         => array( 'id'          => $this->projectID                                                                     ,
-                                                    )                                                                                                       ,
-                          'Order'           => array( 'Date'        => $this->referencesOrder->orderDate                                                    ,
-                                                      'id'          => $this->referencesOrder->identifier                                                   ,
-                                                      'Ref'         => $this->referencesOrder->orderNumber                                                  ,
-                                                    )                                                                                                       ,
-                          'Management'      => array( 'Sent'        => $this->sent                                                                          ,
-                                                      'Paid'        => $this->paid                                                                          ,
-                                                    )                                                                                                       ,
-                          'aLines'          => $this->aLines                                                                                                ,
-                          'Footer'          => $this->footer                                                                                                ,
-                          'Memo'            => $this->memo );
-
-        end:
-        return ( $aRetVal );
-    }   /* End of Invoice.__toArray() ================================================= */
     /* ================================================================================ */
 
 

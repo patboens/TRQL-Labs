@@ -38,14 +38,12 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\musicgroup;
+namespace trql\organization;
 
-use \trql\mother\Mother                     as Mother;
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\mother\iContext                   as iContext;
 use \trql\context\Context                   as Context;
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\performinggroup\PerformingGroup   as PerformingGroup;
-
+use \trql\organization\PerformingGroup      as PerformingGroup;
 
 use DOMDocument;
 use DOMXPath;
@@ -93,6 +91,9 @@ class MusicGroup extends PerformingGroup
                                'home'   => null         ,
                                'family' => null         ,
                              );
+
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId             = 'Q215380';                /* {*property   $wikidataId                 (string)                        Wikidata ID. Musical ensemble which performs music *} */
 
     public      $album                  = null;                     /* {*property   $album                      (MusicAlbum)                    A music album. Supersedes albums. *} */
     public      $genre                  = null;                     /* {*property   $genre                      (Text|URL)                      Genre of the creative work, broadcast channel or group. *} */
@@ -167,6 +168,29 @@ class MusicGroup extends PerformingGroup
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__construct
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __destruct()
     /*------------------------*/
     {
@@ -259,6 +283,29 @@ class Musician extends MusicGroup
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        {*keywords
+            constructors, destructors
+        *}
+
+        {*seealso
+            @fnc.__construct
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __destruct()
     /*------------------------*/
     {
@@ -269,7 +316,5 @@ class Musician extends MusicGroup
         $this->necroSignaling();
     }   /* End of Musician.__destruct() =============================================== */
     /* ================================================================================ */
-
 }   /* End of class Musician ========================================================== */
 /* ==================================================================================== */
-?>

@@ -44,11 +44,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\agent;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli                               as v;
-use \trql\personororganization\PersonOrOrganization     as PersonOrOrganization;
-
+use \trql\vaesoli\Vaesoli                       as v;
+use \trql\organization\PersonOrOrganization     as PersonOrOrganization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -113,7 +112,7 @@ class Agent extends PersonOrOrganization
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of CreativeWork.__construct() ========================================== */
+    }   /* End of Agent.__construct() ================================================= */
     /* ================================================================================ */
 
 
@@ -140,7 +139,7 @@ class Agent extends PersonOrOrganization
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of BankAccount.__destruct() ============================================ */
+    }   /* End of Agent.__destruct() ================================================== */
     /* ================================================================================ */
-}   /* End of class BankAccount ======================================================= */
+}   /* End of class Agent ============================================================= */
 /* ==================================================================================== */

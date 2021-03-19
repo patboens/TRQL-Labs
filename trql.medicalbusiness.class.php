@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -156,4 +154,3 @@ class MedicalBusiness extends LocalBusiness
     /* ================================================================================ */
 }   /* End of class MedicalBusiness =================================================== */
 /* ==================================================================================== */
-?>

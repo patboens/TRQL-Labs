@@ -27,7 +27,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -52,10 +52,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\collegeoruniversity;
+namespace trql\organization;
 
-use \trql\vaesoli\Vaesoli                                   as Vaesoli;
-use \trql\educationalorganization\EducationalOrganization   as EducationalOrganization;
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\organization\EducationalOrganization  as EducationalOrganization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -98,7 +98,7 @@ defined( 'COLLEGEORUNIVERSITY_CLASS_VERSION' ) or define( 'COLLEGEORUNIVERSITY_C
  */
 /* ==================================================================================== */
 class CollegeOrUniversity extends EducationalOrganization
-/*--------------------------------------*/
+/*------------------------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -110,7 +110,7 @@ class CollegeOrUniversity extends EducationalOrganization
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NO SEARCH. *} */
+    public      $wikidataId                     = 'Q189004';        /* {*property   $wikidataId                     (string)                        Wikidata ID. Higher education institution. *} */
 
 
     /* ================================================================================ */
@@ -167,5 +167,3 @@ class CollegeOrUniversity extends EducationalOrganization
     /* ================================================================================ */
 }   /* End of class CollegeOrUniversity =============================================== */
 /* ==================================================================================== */
-
-?>

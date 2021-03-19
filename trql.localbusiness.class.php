@@ -15,8 +15,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -47,10 +45,9 @@
 /****************************************************************************************/
 namespace trql\localbusiness;
 
-use \trql\mother\Mother                 as Mother;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\mother\iContext               as iContext;
 use \trql\context\Context               as Context;
-use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\organization\Organization     as Organization;
 
 use DOMDocument;
@@ -229,4 +226,3 @@ class LocalBusiness extends Organization implements iContext
     /* ================================================================================ */
 }   /* End of class LocalBusiness ===================================================== */
 /* ==================================================================================== */
-?>
