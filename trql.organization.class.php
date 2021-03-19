@@ -59,6 +59,8 @@ use \trql\mother\iContext               as iContext;
 use \trql\context\Context               as Context;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\thing\Thing                   as Thing;
+use \trql\postaladdress\PostalAddress   as PostalAddress;
+use \trql\bankaccount\BankAccount       as BankAccount;
 
 use DOMDocument;
 use DOMXPath;
@@ -71,6 +73,12 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'THING_CLASS_VERSION' ) )
     require_once( 'trql.thing.class.php' );
+
+if ( ! defined( 'POSTALADDRESS_CLASS_VERSION' ) )
+    require_once( 'trql.postaladdress.class.php' );
+
+if ( ! defined( 'BANKACCOUNT_CLASS_VERSION' ) )
+    require_once( 'trql.bankaccount.class.php' );
 
 defined( 'ORGANIZATION_CLASS_VERSION' ) or define( 'ORGANIZATION_CLASS_VERSION','0.1' );
 
@@ -110,7 +118,7 @@ class Organization extends Thing implements iContext
                                                                                                                                                             newsroom’s), including involving the public - digitally or
                                                                                                                                                             otherwise -- in coverage decisions, reporting and activities
                                                                                                                                                             after publication. *} */
-    public      $address                    = null;                 /* {*property   $address                    (PostalAddress|string)                      Physical address of the item. *} */
+    public      $address                    = null;                 /* {*property   $address                    (PostalAddress)                             Physical address of the item. *} */
     public      $aggregateRating            = null;                 /* {*property   $aggregateRating            (AggregateRating)                           The overall rating, based on a collection of reviews or ratings, of the item. *} */
     public      $alumni                     = null;                 /* {*property   $alumni                     (Person)                                    Alumni of an organization. Inverse property: alumniOf. *} */
     public      $areaServed                 = null;                 /* {*property   $areaServed                 (AdministrativeArea|GeoShape|Place|string)  The geographic area where a service or offered item is provided.
@@ -119,7 +127,7 @@ class Organization extends Thing implements iContext
     public      $brand                      = null;                 /* {*property   $brand                      (Brand|Organization)                        The brand(s) associated with a product or service, or the brand(s)
                                                                                                                                                             maintained by an organization or business person. *} */
     public      $contactPoint               = null;                 /* {*property   $contactPoint               (ContactPoint)                              A contact point for a person or organization. Supersedes contactPoints. *} */
-    public      $correctionsPolicy          = null;                 /* {*property   $correctionsPolicy          (CreativeWork|URL)                          For an [c]Organization[/c] (e.g. NewsMediaOrganization), a statement describing
+    public      $correctionsPolicy          = null;                 /* {*property   $correctionsPolicy          (CreativeWork|URL)                          For an [c]Organization[/c] (e.g. @class.NewsMediaOrganization), a statement describing
                                                                                                                                                             (in news media, the newsroom’s) disclosure and correction policy for errors. *} */
     public      $department                 = null;                 /* {*property   $department                 (Organization)                              A relationship between an organization and a department of that
                                                                                                                                                             organization, also described as an organization (allowing different
@@ -216,7 +224,8 @@ class Organization extends Thing implements iContext
                                                                                                                                                             e.g., as a subsidiary. See also: the more specific 'department'
                                                                                                                                                             property. Inverse property: parentOrganization. *} */
     public      $taxID                      = null;                 /* {*propert    $taxID                      (string)                                    The Tax / Fiscal ID of the organization or person, e.g. the TIN in the
-                                                                                                                                                            US or the CIF/NIF in Spain. *} */
+                                                                                                                                                            US or the CIF/NIF in Spain, or the NISS in Belgium for individuals, or the
+                                                                                                                                                            Registre de commerce/Handelregister *} */
     public      $telephone                  = null;                 /* {*propert    $telephone                  (string)                                    The telephone number. *} */
     public      $unnamedSourcesPolicy       = null;                 /* {*propert    $unnamedSourcesPolicy       (CreativeWork|URL)                          For an [c]Organization[/c] (typically a NewsMediaOrganization), a statement
                                                                                                                                                             about policy on use of unnamed sources and the decision process required. *} */
@@ -227,6 +236,7 @@ class Organization extends Thing implements iContext
     public      $wikidataId                 = 'Q43229';             /* {*property   $wikidataId                 (string)                                    Wikidata ID. Social entity (not necessarily commercial) uniting people
                                                                                                                                                             into a structured group managing shared means to meet some needs, or to
                                                                                                                                                             pursue collective goals *} */
+    public      $bankAccount                = null;                 /* {*property   $bankAccount                (BankAccount)                               The BankAccount of the organization *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -253,6 +263,9 @@ class Organization extends Thing implements iContext
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+
+        $this->address      = new PostalAddress();
+        $this->bankAccount  = new BankAccount();
 
         return ( $this );
     }   /* End of Organization.__construct() ========================================== */
@@ -332,4 +345,3 @@ class Organization extends Thing implements iContext
     /* ================================================================================ */
 }   /* End of class Organization ====================================================== */
 /* ==================================================================================== */
-?>

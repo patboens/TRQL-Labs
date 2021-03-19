@@ -15,8 +15,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /****************************************************************************************/
@@ -29,6 +27,7 @@
     {*cdate                 28-08-2020 14:09 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -72,7 +71,7 @@ defined( 'PERSONORORGANIZATION_CLASS_VERSION' ) or define( 'PERSONORORGANIZATION
 
     *}}
  */
-/* =======Member============================================================================= */
+/* ==================================================================================== */
 abstract class PersonOrOrganization extends Organization
 /*----------------------------------------------------*/
 {
@@ -85,7 +84,6 @@ abstract class PersonOrOrganization extends Organization
                              );
 
     /* These properties are extracted from Person ================================================================================================================================================================== */
-
     public  $additionalName             = null;                     /* {*property   $additionalName             (string)                                    An additional name for a Person, can be used for
                                                                                                                                                             a middle name. *} */
     public  $affiliation                = null;                     /* {*property   $affiliation                (Organization)                              An organization that this person is affiliated
@@ -148,6 +146,6 @@ abstract class PersonOrOrganization extends Organization
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = null;
 
-}   /* End of class PersonOrOrganisation ============================================== */
+}   /* End of class PersonOrOrganization ============================================== */
 /* ==================================================================================== */
 ?>

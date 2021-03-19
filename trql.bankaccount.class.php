@@ -151,6 +151,8 @@ class BankAccount extends Account
     public      $oLedger                        = null;             /* {*property   $oLedger                        (Ledger)                        Ledger of the account *} */
     protected   $szFolder                       = null;             /* {*property   $szFolder                       (string)                        A global folder where accounts are stored *} */
     public      $oOwner                         = null;             /* {*property   $oOwner                         (Agent)                         A Person or Organization (@class.Agent) that owns the account. NOT USED SO FAR! *} */
+    public      $bank                           = null;             /* {*property   $bank                           (string)                        The name of the Bank (e.g. "Nagelmackers") *} */
+    public      $BICCode                        = null;             /* {*property   $BICCode                        (string)                        The BIC code of the BankAccount of the organization (if applicable) *} */
 
 
     /* ================================================================================ */
