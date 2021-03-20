@@ -42,12 +42,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\organization;
+namespace trql\quitus;
 
 use \trql\mother\iContext           as iContext;
 use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\organization\Organization as Organization;
-use \trql\thing\Thing               as Thing;
+use \trql\quitus\Subject            as Subject;
 
 if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) )
     require_once( 'trql.mother.class.php' );
@@ -55,8 +54,8 @@ if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) )
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'ORGANIZATION_CLASS_VERSION' ) )
-    require_once( 'trql.organization.class.php' );
+if ( ! defined( 'SUBJECT_CLASS_VERSION' ) )
+    require_once( 'trql.subject.class.php' );
 
 defined( 'PERSONORORGANIZATION_CLASS_VERSION' ) or define( 'PERSONORORGANIZATION_CLASS_VERSION','0.1' );
 
@@ -65,19 +64,15 @@ defined( 'PERSONORORGANIZATION_CLASS_VERSION' ) or define( 'PERSONORORGANIZATION
 
     {*desc
 
-        Abstract class to mention a Person or an Organization
+        Class to mention a Person or an Organization
 
-    *}
-
-    {*todo
-        Weird error : Organization seems to be unknown!!!
     *}
 
     *}}
  */
 /* ==================================================================================== */
-class PersonOrOrganization extends Thing
-/*------------------------------------*/
+class PersonOrOrganization extends Subject
+/*--------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                                     Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -252,5 +247,61 @@ class PersonOrOrganization extends Thing
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = null;
 
+    /* ================================================================================ */
+    /** {{*__construct( [$szHome] )=
+
+        Class constructor
+
+        {*params
+            $szHome     (string)        Home of the class. Optional.
+        *}
+
+        {*return
+            (self)      The current instance of the class
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __construct( $szHome = null )
+    /*-----------------------------------------*/
+    {
+        parent::__construct();
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+
+        return ( $this );
+    }   /* End of PersonOrOrganization.__construct() ================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __destruct()
+    /*------------------------*/
+    {
+        $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of PersonOrOrganization.__destruct() =================================== */
+    /* ================================================================================ */
 }   /* End of class PersonOrOrganization ============================================== */
 /* ==================================================================================== */

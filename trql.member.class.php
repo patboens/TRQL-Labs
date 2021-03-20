@@ -45,9 +45,9 @@
 /****************************************************************************************/
 namespace trql\quitus;
 
-use \trql\mother\iContext                       as iContext;
-use \trql\vaesoli\Vaesoli                       as Vaesoli;
-use \trql\organization\PersonOrOrganization     as PersonOrOrganization;
+use \trql\mother\iContext               as iContext;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\quitus\PersonOrOrganization   as PersonOrOrganization;
 
 use DOMDocument;
 use DOMXPath;
@@ -62,7 +62,6 @@ if ( ! defined( 'PERSONORORGANIZATION_CLASS_VERSION' ) )
     require_once( 'trql.personororganization.class.php' );
 
 defined( 'MEMBER_CLASS_VERSION' ) or define( 'MEMBER_CLASS_VERSION','0.1' );
-
 
 /* ==================================================================================== */
 /** {{*class Member=
@@ -80,7 +79,7 @@ defined( 'MEMBER_CLASS_VERSION' ) or define( 'MEMBER_CLASS_VERSION','0.1' );
 class Member extends PersonOrOrganization
 /*-------------------------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                                     Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
@@ -89,7 +88,9 @@ class Member extends PersonOrOrganization
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q9200127';
+    public      $wikidataId                     = 'Q9200127';       /* {*property   $wikidataId                 (string)                        Wikidata ID. Individual or organization with membership 
+                                                                                                                                                in a group; constitutive components of a corporate body *} */
+
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=

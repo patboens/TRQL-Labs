@@ -1,4 +1,5 @@
 <?php
+/****************************************************************************************/
 /*
     {PYB} is a shortcut for Patrick Boens
 
@@ -17,14 +18,12 @@
 
 */
 
-/****************************************************************************************/
 /** {{{*fheader
-    {*file                  trql.customer.class.php *}
-    {*purpose               recipient of a good, service, product or idea obtained from 
-                            a seller via a financial transaction *}
+    {*file                  trql.mailshot.class.php *}
+    {*purpose               sending mass mailings *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
-    {*cdate                 28-08-2020 14:09 *}
+    {*cdate                 20-03-21 15:12 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
     {*UTF-8                 Quel bel été sous le hêtre *}
@@ -34,60 +33,61 @@
     -------------------------------------------------------------------------------------
 
     {*chist
-        {*mdate 31-07-20 16:21 *}
+        {*mdate 20-03-21 15:12 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Original creation
         *}
     *}
 
+
     *}}} */
 /****************************************************************************************/
 namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\quitus\PersonOrOrganization   as PersonOrOrganization;
-
-use DOMDocument;
-use DOMXPath;
-
-if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) )
-    require_once( 'trql.mother.class.php' );
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\quitus\Advertizing    as Advertizing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'PERSONORORGANIZATION_CLASS_VERSION' ) )
-    require_once( 'trql.personororganization.class.php' );
+if ( ! defined( 'ADVERTIZING_CLASS_VERSION' ) )
+    require_once( 'trql.advertizing.class.php' );
 
-defined( 'CUSTOMER_CLASS_VERSION' ) or define( 'CUSTOMER_CLASS_VERSION','0.1' );
+defined( 'MAILSHOT_CLASS_VERSION' ) or define( 'MAILSHOT_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
-/** {{*class Customer=
+/** {{*class Mailshot=
 
     {*desc
 
-        Recipient of a good, service, product or idea obtained from a seller via 
-        a financial transaction
+        Sending mass mailings.
 
     *}
+
+    {*todo
+        Each class of TRQL Labs should bear a unique ID that should be
+
+        1) published on UIKey
+        2) mentioned on wikidata
 
     *}}
  */
 /* ==================================================================================== */
-class Customer extends PersonOrOrganization
-/*---------------------------------------*/
+class Mailshot extends Advertizing
+/*------------------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                                     Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
                                'home'   => null         ,
                                'family' => null         ,
+                               'UIKey'  => null         ,
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q852835';
+    public      $wikidataId                     = 'Q10392175';      /* {*property   $wikidataId                     (string)                        Wikidata ID. Sending mass mailings *} */
 
 
     /* ================================================================================ */
@@ -121,23 +121,19 @@ class Customer extends PersonOrOrganization
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of Customer.__construct() ============================================== */
+    }   /* End of Mailshot.__construct() ============================================== */
     /* ================================================================================ */
 
-
-    public function speak() : string
-    /*----------------------------*/
+    public function send( $aRecipients )
+    /*--------------------------------*/
     {
-        return( '' );
-    }   /* End of Customer.speak() ==================================================== */
-    /* ================================================================================ */
-
-
-    public function sing() : string
-    /*---------------------------*/
-    {
-        return( '' );
-    }   /* End of Customer.sing() ===================================================== */
+        // Il faut que je sache QUOI envoyer et à QUI
+        foreach( $aRecipients as $aRecipient )
+        {
+            
+        }
+        
+    }   /* End of Mailshot.send() ===================================================== */
     /* ================================================================================ */
 
 
@@ -172,7 +168,7 @@ class Customer extends PersonOrOrganization
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of Customer.__destruct() =============================================== */
+    }   /* End of Mailshot.__destruct() =============================================== */
     /* ================================================================================ */
-}   /* End of class Customer ========================================================== */
+}   /* End of class Mailshot ========================================================== */
 /* ==================================================================================== */

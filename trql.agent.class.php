@@ -46,8 +46,8 @@
 /****************************************************************************************/
 namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli                       as v;
-use \trql\organization\PersonOrOrganization     as PersonOrOrganization;
+use \trql\vaesoli\Vaesoli               as v;
+use \trql\quitus\PersonOrOrganization   as PersonOrOrganization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

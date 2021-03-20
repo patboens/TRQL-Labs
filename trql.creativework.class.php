@@ -27,7 +27,7 @@
     {*cdate                 29-07-20 11:51 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*todo                  1) Make the difference between [c]render()[/c] and
                                [c]speak()[/c][br]
                             2) Implement [c]render()[/c] (in its simplest form)

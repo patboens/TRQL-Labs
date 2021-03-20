@@ -35,3 +35,11 @@ Change Log v 0.0.7
     trql.tireshop.class.php
     trql.toystore.class.php
     trql.wholesalestore.class.php
+
+3)  New classes
+
+    trql.advertizing.class.php
+    trql.mailshot.class.php
+    trql.recipient.class.php
+    trql.subject.class.php
+

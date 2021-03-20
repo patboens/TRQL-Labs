@@ -165,7 +165,8 @@ class Invoice extends Intangible
     public      $discountHTVA                   = '0.0';            /* {*property   $discountHTVA                   (float)                                         The discounted amount, tax excluded. *} */
     public      $discountTVA                    = '0.0';            /* {*property   $discountTVA                    (float)                                         The discounted amount, taxes only. *} */
     public      $discountTVAC                   = '0.0';            /* {*property   $discountTVAC                   (float)                                         The discounted amountdue, tax included. *} */
-    public      $iRounding                      = 4;                /* {*property   $iRounding                      (integer)                                       The rounding that is applied for calculation on amounts *} */
+    public      $iRoundingComputation           = 4;                /* {*property   $iRoundingComputation           (integer)                                       The rounding that is applied for calculation on amounts *} */
+    public      $iRoundingDisplay               = 2;                /* {*property   $iRoundingDisplay               (integer)                                       The rounding that is applied when displaying amounts (affects rendering in @fnc.__toHTML) *} */
     public      $issueDate                      = null;             /* {*property   $issueDate                      (Date|DateTime|string)                          The date the invoice was issued ([c]YYYYMMDD[/c] format. *} */
     public      $refNumber                      = null;             /* {*property   $refNumber                      (string)                                        Annually unique and sequential code that is systematically
                                                                                                                                                                     assigned to invoices. Invoice numbers are one of the most
@@ -822,7 +823,7 @@ class Invoice extends Intangible
     /* ================================================================================ */
     /** {{*computeAll()=
 
-        Computes all internam amounts
+        Computes all internal amounts
 
         {*params
         *}
@@ -832,11 +833,12 @@ class Invoice extends Intangible
         *}
 
         {*remark
-            All internal amounts are refreshed
+            All internal amounts are refreshed when using @fnc.deleteDetail and 
+            @fnc.addDetail
         *}
 
         {*seealso
-            @fnc.__deleteDetail, @fnc.addDetail
+            @fnc.deleteDetail, @fnc.addDetail
         *}
 
         *}}
@@ -877,7 +879,7 @@ class Invoice extends Intangible
         Deletes a line of detail
 
         {*params
-            $iOffset    (int)       Offset in @var.aLines to delete.
+            $iOffset    (int)       Offset in @var.aLines
         *}
 
         {*return
@@ -885,11 +887,11 @@ class Invoice extends Intangible
         *}
 
         {*remark
-            All internal amounts are refreshed
+            All internal amounts are refreshed (call to @fnc.computeAll)
         *}
 
         {*seealso
-            @fnc.__addDetail, @fnc.computeAll
+            @fnc.addDetail, @fnc.computeAll
         *}
 
         {*example
@@ -1011,11 +1013,11 @@ class Invoice extends Intangible
         *}
 
         {*remark
-            All internal amounts are refreshed
+            All internal amounts are refreshed (call to @fnc.computeAll)
         *}
 
         {*seealso
-            @fnc.__deleteDetail, @fnc.computeAll
+            @fnc.deleteDetail, @fnc.computeAll
         *}
 
         {*example
@@ -1151,7 +1153,8 @@ class Invoice extends Intangible
         $this->draft                    = false;
         $this->finalPaymentDate         = null;
         $this->footer                   = null;
-        $this->iRounding                = 4;
+        $this->iRoundingComputation     = 4;
+        $this->iRoundingDisplay         = 2;
         $this->identifier               = null;
         $this->issueDate                = null;
         $this->issuer                   = new Organization();
@@ -1253,7 +1256,7 @@ class Invoice extends Intangible
             {
                 // Check how it looks now (should be filled with all data we've given)
                 var_dump( [b]$o->__toXML()[/b] );
-            }        
+            }
 
             // Gives something like... &#8617;
             // &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
@@ -1318,7 +1321,7 @@ class Invoice extends Intangible
             //            &lt;Billing&gt;
             //                &lt;Street&gt;&lt;![CDATA[Rue des chats, 100]]&gt;&lt;/Street&gt;
             //                &lt;Zip&gt;&lt;![CDATA[4000]]&gt;&lt;/Zip&gt;
-            //                &lt;City&gt;&lt;![CDATA[Li&quot;&iquest;ge]]&gt;&lt;/City&gt;
+            //                &lt;City&gt;&lt;![CDATA[Liège]]&gt;&lt;/City&gt;
             //                &lt;State&gt;&lt;![CDATA[]]&gt;&lt;/State&gt;
             //                &lt;Country&gt;&lt;![CDATA[BE]]&gt;&lt;/Country&gt;
             //            &lt;/Billing&gt;
@@ -1377,14 +1380,14 @@ class Invoice extends Intangible
                     "         date=\"{$this->issueDate}\" \n"                                                                       .
                     "         duedate=\"{$this->paymentDueDate}\"\n"                                                                .
                     "         ref=\"{$this->refNumber}\"\n"                                                                         .
-                    "         prepayment=\""        . number_format( $this->prepayment      ,$this->iRounding,'.','' )  . "\"\n"    .
-                    "         totaldue=\""          . number_format( $this->totalPaymentDue ,$this->iRounding,'.','' )  . "\"\n"    .
-                    "         htva=\""              . number_format( $this->totalHTVA       ,$this->iRounding,'.','' )  . "\"\n"    .
-                    "         tva=\""               . number_format( $this->totalTVA        ,$this->iRounding,'.','' )  . "\"\n"    .
-                    "         tvac=\""              . number_format( $this->totalTVAC       ,$this->iRounding,'.','' )  . "\"\n"    .
-                    "         discounthtva=\""      . number_format( $this->discountHTVA    ,$this->iRounding,'.','' )  . "\"\n"    .
-                    "         discounttva=\""       . number_format( $this->discountTVA     ,$this->iRounding,'.','' )  . "\"\n"    .
-                    "         discounttvac=\""      . number_format( $this->discountTVAC    ,$this->iRounding,'.','' )  . "\"\n"    .
+                    "         prepayment=\""        . number_format( $this->prepayment      ,$this->iRoundingComputation,'.','' )  . "\"\n"    .
+                    "         totaldue=\""          . number_format( $this->totalPaymentDue ,$this->iRoundingComputation,'.','' )  . "\"\n"    .
+                    "         htva=\""              . number_format( $this->totalHTVA       ,$this->iRoundingComputation,'.','' )  . "\"\n"    .
+                    "         tva=\""               . number_format( $this->totalTVA        ,$this->iRoundingComputation,'.','' )  . "\"\n"    .
+                    "         tvac=\""              . number_format( $this->totalTVAC       ,$this->iRoundingComputation,'.','' )  . "\"\n"    .
+                    "         discounthtva=\""      . number_format( $this->discountHTVA    ,$this->iRoundingComputation,'.','' )  . "\"\n"    .
+                    "         discounttva=\""       . number_format( $this->discountTVA     ,$this->iRoundingComputation,'.','' )  . "\"\n"    .
+                    "         discounttvac=\""      . number_format( $this->discountTVAC    ,$this->iRoundingComputation,'.','' )  . "\"\n"    .
                     "         cancelled=\""         . ( $this->cancelled            ? 'yes' : 'no' )                    . "\"\n"    .
                     "         proforma=\""          . ( $this->proforma             ? 'yes' : 'no' )                    . "\"\n"    .
                     "         draft=\""             . ( $this->draft                ? 'yes' : 'no' )                    . "\"\n"    .
@@ -1458,12 +1461,12 @@ class Invoice extends Intangible
                             $szRetVal .= "        <Line update=\"{$aLine['utc']}\">\n";
                             $szRetVal .= "           <Desc><![CDATA[{$aLine['desc']}]]></Desc>\n";
                             $szRetVal .= "           <ID><![CDATA[{$aLine['id']}]]></ID>\n";
-                            $szRetVal .= "           <Qty><![CDATA["        . number_format( $aLine['qty'       ],$this->iRounding,'.','' ) . "]]></Qty>\n";
-                            $szRetVal .= "           <UnitPrice><![CDATA["  . number_format( $aLine['unitprice' ],$this->iRounding,'.','' ) . "]]></UnitPrice>\n";
-                            $szRetVal .= "           <htva><![CDATA["       . number_format( $aLine['htva'      ],$this->iRounding,'.','' ) . "]]></htva>\n";
-                            $szRetVal .= "           <VATPercent><![CDATA[" . number_format( $aLine['vatpercent'],$this->iRounding,'.','' ) . "]]></VATPercent>\n";
-                            $szRetVal .= "           <tva><![CDATA["        . number_format( $aLine['tva'       ],$this->iRounding,'.','' ) . "]]></tva>\n";
-                            $szRetVal .= "           <tvac><![CDATA["       . number_format( $aLine['tvac'      ],$this->iRounding,'.','' ) . "]]></tvac>\n";
+                            $szRetVal .= "           <Qty><![CDATA["        . number_format( $aLine['qty'       ],$this->iRoundingComputation,'.','' ) . "]]></Qty>\n";
+                            $szRetVal .= "           <UnitPrice><![CDATA["  . number_format( $aLine['unitprice' ],$this->iRoundingComputation,'.','' ) . "]]></UnitPrice>\n";
+                            $szRetVal .= "           <htva><![CDATA["       . number_format( $aLine['htva'      ],$this->iRoundingComputation,'.','' ) . "]]></htva>\n";
+                            $szRetVal .= "           <VATPercent><![CDATA[" . number_format( $aLine['vatpercent'],$this->iRoundingComputation,'.','' ) . "]]></VATPercent>\n";
+                            $szRetVal .= "           <tva><![CDATA["        . number_format( $aLine['tva'       ],$this->iRoundingComputation,'.','' ) . "]]></tva>\n";
+                            $szRetVal .= "           <tvac><![CDATA["       . number_format( $aLine['tvac'      ],$this->iRoundingComputation,'.','' ) . "]]></tvac>\n";
                             $szRetVal .= "        </Line>\n";
                         }   /* foreach( this->aLines as $aLine ) */
                     }   /* if ( is_array( $this->aLines ) && count( $this->aLines ) > 0 ) */
@@ -1509,9 +1512,9 @@ class Invoice extends Intangible
             {
                 // Check how the JSON looks like...
                 var_dump( [b]$o->__toJSON()[/b] );
-            }        
+            }
 
-            // Gives something like... 
+            // Gives something like...
             {"@attributes":{"id":"33d6ad86-a216-4233-a19b-b8b54fe90e33","active":"yes","lang":"fr",&#8617;
             "type":"I","version":"2.0","currency":"EUR","date":"20140516","duedate":"20140530",&#8617;
             "ref":"2014\/000001","prepayment":"0.0000","totaldue":"181.5000","htva":"150.0000",&#8617;
@@ -1580,7 +1583,7 @@ class Invoice extends Intangible
         {
             // Check how the Array looks like...
             var_dump( [b]$o->__toArray()[/b] );
-        }        
+        }
 
         // Gives something like...
         //array (size=32)
@@ -1608,7 +1611,7 @@ class Invoice extends Intangible
         //  'lupdate' =&gt; string '20150115153825' (length=14)
         //  'Description' =&gt; string 'Here we can have an extended description of the invoice' (length=55)
         //  'InvoiceName' =&gt; string 'NEW TEST' (length=8)
-        //  'Issuer' =&gt; 
+        //  'Issuer' =&gt;
         //    array (size=13)
         //      'id' =&gt; string '' (length=0)
         //      'Name' =&gt; string 'FW' (length=2)
@@ -1621,46 +1624,46 @@ class Invoice extends Intangible
         //      'FaxNumber' =&gt; string '' (length=0)
         //      'Phone' =&gt; string '+32 2 111.22.33' (length=15)
         //      'Image' =&gt; string 'https://raw.githubusercontent.com/patboens/TRQL-Labs/main/images/LogoStationeryInvoiceQuitus.png' (length=96)
-        //      'BankAccount' =&gt; 
+        //      'BankAccount' =&gt;
         //        array (size=3)
         //          'Bank' =&gt; string 'Nagelmackers' (length=12)
         //          'ID' =&gt; string 'BE76 132 5143964 95' (length=19)
         //          'BIC' =&gt; string 'BNAGBEBB' (length=8)
-        //      'Address' =&gt; 
+        //      'Address' =&gt;
         //        array (size=5)
         //          'Street' =&gt; string 'Rue Am&eacute;d&eacute; Bracke, 9' (length=21)
         //          'Zip' =&gt; string '1950' (length=4)
         //          'City' =&gt; string 'Kraainem' (length=8)
         //          'State' =&gt; string '' (length=0)
         //          'Country' =&gt; string 'BE' (length=2)
-        //  'Customer' =&gt; 
+        //  'Customer' =&gt;
         //    array (size=4)
         //      'id' =&gt; string '' (length=0)
         //      'Name' =&gt; string 'Any Company' (length=11)
         //      'VATNumber' =&gt; string 'BE0463.478.965' (length=14)
-        //      'Addresses' =&gt; 
+        //      'Addresses' =&gt;
         //        array (size=2)
-        //          'Billing' =&gt; 
+        //          'Billing' =&gt;
         //            array (size=5)
         //              ...
-        //          'Delivery' =&gt; 
+        //          'Delivery' =&gt;
         //            array (size=5)
         //              ...
-        //  'Project' =&gt; 
+        //  'Project' =&gt;
         //    array (size=1)
         //      'id' =&gt; string '' (length=0)
-        //  'Order' =&gt; 
+        //  'Order' =&gt;
         //    array (size=3)
         //      'Date' =&gt; string '' (length=0)
         //      'id' =&gt; string '' (length=0)
         //      'Ref' =&gt; null
-        //  'Management' =&gt; 
+        //  'Management' =&gt;
         //    array (size=2)
         //      'Sent' =&gt; boolean true
         //      'Paid' =&gt; boolean true
-        //  'aLines' =&gt; 
+        //  'aLines' =&gt;
         //    array (size=1)
-        //      0 =&gt; 
+        //      0 =&gt;
         //        array (size=9)
         //          'utc' =&gt; int 0
         //          'id' =&gt; string '' (length=0)
@@ -1775,6 +1778,47 @@ class Invoice extends Intangible
             (string)    HTML representation of an invoice
         *}
 
+        {*abstract
+
+            The @fnc.__toHTML method creates an HTML structure that matches the 
+            information contained in the invoice. The HTML structure is pure: 
+            no JavaScript, no CSS! In other words, it is generic but still 
+            contains all the necessary identifiers to be formatted when CSS is 
+            defined and applied to it.[br][br]
+
+            The HTML structure does not therefore represent an entire web page: 
+            it is necessary to nest the HTML structure produced inside a cradle 
+            that gives the structure of the page, as follows:[br][br]
+
+            [pre]
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&#160;&#160;&#160;&#160;&lt;head&gt;
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;meta charset=&quot;utf-8&quot;&gt;
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;meta name=&quot;description&quot; content=&quot;Give it a description&quot;&gt;
+
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;title&gt;Give it a title&lt;/title&gt;
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;style&gt;
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[b]THE CSS TO STYLE THE INVOICE[/b]
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;/style&gt;
+&#160;&#160;&#160;&#160;&lt;/head&gt;
+&#160;&#160;&#160;&#160;&lt;body&gt;
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;[b]HERE THE HTML STRUCTURE PRODUCED BY [c]__toHTML()[/c][/b]
+&#160;&#160;&#160;&#160;&lt;/body&gt;            
+&lt;/html&gt;
+            [/pre]
+        *}
+
+        {*remark
+            
+            Information may be presented, by design, more than once in the HTML
+            that is produced. This approach helps choosing which information suits
+            better the needs of the layout: by hiding the unnecessary structures
+            you can make sure it suits all invoice layouts.
+            
+        *}
+
         {*example
         use \trql\vaesoli\Vaesoli   as v;
         use \trql\quitus\Invoice    as Invoice;
@@ -1787,45 +1831,78 @@ class Invoice extends Intangible
 
         $o = new Invoice();
 
-        if ( $o->load( $szFile = str_replace( '.php','.xml',__FILE__ ) ) )
+        // Let's load an invoice previously saved with [c]save()[/c]
+        if ( $o->load( $szFile = 'invoice.test.xml' ) )
         {
             // Check how the HTML looks like...
             var_dump( [b]$o->__toHTML()[/b] );
-        }        
+        }
 
         // Gives something like...
-        // &lt;article class=&quot;invoice&quot; vocab=&quot;https://schema.org/&quot; typeof=&quot;Invoice&quot;&gt;
-        //   &lt;section class=&quot;logo&quot; vocab=&quot;https://schema.org/&quot; typeof=&quot;Organization&quot;&gt;
-        //       &lt;span class=\image&quot; property=&quot;image&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/patboens/TRQL-Labs/main/images/LogoStationeryInvoiceQuitus.png&quot; /&gt;&lt;/span&gt;
-        //   &lt;/section&gt; &lt;!-- .logo --&gt;
+        // &lt;!-- ** [ START OF INVOICE ] ******************** --&gt;
+        // &lt;!-- ******************************************** --&gt;
+        // &lt;!-- ******************************************** --&gt;
+        // &lt;article class=&quot;invoice&quot;
+        //          contenteditable=&quot;true&quot;
+        //          data-lang=&quot;fr&quot;
+        //          data-country=&quot;BE&quot;
+        //          data-vatID=&quot;BE0111.222.333&quot;
+        //          data-taxID=&quot;RPR 0878.127.142 RPM&quot;
+        //          vocab=&quot;https://schema.org/&quot; typeof=&quot;Invoice&quot;&gt;
         // 
+        //   &lt;!-- ** [ LOGO ] ****************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;section class=&quot;logo&quot; vocab=&quot;https://schema.org/&quot; typeof=&quot;Organization&quot;&gt;
+        //       &lt;span class=&quot;image&quot; property=&quot;image&quot;&gt;&lt;img src=&quot;https://raw.githubusercontent.com/patboens/TRQL-Labs/main/images/LogoStationeryInvoiceQuitus.png&quot; /&gt;&lt;/span&gt;
+        //   &lt;/section&gt; &lt;!-- .logo --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        // 
+        // 
+        //   &lt;!-- ** [ ADDRESSES ] ************************* --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
         //   &lt;section class=&quot;Addresses&quot; vocab=&quot;https://schema.org/&quot; typeof=&quot;PostalAddress&quot;&gt;
         // 
-        //     &lt;section class=&quot;deliveryAddress&quot;&gt;
-        //       &lt;span class=\street&quot;     property=&quot;streetAddress&quot;&gt;&lt;/span&gt;
-        //       &lt;span class=\zip&quot;        property=&quot;postalCode&quot;&gt;&lt;/span&gt;
-        //       &lt;span class=\city&quot;       property=&quot;addressLocality&quot;&gt;&lt;/span&gt;
-        //       &lt;span class=\state&quot;      property=&quot;addressRegion&quot;&gt;&lt;/span&gt;
-        //       &lt;span class=\country&quot;    property=&quot;addressCountry&quot;&gt;&lt;/span&gt;
+        //     &lt;section class=&quot;deliveryAddress&quot; contenteditable=&quot;true&quot;&gt;
+        //       &lt;span class=&quot;street&quot;     property=&quot;streetAddress&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=&quot;zip&quot;        property=&quot;postalCode&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=&quot;city&quot;       property=&quot;addressLocality&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=&quot;zip-and-city&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=&quot;state&quot;      property=&quot;addressRegion&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=&quot;country&quot;    property=&quot;addressCountry&quot;&gt;&lt;/span&gt;
         //     &lt;/section&gt; &lt;!-- .deliveryAddress --&gt;
         // 
-        //     &lt;section class=&quot;billingAddress&quot;&gt;
-        //       &lt;span class=\street&quot;     property=&quot;streetAddress&quot;&gt;Rue des chats, 100&lt;/span&gt;
-        //       &lt;span class=\zip&quot;        property=&quot;postalCode&quot;&gt;4000&lt;/span&gt;
-        //       &lt;span class=\city&quot;       property=&quot;addressLocality&quot;&gt;Li&quot;&iquest;ge&lt;/span&gt;
-        //       &lt;span class=\state&quot;      property=&quot;addressRegion&quot;&gt;&lt;/span&gt;
-        //       &lt;span class=\country&quot;    property=&quot;addressCountry&quot;&gt;BE&lt;/span&gt;
+        //     &lt;section class=&quot;billingAddress&quot; contenteditable=&quot;true&quot;&gt;
+        //       &lt;span class=&quot;street&quot;     property=&quot;streetAddress&quot;&gt;Rue des chats, 100&lt;/span&gt;
+        //       &lt;span class=&quot;zip&quot;        property=&quot;postalCode&quot;&gt;4000&lt;/span&gt;
+        //       &lt;span class=&quot;city&quot;       property=&quot;addressLocality&quot;&gt;Liège&lt;/span&gt;
+        //       &lt;span class=&quot;zip-and-city&quot;&gt;4000 Liège&lt;/span&gt;
+        //       &lt;span class=&quot;state&quot;      property=&quot;addressRegion&quot;&gt;&lt;/span&gt;
+        //       &lt;span class=&quot;country&quot;    property=&quot;addressCountry&quot;&gt;BE&lt;/span&gt;
         //     &lt;/section&gt; &lt;!-- .billingAddress --&gt;
         //   &lt;/section&gt; &lt;!-- .Addresses --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
         // 
+        // 
+        //   &lt;!-- ** [ INVOICE HEADER ] ******************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
         //   &lt;section class=&quot;invoiceHeader&quot;&gt;
         //     &lt;section class=&quot;mandatory&quot;&gt;
-        //       &lt;span class=&quot;refNumber&quot;&gt;2014/000001&lt;/span&gt;
-        //       &lt;span class=&quot;vatID&quot;&gt;BE0463.478.965&lt;/span&gt;
-        //       &lt;span class=&quot;issueDate&quot;&gt;16-05-2014&lt;/span&gt;
-        //       &lt;span class=&quot;order&quot;&gt;&lt;/span&gt;
-        //       &lt;span class=&quot;deliveryNote&quot;&gt;&lt;/span&gt;
-        //       &lt;span class=&quot;paymentDueDate&quot;&gt;30-05-2014&lt;/span&gt;
+        //       &lt;section class=&quot;group&quot;&gt;
+        //         &lt;span class=&quot;refNumber&quot;&gt;2014/000001&lt;/span&gt;
+        //         &lt;span class=&quot;vatID&quot;&gt;BE0463.478.965&lt;/span&gt;
+        //         &lt;span class=&quot;issueDate&quot;&gt;16-05-2014&lt;/span&gt;
+        //       &lt;/section&gt; &lt;!-- .group --&gt;
+        // 
+        //       &lt;section class=&quot;group&quot;&gt;
+        //         &lt;span class=&quot;order&quot;&gt;&lt;/span&gt;
+        //         &lt;span class=&quot;deliveryNote&quot;&gt;&lt;/span&gt;
+        //         &lt;span class=&quot;paymentDueDate&quot;&gt;30-05-2014&lt;/span&gt;
+        //       &lt;/section&gt; &lt;!-- .group --&gt;
         //     &lt;/section&gt; &lt;!-- .mandatory --&gt;
         // 
         //     &lt;section class=&quot;miscellaneous&quot;&gt;
@@ -1838,67 +1915,121 @@ class Invoice extends Intangible
         //       &lt;span class=&quot;draft&quot;&gt;no&lt;/span&gt;
         //       &lt;span class=&quot;refNumber&quot;&gt;2014/000001&lt;/span&gt;
         //     &lt;/section&gt; &lt;!-- .miscellaneous --&gt;
-        // 
         //   &lt;/section&gt; &lt;!-- .invoiceHeader --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
         // 
+        // 
+        //   &lt;!-- ** [ INVOICE BODY] *********************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
         //   &lt;section class=&quot;invoiceBody&quot;&gt;
-        //     &lt;div class=&quot;lineOfDetail&quot;&gt;
-        //       &lt;span class=&quot;quantity&quot;&gt;1&lt;/span&gt;
-        //       &lt;span class=&quot;unitPrice&quot; property=&quot;price&quot;&gt;150.0000&lt;/span&gt;
-        //       &lt;span class=&quot;description&quot;&gt;Lump-sum amount&lt;/span&gt;
-        //       &lt;span class=&quot;htva&quot; property=&quot;price&quot;&gt;150.0000&lt;/span&gt;
-        //       &lt;span class=&quot;vatpercent&quot;&gt;21.0000&lt;/span&gt;
-        //       &lt;span class=&quot;tva&quot;&gt;31.5000&lt;/span&gt;
-        //       &lt;span class=&quot;tvac&quot; property=&quot;price&quot;&gt;181.5000&lt;/span&gt;
-        //     &lt;/div&gt; &lt;!-- .lineOfDetail --&gt;
+        //     &lt;section class=&quot;lines&quot;&gt;
+        //       &lt;section class=&quot;lineOfDetail&quot;&gt;
+        //         &lt;span class=&quot;quantity&quot;&gt;1&lt;/span&gt;
+        //         &lt;span class=&quot;unitPrice&quot; property=&quot;price&quot;&gt;150.00&lt;/span&gt;
+        //         &lt;span class=&quot;description&quot;&gt;Lump-sum amount&lt;/span&gt;
+        //         &lt;span class=&quot;htva&quot; property=&quot;price&quot;&gt;150.00&lt;/span&gt;
+        //         &lt;span class=&quot;vatpercent&quot;&gt;21.00&lt;/span&gt;
+        //         &lt;span class=&quot;tva&quot;&gt;31.50&lt;/span&gt;
+        //         &lt;span class=&quot;tvac&quot; property=&quot;price&quot;&gt;181.50&lt;/span&gt;
+        //       &lt;/section&gt; &lt;!-- .lineOfDetail --&gt;
         // 
-        //     &lt;div class=&quot;totals&quot;&gt;
-        //        &lt;span class=&quot;currency&quot;&gt;EUR&lt;/span&gt;
-        //        &lt;span class=&quot;totalHTVA&quot;&gt;150.0000&lt;/span&gt;
-        //        &lt;span class=&quot;VATPercent&quot;&gt;&amp;#160;&lt;/span&gt;
-        //        &lt;span class=&quot;totalTVA&quot;&gt;31.5000&lt;/span&gt;
-        //        &lt;span class=&quot;totalTVAC&quot;&gt;181.5000&lt;/span&gt;
-        //     &lt;/div&gt; &lt;!-- .totals --&gt;
+        //       &lt;section class=&quot;totals&quot;&gt;
+        //          &lt;span&gt;&lt;/span&gt;
+        //          &lt;span&gt;&lt;/span&gt;
+        //          &lt;span class=&quot;currency&quot;&gt;EUR&lt;/span&gt;
+        //          &lt;span class=&quot;totalHTVA&quot;&gt;150.00&lt;/span&gt;
+        //          &lt;span class=&quot;VATPercent&quot;&gt;&amp;#160;&lt;/span&gt;
+        //          &lt;span class=&quot;totalTVA&quot;&gt;31.50&lt;/span&gt;
+        //          &lt;span class=&quot;totalTVAC&quot;&gt;181.50&lt;/span&gt;
+        //       &lt;/section&gt; &lt;!-- .totals --&gt;
+        //     &lt;/section&gt; &lt;!-- .lines --&gt;
         // 
         //     &lt;section class=&quot;totalPaymentDue&quot; property=&quot;totalPaymentDue&quot; typeof=&quot;PriceSpecification&quot;&gt;
-        //        &lt;span class=&quot;prepayment&quot;&gt;0.0000&lt;/span&gt;
+        //        &lt;span class=&quot;prepayment&quot;&gt;0.00&lt;/span&gt;
         //        &lt;span class=&quot;prepayment currency&quot;&gt;EUR&lt;/span&gt;
-        //        &lt;span class=&quot;totalPaymentDue&quot;&gt;181.5000&lt;/span&gt;
+        //        &lt;span class=&quot;prepayment-and-currency&quot;&gt;0.00 EUR&lt;/span&gt;
+        //        &lt;span class=&quot;totalPaymentDue&quot;&gt;181.50&lt;/span&gt;
         //        &lt;span class=&quot;totalPaymentDue currency&quot;&gt;EUR&lt;/span&gt;
+        //        &lt;span class=&quot;totalPaymentDue-and-currency&quot;&gt;181.50 EUR&lt;/span&gt;
         //     &lt;/section&gt; &lt;!-- .totalPaymentDue --&gt;
-        // 
         //   &lt;/section&gt; &lt;!-- .invoiceBody --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
         // 
+        // 
+        //   &lt;!-- ** [ INVOICE FOOTER ] ******************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
         //   &lt;section class=&quot;invoiceFooter&quot;&gt;
-        //       &lt;span class=\invoiceFooter&quot;&gt;This will be printed in the footer of the invoice: it's information for the customer&lt;/span&gt;
-        //       &lt;span class=\uniqueRef&quot;&gt;33d6ad86-a216-4233-a19b-b8b54fe90e33&lt;/span&gt;
+        //       &lt;span class=&quot;footer&quot;&gt;This will be printed in the footer of the invoice: it's information for the customer&lt;/span&gt;
+        //       &lt;span class=&quot;uniqueRef&quot;&gt;33d6ad86-a216-4233-a19b-b8b54fe90e33&lt;/span&gt;
         //   &lt;/section&gt; &lt;!-- .invoiceFooter --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
         // 
+        // 
+        //   &lt;!-- ** [ DOCUMENT FOOTER ] ******************* --&gt;
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
         //   &lt;section class=&quot;documentFooter&quot; vocab=&quot;https://schema.org/&quot; typeof=&quot;Organization&quot;&gt;
         //     &lt;span class=&quot;name&quot; property=&quot;name&quot;&gt;FastWrite&lt;/span&gt;
         //     &lt;span class=&quot;legalForm&quot;&gt;sprl/bvba&lt;/span&gt;
-        //     &lt;span class=&quot;street&quot;&gt;Rue Am&quot;d&quot; Bracke, 9&lt;/span&gt;
+        //     &lt;span class=&quot;name-and-legalform&quot;&gt;&lt;span&gt;&lt;FastWrite&lt;/span&gt; &lt;span&gt;sprl/bvba&lt;/span&gt;&lt;/span&gt;
+        //     &lt;span class=&quot;street&quot;&gt;Rue Amédé Bracke, 9&lt;/span&gt;
         //     &lt;span class=&quot;zip&quot;&gt;1950&lt;/span&gt;
+        //     &lt;span class=&quot;city&quot;&gt;Kraainem&lt;/span&gt;
         //     &lt;span class=&quot;country&quot;&gt;BE&lt;/span&gt;
         //     &lt;span class=&quot;phone&quot;&gt;+32 2 111.22.33&lt;/span&gt;
         //     &lt;span class=&quot;email&quot;&gt;pb@trql.fm&lt;/span&gt;
         //     &lt;span class=&quot;webSite&quot;&gt;https://www.fastwrite.com&lt;/span&gt;
+        //     &lt;span class=&quot;email-and-website&quot;&gt;&lt;span&gt;pb@trql.fm&lt;/span&gt; &lt;span&gt;https://www.fastwrite.com&lt;/span&gt;&lt;/span&gt;
         //     &lt;span class=&quot;vatID&quot;&gt;BE0111.222.333&lt;/span&gt;
         //     &lt;span class=&quot;taxID&quot;&gt;RPR 0878.127.142 RPM&lt;/span&gt;
+        //     &lt;span class=&quot;vatID-and-taxID&quot;&gt;&lt;span&gt;BE0111.222.333&lt;/span&gt; &lt;span&gt;&lt;/span&gt;RPR 0878.127.142 RPM&lt;/span&gt;
         //     &lt;span class=&quot;bankName&quot;&gt;Nagelmackers&lt;/span&gt;
         //     &lt;span class=&quot;bankAccountNumber&quot;&gt;BE76 132 5143964 95&lt;/span&gt;
         //     &lt;span class=&quot;bankAccountBIC&quot;&gt;BNAGBEBB&lt;/span&gt;
+        //     &lt;span class=&quot;bank-name-number-bic&quot;&gt;&lt;span&gt;Nagelmackers&lt;/span&gt; &lt;span&gt;BE76 132 5143964 95&lt;/span&gt; &lt;span&gt;BNAGBEBB&lt;/span&gt;&lt;/span&gt;
         //     &lt;section class=&quot;address&quot; vocab=&quot;https://schema.org/&quot; typeof=&quot;PostalAddress&quot;&gt;
-        //       &lt;span class=\street&quot;     property=&quot;streetAddress&quot;&gt;Rue Am&quot;d&quot; Bracke, 9&lt;/span&gt;
+        //       &lt;span class=\street&quot;     property=&quot;streetAddress&quot;&gt;Rue Amédé Bracke, 9&lt;/span&gt;
         //       &lt;span class=\zip&quot;        property=&quot;postalCode&quot;&gt;1950&lt;/span&gt;
         //       &lt;span class=\city&quot;       property=&quot;addressLocality&quot;&gt;Kraainem&lt;/span&gt;
         //       &lt;span class=\state&quot;      property=&quot;addressRegion&quot;&gt;&lt;/span&gt;
         //       &lt;span class=\country&quot;    property=&quot;addressCountry&quot;&gt;BE&lt;/span&gt;
         //     &lt;/section&gt; &lt;!-- .address --&gt;
         //   &lt;/section&gt; &lt;!-- .documentFooter --&gt;
-        // 
+        //   &lt;!-- ****************************************** --&gt;
+        //   &lt;!-- ****************************************** --&gt;
         // &lt;/article&gt; &lt;!-- .invoice --&gt;
+        // &lt;!-- ** [ END OF INVOICE ] ********************** --&gt;
+        // &lt;!-- ******************************************** --&gt;
+        // &lt;!-- ******************************************** --&gt;
         *}
+
+        {*todo
+            It is possible to work with parameters for [c]__toHTML()[/c].[br][br]
+
+            For example, we can give it a format like "%L %A %IH %IB %IF %DF"
+            (based on what I do in Glossary class). With this, the user can
+            choose the order in which each major section is presented in the
+            final output (%L = Logo; %A = Addresses; %IH = Invoice Header; 
+            %IB = Invoice Body; %IF = Invoice Footer;%DF = Document Footer).[br][br]
+
+            For example, one can also disable the rendering of certain areas
+            through another parameter especially if the parameter passed to
+            [c]__toHTML()[/c] is an associative array.[br][br]
+
+            Still using parameters, it is possible to preface the detail lines
+            with headers (which is missing for the moment)[br][br]
+
+            Finally, still using parameters, it is possible to call [c]__toHTML()[/c]
+            to generate parts of the globable structure by successive calls. It
+            would be the programmer who assembles all the parts and adds
+            elements of his own (like for example the headers of the detail
+            lines).[br]
+        *}
 
         *}}
     */
@@ -1908,38 +2039,69 @@ class Invoice extends Intangible
     {
         $szHTML = "";
 
-        $szHTML .= "<article class=\"invoice\" vocab=\"https://schema.org/\" typeof=\"Invoice\">\n";
+        $szHTML .= "<!-- ** [ START OF INVOICE ] ******************** -->\n";
+        $szHTML .= "<!-- ******************************************** -->\n";
+        $szHTML .= "<!-- ******************************************** -->\n";
+        $szHTML .= "<article class=\"invoice\" \n"                                          .
+                   "         contenteditable=\"true\" \n"                                   .
+                   "         data-lang=\"{$this->lang}\" \n"                                .
+                   "         data-country=\"{$this->billingAddress->addressCountry}\" \n"   .
+                   "         data-vatID=\"{$this->issuer->vatID}\" \n"                      .
+                   "         data-taxID=\"{$this->issuer->taxID}\" \n"                      .
+                   "         vocab=\"https://schema.org/\" typeof=\"Invoice\">\n\n";
+
+            $szHTML .= "  <!-- ** [ LOGO ] ****************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
             $szHTML .= "  <section class=\"logo\" vocab=\"https://schema.org/\" typeof=\"Organization\">\n";
-            $szHTML .= "      <span class=\image\" property=\"image\">" . ( ! empty( $this->issuer->image ) ? "<img src=\"{$this->issuer->image}\" />" : '' ) . "</span>\n";
-            $szHTML .= "  </section> <!-- .logo -->\n\n";
+            $szHTML .= "      <span class=\"image\" property=\"image\">" . ( ! empty( $this->issuer->image ) ? "<img src=\"{$this->issuer->image}\" />" : '' ) . "</span>\n";
+            $szHTML .= "  </section> <!-- .logo -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n\n\n";
 
+
+            $szHTML .= "  <!-- ** [ ADDRESSES ] ************************* -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
             $szHTML .= "  <section class=\"Addresses\" vocab=\"https://schema.org/\" typeof=\"PostalAddress\">\n\n";
-            $szHTML .= "    <section class=\"deliveryAddress\">\n";
-            $szHTML .= "      <span class=\street\"     property=\"streetAddress\">"      . ( $this->deliveryAddress->streetAddress    ?? '' ) ."</span>\n";
-            $szHTML .= "      <span class=\zip\"        property=\"postalCode\">"         . ( $this->deliveryAddress->postalCode       ?? '' ) ."</span>\n";
-            $szHTML .= "      <span class=\city\"       property=\"addressLocality\">"    . ( $this->deliveryAddress->addressLocality  ?? '' ) ."</span>\n";
-            $szHTML .= "      <span class=\state\"      property=\"addressRegion\">"      . ( $this->deliveryAddress->addressRegion    ?? '' ) ."</span>\n";
-            $szHTML .= "      <span class=\country\"    property=\"addressCountry\">"     . ( $this->deliveryAddress->addressCountry   ?? '' ) ."</span>\n";
+            $szHTML .= "    <section class=\"deliveryAddress\" contenteditable=\"true\">\n";
+            $szHTML .= "      <span class=\"street\"     property=\"streetAddress\">"      . ( $this->deliveryAddress->streetAddress    ?? '' ) . "</span>\n";
+            $szHTML .= "      <span class=\"zip\"        property=\"postalCode\">"         . ( $this->deliveryAddress->postalCode       ?? '' ) . "</span>\n";
+            $szHTML .= "      <span class=\"city\"       property=\"addressLocality\">"    . ( $this->deliveryAddress->addressLocality  ?? '' ) . "</span>\n";
+            $szHTML .= "      <span class=\"zip-and-city\">"  .                        trim( ( $this->deliveryAddress->postalCode       ?? '' ) . ' ' .
+                                                                                             ( $this->deliveryAddress->addressLocality  ?? '' ) ) . "</span>\n";
+            $szHTML .= "      <span class=\"state\"      property=\"addressRegion\">"      . ( $this->deliveryAddress->addressRegion    ?? '' ) . "</span>\n";
+            $szHTML .= "      <span class=\"country\"    property=\"addressCountry\">"     . ( $this->deliveryAddress->addressCountry   ?? '' ) . "</span>\n";
             $szHTML .= "    </section> <!-- .deliveryAddress -->\n\n";
-            $szHTML .= "    <section class=\"billingAddress\">\n";
-            $szHTML .= "      <span class=\street\"     property=\"streetAddress\">"      . ( $this->billingAddress->streetAddress     ?? '' ) ."</span>\n";
-            $szHTML .= "      <span class=\zip\"        property=\"postalCode\">"         . ( $this->billingAddress->postalCode        ?? '' ) ."</span>\n";
-            $szHTML .= "      <span class=\city\"       property=\"addressLocality\">"    . ( $this->billingAddress->addressLocality   ?? '' ) ."</span>\n";
-            $szHTML .= "      <span class=\state\"      property=\"addressRegion\">"      . ( $this->billingAddress->addressRegion     ?? '' ) ."</span>\n";
-            $szHTML .= "      <span class=\country\"    property=\"addressCountry\">"     . ( $this->billingAddress->addressCountry    ?? '' ) ."</span>\n";
+            $szHTML .= "    <section class=\"billingAddress\" contenteditable=\"true\">\n";
+            $szHTML .= "      <span class=\"street\"     property=\"streetAddress\">"      . ( $this->billingAddress->streetAddress     ?? '' ) . "</span>\n";
+            $szHTML .= "      <span class=\"zip\"        property=\"postalCode\">"         . ( $this->billingAddress->postalCode        ?? '' ) . "</span>\n";
+            $szHTML .= "      <span class=\"city\"       property=\"addressLocality\">"    . ( $this->billingAddress->addressLocality   ?? '' ) . "</span>\n";
+            $szHTML .= "      <span class=\"zip-and-city\">"  .                        trim( ( $this->billingAddress->postalCode        ?? '' ) . ' ' .
+                                                                                             ( $this->billingAddress->addressLocality   ?? '' ) ) . "</span>\n";
+            $szHTML .= "      <span class=\"state\"      property=\"addressRegion\">"      . ( $this->billingAddress->addressRegion     ?? '' ) . "</span>\n";
+            $szHTML .= "      <span class=\"country\"    property=\"addressCountry\">"     . ( $this->billingAddress->addressCountry    ?? '' ) . "</span>\n";
             $szHTML .= "    </section> <!-- .billingAddress -->\n";
-            $szHTML .= "  </section> <!-- .Addresses -->\n\n";
+            $szHTML .= "  </section> <!-- .Addresses -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n\n\n";
 
 
+            $szHTML .= "  <!-- ** [ INVOICE HEADER ] ******************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
             $szHTML .= "  <section class=\"invoiceHeader\">\n";
-
             $szHTML .= "    <section class=\"mandatory\">\n";
-            $szHTML .= "      <span class=\"refNumber\">{$this->refNumber}</span>\n";
-            $szHTML .= "      <span class=\"vatID\">{$this->customer->vatID}</span>\n";
-            $szHTML .= "      <span class=\"issueDate\">" . date( $this->dateFormat,strtotime( $this->issueDate ) ) . "</span>\n";
-            $szHTML .= "      <span class=\"order\">{$this->referencesOrder->orderNumber}</span>\n";
-            $szHTML .= "      <span class=\"deliveryNote\"></span>\n";
-            $szHTML .= "      <span class=\"paymentDueDate\">" . date( $this->dateFormat,strtotime( $this->paymentDueDate ) ) . "</span>\n";
+            $szHTML .= "      <section class=\"group\">\n";
+            $szHTML .= "        <span class=\"refNumber\">{$this->refNumber}</span>\n";
+            $szHTML .= "        <span class=\"vatID\">{$this->customer->vatID}</span>\n";
+            $szHTML .= "        <span class=\"issueDate\">" . date( $this->dateFormat,strtotime( $this->issueDate ) ) . "</span>\n";
+            $szHTML .= "      </section> <!-- .group -->\n\n";
+            $szHTML .= "      <section class=\"group\">\n";
+            $szHTML .= "        <span class=\"order\">{$this->referencesOrder->orderNumber}</span>\n";
+            $szHTML .= "        <span class=\"deliveryNote\"></span>\n";
+            $szHTML .= "        <span class=\"paymentDueDate\">" . date( $this->dateFormat,strtotime( $this->paymentDueDate ) ) . "</span>\n";
+            $szHTML .= "      </section> <!-- .group -->\n";
             $szHTML .= "    </section> <!-- .mandatory -->\n\n";
 
             $szHTML .= "    <section class=\"miscellaneous\">\n";
@@ -1951,61 +2113,90 @@ class Invoice extends Intangible
             $szHTML .= "      <span class=\"proforma\">" . ( $this->proforma ? 'yes' : 'no' ) . "</span>\n";
             $szHTML .= "      <span class=\"draft\">"    . ( $this->draft ? 'yes' : 'no' ) . "</span>\n";
             $szHTML .= "      <span class=\"refNumber\">{$this->refNumber}</span>\n";
-            $szHTML .= "    </section> <!-- .miscellaneous -->\n\n";
-            $szHTML .= "  </section> <!-- .invoiceHeader -->\n\n";
+            $szHTML .= "    </section> <!-- .miscellaneous -->\n";
+            $szHTML .= "  </section> <!-- .invoiceHeader -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n\n\n";
 
-            $szHTML .= "  <section class=\"invoiceBody\">\n";
 
-            $iIndent = 6;
-            foreach( $this->aLines as $aLine )
-            {
-                $szHTML .= "    <div class=\"lineOfDetail\">\n";
-                    $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"quantity\">{$aLine['qty']}</span>\n";
-                    $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"unitPrice\" property=\"price\">" . number_format( $aLine['unitprice' ],$this->iRounding,'.','' ) . "</span>\n";;
-                    $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"description\">" . ( ! empty( $aLine['id'] ) ? $aLine['id'] . '&#8211;' : '' ) . $aLine['desc']  .  "</span>\n";
-                    $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"htva\" property=\"price\">"      . number_format( $aLine['htva'      ],$this->iRounding,'.','' ) . "</span>\n";
-                    $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"vatpercent\">"                   . number_format( $aLine['vatpercent'],$this->iRounding,'.','' ) . "</span>\n";
-                    $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"tva\">"                          . number_format( $aLine['tva'       ],$this->iRounding,'.','' ) . "</span>\n";
-                    $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"tvac\" property=\"price\">"      . number_format( $aLine['tvac'      ],$this->iRounding,'.','' ) . "</span>\n";
-                $szHTML .= "    </div> <!-- .lineOfDetail -->\n";
-            }
+            $szHTML .= "  <!-- ** [ INVOICE BODY] *********************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+                $szHTML .= "  <section class=\"invoiceBody\">\n";
+                $szHTML .= "    <section class=\"lines\">\n";
 
-            $szHTML .= "\n    <div class=\"totals\">\n";
-            $szHTML .= "       <span class=\"currency\">{$this->currency}</span>\n";
-            $szHTML .= "       <span class=\"totalHTVA\">"          . number_format( $this->totalHTVA       ,$this->iRounding,'.','' ) . "</span>\n";
-            $szHTML .= "       <span class=\"VATPercent\">&#160;</span>\n";
-            $szHTML .= "       <span class=\"totalTVA\">"           . number_format( $this->totalTVA        ,$this->iRounding,'.','' ) . "</span>\n";
-            $szHTML .= "       <span class=\"totalTVAC\">"          . number_format( $this->totalTVAC       ,$this->iRounding,'.','' ) . "</span>\n";
-            $szHTML .= "    </div> <!-- .totals -->\n\n";
+                    $iIndent = 8;
+                    foreach( $this->aLines as $aLine )
+                    {
+                        $szHTML .= "      <section class=\"lineOfDetail\">\n";
+                            $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"quantity\">{$aLine['qty']}</span>\n";
+                            $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"unitPrice\" property=\"price\">" . number_format( $aLine['unitprice' ],$this->iRoundingDisplay,'.','' ) . "</span>\n";;
+                            $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"description\">" . ( ! empty( $aLine['id'] ) ? $aLine['id'] . '&#8211;' : '' ) . $aLine['desc']  .  "</span>\n";
+                            $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"htva\" property=\"price\">"      . number_format( $aLine['htva'      ],$this->iRoundingDisplay,'.','' ) . "</span>\n";
+                            $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"vatpercent\">"                   . number_format( $aLine['vatpercent'],$this->iRoundingDisplay,'.','' ) . "</span>\n";
+                            $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"tva\">"                          . number_format( $aLine['tva'       ],$this->iRoundingDisplay,'.','' ) . "</span>\n";
+                            $szHTML .= str_repeat( ' ',$iIndent ) . "<span class=\"tvac\" property=\"price\">"      . number_format( $aLine['tvac'      ],$this->iRoundingDisplay,'.','' ) . "</span>\n";
+                        $szHTML .= "      </section> <!-- .lineOfDetail -->\n";
+                    }
 
-            $szHTML .= "    <section class=\"totalPaymentDue\" property=\"totalPaymentDue\" typeof=\"PriceSpecification\">\n";
-            $szHTML .= "       <span class=\"prepayment\">"         . number_format( $this->prepayment      ,$this->iRounding,'.','' ) . "</span>\n";
-            $szHTML .= "       <span class=\"prepayment currency\">{$this->currency}</span>\n";
-            $szHTML .= "       <span class=\"totalPaymentDue\">"    . number_format( $this->totalPaymentDue ,$this->iRounding,'.','' ) . "</span>\n";
-            $szHTML .= "       <span class=\"totalPaymentDue currency\">{$this->currency}</span>\n";
-            $szHTML .= "    </section> <!-- .totalPaymentDue -->\n\n";
+                    $szHTML .= "\n      <section class=\"totals\">\n";
+                    $szHTML .= "         <span></span>\n";
+                    $szHTML .= "         <span></span>\n";
+                    $szHTML .= "         <span class=\"currency\">{$this->currency}</span>\n";
+                    $szHTML .= "         <span class=\"totalHTVA\">"          . number_format( $this->totalHTVA       ,$this->iRoundingDisplay,'.','' ) . "</span>\n";
+                    $szHTML .= "         <span class=\"VATPercent\">&#160;</span>\n";
+                    $szHTML .= "         <span class=\"totalTVA\">"           . number_format( $this->totalTVA        ,$this->iRoundingDisplay,'.','' ) . "</span>\n";
+                    $szHTML .= "         <span class=\"totalTVAC\">"          . number_format( $this->totalTVAC       ,$this->iRoundingDisplay,'.','' ) . "</span>\n";
+                    $szHTML .= "      </section> <!-- .totals -->\n";
+                $szHTML .= "    </section> <!-- .lines -->\n\n";
 
-            $szHTML .= "  </section> <!-- .invoiceBody -->\n\n";
+                $szHTML .= "    <section class=\"totalPaymentDue\" property=\"totalPaymentDue\" typeof=\"PriceSpecification\">\n";
+                $szHTML .= "       <span class=\"prepayment\">"                     . number_format( $this->prepayment      ,$this->iRoundingDisplay,'.','' ) . "</span>\n";
+                $szHTML .= "       <span class=\"prepayment currency\">{$this->currency}</span>\n";
+                $szHTML .= "       <span class=\"prepayment-and-currency\">"        . number_format( $this->prepayment      ,$this->iRoundingDisplay,'.','' ) . " {$this->currency}</span>\n";
+                $szHTML .= "       <span class=\"totalPaymentDue\">"                . number_format( $this->totalPaymentDue ,$this->iRoundingDisplay,'.','' ) . "</span>\n";
+                $szHTML .= "       <span class=\"totalPaymentDue currency\">{$this->currency}</span>\n";
+                $szHTML .= "       <span class=\"totalPaymentDue-and-currency\">"   . number_format( $this->totalPaymentDue ,$this->iRoundingDisplay,'.','' ) . " {$this->currency}</span>\n";
+                $szHTML .= "    </section> <!-- .totalPaymentDue -->\n";
 
+                $szHTML .= "  </section> <!-- .invoiceBody -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n\n\n";
+
+
+            $szHTML .= "  <!-- ** [ INVOICE FOOTER ] ******************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
             $szHTML .= "  <section class=\"invoiceFooter\">\n";
-            $szHTML .= "      <span class=\invoiceFooter\">{$this->footer}</span>\n";
-            $szHTML .= "      <span class=\uniqueRef\">{$this->identifier}</span>\n";
-            $szHTML .= "  </section> <!-- .invoiceFooter -->\n\n";
+            $szHTML .= "      <span class=\"footer\">{$this->footer}</span>\n";
+            $szHTML .= "      <span class=\"uniqueRef\">{$this->identifier}</span>\n";
+            $szHTML .= "  </section> <!-- .invoiceFooter -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n\n\n";
 
+
+            $szHTML .= "  <!-- ** [ DOCUMENT FOOTER ] ******************* -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
             $szHTML .= "  <section class=\"documentFooter\" vocab=\"https://schema.org/\" typeof=\"Organization\">\n";
             $szHTML .= "    <span class=\"name\" property=\"name\">{$this->issuer->legalName}</span>\n";
             $szHTML .= "    <span class=\"legalForm\">{$this->issuer->legalForm}</span>\n";
+            $szHTML .= "    <span class=\"name-and-legalform\"><span><{$this->issuer->legalName}</span> <span>{$this->issuer->legalForm}</span></span>\n";
             $szHTML .= "    <span class=\"street\">{$this->issuer->address->streetAddress}</span>\n";
             $szHTML .= "    <span class=\"zip\">{$this->issuer->address->postalCode}</span>\n";
+            $szHTML .= "    <span class=\"city\">{$this->issuer->address->addressLocality}</span>\n";
             $szHTML .= "    <span class=\"country\">{$this->issuer->address->addressCountry}</span>\n";
             $szHTML .= "    <span class=\"phone\">{$this->issuer->telephone}</span>\n";
             $szHTML .= "    <span class=\"email\">{$this->issuer->email}</span>\n";
             $szHTML .= "    <span class=\"webSite\">{$this->issuer->url}</span>\n";
+            $szHTML .= "    <span class=\"email-and-website\"><span>{$this->issuer->email}</span> <span>{$this->issuer->url}</span></span>\n";
             $szHTML .= "    <span class=\"vatID\">{$this->issuer->vatID}</span>\n";
             $szHTML .= "    <span class=\"taxID\">{$this->issuer->taxID}</span>\n";
+            $szHTML .= "    <span class=\"vatID-and-taxID\"><span>{$this->issuer->vatID}</span> <span></span>{$this->issuer->taxID}</span>\n";
             $szHTML .= "    <span class=\"bankName\">{$this->issuer->bankAccount->bank}</span>\n";
             $szHTML .= "    <span class=\"bankAccountNumber\">{$this->issuer->bankAccount->identifier}</span>\n";
             $szHTML .= "    <span class=\"bankAccountBIC\">{$this->issuer->bankAccount->BICCode}</span>\n";
+            $szHTML .= "    <span class=\"bank-name-number-bic\"><span>{$this->issuer->bankAccount->bank}</span> <span>{$this->issuer->bankAccount->identifier}</span> <span>{$this->issuer->bankAccount->BICCode}</span></span>\n";
             $szHTML .= "    <section class=\"address\" vocab=\"https://schema.org/\" typeof=\"PostalAddress\">\n";
             $szHTML .= "      <span class=\street\"     property=\"streetAddress\">"      . ( $this->issuer->address->streetAddress    ?? '' ) ."</span>\n";
             $szHTML .= "      <span class=\zip\"        property=\"postalCode\">"         . ( $this->issuer->address->postalCode       ?? '' ) ."</span>\n";
@@ -2013,9 +2204,13 @@ class Invoice extends Intangible
             $szHTML .= "      <span class=\state\"      property=\"addressRegion\">"      . ( $this->issuer->address->addressRegion    ?? '' ) ."</span>\n";
             $szHTML .= "      <span class=\country\"    property=\"addressCountry\">"     . ( $this->issuer->address->addressCountry   ?? '' ) ."</span>\n";
             $szHTML .= "    </section> <!-- .address -->\n";
-            
-            $szHTML .= "  </section> <!-- .documentFooter -->\n\n";
+            $szHTML .= "  </section> <!-- .documentFooter -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
+            $szHTML .= "  <!-- ****************************************** -->\n";
         $szHTML .= "</article> <!-- .invoice -->\n";
+        $szHTML .= "<!-- ** [ END OF INVOICE ] ********************** -->\n";
+        $szHTML .= "<!-- ******************************************** -->\n";
+        $szHTML .= "<!-- ******************************************** -->\n\n";
 
         end:
         return ( $szHTML);

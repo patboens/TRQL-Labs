@@ -1,4 +1,5 @@
 <?php
+/****************************************************************************************/
 /*
     {PYB} is a shortcut for Patrick Boens
 
@@ -17,14 +18,12 @@
 
 */
 
-/****************************************************************************************/
 /** {{{*fheader
-    {*file                  trql.customer.class.php *}
-    {*purpose               recipient of a good, service, product or idea obtained from 
-                            a seller via a financial transaction *}
+    {*file                  trql.advertizing.class.php *}
+    {*purpose               Form of communication for marketing, typically paid for *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
-    {*cdate                 28-08-2020 14:09 *}
+    {*cdate                 20-03-21 15:20 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
     {*UTF-8                 Quel bel été sous le hêtre *}
@@ -34,60 +33,62 @@
     -------------------------------------------------------------------------------------
 
     {*chist
-        {*mdate 31-07-20 16:21 *}
+        {*mdate 20-03-21 15:20 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Original creation
         *}
     *}
 
+
     *}}} */
 /****************************************************************************************/
 namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\quitus\PersonOrOrganization   as PersonOrOrganization;
-
-use DOMDocument;
-use DOMXPath;
-
-if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) )
-    require_once( 'trql.mother.class.php' );
+use \trql\creativework\CreativeWork     as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'PERSONORORGANIZATION_CLASS_VERSION' ) )
-    require_once( 'trql.personororganization.class.php' );
+if ( ! defined( 'CREATIVEWORK_CLASS_VERSIONN' ) )
+    require_once( 'trql.creativework.class.php' );
 
-defined( 'CUSTOMER_CLASS_VERSION' ) or define( 'CUSTOMER_CLASS_VERSION','0.1' );
+defined( 'ADVERTIZING_CLASS_VERSION' ) or define( 'ADVERTIZING_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
-/** {{*class Customer=
+/** {{*class Advertizing=
 
     {*desc
 
-        Recipient of a good, service, product or idea obtained from a seller via 
-        a financial transaction
+        Form of communication for marketing, typically paid for
 
     *}
+
+    {*todo
+        Each class of TRQL Labs should bear a unique ID that should be
+
+        1) published on UIKey
+        2) mentioned on wikidata
 
     *}}
  */
 /* ==================================================================================== */
-class Customer extends PersonOrOrganization
-/*---------------------------------------*/
+class Advertizing extends CreativeWork
+/*----------------------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                                     Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
                                'home'   => null         ,
                                'family' => null         ,
+                               'UIKey'  => null         ,
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q852835';
+    public      $wikidataId                     = 'Q37038';         /* {*property   $wikidataId                     (string)                        Wikidata ID. Form of communication for marketing,
+                                                                                                                                                    typically paid for *} */
 
 
     /* ================================================================================ */
@@ -121,23 +122,7 @@ class Customer extends PersonOrOrganization
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of Customer.__construct() ============================================== */
-    /* ================================================================================ */
-
-
-    public function speak() : string
-    /*----------------------------*/
-    {
-        return( '' );
-    }   /* End of Customer.speak() ==================================================== */
-    /* ================================================================================ */
-
-
-    public function sing() : string
-    /*---------------------------*/
-    {
-        return( '' );
-    }   /* End of Customer.sing() ===================================================== */
+    }   /* End of Advertising.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -172,7 +157,7 @@ class Customer extends PersonOrOrganization
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of Customer.__destruct() =============================================== */
+    }   /* End of Advertising.__destruct() ============================================ */
     /* ================================================================================ */
-}   /* End of class Customer ========================================================== */
+}   /* End of class Advertising ======================================================= */
 /* ==================================================================================== */

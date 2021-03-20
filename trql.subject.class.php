@@ -19,12 +19,13 @@
 
 /****************************************************************************************/
 /** {{{*fheader
-    {*file                  trql.customer.class.php *}
-    {*purpose               recipient of a good, service, product or idea obtained from 
-                            a seller via a financial transaction *}
+    {*file                  trql.subject.class.php *}
+    {*purpose               Being who has a unique consciousness and/or unique personal 
+                            experiences, or an entity that has a relationship with 
+                            another entity that exists outside of itself *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
-    {*cdate                 28-08-2020 14:09 *}
+    {*cdate                 20-03-21 15:38 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
     {*UTF-8                 Quel bel été sous le hêtre *}
@@ -34,7 +35,7 @@
     -------------------------------------------------------------------------------------
 
     {*chist
-        {*mdate 31-07-20 16:21 *}
+        {*mdate 20-03-21 15:38 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Original creation
@@ -45,40 +46,35 @@
 /****************************************************************************************/
 namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\quitus\PersonOrOrganization   as PersonOrOrganization;
-
-use DOMDocument;
-use DOMXPath;
-
-if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) )
-    require_once( 'trql.mother.class.php' );
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\thing\Thing       as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'PERSONORORGANIZATION_CLASS_VERSION' ) )
-    require_once( 'trql.personororganization.class.php' );
+if ( ! defined( 'SUBJECT_CLASS_VERSION' ) )
+    require_once( 'trql.subject.class.php' );
 
-defined( 'CUSTOMER_CLASS_VERSION' ) or define( 'CUSTOMER_CLASS_VERSION','0.1' );
+defined( 'SUBJECT_CLASS_VERSION' ) or define( 'SUBJECT_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
-/** {{*class Customer=
+/** {{*class Subject=
 
     {*desc
 
-        Recipient of a good, service, product or idea obtained from a seller via 
-        a financial transaction
+        Being who has a unique consciousness and/or unique personal experiences,
+        or an entity that has a relationship with another entity that exists
+        outside of itself
 
     *}
 
     *}}
  */
 /* ==================================================================================== */
-class Customer extends PersonOrOrganization
-/*---------------------------------------*/
+class Subject extends Thing
+/*-----------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                                     Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
@@ -86,9 +82,12 @@ class Customer extends PersonOrOrganization
                                'family' => null         ,
                              );
 
-    /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q852835';
 
+    /* === [Properties NOT defined in schema.org] ===================================== */
+    public      $wikidataId                     = 'Q830077';        /* {*property   $wikidataId                 (string)                        Wikidata ID. Being who has a unique consciousness and/or 
+                                                                                                                                                unique personal experiences, or an entity that has a 
+                                                                                                                                                relationship with another entity that exists outside 
+                                                                                                                                                of itself *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -121,23 +120,7 @@ class Customer extends PersonOrOrganization
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of Customer.__construct() ============================================== */
-    /* ================================================================================ */
-
-
-    public function speak() : string
-    /*----------------------------*/
-    {
-        return( '' );
-    }   /* End of Customer.speak() ==================================================== */
-    /* ================================================================================ */
-
-
-    public function sing() : string
-    /*---------------------------*/
-    {
-        return( '' );
-    }   /* End of Customer.sing() ===================================================== */
+    }   /* End of Subject.__construct() =============================================== */
     /* ================================================================================ */
 
 
@@ -172,7 +155,7 @@ class Customer extends PersonOrOrganization
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of Customer.__destruct() =============================================== */
+    }   /* End of Subject.__destruct() ================================================ */
     /* ================================================================================ */
-}   /* End of class Customer ========================================================== */
+}   /* End of class Subject =========================================================== */
 /* ==================================================================================== */
