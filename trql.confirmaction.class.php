@@ -28,7 +28,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              action *}
 
     -------------------------------------------------------------------------------------
@@ -55,10 +55,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\confirmaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\informaction\InformAction    as InformAction;
+use \trql\schema\action\InformAction    as InformAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -66,8 +66,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'INFORMACTION_CLASS_VERSION' ) )
     require_once( 'trql.informaction.class.php' );
-
-
 
 defined( 'CONFIRMACTION_CLASS_VERSION' ) or define( 'CONFIRMACTION_CLASS_VERSION','0.1' );
 

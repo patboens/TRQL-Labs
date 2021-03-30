@@ -34,7 +34,8 @@
     {*cdate                 24-08-2020 03:29 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               web *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -54,7 +55,7 @@
 namespace trql\web;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\creativework\CreativeWork         as CreativeWork;
+use \trql\schema\creativework\CreativeWork         as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -132,7 +133,7 @@ class WebContent extends CreativeWork
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of WebContent.__construct() ============================================ */

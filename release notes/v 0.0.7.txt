@@ -1,6 +1,9 @@
 Change Log v 0.0.7
 ==================
 
+0)  More consitent usage of "{*UTF-8    Quel bel été sous le hêtre *}"
+    as to ensure proper encoding (easy visual check)
+
 1)  All the following classes now share the "business" namespace
 
     trql.travelagency.class.php
@@ -39,7 +42,241 @@ Change Log v 0.0.7
 3)  New classes
 
     trql.advertizing.class.php
-    trql.mailshot.class.php
+    trql.mailshot.class.php (NOT OPERATIONAL YET)
     trql.recipient.class.php
     trql.subject.class.php
 
+4) All "action" classes modified to use the trql\schema\action namespace.
+   All sources saved in UTF-8
+   
+    - trql.acceptaction.class.php
+    - trql.achieveaction.class.php
+    - trql.action.class.php
+    - trql.actionaccessspecification.class.php
+    - trql.actionstatustype.class.php
+    - trql.activateaction.class.php
+    - trql.addaction.class.php
+    - trql.agreeaction.class.php
+    - trql.allocateaction.class.php
+    - trql.appendaction.class.php
+    - trql.applyaction.class.php
+    - trql.arriveaction.class.php
+    - trql.askaction.class.php
+    - trql.assessaction.class.php
+    - trql.assignaction.class.php
+    - trql.authorizeaction.class.php
+    - trql.befriendaction.class.php
+    - trql.bookmarkaction.class.php
+    - trql.borrowaction.class.php
+    - trql.buyaction.class.php
+    - trql.cancelaction.class.php
+    - trql.checkaction.class.php
+    - trql.checkinaction.class.php
+    - trql.checkoutaction.class.php
+    - trql.chooseaction.class.php
+    - trql.commentaction.class.php
+    - trql.communicateaction.class.php
+    - trql.confirmaction.class.php
+    - trql.consumeaction.class.php
+    - trql.controlaction.class.php
+    - trql.cookaction.class.php
+    - trql.createaction.class.php
+    - trql.deactivateaction.class.php
+    - trql.deleteaction.class.php
+    - trql.departaction.class.php
+    - trql.disagreeaction.class.php
+    - trql.discoveraction.class.php
+    - trql.dislikeaction.class.php
+    - trql.donateaction.class.php
+    - trql.downloadaction.class.php
+    - trql.drawaction.class.php
+    - trql.drinkaction.class.php
+    - trql.eataction.class.php
+    - trql.endorseaction.class.php
+    - trql.exerciseaction.class.php
+    - trql.filmaction.class.php
+    - trql.findaction.class.php
+    - trql.followaction.class.php
+    - trql.ignoreaction.class.php
+    - trql.informaction.class.php
+    - trql.insertaction.class.php
+    - trql.installaction.class.php
+    - trql.interactaction.class.php
+    - trql.interactioncounter.class.php
+    - trql.inviteaction.class.php
+    - trql.joinaction.class.php
+    - trql.leaveaction.class.php
+    - trql.lendaction.class.php
+    - trql.likeaction.class.php
+    - trql.listenaction.class.php
+    - trql.loseaction.class.php
+    - trql.marryaction.class.php
+    - trql.moveaction.class.php
+    - trql.orderaction.class.php
+    - trql.organizeaction.class.php
+    - trql.paintaction.class.php
+    - trql.payaction.class.php
+    - trql.performaction.class.php
+    - trql.photographaction.class.php
+    - trql.planaction.class.php
+    - trql.playaction.class.php
+    - trql.preorderaction.class.php
+    - trql.prependaction.class.php
+    - trql.quoteaction.class.php
+    - trql.reactaction.class.php
+    - trql.readaction.class.php
+    - trql.receiveaction.class.php
+    - trql.registeraction.class.php
+    - trql.rejectaction.class.php
+    - trql.rentaction.class.php
+    - trql.replaceaction.class.php
+    - trql.replyaction.class.php
+    - trql.reserveaction.class.php
+    - trql.resumeaction.class.php
+    - trql.returnaction.class.php
+    - trql.reviewaction.class.php
+    - trql.rsvpaction.class.php
+    - trql.scheduleaction.class.php
+    - trql.searchaction.class.php
+    - trql.sellaction.class.php
+    - trql.sendaction.class.php
+    - trql.shareaction.class.php
+    - trql.subscribeaction.class.php
+    - trql.suspendaction.class.php
+    - trql.takeaction.class.php
+    - trql.tieaction.class.php
+    - trql.tipaction.class.php
+    - trql.touristattraction.class.php
+    - trql.trackaction.class.php
+    - trql.tradeaction.class.php
+    - trql.transferaction.class.php
+    - trql.travelaction.class.php
+    - trql.unregisteraction.class.php
+    - trql.updateaction.class.php
+    - trql.useaction.class.php
+    - trql.userinteraction.class.php
+    - trql.viewaction.class.php
+    - trql.voteaction.class.php
+    - trql.wantaction.class.php
+    - trql.watchaction.class.php
+    - trql.wearaction.class.php
+    - trql.winaction.class.php
+    - trql.writeaction.class.php
+
+5) The updateSelf() common to all classes has now a 3rd parameter: withFamily
+   withFamily is defaulted to true as to assure backward compatbility.
+   With time, less and less classes will list all their sibling classes (self['family'])
+
+6) Thing and CreativeWork do NOT list class siblings anymore (self['family'])
+   Thing does not call its parent::__construct() anymore for higher performance
+   
+   trql.webapi.class.php
+trql.wpadblock.class.php
+trql.wpfooter.class.php
+trql.wpheader.class.php
+trql.wpsidebar.class.php
+trql.aboutpage.class.php
+trql.checkoutpage.class.php
+trql.webapplication.class.php
+trql.collectionpage.class.php
+trql.faqpage.class.php
+trql.healthtopiccontent.class.php
+trql.mediagallery.class.php
+trql.imagegallery.class.php
+trql.itempage.class.php
+trql.medicalwebpage.class.php
+trql.videogallery.class.php
+trql.browser.class.php
+trql.contactpage.class.php
+trql.paradeigma.class.php
+trql.webcontent.class.php
+
+
+
+7) The namespace of CreativeWork has been changed to "namespace trql\schema\creativework;"
+    All subsequent classes changed:
+
+    - trql.advertizing.class.php
+    - trql.archivecomponent.class.php
+    - trql.atlas.class.php
+    - trql.book.class.php
+    - trql.chapter.class.php
+    - trql.citation.class.php
+    - trql.claim.class.php
+    - trql.clip.class.php
+    - trql.code.class.php
+    - trql.collection.class.php
+    - trql.comicstory.class.php
+    - trql.comment.class.php
+    - trql.conversation.class.php
+    - trql.course.class.php
+    - trql.creativeworkseason.class.php
+    - trql.creativeworkseries.class.php
+    - trql.datacatalog.class.php
+    - trql.dataset.class.php
+    - trql.definedtermset.class.php
+    - trql.diet.class.php
+    - trql.documentor.class.php
+    - trql.drawing.class.php
+    - trql.educationaloccupationalcredential.class.php
+    - trql.episode.class.php
+    - trql.game.class.php
+    - trql.howto.class.php
+    - trql.howtodirection.class.php
+    - trql.howtosection.class.php
+    - trql.howtostep.class.php
+    - trql.howtotip.class.php
+    - trql.label.class.php
+    - trql.learningresource.class.php
+    - trql.legislation.class.php
+    - trql.manuscript.class.php
+    - trql.map.class.php
+    - trql.mediaobject.class.php
+    - trql.menu.class.php
+    - trql.menusection.class.php
+    - trql.message.class.php
+    - trql.movie.class.php
+    - trql.musiccomposition.class.php
+    - trql.musicplaylist.class.php
+    - trql.musicrecording.class.php
+    - trql.photograph.class.php
+    - trql.play.class.php
+    - trql.poster.class.php
+    - trql.publicationissue.class.php
+    - trql.publicationvolume.class.php
+    - trql.question.class.php
+    - trql.quotation.class.php
+    - trql.review.class.php
+    - trql.sculpture.class.php
+    - trql.sheetmusic.class.php
+    - trql.shortstory.class.php
+    - trql.softwareapplication.class.php
+    - trql.softwaresourcecode.class.php
+    - trql.specialannouncement.class.php
+    - trql.thesis.class.php
+    - trql.tvseries.class.php
+    - trql.visualartwork.class.php
+    - trql.webcontent.class.php
+    - trql.webpage.class.php
+    - trql.webpageelement.class.php
+    - trql.website.class.php
+    - trql.writtenwork.class.php
+    
+
+8) All the following classes do share the "trql\schema\creativework" namespace
+
+    - trql.analysisnewsarticle.class.php
+    - trql.article.class.php
+    - trql.askpublicnewsarticle.class.php
+    - trql.backgroundnewsarticle.class.php
+    - trql.blog.class.php
+    - trql.blogposting.class.php
+    - trql.newsarticle.class.php
+    - trql.opinionnewsarticle.class.php
+    - trql.report.class.php
+    - trql.reportagenewsarticle.class.php
+    - trql.reviewnewsarticle.class.php
+    - trql.satiricalarticle.class.php
+    - trql.scholarlyarticle.class.php
+    - trql.socialmediaposting.class.php
+    - trql.techarticle.class.php

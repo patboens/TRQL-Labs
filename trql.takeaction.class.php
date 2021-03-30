@@ -30,6 +30,8 @@
     {*cdate                 28-08-2020 16:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keywords              action *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -46,10 +48,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\takeaction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\transferaction\TransferAction     as TransferAction;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\action\TransferAction  as TransferAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

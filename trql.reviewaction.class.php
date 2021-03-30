@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -30,6 +28,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -46,10 +45,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\reviewaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\assessaction\AssessAction    as AssessAction;
+use \trql\schema\action\AssessAction    as AssessAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -189,8 +188,6 @@ class ReviewAction extends AssessAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
     }   /* End of ReviewAction.__construct() ========================================== */
     /* ================================================================================ */
@@ -221,8 +218,5 @@ class ReviewAction extends AssessAction
         $this->necroSignaling();
     }   /* End of ReviewAction.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class ReviewAction ====================================================== */
 /* ==================================================================================== */
-
-?>

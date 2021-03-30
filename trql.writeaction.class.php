@@ -26,7 +26,8 @@
     {*cdate                 28-08-2020 16:43 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été cous le hêtre *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keywords              action *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -42,10 +43,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\writeaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli               as V;
-use \trql\createaction\CreateAction     as CreateAction;
+use \trql\schema\action\CreateAction    as CreateAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

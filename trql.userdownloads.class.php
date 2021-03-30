@@ -49,7 +49,7 @@
 namespace trql\userdownloads;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\userinteraction\UserInteraction    as UserInteraction;
+use \trql\schema\action\UserInteraction     as UserInteraction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -155,5 +155,3 @@ class UserDownloads extends UserInteraction
     /* ================================================================================ */
 }   /* End of class UserDownloads ===================================================== */
 /* ==================================================================================== */
-
-?>

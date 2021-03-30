@@ -48,7 +48,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\mother;
+namespace trql\quitus;
 
 defined( 'MOTHER_ABSTRACT_CLASS' ) or define( 'MOTHER_ABSTRACT_CLASS','0.1' );
 
@@ -262,12 +262,15 @@ abstract class Mother
     public      $wikidataId                     = null;
 
     /* ================================================================================ */
-    /** {{*__construct( [$szHome] )=
+    /** {{*__construct( [$szHome[,$withFamily] )=
 
         Class constructor
 
         {*params
             $szHome     (string)        Home of the class. Optional.
+            $withFamily (bool)          [c]true[/c] if all sibling classes must be 
+                                        determined; [c]false[/c] if not. Optional.
+                                        [c]true[/c] by default
         *}
 
         {*return
@@ -277,10 +280,10 @@ abstract class Mother
         *}}
     */
     /* ================================================================================ */
-    public function __construct( $szHome = null )
-    /*-----------------------------------------*/
+    public function __construct( $szHome = null,$withFamily = true )
+    /*------------------------------------------------------------*/
     {
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily );
         $this->classIcon = $this->self['icon'];
 
         return ( $this );
@@ -288,8 +291,28 @@ abstract class Mother
     /* ================================================================================ */
 
 
+    public function getRDFa( $szClass )
+    /*-------------------------------*/
+    {
+        //var_dump( $this->self['family'] );
+        $szRetVal = '';
+
+        foreach( $this->self['family'] as $szFile )
+        {
+            if ( preg_match( "/trql.{$szClass}.class.php/si",$szFile ) )
+            {
+                $szRetVal = "<TAG vocab=\"https://schema.org/\" typeof=\"{$szClass}\">...</TAG>";
+                break;
+            }
+        }
+
+        return ( $szRetVal );
+    }   /* End of Mother.getRDFa() ==================================================== */
     /* ================================================================================ */
-    /** {{*updateSelf( $szClass,$szHome )=
+
+
+    /* ================================================================================ */
+    /** {{*updateSelf( $szClass[,$szHome[,$withFamily]] )=
 
         Updates the information the class maintains on itself
 
@@ -303,8 +326,8 @@ abstract class Mother
         *}}
     */
     /* ================================================================================ */
-    protected function updateSelf( $szClass = __CLASS__,$szHome = null )
-    /*----------------------------------------------------------------*/
+    protected function updateSelf( $szClass = __CLASS__,$szHome = null,$withFamily = true )
+    /*-----------------------------------------------------------------------------------*/
     {
         if ( is_array( $this->self ) )
         {
@@ -324,7 +347,7 @@ abstract class Mother
 
             $this->self['home'] = $this->szHome = vaesoli::FIL_RealPath( $szHome );
 
-            if ( is_null( $this->family ) )
+            if ( $withFamily && is_null( $this->family ) )
                 $this->self['family'] = $this->family = vaesoli::FIL_aFilesEx( __DIR__ . '\\trql.*.class.php' );
 
             if ( ! is_dir( $this->szHome ) )

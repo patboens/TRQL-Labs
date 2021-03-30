@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 06-09-20 00:15 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -41,18 +40,16 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
-namespace trql\sms;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\message\Message           as Message;
-use \trql\mother\iAPI               as iAPI;
-use \trql\form\Form                 as Form;
-use \trql\fieldset\Fieldset         as Fieldset;
-use \trql\input\Input               as Input;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\message\Message   as Message;
+use \trql\mother\iAPI       as APIInterface;
+use \trql\html\Form         as Form;
+use \trql\html\Fieldset     as Fieldset;
+use \trql\html\Input        as Input;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -87,11 +84,11 @@ defined( 'SMS_CLASS_VERSION' ) or define( 'SMS_CLASS_VERSION','0.1' );
 
  */
 /* ==================================================================================== */
-//class SMS extends Message implements iAPI
+//class SMS extends Message implements APIInterface
 class SMS extends Message
 /*---------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)             Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
@@ -102,16 +99,17 @@ class SMS extends Message
 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId             = 'Q43024';
-    public      $szClass                = 'sms';            /* {*property   $szClass                        (string)            CSS class of the task when it needs to be rendered *} */
+    public      $wikidataId             = 'Q43024';                 /* {*property   $wikidataId                     (string)            Wikidata ID. Short Message Service ... Text messaging
+                                                                                                                                        service component *} */
+    public      $szClass                = 'sms';                    /* {*property   $szClass                        (string)            CSS class of the task when it needs to be rendered *} */
 
-    public      $message                = null;             /* {*property   $message                        (string)            [doc]https://www.wikidata.org/wiki/Q628523[/doc][br]
-                                                                                                                                Discrete unit of communication intended by the source for 
-                                                                                                                                consumption by some recipient or group of recipients *} */
-    public      $phoneNumber            = null;             /* {*property   $phoneNumber                    (string)            [doc]https://www.wikidata.org/wiki/Property:P1329[/doc][br]
-                                                                                                                                telephone number in standard format (RFC3966), without 
-                                                                                                                                'tel:' prefix *} */
-    
+    public      $message                = null;                     /* {*property   $message                        (string)            [doc]https://www.wikidata.org/wiki/Q628523[/doc][br]
+                                                                                                                                        Discrete unit of communication intended by the source for
+                                                                                                                                        consumption by some recipient or group of recipients *} */
+    public      $phoneNumber            = null;                     /* {*property   $phoneNumber                    (string)            [doc]https://www.wikidata.org/wiki/Property:P1329[/doc][br]
+                                                                                                                                        telephone number in standard format (RFC3966), without
+                                                                                                                                        'tel:' prefix *} */
+
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -154,6 +152,12 @@ class SMS extends Message
         {*return
             (boolean)       [c]true[/c] if message sent successfully; [c]false[/c]
                             otherwise.
+        *}
+
+        {*doc
+            Official documentation of Esendex
+
+            [url]https://developers.esendex.com/api-reference#inbox[/url]
         *}
 
         {*example
@@ -274,7 +278,7 @@ class SMS extends Message
 
         */
 
-        $szMsg = substr( $szMsg,0,140 );
+        $szMsg = substr( $szMsg,0,160 );
 
         if ( is_string( $xPhone ) )
         {
@@ -321,17 +325,10 @@ class SMS extends Message
                 curl_setopt( $ch,CURLOPT_POST,true );
 
 
-                // 01-07-20 16:54:27 : Génération de nouveau mot de passe API
-                // sur https://www.esendex.com/profile/ (Modifier le mot de passe de l'API, en bas de l'écran) ...
-                // Cela a généré le mot de passe "51bbea8642104adab6f7"
-                // Puis, j'ai pris "51bbea8642104adab6f7" et j'ai été sur
-                // https://www.base64encode.org/ pour encoder un nouveau "bearer"
-                // avec "patrick.boens@latosensu.be:51bbea8642104adab6f7"
-                // ce qui a donné ... "cGF0cmljay5ib2Vuc0BsYXRvc2Vuc3UuYmU6NTFiYmVhODY0MjEwNGFkYWI2Zjc="
-
-                // 51bbea8642104adab6f7
-                // combinaison patrick.boens@latosensu.be:51bbea8642104adab6f7 en Base64
-                // cGF0cmljay5ib2Vuc0BsYXRvc2Vuc3UuYmU6NTFiYmVhODY0MjEwNGFkYWI2Zjc=
+                /*  How passwords are formed : trql.sms.passwords.txt 
+                    Pat ... read it when you need to change your authentication
+                    mechanism
+                */
 
                 $szAPIKey = $this->getAPIKey();
                 //var_dump( $szAPIKey );
@@ -348,9 +345,9 @@ class SMS extends Message
                 else
                 {
                     //echo "<p>SMS successful</p>";
-                    $bRetVal = ( $xResult !== '403' );
+                    var_dump( $xResult );
+                    $bRetVal = ! vaesoli::STR_StartWith( $xResult,'4' );
                     // Ici ... j'obtiens un 403 !!!
-                    //var_dump( $xResult );
                     // Uncomment pour voir le résultat qu'on reçoit (par exemple, j'avais
                     // trouvé que je recevais qqch comme "403" ... ce qui indique une erreur!!!
                     // echo htmlentities( $xResult );
@@ -424,23 +421,23 @@ class SMS extends Message
                                                    'delete'         =>  true                                            ,
                                                    'help'           =>  false                                           ,
                                                    'value'          =>  $this->phoneNumber                              ,
-                                                 ) ) );                                                                 
-                                                                                                                        
+                                                 ) ) );
+
                 $oFieldset->add( new Input( array( 'name'           =>  'Message'                                       ,
                                                    'type'           =>  'edt'                                           ,
                                                    'label'          =>  'Message'                                       ,
                                                    'lang'           =>  'en'                                            ,
                                                    'style'          =>  'resize:vertical;'                              ,
-                                                   'tooltip'        =>  'Body of the message to send (140 char max)'    ,
-                                                   'maxlength'      =>  140                                             ,
+                                                   'tooltip'        =>  'Body of the message to send (160 char max)'    ,
+                                                   'maxlength'      =>  160                                             ,
                                                    'rows'           =>  4                                               ,
                                                    'required'       =>  true                                            ,
                                                    'delete'         =>  true                                            ,
                                                    'help'           =>  false                                           ,
                                                    'style'          =>  'resize:vertical;'                              ,
                                                    'value'          =>  $this->description                              ,
-                                                 ) ) );                                                                 
-                                                                                                                        
+                                                 ) ) );
+
                 $oFieldset->add( new Input( array( 'name'           =>  'Submit'                                        ,
                                                    'type'           =>  'cmd'                                           ,
                                                    'class'          =>  'shadow'                                        ,

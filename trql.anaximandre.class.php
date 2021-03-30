@@ -44,11 +44,11 @@
 /****************************************************************************************/
 namespace trql\anaximandre;
 
-use \trql\mother\Mother                 as Mother;
-use \trql\mother\iContext               as iContext;
+use \trql\quitus\Mother                 as Mother;
+use \trql\quitus\iContext               as iContext;
 use \trql\context\Context               as Context;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\thing\Thing                   as Thing;
+use \trql\schema\Thing                   as Thing;
 use \trql\city\City                     as City;
 use \trql\substitution\Substitution     as Substitution;
 use \trql\victorhugo\VictorHugo         as VictorHugo;

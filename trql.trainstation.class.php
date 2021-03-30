@@ -52,7 +52,7 @@
 /****************************************************************************************/
 namespace trql\trainstation;
 
-use \trql\thing\Thing                       as Thing;
+use \trql\schema\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\civicstructure\CivicStructure     as CivicStructure;
 

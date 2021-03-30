@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 28-08-2020 16:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,10 +43,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\tieaction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\achieveaction\AchieveAction    as AchieveAction;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\action\AchieveAction   as AchieveAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -55,8 +54,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'ACHIEVEACTION_CLASS_VERSION' ) )
     require_once( 'trql.achieveaction.class.php' );
-
-
 
 defined( 'TIEACTION_CLASS_VERSION' ) or define( 'TIEACTION_CLASS_VERSION','0.1' );
 
@@ -184,10 +181,8 @@ class TieAction extends AchieveAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of TieAction.__construct() ========================================== */
+    }   /* End of TieAction.__construct() ============================================= */
     /* ================================================================================ */
 
 
@@ -214,10 +209,7 @@ class TieAction extends AchieveAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of TieAction.__destruct() =========================================== */
+    }   /* End of TieAction.__destruct() ============================================== */
     /* ================================================================================ */
-
-}   /* End of class TieAction ====================================================== */
+}   /* End of class TieAction ========================================================= */
 /* ==================================================================================== */
-
-?>

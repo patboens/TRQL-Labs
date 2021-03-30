@@ -45,18 +45,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\report;
+namespace trql\schema\creativework;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\article\Article    as Article;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\creativework\Article   as Article;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'ARTICLE_CLASS_VERSION' ) )
     require_once( 'trql.article.class.php' );
-
 
 
 defined( 'REPORT_CLASS_VERSION' ) or define( 'REPORT_CLASS_VERSION','0.1' );
@@ -127,8 +125,6 @@ class Report extends Article
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
         $this->classIcon = $this->self['icon'];
 
-
-
         return ( $this );
     }   /* End of Report.__construct() ================================================ */
     /* ================================================================================ */
@@ -159,8 +155,5 @@ class Report extends Article
         $this->necroSignaling();
     }   /* End of Report.__destruct() ================================================= */
     /* ================================================================================ */
-
 }   /* End of class Report ============================================================ */
 /* ==================================================================================== */
-
-?>

@@ -51,10 +51,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\moneytransfer;
+namespace trql\schema;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\transferaction\TransferAction     as TransferAction;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\action\TransferAction  as TransferAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )

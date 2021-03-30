@@ -48,7 +48,7 @@
 namespace trql\equipment;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\thing\Thing                       as Thing;
+use \trql\schema\Thing                       as Thing;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )

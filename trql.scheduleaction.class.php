@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -31,6 +29,7 @@
     {*cdate                 28-08-2020 16:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -47,19 +46,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\scheduleaction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\planaction\PlanAction    as PlanAction;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\schema\action\PlanAction  as PlanAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'PLANACTION_CLASS_VERSION' ) )
     require_once( 'trql.planaction.class.php' );
-
-
 
 defined( 'SCHEDULEACTION_CLASS_VERSION' ) or define( 'SCHEDULEACTION_CLASS_VERSION','0.1' );
 
@@ -90,7 +86,7 @@ defined( 'SCHEDULEACTION_CLASS_VERSION' ) or define( 'SCHEDULEACTION_CLASS_VERSI
  */
 /* ==================================================================================== */
 class ScheduleAction extends PlanAction
-/*--------------------------------------*/
+/*------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -190,10 +186,8 @@ class ScheduleAction extends PlanAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of ScheduleAction.__construct() ========================================== */
+    }   /* End of ScheduleAction.__construct() ======================================== */
     /* ================================================================================ */
 
 
@@ -220,10 +214,7 @@ class ScheduleAction extends PlanAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of ScheduleAction.__destruct() =========================================== */
+    }   /* End of ScheduleAction.__destruct() ========================================= */
     /* ================================================================================ */
-
-}   /* End of class ScheduleAction ====================================================== */
+}   /* End of class ScheduleAction ==================================================== */
 /* ==================================================================================== */
-
-?>

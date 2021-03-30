@@ -28,7 +28,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -52,10 +52,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\askaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\communicateaction\CommunicateAction    as CommunicateAction;
+use \trql\schema\action\CommunicateAction    as CommunicateAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -165,4 +165,3 @@ class AskAction extends CommunicateAction
     /* ================================================================================ */
 }   /* End of class AskAction ========================================================= */
 /* ==================================================================================== */
-?>

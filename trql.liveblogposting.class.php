@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -54,19 +52,16 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\liveblogposting;
+namespace trql\schema\creativework;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\blogposting\BlogPosting    as BlogPosting;
-
+use \trql\schema\creativework\BlogPosting   as BlogPosting;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'BLOGPOSTING_CLASS_VERSION' ) )
     require_once( 'trql.blogposting.class.php' );
-
-
 
 defined( 'LIVEBLOGPOSTING_CLASS_VERSION' ) or define( 'LIVEBLOGPOSTING_CLASS_VERSION','0.1' );
 

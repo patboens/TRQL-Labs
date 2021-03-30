@@ -161,7 +161,7 @@ class Ledger extends AccountingRegister
         {*params
             $szOperation    (string)        The operation that must be logged
                                             (non-structured)
-            $fAmount        (float)         The amount involved in [c]$szOperation[/c]
+            $fAmount        (float)         The amount involved in @param.szOperation
         *}
 
         {*return
@@ -184,14 +184,14 @@ class Ledger extends AccountingRegister
     /* ================================================================================ */
     /** {{*append( $szText )=
 
-        Class destructor
+        Appends an entry in the ledger
 
         {*params
             $szText         (string)        The text that must be appended to the ledger
         *}
 
         {*return
-            (bool)      [c]true[/c] if [c]$szText[/c] was succesfully appended to the
+            (bool)      [c]true[/c] if @param.szText was successfully appended to the
                         ledger persistence.
         *}
 
@@ -256,4 +256,3 @@ class Ledger extends AccountingRegister
     /* ================================================================================ */
 }   /* End of class Ledger ============================================================ */
 /* ==================================================================================== */
-?>

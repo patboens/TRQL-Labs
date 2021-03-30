@@ -26,6 +26,7 @@
     {*cdate                 26-08-2020 18:37 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -39,7 +40,6 @@
         *}
     *}
 
-
     {*chist
         {*mdate 14-02-21 10:44 *}
         {*author {PYB} *}
@@ -51,10 +51,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\blog;
+namespace trql\schema\creativework;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\creativework\CreativeWork     as CreativeWork;
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\schema\creativework\CreativeWork      as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -162,4 +162,3 @@ class Blog extends CreativeWork
     /* ================================================================================ */
 }   /* End of class Blog ============================================================== */
 /* ==================================================================================== */
-?>

@@ -32,7 +32,7 @@
     {*cdate                 28-08-2020 16:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -49,7 +49,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\touristattraction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\place\Place           as Place;
@@ -174,4 +174,3 @@ class TouristAttraction extends Place
     /* ================================================================================ */
 }   /* End of class TouristAttraction ================================================= */
 /* ==================================================================================== */
-?>

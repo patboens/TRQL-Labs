@@ -128,6 +128,7 @@ class BankAccount extends Account
                                'UIKey'  => null         ,
                              );
 
+    protected   $schemaOrg  = 'http://schema.org/BankAccount';      /* {*property   $schemaOrg                      (string)                        Where the official documentation is maintained *} */
     public      $accountMinimumInflow           = null;             /* {*property   $accountMinimumInflow           (MonetaryAmount)                A minimum amount that has to be paid in every month. *} */
     public      $accountOverdraftLimit          = null;             /* {*property   $accountOverdraftLimit          (MonetaryAmount)                An overdraft is an extension of credit from a lending institution when
                                                                                                                                                     an account reaches zero. An overdraft allows the individual to

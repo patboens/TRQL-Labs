@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -32,6 +30,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -45,7 +44,6 @@
         *}
     *}
 
-
     {*chist
         {*mdate 14-02-21 10:44 *}
         {*author {PYB} *}
@@ -57,10 +55,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\leaveaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\interactaction\InteractAction    as InteractAction;
+use \trql\schema\action\InteractAction    as InteractAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -201,10 +199,8 @@ class LeaveAction extends InteractAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of LeaveAction.__construct() ========================================== */
+    }   /* End of LeaveAction.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -231,10 +227,7 @@ class LeaveAction extends InteractAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of LeaveAction.__destruct() =========================================== */
+    }   /* End of LeaveAction.__destruct() ============================================ */
     /* ================================================================================ */
-
-}   /* End of class LeaveAction ====================================================== */
+}   /* End of class LeaveAction ======================================================= */
 /* ==================================================================================== */
-
-?>

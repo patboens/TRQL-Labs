@@ -57,7 +57,7 @@
 namespace trql\version;
 
 use \trql\vaesoli\vaesoli       as vaesoli;
-use \trql\thing\Thing           as Thing;
+use \trql\schema\Thing           as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

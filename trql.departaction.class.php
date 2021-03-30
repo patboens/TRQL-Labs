@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -30,6 +28,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -55,10 +54,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\departaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\moveaction\MoveAction    as MoveAction;
+use \trql\schema\action\MoveAction    as MoveAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -199,8 +198,6 @@ class DepartAction extends MoveAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
     }   /* End of DepartAction.__construct() ========================================== */
     /* ================================================================================ */
@@ -231,8 +228,5 @@ class DepartAction extends MoveAction
         $this->necroSignaling();
     }   /* End of DepartAction.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class DepartAction ====================================================== */
 /* ==================================================================================== */
-
-?>

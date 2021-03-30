@@ -30,6 +30,8 @@
     {*license               {RIGHTS} *}
     {*remark                Excellent article about Wikidata and RDFa : 
                             [url]https://lists.w3.org/Archives/Public/public-vocabs/2014Feb/0139.html[/url]
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               web *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -127,7 +129,7 @@ class AboutPage extends WebPage
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of AboutPage.__construct() ============================================= */

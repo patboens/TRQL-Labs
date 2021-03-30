@@ -12,6 +12,24 @@ use \trql\openlabel\OpenLabel           as OpenLabel;
 trait Utils
 /*-------*/
 {
+    public function __toJSONLD()
+    /*------------------------*/
+    {
+        $aSatori = null;
+
+        if ( isset( $this->schemaOrg ) )
+        {
+            $aSatori = Vaesoli::ArrayToJSON(
+                            array( '@context'    => dirname(  $this->schemaOrg ),
+                                   '@type'       => basename( $this->schemaOrg )
+                                 ) );
+        }   /* if ( isset( $this->schemaOrg ) ) */
+
+        return ( $aSatori );
+    }   /* End of Utils.__toJSONLD() ================================================== */
+    /* ================================================================================ */
+
+
     public function isValidURL( $szURL )
     /*---------------------------------*/
     {

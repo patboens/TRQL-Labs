@@ -49,8 +49,8 @@
 /****************************************************************************************/
 namespace trql\ticket;
 
-use \trql\mother\Mother                     as Mother;
-use \trql\mother\iContext                   as iContext;
+use \trql\quitus\Mother                     as Mother;
+use \trql\quitus\iContext                   as iContext;
 use \trql\context\Context                   as Context;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\intangible\Intangible             as Intangible;

@@ -52,10 +52,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\blogposting;
+namespace trql\schema\creativework;
 
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\socialmediaposting\SocialMediaPosting     as SocialMediaPosting;
+use \trql\schema\creativework\SocialMediaPosting    as SocialMediaPosting;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -159,4 +159,3 @@ class BlogPosting extends SocialMediaPosting
     /* ================================================================================ */
 }   /* End of class BlogPosting ======================================================= */
 /* ==================================================================================== */
-?>

@@ -51,7 +51,7 @@
 /****************************************************************************************/
 namespace trql\XML;
 
-use \trql\mother\Mother                             as Mother;
+use \trql\quitus\Mother                             as Mother;
 use \trql\vaesoli\Vaesoli                           as v;
 use \trql\utility\Utility                           as Utility;
 

@@ -26,7 +26,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              action *}
 
     -------------------------------------------------------------------------------------
@@ -41,7 +41,6 @@
         *}
     *}
 
-
     {*chist
         {*mdate 14-02-21 10:44 *}
         {*author {PYB} *}
@@ -53,11 +52,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\consumeaction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\action\Action     as Action;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\schema\action\Action  as Action;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -88,7 +86,6 @@ defined( 'CONSUMEACTION_CLASS_VERSION' ) or define( 'CONSUMEACTION_CLASS_VERSION
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
         on 26-08-2020 18:46.
     *}
-
 
     *}}
 

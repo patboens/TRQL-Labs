@@ -43,10 +43,10 @@
 /****************************************************************************************/
 namespace trql\citation;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
+use \trql\quitus\Mother                             as Mother;
+use \trql\quitus\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\creativework\creativework                 as Creativework;
+use \trql\schema\creativework\CreativeWork                 as Creativework;
 
 use DOMDocument;
 use DOMXPath;

@@ -62,11 +62,11 @@
 /****************************************************************************************/
 namespace trql\web;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\creativework\CreativeWork                 as CreativeWork;
-use \trql\websitegenerator\WebsiteGenerator         as WebsiteGenerator;
+use \trql\quitus\Mother                 as Mother;
+use \trql\quitus\iContext               as iContext;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\creativework\CreativeWork     as CreativeWork;
+use \trql\web\WebsiteGenerator          as WebsiteGenerator;
 
 use DOMDocument;
 use DOMXPath;
@@ -132,16 +132,19 @@ class WebSite extends CreativeWork implements iContext
                                'family' => null         ,
                              );
 
-    public      $issn                   = null;                     /* {*property   $issn                       (string)                            The International Standard Serial Number (ISSN) that
+    protected   $schemaOrg      = 'http://schema.org/WebSite';      /* {*property   $schemaOrg                  (string)                            Where the official documentation is maintained *} */
+    public      $issn           = null;                             /* {*property   $issn                       (string)                            The International Standard Serial Number (ISSN) that
                                                                                                                                                     identifies this serial publication. You can repeat
                                                                                                                                                     this property to identify different formats of, or
                                                                                                                                                     the linking ISSN (ISSN-L) for, this serial publication. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q35127';         /* {*property   $wikidataId                 (string)                            Wikidata ID. set of related web pages served from a single
+    public      $wikidataId     = 'Q35127';                         /* {*property   $wikidataId                 (string)                            Wikidata ID. set of related web pages served from a single
                                                                                                                                                     web domain *} */
-    public      $destinationDir                 = null;             /* {*property   $destinationDir             (string)                            Name where the website is supposed to be generated
-                                                                                                                                                    (e.g. "d:/websites/trql.io/") *} */
+    public      $homeDir        = null;                             /* {*property   $homeDir                    (string)                            Name of the folder where the website is supposed to be generated
+                                                                                                                                                    (e.g. "d:/websites/trql.io/"). *} */
+    public      $aURL           = null;                             /* {*property   $aURL                       (array)                             @var.url parsed into an associative array *} */
+
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -189,8 +192,10 @@ class WebSite extends CreativeWork implements iContext
     /*----------------------*/
     {
         if ( empty( $this->url ) )
+        {
             throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND (ErrCode: " . EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND . ")",EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND );
-        else
+        }   /* if ( empty( $this->url ) ) */
+        else    /* Else of ... if ( empty( $this->url ) ) */
         {
             //throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": EXCEPTION_CODE_UNAVAILABLE (ErrCode: " . EXCEPTION_CODE_UNAVAILABLE . ")",EXCEPTION_CODE_UNAVAILABLE );
 
@@ -199,7 +204,7 @@ class WebSite extends CreativeWork implements iContext
 
             $oGenerator = new WebsiteGenerator( $this );
             $oGenerator->generate();
-        }
+        }    /* End of ... Else of ... if ( empty( $this->url ) ) */
 
         return ( $this );
     }   /* End of WebSite.generate() ================================================== */
@@ -231,6 +236,66 @@ class WebSite extends CreativeWork implements iContext
 
 
     /* ================================================================================ */
+    /** {{*readManifest( [$szFile] )=
+
+        The website meta data is maintained in a XML file. This method permits to read the
+        XML file and to populate internal properties based on what is in the XML file.
+
+        {*params
+            $szFile     (string)        XML file that holds the description of the
+                                        website. Optional. [c]manifest.xml[/c] by
+                                        default.
+        *}
+
+        {*return
+            (self)      The current instance of the class
+        *}
+
+        {*example
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function readManifest( $szFile = 'manifest.xml' )
+    /*----------------------------------------------------*/
+    {
+        if ( ! is_null( $this->homeDir ) )
+        {
+            $this->parseUrl( $this->url );
+            $this->homeDir = str_replace( array( '%host%'   ),
+                                          array( vaesoli::FIL_RealPath( $this->aURL['domain'] . '.' . $this->aURL['tld'] . '/' . $this->aURL['subdomain'] ) ),
+                                          $this->homeDir );
+        }
+
+        // Ici ... je devrais quand même vérifier si je n'ai pas un FULL path
+        // Si c'est le cas, alors je vais lire depuis ce full path et basta !
+
+        if ( $szFile === 'manifest.xml' )
+            $szFile = vaesoli::FIL_RealPath( $this->homeDir . '/httpdocs/sitemap/' . $szFile );
+
+        var_dump( $szFile );
+
+    }   /* End of WebSite.readManifest() ============================================== */
+    /* ================================================================================ */
+
+    protected function parseUrl( $szURL )
+    /*---------------------------------*/
+    {
+        $aURL       = vaesoli::URL_parse( $szURL );
+        $szDomain   = $aURL['domain'];
+        $aURL       = vaesoli::URL_ParseDomain( $szDomain );
+
+        $this->aURL = array( 'full'         => $this->url                               ,
+                             'subdomain'    => str_replace( '.','',$aURL['subdomain'] ) ,
+                             'domain'       => $aURL['domain']                          ,
+                             'tld'          => $aURL['tld']                             ,
+                           );
+    }   /* End of WebSite.parseUrl() ================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
     /** {{*__destruct()=
 
         Class destructor
@@ -255,6 +320,7 @@ class WebSite extends CreativeWork implements iContext
         $this->necroSignaling();
     }   /* End of WebSite.__destruct() ================================================ */
     /* ================================================================================ */
+
 
     /*  Properties of a website
         =======================

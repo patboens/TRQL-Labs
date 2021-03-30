@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -32,6 +30,8 @@
     {*cdate                 28-08-2020 14:01 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               creativework *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -48,19 +48,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\opinionnewsarticle;
+namespace trql\schema\creativework;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\newsarticle\NewsArticle    as NewsArticle;
-
+use \trql\schema\creativework\NewsArticle   as NewsArticle;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'NEWSARTICLE_CLASS_VERSION' ) )
     require_once( 'trql.newsarticle.class.php' );
-
-
 
 defined( 'OPINIONNEWSARTICLE_CLASS_VERSION' ) or define( 'OPINIONNEWSARTICLE_CLASS_VERSION','0.1' );
 
@@ -92,7 +89,7 @@ defined( 'OPINIONNEWSARTICLE_CLASS_VERSION' ) or define( 'OPINIONNEWSARTICLE_CLA
  */
 /* ==================================================================================== */
 class OpinionNewsArticle extends NewsArticle
-/*--------------------------------------*/
+/*----------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -149,9 +146,7 @@ class OpinionNewsArticle extends NewsArticle
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of OpinionNewsArticle.__construct() ==================================== */
@@ -185,4 +180,3 @@ class OpinionNewsArticle extends NewsArticle
     /* ================================================================================ */
 }   /* End of class OpinionNewsArticle ================================================ */
 /* ==================================================================================== */
-?>

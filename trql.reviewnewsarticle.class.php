@@ -28,7 +28,8 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre*}
+    {*keyword               creativework *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -45,10 +46,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\reviewnewsarticle;
+namespace trql\schema\creativework;
 
-use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\newsarticle\NewsArticle   as NewsArticle;
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\schema\creativework\NewsArticle   as NewsArticle;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -128,7 +129,7 @@ class ReviewNewsArticle extends NewsArticle
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of ReviewNewsArticle.__construct() ===================================== */
@@ -162,5 +163,3 @@ class ReviewNewsArticle extends NewsArticle
     /* ================================================================================ */
 }   /* End of class ReviewNewsArticle ================================================= */
 /* ==================================================================================== */
-
-?>

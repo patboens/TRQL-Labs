@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,19 +53,16 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\filmaction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\createaction\CreateAction    as CreateAction;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\action\CreateAction    as CreateAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CREATEACTION_CLASS_VERSION' ) )
     require_once( 'trql.createaction.class.php' );
-
-
 
 defined( 'FILMACTION_CLASS_VERSION' ) or define( 'FILMACTION_CLASS_VERSION','0.1' );
 
@@ -193,10 +189,8 @@ class FilmAction extends CreateAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of FilmAction.__construct() ========================================== */
+    }   /* End of FilmAction.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -223,10 +217,7 @@ class FilmAction extends CreateAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of FilmAction.__destruct() =========================================== */
+    }   /* End of FilmAction.__destruct() ============================================= */
     /* ================================================================================ */
-
-}   /* End of class FilmAction ====================================================== */
+}   /* End of class FilmAction ======================================================== */
 /* ==================================================================================== */
-
-?>

@@ -42,10 +42,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\thing;
+namespace trql\schema;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\mother\Mother         as Mother;
+use \trql\quitus\Mother         as Mother;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -84,6 +84,7 @@ class Thing extends Mother
                                'family' => null         ,
                              );
 
+    protected   $schemaOrg  = 'http://schema.org/Thing';            /* {*property   $schemaOrg                  (string)                Where the official documentation is maintained *} */
     public      $additionalType             = null;                 /* {*property   $additionalType             (string)                An additional type for the item,
                                                                                                                                         typically used for adding more
                                                                                                                                         specific types from external
@@ -173,8 +174,11 @@ class Thing extends Mother
     public function __construct( $szHome = null )
     /*-----------------------------------------*/
     {
-        parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        //parent::__construct();
+        $this->updateSelf( __CLASS__,
+                           '/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),
+                           $withFamily = false );
+        $this->classIcon = $this->self['icon'];
 
     }   /* End of Thing.__construct() ================================================= */
     /* ================================================================================ */

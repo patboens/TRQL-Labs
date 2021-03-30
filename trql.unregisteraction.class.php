@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -33,6 +31,7 @@
     {*cdate                 28-08-2020 16:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -49,19 +48,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\unregisteraction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\interactaction\InteractAction    as InteractAction;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\action\InteractAction  as InteractAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'INTERACTACTION_CLASS_VERSION' ) )
     require_once( 'trql.interactaction.class.php' );
-
-
 
 defined( 'UNREGISTERACTION_CLASS_VERSION' ) or define( 'UNREGISTERACTION_CLASS_VERSION','0.1' );
 
@@ -93,7 +89,7 @@ defined( 'UNREGISTERACTION_CLASS_VERSION' ) or define( 'UNREGISTERACTION_CLASS_V
  */
 /* ==================================================================================== */
 class UnRegisterAction extends InteractAction
-/*--------------------------------------*/
+/*-----------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -192,10 +188,8 @@ class UnRegisterAction extends InteractAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of UnRegisterAction.__construct() ========================================== */
+    }   /* End of UnRegisterAction.__construct() ====================================== */
     /* ================================================================================ */
 
 
@@ -222,10 +216,7 @@ class UnRegisterAction extends InteractAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of UnRegisterAction.__destruct() =========================================== */
+    }   /* End of UnRegisterAction.__destruct() ======================================= */
     /* ================================================================================ */
-
-}   /* End of class UnRegisterAction ====================================================== */
+}   /* End of class UnRegisterAction ================================================== */
 /* ==================================================================================== */
-
-?>

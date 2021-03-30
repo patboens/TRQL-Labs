@@ -27,7 +27,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              action *}
 
     -------------------------------------------------------------------------------------
@@ -45,19 +45,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\returnaction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\transferaction\TransferAction    as TransferAction;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\action\TransferAction  as TransferAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'TRANSFERACTION_CLASS_VERSION' ) )
     require_once( 'trql.transferaction.class.php' );
-
-
 
 defined( 'RETURNACTION_CLASS_VERSION' ) or define( 'RETURNACTION_CLASS_VERSION','0.1' );
 
@@ -131,7 +128,7 @@ class ReturnAction extends TransferAction
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of ReturnAction.__construct() ========================================== */

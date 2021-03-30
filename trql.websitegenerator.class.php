@@ -48,9 +48,9 @@
 /****************************************************************************************/
 namespace trql\web;
 
-use \trql\vaesoli\Vaesoli               as v;
-use \trql\utility\Utility               as Utility;
-use \trql\website\WebSite               as WebSite;
+use \trql\vaesoli\Vaesoli   as v;
+use \trql\utility\Utility   as Utility;
+use \trql\web\WebSite       as WebSite;
 
 use DOMDocument;
 use DOMXPath;
@@ -131,20 +131,25 @@ class WebSiteGenerator extends Utility
             throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND (ErrCode: " . EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND . ")",EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND );
 
         $this->webSite                      = $oWebSite;
+        // Something like ...\trql.classes.home\trql.websitegenerator.class\
         $this->generationHomeDir            = v::FIL_RealPath( $this->szHome . '/generate'  );
+        // Something like ...\trql.classes.home\trql.websitegenerator.class\generate\templates\
         $this->generationTemplatesHomeDir   = v::FIL_RealPath( $this->szHome . '/generate/templates' );
+        // Something like ...\trql.classes.home\trql.websitegenerator.class\generate\structure\
         $this->generationStructureHomeDir   = v::FIL_RealPath( $this->szHome . '/generate/structure' );
+        // e.g. http
         $this->scheme                       = parse_url( $this->webSite->url,PHP_URL_SCHEME );
 
         $aURL = v::URL_parseDomain( v::URL_parse( $this->webSite->url )['domain'] );
         $this->host                         = $aURL['domain'] . '.' . $aURL['tld'];
 
-        $this->addSubstitution( '%destination-dir%' ,$this->webSite->destinationDir  );
-        $this->addSubstitution( '%scheme%'          ,$this->scheme );
-        $this->addSubstitution( '%host%'            ,$this->host  );
+        $this->addSubstitution( '%destination-dir%' ,$this->webSite->destinationDir  ); /* e.g. "d:/websites/trql.io/" */
+        $this->addSubstitution( '%scheme%'          ,$this->scheme );                   /* e.g. "http" */
+        $this->addSubstitution( '%host%'            ,$this->host  );                    /* e.g. "trql.io" */
         $this->addSubstitution( '%d-m-Y H:i:s%'     ,date( 'd-m-Y H:i:s' ) );
 
-        $this->getTemplates();
+        /* Get *.tem files locatred in $this->generationTemplatesHomeDir */
+        $this->getTemplates();              
 
         return ( $this );
     }   /* End of WebSiteGenerator.__construct() ====================================== */
@@ -157,7 +162,9 @@ class WebSiteGenerator extends Utility
         $x = debug_backtrace();
         echo "<p>Line <code>" . $x[0]['line']  . "</code> in <code>{$x[1]['function']}()</code> of <code>" . basename( $x[0]['file'] ) . "</code>: {$szMsg}</p>\n";
         //var_dump( $x );
-    }
+    }   /* End of WebSiteGenerator.Say() ============================================== */
+    /* ================================================================================ */
+
 
     protected function addSubstitution( $szPattern,$szValue )
     /*-----------------------------------------------------*/
@@ -168,13 +175,17 @@ class WebSiteGenerator extends Utility
         $this->aSubstitutions['values'][]   = $szValue;
 
         return ( $this );
-    }
+    }   /* End of WebSiteGenerator.addSubstitution() ================================== */
+    /* ================================================================================ */
+
 
     protected function applySubstitutions( $szStr )
     /*-------------------------------------------*/
     {
         return ( str_replace( $this->aSubstitutions['patterns'],$this->aSubstitutions['values'],$szStr ) );
-    }
+    }   /* End of WebSiteGenerator.applySubstitutions() =============================== */
+    /* ================================================================================ */
+
 
     protected function getTemplates()
     /*-----------------------------*/
@@ -188,7 +199,9 @@ class WebSiteGenerator extends Utility
         }   /* if ( is_array( $aFiles = v::FIL_aFilesEx( $this->generationTemplatesHomeDir ... ) */
 
         //var_dump( $this->aTemplates );
-    }
+    }   /* End of WebSiteGenerator.getTemplates() ===================================== */
+    /* ================================================================================ */
+
 
     /* ================================================================================ */
     /** {{*generate()=
@@ -210,6 +223,10 @@ class WebSiteGenerator extends Utility
     {
         $tStart = microtime( true );
 
+        if ( $this->isCommandLine() )
+            echo "\n\n\n";
+
+        if ( $this->webSite instanceof WebSite )
         {
             $aMap                   = $this->Map( $this->webSite->url );
 
@@ -219,23 +236,67 @@ class WebSiteGenerator extends Utility
                                                              $aMap['level3']    . '/' .
                                                              $aMap['level4'] );
 
-            //var_dump( $this->generationHomeDir,$this->generationDir );
+            if ( $this->isCommandLine() )
+            {
+                echo "Generation HOME dir: ",$this->generationHomeDir,"\n";
+                echo "WebSite generation dir: ",$this->generationDir,"\n\n";
+            }
+
 
             if ( ! is_dir( $this->generationDir ) )
-                if ( v::FIL_MkDir( $this->generationDir ) )
-                    $this->addInfo( __METHOD__ . "(): '{$this->generationDir}' created" );
-                else
-                    $this->addInfo( __METHOD__ . "(): '{$this->generationDir}' CANNOT be created" );
+            {
+                if ( $this->isCommandLine() )
+                    echo "WebSite Generation dir NOT found: ",$this->generationDir,"\n";
 
-            $this->Say( 'Requested to generate the structure of ' . $this->webSite->url );
+                if ( v::FIL_MkDir( $this->generationDir ) )
+                {
+                    if ( $this->isCommandLine() )
+                        echo "WebSite Generation dir created: ",$this->generationDir,"\n";
+
+                    $this->addInfo( __METHOD__ . "(): '{$this->generationDir}' created" );
+                }
+                else
+                {
+                    if ( $this->isCommandLine() )
+                        echo "WebSite Generation dir CANNOT created: ",$this->generationDir,"\n";
+
+                    $this->addInfo( __METHOD__ . "(): '{$this->generationDir}' CANNOT be created" );
+                }
+            }
+            else
+            {
+                if ( $this->isCommandLine() )
+                    echo "WebSite Generation dir FOUND: ",$this->generationDir,"\n";
+            }
+
+            if ( $this->isCommandLine() )
+            {
+                echo "\n",str_repeat( '*',80 ),"\n";
+                echo str_repeat( '*',80 ),"\n";
+                echo 'Requested to generate the structure of ' . $this->webSite->url,"\n";
+                echo str_repeat( '*',80 ),"\n";
+                echo str_repeat( '*',80 ),"\n\n\n";
+            }
+            else
+                $this->Say( 'Requested to generate the structure of ' . $this->webSite->url );
 
             $this->generateVHOST();             /* Generate a small snippet to be integrated in Apache */
             $this->copyStructure();             /* Copy all STANDARD directories AND files (from ...\trql.classes.home\trql.websitegenerator.class\generate\structure\ )*/
-        }
+        }   /* if ( $this->websSite instanceof WebSite ) */
 
         $tEnd = microtime( true );
 
-        $this->Say( 'Generation of <code>' . $this->webSite->url . '</code> completed in ' . round( $tEnd - $tStart,5 ) . 'sec' );
+        if ( $this->isCommandLine() )
+        {
+            echo "\n",str_repeat( '*',80 ),"\n";
+            echo str_repeat( '*',80 ),"\n";
+            echo 'Generation of ',$this->webSite->url,' completed in ' . round( $tEnd - $tStart,5 ) . "sec\n";
+            echo 'Generation DIR: ',$this->generationDir,"\n";
+            echo str_repeat( '*',80 ),"\n";
+            echo str_repeat( '*',80 ),"\n\n\n";
+        }
+        else
+            $this->Say( 'Generation of <code>' . $this->webSite->url . '</code> completed in ' . round( $tEnd - $tStart,5 ) . 'sec' );
 
         return ( $this );
     }   /* End of WebSiteGenerator.generate() ========================================= */
@@ -262,14 +323,28 @@ class WebSiteGenerator extends Utility
     {
         if ( isset( $this->aTemplates['vhost'] ) )
         {
-            $this->Say( 'VHOST Template found' );
+            if ( $this->isCommandLine() )
+                echo 'Apache VHost template ("$this->aTemplates[\'vhost\']"): ',$this->aTemplates['vhost'],"\n";
+            else
+                $this->Say( 'VHOST Template found' );
+
+            // Capture the VHost template
             $szTemplate = v::FIL_FileToStr( $this->aTemplates['vhost'] );
+
             if ( v::FIL_StrToFile( $this->applySubstitutions( $szTemplate ),
                                    $szOutputFile = v::FIL_RealPath( $this->generationDir . '/vhost.txt' )
                                  ) )
             {
-                $this->Say( "VHOST saved in {$szOutputFile}" );
+                if ( $this->isCommandLine() )
+                    echo 'Apache VHost snippet created: ',$szOutputFile,"\n";
+                else
+                    $this->Say( "VHOST saved in {$szOutputFile}" );
             }
+        }
+        else
+        {
+            if ( $this->isCommandLine() )
+                echo 'NO template found to generate the Apache VHost snippet ("$this->aTemplates[\'vhost\'] NOT set")',"\n";
         }
     }   /* End of WebSiteGenerator.generateVHOST() ==================================== */
     /* ================================================================================ */
@@ -293,9 +368,17 @@ class WebSiteGenerator extends Utility
     public function copyStructure()
     /*---------------------------*/
     {
-        $this->Say( "Copying ALL dirs and files of " . $this->generationStructureHomeDir . ' to ' . $this->generationDir );
+        if ( $this->isCommandLine() )
+            echo "Copying ALL dirs and files of " . $this->generationStructureHomeDir . ' to ' . $this->generationDir,"\n";
+        else
+            $this->Say( "Copying ALL dirs and files of " . $this->generationStructureHomeDir . ' to ' . $this->generationDir );
+
         v::FIL_recurseCopy( $this->generationStructureHomeDir,$this->generationDir );
-        $this->Say( "Copying ALL dirs and files: FINISHED" );
+
+        if ( $this->isCommandLine() )
+            echo "Copying ALL dirs and files: FINISHED\n";
+        else
+            $this->Say( "Copying ALL dirs and files: FINISHED" );
 
     }   /* End of WebSiteGenerator.copyStructure() ==================================== */
     /* ================================================================================ */

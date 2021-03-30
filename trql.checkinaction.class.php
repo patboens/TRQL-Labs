@@ -36,7 +36,7 @@
     {*cdate                 26-08-2020 18:40 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              action *}
 
     -------------------------------------------------------------------------------------
@@ -63,10 +63,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\checkinaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                       as Vaesoli;
-use \trql\communicateaction\CommunicateAction   as CommunicateAction;
+use \trql\schema\action\CommunicateAction   as CommunicateAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

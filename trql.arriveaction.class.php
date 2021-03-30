@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
- 
-
 */
 
 /** {{{*fheader
@@ -30,6 +28,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -53,11 +52,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\arriveaction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\moveaction\MoveAction    as MoveAction;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\schema\action\MoveAction  as MoveAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -164,4 +162,3 @@ class ArriveAction extends MoveAction
     /* ================================================================================ */
 }   /* End of class ArriveAction ====================================================== */
 /* ==================================================================================== */
-?>

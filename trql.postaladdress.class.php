@@ -44,8 +44,8 @@
 /****************************************************************************************/
 namespace trql\postaladdress;
 
-use \trql\mother\Mother                     as Mother;
-use \trql\mother\iContext                   as iContext;
+use \trql\quitus\Mother                     as Mother;
+use \trql\quitus\iContext                   as iContext;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\place\Place                       as Place;
 use \trql\structuredvalue\StructuredValue   as StructuredValue;
@@ -114,6 +114,8 @@ class PostalAddress extends ContactPoint implements iContext
                                'home'   => null         ,
                                'family' => null         ,
                              );
+
+    protected   $schemaOrg  = 'http://schema.org/PostalAddress';    /* {*property   $schemaOrg                  (string)                Where the official documentation is maintained *} */
 
     public      $addressCountry             = null;                 /* {*property   $addressCountry             (Country|string)        The country. For example, USA. You can also provide the
                                                                                                                                         two-letter ISO 3166-1 alpha-2 country code. *} */

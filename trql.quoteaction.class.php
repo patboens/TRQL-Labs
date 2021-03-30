@@ -27,7 +27,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              action *}
 
     -------------------------------------------------------------------------------------
@@ -45,10 +45,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\quoteaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\tradeaction\TradeAction       as TradeAction;
+use \trql\schema\action\TradeAction     as TradeAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -163,4 +163,3 @@ class QuoteAction extends TradeAction
     /* ================================================================================ */
 }   /* End of class QuoteAction ======================================================= */
 /* ==================================================================================== */
-?>

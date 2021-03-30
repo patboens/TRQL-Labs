@@ -27,7 +27,7 @@
 namespace trql\meeting;
 
 use \trql\vaesoli\Vaesoli       as v;
-use \trql\mother\iContext       as iContext;
+use \trql\quitus\iContext       as iContext;
 use \trql\event\Event           as Event;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )

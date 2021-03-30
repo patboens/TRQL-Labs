@@ -29,7 +29,8 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel Ã©tÃ© sous le hÃªtre *}
+    {*keyword               creativework *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -56,7 +57,7 @@
 namespace trql\askpublicnewsarticle;
 
 use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\newsarticle\NewsArticle   as NewsArticle;
+use \trql\schema\creativework\NewsArticle   as NewsArticle;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -149,7 +150,8 @@ class AskPublicNewsArticle extends NewsArticle
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
+
 
         return ( $this );
     }   /* End of AskPublicNewsArticle.__construct() ================================== */
@@ -183,4 +185,3 @@ class AskPublicNewsArticle extends NewsArticle
     /* ================================================================================ */
 }   /* End of class AskPublicNewsArticle ============================================== */
 /* ==================================================================================== */
-?>

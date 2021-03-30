@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,19 +53,16 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\deleteaction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\updateaction\UpdateAction    as UpdateAction;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\action\UpdateAction    as UpdateAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'UPDATEACTION_CLASS_VERSION' ) )
     require_once( 'trql.updateaction.class.php' );
-
-
 
 defined( 'DELETEACTION_CLASS_VERSION' ) or define( 'DELETEACTION_CLASS_VERSION','0.1' );
 
@@ -195,8 +191,6 @@ class DeleteAction extends UpdateAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
     }   /* End of DeleteAction.__construct() ========================================== */
     /* ================================================================================ */
@@ -227,8 +221,5 @@ class DeleteAction extends UpdateAction
         $this->necroSignaling();
     }   /* End of DeleteAction.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class DeleteAction ====================================================== */
 /* ==================================================================================== */
-
-?>

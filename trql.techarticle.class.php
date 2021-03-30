@@ -61,10 +61,10 @@
 /****************************************************************************************/
 namespace trql\techarticle;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
+use \trql\quitus\Mother                             as Mother;
+use \trql\quitus\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\article\Article                           as Article;
+use \trql\schema\creativework\Article                           as Article;
 
 use DOMDocument;
 use DOMXPath;

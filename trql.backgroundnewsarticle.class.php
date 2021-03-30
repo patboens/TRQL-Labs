@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
- 
-
 */
 
 /** {{{*fheader
@@ -36,6 +34,8 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               creativework *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -49,7 +49,6 @@
         *}
     *}
 
-
     {*chist
         {*mdate 14-02-21 10:44 *}
         {*author {PYB} *}
@@ -61,10 +60,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\backgroundnewsarticle;
+namespace trql\schema\creativework;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\newsarticle\NewsArticle       as NewsArticle;
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\schema\creativework\NewsArticle   as NewsArticle;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -161,7 +160,7 @@ class BackgroundNewsArticle extends NewsArticle
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of BackgroundNewsArticle.__construct() ================================= */
@@ -195,4 +194,3 @@ class BackgroundNewsArticle extends NewsArticle
     /* ================================================================================ */
 }   /* End of class BackgroundNewsArticle ============================================= */
 /* ==================================================================================== */
-?>

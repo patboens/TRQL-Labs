@@ -47,10 +47,10 @@
 /****************************************************************************************/
 namespace trql\event;
 
-use \trql\mother\Mother         as Mother;
-use \trql\mother\iContext       as iContext;
+use \trql\quitus\Mother         as Mother;
+use \trql\quitus\iContext       as iContext;
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\thing\Thing           as Thing;
+use \trql\schema\Thing           as Thing;
 
 if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) )
     require_once( 'trql.mother.class.php' );

@@ -58,8 +58,8 @@
 /****************************************************************************************/
 namespace trql\civicstructure;
 
-use \trql\mother\Mother                 as Mother;
-use \trql\mother\iContext               as iContext;
+use \trql\quitus\Mother                 as Mother;
+use \trql\quitus\iContext               as iContext;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\place\Place                   as Place;
 

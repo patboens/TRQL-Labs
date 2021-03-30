@@ -29,6 +29,7 @@
     {*cdate                 26-08-2020 18:50 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -52,10 +53,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\moveaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\action\Action     as Action;
+use \trql\schema\action\Action     as Action;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -166,4 +167,3 @@ class MoveAction extends Action
     /* ================================================================================ */
 }   /* End of class MoveAction ======================================================== */
 /* ==================================================================================== */
-?>

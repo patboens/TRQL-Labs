@@ -27,6 +27,7 @@
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
     {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keywords              action *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -52,10 +53,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\eataction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\consumeaction\ConsumeAction    as ConsumeAction;
+use \trql\schema\action\ConsumeAction    as ConsumeAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )

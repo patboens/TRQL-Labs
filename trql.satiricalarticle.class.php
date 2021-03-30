@@ -50,7 +50,7 @@
 namespace trql\satiricalarticle;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\article\Article   as Article;
+use \trql\schema\creativework\Article   as Article;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

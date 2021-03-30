@@ -29,7 +29,7 @@
     {*cdate                 26-08-2020 18:37 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -55,10 +55,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\befriendaction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\interactaction\InteractAction     as InteractAction;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\action\InteractAction  as InteractAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -164,4 +164,3 @@ class BefriendAction extends InteractAction
     /* ================================================================================ */
 }   /* End of class BefriendAction ==================================================== */
 /* ==================================================================================== */
-?>

@@ -26,7 +26,8 @@
     {*cdate                 19-08-20 09:36:13 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel Ã©tÃ© sous le hÃªtre *}
+    {*keyword               web *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -52,7 +53,7 @@
 /****************************************************************************************/
 namespace trql\web;
 
-use \trql\mother\iContext   as iContext;
+use \trql\quitus\iContext   as iContext;
 use \trql\vaesoli\Vaesoli   as Vaesoli;
 use \trql\web\WebPage       as WebPage;
 
@@ -124,7 +125,7 @@ class ContactPage extends WebPage implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of ContactPage.__construct() =========================================== */

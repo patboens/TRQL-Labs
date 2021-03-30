@@ -52,12 +52,12 @@
 /****************************************************************************************/
 namespace trql\contactpoint;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
+use \trql\quitus\Mother                             as Mother;
+use \trql\quitus\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
 use \trql\place\Place                               as Place;
 use \trql\structuredvalue\StructuredValue           as StructuredValue;
-use \trql\thing\Thing                               as Thing;
+use \trql\schema\Thing                               as Thing;
 
 use DOMDocument;
 use DOMXPath;

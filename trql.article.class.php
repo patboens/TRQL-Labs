@@ -29,6 +29,8 @@
     {*cdate                 16-08-20 19:19 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               creativework *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -52,12 +54,12 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\article;
+namespace trql\schema\creativework;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\creativework\CreativeWork                 as CreativeWork;
+use \trql\quitus\Mother                     as Mother;
+use \trql\quitus\iContext                   as iContext;
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\schema\creativework\CreativeWork  as CreativeWork;
 
 use DOMDocument;
 use DOMXPath;
@@ -172,7 +174,7 @@ class Article extends CreativeWork implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of Article.__construct() =============================================== */
@@ -220,7 +222,5 @@ class Article extends CreativeWork implements iContext
         $this->necroSignaling();
     }   /* End of Article.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class Article =========================================================== */
 /* ==================================================================================== */
-?>

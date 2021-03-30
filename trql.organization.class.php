@@ -54,11 +54,11 @@
 /****************************************************************************************/
 namespace trql\organization;
 
-use \trql\mother\Mother                 as Mother;
-use \trql\mother\iContext               as iContext;
+use \trql\quitus\Mother                 as Mother;
+use \trql\quitus\iContext               as iContext;
 use \trql\context\Context               as Context;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\thing\Thing                   as Thing;
+use \trql\schema\Thing                   as Thing;
 use \trql\postaladdress\PostalAddress   as PostalAddress;
 use \trql\bankaccount\BankAccount       as BankAccount;
 
@@ -105,7 +105,7 @@ defined( 'ORGANIZATION_CLASS_VERSION' ) or define( 'ORGANIZATION_CLASS_VERSION',
 class Organization extends Thing implements iContext
 /*------------------------------------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                 Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                                     Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
@@ -113,6 +113,7 @@ class Organization extends Thing implements iContext
                                'family' => null         ,
                              );
 
+    protected   $schemaOrg  = 'http://schema.org/Organization';     /* {*property   $schemaOrg                  (string)                                    Where the official documentation is maintained *} */
     public      $actionableFeedbackPolicy   = null;                 /* {*property   $actionableFeedbackPolicy   (CreativeWork|URL)                          For a NewsMediaOrganization or other news-related Organization, a
                                                                                                                                                             statement about public engagement activities (for news media, the
                                                                                                                                                             newsroom’s), including involving the public - digitally or
@@ -237,6 +238,7 @@ class Organization extends Thing implements iContext
                                                                                                                                                             into a structured group managing shared means to meet some needs, or to
                                                                                                                                                             pursue collective goals *} */
     public      $bankAccount                = null;                 /* {*property   $bankAccount                (BankAccount)                               The BankAccount of the organization *} */
+    public      $legalForm                  = null;                 /* {*property   $legalForm                  (string)                                    The acronym of the legal form of the organization. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=

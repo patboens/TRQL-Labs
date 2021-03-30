@@ -28,6 +28,8 @@
     {*cdate                 26-08-2020 16:23 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               creativework *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -55,17 +57,14 @@
 /****************************************************************************************/
 namespace trql\analysisnewsarticle;
 
-use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\newsarticle\NewsArticle   as NewsArticle;
-
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\schema\creativework\NewsArticle   as NewsArticle;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'NEWSARTICLE_CLASS_VERSION' ) )
     require_once( 'trql.newsarticle.class.php' );
-
-
 
 defined( 'ANALYSISNEWSARTICLE_CLASS_VERSION' ) or define( 'ANALYSISNEWSARTICLE_CLASS_VERSION','0.1' );
 
@@ -131,7 +130,7 @@ class AnalysisNewsArticle extends NewsArticle
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of AnalysisNewsArticle.__construct() =================================== */
@@ -165,4 +164,3 @@ class AnalysisNewsArticle extends NewsArticle
     /* ================================================================================ */
 }   /* End of class AnalysisNewsArticle =============================================== */
 /* ==================================================================================== */
-?>

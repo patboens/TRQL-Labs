@@ -27,7 +27,7 @@
     {*cdate                 28-08-2020 14:01 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              action *}
 
     -------------------------------------------------------------------------------------
@@ -45,10 +45,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\orderaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\tradeaction\TradeAction    as TradeAction;
+use \trql\schema\action\TradeAction    as TradeAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -128,8 +128,9 @@ class OrderAction extends TradeAction
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+
         return ( $this );
-    }   /* End of OrderAction.__construct() ========================================== */
+    }   /* End of OrderAction.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -160,10 +161,7 @@ class OrderAction extends TradeAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of OrderAction.__destruct() =========================================== */
+    }   /* End of OrderAction.__destruct() ============================================ */
     /* ================================================================================ */
-
-}   /* End of class OrderAction ====================================================== */
+}   /* End of class OrderAction ======================================================= */
 /* ==================================================================================== */
-
-?>

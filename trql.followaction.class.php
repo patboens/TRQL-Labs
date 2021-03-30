@@ -41,7 +41,7 @@
     {*cdate                 26-08-2020 18:48 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              action *}
 
     -------------------------------------------------------------------------------------
@@ -68,10 +68,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\followaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\interactaction\InteractAction    as InteractAction;
+use \trql\schema\action\InteractAction    as InteractAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -200,6 +200,5 @@ class FollowAction extends InteractAction
         $this->necroSignaling();
     }   /* End of FollowAction.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class FollowAction ====================================================== */
 /* ==================================================================================== */

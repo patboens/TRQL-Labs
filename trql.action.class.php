@@ -50,10 +50,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\action;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\thing\Thing           as Thing;
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\schema\Thing      as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -202,8 +202,5 @@ class Action extends Thing
         $this->necroSignaling();
     }   /* End of Action.__destruct() ================================================= */
     /* ================================================================================ */
-
 }   /* End of class Action ============================================================ */
 /* ==================================================================================== */
-
-?>

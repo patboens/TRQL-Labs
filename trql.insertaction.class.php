@@ -27,6 +27,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -40,7 +41,6 @@
         *}
     *}
 
-
     {*chist
         {*mdate 14-02-21 10:44 *}
         {*author {PYB} *}
@@ -52,10 +52,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\insertaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\addaction\AddAction   as AddAction;
+use \trql\schema\action\AddAction   as AddAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -162,4 +162,3 @@ class InsertAction extends AddAction
     /* ================================================================================ */
 }   /* End of class InsertAction ====================================================== */
 /* ==================================================================================== */
-?>

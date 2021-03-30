@@ -119,7 +119,7 @@
 
     *}
 
-    {*image                 https://www.trql.fm/images/logos/trql.documentor.jpg *}
+    {*image https://www.trql.fm/images/logos/trql.documentor.jpg *}
 
     Official Coding Standards:
     https://git.php.net/?p=php-src.git;a=blob_plain;f=CODING_STANDARDS.md;hb=HEAD
@@ -160,11 +160,11 @@
 /****************************************************************************************/
 namespace trql\documentor;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
+use \trql\quitus\Mother                             as Mother;
+use \trql\quitus\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\thing\Thing                               as Thing;
-use \trql\creativework\CreativeWork                 as CreativeWork;
+use \trql\schema\Thing                               as Thing;
+use \trql\schema\creativework\CreativeWork                 as CreativeWork;
 use \trql\audience\Audience                         as Audience;
 use \trql\administrativearea\AdministrativeArea     as AdministrativeArea;
 use \trql\person\Person                             as Person;
@@ -842,7 +842,7 @@ Class DocumentorSourceFile extends DocumentorFile
     public      $szNamespace        = null;
     public      $aFunctions         = null;
     public      $aConstants         = null;
-    public      $aUses              = null;                         /* {*property   $aUses                      (array)                             An array of uses (e.g. "use \trql\mother\Mother as Mother;"), or
+    public      $aUses              = null;                         /* {*property   $aUses                      (array)                             An array of uses (e.g. "use \trql\quitus\Mother as Mother;"), or
                                                                                                                                                     [c]null[/c] if none. Each "use" (if any) is structured as an
                                                                                                                                                     associative array: array( 'class' => $szClass,'alias' => $szAlias ) *} */
     public      $aDefines           = null;
@@ -2488,10 +2488,10 @@ Class DocumentorSourceFile extends DocumentorFile
 
         Gets a list of namespaces used such as ...
 
-        use \trql\mother\Mother     as Mother;
-        use \trql\mother\iContext   as iContext;
+        use \trql\quitus\Mother     as Mother;
+        use \trql\quitus\iContext   as iContext;
         use \trql\vaesoli\Vaesoli   as Vaesoli;
-        use \trql\thing\Thing       as Thing;
+        use \trql\schema\Thing       as Thing;
 
         {*params
         *}
@@ -2525,10 +2525,10 @@ Class DocumentorSourceFile extends DocumentorFile
 
             SUPPORTED:
 
-            use \trql\mother\Mother     as Mother;
-            use \trql\mother\iContext   as iContext;
+            use \trql\quitus\Mother     as Mother;
+            use \trql\quitus\iContext   as iContext;
             use \trql\vaesoli\Vaesoli   as Vaesoli;
-            use \trql\thing\Thing       as Thing;
+            use \trql\schema\Thing       as Thing;
 
         *}
 

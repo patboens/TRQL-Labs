@@ -29,6 +29,8 @@
     {*cdate                 26-08-2020 09:44 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               creativework *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -45,10 +47,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\advertisercontentarticle;
+namespace trql\schema\creativework;
 
-use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\article\Article       as Article;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\creativework\Article   as Article;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -120,7 +122,7 @@ class AdvertiserContentArticle extends Article
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of AdvertiserContentArticle.__construct() ============================== */
@@ -155,4 +157,3 @@ class AdvertiserContentArticle extends Article
     /* ================================================================================ */
 }   /* End of class AdvertiserContentArticle ========================================== */
 /* ==================================================================================== */
-?>

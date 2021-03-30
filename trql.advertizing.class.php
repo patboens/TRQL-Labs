@@ -46,7 +46,7 @@
 namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\creativework\CreativeWork     as CreativeWork;
+use \trql\schema\creativework\CreativeWork     as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

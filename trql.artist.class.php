@@ -53,8 +53,8 @@
 /****************************************************************************************/
 namespace trql\artist;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
+use \trql\quitus\Mother                             as Mother;
+use \trql\quitus\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
 use \trql\utility\Utility                           as Utility;
 use \trql\person\Person                             as Person;

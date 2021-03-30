@@ -55,7 +55,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">26-08-2020 18:40</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">16/03/2021 - 09:59:23</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">30/03/2021 - 12:28:17</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
@@ -198,11 +198,8 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 <tr class="property">
 <td class="name" id="var.author"><code>$author</code></td>
-<td class="type"><code>Organization|Person</code></td>
-<td class="description">The author of this content or rating. Please note that author
- is special in that HTML 5 provides a special mechanism for
- indicating authorship via the rel tag. That is equivalent to
- this and may be used interchangeably.</td>
+<td class="type"><code>Agent</code></td>
+<td class="description">Author of the page</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.award"><code>$award</code></td>
@@ -214,6 +211,17 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="type"><code>BreadcrumbList|string</code></td>
 <td class="description">A set of links that can help a user understand and navigate a website
  hierarchy.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.breakingNews"><code>$breakingNews</code></td>
+<td class="type"><code>boolean</code></td>
+<td class="description">Should the Breaking news be displayed on this page: <code>true</code> if
+ yes; <code>false</code> otherwise.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.cargo"><code>$cargo</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Whatever information seems interesting to load and keep in the page</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.citation"><code>$citation</code></td>
@@ -394,6 +402,16 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="name" id="var.genre"><code>$genre</code></td>
 <td class="type"><code>string|URL</code></td>
 <td class="description">Genre of the creative work, broadcast channel or group.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.guid"><code>$guid</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Globally unique Identifier of the page.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.H1"><code>$H1</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">H1 of the page.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.hasPart"><code>$hasPart</code></td>
@@ -657,6 +675,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  page, or official website.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.schemaOrg"><code>$schemaOrg</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Where the official documentation is maintained</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.schemaVersion"><code>$schemaVersion</code></td>
 <td class="type"><code>string|URL</code></td>
 <td class="description">Indicates (by URL or string) a particular version of a schema used
@@ -685,6 +708,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  different site. For example, student projects and open data initiatives
  often re-publish existing content with more explicitly structured metadata.
  The <code>sdPublisher</code> property helps make such practices more explicit.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.seeAlso"><code>$seeAlso</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Pages interesting to visit from the current page (semi-colon separated list).</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.self"><code>$self</code></td>
@@ -761,11 +789,6 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  Inverse property: <code><a href="#var-about">$about</a></code>.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.szAuthor"><code>$szAuthor</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Name of the author of the page</td>
-</tr>
-<tr class="property">
 <td class="name" id="var.szBody"><code>$szBody</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Main body of a page</td>
@@ -776,17 +799,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">Canonical URL of the page.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.szComment"><code>$szComment</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">Comments set for that page (not published)</td>
-</tr>
-<tr class="property">
 <td class="name" id="var.szPageImage"><code>$szPageImage</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Image that represents the page (EXCELLENT for SEO)
- // <meta itemscope itemtype="https://schema.org/WebPage" 
+ // <meta itemscope itemtype="https://schema.org/WebPage"
  // itemprop="image" content="http://www.example.com/image.jpg">
- // <meta name="twitter:card" content="summary_large_image"> 
+ // <meta name="twitter:card" content="summary_large_image">
  // <meta name="twitter:image:src" content="http://www.example.com/image.jpg">
  // <meta property="og:image" content="http://example.com/image.jpg" />
  //</td>
@@ -840,6 +858,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  resource for the typical intended target audience, e.g. 'PT30M', 'PT1H25M'.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.title"><code>$title</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Title of the page (like in <head><title>...</title></head></td>
+</tr>
+<tr class="property">
 <td class="name" id="var.translationOfWork"><code>$translationOfWork</code></td>
 <td class="type"><code>CreativeWork</code></td>
 <td class="description">The work that this work has been translated from. e.g. 物种起源 is a
@@ -858,7 +881,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">The typical expected age range, e.g. '7-9', '11-'.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.UnderConstruction"><code>$UnderConstruction</code></td>
+<td class="name" id="var.underConstruction"><code>$underConstruction</code></td>
 <td class="type"><code>boolean</code></td>
 <td class="description">Is this page still under construction ? <code>false</code> by default</td>
 </tr>
@@ -883,12 +906,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">Wikidata ID. NOT CHECKED SO FAR (25-02-21 18:17:24).</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.WithLupdate"><code>$WithLupdate</code></td>
+<td class="name" id="var.withLupdate"><code>$withLupdate</code></td>
 <td class="type"><code>boolean</code></td>
 <td class="description">Must we display a lupdate tage on the page or not ? <code>true</code> by default</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.WithSocialNetworks"><code>$WithSocialNetworks</code></td>
+<td class="name" id="var.withSocialNetworks"><code>$withSocialNetworks</code></td>
 <td class="type"><code>boolean</code></td>
 <td class="description">Should social networks be displayed on that page?</td>
 </tr>
@@ -934,10 +957,10 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p><code>__destruct()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return</p>
-<hr /><p class="property func" id="fnc.readDescription"><span class="name"><strong><code>readDescription()</code></strong></span>: The page meta data is maintained in a XML file. This method permits to read the
+<hr /><p class="property func" id="fnc.readManifest"><span class="name"><strong><code>readManifest()</code></strong></span>: The page meta data is maintained in a XML file. This method permits to read the
  XML file and to populate internal properties based on what is in the XML file.</p>
 <p class="property">Syntax:</p>
-<p><code>readDescription( $szFile )</code></p>
+<p><code>readManifest( $szFile )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -948,13 +971,112 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param.readDescription.szFile"><code>$szFile</code></td>
+<td class="name" id="param.readManifest.szFile"><code>$szFile</code></td>
 <td class="type"><code>string</code></td>
 <td class="description seealso">XML file that holds the description of the page</td>
 </tr>
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
+<p class="property">Example(s):</p>
+<pre>
+
+      /* *************************************/
+      /* EXAMPLE #1 : CREATE A PAGE TEMPLATE */
+      /* *************************************/
+
+      &lt;?php
+      use \trql\vaesoli\Vaesoli   as V;
+      use \trql\web\Browser       as Browser;
+      use \trql\web\WebPage       as WebPage;
+
+      if ( ! defined( "VAESOLI_CLASS_VERSION" ) )
+          require_once( 'trql.vaesoli.class.php' );
+
+      if ( ! defined( "BROWSER_CLASS_VERSION" ) )
+          require_once( 'trql.browser.class.php' );
+
+      if ( ! defined( "WEBPAGE_CLASS_VERSION" ) )
+          require_once( 'trql.webpage.class.php' );
+
+      <strong>$oPage    = new WebPage();</strong>
+      $oBrowser = new Browser();
+      $oBrowser->parseUA();
+
+      $szBrowserMobility  = strtolower( trim( $oBrowser->szMobility ) );
+      $szBrowserName      = $oBrowser->szName;
+      $szBrowserType      = $oBrowser->szType;
+      $szBrowserPlatform  = $oBrowser->szPlatform;
+      $szSeason           = V::TIM_Season();
+      $szTimeOfTheDay     = V::TIM_timeOfTheDay( time() );
+      $szContentDir       = V::FIL_RealPath( V::FIL_ResolveRoot( '/content' ) );
+      $x                  = explode( '.',$_SERVER['HTTP_HOST'] );
+      $szSubDomain        = 'www';
+      if ( count( $x ) > 2 )
+          $szSubDomain = current( $x );
+
+      $szPage = preg_replace( '/(\A-|\.html\z|\.htm\z|\.php\z)/si','',str_replace( '/','-',$_SERVER['SCRIPT_NAME'] ) );
+
+      $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage . '-' . $szBrowserMobility . '.html'      );
+      $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage                            . '.html'      );
+      $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' .                      $szPage . '-' . $szBrowserMobility . '.html'      );
+      $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' .                      $szPage                            . '.html'      );
+
+      $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage . '-' . $szBrowserMobility . '.meta.xml'  );
+      $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage . '-' . $szBrowserMobility . '.xml'       );
+      $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage                            . '.meta.xml'  );
+      $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage                            . '.xml'       );
+      $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage . '-' . $szBrowserMobility . '.meta.xml'  );
+      $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage . '-' . $szBrowserMobility . '.xml'       );
+      $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage                            . '.meta.xml'  );
+      $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage                            . '.xml'       );
+
+      /* Read the Meta definitions of the page (if any). We have
+         multiple possible files, starting from the most specific
+         to the less specific. The first one that matches is the
+         one we load */
+      foreach( $aPossiblePageDescription as $szXMLFile )
+      {
+          if ( is_file( $szXMLFile ) )
+          {
+              <strong>$oPage->readManifest( $szXMLFile );</strong>
+              break;
+          }
+      }   /* foreach( $aPossiblePageDescription as $szXMLFile ) */
+
+      ?&gt;
+      &lt;!doctype html&gt;
+      &lt;html&gt;
+          &lt;head&gt;
+              &lt;meta charset=&quot;UTF-8&quot;&gt;
+              &lt;title&gt;<strong>&lt;?php echo $oPage-&gt;title; ?&gt;</strong>&lt;/title&gt;
+              &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+              &lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css?family=Roboto&quot;&gt;
+              &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/mathieu.css&quot;&gt;
+              &lt;meta name=&quot;author&quot; content=&quot;<strong>&lt;?php echo $oPage-&gt;author-&gt;name; ?&gt;</strong>&quot;&gt;
+              &lt;meta name=&quot;description&quot; content=&quot;<strong>&lt;?php echo $oPage-&gt;description; ?&gt;</strong>&quot;&gt;
+              &lt;meta name=&quot;keywords&quot; content=&quot;<strong>&lt;?php echo $oPage-&gt;keywords; ?&gt;</strong>&quot;&gt;
+          &lt;/head&gt;
+
+          &lt;body vocab=&quot;https://schema.org/&quot; typeof=&quot;WebPage&quot; class=&quot;&lt;?php echo $szBrowserMobility,' ',$szBrowserName,' ',$szBrowserType,' ',$szBrowserPlatform,' ',$szSeason,' ',$szTimeOfTheDay; ?&gt;&quot;&gt;
+              &lt;div class=&quot;wrapper&quot;&gt;
+              &lt;?php
+                  /* We have multiple possible files for the content, starting from
+                     the most specific name to the less specific. The first one that
+                     matches is the one we load */
+                  foreach( $aPossibleContentFiles as $szFile )
+                  {
+                      if ( is_file( $szFile ) )
+                      {
+                          include_once( $szFile );
+                          break;
+                      }
+                  }   /* foreach( $aPossibleContentFiles as $szFile ) */
+              ?&gt;
+              &lt;/div&gt;
+          &lt;/body&gt;
+      &lt;/html&gt;
+  </pre>
 <hr /><p class="property func" id="fnc.renderComments"><span class="name"><strong><code>renderComments()</code></strong></span>: Renders all comments of the page</p>
 <p class="property">Warning:</p>
 <p>This method is experimental</p>

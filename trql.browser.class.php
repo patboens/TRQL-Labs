@@ -27,6 +27,7 @@
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
     {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               web *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -55,7 +56,7 @@
 namespace trql\web;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\thing\Thing       as Thing;
+use \trql\schema\Thing       as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -76,6 +77,11 @@ defined( 'BROWSER_CLASS_VERSION' ) or define( 'BROWSER_CLASS_VERSION','0.1' );
         Navigator/Browser. Comes with an extensive set of parsing routines
         based on more than 15000 User Agents.
 
+    *}
+
+    {*abstract
+        The [c]Browser[/c] class is particularly useful to assign properties to the
+        HTML of a @class.WebPage.
     *}
 
     **}
@@ -117,6 +123,7 @@ class Browser extends Thing
     /* === [Properties NOT defined in schema.org] ===================================== */                          
     public      $wikidataId         = 'Q6368';                      /* {*property   $wikidataId                     (string)                        Wikidata ID. Web Browser *} */
 
+
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 
@@ -134,6 +141,108 @@ class Browser extends Thing
 
         {*seealso @fnc.__destruct *}
 
+        {*example
+            |** **************************************|
+            |** EXAMPLE #1 : CREATE A PAGE TEMPLATE **|
+            |** SEE HOW WE USE THE BROWSER OBJECT   **|
+            |** TO ASSIGN A SET OF CLASSES TO THE   **|
+            |** BODY TAG; THIS MAKES IT EASY TO     **|
+            |** STYLE THE WEBPAGE ACCORDINGLY       **|
+            |** **************************************|
+
+            &lt;?php
+            use \trql\vaesoli\Vaesoli   as V;
+            [b]use \trql\web\Browser       as Browser;[/b]
+            use \trql\web\WebPage       as WebPage;
+
+            if ( ! defined( "VAESOLI_CLASS_VERSION" ) )
+                require_once( 'trql.vaesoli.class.php' );
+
+            [b]if ( ! defined( "BROWSER_CLASS_VERSION" ) )
+                require_once( 'trql.browser.class.php' );[/b]
+
+            if ( ! defined( "WEBPAGE_CLASS_VERSION" ) )
+                require_once( 'trql.webpage.class.php' );
+
+            $oPage    = new WebPage();
+            [b]$oBrowser = new Browser();
+            $oBrowser->parseUA();
+
+            $szBrowserMobility  = strtolower( trim( $oBrowser->szMobility ) );
+            $szBrowserName      = $oBrowser->szName;
+            $szBrowserType      = $oBrowser->szType;
+            $szBrowserPlatform  = $oBrowser->szPlatform;[/b]
+            $szSeason           = V::TIM_Season();
+            $szTimeOfTheDay     = V::TIM_timeOfTheDay( time() );
+            $szContentDir       = V::FIL_RealPath( V::FIL_ResolveRoot( '/content' ) );
+            $x                  = explode( '.',$_SERVER['HTTP_HOST'] );
+            $szSubDomain        = 'www';
+            if ( count( $x ) > 2 )
+                $szSubDomain = current( $x );
+
+            $szPage = preg_replace( '/(\A-|\.html\z|\.htm\z|\.php\z)/si','',str_replace( '/','-',$_SERVER['SCRIPT_NAME'] ) );
+
+            $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage . '-' . $szBrowserMobility . '.html'      );
+            $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage                            . '.html'      );
+            $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' .                      $szPage . '-' . $szBrowserMobility . '.html'      );
+            $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' .                      $szPage                            . '.html'      );
+
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage . '-' . $szBrowserMobility . '.meta.xml'  );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage . '-' . $szBrowserMobility . '.xml'       );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage                            . '.meta.xml'  );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage                            . '.xml'       );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage . '-' . $szBrowserMobility . '.meta.xml'  );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage . '-' . $szBrowserMobility . '.xml'       );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage                            . '.meta.xml'  );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage                            . '.xml'       );
+
+            |** Read the Meta definitions of the page (if any). We have
+               multiple possible files, starting from the most specific
+               to the less specific. The first one that matches is the
+               one we load **|
+            foreach( $aPossiblePageDescription as $szXMLFile )
+            {
+                if ( is_file( $szXMLFile ) )
+                {
+                    [b]$oPage->readDescription( $szXMLFile );[/b]
+                    break;
+                }
+            }   |** foreach( $aPossiblePageDescription as $szXMLFile ) **|
+
+            ?&gt;
+            &lt;!doctype html&gt;
+            &lt;html&gt;
+                &lt;head&gt;
+                    &lt;meta charset=&quot;UTF-8&quot;&gt;
+                    &lt;title&gt;&lt;?php echo $oPage-&gt;title; ?&gt;&lt;/title&gt;
+                    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+                    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css?family=Roboto&quot;&gt;
+                    &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/mathieu.css&quot;&gt;
+                    &lt;meta name=&quot;author&quot; content=&quot;&lt;?php echo $oPage-&gt;author-&gt;name; ?&gt;&quot;&gt;
+                    &lt;meta name=&quot;description&quot; content=&quot;&lt;?php echo $oPage-&gt;description; ?&gt;&quot;&gt;
+                    &lt;meta name=&quot;keywords&quot; content=&quot;&lt;?php echo $oPage-&gt;keywords; ?&gt;&quot;&gt;
+                &lt;/head&gt;
+
+                &lt;body vocab=&quot;https://schema.org/&quot; typeof=&quot;WebPage&quot; class=&quot;&lt;?php echo [b]$szBrowserMobility[/b],' ',[b]$szBrowserName[/b],' ',[b]$szBrowserType[/b],' ',[b]$szBrowserPlatform[/b],' ',$szSeason,' ',$szTimeOfTheDay; ?&gt;&quot;&gt;
+                    &lt;div class=&quot;wrapper&quot;&gt;
+                    &lt;?php
+                        |** We have multiple possible files for the content, starting from
+                           the most specific name to the less specific. The first one that
+                           matches is the one we load **|
+                        foreach( $aPossibleContentFiles as $szFile )
+                        {
+                            if ( is_file( $szFile ) )
+                            {
+                                include_once( $szFile );
+                                break;
+                            }
+                        }   |** foreach( $aPossibleContentFiles as $szFile ) **|
+                    ?&gt;
+                    &lt;/div&gt;
+                &lt;/body&gt;
+            &lt;/html&gt;
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -141,7 +250,7 @@ class Browser extends Thing
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         if ( ! isset( $_SERVER['HTTP_USER_AGENT'] ) )
             $this->szUA = 'illegal';
@@ -222,15 +331,17 @@ class Browser extends Thing
         of the object.
 
         {*params
-            $szUA       (string)        Optional User Agent. @var.szUA by default.
+            $szUA       (string)        Optional User Agent. SERVER['HTTP_USER_AGENT']
+                                        by default.
         *}
 
         {*cdate 24/06/2012 11:25 *}
-        {*mdate 22/10/2013 11:44 *}
-        {*version 5.0.0003 *}
+        {*mdate 23-03-2021 12:31 *}
+        {*version 9.0.0000 *}
 
         {*return
-            (void)
+            (self)      The method returns the current instance of the class. Internal
+                        properties are updated witn the result of the parsing.
         *}
 
         *}}
@@ -241,7 +352,7 @@ class Browser extends Thing
     {
         $this->fStart   = (float) microtime( true );                /* Parsing start time */
 
-        $this->setDefaultPropertiesBeforeParsing( $szUA );
+        $this->setDefaultPropertiesBeforeParsing( $szUA ?? $_SERVER['HTTP_USER_AGENT'] );
 
         if ( ! is_null( $this->szUA ) && $this->szUA !== 'illegal' )
         {
@@ -4296,15 +4407,6 @@ class Browser extends Thing
                 }   /* switch ( $this->szPlatform ) */
             }   /* if ( ! empty( $this->szPlatform ) ) */
         }
-        //else
-        //{
-        //    echo "<p>User agent NULL</p>\n";
-        //}
-
-
-
-
-
 
         $this->fStop    = (float) microtime( true );                /* Finish time */
 
@@ -4373,7 +4475,8 @@ class Browser extends Thing
         $this->aProperties['voice-input-capable'    ] = null;           // true | false
         
         return ( $this );
-    }
+    }   /* == End of Browser.setDefaultPropertiesBeforeParsing() =====================  */
+    /* ================================================================================ */
 
 
     /* ================================================================================ */

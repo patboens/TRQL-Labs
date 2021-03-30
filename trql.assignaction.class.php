@@ -27,7 +27,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,10 +51,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\assignaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\allocateaction\AllocateAction    as AllocateAction;
+use \trql\schema\action\AllocateAction    as AllocateAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -160,4 +160,3 @@ class AssignAction extends AllocateAction
     /* ================================================================================ */
 }   /* End of class AssignAction ====================================================== */
 /* ==================================================================================== */
-?>

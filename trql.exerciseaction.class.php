@@ -27,7 +27,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel Ã©tÃ© sous le hÃªtre *}
     {*keywords              action *}
 
     -------------------------------------------------------------------------------------
@@ -54,10 +54,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\exerciseaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\playaction\PlayAction as PlayAction;
+use \trql\schema\action\PlayAction as PlayAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -199,4 +199,3 @@ class ExerciseAction extends PlayAction
     /* ================================================================================ */
 }   /* End of class ExerciseAction ==================================================== */
 /* ==================================================================================== */
-?>

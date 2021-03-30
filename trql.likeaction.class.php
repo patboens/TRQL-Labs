@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -30,6 +28,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -43,7 +42,6 @@
         *}
     *}
 
-
     {*chist
         {*mdate 14-02-21 10:44 *}
         {*author {PYB} *}
@@ -55,19 +53,16 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\likeaction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\reactaction\ReactAction    as ReactAction;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\action\ReactAction     as ReactAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'REACTACTION_CLASS_VERSION' ) )
     require_once( 'trql.reactaction.class.php' );
-
-
 
 defined( 'LIKEACTION_CLASS_VERSION' ) or define( 'LIKEACTION_CLASS_VERSION','0.1' );
 
@@ -97,7 +92,7 @@ defined( 'LIKEACTION_CLASS_VERSION' ) or define( 'LIKEACTION_CLASS_VERSION','0.1
  */
 /* ==================================================================================== */
 class LikeAction extends ReactAction
-/*--------------------------------------*/
+/*--------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -195,10 +190,8 @@ class LikeAction extends ReactAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of LikeAction.__construct() ========================================== */
+    }   /* End of LikeAction.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -225,10 +218,7 @@ class LikeAction extends ReactAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of LikeAction.__destruct() =========================================== */
+    }   /* End of LikeAction.__destruct() ============================================= */
     /* ================================================================================ */
-
-}   /* End of class LikeAction ====================================================== */
+}   /* End of class LikeAction ======================================================== */
 /* ==================================================================================== */
-
-?>

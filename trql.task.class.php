@@ -46,14 +46,13 @@
 /****************************************************************************************/
 namespace trql\task;
 
-use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\XML\XML               as XML;
-use \trql\activity\Activity     as Activity;
-use \trql\html\Form             as Form;
-use \trql\html\Fieldset         as Fieldset;
-use \trql\html\Formset          as Formset;
-use \trql\html\Input            as Input;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\XML\XML                   as XML;
+use \trql\schema\action\Activity    as Activity;
+use \trql\html\Form                 as Form;
+use \trql\html\Fieldset             as Fieldset;
+use \trql\html\Formset              as Formset;
+use \trql\html\Input                as Input;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

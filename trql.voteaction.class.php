@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 28-08-2020 16:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -45,19 +44,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\voteaction;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\chooseaction\ChooseAction    as ChooseAction;
-
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\action\ChooseAction    as ChooseAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'CHOOSEACTION_CLASS_VERSION' ) )
     require_once( 'trql.chooseaction.class.php' );
-
-
 
 defined( 'VOTEACTION_CLASS_VERSION' ) or define( 'VOTEACTION_CLASS_VERSION','0.1' );
 
@@ -87,7 +83,7 @@ defined( 'VOTEACTION_CLASS_VERSION' ) or define( 'VOTEACTION_CLASS_VERSION','0.1
  */
 /* ==================================================================================== */
 class VoteAction extends ChooseAction
-/*--------------------------------------*/
+/*---------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -189,10 +185,8 @@ class VoteAction extends ChooseAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of VoteAction.__construct() ========================================== */
+    }   /* End of VoteAction.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -219,10 +213,7 @@ class VoteAction extends ChooseAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of VoteAction.__destruct() =========================================== */
+    }   /* End of VoteAction.__destruct() ============================================= */
     /* ================================================================================ */
-
-}   /* End of class VoteAction ====================================================== */
+}   /* End of class VoteAction ======================================================== */
 /* ==================================================================================== */
-
-?>

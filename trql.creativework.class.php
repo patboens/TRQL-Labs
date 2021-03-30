@@ -55,12 +55,12 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\creativework;
+namespace trql\schema\creativework;
 
-use \trql\mother\Mother         as Mother;
-use \trql\mother\iContext       as iContext;
+use \trql\quitus\Mother         as Mother;
+use \trql\quitus\iContext       as iContext;
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\thing\Thing           as Thing;
+use \trql\schema\Thing          as Thing;
 
 use DOMDocument;
 use DOMXPath;
@@ -108,6 +108,7 @@ class CreativeWork extends Thing implements iContext
                                'family' => null         ,
                              );
 
+    protected   $schemaOrg  = 'http://schema.org/CreativeWork';     /* {*property   $schemaOrg                  (string)                        Where the official documentation is maintained *} */
     public      $about                      = null;                 /* {*property   $about                      (Thing)                         The subject matter of the content. Inverse property: @var.subjectOf *} */
     public      $abstract                   = null;                 /* {*property   $abstract                   (string)                        An abstract is a short description that summarizes a @class.CreativeWork *} */
     public      $accessMode                 = null;                 /* {*property   $accessMode                 (string)                        The human sensory perceptual system or cognitive faculty
@@ -387,7 +388,7 @@ class CreativeWork extends Thing implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of CreativeWork.__construct() ========================================== */

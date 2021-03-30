@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -30,6 +28,7 @@
     {*cdate                 26-08-2020 18:40 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -55,10 +54,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\cancelaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\planaction\PlanAction    as PlanAction;
+use \trql\schema\action\PlanAction    as PlanAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -196,8 +195,6 @@ class CancelAction extends PlanAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
     }   /* End of CancelAction.__construct() ========================================== */
     /* ================================================================================ */
@@ -228,8 +225,5 @@ class CancelAction extends PlanAction
         $this->necroSignaling();
     }   /* End of CancelAction.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class CancelAction ====================================================== */
 /* ==================================================================================== */
-
-?>

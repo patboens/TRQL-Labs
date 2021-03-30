@@ -68,7 +68,7 @@
 /****************************************************************************************/
 namespace trql\audience;
 
-use \trql\mother\Mother                             as Mother;
+use \trql\quitus\Mother                             as Mother;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
 use \trql\intangible\Intangible                     as Intangible;
 use \trql\administrativearea\AdministrativeArea     as AdministrativeArea;

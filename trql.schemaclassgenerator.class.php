@@ -92,7 +92,7 @@
 /****************************************************************************************/
 namespace trql\schemaclassgenerator;
 
-use \trql\mother\iContext                           as iContext;
+use \trql\quitus\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
 use \trql\csv\CSV                                   as CSV;
 use \trql\xml\XML                                   as XML;

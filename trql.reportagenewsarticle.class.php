@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -47,6 +45,8 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               creativework *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -63,19 +63,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\reportagenewsarticle;
+namespace trql\schema\creativework;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\newsarticle\NewsArticle    as NewsArticle;
-
+use \trql\schema\creativework\NewsArticle   as NewsArticle;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'NEWSARTICLE_CLASS_VERSION' ) )
     require_once( 'trql.newsarticle.class.php' );
-
-
 
 defined( 'REPORTAGENEWSARTICLE_CLASS_VERSION' ) or define( 'REPORTAGENEWSARTICLE_CLASS_VERSION','0.1' );
 
@@ -174,9 +171,7 @@ class ReportageNewsArticle extends NewsArticle
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of ReportageNewsArticle.__construct() ================================== */
@@ -210,5 +205,3 @@ class ReportageNewsArticle extends NewsArticle
     /* ================================================================================ */
 }   /* End of class ReportageNewsArticle ============================================== */
 /* ==================================================================================== */
-
-?>

@@ -27,7 +27,8 @@
     {*cdate                 28-08-2020 16:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               creativework *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,10 +45,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\socialmediaposting;
+namespace trql\schema\creativework;
 
-use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\article\Article   as Article;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\creativework\Article   as Article;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -83,7 +84,7 @@ defined( 'SOCIALMEDIAPOSTING_CLASS_VERSION' ) or define( 'SOCIALMEDIAPOSTING_CLA
  */
 /* ==================================================================================== */
 class SocialMediaPosting extends Article
-/*-------------------------------------*/
+/*------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -156,4 +157,3 @@ class SocialMediaPosting extends Article
     /* ================================================================================ */
 }   /* End of class SocialMediaPosting ================================================ */
 /* ==================================================================================== */
-?>

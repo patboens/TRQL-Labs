@@ -26,7 +26,8 @@
     {*cdate                 24-08-2020 03:32 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               web *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -123,7 +124,7 @@ class VideoGallery extends MediaGallery
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of VideoGallery.__construct() ========================================== */

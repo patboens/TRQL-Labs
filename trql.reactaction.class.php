@@ -26,6 +26,7 @@
     {*cdate                 26-08-2020 14:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -49,10 +50,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\reactaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\assessaction\AssessAction     as AssessAction;
+use \trql\schema\action\AssessAction     as AssessAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -158,4 +159,3 @@ class ReactAction extends AssessAction
     /* ================================================================================ */
 }   /* End of class ReactAction ======================================================= */
 /* ==================================================================================== */
-?>

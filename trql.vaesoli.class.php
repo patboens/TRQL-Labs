@@ -1288,6 +1288,7 @@ class Vaesoli
     {
         return ( self::FIL_StrToFile( serialize( $x ),$szFile ) );
     }   /* End of vaesoli.FIL_saveHashFile() ========================================== */
+    public static function saveHashFile( $szFile,$x ) { return( self::FIL_saveHashFile( $szFile,$x ) ); }
     /* ================================================================================ */
 
 
@@ -2042,6 +2043,111 @@ class Vaesoli
     /* ================================================================================ */
 
 
+   /* ================================================================================ */
+    /** {{*STR_isLower( $c )=
+
+        Determines whether $c is a lowercase character
+
+        {*params
+            $c      (string)        Character to test
+        *}
+
+        {*return
+            (bool)              [c]true[/c] if @param.c is a lowercase letter;
+                                [c]false[/c] otherwise
+        *}
+
+        {*assert
+            STR_isLower( 'a' ) === true
+        *}
+
+        {*assert
+            STR_isLower( 'A' ) === false
+        *}
+
+        {*assert
+            STR_isLower( 'à' ) === true
+        *}
+
+        {*assert
+            STR_isLower( 'À' ) === false
+        *}
+
+        {*seealso
+            STR_swapCase()
+        *}
+
+        {*example
+        *}
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_isLower( $c ): bool
+    /*------------------------------------------*/
+    {
+        return ( $c === mb_strtolower( $c ) );
+    }   /* == End of function STR_isLower() =========================================== */
+    /* ================================================================================ */
+
+
+   /* ================================================================================ */
+    /** {{*STR_isLower( $c )=
+
+        Determines whether $c is a lowercase character
+
+        {*params
+            $c      (string)        Character to test
+        *}
+
+        {*return
+            (bool)              [c]true[/c] if @param.c is a lowercase letter;
+                                [c]false[/c] otherwise
+        *}
+
+        {*assert
+            STR_isLower( 'a' ) === true
+        *}
+
+        {*assert
+            STR_isLower( 'A' ) === false
+        *}
+
+        {*assert
+            STR_isLower( 'à' ) === true
+        *}
+
+        {*assert
+            STR_isLower( 'À' ) === false
+        *}
+
+        {*seealso
+            STR_swapCase()
+        *}
+
+        {*example
+        *}
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_swapCase( $str ): string
+    /*-----------------------------------------------*/
+    {
+        $iLen       = mb_strlen( $str );
+        $szRetVal   = '';
+
+        for ( $i=0;$i<$iLen;$i++ )
+        {
+            if ( self::STR_isLower( $c = mb_substr( $str,$i,1 ) ) )
+                $szRetVal .= mb_strtoupper( $c );
+            else
+                $szRetVal .= mb_strtolower( $c );
+        }
+
+        return ( $szRetVal );
+    }   /* == End of function STR_swapCase() ========================================== */
+    /* ================================================================================ */
+
+
     /* ================================================================================ */
     /** {{*STR_InList( $aList,$szValue[,$bPartOf] )=
 
@@ -2188,6 +2294,495 @@ class Vaesoli
 
         return ( $szRetVal );                                           /* Return result to caller */
     }   /* End of function STR_Balance() ============================================== */
+    /* ================================================================================ */
+
+
+    public static function STR_Ascii2( $szStr )
+    /*---------------------------------------*/
+    {
+        $iRetVal    = 0;                                                /* Return value of the function */
+        $iLength = strlen( $szStr );                                    /* Length of the string */
+
+        for ( $i = 0;$i < $iLength;$i++ )                               /* For each character of the string */
+        {
+            $iRetVal += ( ord( $szStr[$i] ) * $i );                     /* Sum ASCII values */
+        }   /* for ( $i = 0;$i < $iLength;$i++ ) */
+
+        return ( $iRetVal );                                            /* Return result to caller */
+    }   /* == End of vaesoli.STR_Ascii2() ============================================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*STR_Eliminate( $szStr,$szCharList )=
+
+        Eliminates all characters of $szCharList from $szStr
+
+        {*params
+            $szStr      (string)    The string to process
+            $szCharList (string)    The list of characters to get rid of
+        *}
+
+        {*return
+            (string)        $szStr amputated from all chars found in $szCharList
+        *}
+
+        {*exec
+            $szStr   = "Hello World\nIs All OK?\r\nHave you seen Henry?";
+            $iLength = strlen( $szStr);
+            echo '<p>Length was: '                          ,
+                     $iLength                               ,
+                     '<br />'                               ,
+                     $szStr = STR_Eliminate( $szStr,"\r\n" ),
+                     '<br />New length is: '                ,
+                     $iLength = strlen( $szStr )            ,
+                     "</p>\n";
+            echo LSUnitTesting::assert( $iLength === 41                                     ,
+                                        'ASSERTION SUCCESSFUL: correct length for $szStr'   ,
+                                        'ASSERTION FAILURE: incorrect length for $szStr'    ,
+                                        'GuideAssert' );
+        *}
+
+        {*seealso
+            STR_Keep()
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_Eliminate( $szStr,$szCharList )
+    /*------------------------------------------------------*/
+    {
+        $iPos       = 0;                                                /* Current position */
+        $iLength    = strlen( $szStr );                                 /* Length fo string to process */
+        $szRetVal   = '';                                               /* Return value of the function */
+
+        while ( $iPos < $iLength )                                      /* While we haven't treated the whole source code */
+        {
+            if ( self::STR_Pos( $szCharList,($c = $szStr[$iPos++]) ) == -1 )  /* Character we just read */
+            {
+                $szRetVal .= $c;                                        /* Add it to the return value */
+            }
+        }   /* while ( $iPos < $iLength ) */
+
+        return ( $szRetVal );                                           /* Return result to caller */
+    }   /* == End of vaesoli.STR_Eliminate() ========================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*STR_SquareBracketsToAngleBrackets( $szText )=
+
+        Turns square brackets to angle brackets
+
+        {*params
+            $szText     (string)    Text to process
+        *}
+
+        {*return
+            (string)    Square brackets turned to angle brackets
+        *}
+
+        {*cdate 22/09/2013 *}
+        {*version 5.6.0000 *}
+        {*author {PYB} *}
+        {*mdate 14/09/2014 h1,h2,h3 support *}
+
+        {*alias STR_FromSquareBracketsToAngleBrackets()
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '[ol][li]...[/li][/ol]' ) === '<ol><li>...</li></ol>'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '[h1][/h1]' ) === '<h1></h1>'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '[h2][/h2]' ) === '<h2></h2>'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '[h3][/h3]' ) === '<h3></h3>'
+        *}
+
+        {*seealso
+            STR_AngleBracketsToSquareBrackets()
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_SquareBracketsToAngleBrackets( $szText )
+    /*---------------------------------------------------------------*/
+    {
+        return ( str_replace( array( '[br]'  ,'[hr]'  ,'[p]' ,'[/p]' ,'[b]'     ,'[/b]'     ,'[q]','[/q]','[i]' ,'[/i]' ,'<br>'  ,'[h1]','[/h1]','[h2]','[/h2]','[h3]','[/h3]','[ul]','[/ul]','[ol]','[/ol]','[li]','[/li]','[url]' ,'[/url]'  )   ,
+                              array( '<br />','<hr />','<p>' ,'</p>' ,'<strong>','</strong>','<q>','</q>','<em>','</em>','<br />','<h1>','</h1>','<h2>','</h2>','<h3>','</h3>','<ul>','</ul>','<ol>','</ol>','<li>','</li>','[http]','[/http]' )   ,
+                              $szText ) );
+    }   /* End of vaesoli.STR_SquareBracketsToAngleBrackets() ========================= */
+    public static function STR_FromSquareBracketsToAngleBrackets( $szText )   { return ( self::STR_SquareBracketsToAngleBrackets( $szText ) ); }
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*STR_AngleBracketsToSquareBrackets( $szText )=
+
+        Turns angle brackets to square brackets
+
+        {*params
+            $szText     (string)    Text to process
+        *}
+
+        {*return
+            (string)    Angle brackets turned to square brackets
+        *}
+
+        {*cdate 22/09/2013 *}
+        {*version 5.6.0000 *}
+        {*author {PYB} *}
+        {*mdate 14/09/2014 h1,h2,h3 support *}
+
+        {*alias
+            STR_FromAngleBracketsToSquareBrackets()
+        *}
+
+        {*assert
+            STR_AngleBracketsToSquareBrackets( '<ol><li>...</li></ol>' ) === '[ol][li]...[/li][/ol]'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '<h1></h1>' ) === '[h1][/h1]'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '<h2></h2>' ) === '[h2][/h2]'
+        *}
+
+        {*assert
+            STR_SquareBracketsToAngleBrackets( '<h3></h3>' ) === '[h3][/h1]'
+        *}
+
+        {*seealso
+            STR_SquareBracketsToAngleBrackets()
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_AngleBracketsToSquareBrackets( $szText )
+    /*-------------------------------------------------*/
+    {
+        return ( str_replace( array( '<br />','<hr />','<p>' ,'</p>', '<strong>','</strong>','<q>','</q>','<em>','</em>','<br />','<h1>','</h1>','<h2>','</h2>','<h3>','</h3>','<ul>','</ul>','<ol>','</ol>','<li>','</li>','[http]','[/http]' )   ,
+                              array( '[br]'  ,'[hr]'  ,'[p]' ,'[/p]', '[b]'     ,'[/b]'     ,'[q]','[/q]','[i]' ,'[/i]' ,'<br>'  ,'[h1]','[/h1]','[h2]','[/h2]','[h3]','[/h3]','[ul]','[/ul]','[ol]','[/ol]','[li]','[/li]','[url]' ,'[/url]'  )   ,
+                              $szText ) );
+    }   /* End of vaesoli.STR_AngleBracketsToSquareBrackets() ========================= */
+    public static function STR_FromAngleBracketsToSquareBrackets( $szText ) { return ( self::STR_AngleBracketsToSquareBrackets( $szText ) ); }
+    /* ================================================================================ */
+
+
+    // Line feeds to <p>...</p>
+    public static function STR_toParagraphs( $szStr )
+    /*---------------------------------------------*/
+    {
+        return ( str_replace( '<p></p>','',preg_replace('/(\A|^)(.*?)($|\R|\z)/m',"<p>$2</p>",$szStr ) ) );        
+    }   /* == End of vaesoli.STR_toParagraphs() ======================================= */
+    /* ================================================================================ */
+
+
+    // Based on https://www.go4expert.com/articles/morse-code-encoder-decoder-t3090/
+    public static function STR_morseEncode( $szStr )
+    /*--------------------------------------------*/
+    {
+        $szRetVal   = '';
+        $szStr      = strtolower( self::STR_stripAccents( $szStr ) );
+
+        if ( ( $iLen = strlen( $szStr ) ) > 0 )
+        {
+            $aMap   = array( "a"    =>  ".-"    ,
+                             "b"    =>  "-..."  ,
+                             "c"    =>  "-.-."  ,
+                             "d"    =>  "-.."   ,
+                             "e"    =>  "."     ,
+                             "f"    =>  "..-."  ,
+                             "g"    =>  "--."   ,
+                             "h"    =>  "...."  ,
+                             "i"    =>  ".."    ,
+                             "j"    =>  ".---"  ,
+                             "k"    =>  "-.-"   ,
+                             "l"    =>  ".-.."  ,
+                             "m"    =>  "--"    ,
+                             "n"    =>  "-."    ,
+                             "o"    =>  "---"   ,
+                             "p"    =>  ".--."  ,
+                             "q"    =>  "--.-"  ,
+                             "r"    =>  ".-."   ,
+                             "s"    =>  "..."   ,
+                             "t"    =>  "-"     ,
+                             "u"    =>  "..-"   ,
+                             "v"    =>  "...-"  ,
+                             "w"    =>  ".--"   ,
+                             "x"    =>  "-..-"  ,
+                             "y"    =>  "-.--"  ,
+                             "z"    =>  "--.."  ,
+                             "0"    =>  "-----" ,
+                             "1"    =>  ".----" ,
+                             "2"    =>  "..---" ,
+                             "3"    =>  "...--" ,
+                             "4"    =>  "....-" ,
+                             "5"    =>  "....." ,
+                             "6"    =>  "-...." ,
+                             "7"    =>  "--..." ,
+                             "8"    =>  "---.." ,
+                             "9"    =>  "----." ,
+                             "."    =>  ".-.-.-",
+                             ","    =>  "--..--",
+                             "?"    =>  "..--..",
+                             "/"    =>  "-..-." ,
+                             " "    =>  "   " );
+        }
+
+        for ( $i = 0; $i < $iLen;$i++ ) 
+        {
+            $c = $szStr[$i];
+
+            // ignore unknown characters
+            if ( empty( $aMap[$c] ) ) 
+                continue;
+
+            $szRetVal .= $aMap[$c]." ";
+        }
+
+        return $szRetVal;
+    }   /* == End of vaesoli.STR_morseEncode() ======================================== */
+    /* ================================================================================ */
+
+
+    // Based on https://www.go4expert.com/articles/morse-code-encoder-decoder-t3090/
+    public static function STR_morseDecode( $szMorse )
+    /*----------------------------------------------*/
+    {
+        $szRetVal   = '';
+        $aMap       = array( ".-"     => "a"    ,
+                             "-..."   => "b"    ,
+                             "-.-."   => "c"    ,
+                             "-.."    => "d"    ,
+                             "."      => "e"    ,
+                             "..-."   => "f"    ,
+                             "--."    => "g"    ,
+                             "...."   => "h"    ,
+                             ".."     => "i"    ,
+                             ".---"   => "j"    ,
+                             "-.-"    => "k"    ,
+                             ".-.."   => "l"    ,
+                             "--"     => "m"    ,
+                             "-."     => "n"    ,
+                             "---"    => "o"    ,
+                             ".--."   => "p"    ,
+                             "--.-"   => "q"    ,
+                             ".-."    => "r"    ,
+                             "..."    => "s"    ,
+                             "-"      => "t"    ,
+                             "..-"    => "u"    ,
+                             "...-"   => "v"    ,
+                             ".--"    => "w"    ,
+                             "-..-"   => "x"    ,
+                             "-.--"   => "y"    ,
+                             "--.."   => "z"    ,
+                             "-----"  => "0"    ,
+                             ".----"  => "1"    ,
+                             "..---"  => "2"    ,
+                             "...--"  => "3"    ,
+                             "....-"  => "4"    ,
+                             "....."  => "5"    ,
+                             "-...."  => "6"    ,
+                             "--..."  => "7"    ,
+                             "---.."  => "8"    ,
+                             "----."  => "9"    ,
+                             ".-.-.-" => "."    ,
+                             "--..--" => ","    ,
+                             "..--.." => "?"    ,
+                             "-..-."  => "/"    ,
+                             "   "    => " "    );
+        $aGroups    = explode( ' ',$szMorse );
+        //var_dump( $szMorse,$aGroups );
+
+        foreach ( $aGroups as $c ) 
+        {
+            // ignore unknown characters
+            if ( empty( $c ) ) 
+                $szRetVal .= ' ';
+
+            if ( empty( $aMap[$c] ) ) 
+                continue;
+
+            $szRetVal .= $aMap[$c];
+        }
+
+        return ( self::STR_reduce( $szRetVal ) );
+    }   /* == End of vaesoli.STR_morseDecode() ======================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*STR_DetectLanguage( $szText[,$szDefault[,$iCount]] )=
+
+        Detects language
+
+        {*params
+            $szText     (string)    Text to determine language
+            $szDefault  (string)    Default language
+            $iCount     (int)       Number of words to take into account.
+                                    The more words, the slower the method.
+        *}
+
+        {*return
+            (string)    Detected language
+        *}
+
+        {*warning
+            Can detect the following languages: 'ca','cs','de','en','es','fr',
+            'it','nl','pt'
+        *}
+
+        {*cdate 27-03-21 *}
+        {*version 5.6.0000 *}
+        {*author {PYB} *}
+
+        {*assert
+            STR_DetectLanguage( 'Voici une phrase écrite en français' ) === 'fr'
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_DetectLanguage( $szText,$szDefault = '?',$iCount = 50 )
+    /*-------------------------------------------------------------------------------*/
+    {
+        //https://en.m.wikipedia.org/wiki/Most_common_words_in_English
+        //http://www.101languages.net/dutch/most-common-dutch-words/
+        //http://wortschatz.uni-leipzig.de/Papers/top100de.txt
+        //http://netia59a.ac-lille.fr/va.anzin/IMG/pdf/mots_les_plus_frequents.pdf
+        //https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/
+        //https://fr.wiktionary.org/wiki/Wiktionnaire:Listes_de_fr%C3%A9quence
+
+        $szText     = ' ' . strtolower( $szText ) . ' ';
+        //var_dump( $szText );
+        $aLanguages = array( 'ca','cs','de','en','es','fr','it','nl','pt' );
+
+        {   /* Catalan - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Catalan/1-2000 */
+            include( 'catalan-words.php' );
+        }
+
+        {   /* Czech - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Czech_wordlist */
+            include( 'czech-words.php' );
+        }
+
+        {   /* German - 200 - https://fr.wiktionary.org/wiki/Wiktionnaire:Listes_de_fr%C3%A9quence/wortschatz-de-1-2000 */
+            include( 'german-words.php' );
+        }
+
+        {   /* English - 200 - https://en.m.wikipedia.org/wiki/Most_common_words_in_English */
+            include( 'english-words.php' );
+        }
+
+        {   /* Spanish - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Spanish1000 */
+            include( 'spanish-words.php' );
+        }
+
+        {   /* French - 200 - https://fr.wiktionary.org/wiki/Wiktionnaire:Listes_de_fr%C3%A9quence/wortschatz-fr-1-2000 */
+            include( 'french-words.php' );
+        }
+
+        {   /* Italian - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Italian1000 */
+            include( 'italian-words.php' );
+        }
+
+        {   /* Dutch - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Dutch_wordlist */
+            include( 'dutch-words.php' );
+        }
+
+        {   /* Portuguese - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Portuguese_wordlist */
+            include( 'portuguese-words.php' );
+        }
+
+
+        // count the occurrences of the most frequent words
+        foreach ( $aLanguages as $szLang )
+        {
+            $counter[$szLang] = 0;
+        }
+
+        //$iLimit = count( $aWords['es'] );
+        $iLimit = min( $iCount,count( $aWords['ca'] ) );
+
+        // Pour le compte de mots à prendre en
+        // considération
+        for ( $i = 0; $i < $iLimit; $i++ )
+        {
+            // Pour chaque langue à détecter
+            foreach ( $aLanguages as $szLang )
+            {
+                //if ( $szLang === 'fr' )
+                //    var_dump( 'Je cherche si "' . $aWords[$szLang][$i] . '" peut être trouvé dans le texte "' . $szText . '" en "' . $szLang . '" ... ' . substr_count( $szText,' ' . $aWords[$szLang][$i] . ' ' ) );
+                $counter[$szLang] += substr_count( $szText,' ' . $aWords[$szLang][$i] . ' ' );
+            }
+        }
+
+        //var_dump( $counter );
+
+        //foreach ( $aLanguages as $szLang )
+        //{
+        //    var_dump( $counter[$szLang] );
+        //}
+
+        // get max counter value
+        // from http://stackoverflow.com/a/1461363
+        $iMaxMatches = max( $counter );
+
+        //var_dump( $iMaxMatches );
+
+        $aWinningLanguages = array_keys( $counter,$iMaxMatches );
+        //var_dump( $aWinningLanguages );
+
+        if ( count( $aWinningLanguages ) > 0 )
+        {
+            //var_dump( $aWinningLanguages );
+            //var_dump( $aWinningLanguages[0] );
+
+            if ( ( $iMatches = $counter[ $aWinningLanguages[0] ] ?? 0 ) > 0 )
+                return ( $aWinningLanguages[0] );
+            else
+                return ( $szDefault );
+
+            //$second = 0;
+            //echo "<p>On a un gagnant et c'est {$szWinner}</p>";
+            //
+            //// get runner-up (second place)
+            //foreach ( $aLanguages as $szLang )
+            //{
+            //    if ( $szLang <> $szWinner )
+            //    {
+            //        if ( $counter[$szLang] > $second )
+            //        {
+            //            $second = $counter[$szLang];
+            //        }
+            //    }
+            //}
+            //
+            //echo "<p>Le second est {$second}</p>";
+            //
+            //
+            //
+            //// apply arbitrary threshold of 10%
+            //if ( ( $second / $max ) < 0.1 )
+            //{
+            //    return ( $szWinner );
+            //}
+        }
+
+        return ( $szDefault );
+    }   /* == End of vaesoli.STR_DetectLanguage() ===================================== */
     /* ================================================================================ */
 
 
@@ -2507,304 +3102,6 @@ class Vaesoli
     }   /* End of function NUM_RoundMultiple() ======================================== */
 
 
-    public static function STR_Ascii2( $szStr )
-    /*---------------------------------------*/
-    {
-        $iRetVal    = 0;                                                /* Return value of the function */
-        $iLength = strlen( $szStr );                                    /* Length of the string */
-
-        for ( $i = 0;$i < $iLength;$i++ )                               /* For each character of the string */
-        {
-            $iRetVal += ( ord( $szStr[$i] ) * $i );                     /* Sum ASCII values */
-        }   /* for ( $i = 0;$i < $iLength;$i++ ) */
-
-        return ( $iRetVal );                                            /* Return result to caller */
-    }   /* == End of vaesoli.STR_Ascii2() ============================================= */
-    /* ================================================================================ */
-
-
-    /* ================================================================================ */
-    /** {{*STR_Eliminate( $szStr,$szCharList )=
-
-        Eliminates all characters of $szCharList from $szStr
-
-        {*params
-            $szStr      (string)    The string to process
-            $szCharList (string)    The list of characters to get rid of
-        *}
-
-        {*return
-            (string)        $szStr amputated from all chars found in $szCharList
-        *}
-
-        {*exec
-            $szStr   = "Hello World\nIs All OK?\r\nHave you seen Henry?";
-            $iLength = strlen( $szStr);
-            echo '<p>Length was: '                          ,
-                     $iLength                               ,
-                     '<br />'                               ,
-                     $szStr = STR_Eliminate( $szStr,"\r\n" ),
-                     '<br />New length is: '                ,
-                     $iLength = strlen( $szStr )            ,
-                     "</p>\n";
-            echo LSUnitTesting::assert( $iLength === 41                                     ,
-                                        'ASSERTION SUCCESSFUL: correct length for $szStr'   ,
-                                        'ASSERTION FAILURE: incorrect length for $szStr'    ,
-                                        'GuideAssert' );
-        *}
-
-        {*seealso
-            STR_Keep()
-        *}
-
-        *}}
-     */
-    /* ================================================================================ */
-    public static function STR_Eliminate( $szStr,$szCharList )
-    /*------------------------------------------------------*/
-    {
-        $iPos       = 0;                                                /* Current position */
-        $iLength    = strlen( $szStr );                                 /* Length fo string to process */
-        $szRetVal   = '';                                               /* Return value of the function */
-
-        while ( $iPos < $iLength )                                      /* While we haven't treated the whole source code */
-        {
-            if ( self::STR_Pos( $szCharList,($c = $szStr[$iPos++]) ) == -1 )  /* Character we just read */
-            {
-                $szRetVal .= $c;                                        /* Add it to the return value */
-            }
-        }   /* while ( $iPos < $iLength ) */
-
-        return ( $szRetVal );                                           /* Return result to caller */
-    }   /* == End of vaesoli.STR_Eliminate() ========================================== */
-    /* ================================================================================ */
-
-
-    /* ================================================================================ */
-    /** {{*STR_SquareBracketsToAngleBrackets( $szText )=
-
-        Turns square brackets to angle brackets
-
-        {*params
-            $szText     (string)    Text to process
-        *}
-
-        {*return
-            (string)    Square brackets turned to angle brackets
-        *}
-
-        {*cdate 22/09/2013 *}
-        {*version 5.6.0000 *}
-        {*author {PYB} *}
-        {*mdate 14/09/2014 h1,h2,h3 support *}
-
-        {*alias STR_FromSquareBracketsToAngleBrackets()
-        *}
-
-        {*assert
-            STR_SquareBracketsToAngleBrackets( '[ol][li]...[/li][/ol]' ) === '<ol><li>...</li></ol>'
-        *}
-
-        {*assert
-            STR_SquareBracketsToAngleBrackets( '[h1][/h1]' ) === '<h1></h1>'
-        *}
-
-        {*assert
-            STR_SquareBracketsToAngleBrackets( '[h2][/h2]' ) === '<h2></h2>'
-        *}
-
-        {*assert
-            STR_SquareBracketsToAngleBrackets( '[h3][/h3]' ) === '<h3></h3>'
-        *}
-
-        {*seealso
-            STR_AngleBracketsToSquareBrackets()
-        *}
-
-        *}}
-     */
-    /* ================================================================================ */
-    public static function STR_SquareBracketsToAngleBrackets( $szText )
-    /*---------------------------------------------------------------*/
-    {
-        return ( str_replace( array( '[br]'  ,'[hr]'  ,'[p]' ,'[/p]' ,'[b]'     ,'[/b]'     ,'[q]','[/q]','[i]' ,'[/i]' ,'<br>'  ,'[h1]','[/h1]','[h2]','[/h2]','[h3]','[/h3]','[ul]','[/ul]','[ol]','[/ol]','[li]','[/li]','[url]' ,'[/url]'  )   ,
-                              array( '<br />','<hr />','<p>' ,'</p>' ,'<strong>','</strong>','<q>','</q>','<em>','</em>','<br />','<h1>','</h1>','<h2>','</h2>','<h3>','</h3>','<ul>','</ul>','<ol>','</ol>','<li>','</li>','[http]','[/http]' )   ,
-                              $szText ) );
-    }   /* End of vaesoli.STR_SquareBracketsToAngleBrackets() ========================= */
-    public static function STR_FromSquareBracketsToAngleBrackets( $szText )   { return ( self::STR_SquareBracketsToAngleBrackets( $szText ) ); }
-    /* ================================================================================ */
-
-
-    /* ================================================================================ */
-    /** {{*STR_AngleBracketsToSquareBrackets( $szText )=
-
-        Turns angle brackets to square brackets
-
-        {*params
-            $szText     (string)    Text to process
-        *}
-
-        {*return
-            (string)    Angle brackets turned to square brackets
-        *}
-
-        {*cdate 22/09/2013 *}
-        {*version 5.6.0000 *}
-        {*author {PYB} *}
-        {*mdate 14/09/2014 h1,h2,h3 support *}
-
-        {*alias
-            STR_FromAngleBracketsToSquareBrackets()
-        *}
-
-        {*assert
-            STR_AngleBracketsToSquareBrackets( '<ol><li>...</li></ol>' ) === '[ol][li]...[/li][/ol]'
-        *}
-
-        {*assert
-            STR_SquareBracketsToAngleBrackets( '<h1></h1>' ) === '[h1][/h1]'
-        *}
-
-        {*assert
-            STR_SquareBracketsToAngleBrackets( '<h2></h2>' ) === '[h2][/h2]'
-        *}
-
-        {*assert
-            STR_SquareBracketsToAngleBrackets( '<h3></h3>' ) === '[h3][/h1]'
-        *}
-
-        {*seealso
-            STR_SquareBracketsToAngleBrackets()
-        *}
-
-        *}}
-     */
-    /* ================================================================================ */
-    public static function STR_AngleBracketsToSquareBrackets( $szText )
-    /*-------------------------------------------------*/
-    {
-        return ( str_replace( array( '<br />','<hr />','<p>' ,'</p>', '<strong>','</strong>','<q>','</q>','<em>','</em>','<br />','<h1>','</h1>','<h2>','</h2>','<h3>','</h3>','<ul>','</ul>','<ol>','</ol>','<li>','</li>','[http]','[/http]' )   ,
-                              array( '[br]'  ,'[hr]'  ,'[p]' ,'[/p]', '[b]'     ,'[/b]'     ,'[q]','[/q]','[i]' ,'[/i]' ,'<br>'  ,'[h1]','[/h1]','[h2]','[/h2]','[h3]','[/h3]','[ul]','[/ul]','[ol]','[/ol]','[li]','[/li]','[url]' ,'[/url]'  )   ,
-                              $szText ) );
-    }   /* End of vaesoli.STR_AngleBracketsToSquareBrackets() ========================= */
-    public static function STR_FromAngleBracketsToSquareBrackets( $szText ) { return ( self::STR_AngleBracketsToSquareBrackets( $szText ) ); }
-    /* ================================================================================ */
-
-
-    public static function STR_DetectLanguage( &$szText,$szDefault = '?',$iCount = 50 )
-    /*-------------------------------------------------------------------------------*/
-    {
-        //https://en.m.wikipedia.org/wiki/Most_common_words_in_English
-        //http://www.101languages.net/dutch/most-common-dutch-words/
-        //http://wortschatz.uni-leipzig.de/Papers/top100de.txt
-        //http://netia59a.ac-lille.fr/va.anzin/IMG/pdf/mots_les_plus_frequents.pdf
-        //https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/
-        //https://fr.wiktionary.org/wiki/Wiktionnaire:Listes_de_fr%C3%A9quence
-
-        $aLanguages = array( 'ca','cs','de','en','es','fr','it','nl','pt' );
-
-        {   /* Catalan - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Catalan/1-2000 */
-            include( 'catalan-words.php' );
-        }
-
-        {   /* Czech - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Czech_wordlist */
-            include( 'czech-words.php' );
-        }
-
-        {   /* German - 200 - https://fr.wiktionary.org/wiki/Wiktionnaire:Listes_de_fr%C3%A9quence/wortschatz-de-1-2000 */
-            include( 'german-words.php' );
-        }
-
-        {   /* English - 200 - https://en.m.wikipedia.org/wiki/Most_common_words_in_English */
-            include( 'english-words.php' );
-        }
-
-        {   /* Spanish - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Spanish1000 */
-            include( 'spanish-words.php' );
-        }
-
-        {   /* French - 200 - https://fr.wiktionary.org/wiki/Wiktionnaire:Listes_de_fr%C3%A9quence/wortschatz-fr-1-2000 */
-            include( 'french-words.php' );
-        }
-
-        {   /* Italian - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Italian1000 */
-            include( 'italian-words.php' );
-        }
-
-        {   /* Dutch - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Dutch_wordlist */
-            include( 'dutch-words.php' );
-        }
-
-        {   /* Portuguese - 200 - https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Portuguese_wordlist */
-            include( 'portuguese-words.php' );
-        }
-
-
-        // count the occurrences of the most frequent words
-        foreach ( $aLanguages as $szLang )
-        {
-            $counter[$szLang] = 0;
-        }
-
-        //$iLimit = count( $aWords['es'] );
-        $iLimit = min( $iCount,count( $aWords['ca'] ) );
-
-        for ( $i = 0; $i < $iLimit; $i++ )
-        {
-            foreach ( $aLanguages as $szLang )
-            {
-                $counter[$szLang] += substr_count( $szText,' ' . $aWords[$szLang][$i] . ' ' );
-            }
-        }
-
-        //foreach ( $aLanguages as $szLang )
-        //{
-        //    var_dump( $counter[$szLang] );
-        //}
-
-        // get max counter value
-        // from http://stackoverflow.com/a/1461363
-        $iMaxMatches = max( $counter );
-
-        //var_dump( $iMaxMatches );
-
-        $aWinningLanguages = array_keys( $counter,$iMaxMatches );
-        //var_dump( $aWinningLanguages );
-
-        if ( count( $aWinningLanguages ) > 0 )
-        {
-            //var_dump( $aWinningLanguages );
-            return( $szWinner = $aWinningLanguages[0] );
-            //$second = 0;
-            //echo "<p>On a un gagnant et c'est {$szWinner}</p>";
-            //
-            //// get runner-up (second place)
-            //foreach ( $aLanguages as $szLang )
-            //{
-            //    if ( $szLang <> $szWinner )
-            //    {
-            //        if ( $counter[$szLang] > $second )
-            //        {
-            //            $second = $counter[$szLang];
-            //        }
-            //    }
-            //}
-            //
-            //echo "<p>Le second est {$second}</p>";
-            //
-            //
-            //
-            //// apply arbitrary threshold of 10%
-            //if ( ( $second / $max ) < 0.1 )
-            //{
-            //    return ( $szWinner );
-            //}
-        }
-
-        return ( $szDefault );
-    }   /* == End of vaesoli.STR_DetectLanguage() ===================================== */
-    /* ================================================================================ */
-
     public static function isdigit( $c )
     /*--------------------------------*/
     {
@@ -2847,8 +3144,8 @@ class Vaesoli
     /*---------------------------------------------------------------*/
     {
         return ( str_pad( (string) $szStr,$iLength,$szPadding,STR_PAD_RIGHT ) );
-    }   /* End of vaesoli.STR_padr() ============================================== */
-    /* ============================================================================ */
+    }   /* End of vaesoli.STR_padr() ================================================== */
+    /* ================================================================================ */
 
 
     public static function STR_Hexa( $szStr )
@@ -2863,11 +3160,11 @@ class Vaesoli
         }
 
         return ( $szResult );
-    }   /* == End of vaesoli.STR_Hexa() =========================================== */
-    /* ============================================================================ */
+    }   /* == End of vaesoli.STR_Hexa() =============================================== */
+    /* ================================================================================ */
 
 
-    /* ============================================================================ */
+    /* ================================================================================ */
     /** {{*STR_htos( $szStr )=
 
         Opposite function to [c]STR_hexa()[/c]
@@ -2894,7 +3191,7 @@ class Vaesoli
 
         *}}
      */
-    /* ========================================================================== */
+    /* ================================================================================ */
     public static function STR_htos( $szStr )
     /*-------------------------------------*/
     {
@@ -2926,7 +3223,7 @@ class Vaesoli
             if ( $c !== '"' && $c !== "'" && $c !== '.' && $c !== '<' && $c !== '>' )
                 $szPassword .= $c;
         }   /* while ( strlen( $szPassword ) < $iLength ) */
-        
+
         return ( $szPassword );
     }   /* == End of function STR_password() ========================================== */
     /* ================================================================================ */
@@ -3228,6 +3525,7 @@ class Vaesoli
     }   /* End of vaesoli.STR_iPos() ================================================== */
     /* ================================================================================ */
 
+
     /* ================================================================================ */
     /** {{*empty( $x )=
 
@@ -3267,16 +3565,16 @@ class Vaesoli
         *}
 
         {*remark
-            The retun value of v::empty( '0' ) yields a [c]false[/c] to the 
+            The retun value of v::empty( '0' ) yields a [c]false[/c] to the
             contrary of PHP.
         *}
 
         {*example
-            var_dump( v::empty( null  ),empty( null  ) );  // Expecting: true            
+            var_dump( v::empty( null  ),empty( null  ) );  // Expecting: true
             var_dump( v::empty( 0     ),empty( 0     ) );  // Expecting: true
             var_dump( v::empty( false ),empty( false ) );  // Expecting: true
-            var_dump( v::empty( true  ),empty( true  ) );  // Expecting: false 
-            var_dump( v::empty( ''    ),empty( ''    ) );  // Expecting: true 
+            var_dump( v::empty( true  ),empty( true  ) );  // Expecting: false
+            var_dump( v::empty( ''    ),empty( ''    ) );  // Expecting: true
             var_dump( v::empty( '0'   ),empty( '0'   ) );  // Expecting: false (PHP returns true!)
             var_dump( v::empty( ' 0'  ),empty( ' 0'  ) );  // Expecting: false
             var_dump( v::empty( '0 '  ),empty( '0 '  ) );  // Expecting: false
@@ -3292,6 +3590,14 @@ class Vaesoli
         return ( $x !== '0' && empty( $x ) );
     }   /* End of vaesoli.empty() ===================================================== */
     /* ================================================================================ */
+
+
+    public static function STR_Empty( $szStr )
+    /*---------------------------------------*/
+    {
+        return ( ( ! $szStr ) || ( @strlen( $szStr ) === 0 ) );
+    }   /* End of vaesoli.function STR_Empty() ======================================== */
+
 
     /* ================================================================================ */
     /** {{*STR_Reduce2( $szStr )=
@@ -3357,7 +3663,7 @@ class Vaesoli
     public static function STR_SoundexFr( $szStr,$bDebug = false )
     /*----------------------------------------------------------*/
     {
-        if ( ! self::STR_Empty( $szStr ) )
+        if ( ! self::empty( $szStr ) )
         {
             if ( $bDebug )
             {
@@ -3545,7 +3851,7 @@ class Vaesoli
                     echo "</pre>\n";
                 }
             }
-        }
+        }   /* if ( ! self::empty( $szStr ) ) */
 
         return ( $szStr );
     }   /* End of vaesoli.STR_SoundexFr() ============================================= */
@@ -3662,8 +3968,8 @@ class Vaesoli
         }
 
         return ( strtr( $szStr,$chars ) );
-    }   /* End of vaesoli.STR_stripAccents() ====================================== */
-    /* ============================================================================ */
+    }   /* End of vaesoli.STR_stripAccents() ========================================== */
+    /* ================================================================================ */
 
 
     public static function STR_Pos( $szStr,$szSubStr )
@@ -3678,8 +3984,8 @@ class Vaesoli
             $iPos = strpos( $szStr,$szSubStr );
             return ( $iPos === false ? -1 : $iPos );
         }
-    }   /* End of vaesoli.STR_Pos() ============================================== */
-    /* ============================================================================ */
+    }   /* End of vaesoli.STR_Pos() =================================================== */
+    /* ================================================================================ */
 
 
     public static function STR_Reduce( $szStr,$cChar = ' ' )
@@ -3713,13 +4019,6 @@ class Vaesoli
     {
        return ( str_replace( $szToReplace,$szReplacement,$szStr ) );
     }   /* End of vaesoli.STR_tran() ================================================== */
-
-
-    public static function STR_Empty( $szStr )
-    /*---------------------------------------*/
-    {
-        return ( ( ! $szStr ) || ( @strlen( $szStr ) === 0 ) );
-    }   /* End of vaesoli.function STR_Empty() ================================= */
 
 
     public static function STR_Left( $szStr,$iCount = 1 )
@@ -3921,7 +4220,8 @@ class Vaesoli
         Gets the season at a given date.
 
         {*params
-            $xDate      (string|int)    The date to consider. Optional.
+            $xDate      (string|int)    The date to consider. Optional. Current date
+                                        by default.
         *}
 
         {*return
@@ -4297,7 +4597,7 @@ class Vaesoli
                 // function call to convert array to xml
                 self::array_to_xml( $a,$oSimpleXML );
 
-                //saving generated xml file; 
+                //saving generated xml file;
                 $szXML = $oSimpleXML->asXML( );
 
                 if ( preg_match( '%<STARTSTARTSTART>(?P<payload>.*?)</STARTSTARTSTART>%si',$szXML,$aMatches ) )

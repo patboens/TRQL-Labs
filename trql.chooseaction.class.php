@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 26-08-2020 14:39 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -52,10 +51,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\chooseaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\assessaction\AssessAction     as AssessAction;
+use \trql\schema\action\AssessAction     as AssessAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -107,7 +106,6 @@ class ChooseAction extends AssessAction
 
     public      $actionOption                   = null;             /* {*property   $actionOption                   (string|Thing)                  A sub property of object. The options subject to this action. *} */
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
 
 
@@ -132,8 +130,6 @@ class ChooseAction extends AssessAction
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
 
         return ( $this );
     }   /* End of ChooseAction.__construct() ========================================== */
@@ -165,8 +161,5 @@ class ChooseAction extends AssessAction
         $this->necroSignaling();
     }   /* End of ChooseAction.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class ChooseAction ====================================================== */
 /* ==================================================================================== */
-
-?>

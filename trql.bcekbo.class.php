@@ -58,7 +58,7 @@
 /****************************************************************************************/
 namespace trql\BCEKBO;
 
-use \trql\mother\Mother                             as Mother;
+use \trql\quitus\Mother                             as Mother;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
 use \trql\utility\Utility                           as Utility;
 use \trql\mercator\Mercator                         as Mercator;

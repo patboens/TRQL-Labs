@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,10 +43,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\readaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\consumeaction\ConsumeAction    as ConsumeAction;
+use \trql\schema\action\ConsumeAction    as ConsumeAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -190,10 +189,8 @@ class ReadAction extends ConsumeAction
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of ReadAction.__construct() ========================================== */
+    }   /* End of ReadAction.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -220,10 +217,7 @@ class ReadAction extends ConsumeAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of ReadAction.__destruct() =========================================== */
+    }   /* End of ReadAction.__destruct() ============================================= */
     /* ================================================================================ */
-
-}   /* End of class ReadAction ====================================================== */
+}   /* End of class ReadAction ======================================================== */
 /* ==================================================================================== */
-
-?>

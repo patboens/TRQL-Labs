@@ -55,10 +55,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\newsarticle;
+namespace trql\schema\creativework;
 
 use \trql\vaesoli\Vaesoli           as v;
-use \trql\article\Article           as Article;
+use \trql\schema\creativework\Article           as Article;
 use \trql\form\Form                 as Form;
 use \trql\fieldset\Fieldset         as Fieldset;
 use \trql\formset\Formset           as Formset;

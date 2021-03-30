@@ -29,7 +29,7 @@
     {*cdate                 24-08-2020 03:39 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -53,7 +53,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\userinteraction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\event\Event           as Event;
@@ -160,4 +160,3 @@ class UserInteraction extends Event
     /* ================================================================================ */
 }   /* End of class UserInteraction =================================================== */
 /* ==================================================================================== */
-?>

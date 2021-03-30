@@ -45,7 +45,7 @@
 namespace trql\paymentProvider;
 
 use \trql\vaesoli\Vaesoli   as v;
-use \trql\thing\Thing       as Thing;
+use \trql\schema\Thing       as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

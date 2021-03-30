@@ -6,7 +6,7 @@
     {COMPANY} is a shortcut to "Lato Sensu Management"
 
     {RIGHTS} is a shortcut used by trql.documentor.class.php. In general the material
-    presented here is available under the conditions of 
+    presented here is available under the conditions of
     https://creativecommons.org/licenses/by-sa/4.0/
 
     Other shortcuts exist. They exist to make it simple to change the formulation
@@ -20,24 +20,18 @@
 
 /** {{{*fheader
     {*file                  trql.webpage.class.php *}
-    {*purpose               A web page. Every web page is implicitly assumed to be 
+    {*purpose               A web page. Every web page is implicitly assumed to be
                             declared to be of type WebPage, so the various properties
-                            about that webpage, such as breadcrumb may be used. We 
-                            recommend explicit declaration if these properties are 
+                            about that webpage, such as breadcrumb may be used. We
+                            recommend explicit declaration if these properties are
                             specified, but if they are found outside of an itemscope,
                             they will be assumed to be about the page. *}
     {*author                {PYB} *}
-    {*company               [br]Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 16-08-20 16:14 *}
     {*mdate                 auto *}
-    {*license               Submitted to intellectual property rights (see
-                            author) *}
-    {*UTF-8                 Quel bel été *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -55,9 +49,10 @@
 /****************************************************************************************/
 namespace trql\web;
 
-use \trql\mother\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\creativework\CreativeWork                 as CreativeWork;
+use \trql\quitus\iContext               as iContext;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\creativework\CreativeWork     as CreativeWork;
+use \trql\quitus\Agent                  as Agent;
 
 use DOMDocument;
 use DOMXPath;
@@ -70,6 +65,9 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
+
+if ( ! defined( 'AGENT_CLASS_VERSION' ) )
+    require_once( 'trql.agent.class.php' );
 
 defined( 'WEBPAGE_CLASS_VERSION' ) or define( 'WEBPAGE_CLASS_VERSION','0.1' );
 
@@ -160,21 +158,27 @@ class WebPage extends CreativeWork implements iContext
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = 'Q36774';         /* {*property   $wikidataId                 (string)                            Wikidata ID: Single document that is directly viewable
                                                                                                                                                     via the World Wide Web and web browsers *} */
+    public      $title                          = null;             /* {*property   $title                      (string)                            Title of the page (like in <head><title>...</title></head> *} */
     public      $szShelter                      = null;             /* {*property   $szShelter                  (string)                            The name of the file where the XML definition of the page is stored *} */
-    public      $szAuthor                       = null;             /* {*property   $szAuthor                   (string)                            Name of the author of the page *} */
-    public      $szComment                      = null;             /* {*property   $szComment                  (string)                            Comments set for that page (not published) *} */
+    public      $author                         = null;             /* {*property   $author                     (Agent)                             Author of the page *} */
     public      $szBody                         = null;             /* {*property   $szBody                     (string)                            Main body of a page *} */
-	public      $Obsolete                       = false;            /* {*property   $obsolete                   (boolean)                           Is this page obsolete or not? [c]false[/c] by default. *} */
-    public      $WithSocialNetworks             = true;             /* {*property   $WithSocialNetworks         (boolean)                           Should social networks be displayed on that page? *} */
-	public      $UnderConstruction              = false;            /* {*property   $UnderConstruction          (boolean)                           Is this page still under construction ? [c]false[/c] by default *} */
-	public      $WithLupdate                    = true;             /* {*property   $WithLupdate                (boolean)                           Must we display a lupdate tage on the page or not ? [c]true[/c] by default *} */
+	public      $obsolete                       = false;            /* {*property   $obsolete                   (boolean)                           Is this page obsolete or not? [c]false[/c] by default. *} */
+    public      $withSocialNetworks             = true;             /* {*property   $withSocialNetworks         (boolean)                           Should social networks be displayed on that page? *} */
+	public      $underConstruction              = false;            /* {*property   $underConstruction          (boolean)                           Is this page still under construction ? [c]false[/c] by default *} */
+	public      $withLupdate                    = true;             /* {*property   $withLupdate                (boolean)                           Must we display a lupdate tage on the page or not ? [c]true[/c] by default *} */
     public      $szCanonical                    = null;             /* {*property   $szCanonical                (string)                            Canonical URL of the page. *} */
+    public      $breakingNews                   = null;             /* {*property   $breakingNews               (boolean)                           Should the Breaking news be displayed on this page: [c]true[/c] if
+                                                                                                                                                    yes; [c]false[/c] otherwise. *} */
+    public      $guid                           = null;             /* {*property   $guid                       (string)                            Globally unique Identifier of the page. *} */
+    public      $H1                             = null;             /* {*property   $H1                         (string)                            H1 of the page. *} */
+    public      $seeAlso                        = null;             /* {*property   $seeAlso                    (string)                            Pages interesting to visit from the current page (semi-colon separated list). *} */
+    public      $cargo                          = null;             /* {*property   $cargo                      (string)                            Whatever information seems interesting to load and keep in the page *} */
 
     // $szPageImage is now replaced by $primaryImageOfPage
     //public      $szPageImage                    = null;             /* {*property   $szPageImage                (string)                            Image that represents the page (EXCELLENT for SEO)
-    //                                                                                                                                                <meta itemscope itemtype="https://schema.org/WebPage" 
+    //                                                                                                                                                <meta itemscope itemtype="https://schema.org/WebPage"
     //                                                                                                                                                      itemprop="image" content="http://www.example.com/image.jpg">
-    //                                                                                                                                                <meta name="twitter:card" content="summary_large_image"> 
+    //                                                                                                                                                <meta name="twitter:card" content="summary_large_image">
     //                                                                                                                                                <meta name="twitter:image:src" content="http://www.example.com/image.jpg">
     //                                                                                                                                                <meta property="og:image" content="http://example.com/image.jpg" />
     //                                                                                                                                                *} */
@@ -201,13 +205,25 @@ class WebPage extends CreativeWork implements iContext
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
+        $this->author = new Agent();
+
         return ( $this );
     }   /* End of WebPage.__construct() =============================================== */
     /* ================================================================================ */
 
 
+    private function curlyBracesToEntities( $szStr )
+    /*--------------------------------------------*/
+    {
+        return ( str_replace( array( '{'     ,'}'      ),
+                              array( '&#123;','&#125;' ),
+                              $szStr ) );
+    }   /* End of WebPage.curlyBracesToEntities() ===================================== */
     /* ================================================================================ */
-    /** {{*readDescription( $szFile )=
+
+
+    /* ================================================================================ */
+    /** {{*readManifest( $szFile )=
 
         The page meta data is maintained in a XML file. This method permits to read the
         XML file and to populate internal properties based on what is in the XML file.
@@ -220,11 +236,109 @@ class WebPage extends CreativeWork implements iContext
             (self)      The current instance of the class
         *}
 
+        {*example
+            |** **************************************|
+            |** EXAMPLE #1 : CREATE A PAGE TEMPLATE **|
+            |** **************************************|
+
+            &lt;?php
+            use \trql\vaesoli\Vaesoli   as V;
+            use \trql\web\Browser       as Browser;
+            use \trql\web\WebPage       as WebPage;
+
+            if ( ! defined( "VAESOLI_CLASS_VERSION" ) )
+                require_once( 'trql.vaesoli.class.php' );
+
+            if ( ! defined( "BROWSER_CLASS_VERSION" ) )
+                require_once( 'trql.browser.class.php' );
+
+            if ( ! defined( "WEBPAGE_CLASS_VERSION" ) )
+                require_once( 'trql.webpage.class.php' );
+
+            [b]$oPage    = new WebPage();[/b]
+            $oBrowser = new Browser();
+            $oBrowser->parseUA();
+
+            $szBrowserMobility  = strtolower( trim( $oBrowser->szMobility ) );
+            $szBrowserName      = $oBrowser->szName;
+            $szBrowserType      = $oBrowser->szType;
+            $szBrowserPlatform  = $oBrowser->szPlatform;
+            $szSeason           = V::TIM_Season();
+            $szTimeOfTheDay     = V::TIM_timeOfTheDay( time() );
+            $szContentDir       = V::FIL_RealPath( V::FIL_ResolveRoot( '/content' ) );
+            $x                  = explode( '.',$_SERVER['HTTP_HOST'] );
+            $szSubDomain        = 'www';
+            if ( count( $x ) > 2 )
+                $szSubDomain = current( $x );
+
+            $szPage = preg_replace( '/(\A-|\.html\z|\.htm\z|\.php\z)/si','',str_replace( '/','-',$_SERVER['SCRIPT_NAME'] ) );
+
+            $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage . '-' . $szBrowserMobility . '.html'      );
+            $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage                            . '.html'      );
+            $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' .                      $szPage . '-' . $szBrowserMobility . '.html'      );
+            $aPossibleContentFiles[]    = V::FIL_RealPath( $szContentDir . '/' .                      $szPage                            . '.html'      );
+
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage . '-' . $szBrowserMobility . '.meta.xml'  );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage . '-' . $szBrowserMobility . '.xml'       );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage                            . '.meta.xml'  );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' . $szSubDomain . '-' . $szPage                            . '.xml'       );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage . '-' . $szBrowserMobility . '.meta.xml'  );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage . '-' . $szBrowserMobility . '.xml'       );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage                            . '.meta.xml'  );
+            $aPossiblePageDescription[] = V::FIL_RealPath( $szContentDir . '/' .                      $szPage                            . '.xml'       );
+
+            |** Read the Meta definitions of the page (if any). We have
+               multiple possible files, starting from the most specific
+               to the less specific. The first one that matches is the
+               one we load **|
+            foreach( $aPossiblePageDescription as $szXMLFile )
+            {
+                if ( is_file( $szXMLFile ) )
+                {
+                    [b]$oPage->readManifest( $szXMLFile );[/b]
+                    break;
+                }
+            }   |** foreach( $aPossiblePageDescription as $szXMLFile ) **|
+
+            ?&gt;
+            &lt;!doctype html&gt;
+            &lt;html&gt;
+                &lt;head&gt;
+                    &lt;meta charset=&quot;UTF-8&quot;&gt;
+                    &lt;title&gt;[b]&lt;?php echo $oPage-&gt;title; ?&gt;[/b]&lt;/title&gt;
+                    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+                    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://fonts.googleapis.com/css?family=Roboto&quot;&gt;
+                    &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/mathieu.css&quot;&gt;
+                    &lt;meta name=&quot;author&quot; content=&quot;[b]&lt;?php echo $oPage-&gt;author-&gt;name; ?&gt;[/b]&quot;&gt;
+                    &lt;meta name=&quot;description&quot; content=&quot;[b]&lt;?php echo $oPage-&gt;description; ?&gt;[/b]&quot;&gt;
+                    &lt;meta name=&quot;keywords&quot; content=&quot;[b]&lt;?php echo $oPage-&gt;keywords; ?&gt;[/b]&quot;&gt;
+                &lt;/head&gt;
+
+                &lt;body vocab=&quot;https://schema.org/&quot; typeof=&quot;WebPage&quot; class=&quot;&lt;?php echo $szBrowserMobility,' ',$szBrowserName,' ',$szBrowserType,' ',$szBrowserPlatform,' ',$szSeason,' ',$szTimeOfTheDay; ?&gt;&quot;&gt;
+                    &lt;div class=&quot;wrapper&quot;&gt;
+                    &lt;?php
+                        |** We have multiple possible files for the content, starting from
+                           the most specific name to the less specific. The first one that
+                           matches is the one we load **|
+                        foreach( $aPossibleContentFiles as $szFile )
+                        {
+                            if ( is_file( $szFile ) )
+                            {
+                                include_once( $szFile );
+                                break;
+                            }
+                        }   |** foreach( $aPossibleContentFiles as $szFile ) **|
+                    ?&gt;
+                    &lt;/div&gt;
+                &lt;/body&gt;
+            &lt;/html&gt;
+        *}
+
         *}}
     */
     /* ================================================================================ */
-    public function readDescription( $szFile )
-    /*--------------------------------------*/
+    public function readManifest( $szFile )
+    /*-----------------------------------*/
     {
         if ( is_file( $szFile ) )
         {
@@ -243,12 +357,44 @@ class WebPage extends CreativeWork implements iContext
     			{
     				$oPage = $oPage->item(0);
 
+                    //var_dump("ALL OK");
+                    //$this->die();
+
                     {   /* Assign properties */
-        				$this->Obsolete             = vaesoli::MISC_CastBool( $oPage->getAttribute( 'obsolete'            ),false   );
-                        $this->WithSocialNetworks   = vaesoli::MISC_CastBool( $oPage->getAttribute( 'social-networks'     ),true    );
-        				$this->UnderConstruction    = vaesoli::MISC_CastBool( $oPage->getAttribute( 'under-construction'  ),false   );
-        				$this->WithLupdate          = vaesoli::MISC_CastBool( $oPage->getAttribute( 'with-lupdate'        ),true    );
-        				// commented out because NOT used yet (20201009) $this->BreakingNews         = vaesoli::MISC_CastBool(   $oPage->getAttribute( 'breaking-news'       ),false );
+        				$this->obsolete             = vaesoli::MISC_CastBool( $oPage->getAttribute( 'obsolete'            ),false   );
+                        $this->withSocialNetworks   = vaesoli::MISC_CastBool( $oPage->getAttribute( 'social-networks'     ),true    );
+        				$this->underConstruction    = vaesoli::MISC_CastBool( $oPage->getAttribute( 'under-construction'  ),false   );
+        				$this->withLupdate          = vaesoli::MISC_CastBool( $oPage->getAttribute( 'with-lupdate'        ),true    );
+        				$this->breakingNews         = vaesoli::MISC_CastBool( $oPage->getAttribute( 'breaking-news'       ),false   );
+
+        				if ( ( $o = $oXPath->query( 'Title',$oPage      ) ) && ( $o->length > 0 ) )
+        					$this->title            = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
+
+        				if ( ( $o = $oXPath->query( 'H1',$oPage         ) ) && ( $o->length > 0 ) )
+        					$this->H1               = $o->item(0)->nodeValue;
+
+        				if ( ( $o = $oXPath->query( 'Author',$oPage     ) ) && ( $o->length > 0 ) )
+        					$this->author->name     = trim( $o->item(0)->nodeValue );
+
+        				if ( ( $o = $oXPath->query( 'Desc',$oPage       ) ) && ( $o->length > 0 ) )
+        					$this->description      = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
+
+        				if ( ( $o = $oXPath->query( 'UsageInfo',$oPage  ) ) && ( $o->length > 0 ) )
+        					$this->usageInfo        = $o->item(0)->nodeValue;
+
+        				if ( ( $o = $oXPath->query( 'Keywords',$oPage  ) ) && ( $o->length > 0 ) )
+        					$this->keywords         = $o->item(0)->nodeValue;
+
+        				if ( ( $o = $oXPath->query( 'GUID',$oPage ) ) && ( $o->length > 0 ) )
+        					$this->szGUID           = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
+
+        				if ( ( $o = $oXPath->query( 'SeeAlso',$oPage ) ) && ( $o->length > 0 ) )
+        					$this->seeAlso          = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
+
+        				if ( ( $o = $oXPath->query( 'Cargo',$oPage ) ) && ( $o->length > 0 ) )
+        					$this->cargo            = $o->item(0)->nodeValue;
+
+
         				// commented out because NOT used yet (20201009) $this->Sitemap              = vaesoli::MISC_CastBool(   $oPage->getAttribute( 'sitemap'             ),true  );
         				// commented out because NOT used yet (20201009) $this->Approved             = vaesoli::MISC_CastBool(   $oPage->getAttribute( 'approved'            ),false );
         				// commented out because NOT used yet (20201009) $this->HasWarning           = vaesoli::MISC_CastBool(   $oPage->getAttribute( 'has-warnings'        ),false );
@@ -273,46 +419,41 @@ class WebPage extends CreativeWork implements iContext
                         // commented out because NOT used yet (20201009)                                                         substr( $this->szPublication,6,2 );
                         // commented out because NOT used yet (20201009) $this->szPubTime            =                           substr( $this->szPublication,8,2 ) . ':' .
                         // commented out because NOT used yet (20201009)                                                         substr( $this->szPublication,10,2 );
-                                                                                
+
                         // commented out because NOT used yet (20201009) $this->szExpiryDate         =                           substr( $this->szExpiry     ,0,4 ) . '-' .
                         // commented out because NOT used yet (20201009)                                                         substr( $this->szExpiry     ,4,2 ) . '-' .
                         // commented out because NOT used yet (20201009)                                                         substr( $this->szExpiry     ,6,2 );
                         // commented out because NOT used yet (20201009) $this->szExpiryTime         =                           substr( $this->szExpiry     ,8,2 ) . ':' .
                         // commented out because NOT used yet (20201009)                                                         substr( $this->szExpiry     ,10,2 );
-                                                                                
+
                         // commented out because NOT used yet (20201009) $this->szMail               =                           $oPage->getAttribute( 'mail'                );
                         // commented out because NOT used yet (20201009) $this->szUserID             =                           $oPage->getAttribute( 'userid'              );
 
-        				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'GUID',$oPage ) ) && ( $o->length > 0 ) )
-        				// commented out because NOT used yet (20201009) {
-        				// commented out because NOT used yet (20201009) 	$this->szGUID           = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
-        				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
         				// commented out because NOT used yet (20201009) if ( ! empty( $x = $oPage->getAttribute( 'lang' ) ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szLanguage = $x;
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'Redirect',$oPage ) ) && ( $o->length > 0 ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szRedirect           = $o->item(0)->nodeValue;
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'License',$oPage ) ) && ( $o->length > 0 ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szLicense            = $o->item(0)->nodeValue;
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'FirstPage',$oPage ) ) && ( $o->length > 0 ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szFirstPage          = $o->item(0)->nodeValue;
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'PreviousPage',$oPage ) ) && ( $o->length > 0 ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szPrevious           = $o->item(0)->nodeValue;
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'NextPage',$oPage ) ) && ( $o->length > 0 ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szNext               = $o->item(0)->nodeValue;
@@ -328,50 +469,23 @@ class WebPage extends CreativeWork implements iContext
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szAlias              = $o->item(0)->nodeValue;
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
-        				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'Title',$oPage ) ) && ( $o->length > 0 ) )
-        				// commented out because NOT used yet (20201009) {
-        				// commented out because NOT used yet (20201009) 	//$this->szTitle              = $this->curlyBracesToEntities( utf8_decode( $o->item(0)->nodeValue ) );
-        				// commented out because NOT used yet (20201009) 	$this->szTitle              = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
-        				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
-        				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'H1',$oPage ) ) && ( $o->length > 0 ) )
-        				// commented out because NOT used yet (20201009) {
-        				// commented out because NOT used yet (20201009) 	//$this->szH1                 = $this->curlyBracesToEntities( utf8_decode( $o->item(0)->nodeValue ) );
-        				// commented out because NOT used yet (20201009) 	$this->szH1                 = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
-        				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
-        				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'Author',$oPage ) ) && ( $o->length > 0 ) )
-        				// commented out because NOT used yet (20201009) {
-        				// commented out because NOT used yet (20201009) 	$this->szAuthor             = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
-        				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'Folder',$oPage ) ) && ( $o->length > 0 ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szFolder             = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
-        				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'Desc',$oPage ) ) && ( $o->length > 0 ) )
-        				// commented out because NOT used yet (20201009) {
-        				// commented out because NOT used yet (20201009) 	$this->szDesc               = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
-        				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
-        				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'Comment',$oPage ) ) && ( $o->length > 0 ) )
-        				// commented out because NOT used yet (20201009) {
-        				// commented out because NOT used yet (20201009) 	$this->szComment            = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
-        				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'Citation',$oPage ) ) && ( $o->length > 0 ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	//$this->szCitation           = $this->curlyBracesToEntities( utf8_decode( $o->item(0)->nodeValue ) );
         				// commented out because NOT used yet (20201009) 	$this->szCitation           = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'LearnMore',$oPage ) ) && ( $o->length > 0 ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szLearnMore          = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( empty( $this->szLearnMore ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	if ( ( $o = $oXPath->query( 'OtherPages',$oPage ) ) && ( $o->length > 0 ) )
@@ -379,33 +493,21 @@ class WebPage extends CreativeWork implements iContext
         				// commented out because NOT used yet (20201009) 		$this->szLearnMore      = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
         				// commented out because NOT used yet (20201009) 	}
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
-        				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'SeeAlso',$oPage ) ) && ( $o->length > 0 ) )
-        				// commented out because NOT used yet (20201009) {
-        				// commented out because NOT used yet (20201009) 	$this->szSeealso            = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
-        				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
-        				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'Keywords',$oPage ) ) && ( $o->length > 0 ) )
-        				// commented out because NOT used yet (20201009) {
-        				// commented out because NOT used yet (20201009) 	//$this->szKeywords = $this->curlyBracesToEntities( utf8_decode( $o->item(0)->nodeValue ) );
-        				// commented out because NOT used yet (20201009) 	$this->szKeywords = $this->curlyBracesToEntities( $o->item(0)->nodeValue );
-        				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
         				if ( ( $o = $oXPath->query( 'Canonical',$oPage ) ) && ( $o->length > 0 ) )
         				{
         					$this->szCanonical          = vaesoli::STR_Reduce( $o->item(0)->nodeValue,'/' );
         				}
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'ExpirationHeader',$oPage ) ) && ( $o->length > 0 ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szExpirationHeader   = $o->item(0)->nodeValue;
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'Header',$oPage ) ) && ( $o->length > 0 ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szHeader             = $o->item(0)->nodeValue;
         				// commented out because NOT used yet (20201009) }
-                        // commented out because NOT used yet (20201009) 
+                        // commented out because NOT used yet (20201009)
         				// commented out because NOT used yet (20201009) if ( ( $o = $oXPath->query( 'Footer',$oPage ) ) && ( $o->length > 0 ) )
         				// commented out because NOT used yet (20201009) {
         				// commented out because NOT used yet (20201009) 	$this->szFooter             = $o->item(0)->nodeValue;
@@ -420,14 +522,15 @@ class WebPage extends CreativeWork implements iContext
     		}   /* if ( $oDom->Load( $szXMLFile ) ) */
     		else
     		{
-    		    
+
     		}
         }   /* if ( is_file( $szFile ) ) */
 
         //var_dump( $this );
 
         return ( $this );
-    }   /* End of WebPage.readDescription() =========================================== */
+    }   /* End of WebPage.readManifest() =========================================== */
+    public function readDescription( $szFile ) { return ( $this->readManifest( $szFile ) ); }
     /* ================================================================================ */
 
 

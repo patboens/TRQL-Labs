@@ -28,6 +28,7 @@
     {*cdate                 25-08-2020 13:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,10 +52,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\communicateaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\interactaction\InteractAction     as InteractAction;
+use \trql\schema\action\InteractAction     as InteractAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -165,8 +166,5 @@ class CommunicateAction extends InteractAction
         $this->necroSignaling();
     }   /* End of CommunicateAction.__destruct() ====================================== */
     /* ================================================================================ */
-
 }   /* End of class CommunicateAction ================================================= */
 /* ==================================================================================== */
-
-?>

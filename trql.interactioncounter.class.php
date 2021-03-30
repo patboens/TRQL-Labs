@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -30,6 +28,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -42,7 +41,6 @@
         {*desc              1)  Original creation
         *}
     *}
-
 
     {*chist
         {*mdate 14-02-21 10:44 *}
@@ -170,10 +168,8 @@ class InteractionCounter extends StructuredValue
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of InteractionCounter.__construct() ========================================== */
+    }   /* End of InteractionCounter.__construct() ==================================== */
     /* ================================================================================ */
 
 
@@ -200,10 +196,7 @@ class InteractionCounter extends StructuredValue
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of InteractionCounter.__destruct() =========================================== */
+    }   /* End of InteractionCounter.__destruct() ===================================== */
     /* ================================================================================ */
-
-}   /* End of class InteractionCounter ====================================================== */
+}   /* End of class InteractionCounter ================================================ */
 /* ==================================================================================== */
-
-?>

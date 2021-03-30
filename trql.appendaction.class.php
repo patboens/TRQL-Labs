@@ -26,7 +26,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -52,10 +52,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\appendaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\insertaction\InsertAction    as InsertAction;
+use \trql\schema\action\InsertAction    as InsertAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -165,4 +165,3 @@ class AppendAction extends InsertAction
     /* ================================================================================ */
 }   /* End of class AppendAction ====================================================== */
 /* ==================================================================================== */
-?>

@@ -26,6 +26,8 @@
     {*cdate                 25-08-2020 13:39 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keywords              action *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -49,11 +51,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\interactaction;
+namespace trql\schema\action;
 
-use \trql\thing\Thing                       as Thing;
+use \trql\schema\Thing                       as Thing;
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\action\Action    as Action;
+use \trql\schema\action\Action    as Action;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -159,4 +161,3 @@ class InteractAction extends Action
     /* ================================================================================ */
 }   /* End of class InteractAction ==================================================== */
 /* ==================================================================================== */
-?>

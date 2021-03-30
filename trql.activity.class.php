@@ -26,7 +26,8 @@
     {*cdate                 10-01-21 12:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel Ã©tÃ© sous le hÃªtre *}
+    {*keywords              action *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -43,11 +44,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\activity;
+namespace trql\schema\action;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\XML\XML                       as XML;
-use \trql\action\Action                 as Action;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\XML\XML                   as XML;
+use \trql\schema\action\Action      as Action;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -108,7 +109,7 @@ class Activity extends Action
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of Activity.__construct() ============================================== */

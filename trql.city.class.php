@@ -31,8 +31,8 @@
 /****************************************************************************************/
 namespace trql\city;
 
-use \trql\mother\Mother                             as Mother;
-use \trql\mother\iContext                           as iContext;
+use \trql\quitus\Mother                             as Mother;
+use \trql\quitus\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
 use \trql\administrativearea\AdministrativeArea     as AdministrativeArea;
 use \trql\mercator\Mercator                         as Mercator;

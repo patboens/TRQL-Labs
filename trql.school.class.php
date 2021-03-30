@@ -52,7 +52,7 @@
 /****************************************************************************************/
 namespace trql\organization;
 
-use \trql\mother\iContext                           as iContext;
+use \trql\quitus\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
 use \trql\organization\EducationalOrganization      as EducationalOrganization;
 

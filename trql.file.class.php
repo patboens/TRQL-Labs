@@ -69,7 +69,7 @@
 /****************************************************************************************/
 namespace trql\file;
 
-use \trql\mother\Mother         as Mother;
+use \trql\quitus\Mother         as Mother;
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\utility\Utility       as Utility;
 

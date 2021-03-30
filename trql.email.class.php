@@ -26,7 +26,7 @@
     {*cdate                 19-01-21 07:14 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel Ã©tÃ© *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -42,14 +42,14 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\email;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\utility\Utility               as Utility;
-use \trql\form\Form                     as Form;
-use \trql\fieldset\Fieldset             as Fieldset;
-use \trql\formset\Formset               as Formset;
-use \trql\input\Input                   as Input;
+use \trql\html\Form                     as Form;
+use \trql\html\Fieldset                 as Fieldset;
+use \trql\html\Formset                  as Formset;
+use \trql\html\Input                    as Input;
 use \trql\emailmessage\EmailMessage     as EmailMessage;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -98,7 +98,7 @@ defined( 'EMAIL_CLASS_VERSION' ) or define( 'EMAIL_CLASS_VERSION','0.1' );
     *}
 
     *}}
- 
+
  */
 /* ==================================================================================== */
 class Email extends Utility
@@ -116,12 +116,12 @@ class Email extends Utility
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId         = 'Q30070439';                  /* {*property   $wikidataId                     (string)                Wikidata ID. A single message, sent by email *} */
     public      $szHost             = null;                         /* {*property   $szHost                         (string)                Host to connect to *} */
-    public      $iPort              = 25;                           /* {*property   $iPort                          (int)                   Connection port *} */
-    public      $szMailType         = 'text/plain';                 /* {*property   $szMailType                     (string)                Mail format (can also be text/html) *} */
-    public      $szCharset          = 'UTF-8';                      /* {*property   $szCharset                      (string)                Character set *} */
+    public      $iPort              = 25;                           /* {*property   $iPort                          (int)                   Connection port. [c]25[/c] by default. *} */
+    public      $szMailType         = 'text/plain';                 /* {*property   $szMailType                     (string)                Mail format. '[c]text/plain[/c]' by default (can also be'[c]text/html)[/c]'.  *} */
+    public      $szCharset          = 'UTF-8';                      /* {*property   $szCharset                      (string)                Character set. '[c]UTF-8[/c]' by default; *} */
     public      $szDomain           = null;                         /* {*property   $szDomain                       (string)                Domaine internet *} */
-    public      $iPriority          = 3;                            /* {*property   $iPriority                      (string)                Mail priority (1 = highest ... 5 = lowest) *} */
-    public      $szFromName         = null;                         /* {*property   $szFromName                     (string)                Sender name */
+    public      $iPriority          = 3;                            /* {*property   $iPriority                      (int)                   Mail priority (1 = highest ... 5 = lowest). [c]3[/c] by default. *} */
+    public      $szFromName         = null;                         /* {*property   $szFromName                     (string)                Sender name *} */
     public      $szFromEmail        = null;                         /* {*property   $szFromEmail                    (string)                Sender Email address *} */
     public      $szTo               = null;                         /* {*property   $szTo                           (string)                Recipient's email address (can be multiple with a ',' separated string *} */
     public      $szCC               = null;                         /* {*property   $szCC                           (string)                Email address of copy *} */
@@ -163,16 +163,351 @@ class Email extends Utility
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*send()=
+
+        Sends a mail
+
+        {*params
+        *}
+
+        {*warning
+            Cannot send attachments for the time being (22-03-21 07:42:20)
+        *}
+
+        {*return
+            (int)       Returns an int corresponding to one of the return codes:[br][br]
+
+                        [c]define( 'EMAIL_RET_CODES'               ,0  );[/c][br][br]
+
+                        [c]define( 'EMAIL_RET_CODE_OK'             ,EMAIL_RET_CODES +   0 )[/c][br]
+                        [c]define( 'EMAIL_RET_CODE_NO_RECIPIENT'   ,EMAIL_RET_CODES - 100 )[/c][br]
+                        [c]define( 'EMAIL_RET_CODE_MAIL_NOT_SENT'  ,EMAIL_RET_CODES - 200 )[/c][br][br]
+        *}
+
+        {*example
+            |** ============================= **|
+            |** [b]EXAMPLE #1 : SIMPLE MAIL[/b]      **|
+            |** ============================= **|
+            use \trql\vaesoli\Vaesoli   as V;
+            use \trql\quitus\Email      as Email;
+
+            if ( ! defined( "VAESOLI_CLASS_VERSION ") )
+                require_once( 'trql.vaesoli.class.php' );
+
+            if ( ! defined( 'EMAIL_CLASS_VERSION' ) )
+                require_once( 'trql.email.class.php' );
+
+            if ( ! defined( 'EMAIL_RET_CODES' ) )
+            {
+                define( 'EMAIL_RET_CODES'               ,0  );
+
+                define( 'EMAIL_RET_CODE_OK'             ,EMAIL_RET_CODES +   0 );
+                define( 'EMAIL_RET_CODE_NO_RECIPIENT'   ,EMAIL_RET_CODES - 100 );
+                define( 'EMAIL_RET_CODE_MAIL_NOT_SENT'  ,EMAIL_RET_CODES - 200 );
+            }
+
+            [b]$oEmail = new Email();
+
+            $oEmail->szMailType     = 'text/html';
+            $oEmail->szCharset      = 'UTF-8';
+            $oEmail->szHost         = 'localhost';
+            $oEmail->iPort          = 25;
+            $oEmail->szFromName     = 'Beautiful Company';
+            $oEmail->szDomain       = 'beautifulcompany.com';
+            $oEmail->szFromEmail    = 'noreply@beautifulcompany.com';
+            $oEmail->szFromName     = 'Email Robot';
+            $oEmail->szTo           = 'friend@beautifulcompany.com';
+            $oEmail->szSubject      = 'Hello';
+            $oEmail->szBody         = '&lt;p&gt;Dear Fiend,&lt;/p&gt; &lt;p&gt;I just wanted to say 'Hello' to you.&lt;/p&gt; &lt;p&gt;Kind regards.&lt;/p&gt;';[/b]
+
+            try
+            {
+                if ( [b]$oEmail->send() !== EMAIL_RET_CODE_OK[/b] )
+                {
+                    echo "&lt;p&gt;PROBLEM with {$oEmail-&gt;szTo}&lt;/p&gt;\n";
+                }
+            }
+            catch ( exception $e)
+            {
+                echo 'Exception: ',  $e->getMessage(), "\n";
+            }
+
+
+            |** ============================= **|
+            |** [b]EXAMPLE #2 : MAILSHOT EXAMPLE[/b] **|
+            |** ============================= **|
+            use \trql\vaesoli\Vaesoli   as V;
+            use \trql\quitus\Email      as Email;
+
+            if ( ! defined( "VAESOLI_CLASS_VERSION ") )
+                require_once( 'd:/websites/snippet-center/trql.vaesoli.class.php' );
+
+            if ( ! defined( 'EMAIL_CLASS_VERSION' ) )
+                require_once( 'd:/websites/snippet-center/trql.email.class.php' );
+
+            if ( ! defined( 'EMAIL_RET_CODES' ) )
+            {
+                define( 'EMAIL_RET_CODES'               ,0  );
+
+                define( 'EMAIL_RET_CODE_OK'             ,EMAIL_RET_CODES +   0 );
+                define( 'EMAIL_RET_CODE_NO_RECIPIENT'   ,EMAIL_RET_CODES - 100 );
+                define( 'EMAIL_RET_CODE_MAIL_NOT_SENT'  ,EMAIL_RET_CODES - 200 );
+            }
+
+            |** The example depicted in here is working as follows
+
+                1) We have a .hash file where all contacts are stored in the
+                   /../databases/clean-up folder
+                2) All contacts are maintained in the mailshot-easter.hash.normalized.hash
+                   file and will be loaded in the aRecipients array which looks like this:
+
+                   aRecipients is an array of elements such as:
+                   '625b57c1437620d016b6612121e86b19' =>
+                     array (size=10)
+                       'lastname' => string 'Doe'
+                       'firstname' => string 'John'
+                       'address' => string 'Rue de Londres, 45'
+                       'postalcode' => string '1000'
+                       'city' => string 'Brussels'
+                       'country' => string 'Belgiium'
+                       'phone' => string '+32475112233'
+                       'isMobilePhone' => boolean true
+                       'phone_normalized' => string '+32475112233'
+                       'email' => string 'john.doe@gmail.com' (length=20)
+
+                3) We will send an email to each contact. The text of the email
+                   is stored in a template : mailshot-easter-mail.txt
+
+                4) For each contact, we will adapt the text of the template by
+                   applying some substitutions
+
+                5) We send the email
+
+            **|
+
+            |** mailshot-easter-mail.txt template content : SAMPLE
+
+                [i]&lt;!DOCTYPE html&gt;
+                &lt;html lang=&quot;en&quot;&gt;
+                    &lt;head&gt;
+                        &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+                        &lt;title&gt;Easter Menu Take-away&lt;/title&gt;
+                        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1&quot; /&gt;
+                        &lt;style type=&quot;text/css&quot;&gt;
+                           body { background-color: rgba(119,73,50,.1);
+                                  color: #6c4b45;
+                                  width: 100%;
+                                  margin: 0;
+                                  padding: 0;
+                                  font: 1em/1.5em verdana,arial,sans-serif; }
+                           footer,#wrapper { width: 90%;
+                                   margin: 0 auto;
+                                   padding: 1em;
+                                   background: #fff;
+                                   font-size: .8em
+                           }
+                           footer { background-color: rgba(119,73,50,.1);
+                                    color: #fff;
+                                    font-size: .7em;
+                           }
+                           h1 { font: 1em/1.5em verdana,arial,sans-serif; }
+                           blockquote { background-color: rgba(119,73,50,.2);
+                               border: 1px solid #774932;
+                               padding: 1.5em; }
+                        &lt;/style&gt;
+                    &lt;/head&gt;
+
+                    &lt;body&gt;
+                        &lt;div id=&quot;wrapper&quot;&gt;
+                            &lt;p&gt;Dear %name()%,&lt;/p&gt;
+
+                            &lt;p&gt;The &lt;strong&gt;Beautiful Restaurant's Easter Menu&lt;/strong&gt; is
+                            available to order while waiting for the long
+                            awaited official reopening of our restaurant&lt;/p&gt;
+
+                            &lt;p&gt;Here is our &lt;a href=&quot;%url%&quot;&gt;Easter Menu&lt;/a&gt; so
+                            that you can stay cheerful even during this
+                            particularly difficult time&lt;/p&gt;
+
+                            &lt;p&gt;Closing date for orders is 02/04/2021, 18:00 at +32 111 22 33 44. Pick up on
+                            03/04/2021, from 14h to 18h.&lt;/p&gt;
+
+                            &lt;p&gt;Thank you and see you soon. The Beautiful Restaurant team.&lt;/p&gt;
+
+                            &lt;p class=&quot;center&quot;&gt;&lt;img
+                            src=&quot;http://www.beautifulrestaurant.com/images/chef-very-small.jpg&quot;
+                            width=&quot;123&quot; height=&quot;250&quot;
+                            title=&quot;Here is The Chef!&quot; alt=&quot;The say of The Chef trumps anything else&quot; /&gt;&lt;/p&gt;
+
+                            &lt;p&gt;NB: Please note that this email was sent to you
+                            from an address that cannot receive a reply. Please
+                            do not reply to this message.&lt;/p&gt;
+
+                            &lt;p&gt;&lt;strong&gt;WARNING&lt;/strong&gt; : We respect your
+                            privacy. We are particularly careful not to &quot;spam&quot;
+                            you and we are very sorry if this was the case.
+                            Therefore, if you do not wish to receive any more
+                            emails from us, simply click on the following link
+                            to let us know&amp;#160;: &lt;a
+                            href=&quot;http://www.beautifulrestaurant.com/unregister.html?key
+                            =%key%&quot;&gt;NO SPAM&lt;/a&gt;! Hope to see you soon.&lt;/p&gt;
+
+                        &lt;/div&gt; &lt;!-- wrapper --&gt;
+
+                        &lt;div id=&quot;tripadvisor&quot;&gt;
+                            &lt;p&gt;Don't forget to leave us a comment on &lt;a
+                            href=&quot;http://www.beautifulrestaurant.com/tripadvisor&quot;&gt;TripAdvisor&lt;/a&gt;. Thanks in advance.&lt;/p&gt;
+                        &lt;/div&gt; &lt;!-- tripadvisor --&gt;
+
+                        &lt;footer&gt;
+                            &lt;a href=&quot;http://www.beautifulrestaurant.com/legal/&quot;
+                               title=&quot;Terms of service&quot;&gt;&amp;copy; 2001 - %year()%
+                               Beautiful Restaurant, all rights reserved&lt;/a&gt; &amp;#8212; Avenue Houba de Strooper 96,
+                               1020 Bruxelles &amp;#8212 Phone : &lt;a href=&quot;tel:+32111223344&quot;&gt;+32 111 22 33 44&lt;/a&gt;
+                               &amp;#8212; Fax : +32 2 123 45 67 &amp;#8212; Design by &lt;a href=&quot;tel:+32495526020&quot;&gt;Pat
+                               Boens &amp;#8211 +32 495 52 60 20&lt;/a&gt; &amp;#8212;
+                               Powered by  &lt;a href=&quot;http://www.quitus.be&quot;&gt;Quitus&lt;/a&gt;
+                        &lt;/footer&gt;
+                    &lt;/body&gt;
+                &lt;/html&gt;[/i]
+
+            **|
+
+
+            [b]// Where data are located
+            $szDir      = V::FIL_RealPath( V::FIL_ResolveRoot( '/../databases/clean-up' ) );
+            // Where all email addresses are stored
+            $szInput    = v::FIL_RealPath( $szDir  . '/mailshot-easter.hash.normalized.hash' );
+            // The mail template
+            $szTemplate = v::FIL_FileToStr( $szDir . '/mailshot-easter-mail.txt'  );
+            // The Email object that will do the dirty work
+            $oEmail     = new Email();
+            // The list of Mails for which we experienced some problems
+            $aProblems  = null;
+            // An index
+            $i          = 0;
+            // Good emails
+            $iGood      = 0;
+
+            set_time_limit(0);
+
+            // A var for the substitutions to perform
+            $szURL      = 'http://www.beautifulrestaurant.com/special-menus/';
+
+            // A set of substitutions to perform
+            // Very suboptimal but it does the job
+            $aSubstitutions = array( array( 'pattern'   => '%firstname%'    ,
+                                            'field'     => 'firstname'      ,
+                                          )                                 ,
+                                     array( 'pattern'   => '%lastname%'     ,
+                                            'field'     => 'lastname'       ,
+                                          )                                 ,
+                                     array( 'pattern'   => '%url%'          ,
+                                            'value'     => $szURL           ,
+                                          )                                 ,
+                                     array( 'pattern'   => '%name()%'       ,
+                                            'func'      => "name"           ,
+                                          )                                 ,
+                                     array( 'pattern'   => '%year()%'       ,
+                                            'func'      => "year"           ,
+                                          )                                 ,
+                                   );
+
+            // Get all people that ever registered with the Beautiful Restaurant
+            if ( is_array( $aRecipients = @V::getHashFile( $szInput ) ) )
+            {
+                foreach( $aRecipients as $key => $aRecipient )
+                {
+                    $szBody = $szTemplate;
+                    $szBody = str_replace( '%key%',$key,$szBody );
+
+                    foreach( $aSubstitutions as $aSubst )
+                    {
+                        $szPattern  = $aSubst['pattern'];
+                        $szValue    = '';
+
+                        if     ( ! empty( $aSubst['field'] ) )
+                        {   $szField = $aSubst['field'];
+                            $szValue = $aRecipient[$szField];
+                        }
+                        elseif ( ! empty( $aSubst['value'] ) )
+                            $szValue = $aSubst['value'];
+                        elseif ( ! empty( $aSubst['func'] ) )
+                            $szValue = ($aSubst['func'])($aRecipient);
+
+                        $szBody = str_replace( $szPattern,$szValue,$szBody );
+                    }
+
+                    $oEmail->szMailType     = 'text/html';
+                    $oEmail->szCharset      = 'UTF-8';
+                    $oEmail->szHost         = 'localhost';
+                    $oEmail->iPort          = 25;
+                    $oEmail->szFromName     = 'Beautiful Restaurant';
+                    $oEmail->szDomain       = 'beautifulrestaurant.com';
+                    $oEmail->szFromEmail    = 'noreply@beautifulrestaurant.com';
+                    $oEmail->szFromName     = 'Email Robot';
+                    $oEmail->szTo           = 'friend@beautifulrestaurant.com';
+                    $oEmail->szSubject      = 'Hello';
+                    $oEmail->szBody         = $szBody;
+
+                    echo htmlentities( $szBody ),"&lt;hr /&gt;";
+                    ob_flush();
+                    flush();
+
+                    try
+                    {
+                        if ( $oEmail->send() === EMAIL_RET_CODE_OK )
+                        {
+                            ++$iGood;
+                        }
+                        else
+                        {
+                            $aProblems[] = $aRecipient;
+                            echo "&lt;p&gt;PROBLEM with {$aRecipient['email']}&lt;/p&gt;\n";
+                        }
+                    }
+                    catch ( exception $e)
+                    {
+                        $aProblems[] = $aRecipient;
+                        echo "&lt;p&gt;PROBLEM with {$aRecipient['email']}&lt;/p&gt;\n";
+                        echo 'Exception reÃ§ue : ', $e->getMessage(),"\n";
+                    }
+                }   |** foreach( $aRecipients as $key => $aRecipient ) **|
+            }   |** if ( is_array( $aRecipients = @V::getHashFile( $szInput ) ) ) **|
+
+            if ( ! is_null( $aProblems ) )
+            {
+                var_dump( count( $aProblems ) . ' problems found sending the mails',$aProblems );
+
+                if ( @V::saveHashFile( $szOutput = v::FIL_RealPath( $szDir . '/mails.problems.hash' ),$aProblems ) )
+                    var_dump( "PROBLEMS SAVED TO {$szOutput}" );
+                else
+                    var_dump( "PROBLEMS CANNOT BE SAVED TO {$szOutput}" );
+            }
+
+            echo "&lt;p&gt;End of the script&lt;/p&gt;";
+
+            function name( $aRecipient )
+            |** ---------------------- **|
+            {
+                return ( trim( trim( $aRecipient['firstname'] ) . ' ' . trim( $aRecipient['lastname'] ) ) );
+            }
+
+            function year( $aRecipient )
+            |** ---------------------- **|
+            {
+                return ( date('Y') );
+            }[/b]
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function send() : int
     /*------------------------*/
     {
         $iRetVal = EMAIL_RET_CODE_OK;                               /* Return value of the method */
-
-        $this->szHost         = strtolower( trim( gethostname() ) ) === 'predator2' ? 'relay.skynet.be' : 'localhost';
-        $this->szFromName     = 'OpenPMO';
-        //$this->szFromEmail    = 'info@ecolediabolo.be';
-        $this->szDomain       = 'openpmo.site';
-
 
         if ( empty( $this->szTo ) )                                 /* If no recipient */
         {
@@ -186,7 +521,7 @@ class Email extends Utility
                 $szMailType = $this->szMailType;
 
             if ( is_null( $this->szCharset ) )
-                $szCharset = 'iso-8859-1';
+                $szCharset = 'UTF-8';
             else
                 $szCharset = $this->szCharset;
         }   /* Set miscellaneous variables to defaults */
@@ -227,11 +562,7 @@ class Email extends Utility
             //echo "PORT: ",$iPort,"\n";
         }
 
-        //$szHeaders  = "From: OpenPMO"                   . "\r\n" .
-        //              "Reply-To: {$this->szFromEmail}"  . "\r\n" .
-        //              "X-Mailer: TRQL Labs/" . str_replace( '\\','-',$this->self['class'] ) . "/" . phpversion();
-
-        $szHeaders  = $this->buildHeaders( 'no-reply@openpmo.site' );
+        $szHeaders  = $this->buildHeaders( $szFromEmail );
         //var_dump( $szHeaders );
         //var_dump( $this->szTo );
 
@@ -240,10 +571,7 @@ class Email extends Utility
             $iRetVal = EMAIL_RET_CODE_OK;
         }
 
-
         return ( $iRetVal );
-
-        return ( @mail( $this->szTo,$this->szSubject,$this->szBody,$szHeaders ) );
     }   /* End of Email.send() ======================================================== */
     /* ================================================================================ */
 
@@ -310,11 +638,11 @@ class Email extends Utility
             if  ( is_string( $this->szBCC ) )
             {
                 $this->szBCC = trim( $this->szBCC );
-        
+
                 if ( strlen( $this->szBCC ) > 0 )
                 {
                     $this->szBCC = trim( str_replace( ';',',',$this->szBCC ) );
-        
+
                     if ( strlen( $this->szBCC ) > 0 )
                     {
                         $szRetVal .= "BCC: {$this->szBCC}" . PHP_EOL;
@@ -414,6 +742,7 @@ class Email extends Utility
     }   /* End of Email.__toHTML() ==================================================== */
     /* ================================================================================ */
 
+
     public function __toString()
     /*------------------------*/
     {
@@ -425,26 +754,47 @@ class Email extends Utility
     /* ================================================================================ */
     /** {{*isEmail( $szEmail[,$szRecord] )=
 
-        Checks whether an email address exists
+        Checks whether an email address can supposedly exist (DNS check)
 
         {*params
             $szEmail            (string)        The email address to check
         *}
 
-        {*return
-            (array)     Associative array if method is successful; [c]null[/c]
-                        otherwise.
+        {*warning
+            Only the domain is checked for existence. If the email address is 
+            valid on an existing domain, the method will return a [c]true[/c]
+            even though the email address does not really exist.
         *}
 
-        {*keywords constructors, destructors *}
+        {*return
+            (bool)      [c]true[/c] if email address exists (supposedly);
+                        [c]false[/c] otherwise.
+        *}
 
-        {*seealso @fnc.__construct *}
+        {*example
+        use \trql\quitus\Email as Email;
+
+        if ( ! defined( 'EMAIL_CLASS_VERSION' ) )
+            require_once( 'd:/websites/snippet-center/trql.email.class.php' );
+
+        // The Email object that will do the dirty work
+        $oEmail = new Email();
+
+        var_dump( ( [b]$oEmail->isEmail( $szEmail = 'john.doe@latosensu.be'        )[/b] ? '"true"' : '"false"' ) . ' for "' . $szEmail . '"' );
+        var_dump( ( [b]$oEmail->isEmail( $szEmail = 'john.doe@gmail.com'           )[/b] ? '"true"' : '"false"' ) . ' for "' . $szEmail . '"' );
+        var_dump( ( [b]$oEmail->isEmail( $szEmail = 'john.doe@microsoft.com'       )[/b] ? '"true"' : '"false"' ) . ' for "' . $szEmail . '"' );
+        var_dump( ( [b]$oEmail->isEmail( $szEmail = 'john.doe@latosensu.co.uk'     )[/b] ? '"true"' : '"false"' ) . ' for "' . $szEmail . '"' );
+        var_dump( ( [b]$oEmail->isEmail( $szEmail = 'completely wrong'             )[/b] ? '"true"' : '"false"' ) . ' for "' . $szEmail . '"' );
+        var_dump( ( [b]$oEmail->isEmail( $szEmail = 'pb@thisdomaindoesnotexist.be' )[/b] ? '"true"' : '"false"' ) . ' for "' . $szEmail . '"' );
+        var_dump( ( [b]$oEmail->isEmail( $szEmail = 'pb@trql.fm'                   )[/b] ? '"true"' : '"false"' ) . ' for "' . $szEmail . '"' );
+        var_dump( ( [b]$oEmail->isEmail( $szEmail = 'pb@ls.co'                     )[/b] ? '"true"' : '"false"' ) . ' for "' . $szEmail . '"' );
+        *}
 
         *}}
     */
     /* ================================================================================ */
     public function isEmail( $szEmail, $szRecord = 'MX' )
-    /*-----------------------------------------------*/
+    /*-------------------------------------------------*/
     {
         if ( is_array( $aParts = explode( '@',$szEmail ) ) && count( $aParts ) > 1 )
         {

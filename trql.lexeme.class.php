@@ -47,7 +47,7 @@
 namespace trql\lexeme;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\mother\mother                 as Mother;
+use \trql\quitus\Mother                 as Mother;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )

@@ -27,6 +27,8 @@
     {*cdate                 28-08-2020 16:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre*}
+    {*keyword               creativework *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -46,7 +48,7 @@
 namespace trql\softwaresourcecode;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\creativework\CreativeWork     as CreativeWork;
+use \trql\schema\creativework\CreativeWork     as CreativeWork;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -163,4 +165,3 @@ class SoftwareSourceCode extends CreativeWork
     /* ================================================================================ */
 }   /* End of class SoftwareSourceCode ================================================ */
 /* ==================================================================================== */
-?>

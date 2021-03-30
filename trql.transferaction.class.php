@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,7 @@
     {*cdate                 28-08-2020 16:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -45,10 +44,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\transferaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\action\Action    as Action;
+use \trql\schema\action\Action    as Action;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -190,10 +189,8 @@ class TransferAction extends Action
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of TransferAction.__construct() ========================================== */
+    }   /* End of TransferAction.__construct() ======================================== */
     /* ================================================================================ */
 
 
@@ -220,10 +217,7 @@ class TransferAction extends Action
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of TransferAction.__destruct() =========================================== */
+    }   /* End of TransferAction.__destruct() ========================================= */
     /* ================================================================================ */
-
-}   /* End of class TransferAction ====================================================== */
+}   /* End of class TransferAction ==================================================== */
 /* ==================================================================================== */
-
-?>

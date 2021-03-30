@@ -27,7 +27,7 @@
     {*cdate                 25-08-2020 14:00 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -51,10 +51,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\rsvpaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\informaction\InformAction     as InformAction;
+use \trql\schema\action\InformAction    as InformAction;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -164,4 +164,3 @@ class RsvpAction extends InformAction
     /* ================================================================================ */
 }   /* End of class RsvpAction ======================================================== */
 /* ==================================================================================== */
-?>

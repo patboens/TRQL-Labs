@@ -51,7 +51,7 @@
 namespace trql\victorhugo;
 
 
-use \trql\mother\Mother                 as Mother;
+use \trql\quitus\Mother                 as Mother;
 use \trql\context\Context               as Context;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\substitution\Substitution     as Substitution;

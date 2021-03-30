@@ -27,7 +27,7 @@
     {*cdate                 26-08-2020 18:37 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              action *}
 
     -------------------------------------------------------------------------------------
@@ -54,10 +54,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\borrowaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\transferaction\TransferAction    as TransferAction;
+use \trql\schema\action\TransferAction    as TransferAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -180,4 +180,3 @@ class BorrowAction extends TransferAction
     /* ================================================================================ */
 }   /* End of class BorrowAction ====================================================== */
 /* ==================================================================================== */
-?>

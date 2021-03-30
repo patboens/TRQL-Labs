@@ -33,6 +33,8 @@
     {*mdate                 auto *}
     {*license               Submitted to intellectual property rights (see
                             author) *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*keyword               web *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -58,7 +60,7 @@
 /****************************************************************************************/
 namespace trql\web;
 
-use \trql\mother\iContext       as iContext;
+use \trql\quitus\iContext       as iContext;
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\web\WebPage           as WebPage;
 
@@ -121,7 +123,7 @@ class Paradeigma extends WebPage implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         //$this->die( __CLASS__ . ' NOT YET FUNCTIONAL' );
 

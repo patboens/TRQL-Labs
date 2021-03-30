@@ -32,7 +32,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel Ã©tÃ© *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              action *}
 
     -------------------------------------------------------------------------------------
@@ -59,10 +59,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\joinaction;
+namespace trql\schema\action;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\interactaction\InteractAction    as InteractAction;
+use \trql\schema\action\InteractAction    as InteractAction;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -152,7 +152,7 @@ class JoinAction extends InteractAction
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of JoinAction.__construct() ========================================== */
+    }   /* End of JoinAction.__construct() ============================================ */
     /* ================================================================================ */
 
 
@@ -183,7 +183,7 @@ class JoinAction extends InteractAction
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of JoinAction.__destruct() =========================================== */
+    }   /* End of JoinAction.__destruct() ============================================= */
     /* ================================================================================ */
-}   /* End of class JoinAction ====================================================== */
+}   /* End of class JoinAction ======================================================== */
 /* ==================================================================================== */
