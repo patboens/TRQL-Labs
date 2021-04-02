@@ -222,6 +222,280 @@ class Vaesoli
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*DAT_Bow( $szDate[,$szFormat] )=
+
+        Determines the beginning of the week (Monday) of a date
+
+        {*params
+            $szDate     (string)    A date string in YYYYMMDD or in a [c]time()[/c]
+                                    format
+            $szFormat   (string)    Output format. Optional. null by default in which
+                                    case the return value is an integer ([c]time()[/c]
+                                    format)
+        *}
+
+        {*return
+            (int)   Time expressed in number of seconds since 01/01/1970 if
+                    $szFormat == null; otherwise a string format (see [c]date()[/c]
+                    function in PHP)
+        *}
+
+        {*cdate     22/07/2012 19:32:47 *}
+        {*mdate     11/10/2014 11:21 *}
+        {*author    {PYB} *}
+        {*version   5.0.0005 *}
+
+        {*remark
+            [c]DAT_Bow()[/c] works with a specific date, either in a string format
+            or in an integer format[br]
+            [c]DAT_Sow()[/c] works with a specific week[br]
+            [c]DAT_Eow()[/c] works with a specific week
+        *}
+
+        {*exec
+            echo "<p>" . ( $iTime1  = DAT_Bow( "20120719"       ) ) . "</p>";
+            echo "<p>" . ( $szTime1 = DAT_Bow( "20120719",'Ymd' ) ) . "</p>";
+            echo "<p>" . ( $iTime2  = DAT_Bow( "20120722"       ) ) . "</p>";
+            echo "<p>" . ( $szTime2 = DAT_Bow( "20120722",'Ymd' ) ) . "</p>";
+            echo "<p>" . ( $szTime3 = DAT_Bow( TIM_MakeInt( '20141029'),'Ymd' ) ) . "</p>";
+
+            echo LSUnitTesting::assert( $iTime1 === 1342396800                          ,
+                                        'ASSERTION SUCCESSFUL: Date of the week correct',
+                                        'ASSERTION FAILURE: Date of the week incorrect' ,
+                                        'GuideAssert' );
+            echo LSUnitTesting::assert( $iTime2 === 1342396800                          ,
+                                        'ASSERTION SUCCESSFUL: Date of the week correct',
+                                        'ASSERTION FAILURE: Date of the week incorrect' ,
+                                        'GuideAssert' );
+            echo LSUnitTesting::assert( $szTime1 === '20120716'                         ,
+                                        'ASSERTION SUCCESSFUL: Date of the week correct',
+                                        'ASSERTION FAILURE: Date of the week incorrect' ,
+                                        'GuideAssert' );
+            echo LSUnitTesting::assert( $szTime2 === '20120716'                         ,
+                                        'ASSERTION SUCCESSFUL: Date of the week correct',
+                                        'ASSERTION FAILURE: Date of the week incorrect' ,
+                                        'GuideAssert' );
+            echo LSUnitTesting::assert( $szTime3 === '20141027'                         ,
+                                        'ASSERTION SUCCESSFUL: Date of the week correct',
+                                        'ASSERTION FAILURE: Date of the week incorrect' ,
+                                        'GuideAssert' );
+        *}
+
+        {*seealso
+            DAT_Sow(), DAT_Dow(), DAT_Eow()
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function DAT_Bow( $xDate,$szFormat = null )
+    /*-----------------------------------------------------*/
+    {
+        if ( is_int( $xDate ) )
+        {
+            $iTime = $xDate;
+        }
+        else
+        {
+            $iTime  = self::TIM_MakeInt( $xDate );
+        }
+
+        $iDay       = self::DAT_Dow( $iTime );
+        $xRetVal    = $xDate;
+
+        if ( $iDay >= 1 && $iDay <= 7 )
+        {
+            $aDate      = self::DAT_2Array( is_int( $xDate ) ? date( 'Ymd',$xDate ) : $xDate );
+            $xRetVal    = self::DAT_Add( (int) $aDate['year'],(int) $aDate['month'],(int) $aDate['day'],-( $iDay - 1 ) );
+
+            if ( ! is_null( $szFormat ) )
+            {
+                $xRetVal = date( $szFormat,$xRetVal );
+            }
+        }
+
+        return ( $xRetVal );
+    }   /* End of function DAT_Bow() ================================================= */
+
+
+    /* ====================================================================== */
+    /**  {{*DAT_2Array( $szDate,$szPart )=
+
+        Turns a date ([c]YYYYMMDD[HHmmSS][/c]) into an associative array
+
+        {*params
+            $szDate (mixed)     A YYYYMMDD[HHmmSS] date string. If an integer is
+                                supplied, then it is considered as a [c]time()[/c]
+                                value on which a [c]date('YmdHis')[/c] is applied
+            $szPart (string)    Optional parameter: the part to be returned:[br]
+                                - 'year'    : return the year part as a string[br]
+                                - 'month'   : return the month part as a string[br]
+                                - 'day'     : return the day part as a string[br]
+                                - 'time'    : return the time part as a string[br]
+        *}
+
+        {*cdate 16/06/2012 14:14:03 *}
+        {*version 5.0.0003 *}
+
+        {*return
+            (mixed)     string if $szPart is passed; array if $szPart is not mentioned
+        *}
+
+        {*assert
+            DAT_2Array( '20120616140959','year' ) == '2012'
+        *}
+
+        {*assert
+            DAT_2Array( '20120616140959','month' ) == '06'
+        *}
+
+        {*assert
+            DAT_2Array( '20120616140959','day' ) == '16'
+        *}
+
+        {*assert
+            DAT_2Array( '20120616140959','time' ) == '140959'
+        *}
+
+        {*assert
+            DAT_2Array( '201206161410','time' ) == '1410'
+        *}
+
+        {*example
+            Example #1
+            echo DAT_2Array( '20120616140959','time' ); // '140959'
+
+            Example #2
+            var_dump( DAT_2Array( '20120616140959' ) );
+
+            Example #3
+            var_dump( DAT_2Array( STR_dionly( '2012-06-16 14:09:59' ) ) );
+        *}
+
+        {*seealso
+            DAT_Split()
+        *}
+        *}}
+     */
+    /* ================================================================================ */
+    public static function DAT_2Array( $szDate,$szPart = null )
+    /*-------------------------------------------------------*/
+    {
+        $aParts = array();                                              /* Return value of the function */
+
+        $aParts['time']     =                                           /* Prepare associative array */
+        $aParts['day']      =
+        $aParts['month']    =
+        $aParts['year']     =
+        null;
+
+        if ( is_int( $szDate ) )
+        {
+            $szDate = date( 'YmdHis',$szDate );
+        }
+
+        if ( preg_match( '%(?P<year>(19|20)[0-9]{2})[- /.]{0,1}(?P<month>(0[1-9]|1[012]))[- /.]{0,1}(?P<day>(0[1-9]|[12][0-9]|3[01]))(?P<time>\d{0,6})?%',$szDate,$aMatch ) )
+        {
+            if ( isset( $aMatch['year'] ) )
+                $aParts['year'] = $aMatch['year'];                      /* Year */
+            if ( isset( $aMatch['month'] ) )
+                $aParts['month'] = $aMatch['month'];                    /* Month */
+            if ( isset( $aMatch['day'] ) )
+                $aParts['day'] = $aMatch['day'];                        /* Year */
+            if ( isset( $aMatch['time'] ) )
+                $aParts['time'] = $aMatch['time'];                      /* Time */
+        }
+
+        if ( ! is_null( $szPart ) && isset( $aParts[$szPart] ) )
+        {
+            return ( $aParts[$szPart] );                                /* Return part that is requested */
+        }   /* if ( ! is_null( $szPart ) && isset( $aParts[$szPart] ) ) */
+        else
+        {
+            return ( $aParts );                                         /* Return result to caller */
+        }
+    }   /* End of function DAT_2Array() =============================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /**  {{*DAT_Add( $iYear,$iMonth,$iDay,$iAdd )=
+
+        Adds or substracts a number of days to/from a date
+
+        {*params
+            $iYear  (int)       Year
+            $iMonth (int)       Month
+            $iDay   (int)       Day
+            $iAdd   (int)       Number of days to add (+) or to substract (-)
+        *}
+
+        {*return
+            (int)               [c]mktime()[/c] expression
+        *}
+
+        {*assert
+            DAT_Add( 2012,5,12,4 ) == '1337126400'
+        *}
+
+        {*assert
+            DAT_Add( 2012,5,12,4 ) === 1337126400
+        *}
+
+        {*assert
+            DAT_Add( 2012,5,12,-1 ) === 1336694400
+        *}
+
+        {*assert
+            date( "Ymd",DAT_Add( 2012,6,16,1 ) ) == '20120617'
+        *}
+
+        {*example
+            echo '<p>',DAT_Add( 2012,5,12,4 ),'</p>';       //1337126400
+            echo '<p>',date( 'Ymd',1337126400 ),'</p>';     //20120516
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function DAT_Add( $iYear,$iMonth,$iDay = 1,$iAdd = 1 )
+    /*----------------------------------------------------------------*/
+    {
+        if ( is_int( $iYear ) )                                         /* If iYear passed as an int */
+        {
+        }
+        elseif ( is_string( $iYear ) && strlen( $iYear ) >= 8 )         /* If $iYear is a string (YYYYMMDD format expected) */
+        {
+            $iAdd   = $iMonth;                                          /* Number of seconds to add is 2nd parameter */
+
+            $szDate = $iYear;                                           /* The date we need to consider */
+
+            $iYear  = (int) substr( $szDate,0,4 );                      /* Extract $iYear  */
+            $iMonth = (int) substr( $szDate,4,2 );                      /* Extract $iMonth */
+            $iDay   = (int) substr( $szDate,6,2 );                      /* Extract $iDay   */
+        }
+
+        //var_dump( $iYear  );
+        //var_dump( $iMonth );
+        //var_dump( $iDay   );
+        //var_dump( $iAdd   );
+
+        //var_dump( mktime( 0,0,0,$iMonth,$iDay,$iYear ) );
+        //var_dump( date("d-m-Y",mktime( 0,0,0,$iMonth,$iDay,$iYear ) ) );
+        //var_dump( date("d-m-Y",mktime( 0,0,0,7,17,1981 ) ) );
+
+        //var_dump( $x = DAT_stod( STR_padl( $iYear    ,4,"0" ) . 
+        //                    STR_padl( $iMonth   ,2,"0" ) . 
+        //                    STR_padl( $iDay     ,4,"0" ) ) );
+        //
+        //var_dump( date("d-m-Y",$x));
+
+        return ( mktime( 0,0,0,$iMonth,$iDay,$iYear ) + ( $iAdd * 86400 ) );
+    }   /* End of function DAT_Add() ================================================== */
+    /* ================================================================================ */
+
+
     public static function DAT_aDaysAndMonths( &$aDays,&$aMonths,$szLang = 'fr' )
     /*-------------------------------------------------------------------------*/
     {
@@ -252,8 +526,8 @@ class Vaesoli
                                           array( "Lu"       ,"Ma"       ,"Me"       ,"Je"       ,"Ve"       ,"Sa"    ,"Di"      ) );
                         break;
         }   /* switch ( $lang ) */
-    }   /* End of vaesoli.DAT_aDaysAndMonths() ================================= */
-    /* ========================================================================== */
+    }   /* End of vaesoli.DAT_aDaysAndMonths() ======================================== */
+    /* ================================================================================ */
 
 
     public static function DAT_cMonth( $xDate,$bLong = true,$szLang = 'fr' )
@@ -306,8 +580,8 @@ class Vaesoli
         }   /* if ( $iMonth >= 1 && $iMonth <= 12 ) */
 
         return ( $szRetVal );                                           /* Return result to caller */
-    }   /* End of vaesoli.DAT_cMonth() ========================================== */
-    /* ========================================================================== */
+    }   /* End of vaesoli.DAT_cMonth() ================================================ */
+    /* ================================================================================ */
 
 
     public static function DAT_isValid( $szYYYYMMDD )
@@ -382,104 +656,6 @@ class Vaesoli
 
         return ( $tBOM );
     }   /* End of vaesoli.DAT_firstDowOfMonth() ================================= */
-    /* ========================================================================== */
-
-
-    /* ========================================================================== */
-    /** {{*DAT_Bow( $szDate[,$szFormat] )=
-
-        Determines the beginning of the week (Monday) of a date
-
-        {*params
-            $szDate     (string)    A date string in YYYYMMDD or in a [c]time()[/c]
-                                    format
-            $szFormat   (string)    Output format. Optional. null by default in which
-                                    case the return value is an integer ([c]time()[/c]
-                                    format)
-        *}
-
-        {*return
-            (int)   Time expressed in number of seconds since 01/01/1970 if
-                    $szFormat == null; otherwise a string format (see [c]date()[/c]
-                    function in PHP)
-        *}
-
-        {*cdate     22/07/2012 19:32:47 *}
-        {*mdate     11/10/2014 11:21 *}
-        {*author    {PYB} *}
-        {*version   5.0.0005 *}
-
-        {*remark
-            [c]DAT_Bow()[/c] works with a specific date, either in a string format
-            or in an integer format[br]
-            [c]DAT_Sow()[/c] works with a specific week[br]
-            [c]DAT_Eow()[/c] works with a specific week
-        *}
-
-        {*exec
-            echo "<p>" . ( $iTime1  = DAT_Bow( "20120719"       ) ) . "</p>";
-            echo "<p>" . ( $szTime1 = DAT_Bow( "20120719",'Ymd' ) ) . "</p>";
-            echo "<p>" . ( $iTime2  = DAT_Bow( "20120722"       ) ) . "</p>";
-            echo "<p>" . ( $szTime2 = DAT_Bow( "20120722",'Ymd' ) ) . "</p>";
-            echo "<p>" . ( $szTime3 = DAT_Bow( TIM_MakeInt( '20141029'),'Ymd' ) ) . "</p>";
-
-            echo LSUnitTesting::assert( $iTime1 === 1342396800                          ,
-                                        'ASSERTION SUCCESSFUL: Date of the week correct',
-                                        'ASSERTION FAILURE: Date of the week incorrect' ,
-                                        'GuideAssert' );
-            echo LSUnitTesting::assert( $iTime2 === 1342396800                          ,
-                                        'ASSERTION SUCCESSFUL: Date of the week correct',
-                                        'ASSERTION FAILURE: Date of the week incorrect' ,
-                                        'GuideAssert' );
-            echo LSUnitTesting::assert( $szTime1 === '20120716'                         ,
-                                        'ASSERTION SUCCESSFUL: Date of the week correct',
-                                        'ASSERTION FAILURE: Date of the week incorrect' ,
-                                        'GuideAssert' );
-            echo LSUnitTesting::assert( $szTime2 === '20120716'                         ,
-                                        'ASSERTION SUCCESSFUL: Date of the week correct',
-                                        'ASSERTION FAILURE: Date of the week incorrect' ,
-                                        'GuideAssert' );
-            echo LSUnitTesting::assert( $szTime3 === '20141027'                         ,
-                                        'ASSERTION SUCCESSFUL: Date of the week correct',
-                                        'ASSERTION FAILURE: Date of the week incorrect' ,
-                                        'GuideAssert' );
-        *}
-
-        {*seealso
-            DAT_Sow(), DAT_Dow(), DAT_Eow()
-        *}
-
-        *}}
-     */
-    /* ========================================================================== */
-    public static function DAT_Bow( $xDate,$szFormat = null )
-    /*-----------------------------------------------------*/
-    {
-        if ( is_int( $xDate ) )
-        {
-            $iTime = $xDate;
-        }
-        else
-        {
-            $iTime  = TIM_MakeInt( $xDate );
-        }
-
-        $iDay       = DAT_Dow( $iTime );
-        $xRetVal    = $xDate;
-
-        if ( $iDay >= 1 && $iDay <= 7 )
-        {
-            $aDate      = DAT_2Array( is_int( $xDate ) ? date( 'Ymd',$xDate ) : $xDate );
-            $xRetVal    = DAT_Add( (int) $aDate['year'],(int) $aDate['month'],(int) $aDate['day'],-( $iDay - 1 ) );
-
-            if ( ! is_null( $szFormat ) )
-            {
-                $xRetVal = date( $szFormat,$xRetVal );
-            }
-        }
-
-        return ( $xRetVal );
-    }   /* End of vaesoli.DAT_Bow() ============================================= */
     /* ========================================================================== */
 
 
@@ -1956,6 +2132,122 @@ class Vaesoli
     /* ================================================================================ */
 
 
+    public static function STR_get3LettersAtRandom()
+    /*--------------------------------------------*/
+    {
+        $szRetVal = '';
+
+        for ( $i=0;$i<3;$i++ )
+        {
+            $szRetVal .= chr( mt_rand( 97,122 ) );
+        }   /* for ( $i=0;$i<3;$i++ ) */
+
+        return ( $szRetVal );
+    }   /* End of STR_get3LettersAtRandom() =========================================== */
+    /* ================================================================================ */
+
+
+    public static function STR_insert( $szHaystack,$szNeedle,$iPos )
+    /*-------------------------------------------------------------*/
+    {
+        return ( substr( $szHaystack,0,$iPos ) ) . $szNeedle . substr( $szHaystack,$iPos );
+    }   /* End of STR_insert() ======================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*STR_GeneratePassword( [$iLength] )=
+
+        Generates a password at random
+
+        {*params
+            $iLength    (int)   Minimum length of the password to be generated.
+                                Optional. [c]10[/c] by default.
+        *}
+
+        {*warning
+            Use this function with caution as it consumes some resources before
+            it returns: the password is chosen amongst more than 3000
+            possible combinations.
+        *}
+
+        {*return
+            (string)    Password at random
+        *}
+
+        {*author {PYB} *}
+        {*mdate 14/10/2013 06:35 *}
+
+        {*exec
+            echo '<p>',$szWord = STR_GeneratePassword(),'</p>';
+            echo LSUnitTesting::assert( ! STR_Empty( $szWord )              &&
+                                          STR_Pos( $szWord,"\r" ) === -1    &&
+                                          STR_Pos( $szWord, "\n" ) === -1               ,
+                                        'ASSERTION SUCCESSFUL: password seems to be OK' ,
+                                        'ASSERTION FAILURE: invalid password'           ,
+                                        'GuideAssert' );
+            echo '<p>',$szWord = STR_GeneratePassword(),'</p>';
+            echo LSUnitTesting::assert( ! STR_Empty( $szWord )              &&
+                                          STR_Pos( $szWord,"\r" ) === -1    &&
+                                          STR_Pos( $szWord,"\n" )                       ,
+                                        'ASSERTION SUCCESSFUL: password seems to be OK' ,
+                                        'ASSERTION FAILURE: invalid password'           ,
+                                        'GuideAssert' );
+            echo '<p>',$szWord = STR_GeneratePassword(),'</p>';
+            echo LSUnitTesting::assert( ! STR_Empty( $szWord )              &&
+                                          STR_Pos( $szWord,"\r" ) === -1    &&
+                                          STR_Pos( $szWord,"\n" )                       ,
+                                        'ASSERTION SUCCESSFUL: password seems to be OK' ,
+                                        'ASSERTION FAILURE: invalid password'           ,
+                                        'GuideAssert' );
+            echo '<p>',$szWord = STR_GeneratePassword(8),'</p>';
+            echo LSUnitTesting::assert( ! STR_Empty( $szWord )              &&
+                                          STR_Pos( $szWord,"\r" ) === -1    &&
+                                          STR_Pos( $szWord,"\n" ) === -1    &&
+                                          strlen( $szWord ) === 8                       ,
+                                        'ASSERTION SUCCESSFUL: password seems to be OK' ,
+                                        'ASSERTION FAILURE: invalid password'           ,
+                                        'GuideAssert' );
+        *}
+
+        {*assert STR_GeneratePassword() != STR_GeneratePassword() *}
+        {*assert ! STR_Empty( STR_GeneratePassword() ) *}
+
+        {*seealso
+            STR_Random()
+        *}
+
+        *}}
+     */
+    /* ========================================================================== */
+    public static function STR_GeneratePassword( $iLength = 10 )
+    /*--------------------------------------------------------*/
+    {
+        $szRetVal = '';
+
+        for ( $i=0;$i<$iLength;$i++)
+        {
+            $c = chr( mt_rand( 33,125 ) );
+
+            if ( $c !== "'" && $c !== '"' && $c !== "`" && $c !== "\\" && $c !== "^" )
+                $szRetVal .= $c;
+        }
+
+        $szRetVal = str_shuffle( $szRetVal );
+
+        $iPos = $iSQRT = (int) sqrt( $iLength );
+
+        while ( $iPos < ( $iLength + ( $iSQRT * 3 /* Because 3 letters */ ) ) )
+        {
+            $sz3        = self::STR_get3LettersAtRandom();
+            $szRetVal   = self::STR_insert( $szRetVal,$sz3,$iPos );
+            $iPos       += $iSQRT + 3;
+        }   /* while ... */
+
+        return ( substr( $szRetVal,0,$iLength ) );
+    }   /* == End of function STR_GeneratePassword() ================================== */
+
+
     /* ================================================================================ */
     /** {{*STR_iInList( $aList,$szValue[,$bPartOf] )=
 
@@ -2485,7 +2777,7 @@ class Vaesoli
     public static function STR_toParagraphs( $szStr )
     /*---------------------------------------------*/
     {
-        return ( str_replace( '<p></p>','',preg_replace('/(\A|^)(.*?)($|\R|\z)/m',"<p>$2</p>",$szStr ) ) );        
+        return ( str_replace( '<p></p>','',preg_replace('/(\A|^)(.*?)($|\R|\z)/m',"<p>$2</p>",$szStr ) ) );
     }   /* == End of vaesoli.STR_toParagraphs() ======================================= */
     /* ================================================================================ */
 
@@ -2542,12 +2834,12 @@ class Vaesoli
                              " "    =>  "   " );
         }
 
-        for ( $i = 0; $i < $iLen;$i++ ) 
+        for ( $i = 0; $i < $iLen;$i++ )
         {
             $c = $szStr[$i];
 
             // ignore unknown characters
-            if ( empty( $aMap[$c] ) ) 
+            if ( empty( $aMap[$c] ) )
                 continue;
 
             $szRetVal .= $aMap[$c]." ";
@@ -2607,13 +2899,13 @@ class Vaesoli
         $aGroups    = explode( ' ',$szMorse );
         //var_dump( $szMorse,$aGroups );
 
-        foreach ( $aGroups as $c ) 
+        foreach ( $aGroups as $c )
         {
             // ignore unknown characters
-            if ( empty( $c ) ) 
+            if ( empty( $c ) )
                 $szRetVal .= ' ';
 
-            if ( empty( $aMap[$c] ) ) 
+            if ( empty( $aMap[$c] ) )
                 continue;
 
             $szRetVal .= $aMap[$c];
