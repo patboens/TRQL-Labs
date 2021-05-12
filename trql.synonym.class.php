@@ -46,9 +46,8 @@
 /****************************************************************************************/
 namespace trql\synonym;
 
-use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\word\Word                 as Word;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\quitus\Word       as Word;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -176,12 +175,15 @@ class Synonym extends Word
 
 
     /* ================================================================================ */
-    /** {{*search( $szTerm[,$szGrammaticalCategory[,$szLang]] )=
+    /** {{*search( $szTerm[,$szLang[,$szGrammaticalCategory]] )=
 
         Search a synonym for a term
 
         {*params
-            $szTerm         (string)    Term to look for synonyms
+            $szTerm                 (string)    Term to look for synonyms
+            $szLang                 (string)    The language to be considered
+            $szGrammaticalCategory  (string)    The grammatical category ("substantif",
+                                                "adjectif","verbe")
         *}
 
         {*return

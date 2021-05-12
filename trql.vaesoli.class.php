@@ -53,7 +53,7 @@ if ( ! defined( 'VAESOLI_SLASH' ) )                                 /* If VAESOL
         case 'WINDOWS'  :
         case 'WIN32'    :
         case 'WIN'      :   /**
-                             *  DÃ©finition du slash en fonction du systÃ¨me d'exploitation
+                             *  Définition du slash en fonction du système d'exploitation
                              */
                             define( 'VAESOLI_SLASH','\\' );
                             break;
@@ -117,6 +117,43 @@ class Vaesoli
 
         return ( $aRetVal );
     }   /* End of vaesoli.assembleArrays() ============================================ */
+    /* ================================================================================ */
+
+
+    /* Retain only duplicates */
+    public static function ARR_duplicates( $a )
+    /*---------------------------------------*/
+    {
+        $aSeen = array();
+        $aDup  = array();
+
+        foreach( $a as $key => $value )
+        {
+            if ( isset( $aSeen[$value] ) )
+                $aDup[$value] = $key;
+            else
+               $aSeen[$value] = $key;
+        }
+
+        return ( array_keys( $aDup ) );
+    }   /* End of vaesoli.duplicates() ================================================ */
+    /* ================================================================================ */
+
+
+    /* Remove all duplicates -- didn't want to use array_unique() */
+    public static function ARR_removeDuplicates( $a )
+    /*---------------------------------------------*/
+    {
+        $aSeen = array();
+
+        foreach( $a as $key => $value )
+        {
+            if ( ! isset( $aSeen[$value] ) )
+               $aSeen[$value] = $key;
+        }
+
+        return ( array_keys( $aSeen ) );
+    }   /* End of vaesoli.ARR_removeDuplicates() ====================================== */
     /* ================================================================================ */
 
 
@@ -485,8 +522,8 @@ class Vaesoli
         //var_dump( date("d-m-Y",mktime( 0,0,0,$iMonth,$iDay,$iYear ) ) );
         //var_dump( date("d-m-Y",mktime( 0,0,0,7,17,1981 ) ) );
 
-        //var_dump( $x = DAT_stod( STR_padl( $iYear    ,4,"0" ) . 
-        //                    STR_padl( $iMonth   ,2,"0" ) . 
+        //var_dump( $x = DAT_stod( STR_padl( $iYear    ,4,"0" ) .
+        //                    STR_padl( $iMonth   ,2,"0" ) .
         //                    STR_padl( $iDay     ,4,"0" ) ) );
         //
         //var_dump( date("d-m-Y",$x));
@@ -845,7 +882,7 @@ class Vaesoli
     public static function TIM_Stot( $szYYYYMMDDHHmmSS )
     /*------------------------------------------------*/
     {
-        if ( self::STR_Empty( $szYYYYMMDDHHmmSS = self::STR_Dionly( $szYYYYMMDDHHmmSS ) ) )
+        if ( self::STR_Empty( $szYYYYMMDDHHmmSS = self::STR_dionly( $szYYYYMMDDHHmmSS ) ) )
             return ( -1 );
 
         $iLength    = strlen( $szYYYYMMDDHHmmSS );
@@ -1024,14 +1061,23 @@ class Vaesoli
 
         *}}
      */
-    /* ========================================================================== */
+    /* ================================================================================ */
     public static function FIL_aFilesEx( $szPattern,$iFlags = 0 )
     /*---------------------------------------------------------*/
     {
         $x = glob( $szPattern,$iFlags );
         return ( is_array( $x ) ? $x : array() );
-    }   /* End of FIL_aFilesEx() ==================================================== */
-    /* ============================================================================== */
+    }   /* End of FIL_aFilesEx() ====================================================== */
+    /* ================================================================================ */
+
+
+    public static function FIL_aDirsEx( $szPattern,$iFlags = GLOB_ONLYDIR )
+    /*-------------------------------------------------------------------*/
+    {
+        $x = glob( $szPattern,$iFlags );
+        return ( is_array( $x ) ? $x : array() );
+    }   /* End of FIL_aDirsEx() ======================================================= */
+    /* ================================================================================ */
 
 
     /* ================================================================================ */
@@ -1924,23 +1970,29 @@ class Vaesoli
     /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
     {
         //echo "GET URL avec " . $GLOBALS['szLSVUserAgent'];
-        $szRetVal   = null;                                             /* Default return value of the function */
-        $WithHeader = true;                                             /* With response header */
+        $szRetVal       = null;                                         /* Default return value of the function */
+        $WithHeader     = true;                                         /* With response header */
+        $followLocation = true;                                         /* Follow location by default */
 
         if ( function_exists( 'curl_init' ) )                           /* If function is defined */
         {
+            //var_dump( "CURL_INIT EXISTS" );
+
             if ( ( $xHandle = curl_init() ) )                           /* Create a handle */
             {
                 if ( ! is_null( $aOptions ) )                           /* If array of options passed */
                 {
                     if ( isset( $aOptions[CURLOPT_HEADER] ) )           /* If response header requested */
-                    {
                         $WithHeader = $aOptions[CURLOPT_HEADER];        /* With response header ? */
-                    }   /* if ( isset( $aOptions[CURLOPT_HEADER] ) ) */
-                    curl_setopt_array ( $xHandle,$aOptions );           /* Use this array */
+
+                    /* Use this array */
+                    if ( ! curl_setopt_array( $xHandle,$aOptions ) )
+                        var_dump( 'OPTIONS NOT SET' );
                 }   /* if ( ! is_null( $aOptions ) ) */
                 else   /* Else of ... if ( ! is_null( $aOptions ) ) */
                 {
+                    //var_dump( "NO OPTIONS" );
+
                     $iMS = isset( $GLOBALS['iLSVTimeout'] ) ? $GLOBALS['iLSVTimeout'] : $iSecs * 1000;
 
                     //set_time_limit( 30 + $iSecs );                      /* To cater for connection timeout and execution timeout */
@@ -1975,6 +2027,7 @@ class Vaesoli
 
                     if ( self::STR_StartWith( $szURL,'https' ) )
                     {
+                        //var_dump( "HTTPS" );
                         curl_setopt( $xHandle,CURLOPT_SSL_VERIFYPEER,false );
                     }
                 }   /* End of ... Else of ... if ( ! is_null( $aOptions ) ) */
@@ -1986,6 +2039,7 @@ class Vaesoli
                     curl_setopt( $xHandle,CURLOPT_USERPWD   ,"{$szUser}:{$szPwd}"   );
                 }   /* if ( ! is_null( $szUser ) ) */
 
+                //var_dump( "READY FOR THE CALL" );
 
                 // Mis en commentaire ke 07-05-16 07:41:38
                 //$szData = curl_exec( $xHandle );                        /* Get data now */
@@ -1994,19 +2048,24 @@ class Vaesoli
                     // Errors received
                     //D:\websites\vaesoli.org\www\httpdocs\vaesoli\include\LSHttp.functions.php:244:string '<url> malformed' (length=15)
                     //D:\websites\vaesoli.org\www\httpdocs\vaesoli\include\LSHttp.functions.php:244:string 'SSL certificate problem: unable to get local issuer certificate' (length=63)
+                    //var_dump( "ERROR" );
                     //var_dump( curl_error( $xHandle ) );
+                    //var_dump( $szData );
 
                     return ( null );
-
                 }
                 else
                 {
+                    //var_dump( "SEEMS OK" );
                     $aInfo      = curl_getinfo( $xHandle );             /* Get info from the connection */
                     $iErrCode   = (int) $aInfo['http_code'];            /* Error code (if any) */
                 }
 
+                //var_dump( $iErrCode );
                 if ( $iErrCode == 200 )                                 /* If success */
                 {
+                    //var_dump( "200 OK" );
+
                     if ( $WithHeader )                                  /* If response header sent back */
                     {
                         /********************************************************************/
@@ -2094,7 +2153,7 @@ class Vaesoli
     /* ================================================================================ */
 
 
-    public static function HTTP_IsURL( $szURL )
+    public static function HTTP_isURL( $szURL )
     /*---------------------------------------*/
     {
         $iRetCode = -1;                                                 /* Default return value of the function */
@@ -2128,8 +2187,82 @@ class Vaesoli
         }   /* if ( $ch = curl_init( $szURL ) ) */
 
         return ( $iRetCode );                                           /* Return result to caller */
-    }   /* End of HTTP_IsURL() ======================================================== */
+    }   /* End of HTTP_isURL() ======================================================== */
     /* ================================================================================ */
+
+
+    public static function NUM_isPrime( $num )
+    /*--------------------------------------*/
+    {
+        //1 is not prime. See: http://en.wikipedia.org/wiki/Prime_number#Primality_of_one
+        if ( $num === 1 )
+            return ( false );
+
+        //2 is prime (the only even number that is prime)
+        if ( $num === 2 )
+            return ( true );
+
+        /**
+         * if the number is divisible by two, then it's not prime and it's no longer
+         * needed to check other even numbers
+         */
+        if ( $num % 2 === 0 )
+            return ( false );
+
+        /**
+         * Checks the odd numbers. If any of them is a factor, then it returns false.
+         * The sqrt can be an aproximation, hence just for the sake of
+         * security, one rounds it to the next highest integer value.
+         */
+        $ceil = ceil(sqrt($num));
+
+        for( $i = 3; $i <= $ceil; $i = $i + 2 )
+        {
+            if ( $num % $i == 0 )
+                return ( false );
+        }
+
+        return true;
+    }   /* End of NUM_isPrime() ======================================================= */
+    /* ================================================================================ */
+
+    /* $aParams['algo'] = 'max'
+                        = 'count' */
+    public static function NUM_getPrimes( $aParams )
+    /*--------------------------------------------*/
+    {
+        $aPrimes    = null;
+        $iLimit     = max( $aParams['value'] ?? 1000,2 );
+
+        if ( ( $szAlgo = $aParams['algo'] ?? 'count' ) === 'count' )
+        {
+            $iCount     = 0;
+            $i          = 2;
+
+            while ( $iCount < $iLimit )
+            {
+                if ( Vaesoli::NUM_isPrime( $i ) )
+                {
+                    $iCount++;
+                    $aPrimes[] = $iPrimeMax = $i;
+                }
+                $i++;
+            }
+        }   /* if ( ( $szAlgo === 'count' ) */
+        else    /* Else ... $szAlgo === 'max' */
+        {
+            $i = 2;
+
+            while ( $i < $iLimit )
+            {
+                if ( Vaesoli::NUM_isPrime( $i ) )
+                    $aPrimes[] = $i;
+                $i++;
+            }   /* while ( $i < $iLimit ) */
+        }
+
+        return ( $aPrimes );
+    }
 
 
     public static function STR_get3LettersAtRandom()
@@ -2152,6 +2285,72 @@ class Vaesoli
     {
         return ( substr( $szHaystack,0,$iPos ) ) . $szNeedle . substr( $szHaystack,$iPos );
     }   /* End of STR_insert() ======================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*STR_musicalChairs( $szWord )=
+
+        Generates a set of words derived from $szWord. Each derived form is based
+        on the original word that has been amputated one character.
+
+        {*params
+            $szWord     (string)        Word to derive other words.
+        *}
+
+        {*warning
+            Use this function with caution as it consumes some resources before
+            it returns: the password is chosen amongst more than 3000
+            possible combinations.
+        *}
+
+        {*return
+            (array)     Array of words derived from
+        *}
+
+        {*author {PYB} *}
+        {*cdate 07-04-21 04:04 *}
+
+        {*assert is_array( STR_musicalChairs( 'world' ) ) *}
+
+        {*example
+            $aWords = STR_musicalChairs( "world" );
+
+            // 0 => string 'orld' (length=4)
+            // 1 => string 'wrld' (length=4)
+            // 2 => string 'wold' (length=4)
+            // 3 => string 'word' (length=4)
+            // 4 => string 'worl' (length=4)
+
+        *}
+
+        *}}
+     */
+    /* ========================================================================== */
+    public static function STR_musicalChairs( $szWord )
+    /*-----------------------------------------------*/
+    {
+        $aRetVal    = null;
+        $iLen       = mb_strlen( $szWord );
+
+        for ( $i = 0;$i < $iLen;$i++ )
+        {
+            if ( $i === 0 )
+                $szLeft = '';
+            else
+                $szLeft = mb_substr( $szWord,0,$i );
+
+            if ( $i === $iLen - 1 )
+                $szRight = '';
+            else
+                $szRight = mb_substr( $szWord,$i + 1 );
+
+            $aRetVal[] = $szLeft . $szRight;
+        }   /* for ( $i = 0;$i < $iLen;$i++ ) */
+
+        //var_dump( $aRetVal );
+        return ( $aRetVal );
+    }   /* End of vaesoli.STR_musicalChairs() ========================================= */
     /* ================================================================================ */
 
 
@@ -2245,7 +2444,7 @@ class Vaesoli
         }   /* while ... */
 
         return ( substr( $szRetVal,0,$iLength ) );
-    }   /* == End of function STR_GeneratePassword() ================================== */
+    }   /* == End of vaesoli.STR_GeneratePassword() =================================== */
 
 
     /* ================================================================================ */
@@ -2331,7 +2530,69 @@ class Vaesoli
         }   /* foreach( $aList as $x ) */
 
         return ( $bRetVal );                                            /* Return result to caller */
-    }   /* == End of function STR_InList() ============================================ */
+    }   /* == End of vaesoli.STR_InList() ============================================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*STR_sentences( $szStr )=
+
+        Slices a string into sentences
+
+        {*params
+            $szStr      (string)    The string to process
+        *}
+
+        {*remark
+            We remove all new line marks from the original string:
+            chr(10),chr(13), ...
+        *}
+
+        {*return
+            (array)     An array of sentences or [c]null[/c] if none found
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_sentences( $szStr )
+    /*------------------------------------------*/
+    {
+        $aRetVal = null;
+
+        $szStr = str_iReplace( array( '%0A','&#13;','&#10;',"\r\n",chr(13) . chr(10),chr(13),chr(10),"\r" ),"\n",$szStr );
+
+
+        if ( preg_match_all( '/.*(\R|\r|\n|\z)/m',$szStr,$aMatches,PREG_PATTERN_ORDER ) )
+        //if ( preg_match_all( '/.*(\n|\z)/im',$szStr,$aMatches,PREG_PATTERN_ORDER ) )
+        {
+            $aMatches = $aMatches[0];
+            $i = 0;
+
+            foreach( $aMatches as $szLine )
+            {
+                if ( ! empty( $szLine = trim( str_replace( array( '&#13;','&#10;',chr(13),chr(10),"\r","\n","\r\n" ),' ',$szLine ) ) ) )
+                    $aRetVal[] = self::STR_Reduce( $szLine );
+            }   /* foreach( $aMatches as $szLine ) */
+        }   /* if ( preg_match_all( '/.*(\R|\z)/m',... ) ) */
+
+        return ( $aRetVal );
+    }   /* == End of vaesoli.STR_sentences() ========================================== */
+    /* ================================================================================ */
+
+
+    // Line feeds to <p>...</p>
+    public static function STR_toParagraphs( $szStr )
+    /*---------------------------------------------*/
+    {
+        $szParagraphs = '';
+
+        if ( is_array( $aSentences = self::STR_sentences( $szStr ) ) )
+            foreach( $aSentences as $szSentence )
+                $szParagraphs .= str_replace( '<p></p>','',preg_replace('/(\A|^)(.*?)($|\R|\z)/m',"<p>$2</p>",$szSentence ) ) . "\n";
+
+        return (  $szParagraphs );
+    }   /* == End of vaesoli.STR_toParagraphs() ======================================= */
     /* ================================================================================ */
 
 
@@ -2378,7 +2639,7 @@ class Vaesoli
     /*------------------------------------------*/
     {
         return ( $c === mb_strtolower( $c ) );
-    }   /* == End of function STR_isLower() =========================================== */
+    }   /* == End of vaesoli.STR_isLower() ============================================ */
     /* ================================================================================ */
 
 
@@ -2436,7 +2697,7 @@ class Vaesoli
         }
 
         return ( $szRetVal );
-    }   /* == End of function STR_swapCase() ========================================== */
+    }   /* == End of vaesoli.STR_swapCase() =========================================== */
     /* ================================================================================ */
 
 
@@ -2522,7 +2783,7 @@ class Vaesoli
         }   /* foreach( $aList as $x ) */
 
         return ( $bRetVal );                                            /* Return result to caller */
-    }   /* == End of function STR_InList() ============================================ */
+    }   /* == End of vaesoli.STR_InList() ============================================= */
     /* ================================================================================ */
 
 
@@ -2535,7 +2796,7 @@ class Vaesoli
         sort( $a );
 
         return( implode( '',$a ) );
-    }   /* End of STR_Sort() ========================================================== */
+    }   /* End of vaesoli.STR_Sort() ================================================== */
     /* ================================================================================ */
 
 
@@ -2585,7 +2846,7 @@ class Vaesoli
         }   /* if ( ( ( $szStr = strstr( $szStr,$szStart ) ) != false ) && ... */
 
         return ( $szRetVal );                                           /* Return result to caller */
-    }   /* End of function STR_Balance() ============================================== */
+    }   /* End of vaesoli.STR_Balance() =============================================== */
     /* ================================================================================ */
 
 
@@ -2773,15 +3034,6 @@ class Vaesoli
     /* ================================================================================ */
 
 
-    // Line feeds to <p>...</p>
-    public static function STR_toParagraphs( $szStr )
-    /*---------------------------------------------*/
-    {
-        return ( str_replace( '<p></p>','',preg_replace('/(\A|^)(.*?)($|\R|\z)/m',"<p>$2</p>",$szStr ) ) );
-    }   /* == End of vaesoli.STR_toParagraphs() ======================================= */
-    /* ================================================================================ */
-
-
     // Based on https://www.go4expert.com/articles/morse-code-encoder-decoder-t3090/
     public static function STR_morseEncode( $szStr )
     /*--------------------------------------------*/
@@ -2913,6 +3165,46 @@ class Vaesoli
 
         return ( self::STR_reduce( $szRetVal ) );
     }   /* == End of vaesoli.STR_morseDecode() ======================================== */
+    /* ================================================================================ */
+
+
+    // Turn all kind of spaces into a common space
+    public static function STR_commonSpaces( $szStr )
+    {
+        return ( preg_replace( '/[\x{A0}]/usim',' ',preg_replace('/\s/sim',' ',str_iReplace( array( '&#32;','&nbsp;','&#160;','&ensp;','&#8194;','&emsp;','&#8195;','&thinsp;','&#8201;' ),' ',$szStr ) ) ) );
+    }
+
+    public static function STR_words( $szText,$iMinLength = -1 )
+    /*========================================================*/
+    {
+        $aWords = null;
+
+        if ( is_array( $aSentences = self::STR_sentences( $szText ) ) )
+        {
+            foreach( $aSentences as $szSentence )
+            {
+                $szText = self::STR_Reduce( str_replace( array( chr(10),'&#10;',chr(13),'&#13;',',',';',':','.','?','!','\'','"','[',']','(',')','{','}','=','\\','/','*','+','-','<','>' ),' ',$szSentence ),' ' );
+
+                // Ceci va séparer les mots sur base d'un espace
+                $aTmp = explode( ' ',$szText );
+
+                foreach( $aTmp as $szWord )
+                {
+                    //var_dump( $szWord );
+                    $szWord =       preg_replace( '/\A(«|“)/i','',$szWord );
+                    $szWord = trim( preg_replace( '/(»|”)\z/i','',$szWord ) );
+                    //var_dump( $szWord );
+                    // je vais enlever les débuts de mot en «|“ et
+                    // les fins de mots en »|”
+                    if ( mb_strlen( $szWord ) > $iMinLength )
+                        $aWords[] = trim( $szWord );
+                }   /* foreach( $aTmp as $szWord ) */
+            }   /* foreach( $aSentences as $szSentence ) */
+        }   /* if ( is_array( $aSentences = self::STR_sentences( $szText ) ) ) */
+
+
+        return ( $aWords );
+    }   /* == End of vaesoli.STR_words() ============================================= */
     /* ================================================================================ */
 
 
@@ -3385,6 +3677,7 @@ class Vaesoli
 
         return ( $x2 );                                                 /* Return result to caller */
     }   /* End of function MISC_CastBool() ============================================ */
+    /* ================================================================================ */
 
 
     public static function NUM_RoundMultiple( $n,$x )
@@ -3392,6 +3685,7 @@ class Vaesoli
     {
         return ( ceil($n)%$x === 0) ? floor($n) : round(($n+$x/2)/$x)*$x;
     }   /* End of function NUM_RoundMultiple() ======================================== */
+    /* ================================================================================ */
 
 
     public static function isdigit( $c )
@@ -3443,12 +3737,12 @@ class Vaesoli
     public static function STR_Hexa( $szStr )
     /*-------------------------------------*/
     {
-        $iLength  = strlen( $szStr );
+        $iLength  = mb_strlen( $szStr );
         $szResult = '';
 
         for ( $i=0;$i < $iLength;$i++ )
         {
-            $szResult  .= sprintf( '%02x',ord( $szStr[$i] ) );
+            $szResult  .= sprintf( '%02x',ord( mb_substr( $szStr,$i,1 ) ) );
         }
 
         return ( $szResult );
@@ -3521,9 +3815,118 @@ class Vaesoli
     /* ================================================================================ */
 
 
+    public static function utf8_ord( $c )
+    /*---------------------------------*/
+    {
+        //$code = ord( substr( $string,$offset,1 ) );
+        //$code = ord( substr( $c,0,1 ) );
+        $code = ord( $c );
+
+        if ( $code >= 128 )
+        {   //otherwise 0xxxxxxx
+            if      ( $code < 224 )
+                $bytesnumber = 2;       //110xxxxx
+            else if ( $code < 240 )
+                $bytesnumber = 3;       //1110xxxx
+            else if ( $code < 248 )
+                $bytesnumber = 4;    //11110xxx
+
+            $codetemp = $code - 192 -
+                        ( $bytesnumber > 2 ? 32 : 0 ) -
+                        ( $bytesnumber > 3 ? 16 : 0 );
+
+            for ( $i = 2; $i <= $bytesnumber; $i++ )
+            {
+                //$offset++;
+                //$code2      = ord( substr( $string,$offset,1 ) ) - 128;        //10xxxxxx
+                $code2      = ord( substr( $c,1,1 ) ) - 128;        //10xxxxxx
+                $codetemp   = $codetemp * 64 + $code2;
+            }
+
+            $code = $codetemp;
+        }
+
+        //$offset += 1;
+        //if ( $offset >= strlen( $string ) )
+        //    $offset = -1;
+
+        return $code;
+    }
+
+
+    public static function STR_vowels( &$szStr )
+    /*----------------------------------------*/
+    {
+        $aRetVal = null;
+
+        if ( preg_match_all('/(ə|ɛ|ẹ|ɜ|ɘ|Ẽ|Ĕ|ẽ|ĕ|Ĩ|Ĭ|ĩ|ĭ|Ɔ|ɔ|Ọ|ọ|Ɵ|ɵ|Ŏ|ŏ|Ʉ|ʉ|Ŭ|ŭ|A|Á|À|Ä|Â|Å|Ã|Ɐ|Ɑ|Ă|ɒ|a|á|à|ä|â|å|ã|ɐ|ɑ|ă|E|É|È|Ë|Ê|e|é|è|ë|ê|I|Ï|Î|Ì|Í|i|ï|î|ì|í|O|Ô|Ö|Ò|Ó|Õ|Ø|o|ô|ö|ò|ó|õ|ø|U|Ú|Ù|Û|Ü|u|ú|ù|û|ü|Y|Ý|Ÿ|y|ý|ÿ)/m',$szStr,$aMatches,PREG_PATTERN_ORDER ) )
+            $aRetVal = $aMatches[0];
+
+        return ( $aRetVal );
+    }   /* == End of function STR_vowels() ============================================ */
+    /* ================================================================================ */
+
+
+    public static function STR_diphthongs( &$szStr )
+    /*--------------------------------------------*/
+    {
+        $aRetVal = null;
+
+        if ( preg_match_all('/(Æ|æ|Œ|œ)/m',$szStr,$aMatches,PREG_PATTERN_ORDER ) )
+            $aRetVal = $aMatches[0];
+
+        return ( $aRetVal );
+    }   /* == End of function STR_diphtongs() ========================================= */
+    /* ================================================================================ */
+
+
+    public static function STR_consonants( &$szStr )
+    /*--------------------------------------------*/
+    {
+        $aRetVal = null;
+
+        $szPattern = 'B|C|D|F|G|H|J|K|L|M|N|P|Q|R|S|T|V|W|X|Z|b|c|d|f|g|h|j|k|l|m|n|p|q|r|s|t|v|w|x|z|' .
+                     'Ɓ|ɓ|Ç|ç|Č|č|ɕ|ɕ|Ɖ|ɖ|Ḍ|ḍ|Ɗ|ɗ|Ɠ|ɠ|Ħ|ħ|ɦ|ɦ|H|h|ʰ|ɥ|ɥ|Ḥ|ḥ|ɧ|ɧ|ǰ|ʝ|ʲ|ɟ|Ɫ|ɫ|ʎ|ɭ|Ḷ|ḷ|ɬ|' .
+                     'ɮ|Ɱ|ɱ|ɯ|ɰ|Ñ|ñ|Ŋ|ŋ|Ɲ|ɲ|ɳ|Ṇ|ṇ|ɹ|ʁ|Ř|ř|ɾ|Ṛ|ṛ|ɻ|Š|š|ʄ|Ś|ś|Ṣ|ṣ|ʂ|Þ|þ|Ʈ|ʈ|Ṭ|ṭ|Ʋ|ʋ|ʍ|ʷ|Ŵ|ŵ|Ẃ|ẃ|Ž|ž|Ʒ|ʒ|Ẓ|ẓ|ʑ|ʐ';
+
+        if ( preg_match_all( '/(' . $szPattern . ')/m',$szStr,$aMatches,PREG_PATTERN_ORDER ) )
+            $aRetVal = $aMatches[0];
+
+        return ( $aRetVal );
+    }   /* == End of function STR_consonants() ========================================= */
+    /* ================================================================================ */
+
+
+    public static function STR_greekLetters( &$szStr )
+    /*----------------------------------------------*/
+    {
+        $aRetVal = null;
+
+        if ( preg_match_all( '/(A|B|Γ|Δ|E|Z|H|Θ|I|K|Λ|M|N|Ξ|O|Π|P|Σ|T|Y|Φ|X|Ψ|Ω|α|β|γ|δ|ε|ζ|η|θ|ι|κ|λ|μ|ν|ξ|o|π|ρ|σ|τ|υ|φ|χ|ψ|ω)/m',$szStr,$aMatches,PREG_PATTERN_ORDER ) )
+            $aRetVal = $aMatches[0];
+
+        return ( $aRetVal );
+    }   /* == End of function STR_greekLetters() ====================================== */
+    /* ================================================================================ */
+
+
+    public static function STR_mathSymbols( &$szStr )
+    /*--------------------------------------------*/
+    {
+        $aRetVal = null;
+
+        if ( preg_match_all( '/(½|¼|¾|¹|³|²|ƒ|±|×|÷)/m',$szStr,$aMatches,PREG_PATTERN_ORDER ) )
+            $aRetVal = $aMatches[0];
+
+        return ( $aRetVal );
+    }   /* == End of function STR_mathSymbols() ======================================= */
+    /* ================================================================================ */
+
+
     public static function STR_Phonetique( $sIn,$iLength = 16 )
     /*-------------------------------------------------------*/
     {
+        // Faudrait ajouter le Y (comme dans STR_vowels())
         $accents = array( 'É' => 'E','È' => 'E','Ë' => 'E','Ê' => 'E','Á' => 'A','À' => 'A','Ä' => 'A'  ,'Â' => 'A',
         				  'Å' => 'A','Ã' => 'A','Æ' => 'E','Ï' => 'I','Î' => 'I','Ì' => 'I','Í' => 'I'  ,
         				  'Ô' => 'O','Ö' => 'O','Ò' => 'O','Ó' => 'O','Õ' => 'O','Ø' => 'O','Œ' => 'OEU',
@@ -3543,12 +3946,12 @@ class Vaesoli
 
         $sBack  = $sIn;                                     // on sauve le code (utilisé pour les mots très courts)
 
-        $sIn    = preg_replace( '`O[O]+`'       ,'OU'   ,$sIn ); 	// pré traitement OO... -> OU
-        $sIn    = preg_replace( '`SAOU`'        ,'SOU'  ,$sIn ); 	// pré traitement SAOU -> SOU
-        $sIn    = preg_replace( '`OES`'         ,'OS'   ,$sIn ); 	// pré traitement OES -> OS
-        $sIn    = preg_replace( '`CCH`'         ,'K'    ,$sIn ); 		// pré traitement CCH -> K
-        $sIn    = preg_replace( '`CC([IYE])`'   ,'KS$1' ,$sIn ); // CCI CCY CCE
-        $sIn    = preg_replace( '`(.)\1`'       ,'$1'   ,$sIn ); 	// supression des répétitions
+        $sIn    = preg_replace( '`O[O]+`'       ,'OU'   ,$sIn );    // pré traitement OO... -> OU
+        $sIn    = preg_replace( '`SAOU`'        ,'SOU'  ,$sIn );    // pré traitement SAOU -> SOU
+        $sIn    = preg_replace( '`OES`'         ,'OS'   ,$sIn );    // pré traitement OES -> OS
+        $sIn    = preg_replace( '`CCH`'         ,'K'    ,$sIn );    // pré traitement CCH -> K
+        $sIn    = preg_replace( '`CC([IYE])`'   ,'KS$1' ,$sIn );    // CCI CCY CCE
+        $sIn    = preg_replace( '`(.)\1`'       ,'$1'   ,$sIn );    // supression des répétitions
 
         // quelques cas particuliers
         if ( $sIn == 'CD'       )   return( $sIn    );
@@ -3815,6 +4218,131 @@ class Vaesoli
         $iPos = stripos( $szStr,$szSubStr,$iStart );
         return ( $iPos === false ? -1 : $iPos );
     }   /* End of vaesoli.STR_iPos() ================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*STR_Compile( $szStr )=
+
+        Returns an OCR code corresponding to a string
+
+        {*params
+            $szStr  (string)    The string that must be processed (works better with
+                                words)
+        *}
+
+        {*return
+            (string)   OCR code
+        *}
+
+        {*warning
+            This function is experimental. Return values will most probably evolve
+            over time
+        *}
+
+        {*assert
+            STR_Compile( 'Facture' ) === STR_Compile( 'F@e7urc' )
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_Compile( $szStr )
+    /*----------------------------------------*/
+    {
+        $aSubst['a'] = $aSubst['à'] = $aSubst['8'] = $aSubst['g'] = $aSubst['@']                                                                = '1';
+        $aSubst['c'] = $aSubst['e'] = $aSubst['é'] = $aSubst['è'] = $aSubst['o']                                                                = '2';
+        $aSubst['û'] = $aSubst['0'] = $aSubst['O'] = $aSubst['o'] = $aSubst['C'] = $aSubst['G']                                                 = '3';
+        $aSubst['B'] = $aSubst['8'] = $aSubst['E'] = $aSubst[chr(128) /* € */]                                                                  = '4';
+        $aSubst['Q'] = $aSubst['R']                                                                                                             = '5';
+        $aSubst['J'] = $aSubst['U'] = $aSubst['u'] = $aSubst['V'] = $aSubst['W'] = $aSubst['v'] = $aSubst['w']                                  = '6';
+        $aSubst['I'] = $aSubst['T'] = $aSubst['1'] = $aSubst['7'] = $aSubst['l'] = $aSubst['t'] = $aSubst['!'] = $aSubst['i'] = $aSubst['L']    = '7';
+        $aSubst['H'] = $aSubst['N'] = $aSubst['h'] = $aSubst['n']                                                                               = '8';
+        $aSubst['S'] = $aSubst['s'] = $aSubst['5'] = $aSubst['$']                                                                               = '9';
+        $aSubst['D'] = $aSubst['O']                                                                                                             = '0';
+
+        // Here you find corrections to the substitutions (based on what real OCR taught us):
+        // Such rules supersede the ones set above
+        $aSubst['L'] = $aSubst['C']; // A C and L are often confused
+
+        //$szStr = utf8_decode( $szStr );
+
+        //print_r( mb_list_encodings() );
+
+        //$szStr = STR_Reduce( mb_convert_encoding( trim( $szStr ),'Windows-1252' ),' ' );
+        $szStr = self::STR_Reduce( trim( $szStr ),' ' );
+
+        //print_r( $szStr );
+        //print_r( ord( $szStr ) );
+        //print_r( strlen( $szStr ) );
+        //die();
+        //var_dump( str_split( $szStr ) );
+
+        $iLen = mb_strlen( $szStr );
+
+        $szOut = '';
+        for ( $i = 0; $i < $iLen; $i++ )
+        {
+            $c = mb_substr( $szStr,$i,1 );
+
+            if ( isset( $aSubst[$c] ) )
+                $szOut .= $aSubst[$c];
+            else
+                $szOut .= $c;
+        }
+
+        //return ( mb_convert_encoding( $szOut,'UTF-8','Windows-1252' ) );
+        return ( $szOut );
+    }   /* == End of vaesoli.STR_Compile() ============================================ */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*STR_Soothe( $szStr[,$cChar] )=
+
+        Soothes a string by inserting one character every character
+
+        {*params
+            $szStr  (string)    The string that must be soothed
+            $cChar  (char)      The character to "slacken" $szStr with.
+                                Optional: [c]' '[/c] by default.
+        *}
+
+        {*return
+            (string)   $szStr soothed with $cChar
+        *}
+
+        {*assert
+            STR_Soothe( 'Hello' ) === 'H e l l o '
+        *}
+
+        {*example
+            // If anchor found in User Agent string
+            if ( preg_match( '%(?P<anchor><a[^>]*>(.*?)</a>)%si',$szUA,$aMatch ) )
+            {
+                // This is the anchor that we detected
+                $szAnchor = $aMatch['anchor'];
+                // Remove it from the User Agent string (and soothe the anchor)
+                $szUA     = str_replace( $szAnchor,'',$szUA ) . ' (anchor removed ... ' . STR_Soothe( $szAnchor,'.' ) . ')';
+                // Echo result
+                echo "<p>{$szUA}</p>";
+            }
+        *}
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_Soothe( $szStr,$cChar = ' ' )
+    /*----------------------------------------------------*/
+    {
+        $szRetVal   = '';                                               /* Resulting string */
+        $iLength    = strlen( $szStr );                                 /* Determine length */
+        for ( $i = 0;$i < $iLength;$i++ )                               /* Treat the entire string (per slice of 8 bits) */
+        {
+            $szRetVal .= $szStr[$i] . $cChar;                           /* Concatenate char in string and sooth character */
+        }   /* for ( $i = 0;$i < $iLength;$i++ ) */
+
+        return ( $szRetVal );                                           /* Return result to caller */
+    }   /* == End of function STR_Soothe() ============================================ */
     /* ================================================================================ */
 
 
@@ -4367,6 +4895,15 @@ class Vaesoli
     /* ========================================================================== */
 
 
+    public static function STR_hash( $szWord )
+    /*--------------------------------------*/
+    {
+        // Eliminate all accents (Windows-1252)
+        return( self::STR_Sort( strtoupper( preg_replace('/[\x41\x45\x49\x4F\x55\x59\x61\x65\x69\x6F\x75\x79\xC0\xC1\xC2\xC3\xC4\xC5\xC6\xC8\xC9\xCA\xCB\xCC\xCD\xCE\xCF\xD2\xD3\xD4\xD5\xD6\xD9\xDA\xDB\xDC\xDD\xE0\xE1\xE2\xE3\xE4\xE5\xE8\xE9\xEA\xEB\xEC\xED\xEE\xEF\xF2\xF3\xF4\xF5\xF6\xF9\xFA\xFB\xFC\xFD\xFF]|[[:punct:]]/sim','',self::STR_stripAccents( $szWord ) ) ) ) );
+    }   /* End of vaesoli.STR_hash() ============================================ */
+    /* ========================================================================== */
+
+
     /* ========================================================================== */
     /** {{*STR_Right( $szStr,$iCount )=
 
@@ -4677,13 +5214,9 @@ class Vaesoli
         }   /* if ( preg_match( ...,$szURL,$aMatch ) ) */
 
         if ( ! is_null( $szPart ) && isset( $aURL[$szPart] ) )
-        {
             return ( $aURL[$szPart] );
-        }
         else
-        {
             return ( $aURL );
-        }
     }   /* End of vaesoli.URL_Parse() ================================================= */
     /* ================================================================================ */
 
@@ -5005,6 +5538,4 @@ class Vaesoli
             /* ======================================================================== */
     /* JSON to Object, to Array , to XML*/
     /* ================================================================================ */
-
 }
-?>

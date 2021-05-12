@@ -262,8 +262,6 @@ class Task extends Activity
     public function __toForm(): string
     /*------------------------------*/
     {
-        $szRetVal = '';
-
         $oForm                      = new Form();
         $oForm->szClass             = $this->szClass;
         $oForm->szOnSubmit          = $this->szOnSubmit;

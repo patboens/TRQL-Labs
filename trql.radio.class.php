@@ -20,14 +20,14 @@
 */
 
 /** {{{*fheader
-    {*file                  trql.radiostation.class.php *}
-    {*purpose               A radio station. *}
+    {*file                  trql.radio.class.php *}
+    {*purpose               TRQL Radio code to create and manage radio stations *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
-    {*cdate                 30-07-20 10:31 *}
+    {*cdate                 11-05-21 04:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*UTF-8                 Quel bel Ã©tÃ© sous le hÃªtre *}
     {*todo                  1) Implement the [c]RadioSeries[/c] class as we have done
                                it on the TRQL Radio web site and for the California
                                Spirit Radioshow. This class must be modified as to
@@ -40,68 +40,58 @@
     -------------------------------------------------------------------------------------
 
     {*chist
-        {*mdate 30-07-20 10:31 *}
+        {*mdate 11-05-21 04:46 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
-        {*desc              1)  Original creation
+        {*desc              1)  Original creation. Most of the code in here comes from
+                                previous work (from 2017 to 2020) which has been 
+                                created for the handling of TRQL Radio.
+                            2)  This code makes the link between the work made in the
+                                past and the newly created trql.radiostation.class.php
         *}
     *}
-
-    {*chist
-        {*mdate 14-02-21 08:55 *}
-        {*author {PYB} *}
-        {*v 8.0.0000 *}
-        {*desc              1)  Standardizing the [c]__destruct() method[/c]
-        *}
-    *}
-
 
     *}}} */
 /****************************************************************************************/
-namespace trql\schema;
+namespace trql\quitus;
 
-use \trql\quitus\Mother                 as Mother;
-use \trql\quitus\iContext               as iContext;
-use \trql\context\Context               as Context;
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\schema\business\LocalBusiness as LocalBusiness;
+use \trql\vaesoli\Vaesoli                   as V;
+use \trql\schema\RadioStation               as RadioStation;
+use \trql\quitus\Wikipedia                  as Wikipedia;
+use \trql\schema\organization\MusicGroup    as MusicGroup;
 
 use DOMDocument;
 use DOMXPath;
 
-if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) )
-    require_once( 'trql.mother.class.php' );
-
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'LOCALBUSINESS_CLASS_VERSION' ) )
-    require_once( 'trql.localbusiness.class.php' );
+if ( ! defined( 'RADIOSTATION_CLASS_VERSION' ) )
+    require_once( 'trql.radiostation.class.php' );
 
-defined( 'RADIOSTATION_CLASS_VERSION' ) or define( 'RADIOSTATION_CLASS_VERSION','0.1' );
+if ( ! defined( 'WIKIPEDIA_CLASS_VERSION' ) )
+    require_once( 'trql.wikipedia.class.php' );
+
+if ( ! defined( 'MUSICGROUP_CLASS_VERSION' ) )
+    require_once( 'trql.musicgroup.class.php' );
+
+defined( 'RADIO_CLASS_VERSION' ) or define( 'RADIO_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
-/** {{*class RadioStation=
+/** {{*class Radio=
 
     {*desc
 
-        A radio station.
+        TRQL Radio code that makes it possible to create radios that are handled either
+        has sub-radios of TRQL Radio or as independent radio stations
 
     *}
-
-    {*credits
-        The whole concept is derived from the fabulous work of Schema.org
-        under the terms of their license:
-        [url]http://schema.org/docs/terms.html[/url]
-    *}
-
-    {*doc [url]https://schema.org/RadioStation[/url] *}
 
     *}}
  */
 /* ==================================================================================== */
-class RadioStation extends LocalBusiness implements iContext
-/*--------------------------------------------------------*/
+class Radio extends RadioStation
+/*----------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                 Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -134,48 +124,48 @@ class RadioStation extends LocalBusiness implements iContext
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
         return ( $this );
-    }   /* End of RadioStation.__construct() ========================================== */
+    }   /* End of Radio.__construct() ================================================= */
     /* ================================================================================ */
 
 
-    public function templates( $oContext = null )
-    /*-----------------------------------------*/
-    {
-        $aRetVal = null;
-
-        $this->__echo( __METHOD__ . "() : SHOULD RETURN TEMPLATES\n" );
-        die();
-
-        return ( $aRetVal );
-    }   /* End of RadioStation.templates() ============================================ */
     /* ================================================================================ */
+    /** {{*getArtistInfo( $szArtist[,$szLang] )=
 
+        Get info about an artist
 
-    public function substitutions( $oContext = null )
-    /*---------------------------------------------*/
-    {
-        $aRetVal = null;
+        {*params
+            $szArtist       (string)        Name of the artist (or group)
+            $szLang         (string)        Optional language. 'en' by default. The 
+                                            language merely serves to perform searches
+                                            on WikiData. Not much attention should be
+                                            paid to it.
+        *}
 
-        $this->die( __METHOD__ . "() : SHOULD RETURN SUBSTITUTIONS\n" );
+        {*return
+            (array)     Returns an associative array of results pertaining to 
+                        @param.szArtist
+        *}
 
-        return ( $aRetVal );
-    }   /* End of RadioStation.substitutions() ======================================== */
+        *}}
+    */
     /* ================================================================================ */
-
-
-    public function speak() : string
-    /*----------------------------*/
+    public function getArtistInfo( $szArtist,$szLang = 'en' )
+    /*-----------------------------------------------------*/
     {
-        return( '' );
-    }   /* End of RadioStation.speak() ================================================ */
-    /* ================================================================================ */
+        $aInfo = null;
+        static $oWiki = null;
+        static $oArtist = null;
 
+        /* An artist, in this case, is a music group : A musical group, such as
+           a band, an orchestra, or a choir. Can also be a solo musician. */
+        if ( is_null( $oArtist ) )
+            $oArtist = new MusicGroup();
 
-    public function sing() : string
-    /*---------------------------*/
-    {
-        return( '' );
-    }   /* End of RadioStation.sing() ================================================= */
+        $aInfo = $oArtist->getInfo( $szArtist,$szLang );
+
+        end:
+        return ( $aInfo );
+    }   /* End of Radio.getArtistInfo() =============================================== */
     /* ================================================================================ */
 
 
@@ -202,7 +192,7 @@ class RadioStation extends LocalBusiness implements iContext
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of RadioStation.__destruct() =========================================== */
+    }   /* End of Radio.__destruct() ================================================== */
     /* ================================================================================ */
-}   /* End of class RadioStation ====================================================== */
+}   /* End of class Radio ============================================================= */
 /* ==================================================================================== */

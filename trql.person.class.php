@@ -43,13 +43,13 @@
     *}}}
 */
 /****************************************************************************************/
-namespace trql\person;
+namespace trql\schema;
 
-use \trql\quitus\Mother         as Mother;
-use \trql\quitus\iContext       as iContext;
-use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\utility\Utility       as Utility;
-use \trql\schema\Thing           as Thing;
+use \trql\quitus\Mother     as Mother;
+use \trql\quitus\iContext   as iContext;
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\utility\Utility   as Utility;
+use \trql\schema\Thing      as Thing;
 
 use DOMDocument;
 use DOMXPath;

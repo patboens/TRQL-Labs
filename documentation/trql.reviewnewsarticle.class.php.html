@@ -765,6 +765,13 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">Fixed 'class' information.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.shelter"><code>$shelter</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The folder where news articles are stored. This property is used in
+ the <code>browse()</code> method AND NOT in the <code>save()</code> method. Replaces
+ $szStorage</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.sourceOrganization"><code>$sourceOrganization</code></td>
 <td class="type"><code>Organization</code></td>
 <td class="description">The <code><a href="?src=Organization">Organization</a></code> on whose behalf the creator was working.</td>
@@ -825,12 +832,6 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="type"><code>CreativeWork|Event</code></td>
 <td class="description">A <code><a href="?src=CreativeWork">CreativeWork</a></code> or <code><a href="?src=Event">Event</a></code> about this <code><a href="?src=Thing">Thing</a></code>. 
  Inverse property: <code><a href="#var-about">$about</a></code>.</td>
-</tr>
-<tr class="property">
-<td class="name" id="var.szStorage"><code>$szStorage</code></td>
-<td class="type"><code>string</code></td>
-<td class="description">The folder where news articles are stored. This property is used in
- the <code>browse()</code> method AND NOT in the <code>save()</code> method.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.temporal"><code>$temporal</code></td>

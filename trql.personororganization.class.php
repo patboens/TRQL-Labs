@@ -203,49 +203,49 @@ class PersonOrOrganization extends Subject
 
 
     /* These properties are extracted from Person ================================================================================================================================================================== */
-    public  $additionalName             = null;                     /* {*property   $additionalName             (string)                                    An additional name for a Person, can be used for
+    public  $additionalName                 = null;                 /* {*property   $additionalName             (string)                                    An additional name for a Person, can be used for
                                                                                                                                                             a middle name. *} */
-    public  $affiliation                = null;                     /* {*property   $affiliation                (Organization)                              An organization that this person is affiliated
+    public  $affiliation                    = null;                 /* {*property   $affiliation                (Organization)                              An organization that this person is affiliated
                                                                                                                                                             with. For example, a school/university, a club,
                                                                                                                                                             or a team. *} */
-    public  $alumniOf                   = null;                     /* {*property   $alumniOf                   (EducationalOrganization|Organization)      An organization that the person is an alumni of.
+    public  $alumniOf                       = null;                 /* {*property   $alumniOf                   (EducationalOrganization|Organization)      An organization that the person is an alumni of.
                                                                                                                                                             Inverse property: alumni. *} */
-    public  $birthDate                  = null;                     /* {*property   $birthDate                  (Date)                                      Date of birth. *} */
-    public  $birthPlace                 = null;                     /* {*property   $birthPlace                 (Place)                                     The place where the person was born. *} */
-    public  $children                   = null;                     /* {*property   $children                   (Person)                                    A child of the person. *} */
-    public  $colleague                  = null;                     /* {*property   $colleague                  (Person|URL)                                A colleague of the person. Supersedes colleagues. *} */
-    public  $deathDate                  = null;                     /* {*property   $deathDate                  (Date)                                      Date of death. *} */
-    public  $deathPlace                 = null;                     /* {*property   $deathPlace                 (Place)                                     The place where the person died. *} */
-    public  $familyName                 = null;                     /* {*property   $familyName                 (string)                                    Family name. In the U.S., the last name of an Person. This can
+    public  $birthDate                      = null;                 /* {*property   $birthDate                  (Date)                                      Date of birth. *} */
+    public  $birthPlace                     = null;                 /* {*property   $birthPlace                 (Place)                                     The place where the person was born. *} */
+    public  $children                       = null;                 /* {*property   $children                   (Person)                                    A child of the person. *} */
+    public  $colleague                      = null;                 /* {*property   $colleague                  (Person|URL)                                A colleague of the person. Supersedes colleagues. *} */
+    public  $deathDate                      = null;                 /* {*property   $deathDate                  (Date)                                      Date of death. *} */
+    public  $deathPlace                     = null;                 /* {*property   $deathPlace                 (Place)                                     The place where the person died. *} */
+    public  $familyName                     = null;                 /* {*property   $familyName                 (string)                                    Family name. In the U.S., the last name of an Person. This can
                                                                                                                                                             be used along with givenName instead of the name property. *} */
-    public  $follows                    = null;                     /* {*property   $follows                    (Person                                     The most generic uni-directional social relation. *} */
-    public  $gender                     = null;                     /* {*property   $gender                     (GenderType|string)                         Gender of the person. While http://schema.org/Male and
+    public  $follows                        = null;                 /* {*property   $follows                    (Person                                     The most generic uni-directional social relation. *} */
+    public  $gender                         = null;                 /* {*property   $gender                     (GenderType|string)                         Gender of the person. While http://schema.org/Male and
                                                                                                                                                             http://schema.org/Female may be used, text strings are
                                                                                                                                                             also acceptable for people who do not identify as a
                                                                                                                                                             binary gender. *} */
-    public  $givenName                  = null;                     /* {*property   $givenName                  (string)                                    Given name. In the U.S., the first name of a Person. This can
+    public  $givenName                      = null;                 /* {*property   $givenName                  (string)                                    Given name. In the U.S., the first name of a Person. This can
                                                                                                                                                             be used along with familyName instead of the name property. *} */
-    public  $hasOccupation              = null;                     /* {*property   $hasOccupation              (Occupation)                                The Person's occupation. For past professions, use Role for expressing dates. *} */
-    public  $height                     = null;                     /* {*property   $height                     (Distance|QuantitativeValue)                The height of the item. *} */
-    public  $homeLocation               = null;                     /* {*property   $homeLocation               (ContactPoint|Place)                        A contact location for a person's residence. *} */
-    public  $honorificPrefix            = null;                     /* {*property   $honorificPrefix            (string)                                    An honorific prefix preceding a Person's name such as Dr/Mrs/Mr. *} */
-    public  $honorificSuffix            = null;                     /* {*property   $honorificSuffix            (string)                                    An honorific suffix preceding a Person's name such as M.D. /PhD/MSCSW. *} */
-    public  $jobTitle                   = null;                     /* {*property   $jobTitle                   (DefinedTerm|string)                        The job title of the person (for example, Financial Manager). *} */
-    public  $knows                      = null;                     /* {*property   $knows                      (Person)                                    The most generic bi-directional social/work relation. *} */
-    public  $nationality                = null;                     /* {*property   $nationality                (Country)                                   Nationality of the person. *} */
-    public  $netWorth                   = null;                     /* {*property   $netWorth                   (MonetaryAmount|PriceSpecification)         The total financial value of the person as calculated by subtracting
+    public  $hasOccupation                  = null;                 /* {*property   $hasOccupation              (Occupation)                                The Person's occupation. For past professions, use Role for expressing dates. *} */
+    public  $height                         = null;                 /* {*property   $height                     (Distance|QuantitativeValue)                The height of the item. *} */
+    public  $homeLocation                   = null;                 /* {*property   $homeLocation               (ContactPoint|Place)                        A contact location for a person's residence. *} */
+    public  $honorificPrefix                = null;                 /* {*property   $honorificPrefix            (string)                                    An honorific prefix preceding a Person's name such as Dr/Mrs/Mr. *} */
+    public  $honorificSuffix                = null;                 /* {*property   $honorificSuffix            (string)                                    An honorific suffix preceding a Person's name such as M.D. /PhD/MSCSW. *} */
+    public  $jobTitle                       = null;                 /* {*property   $jobTitle                   (DefinedTerm|string)                        The job title of the person (for example, Financial Manager). *} */
+    public  $knows                          = null;                 /* {*property   $knows                      (Person)                                    The most generic bi-directional social/work relation. *} */
+    public  $nationality                    = null;                 /* {*property   $nationality                (Country)                                   Nationality of the person. *} */
+    public  $netWorth                       = null;                 /* {*property   $netWorth                   (MonetaryAmount|PriceSpecification)         The total financial value of the person as calculated by subtracting
                                                                                                                                                             assets from liabilities. *} */
-    public  $parent                     = null;                     /* {*property   $parent                     (Person)                                    A parent of this person. Supersedes parents. *} */
-    public  $performerIn                = null;                     /* {*property   $performerIn                (Event)                                     Event that this person is a performer or participant in. *} */
-    public  $relatedTo                  = null;                     /* {*property   $relatedTo                  (Person)                                    The most generic familial relation. *} */
-    public  $sibling                    = null;                     /* {*property   $sibling                    (Person)                                    A sibling of the person. Supersedes siblings. *} */
-    public  $spouse                     = null;                     /* {*property   $spouse                     (Person)                                    The person's spouse. *} */
-    public  $weight                     = null;                     /* {*property   $weight                     (QuantitativeValue)                         The weight of the product or person. *} */
-    public  $workLocation               = null;                     /* {*property   $workLocation               (ContactPoint|Place)                        A contact location for a person's place of work. *} */
-    public  $worksFor                   = null;                     /* {*property   $worksFor                   (Organization)                              Organizations that the person works for. *} */
+    public  $parent                         = null;                 /* {*property   $parent                     (Person)                                    A parent of this person. Supersedes parents. *} */
+    public  $performerIn                    = null;                 /* {*property   $performerIn                (Event)                                     Event that this person is a performer or participant in. *} */
+    public  $relatedTo                      = null;                 /* {*property   $relatedTo                  (Person)                                    The most generic familial relation. *} */
+    public  $sibling                        = null;                 /* {*property   $sibling                    (Person)                                    A sibling of the person. Supersedes siblings. *} */
+    public  $spouse                         = null;                 /* {*property   $spouse                     (Person)                                    The person's spouse. *} */
+    public  $weight                         = null;                 /* {*property   $weight                     (QuantitativeValue)                         The weight of the product or person. *} */
+    public  $workLocation                   = null;                 /* {*property   $workLocation               (ContactPoint|Place)                        A contact location for a person's place of work. *} */
+    public  $worksFor                       = null;                 /* {*property   $worksFor                   (Organization)                              Organizations that the person works for. *} */
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
+    public      $wikidataId                 = null;
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -271,7 +271,7 @@ class PersonOrOrganization extends Subject
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of PersonOrOrganization.__construct() ================================== */

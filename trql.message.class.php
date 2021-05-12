@@ -45,10 +45,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\message;
+namespace trql\schema;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\schema\creativework\CreativeWork    as CreativeWork;
+use \trql\schema\creativework\CreativeWork  as CreativeWork;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -56,8 +56,6 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'CREATIVEWORK_CLASS_VERSION' ) )
     require_once( 'trql.creativework.class.php' );
-
-
 
 defined( 'MESSAGE_CLASS_VERSION' ) or define( 'MESSAGE_CLASS_VERSION','0.1' );
 
@@ -136,7 +134,7 @@ class Message extends CreativeWork
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of Message.__construct() =============================================== */
@@ -168,8 +166,5 @@ class Message extends CreativeWork
         $this->necroSignaling();
     }   /* End of Message.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class Message =========================================================== */
 /* ==================================================================================== */
-
-?>

@@ -22,17 +22,11 @@
     {*file                  trql.mother.class.php *}
     {*purpose               Mother of all TRQL Classes *}
     {*author                {PYB} *}
-    {*company               Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 08/02/2017 - 12:10 *}
     {*mdate                 auto *}
-    {*license               All rights reserved to Lato Sensu Management
-                            for all countries. All Intellectual Property
-                            belongs to Patrick Boens. *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre et devant l'âtre *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -256,7 +250,7 @@ abstract class Mother
     public      $backupRequired         = true;                     /* {*property   $backupRequired             (boolean)               Should the class backup itself? *} */
     public      $autodocRequired        = true;                     /* {*property   $autodocRequired            (boolean)               Should the class auto-document itself? *} */
     public      $classIcon              = null;                     /* {*property   $classIcon                  (string)                Icon representing the class *} */
-
+    public      $cargo                  = null;                     /* {*property   $cargo                      (mixed)                 Feel free to put whatever you like in there: this member if for you *} */ 
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = null;
@@ -754,10 +748,8 @@ abstract class Mother
         //if ( ( $iDoW % 2 === 1 ) && ( $iHour > 21 ) )
         //return ( ( $iDoW % 2 === 1 ) && ( $iHour > 21 ) );
 
-        return ( $szHour >= '0000' && $szHour <= '0005' ||
-                 $szHour >= '0100' && $szHour <= '0105' ||
-                 $szHour >= '0200' && $szHour <= '0210' ||
-                 $szHour >= '2300' && $szHour <= '2305' );
+        return ( $szHour >= '0200' && $szHour <= '0105' ||
+                 $szHour >= '0400' && $szHour <= '0405' );
 
     }   /* End of Mother.isRightTimeForHouseKeeping() ================================= */
     /* ================================================================================ */
@@ -1019,7 +1011,7 @@ abstract class Mother
         *}
 
         {*return
-            (string)    The resource identified by $szURL in a string format
+            (string)    The resource identified by %param.szURL% in a string format
         *}
 
         *}}

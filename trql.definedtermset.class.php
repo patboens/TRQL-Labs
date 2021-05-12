@@ -45,10 +45,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\definedtermset;
+namespace trql\schema;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\schema\creativework\CreativeWork     as CreativeWork;
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\schema\creativework\CreativeWork      as CreativeWork;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -197,14 +197,29 @@ class DefinedTermSet extends CreativeWork
     public function __get( $property )
     /*------------------------------*/
     {
-        switch( $property )
+        switch ( $property )
         {
-            case 'storage'  :   return ( $this->szStorage );
-                                break;
-            default         :   return ( parent::__get( $property ) );
-                                break;
+            case 'storage'      :   return ( $this->shelter );
+                                    break;
+            default             :   return ( parent::__get( $property ) );
+                                    break;
         }
-    }
+    }   /* End of NewsArticle.__get() ================================================= */
+    /* ================================================================================ */
+
+
+    public function __set( $property,$xValue )
+    /*--------------------------------------*/
+    {
+        switch ( $property )
+        {
+            case 'storage'      :   $this->shelter = $xValue;
+                                    break;
+            default             :   return ( parent::__set( $property,$xValue ) );
+                                    break;
+        }
+    }   /* End of NewsArticle.__set() ================================================= */
+    /* ================================================================================ */
 
     /* ================================================================================ */
     /** {{*load( [$szFile] )=

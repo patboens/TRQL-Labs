@@ -57,13 +57,12 @@
 /****************************************************************************************/
 namespace trql\schema\creativework;
 
-use \trql\vaesoli\Vaesoli           as v;
-use \trql\schema\creativework\Article           as Article;
-use \trql\form\Form                 as Form;
-use \trql\fieldset\Fieldset         as Fieldset;
-use \trql\formset\Formset           as Formset;
-use \trql\input\Input               as Input;
-
+use \trql\vaesoli\Vaesoli               as v;
+use \trql\schema\creativework\Article   as Article;
+use \trql\html\Form                     as Form;
+use \trql\html\Fieldset                 as Fieldset;
+use \trql\html\Formset                  as Formset;
+use \trql\html\Input                    as Input;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -108,7 +107,6 @@ defined( 'NEWSARTICLE_CLASS_VERSION' ) or define( 'NEWSARTICLE_CLASS_VERSION','0
     *}
 
     *}}
-
  */
 /* ==================================================================================== */
 class NewsArticle extends Article
@@ -147,8 +145,9 @@ class NewsArticle extends Article
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = 'Q5707594';       /* {*property   $wikidataId                     (string)                        Article that is published in news media *} */
     public      $oForm                          = null;             /* {*property   $oForm                          (Form)                          Form that is generated via [c]__toForm()[/c] *} */
-    public      $szStorage                      = null;             /* {*property   $szStorage                      (string)                        The folder where news articles are stored. This property is used in
-                                                                                                                                                    the [c]browse()[/c] method AND NOT in the [c]save()[/c] method. *} */
+    public      $shelter                        = null;             /* {*property   $shelter                        (string)                        The folder where news articles are stored. This property is used in
+                                                                                                                                                    the [c]browse()[/c] method AND NOT in the [c]save()[/c] method. Replaces
+                                                                                                                                                    $szStorage *} */
 
 
     /* ================================================================================ */
@@ -179,53 +178,6 @@ class NewsArticle extends Article
 
         return ( $this );
     }   /* End of NewsArticle.__construct() =========================================== */
-    /* ================================================================================ */
-
-
-    public function __toString() : string
-    /*---------------------------------*/
-    {
-
-    }   /* End of NewsArticle.__toString() ============================================ */
-    /* ================================================================================ */
-
-
-    public function __toForm() : string
-    /*-------------------------------*/
-    {
-        {   /* Create a fieldset and add the field set to the form */
-            $oFieldset              = new Fieldset();
-            $oFieldset->szCaption   = 'News';
-
-            $this->die( __METHOD__ . "() has never been tested! Sorry for the inconvenience" );
-
-            {   /* Adding zones to the fieldset */
-                $oFieldset->add( new Input( array( 'name'           =>  'Title'                                                 ,
-                                                   'type'           =>  'txt'                                                   ,
-                                                   'label'          =>  'Title'                                                 ,
-                                                   'lang'           =>  'en'                                                    ,
-                                                   'tooltip'        =>  'RSS feed - Item Title'                                 ,
-                                                   'required'       =>  true                                                    ,
-                                                   'delete'         =>  true                                                    ,
-                                                   'help'           =>  false                                                   ,
-                                                   'value'          =>  ''                                                      ,
-                                                 ) ) );
-
-                $oFieldset->add( new Input( array( 'name'           =>  'Submit'                                                ,
-                                                   'type'           =>  'cmd'                                                   ,
-                                                   'class'          =>  'shadow'                                                ,
-                                                   'lang'           =>  'en'                                                    ,
-                                                   'value'          =>  'Submit'                                                ,
-                                                 ) ) );
-            }   /* Adding zones to the fieldset */
-
-            $this->oForm->add( $oFieldset );
-
-        }   /* Create a fieldset and add the field set to the form */
-
-        return ( $this->oForm->render() );
-
-    }   /* End of NewsArticle.__toForm() ============================================== */
     /* ================================================================================ */
 
 
@@ -349,7 +301,7 @@ class NewsArticle extends Article
     /*--------------------------------------*/
     {
         $aRetVal = array();
-        if ( ! is_null( $szFolder = $szFolder ?? $this->szStorage ) )
+        if ( ! is_null( $szFolder = $szFolder ?? $this->shelter ) )
         {
             $iThisYear = (int) date( 'Y' );
             $iLastYear = $iThisYear - 1;
@@ -373,6 +325,83 @@ class NewsArticle extends Article
         end:
         return ( $aRetVal );
     }   /* End of NewsArticle.browse() ================================================ */
+    /* ================================================================================ */
+
+
+    public function __get( $property )
+    /*------------------------------*/
+    {
+        switch ( $property )
+        {
+            case 'szStorage'    :   
+            case 'storage'      :   return ( $this->shelter );
+                                    break;
+            default             :   return ( parent::__get( $property ) );
+                                    break;
+        }
+    }   /* End of NewsArticle.__get() ================================================= */
+    /* ================================================================================ */
+
+
+    public function __set( $property,$xValue )
+    /*--------------------------------------*/
+    {
+        switch ( $property )
+        {
+            case 'szStorage'    :   
+            case 'storage'      :   $this->shelter = $xValue;
+                                    break;
+            default             :   return ( parent::__set( $property,$xValue ) );
+                                    break;
+        }
+    }   /* End of NewsArticle.__set() ================================================= */
+    /* ================================================================================ */
+
+
+    public function __toString() : string
+    /*---------------------------------*/
+    {
+        return ( '' );
+    }   /* End of NewsArticle.__toString() ============================================ */
+    /* ================================================================================ */
+
+
+    public function __toForm() : string
+    /*-------------------------------*/
+    {
+        {   /* Create a fieldset and add the field set to the form */
+            $oFieldset              = new Fieldset();
+            $oFieldset->szCaption   = 'News';
+
+            $this->die( __METHOD__ . "() has never been tested! Sorry for the inconvenience" );
+
+            {   /* Adding zones to the fieldset */
+                $oFieldset->add( new Input( array( 'name'           =>  'Title'                                                 ,
+                                                   'type'           =>  'txt'                                                   ,
+                                                   'label'          =>  'Title'                                                 ,
+                                                   'lang'           =>  'en'                                                    ,
+                                                   'tooltip'        =>  'RSS feed - Item Title'                                 ,
+                                                   'required'       =>  true                                                    ,
+                                                   'delete'         =>  true                                                    ,
+                                                   'help'           =>  false                                                   ,
+                                                   'value'          =>  ''                                                      ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Submit'                                                ,
+                                                   'type'           =>  'cmd'                                                   ,
+                                                   'class'          =>  'shadow'                                                ,
+                                                   'lang'           =>  'en'                                                    ,
+                                                   'value'          =>  'Submit'                                                ,
+                                                 ) ) );
+            }   /* Adding zones to the fieldset */
+
+            $this->oForm->add( $oFieldset );
+
+        }   /* Create a fieldset and add the field set to the form */
+
+        return ( $this->oForm->render() );
+
+    }   /* End of NewsArticle.__toForm() ============================================== */
     /* ================================================================================ */
 
 

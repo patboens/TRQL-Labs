@@ -26,7 +26,7 @@
     {*cdate                 05-01-21 10:10 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              Agility *}
 
     -------------------------------------------------------------------------------------
@@ -43,14 +43,13 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\portfolio;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\catalog\Catalog                   as Catalog;
-use \trql\XML\XML                           as XML;
-use \trql\project\Aspiration                as Aspiration;
-use \trql\mission\Mission                   as Mission;
-
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\quitus\Catalog        as Catalog;
+use \trql\XML\XML               as XML;
+use \trql\schema\Aspiration     as Aspiration;
+use \trql\mission\Mission       as Mission;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -74,7 +73,7 @@ defined( 'PORTFOLIO_CLASS_VERSION' ) or define( 'PORTFOLIO_CLASS_VERSION','0.1' 
 
     {*desc
 
-        A catalog of aspirations (projects)
+        A catalog of aspirations (projects and programmes)
 
     *}
 
@@ -93,7 +92,6 @@ class Portfolio extends Catalog
                                'UIKey'  => null         ,
                              );
 
-
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId         = 'Q95975598';                  /* {*property   $wikidataId                     (string)                        wikidataId. Container for documents.
                                                                                                                                                     There is also another notion that comes close
@@ -101,7 +99,8 @@ class Portfolio extends Catalog
                                                                                                                                                     collection of visual artworks housed in a
                                                                                                                                                     binder, folder or other container ('Q79509036') *} */
     public      $aAspirations       = null;                         /* {*property   $aAspirations                   (array)                         An array of Aspirations belonging to the Portfolio *} */
-    public      $szStorageFolder    = '/../databases/PMO';          /* {*property   $szStorageFolder                (string)                        A relative path where all Aspirations get stored *} */
+    public      $shelter            = '/../databases/PMO';          /* {*property   $shelter                        (string)                        A relative path where all Aspirations get stored.
+                                                                                                                                                    Supersedes szStorageFolder *} */
     protected   $aStorageMap        = null;                         /* {*property   $aStorageMap                    (array)                         Set of values that depicts where the portfolio gets stored. *} */
     protected   $modulo             = 977;                          /* {*property   $modulo                         (int)                           Prime number used to determine the exact storage location
                                                                                                                                                     of the portfolio (see trql.storage.trait.php). *} */
@@ -150,7 +149,7 @@ class Portfolio extends Catalog
             {
                 foreach( $oPortfolio->aAspirations as $oAspiration )
                 {
-                    // Do something 
+                    // Do something
                 }
             }[/b]
 
@@ -212,7 +211,7 @@ class Portfolio extends Catalog
         {
             $this->aStorageMap = $this->map( $this->szCodeName,$this->modulo );
 
-            $szFolder = vaesoli::FIL_RealPath( vaesoli::FIL_ResolveRoot( $this->szStorageFolder         . '/' .
+            $szFolder = vaesoli::FIL_RealPath( vaesoli::FIL_ResolveRoot( $this->shelter         . '/' .
                                                                          $this->aStorageMap['level1']   . '/' .
                                                                          $this->aStorageMap['level2']   . '/' .
                                                                          $this->aStorageMap['level3']   . '/' .
@@ -251,7 +250,8 @@ class Portfolio extends Catalog
         {
             $tEnd = microtime( true );
             //var_dump( "FIL_aFilesEx() en " . round( ( $tEnd = microtime( true ) ) - $tStart,5 ) . 'sec' );
-            foreach( $aFiles as $szFile )
+            //var_dump( $aFiles );
+            foreach ( $aFiles as $szFile )
             {
                 // NOTE DE PERFORMANCE:
                 // La création d'une Aspiration est lente : 0.29 sec
@@ -269,7 +269,7 @@ class Portfolio extends Catalog
                     $oAspiration->oParentPortfolio  = $this;
 
                     // Overwrite what the Aspiration has concluded
-                    $oAspiration->szStorage = $this->szStorageFolder       . '/' .
+                    $oAspiration->szStorage = $this->shelter       . '/' .
                                               $this->aStorageMap['level1'] . '/' .
                                               $this->aStorageMap['level2'] . '/' .
                                               $this->aStorageMap['level3'] . '/' .
@@ -299,7 +299,7 @@ class Portfolio extends Catalog
         {*params
             $szFile         (string)        The file the portfolio must be loaded from.
                                             Optional. If not passed, the name of the file
-                                            is determined from the codeName of the 
+                                            is determined from the codeName of the
                                             portfolio.
         *}
 
@@ -310,15 +310,13 @@ class Portfolio extends Catalog
         *}}
     */
     /* ================================================================================ */
-    public function load( $szFile = null ):bool
-    /*---------------------------------------*/
+    public function load( $szFile = null ): bool
+    /*----------------------------------------*/
     {
         $bRetVal = false;
 
         if ( is_null( $szFile ) )
             $szFile = vaesoli::FIL_RealPath( $this->getFolder() . '/' . $this->szCodeName . '.portfolio.xml' );
-
-        //var_dump( "Looking for " . $szFile );
 
         if ( is_file( $szFile ) )
         {
@@ -368,10 +366,12 @@ class Portfolio extends Catalog
                 }   /* foreach( $oTags as $oNode ) */
                 //var_dump( $this->aDomains );
             }   /* if ( $oDom->load( $szFile) ) */
-        }
-
+        }   /* if ( is_file( $szFile ) ) */
         else
+        {
+            //var_dump( $szFile . " COULD NOT BE LOADED" );
             $this->addInfo( __METHOD__ . "() at line " . __LINE__ . " : {$szFile} could NOT be loaded" );
+        }
 
         end:
         return ( $bRetVal );
@@ -551,7 +551,7 @@ class Portfolio extends Catalog
     /** {{*__toString()=
 
         Allows a class to decide how it will react when it is treated like a
-        string. 
+        string.
 
         {*params
         *}
@@ -576,21 +576,30 @@ class Portfolio extends Catalog
     {
         switch ( $szProperty )
         {
-            case 'modulo'       :   return ( $this->modulo );
-            case 'szID'         :   return ( $this->szID );
-            case 'szShelter'    :   return ( $this->szStorage );
-            default             :   return ( parent::__get( $szProperty ) );
+            case 'modulo'           :   return ( $this->modulo );
+            case 'szID'             :   return ( $this->szID );
+            case 'storage'          :
+            case 'szStorage'        :
+            case 'szShelter'        :
+            case 'szStorageFolder'  :   return ( $this->shelter );
+            default                 :   return ( parent::__get( $szProperty ) );
         }
     }   /* End of Portfolio.__get() =================================================== */
     /* ================================================================================ */
 
 
-    public function __set( $szProperty,$xValue )
-    /*----------------------------------------*/
+    public function __set( $property,$xValue )
+    /*--------------------------------------*/
     {
-        switch ( $szProperty )
+        switch ( $property )
         {
-            case 'szShelter'    : return ( $this->szStorage = $xValue );
+            case 'storage'          :
+            case 'szStorage'        :
+            case 'szShelter'        :
+            case 'szStorageFolder'  :   return ( $this->shelter = $xValue );
+                                        break;
+            default                 :   return ( parent::__set( $property,$xValue ) );
+                                        break;
         }
     }   /* End of Portfolio.__set() =================================================== */
     /* ================================================================================ */

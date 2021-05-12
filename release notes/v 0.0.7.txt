@@ -1,7 +1,7 @@
 Change Log v 0.0.7
 ==================
 
-0)  More consitent usage of "{*UTF-8    Quel bel été sous le hêtre *}"
+0)  More consitent usage of "{*UTF-8    Quel bel Ã©tÃ© sous le hÃªtre *}"
     as to ensure proper encoding (easy visual check)
 
 1)  All the following classes now share the "business" namespace
@@ -170,35 +170,56 @@ Change Log v 0.0.7
 6) Thing and CreativeWork do NOT list class siblings anymore (self['family'])
    Thing does not call its parent::__construct() anymore for higher performance
    
-   trql.webapi.class.php
-trql.wpadblock.class.php
-trql.wpfooter.class.php
-trql.wpheader.class.php
-trql.wpsidebar.class.php
-trql.aboutpage.class.php
-trql.checkoutpage.class.php
-trql.webapplication.class.php
-trql.collectionpage.class.php
-trql.faqpage.class.php
-trql.healthtopiccontent.class.php
-trql.mediagallery.class.php
-trql.imagegallery.class.php
-trql.itempage.class.php
-trql.medicalwebpage.class.php
-trql.videogallery.class.php
-trql.browser.class.php
-trql.contactpage.class.php
-trql.paradeigma.class.php
-trql.webcontent.class.php
-
+    - trql.aboutpage.class.php
+    - trql.agent.class.php
+    - trql.browser.class.php
+    - trql.checkoutpage.class.php
+    - trql.collectionpage.class.php
+    - trql.contactpage.class.php
+    - trql.faqpage.class.php
+    - trql.healthtopiccontent.class.php
+    - trql.imagegallery.class.php
+    - trql.itempage.class.php
+    - trql.lexeme.class.php
+    - trql.lexicalitem.class.php
+    - trql.mediagallery.class.php
+    - trql.medicalwebpage.class.php
+    - trql.paradeigma.class.php
+    - trql.personororganization.class.php
+    - trql.sitemap.class.php
+    - trql.subject.class.php
+    - trql.videogallery.class.php
+    - trql.webapi.class.php
+    - trql.webapplication.class.php
+    - trql.webcontent.class.php
+    - trql.webpage.class.php
+    - trql.website.class.php
+    - trql.word.class.php
+    - trql.wpadblock.class.php
+    - trql.wpfooter.class.php
+    - trql.wpheader.class.php
+    - trql.wpsidebar.class.php
+    - trql.emailmessage.class.php
+    - trql.message.class.php
+    - trql.postaladdress.class.php
+    - trql.bankaccount.class.php
+    - trql.account.class.php
+    - trql.user.class.php
+    - trql.rss.class.php
 
 
 7) The namespace of CreativeWork has been changed to "namespace trql\schema\creativework;"
     All subsequent classes changed:
 
     - trql.advertizing.class.php
+    - trql.analysisnewsarticle.class.php
     - trql.archivecomponent.class.php
+    - trql.article.class.php
+    - trql.askpublicnewsarticle.class.php
     - trql.atlas.class.php
+    - trql.backgroundnewsarticle.class.php
+    - trql.blog.class.php
+    - trql.blogposting.class.php
     - trql.book.class.php
     - trql.chapter.class.php
     - trql.citation.class.php
@@ -229,6 +250,7 @@ trql.webcontent.class.php
     - trql.label.class.php
     - trql.learningresource.class.php
     - trql.legislation.class.php
+    - trql.mailshot.class.php
     - trql.manuscript.class.php
     - trql.map.class.php
     - trql.mediaobject.class.php
@@ -239,6 +261,8 @@ trql.webcontent.class.php
     - trql.musiccomposition.class.php
     - trql.musicplaylist.class.php
     - trql.musicrecording.class.php
+    - trql.newsarticle.class.php
+    - trql.opinionnewsarticle.class.php
     - trql.photograph.class.php
     - trql.play.class.php
     - trql.poster.class.php
@@ -246,13 +270,22 @@ trql.webcontent.class.php
     - trql.publicationvolume.class.php
     - trql.question.class.php
     - trql.quotation.class.php
+    - trql.report.class.php
+    - trql.reportagenewsarticle.class.php
     - trql.review.class.php
+    - trql.reviewnewsarticle.class.php
+    - trql.satiricalarticle.class.php
+    - trql.scholarlyarticle.class.php
     - trql.sculpture.class.php
     - trql.sheetmusic.class.php
     - trql.shortstory.class.php
+    - trql.sms.class.php
+    - trql.socialmediaposting.class.php
     - trql.softwareapplication.class.php
     - trql.softwaresourcecode.class.php
     - trql.specialannouncement.class.php
+    - trql.taxonomizer.class.php
+    - trql.techarticle.class.php
     - trql.thesis.class.php
     - trql.tvseries.class.php
     - trql.visualartwork.class.php
@@ -261,22 +294,45 @@ trql.webcontent.class.php
     - trql.webpageelement.class.php
     - trql.website.class.php
     - trql.writtenwork.class.php
-    
 
-8) All the following classes do share the "trql\schema\creativework" namespace
+8) Classes whose namespace has migrated to "quitus":
 
-    - trql.analysisnewsarticle.class.php
-    - trql.article.class.php
-    - trql.askpublicnewsarticle.class.php
-    - trql.backgroundnewsarticle.class.php
-    - trql.blog.class.php
-    - trql.blogposting.class.php
-    - trql.newsarticle.class.php
-    - trql.opinionnewsarticle.class.php
-    - trql.report.class.php
-    - trql.reportagenewsarticle.class.php
-    - trql.reviewnewsarticle.class.php
-    - trql.satiricalarticle.class.php
-    - trql.scholarlyarticle.class.php
-    - trql.socialmediaposting.class.php
-    - trql.techarticle.class.php
+    - trql.word.class.php
+    - trql.lexicalitem.class.php
+    - trql.lexeme.class.php
+    - trql.wikipedia.class.php
+    - trql.reference.class.php
+    - trql.footnotes.class.php
+    - trql.account.class.php
+    - trql.user.class.php
+    - trql.user.class.php
+    - trql.catalog.class.php
+
+9) trql.newsarticle.class.php : szStorage property changed to shelter (shelter is a folder; storage is a file).
+   __get() and __set() added to assure backward compatibility
+   
+10) trql.definedtermset.class.php :  __get() modified; __set() added
+
+11) trql.portfolio.class.php : szStorageFolder replaced by shelter (shelter is a folder; storage is a file)
+
+12) namespace trql\schema for the following classes:
+
+    - trql.citation.class.php 
+    - trql.emailmessage.class.php
+    - trql.message.class.php
+    - trql.definedtermset.class.php
+    - trql.person.class.php
+    - trql.organization.class.php
+    - trql.performinggroup.class.php
+    - trql.musicgroup.class.php
+    - trql.radiostation.class.php
+    - trql.bankaccount.class.php
+    - trql.project.class.php
+
+13) ???????
+
+14) CECI EST UN TODO IMPORTANT !
+
+    IL FAUT QUE TOUTES LES CLASSES QUI UTILISENT "Home" et "HomeDir" utilisent dÃ©sormais "shelter". Il faut
+    y mettre des __get() et __set() pour assurer la compatbilitÃ© !
+    Par exemple, trql.website.class.php, on y utilise HomeDir !!!

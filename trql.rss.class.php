@@ -52,18 +52,18 @@
 /****************************************************************************************/
 namespace trql\rss;
 
-use \trql\quitus\Mother         as Mother;
-use \trql\quitus\iContext       as iContext;
-use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\utility\Utility       as Utility;
-use \trql\intangible\Intangible as Intangible;
-use \trql\schema\Thing           as Thing;
-use \trql\person\Person         as Person;
-use \trql\html\Form             as Form;
-use \trql\html\Fieldset         as Fieldset;
-use \trql\html\Formset          as Formset;
-use \trql\html\Input            as Input;
-use \trql\comment\Comment       as Comment;
+use \trql\quitus\Mother             as Mother;
+use \trql\quitus\iContext           as iContext;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\utility\Utility           as Utility;
+use \trql\intangible\Intangible     as Intangible;
+use \trql\schema\Thing              as Thing;
+use \trql\schema\Person             as Person;
+use \trql\html\Form                 as Form;
+use \trql\html\Fieldset             as Fieldset;
+use \trql\html\Formset              as Formset;
+use \trql\html\Input                as Input;
+use \trql\comment\Comment           as Comment;
 
 use DOMDocument;
 use DOMXPath;
@@ -161,7 +161,7 @@ class RSS extends Utility implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         $this->oDom     = new DOMDocument();
         $this->oForm    = new Form();
@@ -1300,7 +1300,5 @@ class RSSItem extends DataFeedItem
 
         return ( substr( $szRetVal,0,-1 ) );                        /* Return all categories of the item but the terminating ',' */
     }   /* End of RSSItem.categories() ================================================ */
-
 }   /* End of class RSSItem =========================================================== */
 /* ==================================================================================== */
-?>

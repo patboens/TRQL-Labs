@@ -51,8 +51,8 @@
         *}}
      */
 /****************************************************************************** */
-use \trql\vaesoli\Vaesoli                   as v;
-use \trql\wikipedia\Wikipedia as wikipedia;
+use \trql\vaesoli\Vaesoli   as v;
+use \trql\quitus\Wikipedia  as Wikipedia;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'd:/websites/snippet-center/trql.vaesoli.class.php' );
@@ -60,7 +60,7 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 if ( ! defined( 'WIKIPEDIA_CLASS_VERSION' ) )
     require_once( 'd:/websites/snippet-center/trql.wikipedia.class.php' );
 
-$o = new wikipedia();
+$o = new Wikipedia();
 
 end:
 var_dump( $o->lastInfo );

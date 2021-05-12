@@ -28,7 +28,7 @@
     {*cdate                 29-07-20 11:51 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -52,15 +52,15 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\organization;
+namespace trql\schema\organization;
 
 use \trql\quitus\Mother                 as Mother;
 use \trql\quitus\iContext               as iContext;
 use \trql\context\Context               as Context;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\schema\Thing                   as Thing;
+use \trql\schema\Thing                  as Thing;
 use \trql\postaladdress\PostalAddress   as PostalAddress;
-use \trql\bankaccount\BankAccount       as BankAccount;
+use \trql\schema\BankAccount            as BankAccount;
 
 use DOMDocument;
 use DOMXPath;
@@ -264,7 +264,7 @@ class Organization extends Thing implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         $this->address      = new PostalAddress();
         $this->bankAccount  = new BankAccount();

@@ -26,7 +26,7 @@
     {*cdate                 14-01-21 16:33 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -45,9 +45,9 @@
 /****************************************************************************************/
 namespace trql\smalluad;
 
-use \trql\vaesoli\Vaesoli               as v;
-use \trql\dataset\Dataset               as Dataset;
-use \trql\user\User                     as User;
+use \trql\vaesoli\Vaesoli   as v;
+use \trql\dataset\Dataset   as Dataset;
+use \trql\quitus\User       as User;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

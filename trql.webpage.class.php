@@ -49,10 +49,10 @@
 /****************************************************************************************/
 namespace trql\web;
 
-use \trql\quitus\iContext               as iContext;
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\schema\creativework\CreativeWork     as CreativeWork;
-use \trql\quitus\Agent                  as Agent;
+use \trql\quitus\iContext                   as iContext;
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\schema\creativework\CreativeWork  as CreativeWork;
+use \trql\quitus\Agent                      as Agent;
 
 use DOMDocument;
 use DOMXPath;
@@ -172,7 +172,12 @@ class WebPage extends CreativeWork implements iContext
     public      $guid                           = null;             /* {*property   $guid                       (string)                            Globally unique Identifier of the page. *} */
     public      $H1                             = null;             /* {*property   $H1                         (string)                            H1 of the page. *} */
     public      $seeAlso                        = null;             /* {*property   $seeAlso                    (string)                            Pages interesting to visit from the current page (semi-colon separated list). *} */
+    public      $helpPage                       = null;             /* {*property   $helpPage                   (string|URL)                        Help page that provides additional explanations about the current page. *} */
     public      $cargo                          = null;             /* {*property   $cargo                      (string)                            Whatever information seems interesting to load and keep in the page *} */
+    public      $analysis                       = null;             /* {*property   $analysis                   (array)                             Result of the analysis of the page (call to [c]analyze()[/c]) *} */
+    public      $contentFiles                   = null;             /* {*property   $contentFiles               (array)                             A list of files that are suitable candidates to contain the real payload of the page, its content *} */
+    public      $contentFile                    = null;             /* {*property   $contentFile                (string)                            THE file that has been used to extract the real payload of the page, its content *} */
+    public      $content                        = null;             /* {*property   $content                    (string)                            The content of the page (the whole HTML) (filled after a call to [c]getURL()[/c]) *} */
 
     // $szPageImage is now replaced by $primaryImageOfPage
     //public      $szPageImage                    = null;             /* {*property   $szPageImage                (string)                            Image that represents the page (EXCELLENT for SEO)
@@ -203,7 +208,9 @@ class WebPage extends CreativeWork implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,
+                           '/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),
+                           $withFamily = false );
 
         $this->author = new Agent();
 
@@ -394,6 +401,9 @@ class WebPage extends CreativeWork implements iContext
         				if ( ( $o = $oXPath->query( 'Cargo',$oPage ) ) && ( $o->length > 0 ) )
         					$this->cargo            = $o->item(0)->nodeValue;
 
+        				if ( ( $o = $oXPath->query( 'HelpPage',$oPage ) ) && ( $o->length > 0 ) )
+        					$this->helpPage = $o->item(0)->nodeValue;
+
 
         				// commented out because NOT used yet (20201009) $this->Sitemap              = vaesoli::MISC_CastBool(   $oPage->getAttribute( 'sitemap'             ),true  );
         				// commented out because NOT used yet (20201009) $this->Approved             = vaesoli::MISC_CastBool(   $oPage->getAttribute( 'approved'            ),false );
@@ -532,6 +542,131 @@ class WebPage extends CreativeWork implements iContext
     }   /* End of WebPage.readManifest() =========================================== */
     public function readDescription( $szFile ) { return ( $this->readManifest( $szFile ) ); }
     /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*getURL()=
+
+        Get the content of the page (the whole HTML)
+
+        {*params
+        *}
+
+        {*return
+            (self)      The current instance of the class. The result is
+                        put in the %var.content% property
+        *}
+
+        {*warning
+            This method is in development
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function getURL( $szURL = null,$aParams = null )
+    /*---------------------------------------------------*/
+    {
+        $this->content = null;
+
+        $szURL = $szURL ?? $this->url;
+
+        if ( ! empty( $szURL ) )
+        {
+            $this->content = parent::getURL( $szURL,$aParams );
+        }   /* if ( ! empty( $szURL ) ) */
+
+        return ( $this );
+    }   /* End of WebPage.getURL() ==================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*analyze()=
+
+        Ananlyze the content of a web page
+
+        {*params
+        *}
+
+        {*return
+            (self)      The current instance of the class. The result of the analysis is
+                        put in the %var.analysis% property
+        *}
+
+        {*warning
+            This method is in development
+        *}
+
+            $analysis['tags']['html']
+                             ['head']
+                             ['head']['raw']
+                                     ['metas']
+                                     ['links']
+            $analysis['tags']['body']
+                             ['body']['navs']
+            $analysis['scripts']
+            $analysis['styles']
+            $analysis['headings']
+        *}}
+    */
+    /* ================================================================================ */
+    public function analyze()
+    /*----------------------*/
+    {
+        $this->analysis = null;
+
+        if ( ! empty( $this->content ) )
+        {
+            $aStruct = array();
+
+            if ( preg_match( '%<html\b[^>]*>%si',$this->content,$aMatches ) )
+                $aStruct['tags']['html'] = $aMatches[0];
+
+            if ( preg_match( '%<head\b[^>]*>(.*?)</head>%si',$this->content,$aMatches ) )
+            {
+                $aStruct['tags']['head'] = array( 'raw' => $aMatches[0] );
+
+                if ( preg_match_all( '%<meta(\b[^>]*)/>%si',$aStruct['tags']['head']['raw'],$aMatches, PREG_PATTERN_ORDER ) )
+                    $aStruct['tags']['head']['metas'] = $aMatches[0];
+
+                if ( preg_match_all( '%<link(\b[^>]*)/>%si',$aStruct['tags']['head']['raw'],$aMatches, PREG_PATTERN_ORDER ) )
+                    $aStruct['tags']['head']['links'] = $aMatches[0];
+            }
+
+            if ( preg_match( '%<body\b[^>]*>(.*?)</body>%si',$this->content,$aMatches ) )
+            {
+                $szPure = vaesoli::STR_Reduce( vaesoli::STR_commonSpaces( preg_replace( '/<[^>]*>/si',' ',$aMatches[0] ) ),' ' );
+                $aTmp   = vaesoli::STR_sentences( $aMatches[0] );
+
+                foreach( $aTmp as $szSentence )
+                    $aSentences[] = vaesoli::STR_commonSpaces( $szSentence );
+
+                $aStruct['tags']['body'] = array( 'raw'         => $aMatches[0] ,
+                                                  'pure'        => $szPure      ,
+                                                  'sentences'   => $aSentences  ,
+                                                );
+
+                if ( preg_match_all( '%<nav\b[^>]*>(.*?)</nav>%si',$aStruct['tags']['body']['raw'],$aMatches, PREG_PATTERN_ORDER ) )
+                    $aStruct['tags']['body']['navs'] = $aMatches[0];
+            }
+
+            if ( preg_match_all( '%<script\b[^>]*>(.*?)</script>%si'    ,$this->content,$aMatches,PREG_PATTERN_ORDER ) )
+                $aStruct['scripts'] = $aMatches[0];
+
+            if ( preg_match_all( '%<style\b[^>]*>(.*?)</style>%si'      ,$this->content,$aMatches,PREG_PATTERN_ORDER ) )
+                $aStruct['styles'] = $aMatches[0];
+
+            if ( preg_match_all( '%<h([1-6])\b[^>]*>(.*?)</h\g{1}>%si'  ,$this->content,$aMatches,PREG_PATTERN_ORDER ) )
+                $aStruct['headings'] = $aMatches[0];
+
+            $this->analysis = $aStruct;
+        }
+
+        return ( $this );
+    }   /* End of WebPage.analyze() =================================================== */
+    /* ================================================================================ */
+
 
 
     /* ================================================================================ */

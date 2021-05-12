@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,19 +43,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\emailmessage;
+namespace trql\schema;
 
-use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\message\Message       as Message;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\schema\Message    as Message;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'MESSAGE_CLASS_VERSION' ) )
     require_once( 'trql.message.class.php' );
-
-
 
 defined( 'EMAILMESSAGE_CLASS_VERSION' ) or define( 'EMAILMESSAGE_CLASS_VERSION','0.1' );
 
@@ -122,9 +118,7 @@ class EmailMessage extends Message
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of EmailMessage.__construct() ========================================== */
@@ -156,7 +150,5 @@ class EmailMessage extends Message
         $this->necroSignaling();
     }   /* End of EmailMessage.__destruct() =========================================== */
     /* ================================================================================ */
-
 }   /* End of class EmailMessage ====================================================== */
 /* ==================================================================================== */
-?>

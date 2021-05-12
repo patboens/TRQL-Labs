@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -56,13 +54,13 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\project;
+namespace trql\schema;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\organization\Organization         as Organization;
+use trql\schema\organization\Organization   as Organization;
 use \trql\XML\XML                           as XML;
 use \trql\businesscase\BusinessCase         as BusinessCase;
-use \trql\person\Person                     as Person;
+use \trql\schema\Person                     as Person;
 use \trql\budget\Budget                     as Budget;
 use \trql\sprint\Sprint                     as Sprint;
 use \trql\digitaldocument\DigitalDocument   as DigitalDocument;
@@ -193,7 +191,7 @@ class Project extends Organization
         // On ne la charge donc pas d'emblée. On verra plus tard
         // comment faire.
         //$this->oBusinessCase    = new BusinessCase();
-        //$this->oLeader          = new Person();
+        $this->oLeader          = new Person();
         //$this->oBudget          = new Budget();
 
         //var_dump( "Business Case, Leader and Budget created in " . round( ( $tEnd = microtime( true ) ) - $tStart,5 ) . 'sec' );
@@ -488,8 +486,8 @@ class Aspiration extends Project
 
         if ( true && $this->remembering && vaesoli::FIL_File1OlderThanFile2( $szCacheFile,$szFile ) )
         {
-            $tStart = microtime( true );
-            $o      = vaesoli::FIL_getHashFile( $szCacheFile );
+            $tStart     = microtime( true );
+            $o          = vaesoli::FIL_getHashFile( $szCacheFile );
 
             $reflect    = new RF( $this );
             $aProps     = $reflect->getProperties( \ReflectionProperty::IS_PUBLIC      |
@@ -848,7 +846,7 @@ class Aspiration extends Project
     protected function renderDependencies()
     /*-----------------------------------*/
     {
-        $szRetVal = '<h2 class="sectionTitle dependencies">Team</h2>';
+        $szRetVal = '<h2 class="sectionTitle dependencies">Dependencies</h2>';
 
         if ( is_array( $this->aInDependencies ) && count( $this->aInDependencies ) > 0 )
         {
@@ -1070,7 +1068,9 @@ class Aspiration extends Project
         $szRetVal .= "<p>Name: {$this->name}</p>\n";
         $szRetVal .= "<p>CodeName: {$this->szCodeName}</p>\n";
         $szRetVal .= "<p>Budget: {$this->oBudget->value} {$this->oBudget->currency}</p>\n";
-        $szRetVal .= "<p>Led by: {$this->oLeader->givenName} {$this->oLeader->familyName}</p>\n";
+
+        if ( isset( $this->oLeader ) )
+            $szRetVal .= "<p>Led by: {$this->oLeader->givenName} {$this->oLeader->familyName}</p>\n";
         //var_dump( $this );
         $szRetVal .= "<p>Dates: " . date( 'd-m-Y',$this->startDate ) . "&#8212;" . date( 'd-m-Y',$this->endDate ) . "</p>\n";
 
@@ -1113,5 +1113,5 @@ class Aspiration extends Project
         $this->necroSignaling();
     }   /* End of Aspiration.__destruct() ============================================= */
     /* ================================================================================ */
-}
-?>
+}   /* End of class Aspiration ======================================================== */
+/* ==================================================================================== */

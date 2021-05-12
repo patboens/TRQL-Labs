@@ -171,7 +171,7 @@ class Voltaire extends Utility
             return ( vaesoli::FIL_FileToStr( $szFile ) );
         else
             return ( null );
-    }   /* End of SMS.getAPIKey() ===================================================== */
+    }   /* End of Voltaire.getAPIKey() ================================================ */
     /* ================================================================================ */
 
 

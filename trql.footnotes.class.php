@@ -43,7 +43,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\footnotes;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\web\WebPageElement    as WebPageElement;
@@ -69,6 +69,7 @@ defined( 'FOOTNOTES_CLASS_VERSION' ) or define( 'FOOTNOTES_CLASS_VERSION','0.1' 
         the note was added in the first place.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Footnotes extends WebPageElement

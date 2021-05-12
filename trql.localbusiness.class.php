@@ -43,12 +43,12 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\business;
+namespace trql\schema\business;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\quitus\iContext               as iContext;
-use \trql\context\Context               as Context;
-use \trql\organization\Organization     as Organization;
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\quitus\iContext                   as iContext;
+use \trql\context\Context                   as Context;
+use \trql\schema\organization\Organization  as Organization;
 
 use DOMDocument;
 use DOMXPath;

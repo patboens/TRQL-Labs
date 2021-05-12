@@ -19,22 +19,21 @@
 */
 
 /** {{{*fheader
-    {*file                  trql.agent.class.php *}
-    {*purpose               An individual and identifiable entity capable of 
-                            performing actions. *}
+    {*file                  trql.linkeddatastructure.class.php *}
+    {*purpose               A class that handles linked data structures *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
-    {*cdate                 07-03-21 20:46 *}
+    {*cdate                 10-05-21 04:53 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été sous le hêtre et devant l'âtre *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
     -------------------------------------------------------------------------------------
 
     {*chist
-        {*mdate 07-03-21 20:46 *}
+        {*mdate 10-05-21 04:53 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Original creation
@@ -42,35 +41,35 @@
     *}
 
     *}}} */
-
 /****************************************************************************************/
-namespace trql\quitus;
+namespace trql\structures;
 
-use \trql\vaesoli\Vaesoli               as v;
-use \trql\quitus\PersonOrOrganization   as PersonOrOrganization;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\structures\DataStructure      as DataStructure;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'PERSONORORGANIZATION_CLASS_VERSION' ) )
-    require_once( 'trql.personororganization.class.php' );
+if ( ! defined( 'DATASTRUCTURE_CLASS_VERSION' ) )
+    require_once( 'trql.datastructure.class.php' );
 
-defined( 'AGENT_CLASS_VERSION' ) or define( 'AGENT_CLASS_VERSION','0.1' );
+defined( 'LINKEDDATASTRUCTURE_CLASS_VERSION' ) or define( 'LINKEDDATASTRUCTURE_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
-/** {{*class Agent=
+/** {{*class LinkedDataStructure=
 
     {*desc
 
-        An individual and identifiable entity capable of performing actions
+        Data structure which consists of a set of data records (nodes) linked
+        together and organized by references (links or pointers)
 
     *}
 
     *}}
  */
 /* ==================================================================================== */
-class Agent extends PersonOrOrganization
-/*------------------------------------*/
+class LinkedDataStructure extends DataStructure
+/*-------------------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -82,8 +81,10 @@ class Agent extends PersonOrOrganization
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q24229398';      /* {*property   $wikidataId                     (string)                        Wikidata ID. An individual and identifiable 
-                                                                                                                                                    entity capable of performing actions *} */
+    public      $wikidataId                     = 'Q6554356';       /* {*property   $wikidataId                     (string)                        Data structure which consists of a set of data records
+                                                                                                                                                    (nodes) linked together and organized by references 
+                                                                                                                                                    (links or pointers) *} */
+    public      $list                           = null;             /* {*property   $list                           (array)                         Internal list of structured data *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -102,6 +103,11 @@ class Agent extends PersonOrOrganization
 
         {*seealso @fnc.__destruct *}
 
+        {*example
+
+
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -109,13 +115,44 @@ class Agent extends PersonOrOrganization
     /*-----------------------------------------*/
     {
         parent::__construct();
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
-        $this->updateSelf( __CLASS__,
-                           '/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),
-                           $withFamily = false );
+        //$this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
         return ( $this );
-    }   /* End of Agent.__construct() ================================================= */
+    }   /* End of LinkedDataStructure.__construct() =================================== */
+    /* ================================================================================ */
+
+
+    public function reset()
+    /*-------------------*/
+    {
+        return ( reset( $this->list ) );
+    }   /* End of LinkedList.reset() ================================================== */
+    /* ================================================================================ */
+
+
+    public function prev()
+    /*------------------*/
+    {
+        return ( prev( $this->list ) );
+    }   /* End of LinkedList.prev() =================================================== */
+    /* ================================================================================ */
+
+
+    public function next()
+    /*------------------*/
+    {
+        return ( next( $this->list ) );
+    }   /* End of LinkedList.next() =================================================== */
+    /* ================================================================================ */
+
+
+    public function value()
+    /*-------------------*/
+    {
+        return ( current( $this->list )->value );
+    }   /* End of LinkedList.value() ================================================== */
     /* ================================================================================ */
 
 
@@ -131,6 +168,10 @@ class Agent extends PersonOrOrganization
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -142,7 +183,8 @@ class Agent extends PersonOrOrganization
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of Agent.__destruct() ================================================== */
+    }   /* End of LinkedDataStructure.__destruct() ==================================== */
     /* ================================================================================ */
-}   /* End of class Agent ============================================================= */
+}   /* End of class LinkedDataStructure =============================================== */
 /* ==================================================================================== */
+

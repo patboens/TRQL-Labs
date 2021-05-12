@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 08-11-20 13:43:12 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,19 +43,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\lexicalitem;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\lexeme\Lexeme                 as Lexeme;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\quitus\Lexeme     as Lexeme;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'LEXEME_CLASS_VERSION' ) )
     require_once( 'trql.lexeme.class.php' );
-
-
 
 defined( 'LEXICALITEM_CLASS_VERSION' ) or define( 'LEXICALITEM_CLASS_VERSION','0.1' );
 
@@ -71,7 +67,7 @@ defined( 'LEXICALITEM_CLASS_VERSION' ) or define( 'LEXICALITEM_CLASS_VERSION','0
 
     {*doc [url]https://www.wikidata.org/wiki/Q111352[/url] *}
 
-
+    *}}
  */
 /* ==================================================================================== */
 class LexicalItem extends Lexeme
@@ -112,7 +108,7 @@ class LexicalItem extends Lexeme
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         //$this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
@@ -146,7 +142,5 @@ class LexicalItem extends Lexeme
         $this->necroSignaling();
     }   /* End of LexicalItem.__destruct() ============================================ */
     /* ================================================================================ */
-
 }   /* End of class LexicalItem ======================================================= */
 /* ==================================================================================== */
-?>

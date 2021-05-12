@@ -45,7 +45,7 @@
 namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\message\Message   as Message;
+use \trql\schema\Message    as Message;
 use \trql\mother\iAPI       as APIInterface;
 use \trql\html\Form         as Form;
 use \trql\html\Fieldset     as Fieldset;
@@ -65,6 +65,20 @@ if ( ! defined( 'FIELDSET_CLASS_VERSION' ) )
 
 if ( ! defined( 'INPUT_CLASS_VERSION' ) )
     require_once( 'trql.input.class.php' );
+
+if ( ! defined( 'EMAIL_RET_CODES' ) )                               /* If email return codes NOT defined */
+{
+    define( 'EMAIL_RET_CODES'               ,0  );
+
+    define( 'EMAIL_RET_CODE_OK'             ,EMAIL_RET_CODES +   0          );
+    define( 'EMAIL_RET_CODE_NO_RECIPIENT'   ,EMAIL_RET_CODES - 100          );
+    define( 'EMAIL_RET_CODE_MAIL_NOT_SENT'  ,EMAIL_RET_CODES - 200          );
+
+    define( 'SMS_RET_CODE_OK'               ,EMAIL_RET_CODE_OK              );
+    define( 'SMS_RET_CODE_NO_RECIPIENT'     ,EMAIL_RET_CODE_NO_RECIPIENT    );
+    define( 'SMS_RET_CODE_MAIL_NOT_SENT'    ,EMAIL_RET_CODE_MAIL_NOT_SENT   );
+    define( 'SMS_RET_CODE_NO_MESSAGE'       ,SMS_RET_CODE_MAIL_NOT_SENT - 1 );
+}
 
 defined( 'SMS_CLASS_VERSION' ) or define( 'SMS_CLASS_VERSION','0.1' );
 
@@ -131,7 +145,7 @@ class SMS extends Message
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of SMS.__construct() =================================================== */
@@ -161,9 +175,8 @@ class SMS extends Message
         *}
 
         {*example
-            use \trql\vaesoli\Vaesoli       as Vaesoli;
-            use trql\sms\SMS                as SMS;
-
+            use \trql\vaesoli\Vaesoli   as Vaesoli;
+            use trql\quitus\SMS         as SMS;
 
             if ( ! defined( 'SMS_CLASS_VERSION' ) )
                 require_once( vaesoli::FIL_ResolveRoot( '/snippet-center/trql.sms.class.php' ) );
@@ -369,6 +382,25 @@ class SMS extends Message
     /* ================================================================================ */
 
 
+    public function sendEx(...$params ) : int
+    /*-------------------------------------*/
+    {
+        $iRetVal = EMAIL_RET_CODE_OK;                               /* Return value of the method */
+
+        if ( empty( $this->phoneNumber ) )                          /* If no recipient */
+            return ( SMS_RET_CODE_NO_RECIPIENT );                   /* Return error */
+
+        if ( empty( $this->message ) )                              /* If no body */
+            return ( SMS_RET_CODE_MAIL_NOT_SENT );                  /* Return error */
+
+        if ( $this->send( $this->message,$this->phoneNumber ) )
+            $iRetVal = EMAIL_RET_CODE_OK;
+
+        return ( $iRetVal );
+    }   /* End of SMS.send() ========================================================== */
+    /* ================================================================================ */
+
+
     /* ================================================================================ */
     /** {{*getAPIKey()=
 
@@ -454,6 +486,75 @@ class SMS extends Message
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__get( $szVar )=
+
+        Used for reading data from inaccessible (protected or private) or
+        non-existing properties.
+
+        {*params
+            $szVar      (string)        The name of the properties to access
+        *}
+
+        {*return
+            (mixed)     The value of [c]@param.szVar[/c] or throwing an exception if
+                        [c]@param.szVar[/c] NOT found.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __get( $szVar )
+    /*---------------------------*/
+    {
+        switch ( $szVar )
+        {
+            case 'szTo'         :
+            case 'To'           :
+            case 'to'           :   return ( $this->phoneNumber );
+            case 'szBody'       :   return ( $this->message );
+            default             :   throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": {$szVar} UNKNOWN (ErrCode: " . EXCEPTION_CODE_INVALID_PROPERTY . ")",EXCEPTION_CODE_INVALID_PROPERTY );
+        }   /* switch ( $szVar ) */
+    }   /* End of SMS.__get() ========================================================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*__set( $szVar,$x )=
+
+        Used for setting data of inaccessible (protected or private) or
+        non-existing properties.
+
+        {*params
+            $szVar      (string)        The name of the properties to access
+            $x          (mixed)         The value to assign to @param.szVar
+        *}
+
+        {*return
+            (self)      Returns the current instance of the class
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __set( $szVar,$x )
+    /*------------------------------*/
+    {
+        switch ( $szVar )
+        {
+            case 'szTo'         :
+            case 'To'           :
+            case 'to'           :   $this->phoneNumber  = $x;
+                                    break;
+            case 'szBody'       :   $this->message      = $x;
+                                    break;
+            default             :   throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": UNKNOWN PROPERTY '{$szVar}' (ErrCode: " . EXCEPTION_CODE_INVALID_PROPERTY . ")",EXCEPTION_CODE_INVALID_PROPERTY );
+        }   /* switch ( $szVar ) */
+
+        return ( $this );
+    }   /* End of SMS.__set() ========================================================= */
+    /* ================================================================================ */
+
 
     /* ================================================================================ */
     /** {{*__destruct()=
@@ -480,8 +581,5 @@ class SMS extends Message
         $this->necroSignaling();
     }   /* End of SMS.__destruct() ==================================================== */
     /* ================================================================================ */
-
 }   /* End of class SMS =============================================================== */
 /* ==================================================================================== */
-
-?>

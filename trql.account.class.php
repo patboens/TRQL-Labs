@@ -26,7 +26,7 @@
     {*cdate                 08-03-21 07:06 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -43,11 +43,11 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\account;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli                               as v;
-use \trql\financialproduct\FinancialProduct             as FinancialProduct;
-use \trql\ledger\Ledger                                 as Ledger;
+use \trql\vaesoli\Vaesoli                       as v;
+use \trql\financialproduct\FinancialProduct     as FinancialProduct;
+use \trql\ledger\Ledger                         as Ledger;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -148,7 +148,7 @@ class Account extends FinancialProduct
     /*--------------------------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         $this->identifier   = $szID     ?? null;
         $this->szFolder     = $szFolder ?? null;

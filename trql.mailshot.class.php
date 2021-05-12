@@ -48,6 +48,7 @@ namespace trql\quitus;
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\quitus\Advertizing    as Advertizing;
 use \trql\quitus\Email          as Email;
+use \trql\quitus\SMS            as SMS;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -57,6 +58,9 @@ if ( ! defined( 'ADVERTIZING_CLASS_VERSION' ) )
 
 if ( ! defined( 'EMAIL_CLASS_VERSION' ) )
     require_once( 'd:/websites/snippet-center/trql.email.class.php' );
+
+if ( ! defined( 'SMS_CLASS_VERSION' ) )
+    require_once( 'd:/websites/snippet-center/trql.sms.class.php' );
 
 defined( 'MAILSHOT_CLASS_VERSION' ) or define( 'MAILSHOT_CLASS_VERSION','0.1' );
 
@@ -92,6 +96,9 @@ class Mailshot extends Advertizing
 
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = 'Q10392175';      /* {*property   $wikidataId                     (string)                        Wikidata ID. Sending mass mailings *} */
+    protected   $type                           = 'mail';           /* {*property   $type                           (string)                        Can be 'mail' and 'sms' *} */
+    protected   $mode                           = 'test';           /* {*property   $mode                           (string)                        Either 'test' or 'live'.  *} */
+    protected   $redirectTo                     = null;             /* {*property   $redirectTo                     (string)                        The email address that must be used when operating in 'test' mode *} */
 
 
     /* ================================================================================ */
@@ -122,16 +129,70 @@ class Mailshot extends Advertizing
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of Mailshot.__construct() ============================================== */
     /* ================================================================================ */
 
 
+    protected function createEmailAndSettings( $szSubject )
+    /*---------------------------------------------------*/
+    {
+        $oEmail                 = new Email();
+
+        $oEmail->szMailType     = 'text/html';
+        $oEmail->szCharset      = 'UTF-8';
+
+        /* THIS SHOULD NOT BE HERE : IT'S CONFIGURATION */
+        if ( gethostname() === 'WIN-K5BC2JA5270' )
+            $oEmail->szHost     = 'localhost';
+        else
+            $oEmail->szHost     = 'relay.skynet.be';
+
+        $oEmail->iPort          = 25;
+
+        /* THIS SHOULD NOT BE IN HERE : IT SHOULD COME FROM PARAMETERS OF THE MAILSHOT OBJECT */
+        $oEmail->szDomain       = 'divincaprice.be';
+        $oEmail->szFromEmail    = 'noreply@divincaprice.be';
+        $oEmail->szFromName     = 'Divin Caprice';
+        $oEmail->szSubject      = $szSubject;
+
+        return ( $oEmail );
+    }   /* End of Mailshot.__construct() ============================================== */
+    /* ================================================================================ */
+
+
+    protected function applySubstitutions( $szTemplate,$aSubstitutions,$aRecipient )
+    /*----------------------------------------------------------------------------*/
+    {
+        $szRetVal = $szTemplate;
+
+        foreach( $aSubstitutions as $aSubst )
+        {
+            $szPattern  = $aSubst['pattern'];
+            $szValue    = '';
+
+            if     ( ! empty( $aSubst['field'] ) )
+            {   $szField = $aSubst['field'];
+                $szValue = $aRecipient[$szField];
+            }
+            elseif ( ! empty( $aSubst['value'] ) )
+                $szValue = $aSubst['value'];
+            elseif ( ! empty( $aSubst['func'] ) )
+                $szValue = ($aSubst['func'])( $szPattern,$aRecipient );
+
+            $szRetVal = str_replace( $szPattern,$szValue,$szRetVal );
+        }
+
+        return ( $szRetVal );
+    }   /* End of Mailshot.applySubstitutions() ======================================= */
+    /* ================================================================================ */
+
+
     /* ================================================================================ */
     /* ================================================================================ */
-    /** {{*send( $aRecipients,$aSlots,$szTemplate,$aSubstitutions,$szMailshotType = 'M' )=
+    /** {{*send( $aRecipients,$szSubject,$szTemplate,$aSubstitutions,$szMailshotType = 'M' )=
 
         Send mass mailing OR Short Text Messages
 
@@ -142,13 +203,10 @@ class Mailshot extends Advertizing
                                         phone numbers MUST be provided in the
                                         @param.aRecipients['phone'] slot and MUST be
                                         capable of receiving SMS.
-            $aSlots         (array)     [c]array( 'mail'   => 'email'  ,[br]
-                                                  'sms'    => 'phone'  ,[br]
-                                             )[/c][br]
+            $szSubject      (string)    The subject of the mail to be sent.
             $szTemplate     (string)    The template to use for the mass sending.
-            $aSubstitutions (array)     TO BE DEFINED
-            $szMailshotType (string)    '[c]M[/c]' for mass mailing (default)[br]
-                                        '[c]S[/c]' for mass ShortText Messages;[br]
+            $aSubstitutions (array)     An array of substitutions that must be applied
+                                        on the template (mail merge)
         *}
 
         {*warning
@@ -173,140 +231,165 @@ class Mailshot extends Advertizing
         *}}
     */
     /* ================================================================================ */
-    public function send( $aRecipients,$aSlots,$szTemplate,$aSubstitutions,$szMailshotType = 'M' )
-    /*------------------------------------------------------------------------------------------*/
+    public function send( $aRecipients,$szSubject,$szTemplate,$aSubstitutions )
+    /*-----------------------------------------------------------------------*/
     {
-        $iCount = 0;
-        $aProblems = null;
+        $iCount     = 0;
+        $aProblems  = null;
 
-        $szMailshotType = strtoupper( trim( substr( $szMailshotType,0,1 ) ) );
-
-        // If invalid type ... consider this to be Mass Mailing (emails)
-        if ( $szMailshotType !== 'M' && $szMailshotType !== 'S' )
-            $szMailshotType = 'M';
-
-        $szTheSlot = ( $szMailshotType === 'S' ? 'sms' : 'mail' );
-        var_dump( $szTheSlot );
-
-        //if ( $szMailshotType === 'M' )
-        //{
-        //    $oEmail = new Email();
-        //
-        //    $oEmail->szMailType     = 'text/html';
-        //    $oEmail->szCharset      = 'UTF-8';
-        //    $oEmail->szHost         = 'localhost';
-        //    $oEmail->szHost         = 'relay.skynet.be';
-        //    $oEmail->szHost         = 'localhost';
-        //    $oEmail->iPort          = 25;
-        //    $oEmail->szFromName     = 'Divin Caprice';
-        //    $oEmail->szDomain       = 'divincaprice.be';
-        //    $oEmail->szFromEmail    = 'noreply@divincaprice.be';
-        //    $oEmail->szFromName     = 'TRQL Quitus';
-        //    $oEmail->szTo           = 'info@divincaprice.be';
-        //    $oEmail->szTo           = 'pb@trql.fm,info@divincaprice.be';
-        //    $oEmail->szTo           = 'pb@trql.fm';
-        //    $oEmail->szTo           = 'jessica.hendrickx@hotmail.fr,pb@trql.fm,info@divincaprice.be';
-        //    $oEmail->szTo           = 'pb@trql.fm';
-        //    $oEmail->szTo           = 'pb@trql.fm,info@divincaprice.be';
-        //    $oEmail->szCC           = 'pb@trql.fm';
-        //    //$oEmail->szTo           = 'pb@trql.fm';
-        //    $oEmail->szSubject      = utf8_decode( 'Take-Away Pâques' );
-        //    $oEmail->szSubject      = 'Menu Take-Away de Pâques';
-        //}
+        // $oMedium is either a 'mail' or an 'sms'
+        if ( $this->type === 'mail' )
+            $oMedium = $this->createEmailAndSettings( $szSubject = 'Menu Fête des Mères' );
+        else
+            $oMedium = new SMS();
 
         $i = 0;
 
-        foreach( $aRecipients as $key => $aRecipient )
+        //var_dump( $oMedium );
+
+        if ( $this->type === 'mail' )
+            $szFnc = 'send';
+        else
+            $szFnc = 'sendEx';
+
+        /* All messages go to the same recipient (redirectTo) if we're in test mode */
+        if ( $this->mode === 'test' )
         {
-            // If the "field" we're looking for (either 'mail' or 
-            // 'sms') does not exist in the $aSlots array, there
-            // is no way for us to determine which field in 
-            // $aRecipients we're looking for ... continue
-            // looping
-            if ( is_null( $aSlots[ $szTheSlot ] ?? null ) )
-                continue;
+            if ( is_null( $this->redirectTo ) )
+                throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": invalid 'redirectTo' in test mode (ErrCode: 12345)",12345 );
 
-            //if ( ++$i <= 480 )
-            //    continue;
+            $oMedium->szTo = $this->redirectTo;
+        }   /* if ( $this->mode === 'test' ) */
 
-            //if ( $i > 480 )
-            //    break;
+        //var_dump( $oMedium );
+        //$this->die();
 
-            //$szBody = $szTemplate;
-            //$szBody = str_replace( '%key%',$key,$szBody );
+        foreach ( $aRecipients as $key => $aRecipient )
+        {
+            $oMedium->szBody = $this->applySubstitutions( $szTemplate,$aSubstitutions,$aRecipient );
+            //var_dump( $oMedium );
 
-            //foreach( $aSubstitutions as $aSubst )
-            //{
-            //    $szPattern  = $aSubst['pattern'];
-            //    $szValue    = '';
-            //
-            //    if     ( ! empty( $aSubst['field'] ) )
-            //    {   $szField = $aSubst['field'];
-            //        $szValue = $aRecipient[$szField];
-            //    }
-            //    elseif ( ! empty( $aSubst['value'] ) )
-            //        $szValue = $aSubst['value'];
-            //    elseif ( ! empty( $aSubst['func'] ) )
-            //        $szValue = ($aSubst['func'])( $szPattern,$aRecipient );
-            //
-            //    $szBody = str_replace( $szPattern,$szValue,$szBody );
-            //}
+            if ( $this->mode === 'live' )
+                $oMedium->szTo = $aRecipient['destination'];
 
-            $szMail     = $aRecipient[ $aSlots['mail'] ];
-            $szPhone    = $aRecipient[ $aSlots['sms'] ];
+            if ( $this->type === 'mail' )
+                $this->die( "IL FAUT REVOIR LE FONCTIONNEMENT DE MAILSHOT AVEC LE MAIL" );
 
-            var_dump( $key,$szMail,$szPhone );
-            //echo htmlentities( $szBody );
-
-            //$oEmail->szTo = $szMail;
-
-            if ( $szMailshotType === 'M' && $szMail !== 'bresson.72@gmail.com' && $i > 97 )
+            // Envoyé à +32477230721
+            try
             {
-                $oEmail->szBody = $szBody;
+                //$this->die( "STOP 1 LINE BEFORE SEND(). THE BEST THING TO DO WOULD BE THAT THE SEND() METHOD WORKS THE SAME FOR AN EMAIL AND AN SMS!!! {$oMedium->szTo}" );
 
-                //try 
-                //{
-                //    // Parfois j'obtiens ... Warning: mail(): SMTP server response: 452 Too many recipients received this hour in D:\websites\snippet-center\trql.email.class.php on line 569
-                //    if ( $oEmail->send() !== EMAIL_RET_CODE_OK )
-                //    {
-                //        $aProblems[] = $aRecipient;
-                //        echo "<p>PROBLEM with {$aRecipient['email']}</p>\n";
-                //    }
-                //    else
-                //    {
-                //        $iCount++;
-                //    }
-                //}
-                //catch ( exception $e)
-                //{
-                //    $aProblems[] = $aRecipient;
-                //    echo "<p>PROBLEM with {$aRecipient['email']}</p>\n";
-                //    echo 'Exception reçue : ',  $e->getMessage(), "\n";
-                //}
+                //if ( $oMedim->send() !== EMAIL_RET_CODE_OK )
+                if ( $oMedium->$szFnc() !== EMAIL_RET_CODE_OK )
+                {
+                    $aProblems[] = $aRecipient;
+                    /* NO MESSAGE SHOULD APPEAR IN HERE. THE CLASS MUST BE SILENT */
+                    echo "<p>PROBLEM with {$aRecipient['email']}</p>\n";
+                }
+                else
+                {
+                    /* NO MESSAGE SHOULD APPEAR IN HERE. THE CLASS MUST BE SILENT */
+                    var_dump( "Message #" . $i . ' sent to ' . $aRecipient[ 'destination'] . " ({$aRecipient['lastname']})" );
+                    $iCount++;
+                }
+            }
+            catch ( exception $e)
+            {
+                $aProblems[] = $aRecipient;
+                /* NO MESSAGE SHOULD APPEAR IN HERE. THE CLASS MUST BE SILENT */
+                echo "<p>PROBLEM with {$aRecipient['email']}</p>\n";
+                echo 'Exception reçue : ',  $e->getMessage(), "\n";
             }
 
-            var_dump( "Mail #" . $i );
+            /* NO MESSAGE SHOULD APPEAR IN HERE. THE CLASS MUST BE SILENT */
             echo "<hr />";
             ob_flush();
             flush();
+            $i++;
 
-            //usleep( mt_rand( 30000,3000000 ) );
-
-            //break;
-        }
-
-        //if ( ! is_null( $aProblems ) )
-        //{
-        //    var_dump( count( $aProblems ) . ' problems found sending the mails',$aProblems );
-        //
-        //    if ( @V::saveHashFile( $szOutput = v::FIL_RealPath( $szDir . '/mail.problems.hash' ),$aProblems ) )
-        //        var_dump( "PROBLEMS SAVED TO {$szOutput}" );
-        //    else
-        //        var_dump( "PROBLEMS CANNOT BE SAVED TO {$szOutput}" );
-        //}
+            //if ( $i > 1 )
+            //    break;
+        }   /* foreach ( $aRecipients ... ) */
 
         return ( $iCount );
     }   /* End of Mailshot.send() ===================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*__get( $szVar )=
+
+        Used for reading data from inaccessible (protected or private) or
+        non-existing properties.
+
+        {*params
+            $szVar      (string)        The name of the properties to access
+        *}
+
+        {*return
+            (mixed)     The value of [c]$szVar[/c] or throwing an exception if
+                        [c]$szVar[/c] NOT found.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __get( $szVar )
+    /*---------------------------*/
+    {
+        switch ( $szVar )
+        {
+            case 'mode'         :   return ( $this->mode        );
+            case 'redirectTo'   :   return ( $this->redirectTo  );
+            default             :   throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": UNKNOWN PROPERTY '{$szVar}' (ErrCode: " . EXCEPTION_CODE_INVALID_PROPERTY . ")",EXCEPTION_CODE_INVALID_PROPERTY );
+        }   /* switch ( $szVar ) */
+    }   /* End of Mailshot.__get() ==================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*__set( $szVar,$x )=
+
+        Used for setting data of inaccessible (protected or private) or
+        non-existing properties.
+
+        {*params
+            $szVar      (string)        The name of the properties to access
+            $x          (mixed)         The value to assign to @param.szVar
+        *}
+
+        {*return
+            (self)      Returns the current instance of the class
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __set( $szVar,$x )
+    /*------------------------------*/
+    {
+        switch ( $szVar )
+        {
+            case 'mode'         :   $szMode = strtolower( trim( $x ) );
+
+                                    if ( $szMode === 'test' || $szMode === 'live' )
+                                        $this->mode = $szMode;
+
+                                    break;
+            case 'type'         :   $szType = strtolower( trim( $x ) );
+
+                                    if ( $szType === 'mail' || $szType === 'sms' )
+                                        $this->type = $szType;
+
+                                    break;
+            case 'redirectTo'   :   $this->redirectTo = $x;
+                                    break;
+            default             :   throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": UNKNOWN PROPERTY '{$szVar}' (ErrCode: " . EXCEPTION_CODE_INVALID_PROPERTY . ")",EXCEPTION_CODE_INVALID_PROPERTY );
+        }   /* switch ( $szVar ) */
+
+        return ( $this );
+    }   /* End of Mailshot.__set() ==================================================== */
     /* ================================================================================ */
 
 

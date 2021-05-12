@@ -62,10 +62,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\bankaccount;
+namespace trql\schema;
 
 use \trql\vaesoli\Vaesoli                               as v;
-use \trql\account\Account                               as Account;
+use \trql\quitus\Account                                as Account;
 use \trql\financialproduct\FinancialProduct             as FinancialProduct;
 use \trql\ledger\Ledger                                 as Ledger;
 use \trql\personororganization\PersonOrOrganization     as PersonOrOrganization;
@@ -182,7 +182,7 @@ class BankAccount extends Account
     /*--------------------------------------------------------*/
     {
         parent::__construct( $szID,$szFolder );
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of BankAccount.__construct() =========================================== */

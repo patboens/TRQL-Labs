@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 05-01-21 10:10 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,7 +43,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\catalog;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
 use \trql\collection\Collection             as Collection;
@@ -140,8 +139,5 @@ class Catalog extends Collection
         $this->necroSignaling();
     }   /* End of Catalog.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class Catalog =========================================================== */
 /* ==================================================================================== */
-
-?>

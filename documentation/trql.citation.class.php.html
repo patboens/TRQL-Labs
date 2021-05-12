@@ -49,11 +49,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <div class="trql_documentor_DocumentorSourceFile">
 <section class="header">
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.citation.class.php</span>
-<span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\citation</code></span>
-<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\quitus\Mother as Mother,\trql\quitus\iContext as iContext,\trql\vaesoli\Vaesoli as Vaesoli,\trql\schema\creativework\CreativeWork as Creativework,DOMDocument; use DOMXPath; if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) ) require_once( 'trql.mother.cl as s</code></span>
+<span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\schema</code></span>
+<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\quitus\Mother as Mother,\trql\quitus\iContext as iContext,\trql\vaesoli\Vaesoli as V,\trql\schema\creativework\CreativeWork as Creativework,DOMDocument; use DOMXPath; if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) ) require_once( 'trql.mother.cl as s</code></span>
 <span class="DocumentorLabel">Purpose: </span><span class="property purpose">A quotation. Often but not necessarily from some written work,
  attributable to a real world author and - if associated with
- a fictional character - to any fictional <code>Person</code>. Use 
+ a fictional character - to any fictional <code>Person</code>. Use
  <code>isBasedOn</code> to link to source/origin. The <code>recordedIn</code>
  property can be used to reference a Quotation from an Event.</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
@@ -64,7 +64,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
                             <a href="http://www.latosensu.be" class="DocumentorLink" title="Go to http://www.latosensu.be" itemprop="url">http://www.latosensu.be</a><br />
                             Vae Soli! : <a href="http://www.vaesoli.org" class="DocumentorLink" title="Go to http://www.vaesoli.org" itemprop="url">http://www.vaesoli.org</a></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">15-08-20 10:14</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">30/03/2021 - 11:23:35</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">07/04/2021 - 06:08:01</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Submitted to intellectual property rights (see
                             author)</span>
 </section> <!-- .header -->
@@ -200,6 +200,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="name" id="var.alternativeHeadline"><code>$alternativeHeadline</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">A secondary title of the <code><a href="?src=CreativeWork">CreativeWork</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.aQuotations"><code>$aQuotations</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Array of quotations (filled after a call to <code>load()</code></td>
 </tr>
 <tr class="property">
 <td class="name" id="var.associatedMedia"><code>$associatedMedia</code></td>
@@ -704,7 +709,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.spokenByCharacter"><code>$spokenByCharacter</code></td>
 <td class="type"><code>Organization|Person</code></td>
-<td class="description">The (e.g. fictional) character, Person or Organization to whom 
+<td class="description">The (e.g. fictional) character, Person or Organization to whom
  the quotation is attributed within the containing CreativeWork.</td>
 </tr>
 <tr class="property">
@@ -719,6 +724,26 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="type"><code>CreativeWork|Event</code></td>
 <td class="description">A <code><a href="?src=CreativeWork">CreativeWork</a></code> or <code><a href="?src=Event">Event</a></code> about this <code><a href="?src=Thing">Thing</a></code>. 
  Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szCallbackPost"><code>$szCallbackPost</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Post-block callback - played back AFTER citation rendering. NOT USED FOR NOW.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szCallbackPre"><code>$szCallbackPre</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Pre-block callback - played back BEFORE citation rendering. NOT USED FOR NOW.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szGUID"><code>$szGUID</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">GUID of the citation</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szLang"><code>$szLang</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Language that must be taken into account</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.temporal"><code>$temporal</code></td>
@@ -799,8 +824,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">Wikidata ID. Distinct artistic creation such as
- artwork, literature, music, and paintings.</td>
+<td class="description">Wikidata ID. Reference to a source.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.workExample"><code>$workExample</code></td>

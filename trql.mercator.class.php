@@ -43,7 +43,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\mercator;
+namespace trql\quitus;
 
 use \trql\quitus\Mother                             as Mother;
 use \trql\quitus\iContext                           as iContext;
@@ -535,6 +535,7 @@ class Mercator extends Utility implements iContext
         if ( is_null( $szSecret ) )
             $szSecret = $this->getAPIKey( 'geonames' );
 
+        //var_dump( "SECRET:" . $szSecret );
         $szParams = '';
 
         foreach ( $aParams as $szKey => $xValue )
@@ -1740,20 +1741,20 @@ class Mercator extends Utility implements iContext
     public function search( $szTerm )
     /*-----------------------------*/
     {
-        $aRetVal            = null;
+        $aRetVal = null;
 
         if      ( is_string( $szTerm ) )
             $aParams['q'] = trim( $szTerm );
         elseif ( is_array( $szTerm ) )
             $aParams      = $szTerm;
 
-        $aParams['maxRows'  ] = min( $aParams['maxRows'] ?? 1000,1000 );/* Default number of results returned */
-        $aParams['style'    ] =      $aParams['style'] ?? 'full';   /* Default verbosity */
-        $aParams['service'  ] = 'search-geoCodeAddress';            /* THIS service (with a variation) */
+        $aParams['maxRows'] = min( $aParams['maxRows'] ?? 1000,1000 );/* Default number of results returned */
+        $aParams['style'  ] =      $aParams['style'] ?? 'full';   /* Default verbosity */
+        $aParams['service'] = 'search-geoCodeAddress';            /* THIS service (with a variation) */
 
         $szCacheFile        = $this->cacheName( __METHOD__,$aParams );
 
-        if ( false && $this->remembering && is_file( $szCacheFile ) )
+        if ( true && $this->remembering && is_file( $szCacheFile ) )
         {
             $aRetVal = $this->getCache( $szCacheFile );
             $this->addInfo( __METHOD__ . "(): data obtained from {$szCacheFile}" );
@@ -1761,6 +1762,7 @@ class Mercator extends Utility implements iContext
         }   /* if ( is_file( $szCacheFile ) ) */
         else    /* Else of ... if ( is_file( $szCacheFile ) ) */
         {
+            //var_dump( "Looking for {$szTerm}" );
             if ( is_string( $szTerm ) && strlen( $szTerm ) <= 3 )
             {
                 //$this->echo( "Probablement un code pays\n" );
@@ -1781,6 +1783,7 @@ class Mercator extends Utility implements iContext
             // Si résultat vide OU si recherche infructueuse
             if ( empty( $szXML = $this->call( $szService = 'search',$aParams ) ) || vaesoli::STR_iPos( $szXML,'<totalResultsCount>0</totalResultsCount>' ) !== -1 )
             {
+                //var_dump( "Empty XML #1" );
                 $this->addInfo( __METHOD__ . "(): switching to geoCodeAddress" );
                 $szXML = $this->call( $szService = 'geoCodeAddress',$aParams );
                 //var_dump( $szXML );
@@ -1788,7 +1791,8 @@ class Mercator extends Utility implements iContext
             }
             else
             {
-                //var_dump( "PAS VIDE" );
+                //var_dump( "XML NOT EMPTY" );
+                //var_dump( $aParams );
                 //var_dump( $szXML );
             }
 

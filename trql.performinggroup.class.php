@@ -51,13 +51,12 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\organization;
+namespace trql\schema\organization;
 
-use \trql\quitus\iContext               as iContext;
-use \trql\context\Context               as Context;
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\organization\Organization     as Organization;
-
+use \trql\quitus\iContext                   as iContext;
+use \trql\context\Context                   as Context;
+use \trql\vaesoli\Vaesoli                   as Vaesoli;
+use \trql\schema\organization\Organization  as Organization;
 
 use DOMDocument;
 use DOMXPath;
@@ -124,7 +123,7 @@ class PerformingGroup extends Organization implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of PerformingGroup.__construct() ======================================= */

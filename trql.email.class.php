@@ -156,7 +156,7 @@ class Email extends Utility
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of Email.__construct() ================================================= */
@@ -564,7 +564,7 @@ class Email extends Utility
 
         $szHeaders  = $this->buildHeaders( $szFromEmail );
         //var_dump( $szHeaders );
-        //var_dump( $this->szTo );
+        //var_dump( $this->szTo,$this->szCC,$this->szBCC );
 
         if ( mail( $this->szTo,$this->szSubject,$this->szBody,$szHeaders ) )
         {

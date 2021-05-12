@@ -26,7 +26,7 @@
     {*cdate                 21-11-20 14:18:24 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été sous le hêtre *}
+    {*UTF-8                 Quel bel Ã©tÃ© sous le hÃªtre *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -72,10 +72,9 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
-namespace trql\reference;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\web\WebPageElement    as WebPageElement;
