@@ -26,7 +26,7 @@
     {*cdate                 06-01-21 19:23 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -42,7 +42,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\taskboard;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli           as Vaesoli;
 use \trql\schema\Thing               as Thing;
@@ -227,11 +227,12 @@ class TaskBoard extends Thing
 
 
     /* ================================================================================ */
-    /** {{*__toHTML()=
+    /** {{*__toHTML( [$szID] )=
 
         Renders the taskboard in HTML
 
         {*params
+            $szID       (string)        Optional ID of the whole HTML section
         *}
 
         {*return
@@ -241,134 +242,158 @@ class TaskBoard extends Thing
         *}}
     */
     /* ================================================================================ */
-    public function __toHTML(): string
-    /*------------------------------*/
+    public function __toHTML( $szID = null ): string
+    /*--------------------------------------------*/
     {
         $szRetVal  = '';
 
         if ( is_array( $this->aColumns ) && count( $this->aColumns ) > 0 )
         {
-            if ( ! is_null( $this->szECMAScript ) )
+            if ( is_null( $szID ) )
+                $szID = "wholeTaskboard";
+
+            $szRetVal .= "\n\n<div id=\"{$szID}\">\n";
             {
-                // Parse 
-                $aSrc = explode( ';',str_replace( ',',';',$this->szECMAScript ) );
+                if ( ! is_null( $this->szECMAScript ) )
+                {
+                    // Parse
+                    $aSrc = explode( ';',str_replace( ',',';',$this->szECMAScript ) );
 
-                foreach ( $aSrc as $szJS )
-                    $szRetVal .= "<script src=\"" . trim( $szJS ) . "\"></script>\n";
-            }
+                    foreach ( $aSrc as $szJS )
+                        $szRetVal .= "<script src=\"" . trim( $szJS ) . "\"></script>\n";
+                }
 
-            //$szRetVal .= "<script>\n";
-            //    $szRetVal .= "function dropHandler( ev )\n";
-            //    $szRetVal .= "{\n";
-            //        $szRetVal .= "ev.stopPropagation();\n";
-            //
-            //        $szRetVal .= "let oSource = document.getElementById( ev.dataTransfer.getData('text') );\n";
-            //        $szRetVal .= "let oTarget = ev.target;\n";
-            //
-            //        //$szRetVal .= "console.log( 'DROP' );\n";
-            //        //$szRetVal .= "console.log( 'ID source: ' + szID );\n";
-            //        //$szRetVal .= "console.log( 'EVENT: ',ev );\n";
-            //        $szRetVal .= "console.log( oSource );\n";
-            //        $szRetVal .= "console.log( oTarget );\n";
-            //        $szRetVal .= "console.log( oTarget.nodeName );\n";
-            //
-            //        $szRetVal .= "if ( oSource && oTarget.nodeName === 'TD' )\n";
-            //        //$szRetVal .= "if ( oSource )\n";
-            //        $szRetVal .= "{\n";
-            //        //$szRetVal .= "    console.log( 'PHASE DE LA SOURCE SOURCE: ' + o.getAttribute('data-phase') );\n";
-            //        //$szRetVal .= "    console.log( 'PHASE DU TARGET: ' + ev.target.getAttribute('data-phase') );\n";
-            //
-            //        // Mettre la phase à la valeur de la phase de la colonne TARGET
-            //        $szRetVal .= "    oSource.setAttribute( 'data-phase',ev.target.getAttribute('data-phase') );\n";
-            //
-            //        $szRetVal .= "    console.log( 'NOUVELLE PHASE DU TARGET: ' + oTarget.getAttribute('data-phase') );\n";
-            //
-            //        // Ajouter la source dans la zone target
-            //        $szRetVal .= "    oTarget.innerHTML += oSource.outerHTML;\n";
-            //        // Supprimer la source (puisqu'elle vient d'être déplacée dans la zone target)
-            //        $szRetVal .= "    oSource.outerHTML = '';\n";
-            //        $szRetVal .= "}\n";
-            //    $szRetVal .= "}\n";
-            //
-            //    $szRetVal .= "function allowDrop( ev )\n";
-            //    $szRetVal .= "{\n";
-            //        $szRetVal .= "ev.preventDefault();\n";
-            //    $szRetVal .= "}\n";
-            //
-            //    $szRetVal .= "function drag( ev,szID )\n";
-            //    $szRetVal .= "{\n";
-            //        $szRetVal .= "console.log('IN drag()');\n";
-            //        $szRetVal .= "console.log(' IN drag()');\n";
-            //        $szRetVal .= "ev.dataTransfer.setData( 'text',szID );\n";
-            //    $szRetVal .= "}\n";
-            //
-            //$szRetVal .= "</script>\n";
+                //$szRetVal .= "<script>\n";
+                //    $szRetVal .= "function dropHandler( ev )\n";
+                //    $szRetVal .= "{\n";
+                //        $szRetVal .= "ev.stopPropagation();\n";
+                //
+                //        $szRetVal .= "let oSource = document.getElementById( ev.dataTransfer.getData('text') );\n";
+                //        $szRetVal .= "let oTarget = ev.target;\n";
+                //
+                //        //$szRetVal .= "console.log( 'DROP' );\n";
+                //        //$szRetVal .= "console.log( 'ID source: ' + szID );\n";
+                //        //$szRetVal .= "console.log( 'EVENT: ',ev );\n";
+                //        $szRetVal .= "console.log( oSource );\n";
+                //        $szRetVal .= "console.log( oTarget );\n";
+                //        $szRetVal .= "console.log( oTarget.nodeName );\n";
+                //
+                //        $szRetVal .= "if ( oSource && oTarget.nodeName === 'TD' )\n";
+                //        //$szRetVal .= "if ( oSource )\n";
+                //        $szRetVal .= "{\n";
+                //        //$szRetVal .= "    console.log( 'PHASE DE LA SOURCE SOURCE: ' + o.getAttribute('data-phase') );\n";
+                //        //$szRetVal .= "    console.log( 'PHASE DU TARGET: ' + ev.target.getAttribute('data-phase') );\n";
+                //
+                //        // Mettre la phase à la valeur de la phase de la colonne TARGET
+                //        $szRetVal .= "    oSource.setAttribute( 'data-phase',ev.target.getAttribute('data-phase') );\n";
+                //
+                //        $szRetVal .= "    console.log( 'NOUVELLE PHASE DU TARGET: ' + oTarget.getAttribute('data-phase') );\n";
+                //
+                //        // Ajouter la source dans la zone target
+                //        $szRetVal .= "    oTarget.innerHTML += oSource.outerHTML;\n";
+                //        // Supprimer la source (puisqu'elle vient d'être déplacée dans la zone target)
+                //        $szRetVal .= "    oSource.outerHTML = '';\n";
+                //        $szRetVal .= "}\n";
+                //    $szRetVal .= "}\n";
+                //
+                //    $szRetVal .= "function allowDrop( ev )\n";
+                //    $szRetVal .= "{\n";
+                //        $szRetVal .= "ev.preventDefault();\n";
+                //    $szRetVal .= "}\n";
+                //
+                //    $szRetVal .= "function drag( ev,szID )\n";
+                //    $szRetVal .= "{\n";
+                //        $szRetVal .= "console.log('IN drag()');\n";
+                //        $szRetVal .= "console.log(' IN drag()');\n";
+                //        $szRetVal .= "ev.dataTransfer.setData( 'text',szID );\n";
+                //    $szRetVal .= "}\n";
+                //
+                //$szRetVal .= "</script>\n";
 
-            $szRetVal .= "<section class=\"taskboard\" id=\"{$this->identifier}\">\n";
-                {   /* Table ================================================== */
-                    $szRetVal .= "<table class=\"taskboard shadow {$this->szClass}\" id=\"{$this->identifier}_table\">\n";
-                        {   /* thead ========================================= */
-                            $szRetVal .= "<thead>\n";
-                                $szRetVal .= "<tr>";
-                                    foreach( $this->aColumns as $aColumn )
-                                    {
-                                        $szRetVal .= "<th id=\"{$aColumn['identifier']}\">{$aColumn['title']}</th>\n";
-                                    }
-                                    //$szRetVal .= "<th>Bubble <a href=\"/help/?q=help-portfolio-kanban#bubble\" target=\"_blank\"><img class=\"shadow\" src=\"/images/L(i)VID - Question.png\" width=\"38\" height=\"38\" style=\"display:block;position:absolute;top:-20px;right:-10px;z-index:2;\" /></a></th>\n";
-                                    //$szRetVal .= "<th>To Start <a href=\"/help/?q=help-portfolio-kanban#to-start\" target=\"_blank\"><img class=\"shadow\" src=\"/images/L(i)VID - Question.png\" width=\"38\" height=\"38\" style=\"display:block;position:absolute;top:-20px;right:-10px;z-index:2;\" /></a></th>\n";
-                                    //$szRetVal .= "<th>Started <a href=\"/help/?q=help-portfolio-kanban#started\" target=\"_blank\"><img class=\"shadow\" src=\"/images/L(i)VID - Question.png\" width=\"38\" height=\"38\" style=\"display:block;position:absolute;top:-20px;right:-10px;z-index:2;\" /></a></th>\n";
-                                    //$szRetVal .= "<th>Closed <a href=\"/help/?q=help-portfolio-kanban#closed\" target=\"_blank\"><img class=\"shadow\" src=\"/images/L(i)VID - Question.png\" width=\"38\" height=\"38\" style=\"display:block;position:absolute;top:-20px;right:-10px;z-index:2;\" /></a></th>\n";
-                                $szRetVal .= "</tr>";
-                            $szRetVal .= "</thead>\n";
-                        }   /* thead ========================================= */
+                $szRetVal .= "<section class=\"taskboard\" id=\"{$this->identifier}\">\n";
+                    {   /* Table ================================================== */
+                        $szRetVal .= "<table class=\"taskboard shadow {$this->szClass}\" id=\"{$this->identifier}_table\">\n";
+                            {   /* caption ======================================= */
+                                if ( ! empty( $this->name ) )
+                                    $szRetVal .= "<caption>{$this->name}</caption>";
+                            }   /* caption ======================================= */
 
-                        {   /* tbody ========================================= */
-                            $szRetVal .= "<tbody>\n";
-                                $szRetVal .= "<tr>";
-                                    foreach( $this->aColumns as $aColumn )
-                                    {
-                                        //var_dump( $aColumn );
-                                        $szRetVal .= "<td data-phase=\"{$aColumn['identifier']}\" ondrop=\"dropHandler(event);\" ondragover=\"allowDrop(event);\">";
-                                            if ( is_array( $aColumn['items'] ) && count( $aColumn['items'] ) > 0 )
-                                                foreach( $aColumn['items'] as $oItem )
-                                                {
-                                                    //var_dump( $oItem->szStorage );
-                                                    //die();
+                            {   /* thead ========================================= */
+                                $szRetVal .= "<thead>\n";
+                                    $szRetVal .= "<tr>";
+                                        foreach( $this->aColumns as $aColumn )
+                                        {
+                                            $szRetVal .= "<th id=\"{$aColumn['identifier']}\">{$aColumn['title']}</th>\n";
+                                        }
+                                        //$szRetVal .= "<th>Bubble <a href=\"/help/?q=help-portfolio-kanban#bubble\" target=\"_blank\"><img class=\"shadow\" src=\"/images/L(i)VID - Question.png\" width=\"38\" height=\"38\" style=\"display:block;position:absolute;top:-20px;right:-10px;z-index:2;\" /></a></th>\n";
+                                        //$szRetVal .= "<th>To Start <a href=\"/help/?q=help-portfolio-kanban#to-start\" target=\"_blank\"><img class=\"shadow\" src=\"/images/L(i)VID - Question.png\" width=\"38\" height=\"38\" style=\"display:block;position:absolute;top:-20px;right:-10px;z-index:2;\" /></a></th>\n";
+                                        //$szRetVal .= "<th>Started <a href=\"/help/?q=help-portfolio-kanban#started\" target=\"_blank\"><img class=\"shadow\" src=\"/images/L(i)VID - Question.png\" width=\"38\" height=\"38\" style=\"display:block;position:absolute;top:-20px;right:-10px;z-index:2;\" /></a></th>\n";
+                                        //$szRetVal .= "<th>Closed <a href=\"/help/?q=help-portfolio-kanban#closed\" target=\"_blank\"><img class=\"shadow\" src=\"/images/L(i)VID - Question.png\" width=\"38\" height=\"38\" style=\"display:block;position:absolute;top:-20px;right:-10px;z-index:2;\" /></a></th>\n";
+                                    $szRetVal .= "</tr>";
+                                $szRetVal .= "</thead>\n";
+                            }   /* thead ========================================= */
 
-                                                    $szWhoAmI       = $oItem->whoAmI();
-                                                    $szTaskIdentity = trim( $oItem->identity() );
-                                                    $szPhase        = strtolower( trim( isset( $oItem->szPhase )    ?   /* Defined in an Aspiration */
-                                                                                  $oItem->szPhase                   :   /* Defined in an Aspiration */
-                                                                                  $oItem->szProgress ) );               /* Defined in a Task */
-                                                    $szStorage      = $oItem->szStorage;
-
-                                                    if ( ! empty( $this->itemHyperlink ) )
+                            {   /* tbody ========================================= */
+                                $szRetVal .= "<tbody>\n";
+                                    $szRetVal .= "<tr>";
+                                        foreach( $this->aColumns as $aColumn )
+                                        {
+                                            //var_dump( $aColumn );
+                                            $szRetVal .= "<td data-phase=\"{$aColumn['identifier']}\" ondrop=\"dropHandler(event);\" ondragover=\"allowDrop(event);\">";
+                                                if ( is_array( $aColumn['items'] ) && count( $aColumn['items'] ) > 0 )
+                                                    foreach( $aColumn['items'] as $oItem )
                                                     {
-                                                        $szResolvedLink = $oItem->resolveVars( $this->itemHyperlink );
-                                                        //var_dump( $szResolvedLink );
-                                                        $szRetVal .= "<span id=\"{$oItem->identifier}\" data-phase=\"{$szPhase}\" data-storage=\"{$szStorage}\" data-item-type=\"{$szWhoAmI}\" class=\"{$szWhoAmI}\" draggable=\"true\" ondragstart=\"drag(event,this.id );\"><a href=\"{$szResolvedLink}&storage=" . $oItem->szStorage . "\">{$szTaskIdentity}</a></span>";
-                                                    }
-                                                    else
-                                                    {
-                                                        //var_dump( $oItem );
+                                                        //var_dump( $oItem->szStorage );
                                                         //die();
-                                                        //$szRetVal .= "<span id=\"{$oItem->identifier}\" data-storage=\"{$oItem->szStorage}\" class=\"" . $oItem->whoAmI() . "\" draggable=\"true\" ondragstart=\"drag(event,this.id )>" . trim( $oItem->identity() ) . "</span>";
-                                                        $szRetVal .= "<span id=\"{$oItem->identifier}\" data-phase=\"{$szPhase}\" data-storage=\"{$szStorage}\" data-item-type=\"{$szWhoAmI}\" class=\"{$szWhoAmI}\" draggable=\"true\" ondragstart=\"drag(event,this.id );\">{$szTaskIdentity}</span>";
-                                                    }
-                                                }   /* foreach( $aColumn['items'] as $oItem ) */
-                                        $szRetVal .= "</td>\n";
-                                    }   /* foreach( $this->aColumns as $aColumn ) */
 
-                                    //$szRetVal .= $this->renderKanbanColumn( $this->aBubble  ,$WithRAG = false,$szColumnName = "bubble"      );
-                                    //$szRetVal .= $this->renderKanbanColumn( $this->aToStart ,$WithRAG = false,$szColumnName = "to-start"    );
-                                    //$szRetVal .= $this->renderKanbanColumn( $this->aStarted ,$WithRAG = true ,$szColumnName = "started"     );
-                                    //$szRetVal .= $this->renderKanbanColumn( $this->aClosed  ,$WithRAG = true ,$szColumnName = "closed"      );
-                                $szRetVal .= "</tr>";
-                            $szRetVal .= "</tbody>\n";
-                        }   /* tbody ========================================= */
-                    $szRetVal .= "</table>\n";
-                }   /* Table ================================================== */
-            $szRetVal .= "</section><!-- #{$this->identifier} -->\n";
+                                                        $szStyle  = '';
+
+                                                        if ( isset( $oItem->backColor ) && ! is_null( $oItem->backColor ) )
+                                                            $szStyle .= 'background-color: ' . $oItem->backColor . ';';
+
+                                                        if ( isset( $oItem->foreColor ) && ! is_null( $oItem->foreColor ?? null ) )
+                                                            $szStyle .= 'color: ' . $oItem->foreColor . ' !important;';
+
+                                                        if ( ! empty( $szStyle ) )
+                                                            $szStyle = " style=\"{$szStyle}\"";
+
+                                                        $szWhoAmI       = $oItem->whoAmI();
+                                                        $szTaskIdentity = trim( $oItem->identity() );
+                                                        //$szTaskIdentity = "Me MySelf";
+                                                        $szPhase        = strtolower( trim( isset( $oItem->szPhase )    ?   /* Defined in an Aspiration */
+                                                                                      $oItem->szPhase                   :   /* Defined in an Aspiration */
+                                                                                      $oItem->szProgress ) );               /* Defined in a Task */
+                                                        $szStorage      = $oItem->szStorage;
+
+                                                        if ( ! empty( $this->itemHyperlink ) )
+                                                        {
+                                                            $szResolvedLink = $oItem->resolveVars( $this->itemHyperlink );
+                                                            //var_dump( $szResolvedLink );
+                                                            $szRetVal .= "<span {$szStyle} id=\"{$oItem->identifier}\" data-phase=\"{$szPhase}\" data-storage=\"{$szStorage}\" data-item-type=\"{$szWhoAmI}\" class=\"{$szWhoAmI}\" draggable=\"true\" ondragstart=\"drag(event,this.id );\"><a href=\"{$szResolvedLink}&storage=" . $oItem->szStorage . "\">{$szTaskIdentity}</a></span>";
+                                                        }
+                                                        else
+                                                        {
+                                                            //var_dump( $oItem );
+                                                            //die();
+                                                            //$szRetVal .= "<span id=\"{$oItem->identifier}\" data-storage=\"{$oItem->szStorage}\" class=\"" . $oItem->whoAmI() . "\" draggable=\"true\" ondragstart=\"drag(event,this.id )>" . trim( $oItem->identity() ) . "</span>";
+                                                            $szRetVal .= "<span id=\"{$oItem->identifier}\" data-phase=\"{$szPhase}\" data-storage=\"{$szStorage}\" data-item-type=\"{$szWhoAmI}\" class=\"{$szWhoAmI}\" draggable=\"true\" ondragstart=\"drag(event,this.id );\">{$szTaskIdentity}</span>";
+                                                        }
+                                                    }   /* foreach( $aColumn['items'] as $oItem ) */
+                                            $szRetVal .= "</td>\n";
+                                        }   /* foreach( $this->aColumns as $aColumn ) */
+
+                                        //$szRetVal .= $this->renderKanbanColumn( $this->aBubble  ,$WithRAG = false,$szColumnName = "bubble"      );
+                                        //$szRetVal .= $this->renderKanbanColumn( $this->aToStart ,$WithRAG = false,$szColumnName = "to-start"    );
+                                        //$szRetVal .= $this->renderKanbanColumn( $this->aStarted ,$WithRAG = true ,$szColumnName = "started"     );
+                                        //$szRetVal .= $this->renderKanbanColumn( $this->aClosed  ,$WithRAG = true ,$szColumnName = "closed"      );
+                                    $szRetVal .= "</tr>";
+                                $szRetVal .= "</tbody>\n";
+                            }   /* tbody ========================================= */
+                        $szRetVal .= "</table>\n";
+                    }   /* Table ================================================== */
+                $szRetVal .= "</section><!-- #{$this->identifier} -->\n";
+            }
+            $szRetVal .= "</div> <!-- #{$szID} -->\n\n";
         }
 
         // 08-01-2020 ... $szGUIDRendering    = "KANBAN_" . q_guid();

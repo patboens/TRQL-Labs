@@ -57,7 +57,7 @@
 namespace trql\organization;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\organization\PerformingGroup  as PerformingGroup;
+use \trql\schema\organization\PerformingGroup  as PerformingGroup;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

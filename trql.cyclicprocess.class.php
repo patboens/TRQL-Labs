@@ -1,5 +1,25 @@
 <?php
 /****************************************************************************************/
+
+/*
+    {PYB} is a shortcut for Patrick Boens
+
+    {COMPANY} is a shortcut to "Lato Sensu Management"
+
+    {RIGHTS} is a shortcut used by trql.documentor.class.php for
+    All rights reserved to Lato Sensu Management for all countries.
+    All Intellectual Property belongs to Patrick Boens.
+
+    Other shortcuts exist. They exist to make it simple to change the formulation
+    of parts that can vary over time.
+
+    It does not change the undisputed truth that ALL code has been created by
+    Patrick Boens, the author, who owns ALL the intellectual property of what
+    he created.
+
+*/
+
+
 /** {{{*fheader
     {*file                  trql.cyclicprocess.class.php *}
     {*purpose               Process that repeats itself. *}
@@ -8,6 +28,7 @@
     {*cdate                 07-01-21 11:27 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
 
     --------------------------------------------------------------------------------------
     Changes History:
@@ -23,7 +44,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\cyclicprocess;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\process\Process       as Process;
@@ -83,7 +104,7 @@ class CyclicProcess extends Process
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of CyclicProcess.__construct() ========================================= */
@@ -129,9 +150,7 @@ class CyclicProcess extends Process
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-
     }   /* End of CyclicProcess.__destruct() ========================================== */
     /* ================================================================================ */
 }   /* End of class CyclicProcess ===================================================== */
 /* ==================================================================================== */
-?>

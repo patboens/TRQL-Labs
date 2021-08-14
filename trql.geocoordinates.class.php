@@ -37,12 +37,12 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\geocoordinates;
+namespace trql\schema;
 
-use \trql\quitus\Mother                             as Mother;
-use \trql\quitus\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\structuredvalue\StructuredValue           as StructuredValue;
+use \trql\quitus\Mother             as Mother;
+use \trql\quitus\iContext           as iContext;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\schema\StructuredValue    as StructuredValue;
 
 use DOMDocument;
 use DOMXPath;

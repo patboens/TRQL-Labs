@@ -28,7 +28,7 @@
     {*cdate                 11-03-21 08:10 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -42,14 +42,12 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
 namespace trql\userstory;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\task\Task         as Task;
-
+use \trql\quitus\Task       as Task;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

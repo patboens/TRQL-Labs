@@ -55,8 +55,8 @@ namespace trql\contactpoint;
 use \trql\quitus\Mother                             as Mother;
 use \trql\quitus\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\place\Place                               as Place;
-use \trql\structuredvalue\StructuredValue           as StructuredValue;
+use \trql\schema\Place                               as Place;
+use \trql\schema\StructuredValue           as StructuredValue;
 use \trql\schema\Thing                               as Thing;
 
 use DOMDocument;

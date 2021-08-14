@@ -45,7 +45,7 @@
 namespace trql\textdigitaldocument;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\digitaldocument\DigitalDocument   as DigitalDocument;
+use \trql\schema\DigitalDocument   as DigitalDocument;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

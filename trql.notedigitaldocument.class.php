@@ -44,19 +44,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\notedigitaldocument;
+namespace trql\schema;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\digitaldocument\DigitalDocument    as DigitalDocument;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\schema\DigitalDocument    as DigitalDocument;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'DIGITALDOCUMENT_CLASS_VERSION' ) )
     require_once( 'trql.digitaldocument.class.php' );
-
-
 
 defined( 'NOTEDIGITALDOCUMENT_CLASS_VERSION' ) or define( 'NOTEDIGITALDOCUMENT_CLASS_VERSION','0.1' );
 
@@ -125,9 +122,7 @@ class NoteDigitalDocument extends DigitalDocument
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
-
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of NoteDigitalDocument.__construct() =================================== */

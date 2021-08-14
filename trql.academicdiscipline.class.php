@@ -26,6 +26,7 @@
     {*cdate                 01-03-21 17:09 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -41,10 +42,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\academicdiscipline;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\schema\Thing           as Thing;
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\schema\Thing      as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -97,6 +98,10 @@ class AcademicDiscipline extends Thing
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -104,8 +109,9 @@ class AcademicDiscipline extends Thing
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
+        return ( $this );
     }   /* End of AcademicDiscipline.__construct() ==================================== */
     /* ================================================================================ */
 
@@ -122,6 +128,10 @@ class AcademicDiscipline extends Thing
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -137,4 +147,3 @@ class AcademicDiscipline extends Thing
     /* ================================================================================ */
 }   /* End of class AcademicDiscipline ================================================ */
 /* ==================================================================================== */
-?>

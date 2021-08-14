@@ -86,7 +86,7 @@ defined( "EXCEPTION_CODE_NO_DOMAIN_NAME_FOUND" )                or define( "EXCE
 
 
 /* EXCEPTION_CODE Uncategorized class of errors (error codes are supposed to be defined in the source of each class */
-defined( "EXCEPTION_CLASS_BASIS" )                              or define( "EXCEPTION_CLASS_BASIS"                                  ,EXCEPTION_BASIS + 1000000 );
+defined( "EXCEPTION_CLASS_BASIS" )                              or define( "EXCEPTION_CLASS_BASIS"                                  ,EXCEPTION_BASIS + 10000000 );
 
 
 
@@ -285,6 +285,14 @@ abstract class Mother
     /* ================================================================================ */
 
 
+    protected function noFamily()
+    /*-------------------------*/
+    {
+        $this->self['family'] = $this->family = null;
+    }   /* End of Mother.noFamily() =================================================== */
+    /* ================================================================================ */
+
+
     public function getRDFa( $szClass )
     /*-------------------------------*/
     {
@@ -343,6 +351,8 @@ abstract class Mother
 
             if ( $withFamily && is_null( $this->family ) )
                 $this->self['family'] = $this->family = vaesoli::FIL_aFilesEx( __DIR__ . '\\trql.*.class.php' );
+            else
+                $this->noFamily();
 
             if ( ! is_dir( $this->szHome ) )
             {
@@ -1078,33 +1088,33 @@ abstract class Mother
 
 
     /* ================================================================================ */
-    /** {{*__get( $szVar )=
+    /** {{*__get( $property )=
 
         Used for reading data from inaccessible (protected or private) or
         non-existing properties.
 
         {*params
-            $szVar      (string)        The name of the properties to access
+            $property   (string)        The name of the property to access
         *}
 
         {*return
-            (mixed)     The value of [c]$szVar[/c] or throwing an exception if
-                        [c]$szVar[/c] NOT found.
+            (mixed)     The value of [c]@param.property[/c] or throwing an exception if
+                        [c]@param.property[/c] NOT found.
         *}
 
         *}}
     */
     /* ================================================================================ */
-    public function __get( $szVar )
+    public function __get( $property )
     /*---------------------------*/
     {
-        switch ( strtolower( $szVar ) )
+        switch ( strtolower( $property ) )
         {
             case 'icon'         :   return ( '/snippet-center/icons/' . basename( $this->classIcon ) );
             case 'remembering'  :   return ( $this->remembering );
             case 'myself'       :
             case 'self'         :   return ( $this->self );
-            default             :   throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": {$szVar} UNKNOWN (ErrCode: " . EXCEPTION_CODE_INVALID_PROPERTY . ")",EXCEPTION_CODE_INVALID_PROPERTY );
+            default             :   throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": {$property} UNKNOWN (ErrCode: " . EXCEPTION_CODE_INVALID_PROPERTY . ")",EXCEPTION_CODE_INVALID_PROPERTY );
         }
     }   /* End of Mother.__get() ====================================================== */
     /* ================================================================================ */
@@ -1256,7 +1266,7 @@ abstract class Mother
 
 
     /* ================================================================================ */
-    /** {{*getParam()=
+    /** {{*getParam( $szParam,$xDefault[,$aParams] )=
 
         Returns the value of a parameter
 

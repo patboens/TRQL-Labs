@@ -4,16 +4,11 @@
     {*file                  trql.city.class.php *}
     {*purpose               A city or town derived from [c]AdministrativeArea[/c] *}
     {*author                {PYB} *}
-    {*company               [br]Lato Sensu Management[br]
-                            Rue Bois des Mazuis, 47[br]
-                            5070 Vitrival[br]
-                            Belgium[br]
-                            [url]http://www.latosensu.be[/url][br]
-                            Vae Soli! : [url]http://www.vaesoli.org[/url] *}
+    {*company               {COMPANY} *}
     {*cdate                 29-07-20 11:45 *}
     {*mdate                 auto *}
-    {*license               Submitted to intellectual property rights (see
-                            author) *}
+    {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -31,11 +26,11 @@
 /****************************************************************************************/
 namespace trql\city;
 
-use \trql\quitus\Mother                             as Mother;
-use \trql\quitus\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\administrativearea\AdministrativeArea     as AdministrativeArea;
-use \trql\mercator\Mercator                         as Mercator;
+use \trql\quitus\Mother                 as Mother;
+use \trql\quitus\iContext               as iContext;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\AdministrativeArea     as AdministrativeArea;
+use \trql\mercator\Mercator             as Mercator;
 
 use DOMDocument;
 use DOMXPath;
@@ -102,7 +97,7 @@ class City extends AdministrativeArea implements iContext
     /*-------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of City.__construct() ================================================== */

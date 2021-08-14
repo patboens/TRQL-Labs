@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -28,6 +26,7 @@
     {*cdate                 26-08-2020 14:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -52,10 +51,10 @@
     *}}} */
 
 /****************************************************************************************/
-namespace trql\airline;
+namespace trql\schema;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\organization\Organization     as Organization;
+use \trql\vaesoli\Vaesoli                       as Vaesoli;
+use \trql\schema\organization\Organization      as Organization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -123,6 +122,10 @@ class Airline extends Organization
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -149,6 +152,10 @@ class Airline extends Organization
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -164,4 +171,3 @@ class Airline extends Organization
     /* ================================================================================ */
 }   /* End of class Airline =========================================================== */
 /* ==================================================================================== */
-?>

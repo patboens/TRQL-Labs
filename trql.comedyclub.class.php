@@ -55,7 +55,7 @@
 namespace trql\comedyclub;
 
 use \trql\vaesoli\Vaesoli                               as Vaesoli;
-use \trql\entertainmentbusiness\EntertainmentBusiness   as EntertainmentBusiness;
+use \trql\schema\business\EntertainmentBusiness   as EntertainmentBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

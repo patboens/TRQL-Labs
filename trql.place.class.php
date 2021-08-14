@@ -26,7 +26,7 @@
     {*cdate                 29-07-20 11:47 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -50,13 +50,13 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\place;
+namespace trql\schema;
 
-use \trql\quitus\Mother                 as Mother;
-use \trql\quitus\iContext               as iContext;
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\schema\Thing                   as Thing;
-use \trql\geocoordinates\GeoCoordinates as GeoCoordinates;
+use \trql\quitus\Mother             as Mother;
+use \trql\quitus\iContext           as iContext;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\schema\Thing              as Thing;
+use \trql\schema\GeoCoordinates     as GeoCoordinates;
 
 use DOMDocument;
 use DOMXPath;
@@ -225,7 +225,7 @@ class Place extends Thing implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         $this->geo = new GeoCoordinates();
 

@@ -45,11 +45,11 @@
 namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli               as V;
-use \trql\intangible\Intangible         as Intangible;
+use \trql\schema\Intangible         as Intangible;
 use \trql\quitus\Customer               as Customer;
 use \trql\postaladdress\PostalAddress   as PostalAddress;
 use \trql\quitus\Order                  as Order;
-use \trql\organization\Organization     as Organization;
+use \trql\schema\organization\Organization     as Organization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

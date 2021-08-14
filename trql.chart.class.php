@@ -26,6 +26,7 @@
     {*cdate                 20-01-21 22:32 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -41,10 +42,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\chart;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\infographic\Infographic   as Infographic;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\quitus\Infographic    as Infographic;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -99,6 +100,10 @@ class Chart extends Infographic
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -106,12 +111,32 @@ class Chart extends Infographic
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
+        return ( $this );
     }   /* End of Chart.__construct() ================================================= */
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __destruct()
     /*------------------------*/
     {
@@ -122,7 +147,5 @@ class Chart extends Infographic
         $this->necroSignaling();
     }   /* End of Chart.__destruct() ================================================== */
     /* ================================================================================ */
-
 }   /* End of class Chart ============================================================= */
 /* ==================================================================================== */
-?>

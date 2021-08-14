@@ -27,7 +27,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -55,8 +55,8 @@
 /****************************************************************************************/
 namespace trql\investmentordeposit;
 
-use \trql\vaesoli\Vaesoli                       as Vaesoli;
-use \trql\financialproduct\FinancialProduct     as FinancialProduct;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\schema\FinancialProduct   as FinancialProduct;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -111,6 +111,8 @@ class InvestmentOrDeposit extends FinancialProduct
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NOT CHECKED SO FAR *} */
 
+
+
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 
@@ -135,7 +137,7 @@ class InvestmentOrDeposit extends FinancialProduct
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of InvestmentOrDeposit.__construct() =================================== */

@@ -51,11 +51,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\structuredvalue;
+namespace trql\schema;
 
-use \trql\quitus\Mother                             as Mother;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\intangible\Intangible                     as Intangible;
+use \trql\quitus\Mother             as Mother;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\schema\Intangible         as Intangible;
 
 use DOMDocument;
 use DOMXPath;
@@ -124,6 +124,10 @@ class StructuredValue extends Intangible
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -131,13 +135,33 @@ class StructuredValue extends Intangible
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of StructuredValue.__construct() ======================================= */
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        *}}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
+    */
+    /* ================================================================================ */
     public function __destruct()
     /*------------------------*/
     {
@@ -149,7 +173,5 @@ class StructuredValue extends Intangible
 
     }   /* End of StructuredValue.__destruct() ======================================== */
     /* ================================================================================ */
-
 }   /* End of class StructuredValue =================================================== */
 /* ==================================================================================== */
-?>

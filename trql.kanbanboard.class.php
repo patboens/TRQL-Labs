@@ -27,7 +27,7 @@
     {*cdate                 06-01-21 19:23 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              Agility *}
 
     -------------------------------------------------------------------------------------
@@ -44,10 +44,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\kanbanboard;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\taskboard\TaskBoard   as TaskBoard;
+use \trql\quitus\TaskBoard      as TaskBoard;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -66,6 +66,7 @@ defined( 'KANBANBOARD_CLASS_VERSION' ) or define( 'KANBANBOARD_CLASS_VERSION','0
 
     *}
 
+    *}}
 
  */
 /* ==================================================================================== */
@@ -110,7 +111,7 @@ class KanbanBoard extends TaskBoard
     {
         parent::__construct();
 
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of KanbanBoard.__construct() =========================================== */
@@ -118,7 +119,7 @@ class KanbanBoard extends TaskBoard
 
 
     /* ================================================================================ */
-    /** {{*render( [$szType] )=
+    /** {{*render( [$szType][,$szID] )=
 
         Renders the kanbanboard in XML or in HTML (default)
 
@@ -139,8 +140,8 @@ class KanbanBoard extends TaskBoard
         *}}
     */
     /* ================================================================================ */
-    public function render( $szType = 'html' ): string
-    /*----------------------------------------------*/
+    public function render( $szType = 'html',$szID = null ): string
+    /*-----------------------------------------------------------*/
     {
         $szRetVal = '';
 
@@ -149,7 +150,7 @@ class KanbanBoard extends TaskBoard
             case 'xml'  :   $szRetVal = $this->__toXML();
                             break;
             case 'html' :
-            default     :   $szRetVal = $this->__toHTML();
+            default     :   $szRetVal = $this->__toHTML( $szID );
         }   /* switch( strtolower( trim( $szType ) ) ) */
 
         end:
@@ -207,11 +208,12 @@ class KanbanBoard extends TaskBoard
 
 
     /* ================================================================================ */
-    /** {{*__toHTML()=
+    /** {{*__toHTML( $szID )=
 
         Renders %class% in HTML
 
         {*params
+            $szID       (string)        Optional ID of the whole HTML section
         *}
 
         {*return
@@ -225,10 +227,11 @@ class KanbanBoard extends TaskBoard
         *}}
     */
     /* ================================================================================ */
-    public function __toHTML(): string
-    /*------------------------------*/
+    public function __toHTML( $szID = null ): string
+    /*---------------------------------------------*/
     {
-        return ( parent::__toHTML() );
+        // Calls TaskBoard.__toHTML();
+        return ( parent::__toHTML( $szID ) );
     }   /* End of KanbanBoard.__toHTML() ============================================== */
     /* ================================================================================ */
 

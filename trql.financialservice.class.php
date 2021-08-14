@@ -8,6 +8,7 @@
     {*cdate                 24-08-2020 11:50 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -34,8 +35,7 @@
 namespace trql\financialservice;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\business\LocalBusiness       as LocalBusiness;
-
+use \trql\schema\business\LocalBusiness     as LocalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -97,6 +97,10 @@ class FinancialService extends LocalBusiness
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -122,6 +126,10 @@ class FinancialService extends LocalBusiness
         {*return
             (void)      No return
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
     */

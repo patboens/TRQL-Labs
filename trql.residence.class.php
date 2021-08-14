@@ -45,7 +45,7 @@
 namespace trql\residence;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\place\Place       as Place;
+use \trql\schema\Place       as Place;
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 

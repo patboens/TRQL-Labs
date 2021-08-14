@@ -155,6 +155,7 @@ class CSV extends Utility
 
         if ( ( $handle = fopen( $szFile,"r" ) ) !== false )         // Open the file in read-only mode
         {
+            //var_dump( "FILE OPEN" );
             $iLine      = 1;                                        // Ligne courante du fichier de données
             $aFields    = null;                                     // Ensemble de champs du fichier .CSV
 
@@ -164,7 +165,7 @@ class CSV extends Utility
 
             while ( ( $aFields = fgetcsv( $handle,1000,',') ) !== false )   // Lisons tous les champs
             {
-                $iFields    = count( $aFields );                    // Comptons le nombre de champs (avec le temps, la structure du fichier .CSV a évolué ... et donc le nb de champs n'est pas toujours le même)
+                $iFields = count( $aFields );                    // Comptons le nombre de champs (avec le temps, la structure du fichier .CSV a évolué ... et donc le nb de champs n'est pas toujours le même)
 
                 if ( $iFields > 0 && $iLine === 1 )                 // Si on est sur la première ligne (c'est la ligne du nom des champs)
                 {
@@ -194,6 +195,8 @@ class CSV extends Utility
             }   /* while ( ( $aFields = fgetcsv( $handle,1000,',') ) !== false ) */
 
             fclose( $handle );                                      // Close the file
+
+            //var_dump( "FILE READ" );
 
             $aRetVal = array( "fields"  => $aHeaders,
                               "records" => $aData   ,

@@ -55,7 +55,7 @@
 namespace trql\animalshelter;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\business\LocalBusiness   as LocalBusiness;
+use \trql\schema\business\LocalBusiness   as LocalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -126,7 +126,7 @@ class AnimalShelter extends LocalBusiness
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of AnimalShelter.__construct() ========================================= */

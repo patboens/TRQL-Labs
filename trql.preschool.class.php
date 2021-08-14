@@ -45,7 +45,7 @@
 namespace trql\organization;
 
 use \trql\vaesoli\Vaesoli                       as Vaesoli;
-use \trql\organization\EducationalOrganization  as EducationalOrganization;
+use \trql\schema\organization\EducationalOrganization  as EducationalOrganization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

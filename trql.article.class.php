@@ -115,6 +115,7 @@ class Article extends CreativeWork implements iContext
                                'family' => null         ,
                              );
 
+    protected   $schemaOrg  = 'http://schema.org/Article';          /* {*property   $schemaOrg                  (string)                        Where the official documentation is maintained *} */
     public      $articleBody                = null;                 /* {*property   $articleBody                (string)                            The actual body of the article. *} */
     public      $articleSection             = null;                 /* {*property   $articleSection             (string)                            Articles may belong to one or more 'sections' in a magazine or newspaper, such
                                                                                                                                                     as Sports, Lifestyle, etc. *} */

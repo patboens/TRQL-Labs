@@ -74,7 +74,7 @@ namespace trql\apigateway;
 use \trql\vaesoli\Vaesoli           as v;
 use \trql\gateway\Gateway           as Gateway;
 use \trql\apigateway\APIHandler     as APIHandler;
-use \trql\bankaccount\BankAccount   as BankAccount;
+use \trql\quitus\BankAccount   as BankAccount;
 use \trql\xml\XML                   as XML;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )

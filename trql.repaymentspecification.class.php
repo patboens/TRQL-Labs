@@ -47,7 +47,7 @@
 namespace trql\repaymentspecification;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\structuredvalue\StructuredValue    as StructuredValue;
+use \trql\schema\StructuredValue    as StructuredValue;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )

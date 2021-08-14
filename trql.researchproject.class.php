@@ -26,7 +26,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -40,22 +40,18 @@
         *}
     *}
 
-
     *}}} */
 /****************************************************************************************/
 namespace trql\researchproject;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\project\Project    as Project;
-
+use \trql\vaesoli\Vaesoli   as Vaesoli;
+use \trql\schema\Project    as Project;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'PROJECT_CLASS_VERSION' ) )
     require_once( 'trql.project.class.php' );
-
-
 
 defined( 'RESEARCHPROJECT_CLASS_VERSION' ) or define( 'RESEARCHPROJECT_CLASS_VERSION','0.1' );
 
@@ -153,4 +149,3 @@ class ResearchProject extends Project
     /* ================================================================================ */
 }   /* End of class ResearchProject =================================================== */
 /* ==================================================================================== */
-?>

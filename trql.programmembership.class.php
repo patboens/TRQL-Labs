@@ -49,7 +49,7 @@
 namespace trql\programmembership;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\intangible\Intangible    as Intangible;
+use \trql\schema\Intangible    as Intangible;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )

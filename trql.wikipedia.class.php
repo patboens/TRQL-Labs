@@ -120,6 +120,13 @@ class Wikipedia extends Utility implements iContext
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
+        {*example
+        *}
+
         *}}
     */
     /* ================================================================================ */
@@ -127,7 +134,7 @@ class Wikipedia extends Utility implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of Wikipedia.__construct() ============================================= */
@@ -588,6 +595,233 @@ class Wikipedia extends Utility implements iContext
         return ( null );
 
     }   /* End of Wikipedia.getProperty() ============================================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*searchEvents( $szDate[,$szLang] )=
+
+        Search events (and other things) that happened on a given date
+
+        THE REST OF THE DOC MUST BE UPDATED
+
+        {*params
+            $szTerm         (string)        The terms to look for
+            $iResults       (int)           Number of entities to return. Optional.
+                                            [c]1[/c] by default. [b]No longer used![/b]
+            $szLang         (string)        The language in which the search must be
+                                            performed. '[c]fr[/c]' by default.
+        *}
+
+        {*return
+            (array)     An array of results
+        *}
+
+        {*doc
+            [url]https://www.wikidata.org/w/api.php?action=help&modules=wbgetentities[/url]
+        *}
+
+        {*abstract
+
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function searchEvents( $szDate,$szLang = 'fr' )
+    /*--------------------------------------------------*/
+    {
+        static $oDom    = null;
+
+        $aRetVal        = null;
+        $aEvents        = 
+        $aBirths        =
+        $aDeaths        = null;
+        $szWikiEntity   = null;
+
+        // Avec la date, il faut que j'en déduise le titre de la page
+        // https://en.wikipedia.org/w/api.php?action=parse&page=May_1&format=xml
+        $tDate      = strtotime( $szDate );
+
+        $dateInfo   = array( 'day'      => (int) date( 'd',$tDate ),
+                             'month'    => (int) date( 'm',$tDate ),
+                             'cmonth'   =>       date( 'F',$tDate ),
+                             'cmonth3'  =>       date( 'M',$tDate ),
+                             'year'     => (int) date( 'Y',$tDate ) );
+
+        $szPage = $dateInfo['cmonth'] . '_' . $dateInfo['day'];
+        //echo $szPage,"\n";
+
+
+        $aParams['search'   ]   = date( 'Ymd',$tDate );             /* Term to look for */
+        $aParams['format'   ]   = 'xml';                            /* XML format please */
+        $aParams['service'  ]   = __METHOD__;                       /* This method */
+        $aParams['lang'     ]   = $szLang;                          /* The language (added on 13-04-21 08:33:24) */
+
+        $szCacheFile = $this->cacheName( __METHOD__,$aParams );     /* Get the name of the cache file */
+
+        //echo "Cache: {$szCacheFile}\n";
+
+        if ( true && $this->remembering && is_file( $szCacheFile ) && vaesoli::FIL_FileNoOlderThan( $szCacheFile,86400 * 7 ) )
+        {
+            $aRetVal = $this->getHashFile( $szCacheFile );
+            $this->addInfo( __METHOD__ . "(): data obtained from {$szCacheFile}" );
+        }   /* if ( is_file( $szCacheFile ) ) */
+        else    /* Else of ... if ( true && $this->remembering && is_file( $szCacheFile ) ) */
+        {
+            //if ( ! empty( $szXML  = Vaesoli::HTTP_GetURL( $szURL = "https://en.wikipedia.org/w/api.php?action=parse&page={$szPage}&format=xml" ) ) )
+            if ( ! empty( $szXML = Vaesoli::HTTP_GetURL( $szURL = "https://en.wikipedia.org/w/api.php?action=parse&page={$szPage}&prop=sections&format=xml" ) ) )
+            {
+                //echo "STEP 1 OK\n";
+                //echo "URL: {$szURL}\n";
+                // Get something like...
+                // <api>
+                //  <parse title="May 1" pageid="19348">
+                //   <sections>
+                //    <s toclevel="1"  level="2" line="Events"                   number="1"     index="1" fromtitle="May_1" byteoffset="104" anchor="Events"/>
+                //     <s toclevel="2" level="3" line="Pre-1600"                 number="1.1"   index="2" fromtitle="May_1" byteoffset="115" anchor="Pre-1600"/>
+                //     <s toclevel="2" level="3" line="1601-1900"                number="1.2"   index="3" fromtitle="May_1" byteoffset="756" anchor="1601-1900"/>
+                //     <s toclevel="2" level="3" line="1901-present"             number="1.3"   index="4" fromtitle="May_1" byteoffset="5796" anchor="1901-present"/>
+                //    <s toclevel="1"  level="2" line="Births"                   number="2"     index="5" fromtitle="May_1" byteoffset="12068" anchor="Births"/>
+                //     <s toclevel="2" level="3" line="Pre-1600"                 number="2.1"   index="6" fromtitle="May_1" byteoffset="12079" anchor="Pre-1600_2"/>
+                //     <s toclevel="2" level="3" line="1601-1900"                number="2.2"   index="7" fromtitle="May_1" byteoffset="13476" anchor="1601-1900_2"/>
+                //     <s toclevel="2" level="3" line="1901-present"             number="2.3"   index="8" fromtitle="May_1" byteoffset="19918" anchor="1901-present_2"/>
+                //    <s toclevel="1"  level="2" line="Deaths"                   number="3"     index="9" fromtitle="May_1" byteoffset="38538" anchor="Deaths"/>
+                //     <s toclevel="2" level="3" line="Pre-1600"                 number="3.1"   index="10" fromtitle="May_1" byteoffset="38549" anchor="Pre-1600_3"/>
+                //     <s toclevel="2" level="3" line="1601-1900"                number="3.2"   index="11" fromtitle="May_1" byteoffset="39879" anchor="1601-1900_3"/>
+                //     <s toclevel="2" level="3" line="1901-present"             number="3.3"   index="12" fromtitle="May_1" byteoffset="40964" anchor="1901-present_3"/>
+                //     <s toclevel="2" level="3" line="21st Century"             number="3.4"   index="13" fromtitle="May_1" byteoffset="44069" anchor="21st_Century"/>
+                //    <s toclevel="1"  level="2" line="Holidays and observances" number="4"     index="14" fromtitle="May_1" byteoffset="46435" anchor="Holidays_and_observances"/>
+                //    <s toclevel="1"  level="2" line="References"               number="5"     index="15" fromtitle="May_1" byteoffset="49050" anchor="References"/>
+                //    <s toclevel="1"  level="2" line="External links"           number="6"     index="16" fromtitle="May_1" byteoffset="49078" anchor="External_links"/>
+                //   </sections>
+                //  </parse>
+                // </api>
+
+                // Tout ceci semble BIEN fonctionner pour le mois de mai (e.g. 20200501)
+                // mais PAS du tout pour les autres mois de l'année !!!
+
+                if ( is_null( $oDom ) )
+                    $oDom = new DOMDocument();
+
+                if ( $oDom->loadXML( $szXML ) )
+                {
+                    //echo "URL: {$szURL}\n";
+
+                    // Bon ... ici ... faut chercher les sections
+                    $oXPath         = new DOMXPath( $oDom );
+
+                    $iEventsSection =
+                    $iBirthsSection =
+                    $iDeathsSection = -1;
+
+                    if ( ( $oColl = $oXPath->query( "//s[@line='1901-present']" ) ) && ( $oColl->length > 0 ) )
+                    {
+                        $iEventsSection = $oColl->item(0)->getAttribute( 'index' );
+
+                        if ( $oColl->length >=2 )
+                            $iBirthsSection = $oColl->item(1)->getAttribute( 'index' );
+                        if ( $oColl->length >=3 )
+                            $iDeathsSection = $oColl->item(2)->getAttribute( 'index' );
+                    }
+                    elseif ( ( $oColl = $oXPath->query( "//s[@line='Events']" ) ) && ( $oColl->length > 0 ) )
+                    {
+                        $iEventsSection = $oColl->item(0)->getAttribute( 'index' );
+
+                        if ( ( $oColl = $oXPath->query( "//s[@line='Births']" ) ) && ( $oColl->length > 0 ) )
+                            $iBirthsSection = $oColl->item(0)->getAttribute( 'index' );
+
+                        if ( ( $oColl = $oXPath->query( "//s[@line='Deaths']" ) ) && ( $oColl->length > 0 ) )
+                            $iDeathsSection = $oColl->item(0)->getAttribute( 'index' );
+                    }
+
+                    //echo $iEventsSection,",",$iBirthsSection,",",$iDeathsSection,"\n";
+
+                    if ( $iEventsSection !== -1 )
+                    {
+                        if ( ! empty( $szXML = Vaesoli::HTTP_GetURL( $szURL = "https://en.wikipedia.org/w/api.php?action=parse&page={$szPage}&section={$iEventsSection}&format=xml" ) ) )
+                        {
+                            //echo "URL: {$szURL}\n";
+
+                            if ( $oDom->loadXML( $szXML ) )
+                            {
+                                $oXPath = new DOMXPath( $oDom );
+
+                                if ( ( $oColl = $oXPath->query( "//pp[@name='wikibase_item']" ) ) && ( $oColl->length > 0 ) )
+                                    $szWikiEntity = $oColl->item(0)->nodeValue;
+
+                                //if ( ! is_null( $szWikiEntity ) )
+                                //    echo "Entity: {$szWikiEntity}\n";
+                                //else
+                                //    echo "Entity: NOT FOUND\n";
+
+                                // <api>
+                                //  <parse title="May 1" pageid="19348" revid="1024510668" displaytitle="May 1">
+                                //   <text xml:space="preserve">...</text>
+
+                                /* Et ici, il faut parser le tag <text>...</text> */
+
+                                if ( ( $oColl = $oXPath->query( "//text" ) ) && ( $oColl->length > 0 ) )
+                                {
+                                    $szText = $oColl->item(0)->nodeValue;
+                                    //echo $szText,"\n";
+                                    //echo "► Events:\n";
+
+                                    if ( preg_match_all( '%<li\b[^>]*>(.*?)</li>%si',$szText,$aMatches,PREG_PATTERN_ORDER ) )
+                                    {
+                                        $aMatches = $aMatches[0];
+                                        foreach( $aMatches as $szMatch )
+                                        {
+                                            $szLine = strip_tags( $szMatch );
+                                            if ( preg_match('/\A(19|20)[0-9]{2}/',$szLine ) )
+                                            {
+                                                $szLine = preg_replace( '/&#91;\d+&#93;/','',$szLine );
+
+                                                $szLine = str_replace( array( '#91;'    , 
+                                                                              '#92;'    , 
+                                                                              '#93;'    , 
+                                                                              '#94;'    ,
+                                                                            )           ,
+                                                                       array( '['       ,
+                                                                              '\\'      ,
+                                                                              ']'       ,
+                                                                              '^'       ,
+                                                                            )           ,
+                                                                       $szLine
+                                                                     );
+                                                $aEvents[] = $szLine;
+                                                //$szLine = str_replace( array( "    &#8211;","   &#8211;","  &#8211;"," &#8211;" ),":",$szLine );
+                                                //echo " - ",$szLine,"\n";
+                                            }
+                                        }
+                                    }
+                                }
+                            }   /* if ( $oDom->loadXML( $szXML ) ) */
+                        }
+                    }
+                }
+
+                if ( ! is_null( $szWikiEntity ) )
+                {
+                    $aRetVal = array( 'events'  => $aEvents     ,
+                                      'births'  => $aBirths     ,
+                                      'deaths'  => $aDeaths     ,
+                                      'entity'  => $szWikiEntity,
+                                    );
+                }   /* if ( ! is_null( $szWikiEntity ) ) */
+
+                if ( $this->storing )
+                {
+                    //echo $szCacheFile . " saved\n";
+                    $this->saveHashFile( $szCacheFile,$aRetVal );
+                    $this->addInfo( __METHOD__ . "(): data stored in {$szCacheFile}" );
+                }   /* if ( $this->storing ) */
+            }   /* if ( ! empty( $szXML  = Vaesoli::HTTP_GetURL( $szURL = ... ) ) ) */
+        }   /* End of ... Else of ... if ( true && $this->remembering && is_file( $szCacheFile ) ) */
+
+        end:
+        return ( $aRetVal );
+    }   /* End of Wikipedia.searchEvents() ============================================ */
     /* ================================================================================ */
 
 
@@ -1156,7 +1390,7 @@ class Wikipedia extends Utility implements iContext
 
 
     /* ================================================================================ */
-    /** {{*destruct()=
+    /** {{*__destruct()=
 
         Class destructor
 
@@ -1164,8 +1398,12 @@ class Wikipedia extends Utility implements iContext
         *}
 
         {*return
-            (void)      No return.
+            (void)      No return
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
     */
@@ -1182,3 +1420,44 @@ class Wikipedia extends Utility implements iContext
     /* ================================================================================ */
 }   /* End of class Wikipedia ========================================================= */
 /* ==================================================================================== */
+
+// Ceci me permet de parser la page pour y trouver les sections:
+// Permet d'avoir les sections de la page (tag <sections>...</section>
+//  - https://en.wikipedia.org/w/api.php?action=parse&page=May_1&format=xml
+// Là on voit que la section 4 représente les événements de 1901 à nos jours
+// Là on voit que la section 8 représente les naissances de 1901 à nos jours
+// Là on voit que la section 12 représente les décès de 1901 à nos jours
+//
+// Une fois qu'on connait le numéro de section, on peut prendre LA section en question
+// Par exemple, on prend la section 8 (naissances de 1901 à nos jours):
+//  - https://en.wikipedia.org/w/api.php?action=parse&page=May_1&section=8&format=xml
+//
+// Maintenant, la page https://en.wikipedia.org/wiki/1er_mai devrait donner un résultat
+// similaire MAIS ce n'est pas le cas (je pense que ces nazes de chez Wikipedia) ont
+// évolué petit à petit mais qu'ils n'ont JAMAIS mis leurs APIs à niveau!!!
+// En fait ... il faut passer à :
+//  - https://fr.wikipedia.org/w/api.php?action=parse&page=1er_mai&format=xml
+// On notera le "fr" en sous-domaine!!!!
+// Là on voit que la section 7 représente les événements du 20ème siècle
+// Là on voit que la section 8 représente les événements du 21ème siècle
+// ...
+// Là on voit que la section 34 représente les prénoms du jour
+//
+// Voilà de quoi aller à la page du 2 mai (français):
+//  - https://fr.wikipedia.org/w/api.php?action=parse&page=2_mai&format=xml
+//
+// Voici la page qui donne des infos sur le 23 Mai 2021:
+//  - https://en.wikipedia.org/wiki/Portal:Current_events/2021_May_22
+
+
+
+
+
+
+
+
+// Autres notes diverses avant que je ne trouve mon chemin!
+//  - https://en.wikipedia.org/w/api.php?action=parse&page=May_1&prop=sections&format=xml
+// Doc: https://www.mediawiki.org/wiki/API:Parsing_wikitext
+// La section est celle des naissances/Births
+// - https://en.wikipedia.org/w/api.php?action=parse&page=May_1&section=4&format=xml&prop=parsetree

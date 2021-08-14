@@ -163,11 +163,11 @@ namespace trql\documentor;
 use \trql\quitus\Mother                             as Mother;
 use \trql\quitus\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\schema\Thing                               as Thing;
-use \trql\schema\creativework\CreativeWork                 as CreativeWork;
+use \trql\schema\Thing                              as Thing;
+use \trql\schema\creativework\CreativeWork          as CreativeWork;
 use \trql\audience\Audience                         as Audience;
-use \trql\administrativearea\AdministrativeArea     as AdministrativeArea;
-use \trql\person\Person                             as Person;
+use \trql\schema\AdministrativeArea                 as AdministrativeArea;
+use \trql\schema\Person                             as Person;
 use \trql\postaladdress\PostalAddress               as PostalAddress;
 use \trql\softwaresourcecode\SoftwareSourceCode     as SoftwareSourceCode;
 use \trql\utility\Zip                               as Zip;
@@ -552,6 +552,10 @@ class Documentor extends CreativeWork implements iContext
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -713,7 +717,6 @@ class Documentor extends CreativeWork implements iContext
         $this->necroSignaling();
     }   /* End of Documentor.__destruct() ============================================= */
     /* ================================================================================ */
-
 }   /* End of class Documentor ======================================================== */
 /* ==================================================================================== */
 
@@ -1400,7 +1403,6 @@ Class DocumentorSourceFile extends DocumentorFile
 
         {*example
             $oDoc = new DocumentorSourceFile();
-
         *}
 
         {*seealso
@@ -1726,9 +1728,9 @@ Class DocumentorSourceFile extends DocumentorFile
                                         //require_once( $oClass->oSourceFile->szFileName );
 
                                         /* Et je crée un objet de la classe en question */
-                                        /* Exemple:    '\trql\AdministrativeArea\AdministrativeArea' */
+                                        /* Exemple:    '\trql\schema\AdministrativeArea' */
                                         $szClassName = "\\{$oClass->oSourceFile->szNamespace}\\{$oClass->name}";
-                                        //$o = new \trql\AdministrativeArea\AdministrativeArea();
+                                        //$o = new \trql\schema\AdministrativeArea();
                                         //$o = new $szClassName();
                                         //$aProps = get_object_vars( $o );
                                         //var_dump( $aProps );
@@ -4202,6 +4204,10 @@ Class DocumentorFunctionReturn extends DocumentorSourceFileObject
         {*return
             (void)      No return.
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
     */

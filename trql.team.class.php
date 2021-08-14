@@ -26,7 +26,7 @@
 namespace trql\team;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\organization\Organization         as Organization;
+use \trql\schema\organization\Organization         as Organization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

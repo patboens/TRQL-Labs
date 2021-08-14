@@ -26,6 +26,7 @@
     {*cdate                 11-01-21 13:12 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -42,10 +43,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\budget;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\monetaryamount\MonetaryAmount     as MonetaryAmount;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\schema\MonetaryAmount     as MonetaryAmount;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -64,6 +65,7 @@ defined( 'BUDGET_CLASS_VERSION'    ) or define( 'BUDGET_CLASS_VERSION'    ,'0.1'
 
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Budget extends MonetaryAmount
@@ -103,7 +105,7 @@ class Budget extends MonetaryAmount
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of Budget.__construct() ================================================ */

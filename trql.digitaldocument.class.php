@@ -26,6 +26,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -42,7 +43,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\digitaldocument;
+namespace trql\schema;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\document\Document     as Document;
@@ -123,8 +124,7 @@ class DigitalDocument extends Document
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
-
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of DigitalDocument.__construct() ======================================= */
@@ -158,4 +158,3 @@ class DigitalDocument extends Document
     /* ================================================================================ */
 }   /* End of class DigitalDocument =================================================== */
 /* ==================================================================================== */
-?>

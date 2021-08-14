@@ -185,7 +185,7 @@ class DefinedTermSet extends CreativeWork
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         //$this->die( __CLASS__ . ' has NOT been tested yet! Disable this line when you have tested the class.' );
 
@@ -236,7 +236,7 @@ class DefinedTermSet extends CreativeWork
 
         {*example
         use \trql\vaesoli\Vaesoli                   as Vaesoli;
-        use \trql\definedtermset\DefinedTermSet     as DefinedTermSet;
+        use \trql\schema\DefinedTermSet     as DefinedTermSet;
         
         $oGlossary = new DefinedTermSet();
         [b]$oGlossary->load();[/b]
@@ -292,7 +292,7 @@ class DefinedTermSet extends CreativeWork
 
         {*example
         use \trql\vaesoli\Vaesoli                   as Vaesoli;
-        use \trql\definedtermset\DefinedTermSet     as DefinedTermSet;
+        use \trql\schema\DefinedTermSet     as DefinedTermSet;
 
         $oGlossary = new DefinedTermSet();
         $oGlossary->load();

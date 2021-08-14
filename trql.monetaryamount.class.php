@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -33,6 +31,7 @@
     {*cdate                 26-08-2020 18:49 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -49,10 +48,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\monetaryamount;
+namespace trql\schema;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\structuredvalue\StructuredValue    as StructuredValue;
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\schema\StructuredValue    as StructuredValue;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -88,6 +87,8 @@ defined( 'MONETARYAMOUNT_CLASS_VERSION' ) or define( 'MONETARYAMOUNT_CLASS_VERSI
         This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
         on 26-08-2020 18:49.
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -148,7 +149,7 @@ class MonetaryAmount extends StructuredValue
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of MonetaryAmount.__construct() ======================================== */

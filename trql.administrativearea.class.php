@@ -57,12 +57,12 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\administrativearea;
+namespace trql\schema;
 
-use \trql\quitus\Mother                             as Mother;
-use \trql\quitus\iContext                           as iContext;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\place\Place                               as Place;
+use \trql\quitus\Mother         as Mother;
+use \trql\quitus\iContext       as iContext;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\schema\Place          as Place;
 
 use DOMDocument;
 use DOMXPath;
@@ -136,7 +136,7 @@ class AdministrativeArea extends Place implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of AdministrativeArea.__construct() ==================================== */

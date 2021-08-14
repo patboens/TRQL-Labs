@@ -30,6 +30,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -61,11 +62,16 @@ use trql\schema\organization\Organization   as Organization;
 use \trql\XML\XML                           as XML;
 use \trql\businesscase\BusinessCase         as BusinessCase;
 use \trql\schema\Person                     as Person;
-use \trql\budget\Budget                     as Budget;
-use \trql\sprint\Sprint                     as Sprint;
-use \trql\digitaldocument\DigitalDocument   as DigitalDocument;
+use \trql\quitus\Budget                     as Budget;
+use \trql\quitus\Sprint                     as Sprint;
+use \trql\schema\DigitalDocument            as DigitalDocument;
 use \trql\user\User                         as User;
 use \ReflectionClass                        as RF;
+use \trql\html\Form                         as Form;
+use \trql\html\Fieldset                     as Fieldset;
+use \trql\html\Formset                      as Formset;
+use \trql\html\Input                        as Input;
+use \trql\quitus\Portfolio                  as Portfolio;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -87,6 +93,21 @@ if ( ! defined( 'DIGITALDOCUMENT_CLASS_VERSION' ) )
 
 if ( ! defined( 'USER_CLASS_VERSION' ) )
     require_once( 'trql.user.class.php' );
+
+if ( ! defined( 'FORM_CLASS_VERSION' ) )
+    require_once( 'trql.form.class.php' );
+
+if ( ! defined( 'FIELDSET_CLASS_VERSION' ) )
+    require_once( 'trql.fieldset.class.php' );
+
+if ( ! defined( 'FORMSET_CLASS_VERSION' ) )
+    require_once( 'trql.formset.class.php' );
+
+if ( ! defined( 'INPUT_CLASS_VERSION' ) )
+    require_once( 'trql.input.class.php' );
+
+if ( ! defined( 'PORTFOLIO_CLASS_VERSION' ) )
+    require_once( 'trql.portfolio.class.php' );
 
 
 defined( 'PROJECT_CLASS_VERSION'    ) or define( 'PROJECT_CLASS_VERSION'    ,'0.1' );
@@ -117,6 +138,7 @@ defined( 'ASPIRATION_CLASS_VERSION' ) or define( 'ASPIRATION_CLASS_VERSION' ,'0.
         on 28-08-2020 16:28.
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Project extends Organization
@@ -137,6 +159,7 @@ class Project extends Organization
                                                                                                                                         or design, that is carefully planned to achieve a
                                                                                                                                         particular aim *} */
     public      $oParentPortfolio               = null;             /* {*property   $oParentPortfolio               (Portfolio)         The portfolio this project belongs to. *} */
+    public      $portfolioId                    = null;             /* {*property   $portfolioId                    (string)            Parent Portfolio ID. *} */
     public      $oBusinessCase                  = null;             /* {*property   $oBusinessCase                  (BusinessCase)      Reasoning for initiating a project or task, presented in
                                                                                                                                         a well-structured written document, but may also come in
                                                                                                                                         the form of a short verbal agreement or presentation
@@ -150,7 +173,7 @@ class Project extends Organization
     public      $aDeliverables                  = null;             /* {*property   $aDeliverables                  (array)             Array of expected deliverables ([c]trq.deliverable.class.php[/c]). *} */
     public      $aDocuments                     = null;             /* {*property   $aDocuments                     (array)             Array of documents ([c]trq.document.class.php[/c]). *} */
     public      $aInDependencies                = null;             /* {*property   $aInDependencies                (array)             Array of projects that must deliver an output for THIS project to be able to go ahead *} */
-    public      $aOutDependencies               = null;             /* {*property   $aOutDependencies               (array)             Array of projects that are expecting THIS project to delievr an output to be able to go ahead *} */
+    public      $aOutDependencies               = null;             /* {*property   $aOutDependencies               (array)             Array of projects that are expecting THIS project to deliver an output to be able to go ahead *} */
     public      $aDraft                         = null;             /* {*property   $aDraft                         (array)             Array of short draft messages *} */
     public      $szPhase                        = null;             /* {*property   $szPhase                        (string)            Enumeration: bubble, to-start, started, done (used in Kanban column) *} */
     public      $szStatus                       = null;             /* {*property   $szStatus                       (string)            Enumeration: running, on-hold, abandonned, completed *} */
@@ -159,9 +182,13 @@ class Project extends Organization
     public      $endDate                        = null;             /* {*property   $endDate                        (Date|DateTime)     The end date and time of the item (in ISO 8601 date format). *} */
     public      $startDate                      = null;             /* {*property   $startDate                      (Date|DateTime)     The start date and time of the item (in ISO 8601 date format). *} */
     public      $szGroups                       = null;             /* {*property   $szGroups                       (string)            ';' separated list of groups whose member can have access to the Project. *} */
-    public      $szMailto                       = 'mailto:';        /* {*property   $szMailto                       (string)            The page that should be used to send a mail. If value is 'mailto:', then the local 
+    public      $szMailto                       = 'mailto:';        /* {*property   $szMailto                       (string)            The page that should be used to send a mail. If value is 'mailto:', then the local
                                                                                                                                         email facility will be used *} */
-
+    public      $ref                            = null;             /* {*property   $ref                            (string)            Identifies a unique object. It differs from @var.identifier in the sense that the latter
+                                                                                                                                        serves internal purposes while @var.ref is more public reference, something that the global
+                                                                                                                                        system uses *} */
+    public      $backColor                      = null;             /* {*property   $backColor                      (string)            The background color that must be used when displaying this project in a kanban or taskboard *} */
+    public      $foreColor                      = null;             /* {*property   $foreColor                      (string)            The foreground color that must be used when displaying this project in a kanban or taskboard *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -183,11 +210,17 @@ class Project extends Organization
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
+
+        //if ( is_array( $this->self['family'] ) )
+        //{
+        //    var_dump( $this->self['family'] );
+        //    $this->die('BOUM');
+        //}
 
         $tStart         = microtime( true );
 
-        // La classe de Business Case n'est pas encore utilisée.
+        // La classe "Business Case" n'est pas encore utilisée.
         // On ne la charge donc pas d'emblée. On verra plus tard
         // comment faire.
         //$this->oBusinessCase    = new BusinessCase();
@@ -228,6 +261,7 @@ class Project extends Organization
     }   /* End of Project.resolveVars() =============================================== */
     /* ================================================================================ */
 
+
     // Afin d'éviter de perdre du temps lors de la création de l'objet, on
     // charge les classes dont on a éventuellement besoin plus tard, ICI!
     protected function loadClassesIfNotFound()
@@ -239,6 +273,7 @@ class Project extends Organization
                 require_once( 'trql.budget.class.php' );
 
             $this->oBudget = new Budget();
+            $this->oBudget->noFamily();
 
         }   /* if ( ! class_exists( 'Budget') ) */
 
@@ -360,7 +395,7 @@ class Project extends Organization
 
 
     public function __call( $szMethod,$args )
-
+    /*-------------------------------------*/
     {
         switch ( strtolower( trim( $szMethod ) ) )
         {
@@ -396,7 +431,6 @@ class Project extends Organization
         $this->necroSignaling();
     }   /* End of Project.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class Project =========================================================== */
 /* ==================================================================================== */
 
@@ -413,6 +447,8 @@ class Project extends Organization
         subOrganization/parentOrganization to indicate project sub-structures.
 
     *}
+
+    *}}
 
  */
 /* ==================================================================================== */
@@ -453,7 +489,7 @@ class Aspiration extends Project
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of Aspiration.__construct() ============================================ */
@@ -484,7 +520,7 @@ class Aspiration extends Project
 
         $this->loadClassesIfNotFound();
 
-        if ( true && $this->remembering && vaesoli::FIL_File1OlderThanFile2( $szCacheFile,$szFile ) )
+        if ( false && $this->remembering && vaesoli::FIL_File1OlderThanFile2( $szCacheFile,$szFile ) )
         {
             $tStart     = microtime( true );
             $o          = vaesoli::FIL_getHashFile( $szCacheFile );
@@ -525,6 +561,7 @@ class Aspiration extends Project
                 $this->szStorage            = $szFile;
 
                 $this->identifier           =            trim( $oDom->documentElement->getAttribute( 'identifier'   ) );
+                $this->ref                  =            trim( $oDom->documentElement->getAttribute( 'ref'          ) );
                 $this->startDate            = strtotime( trim( $oDom->documentElement->getAttribute( 'startDate'    ) ) );
                 $this->endDate              = strtotime( trim( $oDom->documentElement->getAttribute( 'endDate'      ) ) );
                 $this->szPriority           =            trim( $oDom->documentElement->getAttribute( 'priority'     ) );
@@ -533,6 +570,7 @@ class Aspiration extends Project
                 $this->oBudget->value       =    (float) trim( $oDom->documentElement->getAttribute( 'budget'       ) );
                 $this->oBudget->currency    =            trim( $oDom->documentElement->getAttribute( 'currency'     ) );
                 $this->szGroups             =            trim( $oDom->documentElement->getAttribute( 'groups'       ) );
+                $this->portfolioId          =            trim( $oDom->documentElement->getAttribute( 'portfolio-id' ) );
 
                 //var_dump( $this->oBudget );
                 //die();
@@ -696,6 +734,17 @@ class Aspiration extends Project
                     }   /* if ( ( $o = $oXPath->query( 'Documents' ) ) && ( $o->length > 0 ) ) */
                 }   /* Documents ========================================================== */
 
+                {   /* Display ============================================================ */
+                    if ( ( $o = $oXPath->query( 'Display' ) ) && ( $o->length > 0 ) )
+                    {
+                        $oDisplayNode    = $o->item(0);
+
+                        $this->backColor = $oDisplayNode->getAttribute( 'backColor' );
+                        $this->foreColor = $oDisplayNode->getAttribute( 'foreColor' );
+                    }   /* if ( ( $o = $oXPath->query( 'Display' ) ) && ( $o->length > 0 ) ) */
+                }   /* Display ============================================================ */
+
+
                 vaesoli::FIL_saveHashFile( $szCacheFile,$this );
 
                 //var_dump( $this->aStakeholders );
@@ -707,9 +756,46 @@ class Aspiration extends Project
             }
         }   /* if ( is_file( $szFile ) ) */
 
+        if ( $bRetVal )
+            $this->oParentPortfolio = $this->findPortfolio();
+
         end:
         return ( $bRetVal );
     }   /* End of Aspiration.load() =================================================== */
+    /* ================================================================================ */
+
+
+    public function findPortfolio( $szID = null )
+    /*-----------------------------------------*/
+    {
+        $oRetVal = null;
+
+        if ( ! is_string( $szID ) )
+            $szID = $this->portfolioId;
+
+        if ( is_string( $szID ) && ! empty( $szID ) )
+        {
+            $szDir = vaesoli::FIL_RealPath( vaesoli::FIL_ResolveRoot( dirname( $this->szStorage ) ) );
+
+            if ( is_array( $aFiles = vaesoli::FIL_aFilesEx( vaesoli::FIL_RealPath( $szDir . '/*.portfolio.xml' ) ) ) && count( $aFiles ) > 0 )
+            {
+                $oPortfolio = new Portfolio();
+
+                foreach( $aFiles as $szFile )
+                {
+                    $oPortfolio->load( $szFile );
+
+                    if ( $oPortfolio->identifier === $szID )
+                    {
+                        $oRetVal = $oPortfolio;
+                        break;
+                    }   /* if ( $oAspiration->identifier === $szID ) */
+                }   /* foreach( $aFiles as $szFile ) */
+            }   /* if ( is_array( $aFiles = vaesoli::FIL_aFilesEx( vaesoli::FIL_RealPath( $szDir . '/*.portfolio.xml' ) ) ) && count( $aFiles ) > 0 ) */
+        }   /* if ( is_string( $szID ) && ! empty( $szID ) ) */
+
+        return ( $oRetVal );
+    }   /* End of Aspiration.findPortfolio() ========================================== */
     /* ================================================================================ */
 
 
@@ -809,6 +895,11 @@ class Aspiration extends Project
         {
             $szRetVal .= "<p class=\"warning\">No Sprint found</p>\n";
         }
+
+        $szRetVal .= '<h3 class="sectionTitle newSprint">New Sprint</h3>';
+
+        $oSprint = new Sprint();
+        $szRetVal .= $oSprint->__toForm();
 
         end:
         return ( $szRetVal );
@@ -1013,8 +1104,9 @@ class Aspiration extends Project
     /*-------------------------*/
     {
         //var_dump( $this->szStorage );
-        //die();
         $szMask = preg_replace('/\.xml\z/si','',$this->szStorage ) . '.sprint.*.xml';
+        //var_dump( $szMask );
+        //die();
 
         $tStart = microtime( true );
         if ( is_array( $aFiles = vaesoli::FIL_aFilesEx( $szMask ) ) && count( $aFiles ) > 0 )
@@ -1050,9 +1142,13 @@ class Aspiration extends Project
     {
         $szRetVal = '';
 
-        $szRetVal = "<span class=\"identity\"><b class=\"name\">{$this->name}</b> (<span class=\"codeName\">{$this->szCodeName}</span><span class=\"identifier\"> &#8212; {$this->identifier}</span>)<br />" .
+        $szRetVal = "<span class=\"identity\"><b class=\"name\">{$this->name}</b> (<span class=\"codeName\">{$this->szCodeName}</span><span class=\"ref\"> &#8212; {$this->ref}</span><span class=\"identifier\"> &#8212; {$this->identifier}</span>)<br />" .
                     date( 'd-m-Y',$this->startDate ) . " &#8213; " .
                     date( 'd-m-Y',$this->endDate   ) . "</span>";
+
+        //$szRetVal = "<span class=\"identity\">Hello</span>";
+        //var_dump( $this );
+        //die();
 
         return ( $szRetVal );
     }   /* End of Aspiration.identity() =============================================== */
@@ -1065,6 +1161,7 @@ class Aspiration extends Project
         $szRetVal = '';
 
         $szRetVal .= "<p>ID: {$this->identifier}</p>\n";
+        $szRetVal .= "<p>Ref: {$this->ref}</p>\n";
         $szRetVal .= "<p>Name: {$this->name}</p>\n";
         $szRetVal .= "<p>CodeName: {$this->szCodeName}</p>\n";
         $szRetVal .= "<p>Budget: {$this->oBudget->value} {$this->oBudget->currency}</p>\n";
@@ -1080,11 +1177,215 @@ class Aspiration extends Project
     /* ================================================================================ */
 
 
-    public function __toString()
-    /*------------------------*/
+    public function __toString():string
+    /*-------------------------------*/
     {
         return ( $this->__toHTML() );
     }   /* End of Aspiration.__toString() ============================================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*__toForm()=
+
+        Returns the object as a form
+
+        {*params
+        *}
+
+        {*return
+            (string)        HTML Code corresponding to a form of the object
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __toForm(): string
+    /*------------------------------*/
+    {
+        $oForm                      = new Form();
+        $oForm->szClass             = $this->szClass;
+        $oForm->szOnSubmit          = $this->szOnSubmit;
+
+        $oForm->settings['withBR']  = false;
+
+        {   /* Create a fieldset and add the field set to the form */
+            $oFieldset              = new Fieldset();
+            $oFieldset->szCaption   = 'Aspiration';
+
+            {   /* Adding zones to the fieldset */
+                $oFieldset->add( new Input( array( 'name'           =>  'ID'                                                                                ,
+                                                   'type'           =>  'txt'                                                                               ,
+                                                   'label'          =>  'ID'                                                                                ,
+                                                   'lang'           =>  'en'                                                                                ,
+                                                   'tooltip'        =>  'ID of the aspiration. Leave it empty for a new aspiration.'                        ,
+                                                   'required'       =>  false                                                                               ,
+                                                   'delete'         =>  true                                                                                ,
+                                                   'help'           =>  false                                                                               ,
+                                                   'value'          =>  $this->identifier                                                                   ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'ref'                                                                               ,
+                                                   'type'           =>  'txt'                                                                               ,
+                                                   'label'          =>  'Ref.'                                                                              ,
+                                                   'lang'           =>  'en'                                                                                ,
+                                                   'tooltip'        =>  'Public identification number of the aspiration.'                                   ,
+                                                   'required'       =>  true                                                                                ,
+                                                   'delete'         =>  true                                                                                ,
+                                                   'help'           =>  false                                                                               ,
+                                                   'value'          =>  $this->ref                                                                          ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Name'                                                                              ,
+                                                   'type'           =>  'txt'                                                                               ,
+                                                   'label'          =>  'Name'                                                                              ,
+                                                   'lang'           =>  'en'                                                                                ,
+                                                   'tooltip'        =>  'Enter a name for this aspiration'                                                  ,
+                                                   'required'       =>  true                                                                                ,
+                                                   'delete'         =>  true                                                                                ,
+                                                   'help'           =>  false                                                                               ,
+                                                   'value'          =>  $this->name                                                                         ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'CodeName'                                                                          ,
+                                                   'type'           =>  'txt'                                                                               ,
+                                                   'label'          =>  'Code Name'                                                                         ,
+                                                   'lang'           =>  'en'                                                                                ,
+                                                   'tooltip'        =>  'Enter a code name for this aspiration'                                             ,
+                                                   'required'       =>  true                                                                                ,
+                                                   'delete'         =>  true                                                                                ,
+                                                   'help'           =>  false                                                                               ,
+                                                   'value'          =>  $this->szCodeName                                                                   ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Phase'                                                                             ,
+                                                   'type'           =>  'cbo'                                                                               ,
+                                                   'label'          =>  'Phase'                                                                             ,
+                                                   'options'        =>  '<option value="bubble">Bubble</option><option value="tostart">To Start</option>'   .
+                                                                        '<option value="started">Started</option><option value="done">Done</option>'        ,
+                                                   'lang'           =>  'en'                                                                                ,
+                                                   'tooltip'        =>  'Enter the Kanban phase of the Aspiration'                                          ,
+                                                   'required'       =>  true                                                                                ,
+                                                   'delete'         =>  true                                                                                ,
+                                                   'help'           =>  false                                                                               ,
+                                                   'value'          =>  strtolower( trim( $this->szPhase ) )                                                ,
+                                                 ) ) );
+
+                /*
+                $oFieldset->add( new Input( array( 'name'           =>  'Agent'                                         ,
+                                                   'type'           =>  'txt'                                           ,
+                                                   'label'          =>  'Assignee'                                      ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Who this task is assigned to'                  ,
+                                                   'required'       =>  false                                           ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'value'          =>  $this->agent                                    ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Type'                                          ,
+                                                   'type'           =>  'cbo'                                           ,
+                                                   'label'          =>  'Task type'                                     ,
+                                                   'options'        =>  '<option value="change">Change</option><option value="defect">Defect</option>',
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Enter the type of task'                        ,
+                                                   'maxlength'      =>  3                                               ,
+                                                   'required'       =>  false                                           ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'step'           =>  1                                               ,
+                                                   'style'          =>  'max-width:11em;width:11em;min-width:11em;'     ,
+                                                   'value'          =>  'change'                                        ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Priority'                                      ,
+                                                   'type'           =>  'txt'                                           ,
+                                                   'label'          =>  'Priority'                                      ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Enter the priority of this task'               ,
+                                                   'maxlength'      =>  3                                               ,
+                                                   'required'       =>  true                                            ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'step'           =>  1                                               ,
+                                                   'style'          =>  'max-width:5em;width:5em;min-width:5em;'        ,
+                                                   'value'          =>  $this->priority                                 ,
+                                                 ) ) );
+
+                // Créé : commentaire JUSTE pour le UTF-8
+                $oFieldset->add( new Input( array( 'name'           =>  'Credits'                                       ,
+                                                   'type'           =>  'num'                                           ,
+                                                   'label'          =>  'Credits'                                       ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Credits of the task'                           ,
+                                                   'required'       =>  false                                           ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'step'           =>  1                                               ,
+                                                   'style'          =>  'max-width:5em;width:5em;min-width:5em;'        ,
+                                                   'value'          =>  $this->credits                                  ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Due'                                           ,
+                                                   'type'           =>  'dat'                                           ,
+                                                   'label'          =>  'Due date'                                      ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Date the task is due'                          ,
+                                                   'required'       =>  false                                           ,
+                                                   'help'           =>  false                                           ,
+                                                   'style'          =>  'max-width:11em;width:11em;min-width:11em;'     ,
+                                                   'value'          =>  ''                                              ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Description'                               ,
+                                                   'type'           =>  'edt'                                       ,
+                                                   'label'          =>  'Description'                               ,
+                                                   'lang'           =>  'en'                                        ,
+                                                   'tooltip'        =>  'Enter a name for this task'                ,
+                                                   'required'       =>  true                                        ,
+                                                   'delete'         =>  true                                        ,
+                                                   'help'           =>  false                                       ,
+                                                   'rows'           =>  8                                           ,
+                                                   'style'          =>  'resize:vertical;'                          ,
+                                                   'value'          =>  trim( $this->description )                  ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Late'                                      ,
+                                                   'type'           =>  'chk'                                       ,
+                                                   'label'          =>  'Late'                                      ,
+                                                   'lang'           =>  'en'                                        ,
+                                                   'tooltip'        =>  'Is this task late?'                        ,
+                                                   'required'       =>  false                                       ,
+                                                   'style'          =>  'max-width:3em;width:3em;min-width:3em;'    ,
+                                                   'value'          =>  false                                       ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Attention'                                 ,
+                                                   'type'           =>  'chk'                                       ,
+                                                   'label'          =>  'Attention'                                 ,
+                                                   'lang'           =>  'en'                                        ,
+                                                   'tooltip'        =>  'Requires attention?'                       ,
+                                                   'required'       =>  false                                       ,
+                                                   'style'          =>  'max-width:3em;width:3em;min-width:3em;'    ,
+                                                   'value'          =>  false                                       ,
+                                                 ) ) );
+                */
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Submit'                                    ,
+                                                   'type'           =>  'cmd'                                       ,
+                                                   'class'          =>  'shadow'                                    ,
+                                                   'lang'           =>  'en'                                        ,
+                                                   'tooltip'        =>  'Click to submit the values of a new task'  ,
+                                                   'value'          =>  'Create'                                    ,
+                                                 ) ) );
+            }   /* Adding zones to the fieldset */
+
+            $oForm->add( $oFieldset );
+
+        }   /* Create a fieldset and add the field set to the form */
+
+        return ( (string) $oForm );
+    }   /* End of Aspiration.__toForm() =============================================== */
     /* ================================================================================ */
 
 

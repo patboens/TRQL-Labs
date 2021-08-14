@@ -8,6 +8,7 @@
     {*cdate                 24-08-2020 12:00 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -31,10 +32,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\entertainmentbusiness;
+namespace trql\schema\business;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\business\LocalBusiness       as LocalBusiness;
+use \trql\schema\business\LocalBusiness     as LocalBusiness;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -87,6 +88,10 @@ class EntertainmentBusiness extends LocalBusiness
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -94,7 +99,7 @@ class EntertainmentBusiness extends LocalBusiness
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of EntertainmentBusiness.__construct() ================================= */
@@ -113,6 +118,10 @@ class EntertainmentBusiness extends LocalBusiness
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -128,5 +137,3 @@ class EntertainmentBusiness extends LocalBusiness
     /* ================================================================================ */
 }   /* End of class EntertainmentBusiness ============================================= */
 /* ==================================================================================== */
-
-?>

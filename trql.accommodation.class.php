@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -35,6 +33,7 @@
     {*cdate                 26-08-2020 08:24 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -53,9 +52,8 @@
 /****************************************************************************************/
 namespace trql\accommodation;
 
-use \trql\schema\Thing           as Thing;
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\place\Place           as Place;
+use \trql\schema\Place          as Place;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

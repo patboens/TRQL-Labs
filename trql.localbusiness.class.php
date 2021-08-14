@@ -28,6 +28,7 @@
     {*cdate                 28-08-2020 14:09 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -99,14 +100,14 @@ class LocalBusiness extends Organization implements iContext
                              );
 
 
-    public  $currenciesAccepted         = null;                     /* {*property   $currenciesAccepted             (string)                The currency accepted.
+    public      $currenciesAccepted     = null;                     /* {*property   $currenciesAccepted             (string)                The currency accepted.
                                                                                                                     
                                                                                                                                             Use standard formats: ISO 4217 currency format
                                                                                                                                             e.g. "USD"; Ticker symbol for
                                                                                                                                             cryptocurrencies e.g. "BTC"; well known names for Local Exchange Tradings
                                                                                                                                             Systems (LETS) and other currency types e.g. "Ithaca HOUR". *} */
                                                                                                                     
-    public  $openingHours               = null;                     /* {*property   $openingHours                   (string)                The general opening hours for a business. Opening hours can be specified
+    public      $openingHours           = null;                     /* {*property   $openingHours                   (string)                The general opening hours for a business. Opening hours can be specified
                                                                                                                                             as a weekly time range, starting with days, then times per day.
                                                                                                                                             Multiple days can be listed with commas ',' separating each day.
                                                                                                                                             Day or time ranges are specified using a hyphen '-'.
@@ -122,9 +123,9 @@ class LocalBusiness extends Organization implements iContext
                                                                                                                                             If a business is open 7 days a week, then it can be specified as <time
                                                                                                                                             itemprop="openingHours" datetime="Mo-Su">Monday through Sunday, all day</time>. *} */
                                                                                                                     
-    public  $paymentAccepted            = null;                     /* {*property   $paymentAccepted                (string)                Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc. *} */
-    public  $priceRange                 = null;                     /* {*property   $priceRange                     (string)                The price range of the business, for example $$$. *} */
-
+    public      $paymentAccepted        = null;                     /* {*property   $paymentAccepted                (string)                Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc. *} */
+    public      $priceRange             = null;                     /* {*property   $priceRange                     (string)                The price range of the business, for example $$$. *} */
+                
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId             = 'Q62849941';             /* {*property    $wikidataId                     (string)                Wikidata ID (https://www.wikidata.org/wiki/Wikidata:Main_Page) : Particular 
                                                                                                                                             physical business or branch of an organization *} */
@@ -143,6 +144,10 @@ class LocalBusiness extends Organization implements iContext
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -150,7 +155,7 @@ class LocalBusiness extends Organization implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of LocalBusiness.__construct() ========================================= */
@@ -210,6 +215,10 @@ class LocalBusiness extends Organization implements iContext
         {*return
             (void)      No return
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
     */

@@ -27,7 +27,7 @@
     {*cdate                 11-03-21 08:23 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,10 +44,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\roadmap;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli   as Vaesoli;
-use \trql\plan\Plan         as Plan;
+use \trql\quitus\Plan       as Plan;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

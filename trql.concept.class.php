@@ -6,7 +6,7 @@
     {COMPANY} is a shortcut to "Lato Sensu Management"
 
     {RIGHTS} is a shortcut used by trql.documentor.class.php. In general the material
-    presented here is available under the conditions of 
+    presented here is available under the conditions of
     https://creativecommons.org/licenses/by-sa/4.0/
 
     Other shortcuts exist. They exist to make it simple to change the formulation
@@ -19,80 +19,60 @@
 */
 
 /** {{{*fheader
-    {*file                  trql.librarysystem.class.php *}
-    {*purpose               A LibrarySystem is a collaborative system amongst several
-                            libraries. *}
+    {*file                  trql.concept.class.php *}
+    {*purpose               A semantic unit understood in different ways, e.g. as mental
+                            representation, ability or abstract object. *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
-    {*cdate                 26-08-2020 18:49 *}
+    {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
     -------------------------------------------------------------------------------------
 
     {*chist
-        {*mdate 26-08-2020 18:49 *}
+        {*mdate 28-08-2020 16:28 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Original creation
         *}
     *}
 
-
-    {*chist
-        {*mdate 14-02-21 10:44 *}
-        {*author {PYB} *}
-        {*v 8.0.0000 *}
-        {*desc              1)  Standardizing the [c]__destruct() method[/c]
-        *}
-    *}
-
     *}}} */
-
 /****************************************************************************************/
-namespace trql\librarysystem;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\schema\organization\Organization     as Organization;
+use \trql\schema\Thing                  as Thing;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'ORGANIZATION_CLASS_VERSION' ) )
-    require_once( 'trql.organization.class.php' );
+if ( ! defined( 'THING_CLASS_VERSION' ) )
+    require_once( 'trql.thing.class.php' );
 
-defined( 'LIBRARYSYSTEM_CLASS_VERSION' ) or define( 'LIBRARYSYSTEM_CLASS_VERSION','0.1' );
+defined( 'CONCEPT_CLASS_VERSION' ) or define( 'CONCEPT_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
-/** {{*class LibrarySystem=
+/** {{*class Concept=
 
     {*desc
 
-        A LibrarySystem is a collaborative system amongst several libraries.
+        A semantic unit understood in different ways, e.g. as mental representation,
+        ability or abstract object
 
     *}
 
-    {*credits
-        The whole concept is derived from the fabulous work of Schema.org
-        under the terms of their license:
-        [url]http://schema.org/docs/terms.html[/url]
-    *}
-
-    {*doc [url]http://schema.org/LibrarySystem[/url] *}
-
-    {*warning
-        This class has been generated automatically by [c]trql.schemaclassgenerator.class.php[/c]
-        on 26-08-2020 18:49.
-    *}
+    *}}
  */
 /* ==================================================================================== */
-class LibrarySystem extends Organization
-/*------------------------------------*/
+class Concept extends Thing
+/*------------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)     Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
@@ -102,8 +82,8 @@ class LibrarySystem extends Organization
                              );
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = 'Q26271642';      /* {*property   $wikidataId                     (string)                        Wikidata ID. Consortium among libraries for co-operation *} */
-
+    public      $wikidataId                     = 'Q151885';        /* {*property   $wikidataId             (string)            Wikidata ID. semantic unit understood in different ways, e.g. as 
+                                                                                                                                mental representation, ability or abstract object *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -118,6 +98,10 @@ class LibrarySystem extends Organization
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -126,14 +110,15 @@ class LibrarySystem extends Organization
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->classIcon = $this->self['icon'];
 
         return ( $this );
-    }   /* End of LibrarySystem.__construct() ========================================= */
+    }   /* End of Concept.__construct() =============================================== */
     /* ================================================================================ */
 
 
     /* ================================================================================ */
-    /** {{*__destruct()=
+    /** {{*destruct()=
 
         Class destructor
 
@@ -141,8 +126,12 @@ class LibrarySystem extends Organization
         *}
 
         {*return
-            (void)      No return
+            (void)      No return.
         *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
 
         *}}
     */
@@ -155,8 +144,7 @@ class LibrarySystem extends Organization
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of LibrarySystem.__destruct() ========================================== */
+    }   /* End of Concept.__destruct() ================================================ */
     /* ================================================================================ */
-}   /* End of class LibrarySystem ===================================================== */
+}   /* End of class Concept =========================================================== */
 /* ==================================================================================== */
-?>

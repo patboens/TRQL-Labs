@@ -68,10 +68,10 @@
 /****************************************************************************************/
 namespace trql\audience;
 
-use \trql\quitus\Mother                             as Mother;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\intangible\Intangible                     as Intangible;
-use \trql\administrativearea\AdministrativeArea     as AdministrativeArea;
+use \trql\quitus\Mother                 as Mother;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\Intangible             as Intangible;
+use \trql\schema\AdministrativeArea     as AdministrativeArea;
 
 use DOMDocument;
 use DOMXPath;
@@ -145,8 +145,9 @@ class Audience extends Intangible
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
+        return ( $this );
     }   /* End of Audience.__construct() ============================================== */
     /* ================================================================================ */
 

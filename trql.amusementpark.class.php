@@ -26,6 +26,7 @@
     {*cdate                 26-08-2020 14:41 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -54,7 +55,7 @@
 namespace trql\amusementpark;
 
 use \trql\vaesoli\Vaesoli                               as Vaesoli;
-use \trql\entertainmentbusiness\EntertainmentBusiness   as EntertainmentBusiness;
+use \trql\schema\business\EntertainmentBusiness   as EntertainmentBusiness;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -119,6 +120,10 @@ class AmusementPark extends EntertainmentBusiness
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -126,7 +131,7 @@ class AmusementPark extends EntertainmentBusiness
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of AmusementPark.__construct() ========================================= */
@@ -145,6 +150,10 @@ class AmusementPark extends EntertainmentBusiness
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -161,4 +170,3 @@ class AmusementPark extends EntertainmentBusiness
     /* ================================================================================ */
 }   /* End of class AmusementPark ===================================================== */
 /* ==================================================================================== */
-?>

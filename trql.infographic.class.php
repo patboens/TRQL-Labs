@@ -28,7 +28,7 @@
     {*cdate                 20-01-21 22:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -44,10 +44,10 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\infographic;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli                       as Vaesoli;
-use \trql\datavisualization\DataVisualization   as DataVisualization;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\quitus\DataVisualization      as DataVisualization;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -89,7 +89,6 @@ class infographic extends DataVisualization
                                                                                                                                         of information, data or knowledge intended to 
                                                                                                                                         present information quickly and clearly*} */
 
-
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 
@@ -103,6 +102,10 @@ class infographic extends DataVisualization
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -110,12 +113,32 @@ class infographic extends DataVisualization
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
+        return ( $this );
     }   /* End of infographic.__construct() =========================================== */
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __destruct()
     /*------------------------*/
     {

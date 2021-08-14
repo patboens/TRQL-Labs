@@ -19,12 +19,11 @@
 */
 
 /** {{{*fheader
-    {*file                  trql.task.class.php *}
-    {*purpose               Activity that needs to be accomplished within a defined
-                            period of time. *}
+    {*file                  trql.flashreport.class.php *}
+    {*purpose               Project Flash Report. *}
     {*author                {PYB} *}
     {*company               {COMPANY} *}
-    {*cdate                 10-01-21 12:27 *}
+    {*cdate                 29-07-21 09:05 *
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
     {*UTF-8                 Quel bel été sous le hêtre *}
@@ -34,10 +33,18 @@
     -------------------------------------------------------------------------------------
 
     {*chist
-        {*mdate 10-01-21 12:27 *}
+        {*mdate 29-07-21 09:05 *}
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Original creation
+        *}
+    *}
+
+    {*chist
+        {*mdate 04-08-21 07:25:12 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Modifications required for the Documentor
         *}
     *}
 
@@ -45,22 +52,22 @@
 /****************************************************************************************/
 namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\XML\XML                   as XML;
-use \trql\schema\action\Activity    as Activity;
-use \trql\html\Form                 as Form;
-use \trql\html\Fieldset             as Fieldset;
-use \trql\html\Formset              as Formset;
-use \trql\html\Input                as Input;
+use \trql\vaesoli\Vaesoli               as Vaesoli;
+use \trql\schema\creativework\Report    as Report;
+use \trql\quitus\RAG                    as RAG;
+use \trql\html\Form                     as Form;
+use \trql\html\Fieldset                 as Fieldset;
+use \trql\html\Formset                  as Formset;
+use \trql\html\Input                    as Input;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
-if ( ! defined( 'XML_CLASS_VERSION' ) )
-    require_once( 'trql.xml.class.php' );
+if ( ! defined( 'REPORT_CLASS_VERSION' ) )
+    require_once( 'trql.report.class.php' );
 
-if ( ! defined( 'ACTIVITY_CLASS_VERSION' ) )
-    require_once( 'trql.activity.class.php' );
+if ( ! defined( 'RAG_CLASS_VERSION' ) )
+    require_once( 'trql.rag.class.php' );
 
 if ( ! defined( 'FORM_CLASS_VERSION' ) )
     require_once( 'trql.form.class.php' );
@@ -74,24 +81,25 @@ if ( ! defined( 'FORMSET_CLASS_VERSION' ) )
 if ( ! defined( 'INPUT_CLASS_VERSION' ) )
     require_once( 'trql.input.class.php' );
 
-defined( 'TASK_CLASS_VERSION' ) or define( 'TASK_CLASS_VERSION' ,'0.1' );
+
+defined( 'FLASHREPORT_CLASS_VERSION' ) or define( 'FLASHREPORT_CLASS_VERSION','0.1' );
 
 /* ==================================================================================== */
-/** {{*class Task=
+/** {{*class FlashReport=
 
     {*desc
 
-        Activity that needs to be accomplished within a defined period of time.
+        A project Flash Report
 
     *}
 
     *}}
  */
 /* ==================================================================================== */
-class Task extends Activity
-/*-----------------------*/
+class FlashReport extends Report
+/*----------------------------*/
 {
-    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)             Fixed 'class' information. *} */
+    protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)     Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
                                'name'   => null         ,
                                'birth'  => null         ,
@@ -100,20 +108,16 @@ class Task extends Activity
                                'UIKey'  => null         ,
                              );
 
+    public      $reportNumber                   = null;             /* {*property   $reportNumber           (string)            The number or other unique designator assigned to a Report by the
+                                                                                                                                publishing organization. *} */
+
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId             = 'Q759676';                /* {*property   $wikidataId                     (string)            Activity that needs to be accomplished within a
-                                                                                                                                        defined period of time *} */
-
-    public      $szProgress             = null;                     /* {*property   $szProgress                     (string)            Free enumeration type (e.g. 'bubble', 'to-start', 'started', 'done', ...) *} */
-    public      $szStorage              = null;
-    public      $credits                = 0.0;                      /* {*property   $credits                        (float)             Number of credits required by this task (1 credit = 1 hour of undisturbed work) *} */
-    public      $szClass                = null;                     /* {*property   $szClass                        (string)            CSS class of the task when it needs to be rendered *} */
-    public      $dateCreated            = null;                     /* {*property   $dateCreated                    (Date|DateTime)     The date on which the task was created *} */
-    public      $active                 = null;                     /* {*property   $active                         (bool)              Is the task active or not? *} */
-    public      $attention              = false;                    /* {*property   $attention                      (bool)              Requires attention or not? *} */
-    public      $late                   = false;                    /* {*property   $late                           (bool)              Late or not? *} */
-    public      $szOnSubmit             = null;                     /* {*property   $szOnSubmit                     (string)            Submit clause of the form ([c]__toForm()[/c]) *} */
-
+    public      $wikidataId                     = 'Q10870555';      /* {*property   $wikidataId             (string)            Wikidata ID. Informational, formal, and detailed text. *} */
+    public      $RAG                            = null;             /* {*property   $RAG                    (RAG)               A Red-Amber-Green object made of sub-statuses (WikidataID - Q813912 - known as "condition") *} */
+    public      $pastActions                    = null;
+    public      $nextActions                    = null;
+    public      $previousMilestone              = null;             /* {*property   $previousMilestone      (Milestone)         The previous attained milestone *} */
+    public      $nextMilestone                  = null;             /* {*property   $nextMilestone          (Milestone)         The next milestone to attain *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -130,7 +134,7 @@ class Task extends Activity
 
         {*keywords constructors, destructors *}
 
-        {*seealso @fnc.__construct *}
+        {*seealso @fnc.__destruct *}
 
         *}}
     */
@@ -139,107 +143,13 @@ class Task extends Activity
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->classIcon = $this->self['icon'];
+
+        $this->RAG = new RAG();
 
         return ( $this );
-    }   /* End of Task.__construct() ================================================== */
-    /* ================================================================================ */
-
-
-    /* ================================================================================ */
-    /** {{*whoAmI()=
-
-        Returns the name of the class
-
-        {*params
-        *}
-
-        {*return
-            (string)        The name of the class (with no namespace)
-        *}
-
-        *}}
-    */
-    /* ================================================================================ */
-    public function whoAmI() : string
-    /*-----------------------------*/
-    {
-        return ( $this->self['name'] );
-    }   /* End of Task.whoAmI() ======================================================= */
-    /* ================================================================================ */
-
-
-    /* ================================================================================ */
-    /** {{*identity()=
-
-        Returns a brief HTML
-
-        {*params
-        *}
-
-        {*return
-            (string)        HTML Code corresponding to the current object. Used when 
-                            rendering a task/user story in a @class.TaskBoard or 
-                            @class.KanbanBoard.
-        *}
-
-        *}}
-    */
-    /* ================================================================================ */
-    public function identity() : string
-    /*-------------------------------*/
-    {
-        $szRetVal = '';
-
-        $szRetVal = "<span class=\"identity\"><b class=\"name\">{$this->name}</b>: "                                .
-            ( ! empty( $this->priority ) ? ( ' (<span class="priority">' . $this->priority . '</span>)' ) : '' )    .
-            ( ! empty( $this->agent    ) ? ( ' (<span class="agent">'    . $this->agent    . '</span>)' ) : '' )    .
-            " <span class=\"description\">{$this->description}</span>"                                              .
-            ( $this->attention ? '<span class="attention" title="Attention!"></span>' : '' )                        .
-            ( $this->late      ? '<span class="late" title="Late!"></span>'           : '' )                        .
-            " <span class=\"credits\" title=\"Requires {$this->credits} credits\">{$this->credits}</span></span>";
-
-        return ( $szRetVal );
-    }   /* End of Task.identity() ===================================================== */
-    /* ================================================================================ */
-
-
-    /* ================================================================================ */
-    /** {{*__toXML()=
-
-        Returns the Task in XML
-
-        {*params
-        *}
-
-        {*return
-            (string)        XML Code
-        *}
-
-        *}}
-    */
-    /* ================================================================================ */
-    public function __toXML(): string
-    /*-----------------------------*/
-    {
-        static $oXML = null;
-        $szRetVal = null;
-
-
-        if ( is_null( $oXML ) )
-            $oXML = new XML();
-
-        $oDom                       = new \DOMDocument( '1.0' );
-
-        $oDom->preserveWhiteSpace   = true;
-        $oDom->formatOutput         = true;
-
-        if ( $oDom->loadXML( $oXML->__toXML( $this ) ) )
-            $szRetVal = $oDom->saveXML();
-
-        end:
-        return ( $szRetVal );
-    }   /* End of Task.__toXML() ====================================================== */
+    }   /* End of FlashReport.__construct() =========================================== */
     /* ================================================================================ */
 
 
@@ -262,8 +172,12 @@ class Task extends Activity
     /*------------------------------*/
     {
         $oForm                      = new Form();
+
+        $this->die( "The " . __METHOD__ . "() method is not ready yet. Head to line " . __LINE__ . " to start implementing it!" );
+
         $oForm->szClass             = $this->szClass;
         $oForm->szOnSubmit          = $this->szOnSubmit;
+
 
         //var_dump( $oForm );
 
@@ -410,12 +324,12 @@ class Task extends Activity
         //var_dump( $oForm );
 
         return ( (string) $oForm );
-    }   /* End of Task.__toForm() ===================================================== */
+    }   /* End of FlashReport.__toForm() ============================================== */
     /* ================================================================================ */
 
 
     /* ================================================================================ */
-    /** {{*__destruct()=
+    /** {{*destruct()=
 
         Class destructor
 
@@ -423,7 +337,7 @@ class Task extends Activity
         *}
 
         {*return
-            (void)      No return
+            (void)      No return.
         *}
 
         {*keywords constructors, destructors *}
@@ -441,7 +355,7 @@ class Task extends Activity
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of Task.__destruct() =================================================== */
+    }   /* End of FlashReport.__destruct() ============================================ */
     /* ================================================================================ */
-}   /* End of class Task ============================================================== */
+}   /* End of class FlashReport ======================================================= */
 /* ==================================================================================== */

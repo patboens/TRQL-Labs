@@ -51,7 +51,7 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\organization;
+namespace trql\schema\organization;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
 use \trql\quitus\iContext               as iContext;
@@ -129,7 +129,7 @@ class EducationalOrganization extends CivicStructure implements iContext
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of EducationalOrganization.__construct() =============================== */

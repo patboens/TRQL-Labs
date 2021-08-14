@@ -54,7 +54,7 @@ namespace trql\organization;
 
 use \trql\quitus\iContext                           as iContext;
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\organization\EducationalOrganization      as EducationalOrganization;
+use \trql\schema\organization\EducationalOrganization      as EducationalOrganization;
 
 use DOMDocument;
 use DOMXPath;

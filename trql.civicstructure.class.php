@@ -61,7 +61,7 @@ namespace trql\civicstructure;
 use \trql\quitus\Mother                 as Mother;
 use \trql\quitus\iContext               as iContext;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\place\Place                   as Place;
+use \trql\schema\Place                   as Place;
 
 
 use DOMDocument;

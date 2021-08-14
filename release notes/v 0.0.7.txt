@@ -48,7 +48,7 @@ Change Log v 0.0.7
 
 4) All "action" classes modified to use the trql\schema\action namespace.
    All sources saved in UTF-8
-   
+
     - trql.acceptaction.class.php
     - trql.achieveaction.class.php
     - trql.action.class.php
@@ -169,25 +169,72 @@ Change Log v 0.0.7
 
 6) Thing and CreativeWork do NOT list class siblings anymore (self['family'])
    Thing does not call its parent::__construct() anymore for higher performance
-   
+
     - trql.aboutpage.class.php
+    - trql.academicdiscipline.class.php
+    - trql.account.class.php
+    - trql.actionaccessspecification.class.php
+    - trql.administrativearea.class.php
+    - trql.adultentertainment.class.php
     - trql.agent.class.php
+    - trql.amusementpark.class.php
+    - trql.animalshelter.class.php
+    - trql.aspiration.class.php
+    - trql.audience.class.php
+    - trql.bankaccount.class.php
+    - trql.broadcastservice.class.php
     - trql.browser.class.php
+    - trql.categorycode.class.php
+    - trql.categorycodeset.class.php
+    - trql.cdcpmdrecord.class.php
+    - trql.chart.class.php
     - trql.checkoutpage.class.php
+    - trql.city.class.php
     - trql.collectionpage.class.php
+    - trql.collegeoruniversity.class.php
     - trql.contactpage.class.php
+    - trql.cyclicprocess.class.php
+    - trql.datavisualization.class.php
+    - trql.definedterm.class.php
+    - trql.definedtermset.class.php
+    - trql.depositaccount.class.php
+    - trql.digitaldocument.class.php
+    - trql.educationalorganization.class.php
+    - trql.emailmessage.class.php
+    - trql.entertainmentbusiness.class.php
+    - trql.enumeration.class.php
     - trql.faqpage.class.php
     - trql.healthtopiccontent.class.php
     - trql.imagegallery.class.php
+    - trql.infographic.class.php
+    - trql.intangible.class.php
+    - trql.artist.class.php
+    - trql.investmentordeposit.class.php
     - trql.itempage.class.php
+    - trql.kanbanboard.class.php
     - trql.lexeme.class.php
     - trql.lexicalitem.class.php
+    - trql.localbusiness.class.php
     - trql.mediagallery.class.php
     - trql.medicalwebpage.class.php
+    - trql.message.class.php
+    - trql.mission.class.php
+    - trql.notedigitaldocument.class.php
+    - trql.offer.class.php
     - trql.paradeigma.class.php
     - trql.personororganization.class.php
+    - trql.place.class.php
+    - trql.postaladdress.class.php
+    - trql.project.class.php
+    - trql.rss.class.php
+    - trql.service.class.php
     - trql.sitemap.class.php
+    - trql.sprint.class.php
+    - trql.structuredvalue.class.php
     - trql.subject.class.php
+    - trql.task.class.php
+    - trql.timeline.class.php
+    - trql.user.class.php
     - trql.videogallery.class.php
     - trql.webapi.class.php
     - trql.webapplication.class.php
@@ -199,14 +246,6 @@ Change Log v 0.0.7
     - trql.wpfooter.class.php
     - trql.wpheader.class.php
     - trql.wpsidebar.class.php
-    - trql.emailmessage.class.php
-    - trql.message.class.php
-    - trql.postaladdress.class.php
-    - trql.bankaccount.class.php
-    - trql.account.class.php
-    - trql.user.class.php
-    - trql.rss.class.php
-
 
 7) The namespace of CreativeWork has been changed to "namespace trql\schema\creativework;"
     All subsequent classes changed:
@@ -294,44 +333,61 @@ Change Log v 0.0.7
     - trql.webpageelement.class.php
     - trql.website.class.php
     - trql.writtenwork.class.php
+    - trql.entertainmentbusiness.class.php
 
 8) Classes whose namespace has migrated to "quitus":
 
-    - trql.word.class.php
-    - trql.lexicalitem.class.php
-    - trql.lexeme.class.php
-    - trql.wikipedia.class.php
-    - trql.reference.class.php
-    - trql.footnotes.class.php
+    - trql.academicdiscipline.class.php
     - trql.account.class.php
-    - trql.user.class.php
-    - trql.user.class.php
+    - trql.budget.class.php
     - trql.catalog.class.php
+    - trql.chart.class.php
+    - trql.cyclicprocess.class.php
+    - trql.datavisualization.class.php
+    - trql.digitaldocument.class.php
+    - trql.footnotes.class.php
+    - trql.infographic.class.php
+    - trql.kanbanboard.class.php
+    - trql.lexeme.class.php
+    - trql.lexicalitem.class.php
+    - trql.mission.class.php
+    - trql.reference.class.php
+    - trql.sprint.class.php
+    - trql.task.class.php
+    - trql.timeline.class.php
+    - trql.user.class.php
+    - trql.wikipedia.class.php
+    - trql.word.class.php
 
 9) trql.newsarticle.class.php : szStorage property changed to shelter (shelter is a folder; storage is a file).
    __get() and __set() added to assure backward compatibility
-   
+
 10) trql.definedtermset.class.php :  __get() modified; __set() added
 
 11) trql.portfolio.class.php : szStorageFolder replaced by shelter (shelter is a folder; storage is a file)
 
 12) namespace trql\schema for the following classes:
 
-    - trql.citation.class.php 
-    - trql.emailmessage.class.php
-    - trql.message.class.php
+    - trql.bankaccount.class.php
+    - trql.citation.class.php
+    - trql.definedterm.class.php
     - trql.definedtermset.class.php
-    - trql.person.class.php
+    - trql.emailmessage.class.php
+    - trql.financialproduct.class.php
+    - trql.geocoordinates.class.php
+    - trql.intangible.class.php
+    - trql.message.class.php
+    - trql.monetaryamount.class.php
+    - trql.musicgroup.class.php
     - trql.organization.class.php
     - trql.performinggroup.class.php
-    - trql.musicgroup.class.php
-    - trql.radiostation.class.php
-    - trql.bankaccount.class.php
+    - trql.person.class.php
     - trql.project.class.php
+    - trql.radiostation.class.php
+    - trql.service.class.php
+    - trql.structuredvalue.class.php
 
-13) ???????
-
-14) CECI EST UN TODO IMPORTANT !
+13) CECI EST UN TODO IMPORTANT !
 
     IL FAUT QUE TOUTES LES CLASSES QUI UTILISENT "Home" et "HomeDir" utilisent désormais "shelter". Il faut
     y mettre des __get() et __set() pour assurer la compatbilité !

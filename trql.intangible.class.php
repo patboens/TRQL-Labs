@@ -26,6 +26,7 @@
     {*cdate                 27/07/2020 - 10:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     ------------------------------------------------------------------------
     Changes History:
@@ -49,17 +50,13 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\intangible;
+namespace trql\schema;
 
-use \trql\quitus\Mother                             as Mother;
-use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\schema\Thing                               as Thing;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\schema\Thing          as Thing;
 
 use DOMDocument;
 use DOMXPath;
-
-if ( ! defined( 'MOTHER_ABSTRACT_CLASS' ) )
-    require_once( 'trql.mother.class.php' );
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -68,13 +65,6 @@ if ( ! defined( 'THING_CLASS_VERSION' ) )
     require_once( 'trql.thing.class.php' );
 
 defined( 'INTANGIBLE_CLASS_VERSION' ) or define( 'INTANGIBLE_CLASS_VERSION','0.1' );
-
-/* Note (16-07-20 23:27:50):
-
-    Le code doit se sauver lui-même dans une sorte de DB. Il doit se compresser
-    lui-même et sauver au moins une dizaine de versions de lui-même.
-
-*/
 
 /* ================================================================================== */
 /** {{*class Intangible=
@@ -119,6 +109,10 @@ class Intangible extends Thing
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -126,13 +120,32 @@ class Intangible extends Thing
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of Intangible.__construct() ============================================ */
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*__destruct()=
+
+        Class destructor
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function __destruct()
     /*------------------------*/
     {
@@ -145,4 +158,3 @@ class Intangible extends Thing
     /* ================================================================================ */
 }   /* End of class Intangible ======================================================== */
 /* ==================================================================================== */
-?>

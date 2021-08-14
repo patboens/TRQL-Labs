@@ -50,7 +50,7 @@
 namespace trql\legalservice;
 
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\business\LocalBusiness   as LocalBusiness;
+use \trql\schema\business\LocalBusiness   as LocalBusiness;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )

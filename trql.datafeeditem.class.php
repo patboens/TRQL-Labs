@@ -54,7 +54,7 @@ namespace trql\datafeeditem;
 
 use \trql\quitus\iContext               as iContext;
 use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\intangible\Intangible         as Intangible;
+use \trql\schema\Intangible         as Intangible;
 
 use DOMDocument;
 use DOMXPath;

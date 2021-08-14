@@ -49,7 +49,8 @@ use \trql\vaesoli\Vaesoli       as Vaesoli;
 use \trql\quitus\Catalog        as Catalog;
 use \trql\XML\XML               as XML;
 use \trql\schema\Aspiration     as Aspiration;
-use \trql\mission\Mission       as Mission;
+use \trql\quitus\Mission        as Mission;
+use \trql\quitus\RoadMap        as RoadMap;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -243,6 +244,7 @@ class Portfolio extends Catalog
     /*-----------------------------*/
     {
         $szMask = $this->getFolder() . '/' . $this->szCodeName . '.*.aspiration.xml';
+        //var_dump( $szMask );
 
         $tStart = microtime( true );
         /* Look for Aspirations in the Portfolio folder */
@@ -265,6 +267,8 @@ class Portfolio extends Catalog
                 $tStart = microtime( true );
                 if ( $oAspiration->load( $szFile ) )
                 {
+                    //var_dump( $oAspiration );
+                    //$this->die();
                     //var_dump( "Nouvelle aspiration chargée en " . round( ( $tEnd = microtime( true ) ) - $tStart,5 ) . 'sec' );
                     $oAspiration->oParentPortfolio  = $this;
 
@@ -318,6 +322,8 @@ class Portfolio extends Catalog
         if ( is_null( $szFile ) )
             $szFile = vaesoli::FIL_RealPath( $this->getFolder() . '/' . $this->szCodeName . '.portfolio.xml' );
 
+        //var_dump( "Looking for {$szFile}" );
+
         if ( is_file( $szFile ) )
         {
             //var_dump( "I can load the file" );
@@ -344,26 +350,33 @@ class Portfolio extends Catalog
                 // Je prends TOUS les tags de premier niveau
                 $oTags = $oXPath->query( "/*/node()" );
 
-                foreach( $oTags as $oNode )
+                // All tags found in the XML will be handled as properties of the Portfolio object
+                if ( $oTags->length > 0 )
                 {
-                    if ( ( substr( $oNode->nodeName,0,5 ) !== '#text'    ) &&
-                         ( substr( $oNode->nodeName,0,8 ) !== '#comment' )
-                       )
+                    foreach( $oTags as $oNode )
                     {
-                        $szProperty = strtolower( substr( $oNode->nodeName,0,1 ) ) . substr( $oNode->nodeName,1 );
-                        //var_dump( $szProperty );
-                        if ( $szProperty !== 'domains' )
-                            $this->$szProperty = $oNode->nodeValue;
-                        //var_dump( $oNode->nodeName,$szProperty,$oNode->nodeValue );
-                    }   /* if ( ( substr( $oNode->nodeName,0,5 ) !== '#text' ) && ... */
-                }   /* foreach( $oTags as $oNode ) */
+                        if ( ( substr( $oNode->nodeName,0,5 ) !== '#text'    ) &&
+                             ( substr( $oNode->nodeName,0,8 ) !== '#comment' )
+                           )
+                        {
+                            $szProperty = strtolower( substr( $oNode->nodeName,0,1 ) ) . substr( $oNode->nodeName,1 );
+                            //var_dump( $szProperty );
+                            if ( $szProperty !== 'domains' )
+                                $this->$szProperty = $oNode->nodeValue;
+                            //var_dump( $oNode->nodeName,$szProperty,$oNode->nodeValue );
+                        }   /* if ( ( substr( $oNode->nodeName,0,5 ) !== '#text' ) && ... */
+                    }   /* foreach( $oTags as $oNode ) */
+                }   /* if ( $oTags->length > 0 ) */
 
-                $oTags = $oXPath->query( "//Domain" );
-
-                foreach( $oTags as $oNode )
+                if ( $oTags->length > 0 )
                 {
-                    $this->aDomains[] = $oNode->nodeValue;
-                }   /* foreach( $oTags as $oNode ) */
+                    $oTags = $oXPath->query( "//Domain" );
+
+                    foreach( $oTags as $oNode )
+                    {
+                        $this->aDomains[] = $oNode->nodeValue;
+                    }   /* foreach( $oTags as $oNode ) */
+                }   /* if ( $oTags->length > 0 ) */
                 //var_dump( $this->aDomains );
             }   /* if ( $oDom->load( $szFile) ) */
         }   /* if ( is_file( $szFile ) ) */
@@ -431,6 +444,23 @@ class Portfolio extends Catalog
         end:
         return ( $bRetVal );
     }   /* End of Portfolio.save() ==================================================== */
+    /* ================================================================================ */
+
+
+    public function renderRoadmap():string
+    /*----------------------------------*/
+    {
+        $oRoadmap = new Roadmap();
+        // 1) Donner à la roadmap toutes les aspirations
+
+        if ( ! is_array( $this->aAspirations ) )
+            $this->findAspirations();
+
+        $oRoadmap->aAspirations = $this->aAspirations;
+
+        return ( $oRoadmap->render() );
+        // 2) Demander à la roadmap de se dessiner
+    }   /* End of Portfolio.renderRoadmap() =========================================== */
     /* ================================================================================ */
 
 

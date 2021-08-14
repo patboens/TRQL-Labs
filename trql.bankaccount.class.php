@@ -28,7 +28,7 @@
     {*cdate                 26-08-2020 18:36 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -66,7 +66,7 @@ namespace trql\schema;
 
 use \trql\vaesoli\Vaesoli                               as v;
 use \trql\quitus\Account                                as Account;
-use \trql\financialproduct\FinancialProduct             as FinancialProduct;
+use \trql\schema\FinancialProduct                       as FinancialProduct;
 use \trql\ledger\Ledger                                 as Ledger;
 use \trql\personororganization\PersonOrOrganization     as PersonOrOrganization;
 

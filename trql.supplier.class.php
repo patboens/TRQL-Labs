@@ -47,7 +47,7 @@ namespace trql\supplier;
 
 use \trql\quitus\iContext                as iContext;
 use \trql\vaesoli\Vaesoli                as Vaesoli;
-use \trql\business\LocalBusiness    as LocalBusiness;
+use \trql\schema\business\LocalBusiness    as LocalBusiness;
 
 use DOMDocument;
 use DOMXPath;

@@ -27,7 +27,7 @@
     {*cdate                 17-08-20 12:51 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -46,6 +46,14 @@
         {*author {PYB} *}
         {*v 8.0.0000 *}
         {*desc              1)  Standardizing the [c]__destruct() method[/c]
+        *}
+    *}
+
+    {*chist
+        {*mdate 12-08-21 09:44 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  Completing the class with what we call an "artist" file
         *}
     *}
 
@@ -73,6 +81,8 @@ if ( ! defined( 'PERSON_CLASS_VERSION' ) )
 
 defined( 'ARTIST_CLASS_VERSION' ) or define( 'ARTIST_CLASS_VERSION','0.1' );
 
+defined( "EXCEPTION_INVALID_PROPERTY" )                         or define( "EXCEPTION_INVALID_PROPERTY"                             ,EXCEPTION_CODE_INVALID_PROPERTY );  /*Defined in trql.mother.class.php */
+
 /* ==================================================================================== */
 /** {{*class Artist=
 
@@ -99,7 +109,10 @@ class Artist extends Person implements iContext
     /* === [Properties NOT defined in schema.org] ===================================== */
     public      $wikidataId                     = 'Q483501';        /* {*property   $wikidataId                 (string)                                    Wikidata ID: person who engages in any form 
                                                                                                                                                             of artistic creation or practice *} */
-
+    public      $storage                        = null;             /* {*property   $storage                    (string)                                    The file in which all information about an artist is maintained.
+                                                                                                                                                            @var.szStorage = alias *} */
+    public      $structure                      = null;             /* {*property   $structure                  (array)                                     An internal structure in which we maintain ALL the information
+                                                                                                                                                            gathered about an artist *} */
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
 
@@ -119,11 +132,61 @@ class Artist extends Person implements iContext
     public function __construct( $szHome = null )
     /*-----------------------------------------*/
     {
+        static $defaultSlotStructure = null;
+
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
+
+        if ( is_null( $defaultSlotStructure ) )
+        {
+          $defaultSlotStructure = array( 'genres'             => null,
+                                         'popularity'         => null,
+                                         'similar-artists'    => null,
+                                         'albums'             => null,
+                                         'top-tracks-lupdate' => null,
+                                         'top-tracks'         => null,
+                                         'top-tracks-url'     => null,
+                                         'fans'               => null,
+                                         'picture'            => null,
+                                         'url'                => null,
+                                         'id'                 => null,
+                                         'lupdate'            => null,
+                                         'lupdate-string'     => null,
+                                       );
+        }   /* if ( is_null( $defaultSlotStructure ) ) */
+
+        $this->structure = array( 'name'        => null,
+                                  'compiled'    => null,
+                                  'final'       => array( 'allmusic'    => $defaultSlotStructure,
+                                                          'deezer'      => $defaultSlotStructure,
+                                                          'spotify'     => $defaultSlotStructure,
+                                                          'itunes'      => $defaultSlotStructure,
+                                                          'tidal'       => $defaultSlotStructure,
+                                                          'qobuz'       => $defaultSlotStructure,
+                                                          'discogs'     => $defaultSlotStructure,
+                                                          'lastfm'      => $defaultSlotStructure,
+
+                                                          /* Very much special/specifics structures */
+                                                          'wikipedia'   => $defaultSlotStructure,
+                                                          'trql'        => $defaultSlotStructure,
+                                                        ),
+                                );
 
         return ( $this );
     }   /* End of Artist.__construct() ================================================ */
+    /* ================================================================================ */
+
+
+    /* Fonction qui va rechercher de l'info concernant l'artiste sur ...
+       Deezer, Spotify, Tidal, Qobuz, Discogs, itunes, wikidata, ... */
+    public function getInfoFromProvider( $szProvider )
+    /*----------------------------------------------*/
+    {
+        // Cela va encore prendre un peu de temps CAR je voudrais que les classes de 
+        // streamprovider soient implémentées dans TRQL Labs. Or, ces classes ne sont
+        // PAS prêtes pour l'instant et sont LOIN de l'être!!!
+        $this->die( __METHOD__ . "(): NOT implemented yet" );
+    }   /* End of Artist.__getInfoFromProvider() ====================================== */
     /* ================================================================================ */
 
 
@@ -140,6 +203,67 @@ class Artist extends Person implements iContext
     {
         return( '' );
     }   /* End of Artist.sing() ======================================================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*__get( $property )=
+
+        Used for reading data from inaccessible (protected or private) or
+        non-existing properties.
+
+        {*params
+            $property   (string)        The name of the property to access
+        *}
+
+        {*return
+            (mixed)     The value of [c]@param.property[/c] or throwing an exception if
+                        [c]@param.property[/c] NOT found.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __get( $property )
+    /*------------------------------*/
+    {
+        //var_dump( "IN " . __METHOD__ . "() WITH '{$property}'" );
+        switch ( $property )
+        {
+            case 'szStorage':   return ( $this->storage );
+            default         :   throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$property}' UNKNOWN (ErrCode: " . EXCEPTION_INVALID_PROPERTY . ")",EXCEPTION_INVALID_PROPERTY );
+        }   /* switch ( $property ) */
+    }   /* End of Artist.__get() ====================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*__set( $property,$value )=
+
+        Run when writing data to inaccessible (protected or private) or non-existing
+        properties.
+
+        {*params
+            $property   (string)        The name of the property to access
+            $value      (mixed)         The value to assign to the property
+        *}
+
+        {*return
+            (mixed)     What the internal method that's called returns
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __set( $property,$value )
+    /*-------------------------------------*/
+    {
+        switch ( $property )
+        {
+            case 'szStorage':   $this->storage = $value;
+            default         :   throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$property}' UNKNOWN (ErrCode: " . EXCEPTION_INVALID_PROPERTY . ")",EXCEPTION_INVALID_PROPERTY );
+        }   /* switch ( $property ) */
+    }   /* End of Artist.__set() ====================================================== */
     /* ================================================================================ */
 
 

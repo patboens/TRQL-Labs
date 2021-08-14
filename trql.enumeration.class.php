@@ -27,6 +27,7 @@
     {*cdate                 26-08-2020 18:46 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -39,7 +40,6 @@
         {*desc              1)  Original creation
         *}
     *}
-
 
     {*chist
         {*mdate 14-02-21 10:44 *}
@@ -54,8 +54,8 @@
 /****************************************************************************************/
 namespace trql\enumeration;
 
-use \trql\vaesoli\Vaesoli           as Vaesoli;
-use \trql\intangible\Intangible     as Intangible;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\schema\Intangible     as Intangible;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -129,7 +129,7 @@ class Enumeration extends Intangible
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of Enumeration.__construct() =========================================== */

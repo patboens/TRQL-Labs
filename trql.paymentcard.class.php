@@ -46,7 +46,7 @@
 namespace trql\paymentcard;
 
 use \trql\vaesoli\Vaesoli                       as Vaesoli;
-use \trql\financialproduct\FinancialProduct     as FinancialProduct;
+use \trql\schema\FinancialProduct     as FinancialProduct;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

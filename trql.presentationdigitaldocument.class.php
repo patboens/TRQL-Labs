@@ -47,7 +47,7 @@
 namespace trql\presentationdigitaldocument;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\digitaldocument\DigitalDocument    as DigitalDocument;
+use \trql\schema\DigitalDocument    as DigitalDocument;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )

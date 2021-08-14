@@ -28,7 +28,7 @@
     {*cdate                 07-01-21 11:38 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
-    {*UTF-8                 Quel bel été *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
     {*keywords              agile, scrum, development *}
 
     --------------------------------------------------------------------------------------
@@ -45,13 +45,19 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\Sprint;
+namespace trql\quitus;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\cyclicprocess\CyclicProcess       as CyclicProcess;
-use \trql\task\Task                         as Task;
-use \trql\digitaldocument\DigitalDocument   as DigitalDocument;
+use \trql\quitus\CyclicProcess              as CyclicProcess;
+use \trql\quitus\Task                       as Task;
+use \trql\schema\DigitalDocument   as DigitalDocument;
 use \ReflectionClass                        as RF;
+use \trql\quitus\KanbanBoard                as KanbanBoard;
+use \trql\html\Form                         as Form;
+use \trql\html\Fieldset                     as Fieldset;
+use \trql\html\Formset                      as Formset;
+use \trql\html\Input                        as Input;
+use \trql\schema\Aspiration                 as Aspiration;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -64,6 +70,21 @@ if ( ! defined( 'TASK_CLASS_VERSION' ) )
 
 if ( ! defined( 'DIGITALDOCUMENT_CLASS_VERSION' ) )
     require_once( 'trql.digitaldocument.class.php' );
+
+if ( ! defined( 'FORM_CLASS_VERSION' ) )
+    require_once( 'trql.form.class.php' );
+
+if ( ! defined( 'FIELDSET_CLASS_VERSION' ) )
+    require_once( 'trql.fieldset.class.php' );
+
+if ( ! defined( 'FORMSET_CLASS_VERSION' ) )
+    require_once( 'trql.formset.class.php' );
+
+if ( ! defined( 'INPUT_CLASS_VERSION' ) )
+    require_once( 'trql.input.class.php' );
+
+if ( ! defined( 'ASPIRATION_CLASS_VERSION' ) )
+    require_once( 'trql.project.class.php' );
 
 defined( 'SPRINT_CLASS_VERSION' ) or define( 'SPRINT_CLASS_VERSION','0.1' );
 
@@ -114,7 +135,7 @@ class Sprint extends CyclicProcess
     /* Toutes ces propriétés doivent être revues */
     public      $szSprintNo         = null;                         /* {*property   $szSprintNo         (string)            Sprint number (e.g. '[c]0[/c]', '[c]1[/c]', '[c]hardening[/c]', '[c]special[/c]', '[c]S[/c]', ...) *} */
     public      $aData              = null;                         /* {*property   $aData              (array)             EXPERIMENTAL. Do not use it (05-03-21 07:22:09) *} */
-    public      $oAspiration        = null;                         /* {*property   $oAspiration        (Aspiration)        Parent [c]Aspiration[/c] this Sprint is attached to *} */
+    public      $oParentAspiration  = null;                         /* {*property   $oParentAspiration  (Aspiration)        Parent [c]Aspiration[/c] this Sprint is attached to *} */
     public      $iWeeksPerSprint    = 2;                            /* {*property   $iWeeksPerSprint    (int)               Number of weeks in a sprint *} */
     public      $helpNeeded         = false;                        /* {*property   $helpNeeded         (bool)              Indicates whether the help of the Management is required ([c]true[/c]) or not ([c]false[/c])*} */
     public      $aObjectives        = null;                         /* {*property   $aObjectives        (array)             A set of objectives this sprint must meet *} */
@@ -124,13 +145,18 @@ class Sprint extends CyclicProcess
     public      $aDocuments         = null;                         /* {*property   $aDocuments         (array)             Array of documents ([c]trql.document.class.php[/c]). *} */
     public      $szStorage          = null;                         /* {*property   $szStorage          (string)            File in which the Sprint maintains its state
                                                                                                                             (all properties) *} */
+    public      $szClass            = null;                         /* {*property   $szClass            (string)            CSS class of the sprint when it needs to be rendered as a form [c]__toForm()[/c])*} */
+    public      $szOnSubmit         = null;                         /* {*property   $szOnSubmit         (string)            Submit clause of the form ([c]__toForm()[/c]) *} */
+    public      $ref                = null;                         /* {*property   $ref                (string)            Identifies a unique object. It differs from @var.identifier in the sense that the latter
+                                                                                                                            serves internal purposes while @var.ref is more public reference, something that the global
+                                                                                                                            system uses *} */
     public      $previousStartDate  = null;                         /* {*property   $previousStartDate  (Date)              Used in conjunction with eventStatus for rescheduled or cancelled events.
                                                                                                                             This property contains the previously scheduled start date. For
                                                                                                                             rescheduled events, the startDate property should be used for the newly
                                                                                                                             scheduled start date. In the (rare) case of an event that has been
                                                                                                                             postponed and rescheduled multiple times, this field may be repeated. *} */
     public      $startDate          = null;                         /* {*property   $startDate          (Date|DateTime)     The start date and time of the item (in ISO 8601 date format). *} */
-
+    public      $aspirationId       = null;                         /* {*property   $aspirationId       (string)            Parent Aspiration ID. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -159,7 +185,7 @@ class Sprint extends CyclicProcess
         use \trql\portfolio\Portfolio       as Portfolio;
         use \trql\project\Aspiration        as Aspiration;
         [b]use \trql\sprint\Sprint             as Sprint;[/b]
-        use \trql\task\Task                 as Task;
+        use \trql\quitus\Task                 as Task;
 
         |** They are used in the [url]https://www.openpmo.site[/url] initiative **|
 
@@ -191,12 +217,19 @@ class Sprint extends CyclicProcess
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
         $this->classIcon = $this->self['icon'];
 
         return ( $this );
     }   /* End of Sprint.__construct() ================================================ */
     /* ================================================================================ */
+
+
+    public function hasTasks()
+    /*-----------------------*/
+    {
+        return ( is_array( $this->aTasks ) && count( $this->aTasks ) > 0 );
+    }
 
 
     /* EXPERIMENTAL */
@@ -901,7 +934,6 @@ class Sprint extends CyclicProcess
 
             if ( $oDom->load( $szFile ) )
             {
-
                 $bRetVal            = true;
 
                 //$this->szStorage    = $szFile;
@@ -940,11 +972,12 @@ class Sprint extends CyclicProcess
                 //var_dump( "STORAGE:" . $this->szStorage );
                 //die();
 
-                $this->identifier   =            trim( $oDom->documentElement->getAttribute( 'identifier'   ) );
-                $this->startDate    = strtotime( trim( $oDom->documentElement->getAttribute( 'startDate'    ) ) );
-                $this->endDate      = strtotime( trim( $oDom->documentElement->getAttribute( 'endDate'      ) ) );
-                $this->szSprintNo   =            trim( $oDom->documentElement->getAttribute( 'sprintNo'     ) );
-                $this->szType       =            trim( $oDom->documentElement->getAttribute( 'type'         ) );
+                $this->identifier   =            trim( $oDom->documentElement->getAttribute( 'identifier'       ) );
+                $this->startDate    = strtotime( trim( $oDom->documentElement->getAttribute( 'startDate'        ) ) );
+                $this->endDate      = strtotime( trim( $oDom->documentElement->getAttribute( 'endDate'          ) ) );
+                $this->szSprintNo   =            trim( $oDom->documentElement->getAttribute( 'sprintNo'         ) );
+                $this->szType       =            trim( $oDom->documentElement->getAttribute( 'type'             ) );
+                $this->aspirationId =            trim( $oDom->documentElement->getAttribute( 'aspiration-id'    ) );
 
                 $oXPath             = new \DOMXPath( $oDom );
 
@@ -1157,9 +1190,134 @@ class Sprint extends CyclicProcess
 
         }   /* if ( is_file( $szFile ) ) */
 
+        if ( $bRetVal )
+            $this->oParentAspiration = $this->findAspiration();
+
         end:
         return ( $bRetVal );
     }   /* End of Sprint.load() ======================================================= */
+    /* ================================================================================ */
+
+
+    public function findAspiration( $szID = null )
+    /*------------------------------------------*/
+    {
+        $oRetVal = null;
+
+        if ( ! is_string( $szID ) )
+            $szID = $this->aspirationId;
+
+        if ( is_string( $szID ) && ! empty( $szID ) )
+        {
+            $szDir = vaesoli::FIL_RealPath( vaesoli::FIL_ResolveRoot( dirname( $this->szStorage ) ) );
+
+            if ( is_array( $aFiles = vaesoli::FIL_aFilesEx( vaesoli::FIL_RealPath( $szDir . '/*.aspiration.xml' ) ) ) && count( $aFiles ) > 0 )
+            {
+                $oAspiration = new Aspiration();
+
+                foreach( $aFiles as $szFile )
+                {
+                    $oAspiration->load( $szFile );
+
+                    if ( $oAspiration->identifier === $szID )
+                    {
+                        $oRetVal = $oAspiration;
+                        break;
+                    }   /* if ( $oAspiration->identifier === $szID ) */
+                }   /* foreach( $aFiles as $szFile ) */
+            }   /* if ( is_array( $aFiles = vaesoli::FIL_aFilesEx( vaesoli::FIL_RealPath( $szDir . '/*.aspiration.xml' ) ) ) && count( $aFiles ) > 0 ) */
+        }   /* if ( is_string( $szID ) && ! empty( $szID ) ) */
+
+        return ( $oRetVal );
+    }   /* End of Sprint.findAspiration() ============================================= */
+    /* ================================================================================ */
+
+
+    /* EXPERIMENTAL */
+    public function renderTaskboard( $szID = null )
+    /*-------------------------------------------*/
+    {
+        $szRetVal = '';
+
+        if ( $this->hasTasks() )
+        {
+            $aItems  = null;
+
+            //echo "<h2 class=\"sectionTitle tasks\">Tasks</h1>";
+
+            foreach( $this->aTasks as $oTask )
+            {
+                if ( $oTask instanceof Task )
+                    if ( $oTask->active )
+                        $aItems[$oTask->szProgress][] = $oTask;
+            }   /* foreach( $oSprint->aTasks as $oTask ) */
+
+            $tTime                  = time();
+            $oKanban                = new KanbanBoard();
+            $oKanban->szECMAScript  = "/js/dropHandler.js?{$tTime};/snippet-center/js/xhr.pmo.20210126.js?{$tTime}";
+            $oKanban->szClass       = "tasks";
+
+            $oKanban->identifier    = 'backlog';
+
+            $oKanban->addColumn( array( 'identifier'    => 'todo'                       ,
+                                        'title'         => 'To Do'                      ,
+                                        'items'         => $aItems['todo'] ?? null      ,
+                                      ) );
+            $oKanban->addColumn( array( 'identifier'    => 'doing'                      ,
+                                        'title'         => 'Doing'                      ,
+                                        'items'         => $aItems['doing' ] ?? null    ,
+                                      ) );
+            $oKanban->addColumn( array( 'identifier'    => 'done'                       ,
+                                        'title'         => 'Done'                       ,
+                                        'items'         => $aItems['done'    ] ?? null  ,
+                                      ) );
+
+            $szRetVal = $oKanban->render( 'html',$szID );
+
+        }   /* if ( $this->hasTasks() ) */
+
+        return ( $szRetVal );
+    }   /* End of Sprint.renderTaskboard() ============================================ */
+    /* ================================================================================ */
+
+
+    public function performance()
+    /*-------------------------*/
+    {
+        $aRetVal = array( 'total-count'     => 0,
+                          'total-credits'   => 0,
+                          /* ------------------ */
+                          'todo-count'      => 0,
+                          'todo-credits'    => 0,
+                          /* ------------------ */
+                          'doing-count'     => 0,
+                          'doing-credits'   => 0,
+                          /* ------------------ */
+                          'done-count'      => 0,
+                          'done-credits'    => 0,
+                        );
+
+        if ( $this->hasTasks() )
+        {
+            foreach( $this->aTasks as $oTask )
+            {
+                if ( $oTask instanceof Task && $oTask->active )
+                {
+                    /* todo, doing or done */
+                    $szPhase    = strtolower( trim( $oTask->szProgress ) );
+                    $fCredits   = $oTask->credits;
+
+                    $aRetVal[ 'total-count']            += 1;
+                    $aRetVal[ 'total-credits']          += $fCredits;
+
+                    $aRetVal[ $szPhase . '-count']      += 1;
+                    $aRetVal[ $szPhase . '-credits']    += $fCredits;
+                }
+            }   /* foreach( $oSprint->aTasks as $oTask ) */
+        }   /* if ( $this->hasTasks() ) */
+
+        return ( $aRetVal );
+    }   /* End of Sprint.performance() ================================================ */
     /* ================================================================================ */
 
 
@@ -1307,6 +1465,199 @@ class Sprint extends CyclicProcess
     {
         return ( $this->__toHTML() );
     }   /* End of Sprint.__toString() ================================================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*__toForm()=
+
+        Returns the object as a form
+
+        {*params
+        *}
+
+        {*return
+            (string)        HTML Code corresponding to a form of the object
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __toForm(): string
+    /*------------------------------*/
+    {
+        $oForm                      = new Form();
+        $oForm->szClass             = $this->szClass;
+        $oForm->szOnSubmit          = $this->szOnSubmit;
+
+        $oForm->settings['withBR']  = false;
+
+        {   /* Create a fieldset and add the field set to the form */
+            $oFieldset              = new Fieldset();
+            $oFieldset->szCaption   = 'Sprint';
+
+            {   /* Adding zones to the fieldset */
+                $oFieldset->add( new Input( array( 'name'           =>  'ID'                                                                                ,
+                                                   'type'           =>  'txt'                                                                               ,
+                                                   'label'          =>  'ID'                                                                                ,
+                                                   'lang'           =>  'en'                                                                                ,
+                                                   'tooltip'        =>  'ID of the sprint. Leave it empty for a new sprint.'                                ,
+                                                   'required'       =>  false                                                                               ,
+                                                   'delete'         =>  true                                                                                ,
+                                                   'help'           =>  false                                                                               ,
+                                                   'value'          =>  ''                                                                                  ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'ref'                                                                               ,
+                                                   'type'           =>  'txt'                                                                               ,
+                                                   'label'          =>  'Ref.'                                                                              ,
+                                                   'lang'           =>  'en'                                                                                ,
+                                                   'tooltip'        =>  'Public identification number of the sprint (if any)'                               ,
+                                                   'required'       =>  true                                                                                ,
+                                                   'delete'         =>  true                                                                                ,
+                                                   'help'           =>  false                                                                               ,
+                                                   'value'          =>  $this->ref                                                                          ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Name'                                                                              ,
+                                                   'type'           =>  'txt'                                                                               ,
+                                                   'label'          =>  'Name'                                                                              ,
+                                                   'lang'           =>  'en'                                                                                ,
+                                                   'tooltip'        =>  'Enter a name for this aspiration'                                                  ,
+                                                   'required'       =>  true                                                                                ,
+                                                   'delete'         =>  true                                                                                ,
+                                                   'help'           =>  false                                                                               ,
+                                                   'value'          =>  $this->name                                                                         ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Type'                                                                             ,
+                                                   'type'           =>  'cbo'                                                                               ,
+                                                   'label'          =>  'Phase'                                                                             ,
+                                                   'options'        =>  '<option value="bubble">Bubble</option><option value="tostart">To Start</option>'   .
+                                                                        '<option value="started">Started</option><option value="done">Done</option>'        ,
+                                                   'lang'           =>  'en'                                                                                ,
+                                                   'tooltip'        =>  'Enter the Kanban phase of the Aspiration'                                          ,
+                                                   'required'       =>  true                                                                                ,
+                                                   'delete'         =>  true                                                                                ,
+                                                   'help'           =>  false                                                                               ,
+                                                   'value'          =>  ''                                              ,
+                                                 ) ) );
+
+                /*
+                $oFieldset->add( new Input( array( 'name'           =>  'Agent'                                         ,
+                                                   'type'           =>  'txt'                                           ,
+                                                   'label'          =>  'Assignee'                                      ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Who this task is assigned to'                  ,
+                                                   'required'       =>  false                                           ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'value'          =>  $this->agent                                    ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Type'                                          ,
+                                                   'type'           =>  'cbo'                                           ,
+                                                   'label'          =>  'Task type'                                     ,
+                                                   'options'        =>  '<option value="change">Change</option><option value="defect">Defect</option>',
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Enter the type of task'                        ,
+                                                   'maxlength'      =>  3                                               ,
+                                                   'required'       =>  false                                           ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'step'           =>  1                                               ,
+                                                   'style'          =>  'max-width:11em;width:11em;min-width:11em;'     ,
+                                                   'value'          =>  'change'                                        ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Priority'                                      ,
+                                                   'type'           =>  'txt'                                           ,
+                                                   'label'          =>  'Priority'                                      ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Enter the priority of this task'               ,
+                                                   'maxlength'      =>  3                                               ,
+                                                   'required'       =>  true                                            ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'step'           =>  1                                               ,
+                                                   'style'          =>  'max-width:5em;width:5em;min-width:5em;'        ,
+                                                   'value'          =>  $this->priority                                 ,
+                                                 ) ) );
+
+                // Créé : commentaire JUSTE pour le UTF-8
+                $oFieldset->add( new Input( array( 'name'           =>  'Credits'                                       ,
+                                                   'type'           =>  'num'                                           ,
+                                                   'label'          =>  'Credits'                                       ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Credits of the task'                           ,
+                                                   'required'       =>  false                                           ,
+                                                   'delete'         =>  true                                            ,
+                                                   'help'           =>  false                                           ,
+                                                   'step'           =>  1                                               ,
+                                                   'style'          =>  'max-width:5em;width:5em;min-width:5em;'        ,
+                                                   'value'          =>  $this->credits                                  ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Due'                                           ,
+                                                   'type'           =>  'dat'                                           ,
+                                                   'label'          =>  'Due date'                                      ,
+                                                   'lang'           =>  'en'                                            ,
+                                                   'tooltip'        =>  'Date the task is due'                          ,
+                                                   'required'       =>  false                                           ,
+                                                   'help'           =>  false                                           ,
+                                                   'style'          =>  'max-width:11em;width:11em;min-width:11em;'     ,
+                                                   'value'          =>  ''                                              ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Description'                               ,
+                                                   'type'           =>  'edt'                                       ,
+                                                   'label'          =>  'Description'                               ,
+                                                   'lang'           =>  'en'                                        ,
+                                                   'tooltip'        =>  'Enter a name for this task'                ,
+                                                   'required'       =>  true                                        ,
+                                                   'delete'         =>  true                                        ,
+                                                   'help'           =>  false                                       ,
+                                                   'rows'           =>  8                                           ,
+                                                   'style'          =>  'resize:vertical;'                          ,
+                                                   'value'          =>  trim( $this->description )                  ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Late'                                      ,
+                                                   'type'           =>  'chk'                                       ,
+                                                   'label'          =>  'Late'                                      ,
+                                                   'lang'           =>  'en'                                        ,
+                                                   'tooltip'        =>  'Is this task late?'                        ,
+                                                   'required'       =>  false                                       ,
+                                                   'style'          =>  'max-width:3em;width:3em;min-width:3em;'    ,
+                                                   'value'          =>  false                                       ,
+                                                 ) ) );
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Attention'                                 ,
+                                                   'type'           =>  'chk'                                       ,
+                                                   'label'          =>  'Attention'                                 ,
+                                                   'lang'           =>  'en'                                        ,
+                                                   'tooltip'        =>  'Requires attention?'                       ,
+                                                   'required'       =>  false                                       ,
+                                                   'style'          =>  'max-width:3em;width:3em;min-width:3em;'    ,
+                                                   'value'          =>  false                                       ,
+                                                 ) ) );
+                */
+
+                $oFieldset->add( new Input( array( 'name'           =>  'Submit'                                    ,
+                                                   'type'           =>  'cmd'                                       ,
+                                                   'class'          =>  'shadow'                                    ,
+                                                   'lang'           =>  'en'                                        ,
+                                                   'tooltip'        =>  'Click to submit the values of a new task'  ,
+                                                   'value'          =>  'Create'                                    ,
+                                                 ) ) );
+            }   /* Adding zones to the fieldset */
+
+            $oForm->add( $oFieldset );
+
+        }   /* Create a fieldset and add the field set to the form */
+
+        return ( (string) $oForm );
+    }   /* End of Sprint.__toForm() =================================================== */
     /* ================================================================================ */
 
 

@@ -45,7 +45,7 @@
 namespace trql\state;
 
 use \trql\vaesoli\Vaesoli                           as Vaesoli;
-use \trql\administrativearea\AdministrativeArea     as AdministrativeArea;
+use \trql\schema\AdministrativeArea     as AdministrativeArea;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );

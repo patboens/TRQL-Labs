@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -29,6 +27,8 @@
     {*cdate                 28-08-2020 16:30 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été *}
+    {*keywords              service *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -45,19 +45,16 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\servicechannel;
+namespace trql\schemachannel;
 
-use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\intangible\Intangible    as Intangible;
-
+use \trql\vaesoli\Vaesoli           as Vaesoli;
+use \trql\schema\Intangible     as Intangible;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
 
 if ( ! defined( 'INTANGIBLE_CLASS_VERSION' ) )
     require_once( 'trql.intangible.class.php' );
-
-
 
 defined( 'SERVICECHANNEL_CLASS_VERSION' ) or define( 'SERVICECHANNEL_CLASS_VERSION','0.1' );
 
@@ -84,10 +81,12 @@ defined( 'SERVICECHANNEL_CLASS_VERSION' ) or define( 'SERVICECHANNEL_CLASS_VERSI
         on 28-08-2020 16:30.
     *}
 
+    *}}
+
  */
 /* ==================================================================================== */
 class ServiceChannel extends Intangible
-/*--------------------------------------*/
+/*-----------------------------------*/
 {
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                           (array)                         Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -98,50 +97,20 @@ class ServiceChannel extends Intangible
                                'UIKey'  => null         ,
                              );
 
-    public      $additionalType                 = null;             /* {*property   $additionalType                 (URL)                           An additional type for the item, typically used for adding more
-                                                                                                                                                    specific types from external vocabularies in microdata syntax. This is
-                                                                                                                                                    a relationship between something and a class that the thing is in. In
-                                                                                                                                                    RDFa syntax, it is better to use the native RDFa syntax - the 'typeof'
-                                                                                                                                                    attribute - for multiple types. Schema.org tools may have only weaker
-                                                                                                                                                    understanding of extra types, in particular those defined externally. *} */
-    public      $alternateName                  = null;             /* {*property   $alternateName                  (string)                        An alias for the item. *} */
     public      $availableLanguage              = null;             /* {*property   $availableLanguage              (string|Language)               A language someone may use with or at the item, service or place.
                                                                                                                                                     Please use one of the language codes from the IETF BCP 47 standard.
                                                                                                                                                     See also inLanguage *} */
-    public      $description                    = null;             /* {*property   $description                    (string)                        A description of the item. *} */
-    public      $disambiguatingDescription      = null;             /* {*property   $disambiguatingDescription      (string)                        A sub property of description. A short description of the item used to
-                                                                                                                                                    disambiguate from other, similar items. Information from other
-                                                                                                                                                    properties (in particular, name) may be necessary for the description
-                                                                                                                                                    to be useful for disambiguation. *} */
-    public      $identifier                     = null;             /* {*property   $identifier                     (URL|string|PropertyValue)      The identifier property represents any kind of identifier for any kind
-                                                                                                                                                    of Thing, such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
-                                                                                                                                                    dedicated properties for representing many of these, either as textual
-                                                                                                                                                    strings or as URL (URI) links. See background notes for more details. *} */
-    public      $image                          = null;             /* {*property   $image                          (ImageObject|URL)               An image of the item. This can be a URL or a fully described
-                                                                                                                                                    ImageObject. *} */
-    public      $mainEntityOfPage               = null;             /* {*property   $mainEntityOfPage               (CreativeWork|URL)              Indicates a page (or other CreativeWork) for which this thing is the
-                                                                                                                                                    main entity being described. See background notes for details. *} */
-    public      $name                           = null;             /* {*property   $name                           (string)                        The name of the item. *} */
-    public      $potentialAction                = null;             /* {*property   $potentialAction                (Action)                        Indicates a potential Action, which describes an idealized action in
-                                                                                                                                                    which this thing would play an 'object' role. *} */
     public      $processingTime                 = null;             /* {*property   $processingTime                 (Duration)                      Estimated processing time for the service using this channel. *} */
     public      $providesService                = null;             /* {*property   $providesService                (Service)                       The service provided by this channel. *} */
-    public      $sameAs                         = null;             /* {*property   $sameAs                         (URL)                           URL of a reference Web page that unambiguously indicates the item's
-                                                                                                                                                    identity. E.g. the URL of the item's Wikipedia page, Wikidata entry,
-                                                                                                                                                    or official website. *} */
     public      $serviceLocation                = null;             /* {*property   $serviceLocation                (Place)                         The location (e.g. civic structure, local business, etc.) where a
                                                                                                                                                     person can go to access the service. *} */
     public      $servicePhone                   = null;             /* {*property   $servicePhone                   (ContactPoint)                  The phone number to use to access the service. *} */
     public      $servicePostalAddress           = null;             /* {*property   $servicePostalAddress           (PostalAddress)                 The address for accessing the service by mail. *} */
     public      $serviceSmsNumber               = null;             /* {*property   $serviceSmsNumber               (ContactPoint)                  The number to access the service by text message. *} */
     public      $serviceUrl                     = null;             /* {*property   $serviceUrl                     (URL)                           The website to access the service. *} */
-    public      $subjectOf                      = null;             /* {*property   $subjectOf                      (Event|CreativeWork)            A CreativeWork or Event about this Thing. *} */
-    public      $url                            = null;             /* {*property   $url                            (URL)                           URL of the item. *} */
-
 
     /* === [Properties NOT defined in schema.org] ===================================== */
-    public      $wikidataId                     = null;
-
+    public      $wikidataId                     = null;             /* {*property   $wikidataId                     (string)                        Wikidata ID. NO SEARCH YET. *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -156,6 +125,10 @@ class ServiceChannel extends Intangible
             (self)      The current instance of the class
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -165,10 +138,8 @@ class ServiceChannel extends Intangible
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
 
-
-
         return ( $this );
-    }   /* End of ServiceChannel.__construct() ========================================== */
+    }   /* End of ServiceChannel.__construct() ======================================== */
     /* ================================================================================ */
 
 
@@ -184,6 +155,10 @@ class ServiceChannel extends Intangible
             (void)      No return
         *}
 
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
         *}}
     */
     /* ================================================================================ */
@@ -195,10 +170,7 @@ class ServiceChannel extends Intangible
         $this->UIKey();
         $this->WikiData();
         $this->necroSignaling();
-    }   /* End of ServiceChannel.__destruct() =========================================== */
+    }   /* End of ServiceChannel.__destruct() ========================================= */
     /* ================================================================================ */
-
-}   /* End of class ServiceChannel ====================================================== */
+}   /* End of class ServiceChannel ==================================================== */
 /* ==================================================================================== */
-
-?>

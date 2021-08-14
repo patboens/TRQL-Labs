@@ -16,8 +16,6 @@
     Patrick Boens, the author, who owns ALL the intellectual property of what
     he created.
 
-
-
 */
 
 /** {{{*fheader
@@ -30,6 +28,7 @@
     {*cdate                 28-08-2020 16:28 *}
     {*mdate                 auto *}
     {*license               {RIGHTS} *}
+    {*UTF-8                 Quel bel été sous le hêtre *}
 
     -------------------------------------------------------------------------------------
     Changes History:
@@ -46,11 +45,11 @@
 
     *}}} */
 /****************************************************************************************/
-namespace trql\mission;
+namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli               as Vaesoli;
-use \trql\XML\XML                       as XML;
-use \trql\task\Task                     as Task;
+use \trql\vaesoli\Vaesoli       as Vaesoli;
+use \trql\XML\XML               as XML;
+use \trql\quitus\Task           as Task;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -73,6 +72,7 @@ defined( 'MISSION_CLASS_VERSION' ) or define( 'MISSION_CLASS_VERSION' ,'0.1' );
 
     *}
 
+    *}}
  */
 /* ==================================================================================== */
 class Mission extends Task
@@ -114,7 +114,7 @@ class Mission extends Task
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of Mission.__construct() =============================================== */
@@ -185,7 +185,5 @@ class Mission extends Task
         $this->necroSignaling();
     }   /* End of Mission.__destruct() ================================================ */
     /* ================================================================================ */
-
 }   /* End of class Mission =========================================================== */
 /* ==================================================================================== */
-?>

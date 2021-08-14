@@ -54,7 +54,7 @@
 namespace trql\categorycodeset;
 
 use \trql\vaesoli\Vaesoli                   as Vaesoli;
-use \trql\definedtermset\DefinedTermSet     as DefinedTermSet;
+use \trql\schema\DefinedTermSet     as DefinedTermSet;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -126,7 +126,7 @@ class CategoryCodeSet extends DefinedTermSet
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of CategoryCodeSet.__construct() ======================================= */

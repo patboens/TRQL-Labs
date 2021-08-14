@@ -45,9 +45,9 @@
 /****************************************************************************************/
 namespace trql\quitus;
 
-use \trql\vaesoli\Vaesoli                       as v;
-use \trql\financialproduct\FinancialProduct     as FinancialProduct;
-use \trql\ledger\Ledger                         as Ledger;
+use \trql\vaesoli\Vaesoli           as v;
+use \trql\schema\FinancialProduct   as FinancialProduct;
+use \trql\ledger\Ledger             as Ledger;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )

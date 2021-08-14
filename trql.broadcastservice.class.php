@@ -57,7 +57,7 @@
 namespace trql\broadcastservice;
 
 use \trql\vaesoli\Vaesoli       as Vaesoli;
-use \trql\service\Service       as Service;
+use \trql\schema\Service       as Service;
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
     require_once( 'trql.vaesoli.class.php' );
@@ -154,7 +154,7 @@ class BroadcastService extends Service
     /*-----------------------------------------*/
     {
         parent::__construct();
-        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ) );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
 
         return ( $this );
     }   /* End of BroadcastService.__construct() ====================================== */

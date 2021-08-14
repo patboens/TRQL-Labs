@@ -70,11 +70,14 @@ if ( ! defined( 'VAESOLI_SLASH' ) )                                 /* If VAESOL
     }   /* switch ( strtoupper( PHP_OS ) ) */
 }   /* if ( ! defined( 'VAESOLI_SLASH' ) ) */
 
+defined( "BOYER_SKIP_TABLE_LENGTH" )    or define( "BOYER_SKIP_TABLE_LENGTH"    ,256 );
+defined( "MIN_PATTERN_LEN"  )           or define( "MIN_PATTERN_LEN"            ,5 );
+
 class Vaesoli
 /*---------*/
 {
     /* ================================================================================ */
-    /** {{*assembleArrays( $a,$b)=
+    /** {{*assembleArrays( $a,$b )=
 
         Assemble arguments and values
 
@@ -157,6 +160,183 @@ class Vaesoli
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*ARR_quickSort( $a )=
+
+        Array to sort
+
+        {*params
+            $a      (array)     Series of elements to sort
+        *}
+
+        {*return
+            (array)     The sorted array
+        *}
+
+        {*example
+        $a  = array( 51,95,66,72,42,38,39,41,15 );
+        $t1 = microtime( true );
+        [b]$a  = quick_sort( $a );[/b]
+        $t2 = microtime( true );
+        var_dump( "PERF: " . number_format( $t2 - $t1,8,',','.' ) . " secs" );
+
+        $a  = array( "Patrick","Genevière","Alain","Daniel","Pierre","Xavier","Séverine","Pavlina","André","Jocelyne","Elissa","Aline","Stéphane","Marc","Didier","Lucas","Manu","Thomas","Géraldine" );
+        $t1 = microtime( true );
+        [b]$a  = ARR_quickSort( $a );[/b]
+        $t2 = microtime( true );
+        var_dump( "PERF: " . number_format( $t2 - $t1,8,',','.' ) . " secs" );
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public static function ARR_quickSort( $a )
+    /*--------------------------------------*/
+    {
+        $low = $high = array();
+
+        if ( count( $a ) < 2 )                                      /* There is no need to go any further */
+            return ( $a );
+
+        $pivotIndex = key( $a );                                    /* Get the index of the pivot element */
+        $pivotValue = array_shift($a);                              /* Get the value of the pivot element */
+
+        foreach ( $a as $value )                                    /* For each value of the array */
+        {
+            if     ( $value <= $pivotValue )                        /*If loe => ut it in the low part */
+                $low[]  = $value;
+            elseif ( $value > $pivotValue )                         /* If bigger => put it in the high part */
+                $high[] = $value;
+        }   /* foreach ( $a as $value ) */
+
+        /* Assemble the low part, the pivot and the high part (use recursion) */
+        return ( array_merge( self::ARR_quickSort( $low )           ,
+                              array( $pivotIndex => $pivotValue )   ,
+                              self::ARR_quickSort( $high )
+                            ) );
+    }   /* End of vaesoli.ARR_quickSort() ============================================= */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*ARR_radixSort( $a )=
+
+        Array to sort
+
+        {*params
+            $a      (array)     Series of elements to sort
+        *}
+
+        {*return
+            (array)     The sorted array
+        *}
+
+        {*credits
+            Based on https://www.alphacodingskills.com/php/pages/php-program-for-radix-sort.php
+        *}
+
+        {*example
+        set_time_limit( 0 );
+
+        $size = 2000;
+        $repeat = 1;
+        for( $j = 0;$j < 15;$j++ )
+        {
+            $array = range( 1,$size );
+            shuffle( $array );
+            $t1 = microtime( true );
+            for( $i=0;$i<$repeat;$i++ )
+            {
+                v::ARR_quickSort( $array );
+            }
+            $t2 = microtime( true );
+            var_dump( "$i times 'ARR_quickSort()' took " . number_format( $perfQuick = ( $t2 - $t1 ),8,',','.') . " secs to sort an array of {$size} elements" );
+            ob_flush();
+            flush();
+
+            shuffle( $array );
+            $t1 = microtime( true );
+            for( $i=0;$i<$repeat;$i++ )
+            {
+                v::ARR_radixSort( $array,$size );
+            }
+            $t2 = microtime( true );
+            var_dump( "$i times 'ARR_radixSort()' took " . number_format( $perfRadix = ( $t2 - $t1 ),8,',','.') . " secs to sort an array of {$size} elements" );
+            ob_flush();
+            flush();
+
+            var_dump( number_format( ( $perfQuick / $perfRadix ) * 100,3,",","." ) . "% = ratio between quickSort() vs. radixSort()" );
+            ob_flush();
+            flush();
+
+            $size *= 2;
+            unset( $array );
+            $array = null;
+
+            var_dump( "Waiting 2secs","=============" );
+            ob_flush();
+            flush();
+            usleep( 2000000 );  |** Gives some time for garbage collection **|
+
+        }  |** for( $j = 0;$j < 10;$j++ ) **|
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public static function ARR_radixSort( &$a,$n )
+    /*------------------------------------------*/
+    {
+        $max = $a[0];
+
+        //find largest element in the Array
+        for ( $i=1;$i<$n; $i++ )
+        {
+            if ( $max < $a[$i] )
+                $max = $a[$i];
+        }   /* for ( $i=1;$i<$n; $i++ ) */
+
+        //Counting sort is performed based on place.
+        //like ones place, tens place and so on.
+        for ( $place = 1; $max/$place > 0; $place *= 10 )
+            self::countingsort( $a, $n, $place);
+    }   /* End of vaesoli.ARR_radixSort() ============================================= */
+    /* ================================================================================ */
+
+
+    /* Used internally by ARR_radixSort() */
+    protected static function countingsort( &$a,$n,$place )
+    /*---------------------------------------------------*/
+    {
+        $output = array_fill( 0,$n,0 );
+
+        //range of the number is 0-9 for each place considered.
+        $freq = array_fill( 0,10,0 );
+
+        //count number of occurrences in freq array
+        for( $i = 0; $i < $n; $i++)
+            $freq[($a[$i]/$place)%10]++;
+
+        //Change count[i] so that count[i] now contains actual
+        //position of this digit in output[]
+        for ($i = 1; $i < 10; $i++)
+            $freq[$i] += $freq[$i - 1];
+
+        //Build the output array
+        for ( $i = $n - 1; $i >= 0; $i-- )
+        {
+            $output[$freq[($a[$i]/$place)%10] - 1] = $a[$i];
+            $freq[($a[$i]/$place)%10]--;
+        }   /* for ( $i = $n - 1; $i >= 0; $i-- ) */
+
+        //Copy the output array to the input Array, Now the Array will
+        //contain sorted array based on digit at specified place
+        for ($i = 0; $i < $n; $i++)
+            $a[$i] = $output[$i];
+    }   /* End of vaesoli.countingSort() ============================================== */
+    /* ================================================================================ */
+
+
     public static function COLOR_rgb2hsv( $r,$g = null,$b = null )
     /*----------------------------------------------------------*/
     {
@@ -204,13 +384,6 @@ class Vaesoli
                         'v' => $v
                        ) );
     }   /* End of vaesoli.COLOR_rgb2hsv() ============================================= */
-    /* ================================================================================ */
-
-    public static function WhoAmI()
-    /*---------------------------*/
-    {
-        return ( __FILE__ );
-    }   /* End of vaesoli.WhoAmI() ==================================================== */
     /* ================================================================================ */
 
 
@@ -353,10 +526,10 @@ class Vaesoli
         }
 
         return ( $xRetVal );
-    }   /* End of function DAT_Bow() ================================================= */
+    }   /* End of function DAT_Bow() ================================================== */
 
 
-    /* ====================================================================== */
+    /* ================================================================================ */
     /**  {{*DAT_2Array( $szDate,$szPart )=
 
         Turns a date ([c]YYYYMMDD[HHmmSS][/c]) into an associative array
@@ -635,11 +808,11 @@ class Vaesoli
         $szYYYYMMDD = self::STR_Left( $szYYYYMMDD,8 );
 
         return ( preg_match( '%(19|20|21)[0-9]{2}[- /.]?(0[1-9]|1[012])[- /.]?(0[1-9]|[12][0-9]|3[01])%',$szYYYYMMDD ) );
-    }   /* End of vaesoli.DAT_isValid() ========================================= */
-    /* ========================================================================== */
+    }   /* End of vaesoli.DAT_isValid() =============================================== */
+    /* ================================================================================ */
 
 
-    /* ========================================================================== */
+    /* ================================================================================ */
     /**  {{*DAT_firstDowOfMonth( $xDate,$iDow )=
 
         Returns the first day of the week of a given month (e.g. first Sunday of
@@ -664,7 +837,7 @@ class Vaesoli
 
         *}}
      */
-    /* ========================================================================== */
+    /* ================================================================================ */
     public static function DAT_firstDowOfMonth( $xDate,$iDow )
     /*------------------------------------------------------*/
     {
@@ -692,18 +865,64 @@ class Vaesoli
         }   /* while ( true ) */
 
         return ( $tBOM );
-    }   /* End of vaesoli.DAT_firstDowOfMonth() ================================= */
-    /* ========================================================================== */
+    }   /* End of vaesoli.DAT_firstDowOfMonth() ======================================= */
+    /* ================================================================================ */
+
+    /* ================================================================================ */
+    /**  {{*DAT_DaysBeforeDate( $date,$n )=
+
+        Returns the date that is the day of the week before $date
+
+        {*params
+            $date   (int)       Starting date (typically resulting from a call to
+                                [c]time()[/c]).
+            $n      (int)       1 = Monday, 2 = Tuesday, ... 7 = Sunday
+        *}
+
+        {*return
+            (int)   The day that is n days before date
+        *}
+
+        {*cdate     31/07/2018 10:55 *}
+        {*version   7.0.0009 *}
+
+        {*assert
+            DAT_DaysBeforeDate( strtotime( "20210802" ),5 ) === strtotime( "20210730" )
+        *}
+
+        {*example
+            DAT_DaysBeforeDate( time(),4 )  // Thursday that precedes the current date
+                                            // (1 = Monday, 2 = Tuesday, ...)
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function DAT_DaysBeforeDate( $date,$n )
+    /*-------------------------------------------------*/
+    {
+        $tPreviousDate = $date - ( 86400 * 7 );
+
+        while( date( 'N',$tPreviousDate ) < $n )
+        {
+            $tPreviousDate += 86400;
+        }   /* while( date( 'N',$tPreviousDate ) < $n ) */
+
+        //var_dump( "Previous date: " . date( 'd-m-Y',$tPreviousDate ) );
+
+        return ( $tPreviousDate );
+    }   /* End of vaesoli.DAT_DaysBeforeDate() ======================================== */
+    /* ================================================================================ */
 
 
-    /* ========================================================================== */
+    /* ================================================================================ */
     /**  {{*DAT_Bom( [$xDate] )=
 
         Returns the day that is the starting date of the month
 
         {*params
             $xDate  (mixed)     Optional date (can be a "YYYYMMDD" string or an int
-                                (typically resukting from a call to [c]time()[/c]).
+                                (typically resulting from a call to [c]time()[/c]).
                                 If not passed, current time is considered
         *}
 
@@ -720,7 +939,7 @@ class Vaesoli
 
         *}}
      */
-    /* ========================================================================== */
+    /* ================================================================================ */
     public static function DAT_Bom( $xDate = null )
     /*-------------------------------------------*/
     {
@@ -742,8 +961,8 @@ class Vaesoli
         $szDay   = "01";
 
         return ( self::DAT_stod( $szYear . $szMonth . $szDay ) );
-    }   /* End of vaesoli.DAT_Bom() ============================================= */
-    /* ========================================================================== */
+    }   /* End of vaesoli.DAT_Bom() =================================================== */
+    /* ================================================================================ */
 
 
     public static function DAT_Dow( $xDate = null )
@@ -767,11 +986,11 @@ class Vaesoli
         }
 
         return ( $iDay === 0 ? 7 : $iDay );                             /* Return result to caller */
-    }   /* End of vaesoli.DAT_Dow() =============================================== */
-    /* ============================================================================ */
+    }   /* End of vaesoli.DAT_Dow() =================================================== */
+    /* ================================================================================ */
 
 
-    /* ============================================================================ */
+    /* ================================================================================ */
     /** {{*DAT_cDow( $xDate[,$bLong][,$szLang])=
 
         Returns the day of the week from a given date or day in a week
@@ -839,7 +1058,7 @@ class Vaesoli
         *}
         *}}
      */
-    /* ============================================================================ */
+    /* ================================================================================ */
     public static function DAT_cDow( $xDate,$bLong = true,$szLang = 'en' )
     /*------------------------------------------------------------------*/
     {
@@ -875,8 +1094,8 @@ class Vaesoli
         }   /* if ( $iDay >= 1 && $iDay <= 7 ) */
 
         return ( $szRetVal );                                           /* Return result to caller */
-    }   /* End of vaesoli.DAT_cDow() ============================================== */
-    /* ============================================================================ */
+    }   /* End of vaesoli.DAT_cDow() ================================================== */
+    /* ================================================================================ */
 
 
     public static function TIM_Stot( $szYYYYMMDDHHmmSS )
@@ -913,7 +1132,7 @@ class Vaesoli
         //echo "<p>Day  : "       . substr( $szYYYYMMDDHHmmSS,6,2 )   . "</p>\n";
 
         return ( mktime( $iHours,$iMinutes,$iSeconds,$iMonth,$iDay,$iYear ) );
-    }   /* End of vaesoli.TIM_Stot() =========================================== */
+    }   /* End of vaesoli.TIM_Stot() ================================================== */
     public static function DAT_Stot( $x ) { return ( self::TIM_Stot( $x ) ); }
     public static function DAT_Stod( $x ) { return ( self::TIM_Stot( $x ) ); }
 
@@ -942,8 +1161,130 @@ class Vaesoli
         }   /* if ( substr( $szStr,strlen( $szStr ) - 1,1 ) != $cMark ) */
 
         return ( self::STR_Tran( $szStr,$cMark . $cMark,$cMark ) );            /* Make sure that double slashes are turned to single slashes */
-    }   /* End of vaesoli.FIL_AddBS() =========================================== */
-    /* ========================================================================== */
+    }   /* End of vaesoli.FIL_AddBS() ================================================= */
+    /* ================================================================================ */
+
+
+    // JE DEVRAIS METTRE LE FILE EN 1ER ARGUMENT
+    public static function FIL_searchInFile( $needle,$szFile,$offset = 0,$blockLength = 60000 )
+    /*---------------------------------------------------------------------------------------*/
+    {
+        $iRetVal = -1;
+
+        // Fichier de données (±58Mb)
+        // Chaîne à rechercher: '618c4888405547ba83e2efa319a9e33b04b5df20'
+        // offset attendu: 57834356
+        $buffer         = substr( $needle,1 );  // Je mets le needle (sauf son 1er caractère) dans le buffer
+        $lastCharsLen   = strlen( $buffer ) ;
+
+        $offset         = max( $offset,0 );                         /* 1st position in file (can start way after BOF) */
+
+        if ( is_file( $szFile ) )                                   /* If file exists */
+        {
+            if ( $fh = fopen( $szFile,'rb' ) )                      /* Open the file in "read" mode (binary) */
+            {
+                fseek( $fh,$offset,SEEK_SET );                      /* Position offset */
+
+                while( ! feof( $fh ) )                              /* While NOT End Of File */
+                {
+                    /* Read a block of bytes (augment it with the last chars of previous buffer) */
+                    $buffer = substr( $buffer,-$lastCharsLen ) . fread( $fh,$blockLength );
+
+                    // Maybe Boyer-Moore will be faster !?!
+                    // Maybe Knuth-Morris-Pratt will be faster ?!?
+                    // THIS MUST BE CHECKED IN THE FUTURE
+                    if ( $iPos = strpos( $buffer,$needle ) )        /* If $needle found in block of bytes */
+                        break;                                      /* Stop looking any further */
+
+                    $offset += $blockLength;                        /* Update offset */
+                }   /* while( ! feof( $fh ) ) */
+
+                if ( is_int( $iPos ) )                              /* If $needle found */
+                    $iRetVal = $offset + $iPos - $lastCharsLen;     /* Calculate offset in file */
+
+                fclose( $fh );                                      /* Close file */
+            }   /* if ( $fh = fopen( $szFile,'r' ) ) */
+        }   /* if ( is_file( $szFile ) ) */
+
+        return( $iRetVal );
+    }   /* End of vaesoli.FIL_searchInFile() ========================================== */
+    /* ================================================================================ */
+
+
+    /* Deletes a block of $length bytes in a file */
+    public static function FIL_deleteInFile( $szFile,$offset,$length )
+    /*--------------------------------------------------------------*/
+    {
+        $fh1 = fopen( $szFile,'r+b' );
+        $fh2 = fopen( $szFile,'r+b' );
+
+        // fseek( $fh1,104,SEEK_SET );
+        // Offset 104 : '{PYB} is a shortcut for Patrick Boens
+        // Jusqu'à offset 141
+
+        $startOffset = $offset;
+        $endOffset   = $startOffset + $length;
+
+        fseek( $fh1,$startOffset,SEEK_SET );
+        fseek( $fh2,$endOffset,SEEK_SET );
+
+        while ( ! feof( $fh2 ) )
+        {
+            $n = fwrite( $fh1,fread( $fh2,100 ) );
+        }
+
+        $size = ftell( $fh1 );
+        fflush( $fh1 );
+        ftruncate( $fh1,$size);
+        fclose( $fh1 );
+        fclose( $fh2 );
+
+        return ( $size );
+    }
+
+
+    /* Inserts a block at offset in a file */
+    public static function FIL_insertInFile( $szFile,$offset,$block )
+    /*--------------------------------------------------------------*/
+    {
+        $buffer[] = null;
+        $buffer[] = null;
+
+        $len = strlen( $block );
+        $fh1 = fopen( $szFile,'r+b' );
+        $fh2 = fopen( $szFile,'r+b' );
+
+        fseek( $fh1,$offset,SEEK_SET );
+        fseek( $fh2,$offset,SEEK_SET );
+
+        $i = 0;
+
+        $buffer[0] = fread( $fh2,$len );
+        var_dump( "LECTURE:" . $buffer[0] );
+        fwrite( $fh1,$block );
+        var_dump( "ÉCRITURE:" . $block );
+
+        while ( ! feof( $fh2 ) )
+        {
+            $buffer[1] = fread( $fh2,$len );
+            var_dump( "LECTURE:" . $buffer[1] );
+
+            fwrite( $fh1,$buffer[0] );
+            var_dump( "ÉCRITURE:" . $buffer[0] );
+
+            $buffer[0] = $buffer[1];
+        }
+        fwrite( $fh1,$buffer[0] );
+        var_dump( "ÉCRITURE:" . $buffer[0] );
+
+        $size = ftell( $fh1 );
+        fflush( $fh1 );
+        //ftruncate( $fh1,$size);
+        fclose( $fh1 );
+        fclose( $fh2 );
+
+        return ( $size );
+    }
 
 
     public static function FIL_aFiles( $szDir,$szPattern = null,$bWithRoot = true,$bWithDir = false )
@@ -1009,11 +1350,11 @@ class Vaesoli
         }   /* if ( $nHandle = opendir( $szDir ) ) */
 
         return ( $aFiles );                                         /* Return array of dirs */
-    }   /* End of vaesoli.FIL_aFiles() ========================================== */
-    /* ========================================================================== */
+    }   /* End of vaesoli.FIL_aFiles() ================================================ */
+    /* ================================================================================ */
 
 
-    /* ========================================================================== */
+    /* ================================================================================ */
     /** {{*FIL_aFilesEx( $szPattern[,$iFlags] )=
 
         Find pathnames matching a pattern
@@ -1080,6 +1421,44 @@ class Vaesoli
     /* ================================================================================ */
 
 
+    /* Cette fonction n'a pas grand intérêt. Il faudrait savoir,
+       quand on fait le require_once, s'il est couronné de succès
+       ou pas ... mais ce n'est pas possible avec le require_once
+       car s'il ne trouve pas, il génère automatiquement une erreur
+       que je ne peux pas attrapper */
+    public static function FIL_requireOnce( $szFile )
+    /*---------------------------------------------*/
+    {
+        $bRetVal = false;
+
+        try
+        {
+            if     ( is_file( $szFile ) )
+            {
+                require_once( $szFile );
+                $bRetVal = true;
+            }
+            elseif ( is_file( $szFile2 = self::FIL_ResolveRoot( '/snippet-center/' . $szFile ) ) )
+            {
+                require_once( $szFile2 );
+                $bRetVal = true;
+            }
+            else
+            {
+                var_dump( $szFile2 );
+            }
+        }
+        catch( Exception $e )
+        {
+            echo "Message : " . $e->getMessage();
+            echo "Code : " . $e->getCode();
+        }
+
+        return ( $bRetVal );
+    }   /* End of vaesoli.requireOnce() =============================================== */
+    /* ================================================================================ */
+
+
     /* ================================================================================ */
     /** {{*isCommandLine()=
 
@@ -1098,43 +1477,83 @@ class Vaesoli
     public static function isCommandLine()
     /*----------------------------------*/
     {
-    	if     ( defined( 'STDIN' ) )
-    	    $bCommandLine = true;
+        if     ( defined( 'STDIN' ) )
+            $bCommandLine = true;
         elseif ( self::empty( $_SERVER['REMOTE_ADDR'] ) && ! isset( $_SERVER['HTTP_USER_AGENT'] ) && count( $_SERVER['argv'] ) > 0 )
             $bCommandLine = true;
         else
             $bCommandLine = false;
 
         return ( $bCommandLine );
-    }   /* End of vaesoli.isCommandLine() =========================================== */
-    /* ============================================================================== */
+    }   /* End of vaesoli.isCommandLine() ============================================= */
+    /* ================================================================================ */
 
 
-    public static function getParam( $szParameter,$aParams )
-    /*----------------------------------------------------*/
+    /* ================================================================================ */
+    /** {{*getParam( $szParameter,$aParams[,$default] )=
+
+        Get the value of a parameter in the $aParams list of parameters. If not
+        found, return a default value
+
+        {*params
+            $szParameter    (string)    Name of the parameter to look for (case
+                                        sensitive)
+            $aParams        (array)     The array of parameters
+            $default        (mixed)     The optional defalut value. If not passed,
+                                        [c]$default[/c] is [c]null[/c]
+        *}
+
+        {*mdate
+            14/01/2013 - 12:03
+        *}
+
+        {*mdate
+            25/06/2021 - 04:06
+        *}
+
+
+        {*return
+            (string)    The value of the $szParameter parameter or $default if
+                        not found
+        *}
+
+        {*example
+
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function getParam( $szParameter,$aParams,$default = null )
+    /*--------------------------------------------------------------------*/
     {
-        $szRetVal = null;
+        $szRetVal = $default;
 
-        foreach( $aParams as $szValue )
+        if ( is_array( $aParams ) && count( $aParams ) > 0 )
         {
-            $szPattern = "/{$szParameter}=(?P<{$szParameter}>.*?)\z/si";
-            //var_dump( "Pattern: {$szPattern}" );
-            if ( preg_match( $szPattern,$szValue,$aMatches ) )
+            //var_dump( $aParams );
+
+            foreach( $aParams as $szValue )
             {
-                //var_dump("FOUND");
-                //var_dump( $aMatches );
-                $szRetVal = $aMatches[$szParameter];
-                break;
-            }   /* if ( preg_match( $szPattern,$szValue,$aMatches ) ) */
-        }   /* foreach( $aParams as $szValue ) */
+                $szPattern = "/{$szParameter}=(?P<{$szParameter}>.*?)\z/si";
+                //var_dump( $szPattern );
+                //var_dump( "Pattern: {$szPattern}" );
+                if ( preg_match( $szPattern,$szValue,$aMatches ) )
+                {
+                    //var_dump("FOUND");
+                    //var_dump( $aMatches );
+                    $szRetVal = $aMatches[$szParameter];
+                    break;
+                }   /* if ( preg_match( $szPattern,$szValue,$aMatches ) ) */
+            }   /* foreach( $aParams as $szValue ) */
+        }
 
         //var_dump( "WIll return: " );
         //var_dump( $szRetVal );
 
         return ( $szRetVal );
-    }   /* End of getParam() ======================================================== */
-    /* ============================================================================== */
-
+    }   /* End of getParam() ========================================================== */
+    /* ================================================================================ */
 
 
     public static function FIL_Append( $szFile,$szText )
@@ -1319,11 +1738,11 @@ class Vaesoli
         }
 
         return ( $szRetVal );
-    }   /* End of vaesoli.FIL_KeepValidCharacters() ============================= */
-    /* ========================================================================== */
+    }   /* End of vaesoli.FIL_KeepValidCharacters() =================================== */
+    /* ================================================================================ */
 
 
-    /* ========================================================================== */
+    /* ================================================================================ */
     /** {{*FIL_MDate( $szFile,$szFormat )=
 
         Determines the date and time of last modification of a file
@@ -1383,7 +1802,7 @@ class Vaesoli
 
         *}}
      */
-    /* ========================================================================== */
+    /* ================================================================================ */
     public static function FIL_MDate( $szFile,$szFormat = 'd/m/Y - H:i:s' )
     /*-------------------------------------------------------------------*/
     {
@@ -1395,8 +1814,8 @@ class Vaesoli
         {
             return ( self::FIL_Time( $szFile,'m',$szFormat ) );
         }
-    }   /* End of function FIL_MDate() ========================================== */
-    /* ========================================================================== */
+    }   /* End of function FIL_MDate() ================================================ */
+    /* ================================================================================ */
 
 
     public static function FIL_CDate( $szFile,$szFormat = 'd/m/Y - H:i:s' )
@@ -1412,8 +1831,8 @@ class Vaesoli
             //var_dump( "On me demande la date de création de {$szFile}" );
             return ( self::FIL_Time( $szFile,'c',$szFormat ) );
         }
-    }   /* End of function FIL_CDate() ========================================== */
-    /* ========================================================================== */
+    }   /* End of function FIL_CDate() ================================================ */
+    /* ================================================================================ */
 
 
     public static function FIL_mTime( $szFile,$szFormat = null )
@@ -1574,9 +1993,8 @@ class Vaesoli
         //}
 
         return ( $bRetVal );                                            /* Return value to caller */
-    }   /* End of FIL_MkDir() */
-    /* ========================================================================== */
-    /* ========================================================================== */
+    }   /* End of FIL_MkDir() ========================================================= */
+    /* ================================================================================ */
 
 
     public static function FIL_Normalize( $szPath,$bShorten = false )
@@ -1636,8 +2054,8 @@ class Vaesoli
 
         /* Return result to caller */
         return ( self::FIL_Normalize( str_replace( array( '//','\\\\' ),array( '/','\\' ),$szPath ) ) );
-    }   /* End of vaesoli.FIL_RealPath() ======================================== */
-    /* ========================================================================== */
+    }   /* End of vaesoli.FIL_RealPath() ============================================== */
+    /* ================================================================================ */
 
 
     public static function FIL_ResolveRoot( $szFileSpec,$szRoot = null )
@@ -1689,8 +2107,8 @@ class Vaesoli
         }
 
         return ( $szFileSpec );
-    }   /* End of vaesoli.FIL_ResolveRoot() ===================================== */
-    /* ========================================================================== */
+    }   /* End of vaesoli.FIL_ResolveRoot() =========================================== */
+    /* ================================================================================ */
 
 
     public static function FIL_RevertRoot( $szFileSpec,$szRoot = null )
@@ -2226,6 +2644,7 @@ class Vaesoli
     }   /* End of NUM_isPrime() ======================================================= */
     /* ================================================================================ */
 
+
     /* $aParams['algo'] = 'max'
                         = 'count' */
     public static function NUM_getPrimes( $aParams )
@@ -2262,8 +2681,301 @@ class Vaesoli
         }
 
         return ( $aPrimes );
-    }
+    }   /* End of NUM_getPrimes() ===================================================== */
+    /* ================================================================================ */
 
+
+    /* ================================================================================ */
+    /** {{*STR_at( $szWord )=
+
+        Find a substring (case sensitive) using BOYER-MOORE
+
+        {*params
+            $szString          (string)     String to process.
+            $uiStringLen       (int)        Length of szString
+            $szPattern         (string)     Pattern to look for
+            $uiPatternLen      (int)        Length of szPattern
+            $SkipTable         (array)      Skip table to use. If NULL, use default skip table
+        *}
+
+        {*return
+            Position of szPattern in string of -1 if not found
+        *}
+
+        {*warning
+
+        {*remark
+            PHP penalizes code that is written in a class (static methods)
+            terribly compared to code written in a simple function AND PHP
+            penalizes user code compared to its own internal code (e.g. strpos()
+            code). SO ... it is better to use strpos() for the best performance
+        *}
+
+        {*remark
+            The code is the PHP transcription of the C code of Vae Soli!
+        *}
+
+        {*author {PYB} *}
+        {*cdate 2003-05-25 13:12:00 *}
+        {*mdate 31-07-21 11:10:02 *}
+
+        {*example
+        *}
+
+        *}}
+     */
+    /* ========================================================================== */
+    public static function STR_at( &$szString    ,
+                                   &$uiStringLen ,
+                                   &$szPattern   ,
+                                   &$uiPatternLen,
+                                   &$skip = null )
+    /*-----------------------------------------*/
+    {
+        //return ( is_int( $iPos = strpos( $szString,$szPattern ) ) ? $iPos : -1 );
+        $i;$j;$k;$m = $uiPatternLen;$cbMatches;
+
+        //var_dump( $skip );
+
+        if ( is_null( $skip ) )
+        {
+            var_dump( "COMPOSING THE SKIP TABLE" );
+            //$skip = array_fill( 0,BOYER_SKIP_TABLE_LENGTH,-1 );
+            for ( $i = 0;$i < BOYER_SKIP_TABLE_LENGTH;$i++ )
+                $skip[chr($i)] = $uiPatternLen;
+
+            for ( $i = 0; $i < $uiPatternLen;$i++ )
+            {
+                $c = $szPattern[$i];
+                if ( $skip[$c] === $uiPatternLen )
+                    $skip[$c] = 0 - $i;
+                echo $c,$skip[$c];
+            }
+        }
+
+        //var_dump( time(),$skip['r'] );
+        //var_dump( $skip );
+        //goto end;
+
+        /* If the Pattern is empty ... then, there is nothing to do      */
+        if ( $m === 0 )
+        {
+           return ( 0 );
+        }
+
+        if ( $uiStringLen < $uiPatternLen )
+        {
+            goto end;
+        }
+
+        /**************************************************************/
+        /* If the string we search in is so small, or if the          */
+        /* pattern that was submitted is so small ... that the        */
+        /* usefulness of the BOYER-MOORE algorithm is in doubt,       */
+        /* then simply use the native STR_Pos() method               */
+        /**************************************************************/
+        //if ( ( $uiStringLen <= BOYER_SKIP_TABLE_LENGTH ) ||
+        //     ( $m           <  MIN_PATTERN_LEN         ) ||
+        //     ( $uiStringLen <  180 )
+        //   )
+        //{
+        //    return ( self::STR_pos( $szString,$szPattern ) );
+        //}
+        //else
+        {
+            //var_dump( $SkipTable );
+            //goto end;
+
+            for ( $k = $m-1; $k < $uiStringLen; )               /* Here's the magic: for each character */
+            {
+                // Uncomment to reveal the magic:
+                // ------------------------------
+                // printf( "$k=%d ($szString[$k]=%c)/skip value=%d/skip=%d\n",$k,$szString[$k],$skip[($szString[$k] & 255)],$skip[$szString[$k]] );
+                //
+                //var_dump( "k = {$k} and at this position the character in the string is {$szString[$k]}" );
+                for ( $j=$m,$i=$k+1,$cbMatches=$m/2;$cbMatches>0;$cbMatches-- )
+                {
+                    /* Uncomment to reveal the magic
+                       -----------------------------
+                       printf( "%s - %c [i=%d,k=%d,m=%d]\n",&szString[i] ,szString[i] ,i,k,m ); printf( "%s - %c [i=%d,k=%d,m=%d]\n",&szPattern[j],szPattern[j],j,k,m ); printf( "\n" ); */
+                             /* The usual algorithm compares 1 char of the pattern with
+                                1 char of the buffer. What WE do is to compare
+                                2 bytes at once. We do this by saying that we point to
+                                a short in both buffers. That's what the first member
+                                expresses. The second member helps exiting the loop
+                                earlier by also comparing the first char of the pattern:
+                                not only the 2 chars that we point must be identical in
+                                the buffer and in the pattern, but also the first byte
+                                of the pattern must match the k-m-1 byte of the buffer
+                    */
+
+                    /* $i points to the next character in the haystack */
+
+                    if ( $szString[ $i-=2 ] !== $szPattern[$j-=2 ] )
+                        goto NoMatch;
+                }   /* for ( j=m,i=k+1,cbMatches=m/2;cbMatches>0;cbMatches-- ) */
+
+                //if ( $j !== 0 )
+                //{
+                //    var_dump( "CASE 1");
+                //    if ( $szString[--$i] == $szPattern[0] )
+                //        return ( $i );    /* En C c'était return ( szString + i ) */
+                //}   /* if ( j != 0 ) */
+                //else   /* Else of ... if ( j != 0 ) */
+                //{
+                //    var_dump( "CASE 2");
+                //    return ( $i );    /* En C c'était return ( szString + i ) */
+                //}   /* End of Else of ... if ( j != 0 ) */
+
+                NoMatch: //var_dump( "k = {$k} and at this position the character in the string is {$szString[$k]}. We should skip {$skip[$szString[$k]]} bytes" );
+                $k += $skip[ $szString[$k] ];
+                //var_dump( "k is now qual to " . $k );
+
+                if ( $skip[$szString[$k]] === 0 )
+                {
+                    if ( substr( $szString,$k,$uiPatternLen ) === $szPattern )
+                        return ( $k );
+                }
+
+            }   /* for( k = m-1; k < uiStringLen;  ) */
+        }
+
+        end:
+        return ( -1 );
+    }   /* End of STR_At() ============================================================ */
+    /* ================================================================================ */
+
+
+    // This is the C Code /*************************************************************************/
+    // This is the C Code /**
+    // This is the C Code *   @brief       Find a substring
+    // This is the C Code *
+    // This is the C Code *   @date        2003-05-25 13:12:00
+    // This is the C Code *   @author      Pat Y. Boens
+    // This is the C Code *
+    // This is the C Code *   @param       szString          String to process.
+    // This is the C Code *   @param       uiStringLen       Length of szString
+    // This is the C Code *   @param       szPattern         Pattern to look for
+    // This is the C Code *   @param       uiPatternLen      Length of szPattern
+    // This is the C Code *   @param       SkipTable         Skip table to use. If NULL, use default
+    // This is the C Code *                                  skip table
+    // This is the C Code *   @return                        Pointer to beginning of substring in
+    // This is the C Code *                                  string. NULL if the substring wasn't
+    // This is the C Code *                                  found.
+    // This is the C Code */
+    // This is the C Code /*************************************************************************/
+    // This is the C Code FUNCTION char *STR_At( char      *szString   ,
+    // This is the C Code                        XS_UINT   uiStringLen ,
+    // This is the C Code                        char      *szPattern  ,
+    // This is the C Code                        XS_UINT   uiPatternLen,
+    // This is the C Code                        XS_UINT   SkipTable[]
+    // This is the C Code                      )
+    // This is the C Code /*-----------------------------------------------*/
+    // This is the C Code {
+    // This is the C Code    register XS_UINT i,j,k,m = uiPatternLen,cbMatches;
+    // This is the C Code
+    // This is the C Code
+    // This is the C Code    FUNCTION_START( "STR_At()" );
+    // This is the C Code
+    // This is the C Code
+    // This is the C Code    /* If the Pattern is empty ... then, there is nothing to do      */
+    // This is the C Code    if ( m == 0 )
+    // This is the C Code    {
+    // This is the C Code       FUNCTION_STOP();                                                  /* Stop function tracing */
+    // This is the C Code       return( szString );
+    // This is the C Code    }
+    // This is the C Code
+    // This is the C Code    /* If the length of the string is less than the length of        */
+    // This is the C Code    /* the pattern                                                   */
+    // This is the C Code    if ( uiStringLen < uiPatternLen )
+    // This is the C Code    {
+    // This is the C Code       FUNCTION_STOP();                                                  /* Stop function tracing */
+    // This is the C Code       return ( ( char *) NULL );
+    // This is the C Code    }
+    // This is the C Code
+    // This is the C Code    /*****************************************************************/
+    // This is the C Code    /* If a table of skips was given, then we do not need to check   */
+    // This is the C Code    /* the length of the pattern (the pattern is already prechewed). */
+    // This is the C Code    /* In that case, USE Boyer-Moore please and not strstr().        */
+    // This is the C Code    /* Added: if ( SkipTable == NULL )                               */
+    // This is the C Code    /*****************************************************************/
+    // This is the C Code    if ( SkipTable == NULL )
+    // This is the C Code    {
+    // This is the C Code       /**************************************************************/
+    // This is the C Code       /* If the string we search in is so small, or if the          */
+    // This is the C Code       /* pattern that was submitted is so small ... that the        */
+    // This is the C Code       /* usefulness of the BOYER-MOORE algorithm is in doubt,       */
+    // This is the C Code       /* then simply use the native strstr() function               */
+    // This is the C Code       /**************************************************************/
+    // This is the C Code       if ( ( uiStringLen <= BOYER_SKIP_TABLE_LENGTH ) ||
+    // This is the C Code            ( m           <  MIN_PATTERN_LEN         ) ||
+    // This is the C Code            ( uiStringLen <  180 )
+    // This is the C Code          )
+    // This is the C Code       {
+    // This is the C Code          FUNCTION_STOP();                                               /* Stop function tracing */
+    // This is the C Code          return ( strstr( szString,szPattern ) );
+    // This is the C Code       }
+    // This is the C Code       else
+    // This is the C Code       {
+    // This is the C Code          SkipTable = skip;                                              /* We need considering the default Skips table: skip */
+    // This is the C Code       }
+    // This is the C Code    }
+    // This is the C Code
+    // This is the C Code #ifdef CRACRA
+    // This is the C Code    if ( SkipTable == NULL )                                             /* If NO Skips table was given to us */
+    // This is the C Code    {
+    // This is the C Code       SkipTable = skip;                                                 /* We need considering the default Skips table: skip */
+    // This is the C Code    }
+    // This is the C Code #endif
+    // This is the C Code
+    // This is the C Code    for( k = m-1; k < uiStringLen;  )                                    /* Here's the magic */
+    // This is the C Code    {
+    // This is the C Code /* Uncomment to reveal the magic
+    // This is the C Code printf( "k=%d (szString[k]=%c)/skip value=%d/skip=%d\n",k,szString[k],skip[(szString[k] & 255)],skip[szString[k]] ); */
+    // This is the C Code       for ( j=m,i=k+1,cbMatches=m/2;cbMatches>0;cbMatches-- )
+    // This is the C Code       {
+    // This is the C Code  /* Uncomment to reveal the magic
+    // This is the C Code printf( "%s - %c [i=%d,k=%d,m=%d]\n",&szString[i] ,szString[i] ,i,k,m ); printf( "%s - %c [i=%d,k=%d,m=%d]\n",&szPattern[j],szPattern[j],j,k,m ); printf( "\n" ); */
+    // This is the C Code          /* The usual algorithm compares 1 char of the pattern with
+    // This is the C Code             1 char of the buffer. What we do ourselves, is to compare
+    // This is the C Code             2 bytes at once. We do this by saying that we point to
+    // This is the C Code             a short in both buffers. That's what the first member
+    // This is the C Code             expresses. The second member helps exiting the loop
+    // This is the C Code             earlier by also comparing the first char of the pattern:
+    // This is the C Code             not only the 2 chars that we point must be identical in
+    // This is the C Code             the buffer and in the pattern, but also the first byte
+    // This is the C Code             of the pattern must match the k-m-1 byte of the buffer */
+    // This is the C Code
+    // This is the C Code          if ( ( *((short *) &szString[ i-=2 ] ) !=
+    // This is the C Code                 *((short *) &szPattern[j-=2 ] )
+    // This is the C Code               )
+    // This is the C Code             )
+    // This is the C Code          {
+    // This is the C Code             goto NoMatch;
+    // This is the C Code          }
+    // This is the C Code       }   /* for ( j=m,i=k+1,cbMatches=m/2;cbMatches>0;cbMatches-- ) */
+    // This is the C Code
+    // This is the C Code       if ( j != 0 )
+    // This is the C Code       {
+    // This is the C Code          if ( szString[--i] == szPattern[0] )
+    // This is the C Code          {
+    // This is the C Code             FUNCTION_STOP();                                            /* Stop function tracing */
+    // This is the C Code             return ( szString + i );
+    // This is the C Code          }
+    // This is the C Code       }   /* if ( j != 0 ) */
+    // This is the C Code       else   /* Else of ... if ( j != 0 ) */
+    // This is the C Code       {
+    // This is the C Code          FUNCTION_STOP();                                               /* Stop function tracing */
+    // This is the C Code          return ( szString + i );
+    // This is the C Code       }   /* End of Else of ... if ( j != 0 ) */
+    // This is the C Code
+    // This is the C Code NoMatch: k += SkipTable[(XS_UCHAR) szString[k]];
+    // This is the C Code    }   /* for( k = m-1; k < uiStringLen;  ) */
+    // This is the C Code
+    // This is the C Code    FUNCTION_STOP();                                                     /* Stop function tracing */
+    // This is the C Code
+    // This is the C Code    return ( NULL );
+    // This is the C Code }   /* End of FUNCTION char *STR_At() */
 
     public static function STR_get3LettersAtRandom()
     /*--------------------------------------------*/
@@ -2924,6 +3636,60 @@ class Vaesoli
 
 
     /* ================================================================================ */
+    /** {{*STR_Keep( $szStr,$szChars )=
+
+        Keeps only the characters of $szStr which can be found in $szChars
+
+        {*params
+            $szStr      (string)    Input string
+            $szChars    (string)    List of chars to keep
+        *}
+
+        {*return
+            (string)    The resulting string
+        *}
+
+        {*uses
+            STR_Pos()
+        *}
+
+        {*assert
+            STR_Keep( 'Rue Bois des Mazuis, 47 - 5070 - Vitrival','aeiouyAEIOUY' ) === 'ueoieauiiia'
+        *}
+
+        {*assert
+            STR_IsVowel( STR_Keep( 'Rue Bois des Mazuis, 47 - 5070 - Vitrival','aeiouyAEIOUY' ) )
+        *}
+
+        {*exec
+            echo '<p>',STR_Keep( 'Rue Bois des Mazuis, 47 - 5070 - Vitrival','aeiouyAEIOUY' ),'</p>';
+        *}
+
+        {*seealso
+            STR_Eliminate()
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_Keep( $szStr,$szChars )
+    /*----------------------------------------------*/
+    {
+        $szRetVal   = '';                                               /* Default return value of the function */
+        $iLength    = strlen( $szStr );                                 /* Length of the string to treat */
+
+        for ( $i = 0;$i < $iLength;$i++ )                               /* For the entire string */
+        {
+            if ( self::STR_Pos( $szChars,$cChar = $szStr[$i] ) != -1 )  /* Char is appended if in $szChars */
+                $szRetVal .= $cChar;
+        }   /* for ( $i = 0;$i < $iLength;$i++ ) */
+
+        return ( $szRetVal );                                           /* Return result to caller */
+    }   /* End of method vaesoli.STR_Keep() =========================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
     /** {{*STR_SquareBracketsToAngleBrackets( $szText )=
 
         Turns square brackets to angle brackets
@@ -3170,9 +3936,11 @@ class Vaesoli
 
     // Turn all kind of spaces into a common space
     public static function STR_commonSpaces( $szStr )
+    /*---------------------------------------------*/
     {
         return ( preg_replace( '/[\x{A0}]/usim',' ',preg_replace('/\s/sim',' ',str_iReplace( array( '&#32;','&nbsp;','&#160;','&ensp;','&#8194;','&emsp;','&#8195;','&thinsp;','&#8201;' ),' ',$szStr ) ) ) );
-    }
+    }   /* == End of vaesoli.STR_commonSpaces() ======================================= */
+    /* ================================================================================ */
 
     public static function STR_words( $szText,$iMinLength = -1 )
     /*========================================================*/
@@ -3928,14 +4696,14 @@ class Vaesoli
     {
         // Faudrait ajouter le Y (comme dans STR_vowels())
         $accents = array( 'É' => 'E','È' => 'E','Ë' => 'E','Ê' => 'E','Á' => 'A','À' => 'A','Ä' => 'A'  ,'Â' => 'A',
-        				  'Å' => 'A','Ã' => 'A','Æ' => 'E','Ï' => 'I','Î' => 'I','Ì' => 'I','Í' => 'I'  ,
-        				  'Ô' => 'O','Ö' => 'O','Ò' => 'O','Ó' => 'O','Õ' => 'O','Ø' => 'O','Œ' => 'OEU',
-        				  'Ú' => 'U','Ù' => 'U','Û' => 'U','Ü' => 'U','Ñ' => 'N','Ç' => 'S','¿' => 'E' );
+                          'Å' => 'A','Ã' => 'A','Æ' => 'E','Ï' => 'I','Î' => 'I','Ì' => 'I','Í' => 'I'  ,
+                          'Ô' => 'O','Ö' => 'O','Ò' => 'O','Ó' => 'O','Õ' => 'O','Ø' => 'O','Œ' => 'OEU',
+                          'Ú' => 'U','Ù' => 'U','Û' => 'U','Ü' => 'U','Ñ' => 'N','Ç' => 'S','¿' => 'E' );
 
         $min2maj = array( 'é' => 'É','è' => 'È','ë' => 'Ë','ê' => 'Ê','á' => 'Á','â' => 'Â','à' => 'À'  ,'Ä' => 'A',
-        				  'Â' => 'A','å' => 'Å','ã' => 'Ã','æ' => 'Æ','ï' => 'Ï','î' => 'Î','ì' => 'Ì'  ,'í' => 'Í',
-        				  'ô' => 'Ô','ö' => 'Ö','ò' => 'Ò','ó' => 'Ó','õ' => 'Õ','ø' => 'Ø','œ' => 'Œ'  ,
-        				  'ú' => 'Ú','ù' => 'Ù','û' => 'Û','ü' => 'Ü','ç' => 'Ç','ñ' => 'Ñ','ß' => 'S' );
+                          'Â' => 'A','å' => 'Å','ã' => 'Ã','æ' => 'Æ','ï' => 'Ï','î' => 'Î','ì' => 'Ì'  ,'í' => 'Í',
+                          'ô' => 'Ô','ö' => 'Ö','ò' => 'Ò','ó' => 'Ó','õ' => 'Õ','ø' => 'Ø','œ' => 'Œ'  ,
+                          'ú' => 'Ú','ù' => 'Ù','û' => 'Û','ü' => 'Ü','ç' => 'Ç','ñ' => 'Ñ','ß' => 'S' );
 
 
         //$sIn = utf8_decode($sIn);                         // Selon votre implémentation, vous aurez besoin de décoder ce qui arrive pour les caractères spéciaux
@@ -3973,24 +4741,24 @@ class Vaesoli
         if ( $sIn == 'RAZ'      )   return( 'RA'    );
 
         // pré-traitements
-        $sIn = preg_replace( '`OIN[GT]$`', 'OIN', $sIn );									// terminaisons OING -> OIN
-        $sIn = preg_replace( '`E[RS]$`', 'E', $sIn ); 										// supression des terminaisons infinitifs et participes pluriels
-        $sIn = preg_replace( '`(C|CH)OEU`', 'KE', $sIn ); 									// pré traitement OEU -> EU
-        $sIn = preg_replace( '`MOEU`', 'ME', $sIn ); 										// pré traitement OEU -> EU
-        $sIn = preg_replace( '`OE([UI]+)([BCDFGHJKLMNPQRSTVWXZ])`', 'E$1$2', $sIn ); 		// pré traitement OEU OEI -> E
-        $sIn = preg_replace( '`^GEN[TS]$`', 'JAN', $sIn );									// pré traitement GEN -> JAN
-        $sIn = preg_replace( '`CUEI`', 'KEI', $sIn ); 										// pré traitement accueil
-        $sIn = preg_replace( '`([^AEIOUYC])AE([BCDFGHJKLMNPQRSTVWXZ])`', '$1E$2', $sIn ); 	// pré traitement AE -> E
-        $sIn = preg_replace( '`AE([QS])`', 'E$1', $sIn ); 									// pré traitement AE -> E
-        $sIn = preg_replace( '`AIE([BCDFGJKLMNPQRSTVWXZ])`', 'AI$1', $sIn );				// pré-traitement AIE(consonne) -> AI
-        $sIn = preg_replace( '`ANIEM`', 'ANIM', $sIn ); 									// pré traitement NIEM -> NIM
-        $sIn = preg_replace( '`(DRA|TRO|IRO)P$`', '$1', $sIn ); 							// P terminal muet
-        $sIn = preg_replace( '`(LOM)B$`', '$1', $sIn ); 									// B terminal muet
-        $sIn = preg_replace( '`(RON|POR)C$`', '$1', $sIn ); 								// C terminal muet
-        $sIn = preg_replace( '`PECT$`', 'PET', $sIn ); 										// C terminal muet
-        $sIn = preg_replace( '`ECUL$`', 'CU', $sIn ); 										// L terminal muet
-        $sIn = preg_replace( '`(CHA|CA|E)M(P|PS)$`', '$1N', $sIn ); 		 				// P ou PS terminal muet
-        $sIn = preg_replace( '`(TAN|RAN)G$`', '$1', $sIn ); 			 					// G terminal muet
+        $sIn = preg_replace( '`OIN[GT]$`', 'OIN', $sIn );                                    // terminaisons OING -> OIN
+        $sIn = preg_replace( '`E[RS]$`', 'E', $sIn );                                         // supression des terminaisons infinitifs et participes pluriels
+        $sIn = preg_replace( '`(C|CH)OEU`', 'KE', $sIn );                                     // pré traitement OEU -> EU
+        $sIn = preg_replace( '`MOEU`', 'ME', $sIn );                                         // pré traitement OEU -> EU
+        $sIn = preg_replace( '`OE([UI]+)([BCDFGHJKLMNPQRSTVWXZ])`', 'E$1$2', $sIn );         // pré traitement OEU OEI -> E
+        $sIn = preg_replace( '`^GEN[TS]$`', 'JAN', $sIn );                                    // pré traitement GEN -> JAN
+        $sIn = preg_replace( '`CUEI`', 'KEI', $sIn );                                         // pré traitement accueil
+        $sIn = preg_replace( '`([^AEIOUYC])AE([BCDFGHJKLMNPQRSTVWXZ])`', '$1E$2', $sIn );     // pré traitement AE -> E
+        $sIn = preg_replace( '`AE([QS])`', 'E$1', $sIn );                                     // pré traitement AE -> E
+        $sIn = preg_replace( '`AIE([BCDFGJKLMNPQRSTVWXZ])`', 'AI$1', $sIn );                // pré-traitement AIE(consonne) -> AI
+        $sIn = preg_replace( '`ANIEM`', 'ANIM', $sIn );                                     // pré traitement NIEM -> NIM
+        $sIn = preg_replace( '`(DRA|TRO|IRO)P$`', '$1', $sIn );                             // P terminal muet
+        $sIn = preg_replace( '`(LOM)B$`', '$1', $sIn );                                     // B terminal muet
+        $sIn = preg_replace( '`(RON|POR)C$`', '$1', $sIn );                                 // C terminal muet
+        $sIn = preg_replace( '`PECT$`', 'PET', $sIn );                                         // C terminal muet
+        $sIn = preg_replace( '`ECUL$`', 'CU', $sIn );                                         // L terminal muet
+        $sIn = preg_replace( '`(CHA|CA|E)M(P|PS)$`', '$1N', $sIn );                          // P ou PS terminal muet
+        $sIn = preg_replace( '`(TAN|RAN)G$`', '$1', $sIn );                                  // G terminal muet
 
 
         // sons YEUX
@@ -4003,8 +4771,8 @@ class Vaesoli
         $convMOut = array( "DIAI", "DION","DIER", "DIEM", "RION", "TAIE", "GAIET", "AIAI", "AIAR",
         "OUIA", "AIAI", "AIAR", "AIER", "AIEM",  "RAIET", "EIET", "AIOL" );
         $sIn = str_replace( $convMIn, $convMOut, $sIn );
-        $sIn = preg_replace( '`([^AEIOUY])(SC|S)IEM([EA])`', '$1$2IAM$3', $sIn ); 	// IEM -> IAM
-        $sIn = preg_replace( '`^(SC|S)IEM([EA])`', '$1IAM$2', $sIn ); 				// IEM -> IAM
+        $sIn = preg_replace( '`([^AEIOUY])(SC|S)IEM([EA])`', '$1$2IAM$3', $sIn );     // IEM -> IAM
+        $sIn = preg_replace( '`^(SC|S)IEM([EA])`', '$1IAM$2', $sIn );                 // IEM -> IAM
 
         // MP MB -> NP NB
         $convMIn  = array( 'OMB', 'AMB', 'OMP', 'AMP', 'IMB', 'EMP','GEMB','EMB', 'UMBL','CIEN');
@@ -4012,11 +4780,11 @@ class Vaesoli
         $sIn = str_replace( $convMIn, $convMOut, $sIn );
 
         // Sons en K
-        $sIn = preg_replace( '`^ECHO$`', 'EKO', $sIn ); 	// cas particulier écho
-        $sIn = preg_replace( '`^ECEUR`', 'EKEUR', $sIn ); 	// cas particulier écœuré
+        $sIn = preg_replace( '`^ECHO$`', 'EKO', $sIn );     // cas particulier écho
+        $sIn = preg_replace( '`^ECEUR`', 'EKEUR', $sIn );     // cas particulier écœuré
         // Choléra Chœur mais pas chocolat!
-        $sIn = preg_replace( '`^CH(OG+|OL+|OR+|EU+|ARIS|M+|IRO|ONDR)`', 'K$1', $sIn ); 				//En début de mot
-        $sIn = preg_replace( '`(YN|RI)CH(OG+|OL+|OC+|OP+|OM+|ARIS|M+|IRO|ONDR)`', '$1K$2', $sIn ); 	//Ou devant une consonne
+        $sIn = preg_replace( '`^CH(OG+|OL+|OR+|EU+|ARIS|M+|IRO|ONDR)`', 'K$1', $sIn );                 //En début de mot
+        $sIn = preg_replace( '`(YN|RI)CH(OG+|OL+|OC+|OP+|OM+|ARIS|M+|IRO|ONDR)`', '$1K$2', $sIn );     //Ou devant une consonne
         $sIn = preg_replace( '`CHS`', 'CH', $sIn );
         $sIn = preg_replace( '`CH(AIQ)`', 'K$1', $sIn );
         $sIn = preg_replace( '`^ECHO([^UIPY])`', 'EKO$1', $sIn );
@@ -4024,9 +4792,9 @@ class Vaesoli
         $sIn = preg_replace( '`^ICHT`', 'IKT', $sIn );
         $sIn = preg_replace( '`ORCHID`', 'ORKID', $sIn );
         $sIn = preg_replace( '`ONCHIO`', 'ONKIO', $sIn );
-        $sIn = preg_replace( '`ACHIA`', 'AKIA', $sIn );			// retouche ACHIA -> AKIA
-        $sIn = preg_replace( '`([^C])ANICH`', '$1ANIK', $sIn );	// ANICH -> ANIK 	1/2
-        $sIn = preg_replace( '`OMANIK`', 'OMANICH', $sIn ); 	// cas particulier 	2/2
+        $sIn = preg_replace( '`ACHIA`', 'AKIA', $sIn );            // retouche ACHIA -> AKIA
+        $sIn = preg_replace( '`([^C])ANICH`', '$1ANIK', $sIn );    // ANICH -> ANIK     1/2
+        $sIn = preg_replace( '`OMANIK`', 'OMANICH', $sIn );     // cas particulier     2/2
         $sIn = preg_replace( '`ACHY([^D])`', 'AKI$1', $sIn );
         $sIn = preg_replace( '`([AEIOU])C([BDFGJKLMNPQRTVWXZ])`', '$1K$2', $sIn ); // voyelle, C, consonne sauf H
         $convPrIn  = array('EUCHA','YCHIA','YCHA','YCHO','YCHED','ACHEO','RCHEO','RCHES',
@@ -4075,10 +4843,10 @@ class Vaesoli
 
 
     // H muet
-    $sIn = preg_replace( '`([^CS])H`', '$1', $sIn ); 	// H muet
-    $sIn = str_replace( "ESH", "ES", $sIn );			// H muet
-    $sIn = str_replace( "NSH", "NS", $sIn );			// H muet
-    $sIn = str_replace( "SH", "CH", $sIn );				// ou pas!
+    $sIn = preg_replace( '`([^CS])H`', '$1', $sIn );     // H muet
+    $sIn = str_replace( "ESH", "ES", $sIn );            // H muet
+    $sIn = str_replace( "NSH", "NS", $sIn );            // H muet
+    $sIn = str_replace( "SH", "CH", $sIn );                // ou pas!
 
     // NASALES
     $convNasIn  = array( 'OMT','IMB', 'IMP','UMD','TIENT','RIENT','DIENT','IEN',
@@ -4115,68 +4883,68 @@ class Vaesoli
     $sIn = preg_replace( '`AU([^E])`', 'O$1', $sIn ); // AU sans E qui suit
 
         // Les retouches!
-        $sIn = preg_replace( '`^BENJ`'              ,'BINJ'     ,$sIn );				// retouche BENJ -> BINJ
-        $sIn = preg_replace( '`RTIEL`'              ,'RSIEL'    ,$sIn );			// retouche RTIEL -> RSIEL
-        $sIn = preg_replace( '`PINK`'               ,'PONK'     ,$sIn );				// retouche PINK -> PONK
-        $sIn = preg_replace( '`KIND`'               ,'KOND'     ,$sIn );				// retouche KIND -> KOND
-        $sIn = preg_replace( '`KUM(N|P)`'           ,'KON$1'    ,$sIn );			// retouche KUMN KUMP
-        $sIn = preg_replace( '`LKOU`'               ,'LKO'      ,$sIn );				// retouche LKOU -> LKO
-        $sIn = preg_replace( '`EDBE`'               ,'EBE'      ,$sIn );				// retouche EDBE pied-bœuf
-        $sIn = preg_replace( '`ARCM`'               ,'ARKM'     ,$sIn );				// retouche SCH -> CH
-        $sIn = preg_replace( '`SCH`'                ,'CH'       ,$sIn );					// retouche SCH -> CH
+        $sIn = preg_replace( '`^BENJ`'              ,'BINJ'     ,$sIn );                // retouche BENJ -> BINJ
+        $sIn = preg_replace( '`RTIEL`'              ,'RSIEL'    ,$sIn );            // retouche RTIEL -> RSIEL
+        $sIn = preg_replace( '`PINK`'               ,'PONK'     ,$sIn );                // retouche PINK -> PONK
+        $sIn = preg_replace( '`KIND`'               ,'KOND'     ,$sIn );                // retouche KIND -> KOND
+        $sIn = preg_replace( '`KUM(N|P)`'           ,'KON$1'    ,$sIn );            // retouche KUMN KUMP
+        $sIn = preg_replace( '`LKOU`'               ,'LKO'      ,$sIn );                // retouche LKOU -> LKO
+        $sIn = preg_replace( '`EDBE`'               ,'EBE'      ,$sIn );                // retouche EDBE pied-bœuf
+        $sIn = preg_replace( '`ARCM`'               ,'ARKM'     ,$sIn );                // retouche SCH -> CH
+        $sIn = preg_replace( '`SCH`'                ,'CH'       ,$sIn );                    // retouche SCH -> CH
         $sIn = preg_replace( '`^OINI`'              ,'ONI'      ,$sIn );           // retouche début OINI -> ONI
-        $sIn = preg_replace( '`([^NDCGRHKO])APT`'   ,'$1AT'     ,$sIn );	// retouche APT -> AT
-        $sIn = preg_replace( '`([L]|KON)PT`'        ,'$1T'      ,$sIn );		// retouche LPT -> LT
-        $sIn = preg_replace( '`OTB`'                ,'OB'       ,$sIn );					// retouche OTB -> OB (hautbois)
-        $sIn = preg_replace( '`IXA`'                ,'ISA'      ,$sIn );				// retouche IXA -> ISA
-        $sIn = preg_replace( '`TG`'                 ,'G'        ,$sIn );					// retouche TG -> G
-        $sIn = preg_replace( '`^TZ`'                ,'TS'       ,$sIn );					// retouche début TZ -> TS
-        $sIn = preg_replace( '`PTIE`'               ,'TIE'      ,$sIn );				// retouche PTIE -> TIE
-        $sIn = preg_replace( '`GT`'                 ,'T'        ,$sIn );					// retouche GT -> T
-        $sIn = str_replace(  "ANKIEM"               ,"ANKILEM"  ,$sIn );			// retouche tranquillement
-        $sIn = preg_replace( "`(LO|RE)KEMAN`", "$1KAMAN", $sIn );	// KEMAN -> KAMAN
-        $sIn = preg_replace( '`NT(B|M)`', 'N$1', $sIn );			// retouche TB -> B  TM -> M
-        $sIn = preg_replace( '`GSU`', 'SU', $sIn );					// retouche GS -> SU
-        $sIn = preg_replace( '`ESD`', 'ED', $sIn );					// retouche ESD -> ED
-        $sIn = preg_replace( '`LESKEL`','LEKEL', $sIn );			// retouche LESQUEL -> LEKEL
-        $sIn = preg_replace( '`CK`', 'K', $sIn );					// retouche CK -> K
+        $sIn = preg_replace( '`([^NDCGRHKO])APT`'   ,'$1AT'     ,$sIn );    // retouche APT -> AT
+        $sIn = preg_replace( '`([L]|KON)PT`'        ,'$1T'      ,$sIn );        // retouche LPT -> LT
+        $sIn = preg_replace( '`OTB`'                ,'OB'       ,$sIn );                    // retouche OTB -> OB (hautbois)
+        $sIn = preg_replace( '`IXA`'                ,'ISA'      ,$sIn );                // retouche IXA -> ISA
+        $sIn = preg_replace( '`TG`'                 ,'G'        ,$sIn );                    // retouche TG -> G
+        $sIn = preg_replace( '`^TZ`'                ,'TS'       ,$sIn );                    // retouche début TZ -> TS
+        $sIn = preg_replace( '`PTIE`'               ,'TIE'      ,$sIn );                // retouche PTIE -> TIE
+        $sIn = preg_replace( '`GT`'                 ,'T'        ,$sIn );                    // retouche GT -> T
+        $sIn = str_replace(  "ANKIEM"               ,"ANKILEM"  ,$sIn );            // retouche tranquillement
+        $sIn = preg_replace( "`(LO|RE)KEMAN`", "$1KAMAN", $sIn );    // KEMAN -> KAMAN
+        $sIn = preg_replace( '`NT(B|M)`', 'N$1', $sIn );            // retouche TB -> B  TM -> M
+        $sIn = preg_replace( '`GSU`', 'SU', $sIn );                    // retouche GS -> SU
+        $sIn = preg_replace( '`ESD`', 'ED', $sIn );                    // retouche ESD -> ED
+        $sIn = preg_replace( '`LESKEL`','LEKEL', $sIn );            // retouche LESQUEL -> LEKEL
+        $sIn = preg_replace( '`CK`', 'K', $sIn );                    // retouche CK -> K
 
         // Terminaisons
-        $sIn = preg_replace( '`USIL$`', 'USI', $sIn ); 				// terminaisons USIL -> USI
-        $sIn = preg_replace( '`X$|[TD]S$|[DS]$`', '', $sIn );		// terminaisons TS DS LS X T D S...  v2.0
-        $sIn = preg_replace( '`([^KL]+)T$`', '$1', $sIn );			// sauf KT LT terminal
-        $sIn = preg_replace( '`^[H]`', '', $sIn );					// H pseudo muet en début de mot, je sais, ce n'est pas une terminaison
-        $sBack2=$sIn;												// on sauve le code (utilisé pour les mots très courts)
-        $sIn = preg_replace( '`TIL$`', 'TI', $sIn );				// terminaisons TIL -> TI
-        $sIn = preg_replace( '`LC$`', 'LK', $sIn );					// terminaisons LC -> LK
-        $sIn = preg_replace( '`L[E]?[S]?$`', 'L', $sIn );			// terminaisons LE LES -> L
-        $sIn = preg_replace( '`(.+)N[E]?[S]?$`', '$1N', $sIn );		// terminaisons NE NES -> N
-        $sIn = preg_replace( '`EZ$`', 'E', $sIn );					// terminaisons EZ -> E
-        $sIn = preg_replace( '`OIG$`', 'OI', $sIn );				// terminaisons OIG -> OI
-        $sIn = preg_replace( '`OUP$`', 'OU', $sIn );				// terminaisons OUP -> OU
-        $sIn = preg_replace( '`([^R])OM$`', '$1ON', $sIn );			// terminaisons OM -> ON sauf ROM
-        $sIn = preg_replace( '`LOP$`', 'LO', $sIn );				// terminaisons LOP -> LO
-        $sIn = preg_replace( '`NTANP$`', 'NTAN', $sIn );			// terminaisons NTANP -> NTAN
-        $sIn = preg_replace( '`TUN$`', 'TIN', $sIn );				// terminaisons TUN -> TIN
-        $sIn = preg_replace( '`AU$`', 'O', $sIn );					// terminaisons AU -> O
-        $sIn = preg_replace( '`EI$`', 'AI', $sIn );					// terminaisons EI -> AI
-        $sIn = preg_replace( '`R[DG]$`', 'R', $sIn );				// terminaisons RD RG -> R
-        $sIn = preg_replace( '`ANC$`', 'AN', $sIn );				// terminaisons ANC -> AN
-        $sIn = preg_replace( '`KROC$`', 'KRO', $sIn );				// terminaisons C muet de CROC, ESCROC
-        $sIn = preg_replace( '`HOUC$`', 'HOU', $sIn );				// terminaisons C muet de CAOUTCHOUC
-        $sIn = preg_replace( '`OMAC$`', 'OMA', $sIn );				// terminaisons C muet de ESTOMAC (mais pas HAMAC)
+        $sIn = preg_replace( '`USIL$`', 'USI', $sIn );                 // terminaisons USIL -> USI
+        $sIn = preg_replace( '`X$|[TD]S$|[DS]$`', '', $sIn );        // terminaisons TS DS LS X T D S...  v2.0
+        $sIn = preg_replace( '`([^KL]+)T$`', '$1', $sIn );            // sauf KT LT terminal
+        $sIn = preg_replace( '`^[H]`', '', $sIn );                    // H pseudo muet en début de mot, je sais, ce n'est pas une terminaison
+        $sBack2=$sIn;                                                // on sauve le code (utilisé pour les mots très courts)
+        $sIn = preg_replace( '`TIL$`', 'TI', $sIn );                // terminaisons TIL -> TI
+        $sIn = preg_replace( '`LC$`', 'LK', $sIn );                    // terminaisons LC -> LK
+        $sIn = preg_replace( '`L[E]?[S]?$`', 'L', $sIn );            // terminaisons LE LES -> L
+        $sIn = preg_replace( '`(.+)N[E]?[S]?$`', '$1N', $sIn );        // terminaisons NE NES -> N
+        $sIn = preg_replace( '`EZ$`', 'E', $sIn );                    // terminaisons EZ -> E
+        $sIn = preg_replace( '`OIG$`', 'OI', $sIn );                // terminaisons OIG -> OI
+        $sIn = preg_replace( '`OUP$`', 'OU', $sIn );                // terminaisons OUP -> OU
+        $sIn = preg_replace( '`([^R])OM$`', '$1ON', $sIn );            // terminaisons OM -> ON sauf ROM
+        $sIn = preg_replace( '`LOP$`', 'LO', $sIn );                // terminaisons LOP -> LO
+        $sIn = preg_replace( '`NTANP$`', 'NTAN', $sIn );            // terminaisons NTANP -> NTAN
+        $sIn = preg_replace( '`TUN$`', 'TIN', $sIn );                // terminaisons TUN -> TIN
+        $sIn = preg_replace( '`AU$`', 'O', $sIn );                    // terminaisons AU -> O
+        $sIn = preg_replace( '`EI$`', 'AI', $sIn );                    // terminaisons EI -> AI
+        $sIn = preg_replace( '`R[DG]$`', 'R', $sIn );                // terminaisons RD RG -> R
+        $sIn = preg_replace( '`ANC$`', 'AN', $sIn );                // terminaisons ANC -> AN
+        $sIn = preg_replace( '`KROC$`', 'KRO', $sIn );                // terminaisons C muet de CROC, ESCROC
+        $sIn = preg_replace( '`HOUC$`', 'HOU', $sIn );                // terminaisons C muet de CAOUTCHOUC
+        $sIn = preg_replace( '`OMAC$`', 'OMA', $sIn );                // terminaisons C muet de ESTOMAC (mais pas HAMAC)
         $sIn = preg_replace( '`([J])O([NU])[CG]$`', '$1O$2', $sIn );// terminaisons C et G muet de OUC ONC OUG
         $sIn = preg_replace( '`([^GTR])([AO])NG$`', '$1$2N', $sIn );// terminaisons G muet ANG ONG sauf GANG GONG TANG TONG
-        $sIn = preg_replace( '`UC$`', 'UK', $sIn );					// terminaisons UC -> UK
-        $sIn = preg_replace( '`AING$`', 'IN', $sIn );				// terminaisons AING -> IN
-        $sIn = preg_replace( '`([EISOARN])C$`', '$1K', $sIn );		// terminaisons C -> K
-        $sIn = preg_replace( '`([ABD-MO-Z]+)[EH]+$`', '$1', $sIn );	// terminaisons E ou H sauf pour C et N
-        $sIn = preg_replace( '`EN$`', 'AN', $sIn );					// terminaisons EN -> AN (difficile à faire avant sans avoir des soucis) Et encore, c'est pas top!
-        $sIn = preg_replace( '`(NJ)EN$`', '$1AN', $sIn );			// terminaisons EN -> AN
-        $sIn = preg_replace( '`^PAIEM`', 'PAIM', $sIn ); 			// PAIE -> PAI
-        $sIn = preg_replace( '`([^NTB])EF$`', '\1', $sIn );			// F muet en fin de mot
+        $sIn = preg_replace( '`UC$`', 'UK', $sIn );                    // terminaisons UC -> UK
+        $sIn = preg_replace( '`AING$`', 'IN', $sIn );                // terminaisons AING -> IN
+        $sIn = preg_replace( '`([EISOARN])C$`', '$1K', $sIn );        // terminaisons C -> K
+        $sIn = preg_replace( '`([ABD-MO-Z]+)[EH]+$`', '$1', $sIn );    // terminaisons E ou H sauf pour C et N
+        $sIn = preg_replace( '`EN$`', 'AN', $sIn );                    // terminaisons EN -> AN (difficile à faire avant sans avoir des soucis) Et encore, c'est pas top!
+        $sIn = preg_replace( '`(NJ)EN$`', '$1AN', $sIn );            // terminaisons EN -> AN
+        $sIn = preg_replace( '`^PAIEM`', 'PAIM', $sIn );             // PAIE -> PAI
+        $sIn = preg_replace( '`([^NTB])EF$`', '\1', $sIn );            // F muet en fin de mot
 
-        $sIn = preg_replace( '`(.)\1`', '$1', $sIn ); 				// supression des répétitions (suite à certains remplacements)
+        $sIn = preg_replace( '`(.)\1`', '$1', $sIn );                 // supression des répétitions (suite à certains remplacements)
 
         // cas particuliers, bah au final, je n'en ai qu'un ici
         $convPartIn  = array( 'FUEL');
@@ -4189,25 +4957,25 @@ class Vaesoli
         // seconde chance sur les mots courts qui ont souffert de la simplification
         if (strlen($sIn)<2)
         {
-        	// Sigles ou abréviations
-        	if (preg_match("`[BCDFGHJKLMNPQRSTVWXYZ][BCDFGHJKLMNPQRSTVWXYZ][BCDFGHJKLMNPQRSTVWXYZ][BCDFGHJKLMNPQRSTVWXYZ]*`",$sBack))
-        		return($sBack);
+            // Sigles ou abréviations
+            if (preg_match("`[BCDFGHJKLMNPQRSTVWXYZ][BCDFGHJKLMNPQRSTVWXYZ][BCDFGHJKLMNPQRSTVWXYZ][BCDFGHJKLMNPQRSTVWXYZ]*`",$sBack))
+                return($sBack);
 
-        	if (preg_match("`[RFMLVSPJDF][AEIOU]`",$sBack))
-        	{
-        		if (strlen($sBack)==3)
-        			return(substr($sBack,0,2));// mots de trois lettres supposés simples
-        		if (strlen($sBack)==4)
-        			return(substr($sBack,0,3));// mots de quatre lettres supposés simples
-        	}
+            if (preg_match("`[RFMLVSPJDF][AEIOU]`",$sBack))
+            {
+                if (strlen($sBack)==3)
+                    return(substr($sBack,0,2));// mots de trois lettres supposés simples
+                if (strlen($sBack)==4)
+                    return(substr($sBack,0,3));// mots de quatre lettres supposés simples
+            }
 
-        	if (strlen($sBack2)>1) return $sBack2;
+            if (strlen($sBack2)>1) return $sBack2;
         }
 
     if ( strlen( $sIn ) > 1 )
-    	return ( substr( $sIn,0,$iLength ) ); // Je limite à 16 caractères mais vous faites comme vous voulez!
+        return ( substr( $sIn,0,$iLength ) ); // Je limite à 16 caractères mais vous faites comme vous voulez!
     else
-    	return '';
+        return '';
     }   /* == End of vaesoli.STR_Phonetique() ========================================= */
     /* ================================================================================ */
 
@@ -4839,13 +5607,15 @@ class Vaesoli
     {
        return ( str_replace( $szToReplace,$szReplacement,$szStr ) );
     }   /* End of vaesoli.STR_tran() ================================================== */
+    /* ================================================================================ */
 
 
     public static function STR_Left( $szStr,$iCount = 1 )
     /*-------------------------------------------------*/
     {
         return substr( $szStr,0,$iCount );
-    }   /* End of vaesoli.STR_Left() =========================================== */
+    }   /* End of vaesoli.STR_Left() ================================================== */
+    /* ================================================================================ */
 
 
     public static function STR_StartWith( $szStr,$szStart )
@@ -4854,14 +5624,32 @@ class Vaesoli
         $bRetVal = false;                                               /* Return value of the function */
         $iLength = strlen( $szStart );                                  /* Length of $szStart */
 
-        if ( ! self::STR_Empty( $szStr ) && ( $iLength > 0 ) )                /* If all seems to be OK */
+        if ( ! empty( $szStr ) && ( $iLength > 0 ) )                    /* If all seems to be OK */
         {
             $bRetVal = ( self::STR_Left( $szStr,$iLength ) === $szStart );    /* Compare strings */
         }   /* if ( ! STR_Empty( $szStr ) && ( $iLength > 0 ) ) */
 
         return ( $bRetVal );                                            /* Return result to caller */
-    } /* End of vaesoli.STR_StartWith() ========================================= */
-    /* ========================================================================== */
+    } /* End of vaesoli.STR_StartWith() =============================================== */
+    /* ================================================================================ */
+
+
+    /* As in https://www.php.net/manual/fr/function.str-starts-with.php */
+    public static function str_starts_with( $haystack,$szNeedle ) : bool
+    /*----------------------------------------------------------------*/
+    {
+        return ( substr( $haystack,0,strlen( $szNeedle ) ) === $szNeedle );
+    } /* End of vaesoli.str_starts_with() ============================================= */
+    /* ================================================================================ */
+
+
+    public static function str_istarts_with( $haystack,$szNeedle ) : bool
+    /*-----------------------------------------------------------------*/
+    {
+        //var_dump( __METHOD__,strtoupper( substr( $haystack,0,strlen( $szNeedle ) ) ),strtoupper( $szNeedle ) );
+        return ( strtoupper( substr( $haystack,0,strlen( $szNeedle ) ) ) === strtoupper( $szNeedle ) );
+    } /* End of vaesoli.str_istarts_with() ============================================ */
+    /* ================================================================================ */
 
 
     public static function STR_EndWith( $szStr,$szEnd )
@@ -4876,8 +5664,8 @@ class Vaesoli
         }   /* if ( ! STR_Empty( $szStr ) && ( $iLength > 0 ) ) */
 
         return ( $bRetVal );                                            /* Return result to caller */
-    } /* End of vaesoli.STR_EndWith() =========================================== */
-    /* ========================================================================== */
+    } /* End of vaesoli.STR_EndWith() ================================================= */
+    /* ================================================================================ */
 
 
     public static function STR_Strin( $szStr,$iRid = 1 )
@@ -4891,8 +5679,8 @@ class Vaesoli
         {
             return ( $szStr );                                      /* Return result to caller (original string) */
         }
-    }   /* End of vaesoli.STR_Strin() =========================================== */
-    /* ========================================================================== */
+    }   /* End of vaesoli.STR_Strin() ================================================= */
+    /* ================================================================================ */
 
 
     public static function STR_hash( $szWord )
@@ -4900,8 +5688,8 @@ class Vaesoli
     {
         // Eliminate all accents (Windows-1252)
         return( self::STR_Sort( strtoupper( preg_replace('/[\x41\x45\x49\x4F\x55\x59\x61\x65\x69\x6F\x75\x79\xC0\xC1\xC2\xC3\xC4\xC5\xC6\xC8\xC9\xCA\xCB\xCC\xCD\xCE\xCF\xD2\xD3\xD4\xD5\xD6\xD9\xDA\xDB\xDC\xDD\xE0\xE1\xE2\xE3\xE4\xE5\xE8\xE9\xEA\xEB\xEC\xED\xEE\xEF\xF2\xF3\xF4\xF5\xF6\xF9\xFA\xFB\xFC\xFD\xFF]|[[:punct:]]/sim','',self::STR_stripAccents( $szWord ) ) ) ) );
-    }   /* End of vaesoli.STR_hash() ============================================ */
-    /* ========================================================================== */
+    }   /* End of vaesoli.STR_hash() ================================================== */
+    /* ================================================================================ */
 
 
     /* ========================================================================== */
@@ -5307,6 +6095,14 @@ class Vaesoli
     /* ================================================================================ */
 
 
+    public static function WhoAmI()
+    /*---------------------------*/
+    {
+        return ( __FILE__ );
+    }   /* End of vaesoli.WhoAmI() ==================================================== */
+    /* ================================================================================ */
+
+
     /* ================================================================================ */
     /* XML to JSON, to Array, to Object */
             /* ======================================================================== */
@@ -5391,8 +6187,6 @@ class Vaesoli
             /* ======================================================================== */
     /* XML to JSON, to Array, to Object */
     /* ================================================================================ */
-
-
 
 
     /* ================================================================================ */
@@ -5482,8 +6276,6 @@ class Vaesoli
     /* ================================================================================ */
 
 
-
-
     /* ================================================================================ */
     /* JSON to Object, to Array , to XML*/
             public static function JSONToObject( $szJSON )
@@ -5508,8 +6300,6 @@ class Vaesoli
             /* ======================================================================== */
     /* JSON to Object, to Array , to XML*/
     /* ================================================================================ */
-
-
 
 
     /* ================================================================================ */

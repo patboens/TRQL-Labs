@@ -54,7 +54,7 @@ use \trql\input\Input                   as Input;
 use \trql\tag\Tag                       as Tag;
 use \trql\audience\Audience             as Audience;
 use \trql\person\Person                 as Person;
-use \trql\organization\Organization     as Organization;
+use \trql\schema\organization\Organization     as Organization;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
