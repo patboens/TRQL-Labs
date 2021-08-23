@@ -76,6 +76,14 @@
         *}
     *}
 
+    {*chist
+        {*mdate 22-08-21 10:44:07 *}
+        {*author {PYB} *}
+        {*v 8.0.0000 *}
+        {*desc              1)  First implementation of views
+        *}
+    *}
+
     {*todo
 
         1) Pouvoir créer le schéma d'une table sur base des propriétés d'une classe (on donne le nom de la classe
@@ -83,32 +91,34 @@
            magiques __sleep() et __wakeup())
         2) Pouvoir sauver tout un record ou une array de records (en commençant au recno
            courant)
-        3) Documenter toute la classe IllicoDB
-        4) Implémenter les champs "guid"
-        7) Pouvoir mettre un commentaire sur chaque champ de la structure d'une table
-        8) Pouvoir modifier la structure "on-the-fly" (les données sont recopiées sans aucune perte dans la nouvelle structure)
+        3) VIEWS: il faudrait être capable de créer des "champs" qui sont des expressions (field1 + field2)
+            - le difficulté sera de calculer des offsets dans ce cas là
+        4) Index on dates, datetimes, ints and floats
+        5) Implémenter les champs "guid" qui sont des champs "id" en fait
+        6) Pouvoir mettre un commentaire sur chaque champ de la structure d'une table
+        7) Pouvoir modifier la structure "on-the-fly" (les données sont recopiées sans aucune perte dans la nouvelle structure)
         9) Création d'une documentation des tables faisant partie d'une DB
-        10) Disposer de Stored Procedures
-        11) Pouvoir mettre des champs en relation (1 .. 1, 1 .. n, n .. 1)
-        12) Extraire le commentaire de la structure d'une table (modifier en description)
-        13) Le create() doit permettre de placer les descriptions des champs
-        14) __toXML() d'une table
-        15) Pouvoir faire une modification de structure de la DB à chaud (readStructure() doit pouvoir
+        9) Disposer de Stored Procedures (c'est VRAIMENT pas urgent !)
+        10) Pouvoir mettre des champs en relation (1 .. 1, 1 .. n, n .. 1)
+        11) Le create() doit permettre de placer les descriptions des champs
+        12) Pouvoir faire une modification de structure de la DB à chaud (readStructure() doit pouvoir
             être ré-appelé; un modifyStructure dot voir le jour)
-        16) Les noms des champs doivent être case-sensitive
-        17) Implémenter un PACK
-        18) Implémenter un champ "othermemo" : c'est un fichier mémo mais il a un nom
+        13) Les noms des champs doivent être case-sensitive
+        14) Implémenter un champ "othermemo" : c'est un fichier mémo mais il a un nom
             positionnable par l'utilisateur (une référence à un autre fichier mémo dans
             lequel les données sont vraiment disponibles)
-        19) If duplicate id => EXCEPTION
-        20) Quand on indexe (c'est le sort en fait) on devrait faire les manipulations dans
-            un fichier (ce sera peut-être plus lent mais au moins on pourra indexer beaucoup
-            plus de données). Il est même possible d'avoir une double stratégie:
-                - en mémoire pour des quantités limitées
-                - en fichier pour des quantités plus importantes
-        21) Permettre une mise à jour des index en temps réel : on voit quels sont les index
+        15) If duplicate id (on ne peut avoir QU'UN SEUL type 'id) => EXCEPTION
+        16) Permettre une mise à jour des index en temps réel : on voit quels sont les index
             positionnés sur la table, et ils sont mis à jour automatiquement sur base
             des write, append, delete et pack.
+        17) __toString devrait faire la même chose que __toXML MAIS ... devrait faire l'export
+            dans un fichier texte ! Par contre, le nom estmisleading car on s'attend à avoir
+            un retour de string. Peut-être trouver autre nom : __toText() ?
+        18) Vérifier la méthode de backup
+        19) Implémenter un __toZip()
+        20) Transformer le read() and write() pour lire et écrire dans un raw record
+        21) Faire précéder toutes les méthodes "protected" par le mot-clef "protected" dans
+            les déclarations de fonctions pour la doc
     *}
 
     *}}} */
@@ -120,6 +130,10 @@ use \DOMXPath;
 
 use \trql\vaesoli\Vaesoli   as v;
 use \trql\schema\Thing      as Thing;
+use \trql\html\Form         as Form;
+use \trql\html\Fieldset     as Fieldset;
+use \trql\html\Formset      as Formset;
+use \trql\html\Input        as Input;
 
 
 if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
@@ -127,6 +141,19 @@ if ( ! defined( 'VAESOLI_CLASS_VERSION' ) )
 
 if ( ! defined( 'THING_CLASS_VERSION' ) )
     require_once( 'trql.thing.class.php' );
+
+if ( ! defined( 'FORM_CLASS_VERSION' ) )
+    require_once( 'trql.form.class.php' );
+
+if ( ! defined( 'FIELDSET_CLASS_VERSION' ) )
+    require_once( 'trql.fieldset.class.php' );
+
+if ( ! defined( 'FORMSET_CLASS_VERSION' ) )
+    require_once( 'trql.formset.class.php' );
+
+if ( ! defined( 'INPUT_CLASS_VERSION' ) )
+    require_once( 'trql.input.class.php' );
+
 
 defined( 'ILLICODB_CLASS_VERSION' ) or define( 'ILLICODB_CLASS_VERSION','0.1' );
 
@@ -152,86 +179,58 @@ defined( "EXCEPTION_FILE_NOT_FOUND" )                           or define( "EXCE
 defined( "EXCEPTION_DB_ALREADY_OPEN" )                          or define( "EXCEPTION_DB_ALREADY_OPEN"                              ,EXCEPTION_BASIS + 1016 );
 defined( "EXCEPTION_DB_NOT_OPEN" )                              or define( "EXCEPTION_DB_NOT_OPEN"                                  ,EXCEPTION_BASIS + 1017 );
 defined( "EXCEPTION_DUPLICATE_FIELD" )                          or define( "EXCEPTION_DUPLICATE_FIELD"                              ,EXCEPTION_BASIS + 1018 );
+defined( "EXCEPTION_MEMO_FILE_NOT_FOUND" )                      or define( "EXCEPTION_MEMO_FILE_NOT_FOUND"                          ,EXCEPTION_BASIS + 1019 );
+defined( "EXCEPTION_CANNOT_OPEN_TABLE" )                        or define( "EXCEPTION_CANNOT_OPEN_TABLE"                            ,EXCEPTION_BASIS + 1020 );
+defined( "EXCEPTION_CANNOT_LOAD_XML_FILE" )                     or define( "EXCEPTION_CANNOT_LOAD_XML_FILE"                         ,EXCEPTION_BASIS + 1021 );
+defined( "EXCEPTION_INVALID_VALUE" )                            or define( "EXCEPTION_INVALID_VALUE"                                ,EXCEPTION_BASIS + 1022 );
+defined( "EXCEPTION_OUT_OF_RANGE" )                             or define( "EXCEPTION_OUT_OF_RANGE"                                 ,EXCEPTION_BASIS + 1023 );
 
 
 trait commonTrait
 /*-------------*/
 {
+    /* À documenter */
     public function hash( $szValue )
+    /*----------------------------*/
     {
         return ( hash( 'sha1',(string) $szValue ) );
     }
 
-    /* OBSOLETE */
-    public function fieldTypesOLD()
+    /* ================================================================================ */
+    /** {{*msToMins( $milliseconds )=
+
+        From milliseconds to minutes and seconds
+
+        {*params
+            $milliseconds   (int)       Milliseconds
+        *}
+
+        {*return
+            (string)    @param.milliseconds turned into a string of minutes and seconds
+        *}
+
+        {*example
+        $oDB = new IllicoDB();
+        var_dump( $oDB->msToMins( 2400000 ) );  // Will print [c]40'00"[/c]
+        var_dump( $oDB->msToMins( 1876235 ) );  // Will print [c]31'16"[/c]
+        var_dump( $oDB->msToMins( 271960  ) );  // Will print [c]4'32"[/c]
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function msToMins( $ms )
+    /*---------------------------*/
     {
-        static $aTypes = null;
+        $fMins = (int) ( $ms / 1000 / 60 );
+        $fMs   = $ms - ( $fMins * 60 * 1000 );
+        $fSecs = round( $fMs / 1000,0 );
 
-        if ( is_null( $aTypes) )
-        {
-            $aTypes['boolean'   ] =
-            $aTypes['bool'      ] =
-            $aTypes['logical'   ] = 1;
-            $aTypes['date'      ] = 8;
-            $aTypes['datetime'  ] = 14;
-            $aTypes['float'     ] = 16;
-            $aTypes['gender'    ] = 1;
-            $aTypes['id'        ] = 40;
-            $aTypes['int'       ] = 8;
-            $aTypes['lang'      ] = 5;
-            $aTypes['string'    ] = -1;
-            $aTypes['time'      ] = 6;
+        return ( (string) $fMins . "'" . v::STR_padl( $fSecs,2,'0' ) . '"' );
+    }   /* End of commonTrait.msToMins() ============================================== */
+    /* ================================================================================ */
 
-            $aTypes['array'     ] = 0;
-            $aTypes['memo'      ] = 0;
-            $aTypes['object'    ] = 0;
-            $aTypes['guid'      ] = 0;
-            $aTypes['email'     ] = 0;
-            $aTypes['color'     ] = 0;
-        }
 
-        return ( $aTypes );
-    }
-
-    /* OBSOLETE */
-    public function isTypeOLD( $type )
-    {
-        static $aTypes = null;
-
-        if ( is_null( $aTypes) )
-            $aTypes = $this->fieldTypes();
-
-        //var_dump( $type,isset( $aTypes[$type] ),$aTypes );
-
-        return ( isset( $aTypes[$type] ) );
-    }
-
-    /* OBSOLETE */
-    public function fieldLengthOLD( $type )
-    {
-        static $aLengths = null;
-
-        // Devrait se baser sur les longueurs définies dans fieldTypes() */
-        if ( is_null( $aLengths ) )
-        {
-            $aLengths['boolean' ] =
-            $aLengths['bool'    ] =
-            $aLengths['logical' ] = 1;
-            $aLengths['date'    ] = 8;
-            $aLengths['datetime'] = 14;
-            //$aLengths['float'   ] = ( PHP_FLOAT_SIZE * 2 )+ 1;
-            $aLengths['float'   ] = 16;
-            $aLengths['gender'  ] = 1;
-            $aLengths['id'      ] = 40;
-            //$aLengths['int'     ] = PHP_INT_SIZE + 1;
-            $aLengths['int'     ] = 8;
-            $aLengths['time'    ] = 6;
-            $aLengths['lang'    ] = 5;
-            $aLengths['memo'    ] = 0;
-        }
-
-        return ( $aLengths[$type] ?? -1 );
-    }
     /* ================================================================================ */
     /** {{*fieldLength( $type )=
 
@@ -242,12 +241,8 @@ trait commonTrait
         *}
 
         {*return
-            (self)      The current instance of the class
+            (int)       The length of a type of field
         *}
-
-        {*keywords constructors, destructors *}
-
-        {*seealso @fnc.__destruct *}
 
         *}}
     */
@@ -313,7 +308,7 @@ trait commonTrait
 class IllicoDB extends Thing
 /*------------------------*/
 {
-    use commonTrait;
+    use commonTrait;                                                /* Common set of methods used in (many) classes */
 
     protected   $self = array( 'file'   => __FILE__     ,           /* {*property   $self                       (array)                 Fixed 'class' information. *} */
                                'class'  => __CLASS__    ,
@@ -327,10 +322,12 @@ class IllicoDB extends Thing
     public      $wikidataId                 = 'Q8513';              /* {*property   $wikidataId                 (string)                WikidataId ... organized collection of data in computing *} */
     public      $homeOfData                 = null;
     public      $tables                     = null;                 /* {*property   $tables                     (array)                 Set of tables composing the DB *} */
+    public      $views                      = null;                 /* {*property   $views                      (array)                 Set of views set on the DB *} */
     public      $storedProcedures           = null;                 /* {*property   $storedProcedures           (array)                 Set of stored procedures (NOT USED : 29-07-21 14:40:19) *} */
     public      $name                       = null;                 /* {*property   $name                       (string)                DB Name *} */
     protected   $isOpen                     = false;
     public      $table                      = null;
+    public      $view                       = null;
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=
@@ -451,6 +448,7 @@ class IllicoDB extends Thing
     /* ================================================================================ */
 
 
+    // EST-CE QUE CETTE METHOD EST BIEN UTILE???
     /* ================================================================================ */
     /** {{*use( $table )=
 
@@ -490,7 +488,7 @@ class IllicoDB extends Thing
         *}}
     */
     /* ================================================================================ */
-    public function use( $table )
+    public function useOLD( $table )
     /*-------------------------*/
     {
         if ( $this->isOpen )
@@ -502,8 +500,21 @@ class IllicoDB extends Thing
 
                 try
                 {
-                    //var_dump( "BEFORE EXCEPTION");
-                    $this->Go( $table,$this->reccount( $table ) > 0 ? 1 : 0 );
+                    $this->$table->Goto(1);
+                }
+                catch( Exception $e )
+                {
+                    var_dump( $e );
+                }
+            }
+            elseif ( isset( $this->views[ $table ] ) )
+            {
+                //var_dump("ON EST DANS LE USE");
+                $this->view = $table;
+
+                try
+                {
+                    $this->$table->Goto(1);
                 }
                 catch( Exception $e )
                 {
@@ -511,10 +522,10 @@ class IllicoDB extends Thing
                 }
             }
             else
-                throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$table}' NOT FOUND (ErrCode: " . EXCEPTION_TABLE_NOT_FOUND . ")",EXCEPTION_TABLE_NOT_FOUND );
+                throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$table}' NOT FOUND (ErrCode: EXCEPTION_TABLE_NOT_FOUND = " . EXCEPTION_TABLE_NOT_FOUND . ")",EXCEPTION_TABLE_NOT_FOUND );
         }
         else
-            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": database NOT open (ErrCode: " . EXCEPTION_DB_NOT_OPEN . ")",EXCEPTION_DB_NOT_OPEN );
+            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": database NOT open (ErrCode: EXCEPTION_DB_NOT_OPEN = " . EXCEPTION_DB_NOT_OPEN . ")",EXCEPTION_DB_NOT_OPEN );
 
         return ( $this );
     }   /* End of Database.use() ====================================================== */
@@ -534,7 +545,7 @@ class IllicoDB extends Thing
         *}
 
         {*warning
-            The name of the method will be changed. Do not use for production
+            THE NAME OF THE METHOD WILL BE CHANGED. DO NOT USE FOR PRODUCTION
         *}
 
         *}}
@@ -556,13 +567,14 @@ class IllicoDB extends Thing
                 $szRetVal .= "<li><code>{$fname}</code> (type = {$field->type}) (length = {$field->length}): {$field->description}</li>\n";
             }
             $szRetVal .= "</ul>\n";
-        }
+        }   /* foreach( $this->tables as $name => $table ) */
 
         return ( $szRetVal );
     }   /* End of Database.structure() ================================================ */
     /* ================================================================================ */
 
 
+    /* THIS METHOD IS OBSOLETE */
     /* Do no use it yet */
     public function writeRawMemo( $table,$aMemo )
     /*-----------------------------------------*/
@@ -580,6 +592,7 @@ class IllicoDB extends Thing
     /* ================================================================================ */
 
 
+    /* THIS METHOD IS OBSOLETE */
     /* ================================================================================ */
     /** {{*write( $table,$field[,$value] )=
 
@@ -595,6 +608,11 @@ class IllicoDB extends Thing
 
         {*return
             (int)       Returns the number of bytes written or [c]0[/c] in case of error
+        *}
+
+        {*warning
+            THIS METHOD IS OBSOLETE. Direct access to write() of a table is what should
+            be used.
         *}
 
         {*example
@@ -664,10 +682,31 @@ class IllicoDB extends Thing
     /* ================================================================================ */
 
 
-
-
     // Example: $oDB->read( 'artists','creator' );                  /* Doit retourner 'Any value' du record courant */
-    public function read( $table,$field )
+    /* ================================================================================ */
+    /** {{*read( $table,)=
+
+        Reads a field of a table.
+
+        {*params
+        *}
+
+        {*return
+            (self)      The current instance of the class
+        *}
+
+        {*warning
+            This method is obsolete. Direct access to read() of a tabe is what should be
+            used.
+        *}
+
+        {*seealso @fnc.write *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    /* OBSOLETE */
+    public function OLDread( $table,$field )
     /*---------------------------------*/
     {
         if ( $this->isOpen )
@@ -687,6 +726,7 @@ class IllicoDB extends Thing
     /* Pas définitif : arguments */
     /* Un find() opère en cherchant par sous-chaîne case sensitive */
     /* Seul le premier record est renvoyé */
+    /* ATTENTION ... C'EST VRAIMENT MAUVAIS !!! */
     public function find( $table,$field,$value,$sensitive = true,&$collection = null )
     /*------------------------------------------------------------------------------*/
     {
@@ -761,6 +801,7 @@ class IllicoDB extends Thing
     public function seek( $table,$szValue,&$aValues,&$index,&$recno )
     /*-------------------------------------------------------------*/
     {
+        /* !!!THIS IS ALL WRONG */
         if ( $this->isOpen )
         {
             if ( $this->isOpen && isset( $this->tables[$table] ) )
@@ -772,8 +813,6 @@ class IllicoDB extends Thing
             throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": database NOT open (ErrCode: " . EXCEPTION_DB_NOT_OPEN . ")",EXCEPTION_DB_NOT_OPEN );
     }   /* End of Database.seek() ===================================================== */
     /* ================================================================================ */
-
-
 
 
     /* ================================================================================ */
@@ -865,43 +904,51 @@ class IllicoDB extends Thing
 
                     if ( ( $tableCollection = $oXPath->query( 'tables/table' ) ) && ( $tableCollection->length > 0 ) )
                     {
-                        //var_dump( "ON A TROUVÉ LES TABLES" );
-
                         foreach( $tableCollection as $table )
                         {
-                            $oTable             = new Table();
-
-                            $oTable->container  = $this;
-                            $oTable->name       = strtolower( trim( $table->getAttribute( 'name' ) ) );
-
-                            $oTable->readStructure( $oDom,$oXPath,$table );
-
-                            $this->tables[$oTable->name] = $oTable;
+                            $name = strtolower( trim( $table->getAttribute( 'name' ) ) );
+                            $this->tables[$name] = new Table( $this,$name );
                         }
                     }
+
+                    if ( ( $viewCollection = $oXPath->query( 'views/view' ) ) && ( $tableCollection->length > 0 ) )
+                    {
+                        foreach( $viewCollection as $view )
+                        {
+                            if ( isset( $this->tables[$table = $view->getAttribute('table')] ) )
+                            {
+                                $name = strtolower( trim( $view->getAttribute( 'name' ) ) );
+                                $this->views[$name] = new View( $this->tables[$table],$name );
+                            }
+                            else
+                                throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$table}' NOT FOUND (ErrCode: EXCEPTION_TABLE_NOT_FOUND = " . EXCEPTION_TABLE_NOT_FOUND . ")",EXCEPTION_TABLE_NOT_FOUND );
+                        }   /* foreach( $viewCollection as $view ) */
+                    }   /* if ( ( $viewCollection = $oXPath->query( 'views/view' ) ) && ( $tableCollection->length > 0 ) ) */
                 }
                 else
-                {
-                    throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": 'INVALID DB CONTAINER (cannot be loaded) (ErrCode: " . EXCEPTION_INVALID_DB_CONTAINER . ")",EXCEPTION_INVALID_DB_CONTAINER );
-                }
+                    throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": 'INVALID DB CONTAINER (cannot be loaded) (ErrCode: EXCEPTION_INVALID_DB_CONTAINER = " . EXCEPTION_INVALID_DB_CONTAINER . ")",EXCEPTION_INVALID_DB_CONTAINER );
             }
             else
                 throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$szDBFile}' NOT FOUND (ErrCode: EXCEPTION_DB_CONTAINER_NOT_FOUND = " . EXCEPTION_DB_CONTAINER_NOT_FOUND . ")",EXCEPTION_DB_CONTAINER_NOT_FOUND );
         }
         else
-            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": database NOT open (ErrCode: " . EXCEPTION_DB_NOT_OPEN . ")",EXCEPTION_DB_NOT_OPEN );
+            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": database NOT open (ErrCode: EXCEPTION_DB_NOT_OPEN = " . EXCEPTION_DB_NOT_OPEN . ")",EXCEPTION_DB_NOT_OPEN );
+
 
     }   /* End of Database.readStructure() ============================================ */
     /* ================================================================================ */
 
 
-    public function append( $table,$x = 1 )
+    /* OBSOLETE */
+    public function OLDappend( $table,$x = 1 )
     /*-----------------------------------*/
     {
         if ( $this->isOpen )
         {
             if ( isset( $this->tables[$table] ) )
                 return ( $this->tables[$table]->append( $x ) );
+            elseif ( isset( $this->views[$table] ) )
+                return ( $this->views[$table]->append( $x ) );
 
             throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$table}' NOT FOUND (ErrCode: " . EXCEPTION_TABLE_NOT_FOUND . ")",EXCEPTION_TABLE_NOT_FOUND );
         }
@@ -911,13 +958,17 @@ class IllicoDB extends Thing
     /* ================================================================================ */
 
 
-    public function reccount( $table )
+    /* OBSOLETE */
+    public function reccountOLD( $table )
     /*------------------------------*/
     {
         if ( $this->isOpen )
         {
+            var_dump( $this );
             if ( isset( $this->tables[$table] ) )
                 return ( $this->tables[$table]->reccount() );
+            elseif ( isset( $this->views[$table] ) )
+                return ( $this->views[$table]->reccount() );
 
             throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$table}' NOT FOUND (ErrCode: " . EXCEPTION_TABLE_NOT_FOUND . ")",EXCEPTION_TABLE_NOT_FOUND );
         }
@@ -1011,6 +1062,7 @@ class IllicoDB extends Thing
     /* ================================================================================ */
 
 
+    /* OBSOLETE */
     public function deleted( $table )
     /*-----------------------------*/
     {
@@ -1027,6 +1079,7 @@ class IllicoDB extends Thing
     /* ================================================================================ */
 
 
+    /* OBSOLETE */
     /* ================================================================================ */
     /** {{*delete( $table )=
 
@@ -1061,6 +1114,7 @@ class IllicoDB extends Thing
     /* ================================================================================ */
 
 
+    /* OBSOLETE */
     /* ================================================================================ */
     /** {{*pack( $table )=
 
@@ -1095,7 +1149,8 @@ class IllicoDB extends Thing
     /* ================================================================================ */
 
 
-    public function recall( $table )
+    /* OBSOLETE */
+    public function OLDrecall( $table )
     /*-----------------------------*/
     {
         if ( $this->isOpen )
@@ -1111,7 +1166,8 @@ class IllicoDB extends Thing
     /* ================================================================================ */
 
 
-    public function record( $table )
+    /* OBSOLETE */
+    public function OLDrecord( $table )
     /*----------------------------*/
     {
         if ( $this->isOpen )
@@ -1127,7 +1183,8 @@ class IllicoDB extends Thing
     /* ================================================================================ */
 
 
-    public function records( $table,$n = 1)
+    /* OBSOLETE */
+    public function OLDrecords( $table,$n = 1)
     /*-----------------------------------*/
     {
         if ( $this->isOpen )
@@ -1231,6 +1288,7 @@ class IllicoDB extends Thing
 
 
     public function speak()
+    /*-------------------*/
     {
 
     }   /* End of Database.speak() ==================================================== */
@@ -1262,11 +1320,10 @@ class IllicoDB extends Thing
         switch ( $property )
         {
             case 'name' :   return ( $this->name );
-            default     :   if ( isset( $this->tables[$property] ) )
-                            {
-                            //    var_dump( $this->tables[$property] );
+            default     :   if     ( isset( $this->tables[$property] ) )
                                 return ( $this->tables[$property] );
-                            }
+                            elseif ( isset( $this->views[$property] ) )
+                                return ( $this->views[$property] );
                             else
                                 throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$property}' UNKNOWN (ErrCode: " . EXCEPTION_INVALID_PROPERTY . ")",EXCEPTION_INVALID_PROPERTY );
         }   /* switch ( $property ) */
@@ -1299,6 +1356,8 @@ class IllicoDB extends Thing
         {
             default     :   if ( isset( $this->tables[$property] ) )
                                 return ( $this->tables[$property]->write( $value ) );
+                            elseif ( isset( $this->views[$property] ) )
+                                return ( $this->views[$property]->write( $value ) );
                             else
                                 throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$property}' UNKNOWN (ErrCode: " . EXCEPTION_INVALID_PROPERTY . ")",EXCEPTION_INVALID_PROPERTY );
         }   /* switch ( $property ) */
@@ -1364,14 +1423,17 @@ class Table extends Thing
     public      $wikidataId                 = 'Q496946';            /* {*property   $wikidataId                 (string)                WikidataId ... arrangement of data in rows and columns *} */
     public      $name                       = null;
     public      $fields                     = null;
-    public      $recno                      = 0;
-    public      $reccount                   = 0;
-    public      $offsets                    = null;
+    protected   $recno                      = 0;                    /* {*property   $recno                      (int)                   Current record position. From [c]0[/c] (invalid position) to @var.reccount *} */
+    protected   $reccount                   = 0;                    /* {*property   $recno                      (int)                   Number of records stored in the table (including all 'deleted' records) *} */
+    public      $offsets                    = null;         /* THIS SHOULD BE PROTECTED */
     public      $container                  = null;     /* Le nom de la DB dans laquelle est stockée la table */
     public      $recordSize                 = -1;
     public      $fileSize                   = -1;
     public      $storage                    = null;
     public      $autoSort                   = true;     /* Si true, alors si l'index est out-of-sync avec la DB, alors il est reconstruit; si false, l'index n'est PAS reconstuit et on pourrait se trouver avec un vieil index (mais probablement utilisable en partie) */
+    public      $softseek                   = false;                    /* {*property   $softseek               (bool)              [c]true[/c] to perform a soft seek when using [c]@class.seek()[/c]; [c]false[/c] to perform an exact seek *} */
+    public      $szClass                    = null;                     /* {*property   $szClass                (string)            CSS class of the task when it needs to be rendered *} */
+    public      $szOnSubmit                 = null;                     /* {*property   $szOnSubmit             (string)            Submit clause of the form ([c]__toForm()[/c]) *} */
     protected   $readHandle                 = null;
     protected   $readMemoHandle             = null;
     protected   $writeHandle                = null;
@@ -1381,16 +1443,17 @@ class Table extends Thing
     protected   $reccountHandle             = null;
     protected   $isEOF                      = true;
     protected   $isBOF                      = true;
-
+    protected   $idField                    = null;
 
 
     /* ================================================================================ */
-    /** {{*__construct( [$szHome] )=
+    /** {{*__construct( $container,$name )=
 
         Class constructor
 
         {*params
-            $szHome     (string)        Home of the class. Optional.
+            $container      (IllicoDB)      DB Container
+            $name           (string)        Table name
         *}
 
         {*return
@@ -1404,11 +1467,43 @@ class Table extends Thing
         *}}
     */
     /* ================================================================================ */
-    public function __construct( $szHome = null )
-    /*-----------------------------------------*/
+    public function __construct( $container,$name )
+    /*-------------------------------------------*/
     {
         parent::__construct();
         $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
+
+        $this->container    = $container;
+        $this->name         = $name;
+
+        $szDBFile = strtolower( v::FIL_addBS( $this->container->homeOfData ) . $this->container->name . '.illicoDB' );
+        //var_dump( $szDBFile );
+
+        if ( is_file( $szDBFile ) )                                 /* If DB file found */
+        {
+            $oDom = new \DOMDocument();
+
+            if ( $oDom->load( $szDBFile ) )                         /* If we could load the DB file */
+            {
+                //var_dump( "DOM loaded" );
+                $oXPath = new \DOMXPath( $oDom );
+                //var_dump( "XPath created" );
+
+                if ( ( $tableCollection = $oXPath->query( "tables/table[@name='{$name}']" ) ) && ( $tableCollection->length > 0 ) )
+                {
+                    //var_dump( "TABLE {$name} FOUND",$tableCollection->item(0) );
+                    $this->readStructure( $oDom,$oXPath,$tableCollection->item(0) );
+                }
+            }
+
+            $this->determineLengthOfDataFile(); /* $this->fileSize est mis à jour */
+            // The recordSize can only be known when we have read the table structure!!!
+            $this->reccount = (int) ( $this->fileSize / $this->recordSize );
+
+            //var_dump( $this->name,$this->fileSize,$this->recordSize,$this->reccount );
+        }
+        else
+            // EXCEPTION
 
         return ( $this );
     }   /* End of Table.__construct() ================================================= */
@@ -1434,8 +1529,13 @@ class Table extends Thing
     /*----------------------------------------*/
     {
         if ( is_null( $this->storage ) )
+        {
+            //var_dump( $this->container );
+            //var_dump( $this->container->homeOfData );
+
             $this->storage = v::FIL_addBS( $this->container->homeOfData ) . strtolower( trim( $this->container->name ) ) . '.' .
                                                                             strtolower( trim( $this->name            ) ) . '.illicoDB';
+        }
 
         return ( $this->storage );
     }   /* End of Table.determineDataFile() =========================================== */
@@ -1480,6 +1580,7 @@ class Table extends Thing
     /* ================================================================================ */
 
 
+    /* OBSOLETE: __get(), __set() and __call() instead!! */
     /* ================================================================================ */
     /** {{*reccount()=
 
@@ -1499,6 +1600,8 @@ class Table extends Thing
     /*----------------------------*/
     {
         $this->determineLengthOfDataFile();         /* $this->fileSize est mis à jour */
+
+        //var_dump( $this->fileSize,$this->recordSize );
 
         return ( (int) ( $this->fileSize / $this->recordSize ) );
     }   /* End of Table.reccount() ==================================================== */
@@ -1529,6 +1632,13 @@ class Table extends Thing
         {*return
             (bool)      [c]true[/c] if record deleted; [c]false[/c] if not
         *}
+
+        {*remark
+            This method should use the writeHandle instead of opening the file
+            and closing it
+        *}
+
+        {*seealso @fnc.deleted, @fnc.pack, @fnc.recall *}
 
         *}}
     */
@@ -1562,6 +1672,104 @@ class Table extends Thing
 
 
     /* ================================================================================ */
+    /** {{*deleted()=
+
+        Determines whether a record is logically deleted or not
+
+        {*params
+        *}
+
+        {*return
+            (bool)      [c]true[/c] if record deleted; [c]false[/c] if not
+        *}
+
+        {*remark
+            This method should use the readHandle instead of opening the file
+            and closing it
+        *}
+
+        {*seealso @fnc.pack, @fnc.delete, @fnc.recall *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function deleted()
+    /*---------------------*/
+    {
+        $bRetVal = false;
+
+        $szFile = $this->determineDataFile();
+
+        if ( $fh = fopen( $szFile,'r+b' ) )
+        {
+            $offset = ( $this->recordSize * ( $this->recno - 1 ) );
+
+            fseek( $fh,$offset,SEEK_SET );
+
+            $bRetVal = ( fread( $fh,1 ) === '*' );
+
+            fclose( $fh );
+        }
+        else
+        {
+            // EXCEPTION: CANNOT WRITE (FOPEN FAILED)
+        }
+
+        return ( $bRetVal );
+    }   /* End of Table.deleted() ===================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*recall()=
+
+        Recalls a record from the current table (opposite operation of [c]@fnc.delete[c])
+
+        {*params
+        *}
+
+        {*return
+            (bool)      [c]true[/c] if record successfully recalled; [c]false[/c] if not
+        *}
+
+        {*remark
+            This method should use the writeHandle instead of opening the file
+            and closing it
+        *}
+
+        {*seealso @fnc.deleted, @fnc.delete, @fnc.pack *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function recall()
+    /*--------------------*/
+    {
+        $bRetVal = false;
+
+        $szFile = $this->determineDataFile();
+
+        if ( $fh = fopen( $szFile,'c+b' ) )
+        {
+            $offset = ( $this->recordSize * ( $this->recno - 1 ) );
+
+            fseek( $fh,$offset,SEEK_SET );
+
+            $bRetVal = ( fwrite( $fh,' ' ) === 1 );
+
+            fclose( $fh );
+        }
+        else
+        {
+            // EXCEPTION: CANNOT WRITE (FOPEN FAILED)
+        }
+
+        return ( $bRetVal );
+    }   /* End of Table.recall() ====================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
     /** {{*pack()=
 
         Removes all records that have been marked as deleted.
@@ -1570,37 +1778,78 @@ class Table extends Thing
         *}
 
         {*return
-            (self)      The current instance of the class
+            ($iCount)       The number of records that were deleted
         *}
 
-        {*seealso @fnc.deleted, @fnc.pack *}
+        {*warning
+            Index may need to be rebuilt; Memo files are out of sync (WHICH IS A PROBLEM)
+        *}
+
+        {*seealso @fnc.deleted, @fnc.delete, @fnc.recall *}
 
         *}}
     */
     /* ================================================================================ */
-    public function pack( $table )
-    /*--------------------------*/
+    public function pack()
+    /*------------------*/
     {
         $iDeleted = 0;
-        $iRecno = $this->recno();                                   /* Save record pointer */
 
-        $szFile = $this->determineDataFile();
-
-        $this->Go( 1 );
-
-        while( ! $this->eof() )                                     /* While NOT EndOfFile */
+        if ( $this->reccount() > 0 )                                  /* If we have records */
         {
-            if ( $this->deleted() )                                 /* If deleted */
+            $szFile = $this->determineDataFile();                   /* Determine the name of the physical file */
+            $szRoot = v::FIL_RealPath( dirname( v::FIL_ResolveRoot( $szFile ) ) );
+            $tmpName = tempnam( $szRoot,'' );                       /* Create a temp file */
+
+            //var_dump( "FICHIER TEMPORAIRE: " . $tmpName );
+
+            if ( $tmp = fopen( $tmpName ,'w+b' ) )                  /* Open the temp file and set it 0 length */
             {
-                // Bon, ici ... il faut VRAIMENT faire le travail !!!
-                $iDeleted++;                                        /* Count */
-            }   /* if ( $this->deleted() ) */
+                if ( is_null( $this->readHandle ) )
+                    $this->readHandle = fopen( $szFile,'r+b' );
 
-            $this->skip();                                          /* Next record */
-        }   /* while( ! $this->eof() ) */
+                if ( $this->readHandle )                            /* If we could open the table file */
+                {
+                    fseek( $this->readHandle,0,SEEK_SET );          /* Go to first byte */
 
-        $this->Go( $iRecno );                                       /* Restore record pointer */
+                    while ( ! feof( $this->readHandle ) )           /* While NOT End of File */
+                    {
+                        if ( ! empty( $record = fread( $this->readHandle,$this->recordSize ) ) )
+                        {
+                            //var_dump( $record );
+                            if ( $record[0] !== '*' )               /* If record NOT deleted */
+                                fwrite( $tmp,$record );             /* Write the record to the tmp file */
+                            else
+                                $iDeleted++;                            /* Increment Count */
+                        }   /* if ( ! empty( $record ... ) ) ) */
+                    }   /* while ( ! feof( $this->readHandle ) ) */
 
+                    fclose( $tmp );                                 /* Close the temp file */
+
+                    {   /* Make sure some handles get closed before we overwrite the table file */
+                        $this->closeHandles();
+                    }   /* Make sure some handles get closed before we overwrite the table file */
+
+                    rename( $tmpName,$szFile );                     /* Rename the tmp file to the table filename */
+                }   /* if ( $this->readHandle ) */
+                else
+                {
+                    // EXCEPTION: CANNOT READ (FOPEN FAILED)
+                }
+            }   /* if ( $tmp = fopen( $tmpName ,'w+b' ) ) */
+
+            // MAINTENANT, IL FAUT ENCORE S'OCCUPER DES INDEX ET DES CHAMPS MEMO !!!!!!!!!
+
+            $this->recno = 1;
+            $this->closeHandles();
+            var_dump( $this->reccount() );
+        }
+        else
+        {
+            //var_dump( "NO RECORDS FOUND" );
+        }
+
+        end:
         return ( $iDeleted );                                       /* Return the nuber of records that were deleted */
     }   /* End of Table.pack() ======================================================== */
     /* ================================================================================ */
@@ -1632,92 +1881,9 @@ class Table extends Thing
     /* ================================================================================ */
 
 
-    public function deleted()
-    /*---------------------*/
-    {
-        $bRetVal = false;
-
-        $szFile = $this->determineDataFile();
-
-        if ( $fh = fopen( $szFile,'r+b' ) )
-        {
-            $offset = ( $this->recordSize * ( $this->recno - 1 ) );
-
-            fseek( $fh,$offset,SEEK_SET );
-
-            $bRetVal = ( fread( $fh,1 ) === '*' );
-
-            fclose( $fh );
-        }
-        else
-        {
-            // EXCEPTION: CANNOT WRITE (FOPEN FAILED)
-        }
-
-        return ( $bRetVal );
-
-    }   /* End of Table.deleted() ===================================================== */
-    /* ================================================================================ */
-
-
-    public function recall()
-    /*--------------------*/
-    {
-        $bRetVal = false;
-
-        $szFile = $this->determineDataFile();
-
-        if ( $fh = fopen( $szFile,'c+b' ) )
-        {
-            $offset = ( $this->recordSize * ( $this->recno - 1 ) );
-
-            fseek( $fh,$offset,SEEK_SET );
-
-            $bRetVal = ( fwrite( $fh,' ' ) === 1 );
-
-            fclose( $fh );
-        }
-        else
-        {
-            // EXCEPTION: CANNOT WRITE (FOPEN FAILED)
-        }
-
-        return ( $bRetVal );
-    }   /* End of Table.recall() ====================================================== */
-    /* ================================================================================ */
-
-
-    public function append( $x = 1 )
-    /*----------------------------*/
-    {
-        $szFile = $this->determineDataFile();
-
-        $iRetVal = -1;
-
-        if ( $fh = fopen( $szFile,'a+b' ) )
-        {
-            // JE DOIS METTRE UN LOCK!!!
-            $iRetVal = fwrite( $fh,str_repeat( ' ',$x * $this->recordSize ) );
-
-            if ( $this->fileSize < 1 )
-                $this->determineLengthOfDataFile();         /* $this->fileSize est mis à jour */
-
-            fclose( $fh );
-
-            // ICI, JE DOIS TESTER ! QUAND ON AJOUTE UN NOUVEAU RECORD,
-            // LE RECORD COURANT EST LE DERNIER !!!
-            $this->recno = $this->reccount();
-        }
-        else
-        {
-            // EXCEPTION: CANNOT APPEND (FOPEN FAILED)
-        }
-
-        return ( $iRetVal );
-    }   /* End of Table.append() ====================================================== */
-    /* ================================================================================ */
-
-
+    // THIS METHOD SHOULD GO !
+    // USE __call() INSTEAD !!!
+    // MAKE IT SUCH THAT IT USES GO() OR GOTO()
     /* ================================================================================ */
     /** {{*skip( [$n] )=
 
@@ -1780,6 +1946,8 @@ class Table extends Thing
     /* ================================================================================ */
 
 
+    // THIS METHOD SHOULD GO !
+    // USE __call() INSTEAD !!!
     public function eof()
     /*-----------------*/
     {
@@ -1788,6 +1956,8 @@ class Table extends Thing
     /* ================================================================================ */
 
 
+    // THIS METHOD SHOULD GO !
+    // USE __call() INSTEAD !!!
     public function bof()
     /*-----------------*/
     {
@@ -1796,7 +1966,9 @@ class Table extends Thing
     /* ================================================================================ */
 
 
-    public function recno()
+    // THIS METHOD SHOULD GO !
+    // USE __call() INSTEAD !!!
+    public function OLDrecno()
     {
         return ( $this->recno );
     }
@@ -1813,6 +1985,12 @@ class Table extends Thing
 
         {*return
             (int)       The current record number
+        *}
+
+        {*remark
+            @fnc.go() differs from @fnc.goto() in the sense that it returns the current
+            record pointer ([c]recno[/c]) whereas @fnc.goto() returns the current instance
+            of the class while doing exactly the same thing.
         *}
 
         {*example
@@ -1907,22 +2085,210 @@ class Table extends Thing
     /* ================================================================================ */
 
 
-    /* Return the 'id field if any */
-    protected function id()
-    /*-------------------*/
+    /* ================================================================================ */
+    /** {{*id()=
+
+        Returns the value of the "id" field ("id" type)
+
+        {*params
+        *}
+
+        {*return
+            (mixed)     The value of the "id" type field or [c]null[/c] if none found
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function id()
+    /*----------------*/
     {
-        // WHY NOT $this->read( 'id' ) DIRECTEMENT ET TRAPPER UNE EXCEPTION ????
-        foreach( $this->fields as $field => $oField )
-        {
-            if ( $oField->type === 'id' )
-                return ( $this->read( $field ) );
-        }   /* foreach( $this->fields as $field => $oField ) */
+        if ( ! is_null( $this->idField ) )
+            return ( $this->read( $this->idField->name ) );
 
         return ( null );
     }   /* End of Table.id() ========================================================== */
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*idField()=
+
+        Returns the "id" type field
+
+        {*params
+        *}
+
+        {*return
+            (mixed)     A Field or null if no field of "id" type
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    protected function idField()
+    /*------------------------*/
+    {
+        return ( $this->idField );
+    }   /* End of Table.idField() ===================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*append( [$n] )=
+
+        Move the record pointer to @param.n
+
+        {*params
+            $n          (int)       The number of records to add. Optional. [c]1[/c] by
+                                    default
+        *}
+
+        {*return
+            (self)      The current instance of the class
+        *}
+
+        {*remark
+            The record pointer (@var.recno) is advanced accordingly (always = to
+            @var.reccount)
+        *}
+
+        {*example
+        $oDB = new IllicoDB();
+
+        $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+        $oDB->use( 'artists' );
+
+        |** Adds 100 blank records **|
+        [b]$oDB->artists->append(100)[/b];
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function append( $x = 1 )
+    /*----------------------------*/
+    {
+        $szFile = $this->determineDataFile();
+
+        /* Je ne devrais PAS ouvrir le fichier ! Le writeHandle devrait être utilisé */
+        if ( $fh = fopen( $szFile,'a+b' ) )
+        {
+            // Hmmm ... si j'ai un field de type "id" alors, je dois le remplir automatiquement !
+            if ( flock( $fh,LOCK_EX ) )
+            {
+                fwrite( $fh,str_repeat( ' ',$x * $this->recordSize ) );
+                flock( $fh,LOCK_UN );
+            }   /* if ( flock( $fh,LOCK_EX ) ) */
+
+            if ( $this->fileSize < 1 )
+                $this->determineLengthOfDataFile();         /* $this->fileSize est mis à jour */
+
+            fclose( $fh );
+
+            $this->recno = $this->reccount;
+        }
+        else
+        {
+            // EXCEPTION: CANNOT APPEND (FOPEN FAILED)
+        }
+
+        return ( $this );
+    }   /* End of Table.append() ====================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*protected readRawRecord()=
+
+        Reads the whole current record
+
+        {*params
+        *}
+
+        {*return
+            (mixed)     The value of the field
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    protected function readRawRecord()
+    /*------------------------------*/
+    {
+        if ( is_null( $this->readHandle ) )
+            $this->readHandle = fopen( $szFile = $this->determineDataFile(),'rb' );
+
+        if ( $this->readHandle )
+        {
+            $offset = ( $this->recordSize * ( $this->recno - 1 ) )  + 1; /* +1 => because of the 1st byte which is the "deleted" mark */
+
+            fseek( $this->readHandle,$offset,SEEK_SET );
+            return ( fread( $this->readHandle,$this->recordSize ) );
+        }
+        else
+            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": Attempt to write after EOF (ErrCode: EXCEPTION_CANNOT_OPEN_TABLE = " . EXCEPTION_CANNOT_OPEN_TABLE . ")",EXCEPTION_CANNOT_OPEN_TABLE );
+
+        return ( null );
+    }   /* End of Table.readRawRecord() =============================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*read( $field )=
+
+        Reads a field of the current record
+
+        {*params
+            $field      (string)    Field to read
+        *}
+
+        {*return
+            (mixed)     The value of the field
+        *}
+
+        {*example
+        $oDB = new IllicoDB();
+
+        $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+        $oDB->use( 'artists' );
+
+        |** Read the '[c]id[/c]' field **|
+        var_dump( [b]$oDB->artists->Goto(15000)->read( 'id' )[/b] );
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function read( $field )
+    /*--------------------------*/
+    {
+        if ( ! isset( $this->fields[$field] ) )
+            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$field}' ... FIELD NOT FOUND (ErrCode: EXCEPTION_INVALID_FIELD = " . EXCEPTION_INVALID_FIELD . ")",EXCEPTION_INVALID_FIELD );
+        else
+        {
+            if ( $this->fields[$field]->type === 'memo' )
+                return ( $this->readMemo( $field ) );
+        }
+
+        if ( ! is_null( $rawRecord = $this->readRawRecord() ) )
+            return ( substr( $rawRecord,$this->offsets[$field]['offset'],$this->offsets[$field]['length'] ) );
+        else
+            return ( null );
+    }   /* End of Table.read() ======================================================== */
+    /* ================================================================================ */
+
+
+    // THIS METHOD SHOULD WORK DIFFERENTLY!!!
+    // WE SHOULD READ and WRITE raw records OR AT LEAST
+    // POSITION THE FILE POINTER EXACTLY WHERE THE CURRENT
+    // RECORD STARTS AND NEVER MOVE IT INSIDE THE RECORD.
+    // WE SHOULD READ THE RECORD (WHOLE STRING) AND EXTRACT
+    // FIELDS BASED ON THEIR OFFSET (offset IN THE STRING) OR
+    // WRITE VALUES INSIDE THE STRING (AT PROPER OFFSET) AND
+    // WRITE THE RECORD BACK TO THE FILE.
+    // THE READ AND WRITE HANDLES SHOULD BE THE SAME: THE FILE
+    // POINTER SHOULD BE UNIQUE !!!
     public function write( $field,$value = null )
     /*-----------------------------------------*/
     {
@@ -1960,12 +2326,10 @@ class Table extends Thing
             }   /* switch( $this->fields[$field]->type ) */
         }
         else
-        {
-            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$field}' ... FIELD NOT FOUND (ErrCode: " . EXCEPTION_INVALID_FIELD . ")",EXCEPTION_INVALID_FIELD );
-        }
+            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$field}' ... FIELD NOT FOUND (ErrCode: EXCEPTION_INVALID_FIELD = " . EXCEPTION_INVALID_FIELD . ")",EXCEPTION_INVALID_FIELD );
 
         if ( $this->recno < 1 )
-            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": ATTEMPT TO WRITE BEFORE BOF (ErrCode: " . EXCEPTION_ATTEMPT_TO_WRITE_BEFORE_EOF . ")",EXCEPTION_ATTEMPT_TO_WRITE_BEFORE_EOF );
+            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": ATTEMPT TO WRITE BEFORE BOF (ErrCode: EXCEPTION_ATTEMPT_TO_WRITE_BEFORE_EOF = " . EXCEPTION_ATTEMPT_TO_WRITE_BEFORE_EOF . ")",EXCEPTION_ATTEMPT_TO_WRITE_BEFORE_EOF );
 
         if ( is_null( $this->writeHandle ) )
             $this->writeHandle = fopen( $szFile = $this->determineDataFile(),'c+b' );
@@ -2001,7 +2365,7 @@ class Table extends Thing
             }
             else
             {
-                throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": ATTEMPT TO WRITE AFTER EOF (ErrCode: " . EXCEPTION_ATTEMPT_TO_WRITE_AFTER_EOF . ")",EXCEPTION_ATTEMPT_TO_WRITE_AFTER_EOF );
+                throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": Attempt to write after EOF (ErrCode: EXCEPTION_ATTEMPT_TO_WRITE_AFTER_EOF = " . EXCEPTION_ATTEMPT_TO_WRITE_AFTER_EOF . ")",EXCEPTION_ATTEMPT_TO_WRITE_AFTER_EOF );
             }
         }
         else
@@ -2016,152 +2380,7 @@ class Table extends Thing
     /* ================================================================================ */
 
 
-    /* Attention: changer l'ID d'un record dans le fichier data peut
-       désynchroniser tous les fichiers *.xml liés */
-    // protected function writeMemoOld( &$field,&$x )
-    // /*---------------------------------------*/
-    // {
-    //     if ( ! is_string( $x ) && ! is_null( $x ) )
-    //     {
-    //         var_dump( $x );
-    //         throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": value to write is NOT nullable string (ErrCode: " . EXCEPTION_NOT_A_STRING . ")",EXCEPTION_NOT_A_STRING );
-    //     }
-    //
-    //     if ( ! is_null( $szID = $this->id() ) )
-    //     {
-    //         $szHash = (string) ( crc32( $szID ) % 999983 );
-    //         $szFile = $this->determineDataFile() . ".extra.data.{$szHash}.xml";
-    //
-    //         // Écrire
-    //         // <record id=\"{$szID}\">\n
-    //         //  <field name=\"{$field}\">\n"><[CDATA[" . serialize( $a ) . "]]></field>\n;
-    //         // </record>
-    //
-    //         $szXML = "<record id=\"{$szID}\">\n";
-    //         $szXML .= " <field name=\"{$field}\" type=\"array\"><[CDATA[" . serialize( $x ) . "]]></field>\n";
-    //         $szXML .= "</record>\n";
-    //
-    //         //var_dump( $szXML );
-    //
-    //         //$this->die( __METHOD__ . "() Not yet ready" );
-    //
-    //         $oDom = new \DOMDocument();
-    //
-    //         // Create XML file if it does not exist
-    //         if ( ! is_file( $szFile ) )
-    //         {
-    //             //var_dump( "Create {$szFile}" );
-    //             $oDom->formatOutput = true;
-    //             $root = $oDom->createElement( 'records' );
-    //             $root = $oDom->appendChild( $root );
-    //             $oDom->save( $szFile );
-    //         }
-    //
-    //         if ( is_file( $szFile ) )
-    //         {
-    //             if ( $oDom->load( $szFile ) )
-    //             {
-    //                 //var_dump( $szFile . " loaded" );
-    //
-    //                 $root = $oDom->documentElement;
-    //                 $oXPath = new \DOMXPath( $oDom );
-    //
-    //                 $oFieldNode     =
-    //                 $oRecordNode    = null;
-    //
-    //                 if ( ( $oCollection = $oXPath->query( "record[@id='{$szID}']" ) ) && $oCollection->length > 0 )
-    //                 {
-    //                     // J'ai trouvé le record
-    //                     //var_dump( "Record found in XML file" );
-    //                     $oRecordNode = $oCollection->item(0);
-    //                 }
-    //                 else
-    //                 {
-    //                     //var_dump( $szID . " NOT found in {$szFile}" );
-    //
-    //                     // Écrire <record id=\"{$szID}\">
-    //                     $oRecordNode = $oDom->createElement( 'record' );
-    //                     $oRecordNode->setAttribute( 'id',$szID );
-    //                     $root->appendChild( $oRecordNode );
-    //                     $oDom->save( $szFile );
-    //                 }
-    //
-    //                 if ( ( $oCollection = $oXPath->query( "field[@name='{$field}']",$oRecordNode ) ) && $oCollection->length > 0 )
-    //                 {
-    //                     //var_dump( "Trouvé le field" );
-    //                     $oFieldNode = $oCollection->item(0);
-    //                 }
-    //                 else
-    //                 {
-    //                     //var_dump( "Création du field" );
-    //
-    //                     $oFieldNode = $oDom->createElement( 'field' );
-    //                     $oFieldNode->setAttribute( 'name',$field );
-    //                 }
-    //
-    //                 if ( $oRecordNode && $oFieldNode )
-    //                 {
-    //                     $oFieldNode->setAttribute( 'type','memo' );
-    //                     $szData     = base64_encode( serialize( $x ) );
-    //                     $oCDATA     = $oDom->createCDATASection( $szData );
-    //                     $oFieldNode->nodeValue = '';
-    //                     $oFieldNode->appendChild( $oCDATA );
-    //                     $oRecordNode->appendChild( $oFieldNode );
-    //
-    //                     $oDom->save( $szFile );
-    //                 }
-    //             }
-    //         }
-    //         else
-    //         {
-    //             // EXCEPTION: FILE NOT FOUND
-    //         }
-    //
-    //
-    //         //$this->die("Tentative d'écrire un objet dans {$szFile}; hash = {$szHash}" );
-    //     }
-    //     else
-    //         throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": ID required (ErrCode: " . EXCEPTION_NO_ID_FIELD_FOUND . ")",EXCEPTION_NO_ID_FIELD_FOUND );
-    //
-    //     return ( 1 );   /* On devrait retourner le nombre de bytes écrits */
-    // }   /* End of Table.writeMemo() =================================================== */
-    /* ================================================================================ */
-
-
-    public function writeRawMemo( &$aMemo )
-    /*-----------------------------------*/
-    {
-
-        if ( ! $this->writeRawMemoHandle )
-           $this->writeRawMemoHandle = fopen( $szFile = $this->determineDataFile() . '.memo','c+b' );
-
-        if ( $this->writeRawMemoHandle )
-        {
-            if ( is_array( $aMemo ) && isset( $aMemo['id'] ) )
-            {
-                $szID   = $aMemo['id'];
-                $record = "<{$szID}>";
-
-                foreach( $aMemo as $field => $value )
-                {
-                    if ( $field !== 'id' )
-                        $record .= "<{$field}>" . base64_encode( serialize( $value ) ) . "</{$field}>";
-                }
-
-                $record .= "</{$szID}>";
-
-                fwrite( $this->writeRawMemoHandle,$record );
-            }
-            else
-            {
-                fflush( $this->writeRawMemoHandle );
-                fclose( $this->writeRawMemoHandle );
-            }
-        }
-    }   /* End of Table.writeRawMemo() ================================================ */
-    /* ================================================================================ */
-
-
+    // Écrit un champ mémo dans le fichier mémo
     protected function writeMemo( &$field,&$value )
     /*-------------------------------------------*/
     {
@@ -2171,21 +2390,6 @@ class Table extends Thing
 
         if ( $this->writeMemoHandle )
         {
-            //var_dump( "-------------------------- {$field}/{$value}" );
-            // Bon ... ici, je dois chercher le début du record
-            // <l'id>........</l'id>
-            // J'ai deux offsets (le début du record et la fin du record)
-            // Une fois que j'ai ces 2 offsets, je peux extraire l'ensemble
-            // du record (avec tous les champs, array, object, ...) et je
-            // peux rechercher $field là-dedans.
-
-            // Si $field ne s'y trouve pas, je l'ajoute; si $field s'y trouve,
-            // je le remplace ... et j'ai un nouveau record
-            // Avec mes 2 offsets, je sais aussi jusqu'où je dois lire (la partie
-            // AVANT) et aussi à partir de quel endroit je dois reprendre (la
-            // partie APRÈS)
-
-            // Ce code écrit le record EXACTEMENT où il faut qu'il s'insère !!!
             $t1         = microtime( true );
             $offset     = 0;
             $size       = 5000 * 8;                                 /* Ici, ajustement possible pour performances */
@@ -2194,8 +2398,6 @@ class Table extends Thing
 
             if ( ! is_null( $szID = $this->id() ) )                 /* If we have an ID (no ID => cannot write to a memo file) */
             {
-                //var_dump( "ID: " . $szID );
-
                 $startOffset = $endOffset = -1;                     /* starting and ending offsets of the record */
                 $recordFound = false;
                 $record      = null;
@@ -2217,435 +2419,342 @@ class Table extends Thing
                     //var_dump( "FINISHED ENDOFFSET IN " . number_format( $t2 - $t1,6,',','.' ) . " secs: " . $endOffset );
                 }
 
+                /* If the record was found */
                 if ( $recordFound = ( $startOffset !== -1 && $endOffset !== -1 ) )
                 {
                     fseek( $this->writeMemoHandle,$startOffset,SEEK_SET );
-                    // ATTENTION: ICI, JE DOIS AJUSTER LES OFFSETS CAR $startOffset EST LE DEBUT DU <id>
-                    //            ET $endOffset est le début du </id>
                     $len = ( $endOffset - $startOffset ) + strlen( $szID ) + 3;
                     $record = fread( $this->writeMemoHandle,$len );
-                    //var_dump( "RECORD FOUND" );
-                    //var_dump( "RECORD='{$record}'" );
-                }   /* if ( $recordFound = ( $startOffset !== -1 && $endOffset !== -1 ) ) */
-                else
-                {
-                    //var_dump( "ON N'A PAS TROUVÉ LE RECORD" );
-                    $record = "<$szID><{$field}>" . base64_encode( serialize( $value ) ) . "</{$field}></$szID>";
-                }
 
-                if ( ! is_null( $record ) )
-                {
-                    //var_dump( "LE RECORD N'EST PAS NULL" );
-
-                    // Ici, je dois modifier le record
-                    //var_dump( "RECORD TROUVÉ = ",$record );
-                    // En fait, ici ... 2 cas de figure:
-                    //  1) Le field est trouvé et il doit être remplacé
-                    //  2) Le field n'est PAS trouvé et il doit être ajouté au record!
                     if ( preg_match( "%<{$field}>.*</{$field}>%s",$record ) )
-                    {
-                        //var_dump( "ON A TROUVÉ LE FIELD '{$field}'" );
                         $record = preg_replace( "%<{$field}>.*</{$field}>%s","<{$field}>" . base64_encode( serialize( $value ) ) . "</{$field}>",$record );
-                    }
                     else
-                    {
-                        //var_dump( "!!!!!!!!!!!!!!!!!!!ON N'A PAS TROUVÉ LE FIELD '{$field}'" );
                         $record = str_replace( "</{$szID}>","<{$field}>" . base64_encode( serialize( $value ) ) . "</{$field}></{$szID}>",$record );
-                    }
 
-                    //var_dump( "RECORD='{$record}'" );
-
-                    if ( ! $recordFound )
+                    // Je vais commencer par fermer le handle
+                    if ( $this->writeMemoHandle )
                     {
-                        // Le cas est simple: on écrit le record à la fin du fichier et c'est tout!
-                        //var_dump( "CAS SIMPLE! ON N'A PAS TROUVÉ LE RECORD ET DONC ON VA ÉCRIRE LE NOUVEAU RECORD À LA FIN DU FICHIER ET BASTA!" );
-                        fseek( $this->writeMemoHandle,0,SEEK_END );
-                        $iRetVal = fwrite( $this->writeMemoHandle,$record );
-                        goto end;
-                    }   /* if ( ! $recordFound ) */
-                    else    /* Else of ... if ( ! $recordFound ) */
-                    {
-                        //var_dump( "CAS COMPLIQUÉ! ON A TROUVÉ LE RECORD ET DONC ON VA DEVOIR L'ÉCRIRE DANS LE FICHIER À L'ENDROIT OÙ IL SE TROUVAIT! VOICI LES OFFSETS:" );
-                        //var_dump( "startOffset: {$startOffset}; endOffset: {$endOffset}" );
-                        $tmpName = tempnam( $szRoot,'' );
-                        //var_dump( "ON VA ÉCRIRE DANS LE FICHIER TEMPORAIRE: " . $tmpName );
+                        fflush( $this->writeMemoHandle );
+                        fclose( $this->writeMemoHandle );
+                        $this->writeMemoHandle = null;
+                    }   /* if ( $this->writeMemoHandle ) */
 
-                        if ( $tmp = fopen( $tmpName ,'w+b' ) )
-                        {
-                            if ( $startOffset === 0 )
-                            {
-                                //var_dump( "LE CAS SE SIMPLIFIE CAR ON N'A PAS DE PARTIE 'AVANT'" );
-                                fwrite( $tmp,$record );
-                                fseek( $this->writeMemoHandle,$endOffset + strlen( $szID ) + 3 );
-                                while ( ! feof( $this->writeMemoHandle ) )
-                                    fwrite( $tmp,fread( $this->writeMemoHandle,$size ) );
+                    // Je coupe le bloc de l'ancien record
+                    v::FIL_deleteInFile( $szFile,$startOffset,$len );
+                    // J'écris le nouveau record
+                    v::FIL_insertInFile( $szFile,$startOffset,$record );
 
-                                //var_dump( "ON FERME LE FICHIER TEMPORAIRE..." );
-                                fflush( $tmp );
-                                fclose( $tmp );
-                                $tmp = null;
-                                //var_dump( "ON FLUSHE ET FERME LE HANDLE DU FICHIER DE MEMO" );
-                                fflush( $this->writeMemoHandle );
-                                fclose( $this->writeMemoHandle );
-                                $this->writeMemoHandle = null;
+                    // ON AURAIT UNE BELLE OPTIMISATION A FAIRE LES DEUX OPERATIONS DANS UNE
+                    // SEULE ROUTINE CAR ON NE VA PAS OUVRIR ET FERMER LE FICHIER PLUSIEURS
+                    // FOIS
 
-                                if ( rename( $tmpName,$szFile ) )
-                                {
-                                    //var_dump( "RENAME OF '{$tmpName}' TO '{$szFile}' OK!" );
-                                }
-                                else
-                                {
-                                    //var_dump( "RENAME OF '{$tmpName}' TO '{$szFile}' KO!" );
-                                }
-                                goto end;
-                            }   /* if ( $startOffset === 0 ) */
-                            else    /* Else of ... if ( $startOffset === 0 ) */
-                            {
-                                //var_dump( "LE CAS EST CELUI D'UNE PARTIE 'AVANT', LE RECORD, ET UNE PARTIE 'APRÈS'" );
-                                //var_dump( "COMMENÇONS PAR LA PARTIE 'AVANT' (STARTOFFSET = {$startOffset})" );
-
-                                $offset = 0;
-                                fseek( $this->writeMemoHandle,$offset,SEEK_SET );
-                                fseek( $tmp                  ,$offset,SEEK_SET );
-                                while ( ( $offset + $size ) <= $startOffset )
-                                {
-                                    //var_dump( "LECTURE DE {$size} BYTES..." );
-                                    $buffer = fread( $this->writeMemoHandle,$size );
-                                    $offset += $size;
-                                    //var_dump( "ÉCRITURE DE {$size} BYTES..." );
-                                    fwrite( $tmp,$buffer,$size );
-                                }
-
-                                /* S'il reste des choses à écrire */
-                                if ( ( $offset + $size ) > $startOffset )
-                                {
-                                    $remainingLength = $startOffset - $offset;
-                                    //var_dump( "=======IL RESTE {$remainingLength} BYTES A ECRIRE QUI SONT LE DERNIER BLOC DE LA PARTIE 'AVANT'" );
-                                    //var_dump( "LECTURE DE {$remainingLength} BYTES" );
-                                    $buffer = fread( $this->writeMemoHandle,$remainingLength );
-                                    //var_dump( "ÉCRITURE DE '{$buffer}' POUR LE DERNIER BLOC DE LA PARTIE 'AVANT'" );
-                                    $q = fwrite( $tmp,$buffer );
-                                    //var_dump( "{$q} BYTES WRITTEN" );
-                                    //var_dump( substr( $szBuffer2,-16 ) );
-                                }
-
-                                /* Write record now */
-                                //var_dump( "***************ÉCRIRE LE RECORD {$record}" );
-                                $iRetVal = fwrite( $tmp,$record );
-                                //var_dump( "{$iRetVal} BYTES WRITTEN" );
-
-                                /* Write the rest of the memo file now : la partie "APRÈS" */
-                                //var_dump( "ÉCRIRE LA PARTIE 'APRÈS' ..." );
-                                fseek( $this->writeMemoHandle,$endOffset + strlen( $szID ) + 3 );
-                                //var_dump( "POSITION DANS LE MEMO: " . $x = ftell( $this->writeMemoHandle ) );
-                                //fseek( $this->writeMemoHandle,0,SEEK_END );
-                                //var_dump( "**********LONGUEUR DU MEMO: " . ftell( $this->writeMemoHandle ) );
-                                //fseek( $this->writeMemoHandle,$x,SEEK_SET );
-
-                                while ( ! feof( $this->writeMemoHandle ) )
-                                {
-                                    $buffer = fread( $this->writeMemoHandle,$size );
-                                    //var_dump( "ÉCRIRE {$buffer}..." );
-
-                                    $q = fwrite( $tmp,$buffer );
-                                    //var_dump( "{$q} BYTES WRITTEN" );
-                                }
-
-                                //var_dump( "ON FLUSHE ET FERME LE HANDLE DU FICHIER DE MEMO" );
-                                fflush( $this->writeMemoHandle );
-                                fclose( $this->writeMemoHandle );
-                                $this->writeMemoHandle = null;
-
-                                //var_dump( "ON FERME LE FICHIER TEMPORAIRE..." );
-                                fflush( $tmp );
-                                fclose( $tmp );
-                                $tmp = null;
-
-                                if ( rename( $tmpName,$szFile ) )
-                                {
-                                    //var_dump( "RENAME OF '{$tmpName}' TO '{$szFile}' OK!" );
-                                }
-                                else
-                                {
-                                    //var_dump( "RENAME OF '{$tmpName}' TO '{$szFile}' KO!" );
-                                }
-
-                                goto end;
-                            }   /* End of ... Else of ... if ( $startOffset === 0 ) */
-                        }   /* if ( $tmp = fopen( $tmpName ,'w+b' ) ) */
-                    }    /* End of ... Else of ... if ( ! $recordFound ) */
-                }   /* if ( ! is_null( $record ) ) */
-                //else
-                //{
-                //    $record = "<{$szID}><{$field}>" . serialize( $value ) . "</{$field}></{$szID}>";
-                //}
-                //
-                //var_dump( "RECORD APRÈS TRANSFORMATION:",$record );
-                //
-                //if ( ! $recordFound )
-                //{
-                //    // Le cas est simple: on écrit le record à la fin du fichier et c'est tout!
-                //    fseek( $this->writeMemoHandle,0,SEEK_END );
-                //    $iRetVal = fwrite( $this->writeMemoHandle,$record );
-                //    goto end;
-                //}
-                //else
-                //{
-                //    // Le cas est plus compliqué car il faut recopier les parties AVANT et APRÈS le record
-                //    var_dump( "ATTENTION: CAS D'UN RECORD TROUVÉ!" );
-                //    var_dump( "startOffset: {$startOffset}; endOffset: {$endOffset}" );
-                //
-                //    $tmpName = tempnam( $szRoot,'' );
-                //    var_dump( "FICHIER TEMPORAIRE: " . $tmpName );
-                //
-                //    if ( $tmp = fopen( $tmpName ,'w+b' ) )
-                //    {
-                //        if ( $startOffset === 0 )
-                //        {
-                //            // Ceci est encore un cas simple car il n'y a pas de AVANT et APRÈS
-                //            // Il n'y a que le record à écrire et écrire tout ce qui se trouve
-                //            // derrière (endOffset + longueur de l'ID + les caractères </>
-                //
-                //            fseek( $tmp,0,SEEK_SET );
-                //            $iRetVal = fwrite( $tmp,$record );
-                //
-                //            fseek( $tmp,0,SEEK_SET );
-                //            fseek( $this->writeMemoHandle,$endOffset + strlen( $szID ) + 3 );
-                //            while ( ! feof( $this->writeMemoHandle ) )
-                //                fwrite( $tmp,fread( $this->writeMemoHandle,$size ) );
-                //        }
-                //        else
-                //        {
-                //            // Ceci est le cas où il faut écrire le AVANT + le record + le APRÈS
-                //            // C'est le cas le plus compliqué
-                //            /*  Écrire la partie "AVANT" */
-                //            $offset = 0;
-                //            while ( ( $offset + $size ) <= $startOffset )
-                //            {
-                //                $buffer = fread( $this->writeMemoHandle,$size );
-                //                var_dump( "LECTURE DE {$size} BYTES..." );
-                //                $offset += $size;
-                //                fwrite( $tmp,$buffer,$size );
-                //            }
-                //
-                //            /* S'il reste des choses à écrire */
-                //            if ( ( $offset + $size ) > $startOffset )
-                //            {
-                //                $remainingLength = $startOffset - $offset;
-                //                var_dump( "IL RESTE A LIRE " . ( $remainingLength ) . " BYTES" );
-                //                $buffer = fread( $this->writeMemoHandle,$remainingLength );
-                //                fwrite( $tmp,$buffer,$remainingLength );
-                //                //var_dump( substr( $szBuffer2,-16 ) );
-                //            }
-                //
-                //            /* Write record now */
-                //            $iRetVal = fwrite( $tmp,$record );
-                //
-                //            /* Write the rest of the memo file now */
-                //            fseek( $this->writeMemoHandle,$endOffset + strlen( $szID ) + 3 );
-                //
-                //            while ( ! feof( $this->writeMemoHandle ) )
-                //                fwrite( $tmp,fread( $this->writeMemoHandle,$size ) );
-                //
-                //            var_dump( "TEMP FILE ENTIRELY WRITTEN" );
-                //        }
-                //
-                //        fclose( $tmp );
-                //        fclose( $this->writeMemoHandle );
-                //        $this->writeMemoHandle = null;
-                //        var_dump( rename( $tmpName,$szFile ) );
-                //    }
-                //    else
-                //    {
-                //        // EXCEPTION: ON NE PEUT PAS OUVRIR LE FICHIER TEMPORAIRE
-                //    }
-                //}
-
-                //$this->die( "BEFORE ANY HARM" );
-
-                if ( false )
+                }   /* if ( $recordFound = ( $startOffset !== -1 && $endOffset !== -1 ) ) */
+                else    /* Record NOT found */
                 {
-                    if ( $tmp = fopen( $tmpName ,'w+b' ) )
-                    {
-                        var_dump( "FICHIER TEMPORAIRE CRÉÉ" );
-
-                        while ( ( $offset + $size ) <= $startOffset )
-                        {
-                            $buffer = fread( $this->writeMemoHandle,$size );
-                            var_dump( "LECTURE DE {$size} BYTES..." );
-                            $offset += $size;
-                            fwrite( $tmp,$buffer,$size );
-                        }
-
-                        var_dump( $offset,$startOffset );
-
-                        /* S'il reste des choses à écrire */
-                        if ( ( $offset + $size ) > $startOffset )
-                        {
-                            $remainingLength = $startOffset - $offset;
-                            var_dump( "IL RESTE A LIRE " . ( $remainingLength ) . " BYTES" );
-                            $buffer = fread( $this->writeMemoHandle,$remainingLength );
-                            fwrite( $tmp,$buffer,$remainingLength );
-                            //var_dump( substr( $szBuffer2,-16 ) );
-                        }
-
-                        /* Write new record */
-                        fwrite( $tmp,serialize( $value ) );
-
-                        // Aller à l'offset 179354 du fichier source
-                        //$endOffset = 179354;
-                        fseek( $this->writeMemoHandle,$endOffset,SEEK_SET );
-
-                        while ( ! feof( $this->writeMemoHandle ) )
-                            fwrite( $tmp,fread( $this->writeMemoHandle,$size ) );
-
-                        fclose( $tmp );
-                    }   /* if ( $tmp = fopen( $tmpName ,'w+b' ) ) */
-
-                    // Ici, il faut que je renomme le fichier temporaire en nom du fichier
-                    // de data => il faut probablement que je teste si les readHandle et writeHandle
-                    // sont encore corrects !!!
-
-                    //fflush( $this->writeMemoHandle );
-                    //fclose( $this->writeMemoHandle );
+                    //var_dump( "RECORD NOT FOUND" );
+                    $record = "<$szID><{$field}>" . base64_encode( serialize( $value ) ) . "</{$field}></$szID>";
+                    fseek( $this->writeMemoHandle,0,SEEK_END );
+                    $iRetVal = fwrite( $this->writeMemoHandle,$record );
+                    //var_dump( "RECORD WRITTEN" );
                 }
             }   /* if ( ! is_null( $szID = $this->id() ) ) */
             else
-            {
                 throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": 'id' field required (ErrCode: " . EXCEPTION_NO_ID_FIELD_FOUND . ")",EXCEPTION_NO_ID_FIELD_FOUND );
-            }
-
-            $t2 = microtime( true );
-            var_dump( "ÉCRITURE DANS FICHIER TEMPORAIRE EN " . number_format( $t2 - $t1,6,',','.' ) . " secs" );
-            // Ce code écrit le record EXACTEMENT où il faut qu'il s'insère !!!
         }   /* if ( $this->writeMemoHandle ) */
 
         end:
-        //var_dump( "FIN DE " . __METHOD__ . "()" );
+
         if ( $this->writeMemoHandle )
         {
-            //var_dump( "ON FLUSHE ET FERME LE HANDLE DU FICHIER DE MEMO" );
-
             fflush( $this->writeMemoHandle );
             fclose( $this->writeMemoHandle );
             $this->writeMemoHandle = null;
-        }
+        }   /* if ( $this->writeMemoHandle ) */
+
         return ( $iRetVal );
     }   /* End of Table.writeMemo() =================================================== */
     /* ================================================================================ */
 
 
-    /* Attention: changer l'ID d'un record dans le fichier data peut
-       désynchroniser tous les fichiers *.xml liés */
-    protected function writeObject( &$field,&$o )
-    /*-----------------------------------------*/
+    // TO BE DOCUMENTED
+    protected function readMemo( &$field )
+    /*----------------------------------*/
     {
-        if ( ! is_object( $o ) )
-        {
-            var_dump( $o );
-            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": value to write is NOT an object (ErrCode: " . EXCEPTION_NOT_AN_OBJECT . ")",EXCEPTION_NOT_AN_OBJECT );
-        }
+        $RetVal = null;
 
+        //var_dump( "AVANT PROBLEME" );
+        $szFile = $this->determineDataFile() . '.memo';
         if ( ! is_null( $szID = $this->id() ) )
         {
-            $szHash = (string) ( crc32( $szID ) % 999983 );
-            $szFile = $this->determineDataFile() . ".extra.data.{$szHash}.xml";
+             if ( ! $this->readMemoHandle )
+                 $this->readMemoHandle = @fopen( $szFile,'rb' );
 
-            // Écrire
-            // <record id=\"{$szID}\">\n
-            //  <field name=\"{$field}\">\n"><[CDATA[" . serialize( $o ) . "]]></field>\n;
-            // </record>
+             if ( $this->readMemoHandle )
+             {
+                 //var_dump( "LE FICHIER MEMO EST OUVERT" );
+                 $pattern = '<' . $szID . '>';
+                 //var_dump( "PATTERN: {$pattern}" );
 
-            $szXML = "<record id=\"{$szID}\">\n";
-            $szXML .= " <field name=\"{$field}\">><[CDATA[" . serialize( $o ) . "]]></field>\n";
-            $szXML .= "</record>\n";
+                 if ( ( $startOffset = v::FIL_searchInFile( $pattern,$szFile,0 /* start position */,60000 /* block size */ ) ) !== -1 )
+                 {
+                     //var_dump( "ON A TROUVÉ LE STARTOFFSET: {$startOffset}" );
+                     $pattern = '</' . $szID . '>';
+                     //var_dump( "PATTERN: {$pattern}" );
+                     if ( ( $endOffset = v::FIL_searchInFile( $pattern,$szFile,$startOffset /* start position */,60000 /* block size */ ) ) !== -1 )
+                     {
+                         //var_dump( "ON A TROUVÉ LE ENDOFFSET: {$endOffset}" );
+                         fseek( $this->readMemoHandle,$startOffset ,SEEK_SET );
+                         $len = ( $endOffset - $startOffset ) + strlen( $szID ) + 3;
+                         $record = fread( $this->readMemoHandle,$len );
+                         //var_dump( "RECORD='{$record}'" );
+                         if ( preg_match( "%<{$field}>(?P<field>.*)</{$field}>%s",$record,$aMatches ) )
+                         {
+                             $RetVal = unserialize( base64_decode( $aMatches['field'] ) );
+                             //var_dump( "ON A TROUVÉ LE CHAMP: {$value}" );
+                         }
+                     }   /* if ( ( $endOffset = v::FIL_searchInFile( $pattern,... */
+                 }   /* if ( ( $startOffset = v::FIL_searchInFile( $pattern,... */
 
-            //var_dump( $szXML );
+                 //fclose( $this->readMemoHandle );
+             }   /* if ( $this->readMemoHandle = fopen( $szFile = $this->determineDataFile() . '.memo','rb' ) ) */
+             else
+                 throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$szFile}' NOT found (ErrCode: EXCEPTION_MEMO_FILE_NOT_FOUND = " . EXCEPTION_MEMO_FILE_NOT_FOUND . ")",EXCEPTION_MEMO_FILE_NOT_FOUND );
+        }
+        // .. else
+        // ..     throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": ID required (ErrCode: EXCEPTION_NO_ID_FIELD_FOUND = " . EXCEPTION_NO_ID_FIELD_FOUND . ")",EXCEPTION_NO_ID_FIELD_FOUND );
 
-            $oDom = new \DOMDocument();
+        //var_dump( $RetVal );
+        return ( $RetVal );
+    }   /* End of Table.readMemo() ==================================================== */
+    /* ================================================================================ */
 
-            // Create XML file if it does not exist
-            if ( ! is_file( $szFile ) )
+
+    // THIS METHOD SHOULD BE TESTED EXTENSIVELY
+    // AND ... IT BANGS INTO THE DINITION OF backup() OF MOTHER !
+    // WE SHOULD CHANGE THE NAME OTHERWISE IT WILL GENERATE MULTIPLE PROBLEMS
+    /* ================================================================================ */
+    /** {{*backup( $szTarget )=
+
+        Creates a backup of the table
+
+        {*params
+            $szTarget       (string)        The name of the backup file. Optional.
+                                            If not passed, @param.szTarget will be
+                                            equal to the name of the physical file of
+                                            the table augmented by the current date and
+                                            time.
+        *}
+
+        {*return
+            (bool)      [c]true[/c] if backup successful; [c]false[/c] if not.
+        *}
+
+        {*example
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function backupGRRRRRRRR( $szTarget = null )
+    /*--------------------------------------*/
+    {
+        $szFile = $this->determineDataFile();
+
+        //if ( is_null( $szTarget ) )
+        //    $szTarget = $szFile . '.' . date( 'YmdHis' ) . '.backup';
+        //
+        //var_dump ( "Writing {$szFile} to {$szTarget}" );
+        //return ( v::FIL_Copy( $szFile,$szTarget ) );
+    }   /* End of Table.backup() ====================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*indexes()=
+
+        Returns the name of all indexes set on the current table
+
+        {*params
+        *}
+
+        {*return
+            (array)     Array of filenames
+        *}
+
+        {*example
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function indexes()
+    /*---------------------*/
+    {
+        return ( $aFiles = v::FIL_aFilesEx( $this->determineDataFile() . "*.idx" ) );
+    }   /* End of Table.indexes() ===================================================== */
+    /* ================================================================================ */
+
+
+    // Écrit une array qui représente TOUS les champs "memo" à écrire
+    // dans le fichier mémo
+    public function writeRawMemoOLD( &$aMemo )
+    /*-----------------------------------*/
+    {
+        $this->die( __METHOD__ . "(): obsolete!" );
+
+        if ( ! $this->writeRawMemoHandle )
+           $this->writeRawMemoHandle = fopen( $szFile = $this->determineDataFile() . '.memo','c+b' );
+
+        if ( $this->writeRawMemoHandle )
+        {
+            if ( is_array( $aMemo ) && isset( $aMemo['id'] ) )
             {
-                //var_dump( "Create {$szFile}" );
-                $oDom->formatOutput = true;
-                $root = $oDom->createElement( 'records' );
-                $root = $oDom->appendChild( $root );
-                $oDom->save( $szFile );
-            }
+                $szID   = $aMemo['id'];
+                $record = "<{$szID}>";
 
-            if ( is_file( $szFile ) )
-            {
-                if ( $oDom->load( $szFile ) )
+                foreach( $aMemo as $field => $value )
                 {
-                    //var_dump( $szFile . " loaded" );
-
-                    $root = $oDom->documentElement;
-                    $oXPath = new \DOMXPath( $oDom );
-
-                    $oFieldNode     =
-                    $oRecordNode    = null;
-
-                    if ( ( $oCollection = $oXPath->query( "record[@id='{$szID}']" ) ) && $oCollection->length > 0 )
-                    {
-                        // J'ai trouvé le record
-                        //var_dump( "Record found in XML file" );
-                        $oRecordNode = $oCollection->item(0);
-                    }
-                    else
-                    {
-                        //var_dump( $szID . " NOT found in {$szFile}" );
-
-                        // Écrire <record id=\"{$szID}\">
-                        $oRecordNode = $oDom->createElement( 'record' );
-                        $oRecordNode->setAttribute( 'id',$szID );
-                        $root->appendChild( $oRecordNode );
-                        $oDom->save( $szFile );
-                    }
-
-                    if ( ( $oCollection = $oXPath->query( "field[@name='{$field}']",$oRecordNode ) ) && $oCollection->length > 0 )
-                    {
-                        //var_dump( "Trouvé le field" );
-                        $oFieldNode = $oCollection->item(0);
-                    }
-                    else
-                    {
-                        //var_dump( "Création du field" );
-
-                        $oFieldNode = $oDom->createElement( 'field' );
-                        $oFieldNode->setAttribute( 'name',$field );
-                    }
-
-                    if ( $oRecordNode && $oFieldNode )
-                    {
-                        $oFieldNode->setAttribute( 'type','object' );
-                        $oFieldNode->setAttribute( 'class',get_class( $o ) );
-                        $szData     = base64_encode( serialize( $o ) );
-                        //var_dump( $szData );
-                        $oCDATA     = $oDom->createCDATASection( $szData );
-                        $oFieldNode->nodeValue = '';
-                        $oFieldNode->appendChild( $oCDATA );
-                        $oRecordNode->appendChild( $oFieldNode );
-
-                        //var_dump( "FIELD UPDATED" );
-                        $oDom->save( $szFile );
-                    }
+                    if ( $field !== 'id' )
+                        $record .= "<{$field}>" . base64_encode( serialize( $value ) ) . "</{$field}>";
                 }
-            }
+
+                $record .= "</{$szID}>";
+
+                fwrite( $this->writeRawMemoHandle,$record );
+            }   /* if ( is_array( $aMemo ) && isset( $aMemo['id'] ) ) */
             else
             {
-                // EXCEPTION: FILE NOT FOUND
+                // EXCEPTION
+                fflush( $this->writeRawMemoHandle );
+                fclose( $this->writeRawMemoHandle );
             }
+        }   /* if ( $this->writeRawMemoHandle ) */
+    }   /* End of Table.writeRawMemoOLD() ================================================ */
+    /* ================================================================================ */
 
 
-            //$this->die("Tentative d'écrire un objet dans {$szFile}; hash = {$szHash}" );
+    public function writeRawMemo( &$aMemo )
+    /*-----------------------------------*/
+    {
+        $szFile = $this->determineDataFile() . '.memo';
+
+        if ( ! $this->writeRawMemoHandle )
+           $this->writeRawMemoHandle = fopen( $szFile,'c+b' );
+
+        if ( $this->writeRawMemoHandle )
+        {
+            if ( is_array( $aMemo ) && isset( $aMemo['id'] ) )
+            {
+                $szID           = $aMemo['id'];
+                $patternStart   = '<' . $szID . '>';
+                $patternEnd     = '</' . $szID . '>';
+
+                {   /* Compose the raw memo */
+                    $record         = "<{$szID}>";
+                    foreach( $aMemo as $field => $value )
+                    {
+                        if ( $field !== 'id' )
+                            $record .= "<{$field}>" . base64_encode( serialize( $value ) ) . "</{$field}>";
+                    }
+                    $record .= "</{$szID}>";
+                }   /* Compose the raw memo */
+
+                $startOffset = $endOffset = -1;                     /* starting and ending offsets of the record */
+                $recordFound = false;
+
+                $t1 = microtime( true );
+                //var_dump( "LOOKING FOR '{$patternStart}'" );
+                $startOffset = v::FIL_searchInFile( $patternStart,$szFile,0 /* start position */,60000 /* block size */ );
+                $t2 = microtime( true );
+                //var_dump( "FINISHED STARTOFFSET IN " . number_format( $t2 - $t1,6,',','.' ) . " secs: " . $startOffset );
+
+                if ( $startOffset !== -1 )
+                {
+                    $t1 = microtime( true );
+                    //var_dump( "LOOKING FOR '{$patternEnd}'" );
+                    $endOffset = v::FIL_searchInFile( $patternEnd,$szFile,$startOffset /* start position */,60000 /* block size */ );
+                    $t2 = microtime( true );
+                    //var_dump( "FINISHED ENDOFFSET IN " . number_format( $t2 - $t1,6,',','.' ) . " secs: " . $endOffset );
+                }   /* if ( $startOffset !== -1 ) */
+
+                /* If the record found */
+                if ( $recordFound = ( $startOffset !== -1 && $endOffset !== -1 ) )
+                {
+                    //var_dump( "MEMO RECORD FOUND: more complicated!" );
+
+                    $len = ( $endOffset - $startOffset ) + strlen( $szID ) + 3;
+                    v::FIL_deleteInFile( $szFile,$startOffset,$len );
+                    v::FIL_insertInFile( $szFile,$startOffset,$record );
+                }   /* if ( $recordFound = ... ) */
+                else    /* Else of ... if ( $recordFound = ... ) */
+                {
+                    /* The record was NOT found => go to the end of the memo file and
+                       write the damn record */
+                    //var_dump( "MEMO RECORD NOT FOUND: simple case = write at the end of the memo file!" );
+                    fseek( $this->writeRawMemoHandle,0,SEEK_END );
+                    fwrite( $this->writeRawMemoHandle,$record );
+                }    /* End of ... Else of ... if ( $recordFound = ... ) */
+                //fwrite( $this->writeRawMemoHandle,$record );
+            }   /* if ( is_array( $aMemo ) && isset( $aMemo['id'] ) ) */
+        }   /* if ( $this->writeRawMemoHandle ) */
+    }   /* End of Table.writeRawMemo() ================================================ */
+    /* ================================================================================ */
+
+
+    // Écrit une chaîne de caractères qui représente TOUT un record
+    // dans la table
+    // THIS IS THE METHOD WRITE() SHOULD WORK WITH
+    public function writeRawRecord( $record )
+    /*-------------------------------------*/
+    {
+        if ( is_null( $this->writeHandle ) )
+            $this->writeHandle = fopen( $szFile = $this->determineDataFile(),'c+b' );
+
+        if ( $this->writeHandle )
+        {
+            // JE DOIS METTRE UN LOCK!!!
+
+            $offset = ( $this->recordSize * ( $this->recno - 1 ) )  +
+                      1; /* +1 => because of the 1st byte which is the "deleted" mark */
+
+            fseek( $this->writeHandle,$offset,SEEK_SET );
+            fwrite( $this->writeHandle,$record,$this->recordSize );
         }
         else
-            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": ID required (ErrCode: " . EXCEPTION_NO_ID_FIELD_FOUND . ")",EXCEPTION_NO_ID_FIELD_FOUND );
+            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": Attempt to write after EOF (ErrCode: EXCEPTION_CANNOT_OPEN_TABLE = " . EXCEPTION_CANNOT_OPEN_TABLE . ")",EXCEPTION_CANNOT_OPEN_TABLE );
 
-        return ( 1 );   /* On devrait retourner le nombre de bytes écrits */
+        return ( $this );
+    }   /* End of Table.writeRawRecord() ============================================== */
+    /* ================================================================================ */
 
-    }   /* End of Table.writeObject() ================================================= */
+
+    /* Obtain data from table directly going to the offset */
+    /* CHECK IF THIS METHOD IS NOT A DUPLICATE OF readRawRecord() */
+    public function readRaw( $offset,$length )
+    /*--------------------------------------*/
+    {
+        $szRetVal = null;
+
+        if ( is_null( $this->readHandle ) )
+            $this->readHandle = fopen( $szFile = $this->determineDataFile(),'r+b' );
+
+        $oldPointer = ftell( $this->readHandle );                   /* Save file pointer */
+
+        if ( $this->readHandle )
+        {
+            fseek( $this->readHandle,$offset,SEEK_SET );
+            $szRetVal = fread( $this->readHandle,$length );
+            fseek( $this->readHandle,$oldPointer,SEEK_SET );        /* Restore file pointer (VRAIMENT?) */
+        }
+        else
+        {
+            // EXCEPTION: CANNOT READ (FOPEN FAILED)
+        }
+
+        end:
+        return ( $szRetVal );
+
+    }   /* End of Table.readRaw() ===================================================== */
     /* ================================================================================ */
 
 
@@ -2674,23 +2783,26 @@ class Table extends Thing
                 /* ATTENTION, CE CODE DOIT ETRE VERIFIE AVEC DES ENREGISTREMENTS QUI SE TROUVENT DANS
                    DES FICHIERS MEMO ! PAR EXEMPLE, AVEC DES CHAMPS MEMO, LA VALEUR NE SE TROUVE PAS
                    DANS LE $value !!! */
-
                 foreach( $this->offsets as $field => $positions )
                 {
-                    $value = substr( $szRetVal,$positions['offset'] + 1,$positions['length'] );
-
-                    switch( $positions['type'] )
+                    /* We check the existence of the field because in a View ... we don't have all the fields */
+                    if ( isset( $this->fields[$field] ) )
                     {
-                        case 'bool'     :
-                        case 'boolean'  :
-                        case 'logical'  : $value = ( trim( $value ) === 'true' ); break;
-                        case 'int'      : $value = (int) trim( $value ); break;
-                    }
+                        $value = substr( $szRetVal,$positions['offset'] + 1,$positions['length'] );
 
-                    $aRetVal[$field] = array( 'field' => $field               ,
-                                              'value' => $value               ,
-                                              'type'  => $positions['type']   ,
-                                            );
+                        switch( $positions['type'] )
+                        {
+                            case 'bool'     :
+                            case 'boolean'  :
+                            case 'logical'  : $value = ( trim( $value ) === 'true' ); break;
+                            case 'int'      : $value = (int) trim( $value ); break;
+                        }
+
+                        $aRetVal[$field] = array( 'field' => $field               ,
+                                                  'value' => $value               ,
+                                                  'type'  => $positions['type']   ,
+                                                );
+                    }
                 }   /* foreach( $this->offsets as $field => $positions ) */
             }   /* if ( ! empty( $szRetVal = fread( $fh,$this->recordSize ) ) ) */
 
@@ -2702,8 +2814,6 @@ class Table extends Thing
         }
 
         return ( $aRetVal );
-
-        // CODE A FAIRE (SE BASER SUR LE DELETED ET RAMENER TOUT TE RECORDSIZE)
     }   /* End of Table.record() ====================================================== */
     /* ================================================================================ */
 
@@ -2863,138 +2973,6 @@ class Table extends Thing
     /* ================================================================================ */
 
 
-    /* Obtain data from table directly going to the offset */
-    public function readRaw( $offset,$length )
-    /*--------------------------------------*/
-    {
-        $szRetVal = null;
-
-        if ( is_null( $this->readHandle ) )
-            $this->readHandle = fopen( $szFile = $this->determineDataFile(),'r+b' );
-
-        $oldPointer = ftell( $this->readHandle );                   /* Save file pointer */
-
-        if ( $this->readHandle )
-        {
-            fseek( $this->readHandle,$offset,SEEK_SET );
-            $szRetVal = fread( $this->readHandle,$length );
-            fseek( $this->readHandle,$oldPointer,SEEK_SET );        /* Restore file pointer (VRAIMENT?) */
-        }
-        else
-        {
-            // EXCEPTION: CANNOT READ (FOPEN FAILED)
-        }
-
-        end:
-        return ( $szRetVal );
-
-    }   /* End of Table.readRaw() ===================================================== */
-    /* ================================================================================ */
-
-
-    protected function readMemo( &$field )
-    /*----------------------------------*/
-    {
-        $RetVal = null;
-
-        if ( ! is_null( $szID = $this->id() ) )
-        {
-            if ( $this->readMemoHandle = fopen( $szFile = $this->determineDataFile() . '.memo','rb' ) )
-            {
-                //var_dump( "LE FICHIER MEMO EST OUVERT" );
-                $pattern = '<' . $szID . '>';
-                //var_dump( "PATTERN: {$pattern}" );
-
-                if ( ( $startOffset = v::FIL_searchInFile( $pattern,$szFile,0 /* start position */,60000 /* block size */ ) ) !== -1 )
-                {
-                    //var_dump( "ON A TROUVÉ LE STARTOFFSET: {$startOffset}" );
-                    $pattern = '</' . $szID . '>';
-                    //var_dump( "PATTERN: {$pattern}" );
-                    if ( ( $endOffset = v::FIL_searchInFile( $pattern,$szFile,$startOffset /* start position */,60000 /* block size */ ) ) !== -1 )
-                    {
-                        //var_dump( "ON A TROUVÉ LE ENDOFFSET: {$endOffset}" );
-                        fseek( $this->readMemoHandle,$startOffset ,SEEK_SET );
-                        $len = ( $endOffset - $startOffset ) + strlen( $szID ) + 3;
-                        $record = fread( $this->readMemoHandle,$len );
-                        //var_dump( "RECORD='{$record}'" );
-                        if ( preg_match( "%<{$field}>(?P<field>.*)</{$field}>%s",$record,$aMatches ) )
-                        {
-                            $RetVal = unserialize( base64_decode( $aMatches['field'] ) );
-                            //var_dump( "ON A TROUVÉ LE CHAMP: {$value}" );
-                        }
-                    }   /* if ( ( $endOffset = v::FIL_searchInFile( $pattern,... */
-                }   /* if ( ( $startOffset = v::FIL_searchInFile( $pattern,... */
-            }   /* if ( $this->readMemoHandle = fopen( $szFile = $this->determineDataFile() . '.memo','rb' ) ) */
-            fclose( $this->readMemoHandle );
-        }
-        else
-            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": ID required (ErrCode: " . EXCEPTION_NO_ID_FIELD_FOUND . ")",EXCEPTION_NO_ID_FIELD_FOUND );
-
-        //var_dump( $RetVal );
-        return ( $RetVal );
-    }   /* End of Table.readMemo() ================================================== */
-
-
-    public function read( $field )
-    /*--------------------------*/
-    {
-        $xRetVal = null;
-
-        if ( is_null( $this->readHandle ) )
-        {
-            //var_dump( "OUVERTURE EN READ BINAIRE" );
-            $this->readHandle = fopen( $szFile = $this->determineDataFile(),'r+b' );
-        }
-
-        //var_dump( $szFile = $this->determineDataFile() );
-        //var_dump( v::FIL_Size( $szFile ) . " bytes" );
-
-        if ( ! isset( $this->offsets[$field] ) )
-            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$field}' ... FIELD NOT FOUND (ErrCode: " . EXCEPTION_INVALID_FIELD . ")",EXCEPTION_INVALID_FIELD );
-        else
-        {
-            //var_dump( "TENTATIVE DE READ" );
-            switch( $this->fields[$field]->type )
-            {
-                /* Je peux simplifie en faisant appel directement à readObject() pour tous les types */
-                case 'array'    :
-                case 'memo'     :
-                case 'object'   :   $xRetVal = $this->readMemo( $field );
-                                    goto end;
-            }
-        }
-
-        if ( $this->readHandle )
-        {
-            $offset = ( $this->recordSize * ( $this->recno - 1 ) )  +
-                      $this->offsets[$field]['offset']              +
-                      1; /* +1 => because the 1st byte is the "deleted" mark */
-
-            //var_dump( "POSITIONNEMENT A L'OFFSET " . $offset );
-            //$x = ftell( $this->readHandle );
-            //fseek( $this->readHandle,0,SEEK_END );
-            //var_dump( "SIZE: " . ftell( $this->readHandle ) );
-            fseek( $this->readHandle,$offset,SEEK_SET );
-            //var_dump( "POSITIONNEMENT: " . ftell( $this->readHandle ) );
-            //var_dump( "LECTURE DE " . $this->offsets[$field]['length'] . " BYTES" );
-
-            //var_dump( $this->offsets[$field] );
-            $xRetVal = fread( $this->readHandle,$this->offsets[$field]['length'] );
-            //var_dump( "RETOUR: " . $xRetVal );
-            //fclose( $fh );
-        }
-        else
-        {
-            // EXCEPTION: CANNOT READ (FOPEN FAILED)
-        }
-
-        end:
-        return ( $xRetVal );
-
-    }   /* End of Table.read() ======================================================== */
-    /* ================================================================================ */
-
-
     /* Attention: SANS index !!! */
     /* Si $collection non null, alors on cherche TOUS les records qui matchent =>
        nous avons une collection de matches possibles
@@ -3059,160 +3037,7 @@ class Table extends Thing
 
 
     /* ================================================================================ */
-    /** {{*index( $field )=
-
-        Index on the @param.field field
-
-        {*params
-            $field      (string)    The name of the field to index on
-        *}
-
-        {*return
-            (array)     Values that were indexed or [c]null[/c] if no index
-                        could be created.
-        *}
-
-        {*warning
-            L'algorithme est en construction : RIEN N'EST DÉFINITIF. L'algorithme
-            ne fonctionne QUE sur des strings !!!
-        *}
-
-        {*example
-            Imagine you have a DB called 'Tamarind'. This DB stores tracks and
-            artists for the "Tamarin Radio". The physical file of the DB Container is
-            [c]tamarind.illicoDB[/c][br]
-
-            Tracks are stored in the 'catalog' table ([c]tamarind.catalog.illicoDB[/c][br]
-            Artists are stored in the 'artists' table ([c]tamarind.artists.illicoDB[/c])[br][br]
-
-            Imagine you want to index the the 'artists' table on the the '[c]f_name[/c]' field.
-            Ultimately, the physical index file will be named
-            '[c]tamarind.artists.illicoDB.[b]f_name.idx[/b][/c]' a name in which you find the name
-            of the DB Container, the name of the table, and the name of the field.
-            This eases recognize all physical data files pertaining to a DB container.
-
-        $oDB = new IllicoDB();
-
-        $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
-        $oDB->use( 'artists' );
-
-        $t1 = microtime( true );
-        $aValues = $oDB->artists->index( 'f_name' );
-        $t2 = microtime( true );
-        var_dump( "INDEX PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
-
-
-        $t1 = microtime( true );
-        $index = $recno = 0;
-        if ( $oDB->artists->seek( 'Stevie',$aValues,$index,$recno ) )
-        {
-            $oDB->artists->Go( $recno );
-            var_dump( $oDB->artists->read( 'f_name' ) );
-
-            |** __get() **|
-            var_dump( "FIRSTNAME: "     . $oDB->artists->f_firstname    );
-            var_dump( "LASTNAME: "      . $oDB->artists->f_lastname     );
-            var_dump( "BIRTHPLACE: "    . $oDB->artists->f_birthplace   );
-
-            |** __set() **|
-            $oDB->artists->f_firstname = 'Stevie';
-            $oDB->artists->f_lastname = 'Nicks';
-            var_dump( "FIRSTNAME: "     . $oDB->artists->f_firstname    );
-            var_dump( "LASTNAME: "      . $oDB->artists->f_lastname     );
-        }
-        $t2 = microtime( true );
-        var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
-
-        *}
-
-        *}}
-    */
-    /* ================================================================================ */
-    public function indexOLD( $field,$forced = false )
-    /*-------------------------------------------*/
-    {
-        $this->die( __METHOD__ . "() is obsolete" );
-        $iRecno         = 1;
-
-        if ( isset( $this->fields[$field] ) )
-        {
-            $tStart         = microtime( true );
-            $szFile         = $this->determineDataFile();
-            $szIndexFile    = $szFile . ".{$field}.idx";
-
-            $aValues        = null;
-
-            ///var_dump( "Index file: " . $szIndexFile );
-            //$this->die();
-
-            if ( ! $forced && v::FIL_File1OlderThanFile2( $szIndexFile,$szFile ) )
-            {
-                $aValues = unserialize( v::FIL_FileToStr( $szIndexFile ) );
-                //var_dump( "CACHE FOUND" );
-                goto end;
-            }
-
-            if ( $fh = fopen( $szFile,'r+b' ) )
-            {
-                $offset = ( $this->recordSize * ( $iRecno - 1 ) )       +
-                          $this->offsets[$field]['offset']              +
-                          1; /* +1 => because the 1st byte is the "deleted" mark */
-
-                $this->determineLengthOfDataFile(); /* $this->fileSize updated */
-
-                $aHash = null;
-
-                while ( $offset <= $this->fileSize )
-                {
-                    fseek( $fh,$offset,SEEK_SET );
-
-                    // NE PAS JETER CETTE LIGNE: ELLE POURRAIT ÊTRE UTILE POUR UN HASHING RAPIDE
-                    //$aHash['KEY-' . ( crc32( trim( fread( $fh,$this->offsets[$field]['length'] ) ) ) % 3067 )][] = $iRecno;
-
-                    $aValues[] = array( 'v' => trim( fread( $fh,$this->offsets[$field]['length'] ) ),
-                                        'r' => $iRecno                                              ,
-                                      );
-
-                    $offset += $this->recordSize;
-                    $iRecno++;
-                }   /* while ( $offset <= $this->fileSize ) */
-
-                fclose( $fh );
-
-                usort( $aValues,function( $a,$b )
-                                {
-                                    $a = strtoupper( trim( $a['v'] ) );
-                                    $b = strtoupper( trim( $b['v'] ) );
-                                    if ( $a  === $b )
-                                        return ( 0 );
-                                    elseif ( $a < $b )
-                                        return ( -1 );
-                                    else
-                                        return ( 1 );
-                                }
-                     );
-
-                 v::FIL_StrToFile( serialize( $aValues ),$szIndexFile );
-            }
-            else
-            {
-                // EXCEPTION: CANNOT WRITE (FOPEN FAILED)
-            }
-        }
-        else
-            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$field}' ... FIELD NOT FOUND (ErrCode: EXCEPTION_INVALID_FIELD - " . EXCEPTION_INVALID_FIELD . ")",EXCEPTION_INVALID_FIELD );
-
-        end:
-        $tEnd = microtime( true );
-        //var_dump( "It took " . round( $tEnd - $tStart,5 ) . " secs to index" );
-
-        return ( $aValues );
-    }   /* End of Table.indexOLD() ==================================================== */
-    /* ================================================================================ */
-
-
-    /* ================================================================================ */
-    /** {{*sort( $field[,$iStart[,$iEnd]] )=
+    /** {{*protected sort( $field[,$iStart[,$iEnd]] )=
 
         Index on the @param.field field betwwen record @param.iStart and @param.iEnd
 
@@ -3335,6 +3160,26 @@ class Table extends Thing
     /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*index( $field[,$forced] )=
+
+        Index on the @param.field field if necessary unless @param.forced is set to
+        [c]true[/c]
+
+        {*params
+            $field      (string)    The name of the field to index on
+        *}
+
+        {*return
+            (self)      Current instance of the class
+        *}
+
+        {*example
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function index( $field,$forced = false )
     /*-------------------------------------------*/
     {
@@ -3384,13 +3229,61 @@ class Table extends Thing
             throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$field}' ... FIELD NOT FOUND (ErrCode: EXCEPTION_INVALID_FIELD - " . EXCEPTION_INVALID_FIELD . ")",EXCEPTION_INVALID_FIELD );
 
         end:
-        return ( null );        /* There is nothing to return */
-        return ( $aValues );
+        return ( $this );        /* There is nothing to return */
     }   /* End of Table.index() ======================================================= */
+    /* ================================================================================ */
 
 
-    public function seek( $needle,$field,&$recno )
-    /*------------------------------------------*/
+    /* ================================================================================ */
+    /** {{*seek( $needle,$field,$recno[,$select] )=
+
+        Seek @param.needle in the @param.field field of the table
+
+        {*params
+            $needle     (string)    The value to look for
+            $field      (string)    The name of the field where the search will take place
+            $recno      (int|null)  The record number of the first match
+            $select     (array)     Optional array. If passed, then ALL matches will be
+                                    returned (record nuumbers)
+        *}
+
+        {*return
+            (bool)      [c]true[/c] if @param.needle found; [c]false[/c] otherwise
+        *}
+
+        {*example
+        $oDB = new IllicoDB();
+        $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+        $oDB->use( 'catalog' );
+
+        $recno   = null;
+        $records = array();
+        $needle  = 'What a fool believes';
+        $field   = 'f_title';
+
+        [b]if ( $oDB->catalog->seek( $needle,$field,$recno,$records ) )
+        {
+            var_dump( $needle . ' FOUND' );
+
+            if ( count( $records ) != 0 )
+            {
+                foreach( $records as $recno )
+                {
+                    var_dump( trim( $oDB->catalog->Goto($recno)->f_title ) . ' by ' . trim( $oDB->catalog->f_creator ) );
+                }
+            }
+        }[/b]
+        else
+        {
+            var_dump( $needle . ' NOT FOUND' );
+        }
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function seek( $needle,$field,&$recno,&$select = null,&$index = 0 )
+    /*----------------------------------------------------------------------*/
     {
         //tamarind.artists.illicoDB.f_name.idx
 
@@ -3398,20 +3291,10 @@ class Table extends Thing
         $szFile         = $this->determineDataFile();
         $szIndexFile    = $szFile . ".{$field}.idx";
 
-        //var_dump( $szFile,$szIndexFile );
-
-        // Il faudrait que je me réserve des handles d'index (10, 20, 50, 100?)
-        // et que je puisse me passer des ouvertures/fermetures de fichiers
-        // en récupérant toujours le bon handle.µ
-        // Cela ne va pas me donner le moindre avantage sur 1! exécution mais
-        // quand on enchaîne les recherches je pense que le gain sera immense
-
-        $t1 = microtime( true );
-
         if ( isset( $this->indexHandles[ $szIndexFile ] ) )
         {
             $fh = $this->indexHandles[ $szIndexFile ];
-            var_dump( "Re-use handle" );
+            //var_dump( "Re-use handle" );
         }
         else
         {
@@ -3438,7 +3321,9 @@ class Table extends Thing
             //$iHigh  = 14214;
             ////$index  = $iLow + (int) ( ( $iHigh - $iLow ) / 2 );
             //$index = $iLow + (int) round( ( $iHigh - $iLow ) / 2,0 );
+            //var_dump( $this->softseek );
 
+            // LE SOFTSEEK NE FONCTIONNE PAS ENCORE !!!
             while ( true )
             {
                 $oldIndex   = $index;
@@ -3449,11 +3334,47 @@ class Table extends Thing
                 $recno  = (int) fread( $fh,$recordSize );
                 $FValue = trim( $this->GoTo( $recno )->$field );    /* value in the field */
                 //var_dump( "COMPARING '{$needle}' AND '{$FValue}'" );
+                //if ( ( $n = strcasecmp( $needle,$FValue ) ) === 0 || $this->softseek ? v::str_istarts_with( $FValue,$needle ) : false)
+
+                // ATTENTION, IL FAUDRAIT QUE JE REMONTE AU PREMIER RECORD QUI MATCHE
+                // CAR SI ON EST DANS TOUTE UNE SERIE QUI MATCHE, ALORS IL SE POURRAIT
+                // BIEN QUE JE MATCHE EN PLEIN MILIEU DELA SERIE ET PAS AU PREMIER DE
+                // LA SERIE !!!!
+                // QUI PLUS EST ...
+                // IL EST ENVISAGEABLE QUE JE VEUILLE MATCHER UN RECORD COMME
+                // "Counting Crows/Vanessa Carlton" en recherchant "Vanessa Carlton"
+                // ET AVEC UN INDEX ... JENE VAIS PAS LE TROUVER !!!
 
                 if ( ( $n = strcasecmp( $needle,$FValue ) ) === 0 )
                 {
                     $bFound = true;
+
+                    //var_dump( "BEFORE FINDFIRST. RECNO={$recno}; INDEX={$index}; VALEUR={$FValue}" );
+                    $recno = $this->findFirst( $fh,$needle,$field,$index,$recno );
+                    //var_dump( "AFTER FINDFIRST. RECNO={$recno}; INDEX={$index}; VALEUR={$FValue}" );
+
                     //var_dump( "FOUND IN " . __METHOD__ . "()" );
+
+                    // If we must return all successive matches
+                    if ( is_array( $select ) )
+                    {
+                        //var_dump( "ON ME DEMANDE TOUS LES RESULTATS QUI MATCHENT" );
+                        //var_dump( $this->$field );
+
+                        $select[] = $recno;
+
+                        while ( ! $this->eof() )
+                        {
+                            fseek( $fh,$recordSize,SEEK_CUR );
+                            $recordNumber = (int) fread( $fh,$recordSize );
+                            if ( v::STR_iPos( $this->GoTo( $recordNumber )->$field,$needle ) !== -1 )
+                                $select[] = $recordNumber;
+                            else
+                                break;
+                        }   /* while ( ! $this->eof() ) */
+
+                        $this->GoTo( $recno );   /* Get back where we found the 1st match */
+                    }
                     break;
                 }
                 elseif ( $n > 0 )   /* pattern > value */
@@ -3475,14 +3396,50 @@ class Table extends Thing
 
                 if ( $oldIndex === $index )
                 {
+                    if ( $this->softseek )
+                    {
+
+                        if ( v::str_istarts_with( $FValue,$needle ) )
+                        {
+                            $bFound = true;
+                            //var_dump( "'{$needle}' FOUND with softseek" );
+
+                            if ( is_array( $select ) )
+                            {
+                                //var_dump( "ON ME DEMANDE TOUS LES RESULTATS QUI MATCHENT" );
+                                //var_dump( $this->$field );
+
+                                $select[] = $recno;
+
+                                while ( ! $this->eof() )
+                                {
+                                    fseek( $fh,$recordSize,SEEK_CUR );
+                                    $recordNumber = (int) fread( $fh,$recordSize );
+                                    if ( v::STR_iPos( $this->GoTo( $recordNumber )->$field,$needle ) !== -1 )
+                                        $select[] = $recordNumber;
+                                    else
+                                        break;
+                                }   /* while ( ! $this->eof() ) */
+
+                                $this->GoTo( $recno );   /* Get back where we found the 1st match */
+                            }
+
+                            break;
+                        }
+                    }
+
                     --$index;       /* Going 1 record backward - due to rounding when setting the new offset */
                     $offset = $recordSize * ( $index - 1 );
                     fseek( $fh,$offset,SEEK_SET );
                     $recno  = (int) fread( $fh,$recordSize );
                     $FValue = trim( $this->GoTo( $recno )->$field );    /* value in the field */
 
+                    //var_dump( "PREVIOUS VALUE: " . $FValue . "; COMPARING '{$needle}' AND '{$FValue}'" );
+
                     if ( strcasecmp( $needle,$FValue ) === 0 )
                     {
+                        // ICI, IL FAUT PEUT-ÊTRE REMONTER
+                        $bFound = true;
                         //var_dump( "'{$needle}' FOUND" );
                         break;
                     }
@@ -3508,193 +3465,185 @@ class Table extends Thing
         }
         else
         {
-            // EXCEPTION
+            $this->die("INDEX FILE NOT OPEN");
         }
 
-        $t2 = microtime( true );
-        //var_dump( "METHODE INDEXEE " . number_format( $t2 -$t1,8,',', '.' ) . " secs" );
-
+        //var_dump( $bFound );
         return ( $bFound );
     }   /* End of Table.seek() ======================================================== */
     /* ================================================================================ */
 
 
-    /* Attention: AVEC index !!! */
-    //public function seekOld( $szValue,&$aValues,&$index,&$recno,$sensitive = true )
-    ///*------------------------------------------------------------------------*/
-    //{
-    //    $tStart = microtime( true );
-    //
-    //    $bRetVal = false;
-    //
-    //    //var_dump( "Looking for '{$szValue}'" );
-    //
-    //    $iLow   = 0;
-    //    $iHigh  = count( $aValues ) - 1;
-    //    $index  = $iLow + (int) ( ( $iHigh - $iLow ) / 2 );
-    //
-    //    if ( $sensitive )
-    //    {
-    //        while ( true )
-    //        {
-    //            $oldIndex = $index;
-    //
-    //            if ( v::str_starts_with( $aValues[$index]['value'],$szValue ) )
-    //            {
-    //                $bRetVal = true;
-    //                $recno   = $aValues[$index]['recno'];
-    //                //var_dump( "FOUND IN " . __FUNCTION__ . "()" );
-    //                break;
-    //            }
-    //            elseif ( $szValue > $aValues[$index]['value'] )
-    //                $iLow = $index;
-    //            else
-    //                $iHigh = $index;
-    //
-    //            $index = $iLow + (int) ( ( $iHigh - $iLow ) / 2 );
-    //
-    //            //var_dump( "Low= " . $iLow . "; High= " . $iHigh . "; Index= " . $index . "; VALUE= '{$aValues[$index]['value']}'" );
-    //
-    //            if ( $oldIndex === $index || $iLow >= $iHigh || $iHigh < $iLow )
-    //            {
-    //                //var_dump( "NO NEED TO GO FURTHER" );
-    //                $recno   = $aValues[$index]['recno'];
-    //                break;
-    //            }
-    //        }   /* while ( true ) */
-    //    }
-    //    else
-    //    {
-    //        $szUValue = strtoupper( $szValue );
-    //        while ( true )
-    //        {
-    //            $oldIndex = $index;
-    //
-    //            if ( v::str_istarts_with( $aValues[$index]['value'],$szValue ) )
-    //            {
-    //                $bRetVal = true;
-    //                $recno   = $aValues[$index]['recno'];
-    //                //var_dump( "FOUND IN " . __FUNCTION__ . "()" );
-    //                break;
-    //            }
-    //            elseif ( $szUValue > strtoupper( $aValues[$index]['value'] ) )
-    //                $iLow = $index;
-    //            else
-    //                $iHigh = $index;
-    //
-    //            $index = $iLow + (int) ( ( $iHigh - $iLow ) / 2 );
-    //
-    //            //var_dump( "Low= " . $iLow . "; High= " . $iHigh . "; Index= " . $index . "; VALUE= '{$aValues[$index]['value']}'" );
-    //
-    //            if ( $oldIndex === $index || $iLow >= $iHigh || $iHigh < $iLow )
-    //            {
-    //                //var_dump( "NO NEED TO GO FURTHER" );
-    //                $recno   = $aValues[$index]['recno'];
-    //                break;
-    //            }
-    //        }   /* while ( true ) */
-    //    }
-    //
-    //    $tEnd = microtime( true );
-    //
-    //    //var_dump( __FUNCTION__ . "() found a result in " . number_format( $tEnd - $tStart,9,'.','' ) . " secs" );
-    //
-    //    return ( $bRetVal );
-    //}   /* End of Table.seek() ======================================================== */
-    ///* ================================================================================ */
+    // Méthode qui permet de remonter au premier match dans seek()
+    protected function findFirst( $fh,$needle,$field,&$index,&$recno )
+    /*--------------------------------------------------------------*/
+    {
+        if ( $fh )
+        {
+            $recordSize = 9;                /* 9 car chq record est écrit sur 9 bytes */
+
+            //$offset     = $recordSize * ( $index - 1 );
+            //fseek( $fh,$offset,SEEK_SET );
+
+            $recNum     = $recno;
+            $indexNum   = $index;
+
+            $offset     = $recordSize * ( $indexNum - 1 );
+            fseek( $fh,$offset,SEEK_SET );    /* Point to 1st match (already on there)*/
+
+            $FValue = trim( $this->GoTo( $recNum )->$field );    /* value in the field */
+
+            //var_dump( "START DU FINDFIRST. RECNO = {$recno}; INDEX = {$index}; RECNUM = {$recNum}; INDEXNUM = {$indexNum}" );
+
+            // Je recule de 1 record
+            fseek( $fh,-$recordSize,SEEK_CUR );
+
+            // On y va record par record ... mais ce serait mieux d'y aller avec $low et $high
+            while ( true )
+            {
+                $recNumber = (int) fread( $fh,$recordSize );
+                $indexNum--;
+                $FValue = trim( $this->GoTo( $recNumber )->$field );    /* value in the field */
+
+                if ( ( $n = strcasecmp( $needle,$FValue ) ) !== 0 || ftell( $fh ) <= 0 )
+                    break;
+                else
+                {
+                    $recno = $recNumber;
+                    $index = $indexNum;
+                    fseek( $fh,-($recordSize * 2 ),SEEK_CUR );
+
+                    //var_dump( "ITERATION FINDFIRST. RECNO = {$recno}; INDEX = {$index}; POS = " . ftell( $fh ) );
+                }
+            }
+
+            //var_dump( "OUT" );
+            //var_dump( $recno,$index,$FValue );
+
+            $FValue     = trim( $this->GoTo( $recno )->$field );    /* value in the field */
+        }
+
+        return ( $recno );
+    }   /* End of Table.findFirst() =================================================== */
+    /* ================================================================================ */
 
 
-    //public function seekOLD2( $value,$field,$records,$forced = false )
-    ///*----------------------------------------------------------*/
-    //{
-    //    $this->die( __METHOD__ . "() should be using what the sort() method yields! CODE IS TO BE REVISITED" );
-    //
-    //    $bFound         = false;
-    //    $szFile         = $this->determineDataFile();
-    //    $szCacheFile    = $szFile . ".{$this->name}.{$field}.idx";
-    //    var_dump( $szFile,$szCacheFile );
-    //
-    //    if ( is_null( $records ) )
-    //        return ( false );
-    //
-    //    $bFound         = false;
-    //    $szFile         = $this->determineDataFile();
-    //    $szCacheFile    = $szFile . ".{$this->name}.{$field}.idx";
-    //
-    //    $this->die();
-    //
-    //
-    //    $t1 = microtime( true );
-    //    if ( is_file( $szCacheFile ) && ! $forced && v::FIL_File1OlderThanFile2( $szIndexFile,$szFile ) )
-    //        $aRecords = v::FIL_getHashFile( $szCacheFile );
-    //    $t2 = microtime( true );
-    //    var_dump( "Recupération des data de {$szCacheFile} : " . number_format( $t2 - $t1,8,',','.' ) . " secs" );
-    //
-    //
-    //
-    //    var_dump( $oDB->artists->GoTo( $aRecords[180000] )->f_name );
-    //
-    //    $iLow       = 1;
-    //    $iHigh      = $oDB->artists->reccount();
-    //    $index      = $iLow + (int) ( ( $iHigh - $iLow ) / 2 );
-    //    $szPattern  = "Wayne Kelly";
-    //
-    //    //var_dump( $iLow,$iHigh,$index,$szPattern,$oDB->artists->GoTo( $aRecords[$index] )->f_name,'-----------' );
-    //
-    //
-    //    $t1 = microtime( true );
-    //    while ( true )
-    //    {
-    //        $oldIndex = $index;
-    //
-    //        /* Value in the field */
-    //        $szFValue = trim( $oDB->artists->GoTo( $aRecords[$index] )->f_name );
-    //        $n = strcasecmp( $szPattern,$szFValue );
-    //        //var_dump( "At index {$index}: '" . $szFValue . "' compared to '" . $szPattern . "' (n = {$n})" );
-    //
-    //
-    //        //if ( v::str_starts_with( $szFValue,$szPattern ) )
-    //        if ( $n === 0 )
-    //        {
-    //            $bFound = true;
-    //            $recno   = $aRecords[$index];
-    //            //var_dump( "FOUND IN " . __FUNCTION__ . "()" );
-    //            break;
-    //        }
-    //        elseif ( $n > 0 )
-    //        {
-    //            $iLow  = $index;
-    //            //var_dump( "---Going forward","********" );
-    //        }
-    //        else
-    //        {
-    //            $iHigh = $index;
-    //            //var_dump( "===Going backward","********" );
-    //        }
-    //
-    //        $index = $iLow + (int) ( ( $iHigh - $iLow ) / 2 );
-    //
-    //        //var_dump( "Low= " . $iLow . "; High= " . $iHigh . "; Index= " . $index . "; VALUE= '{$aValues[$index]['value']}'" );
-    //
-    //        if ( $oldIndex === $index || $iLow >= $iHigh || $iHigh < $iLow )
-    //        {
-    //            //var_dump( "NO NEED TO GO FURTHER" );
-    //            $recno = $aRecords[$index];
-    //            break;
-    //        }
-    //    }   /* while ( true ) */
-    //    $t2 = microtime( true );
-    //
-    //    if ( $bFound )
-    //        var_dump( "Seek - FOUND: " . number_format( $t2 - $t1,8,',','.' ) . " secs" );
-    //    else
-    //        var_dump( "Seek - NOT FOUND: " . number_format( $t2 - $t1,8,',','.' ) . " secs" );
-    //
-    //    $oDB->die();
-    //}
+    /* ================================================================================ */
+    /** {{*fromIndex( $field,$index,$howMany )=
+
+        Get @param.howMany records from an index starting at @param.index position
+
+        {*params
+            $field      (string)    The name of the field (determine the name of the
+                                    index to reach)
+            $index      (int)       Index number (typically from a previous call to
+                                    [c]@class.seek()[/c])
+            $howMany    (int)       Optional count of records to return. [c]10[/c]
+                                    by default
+        *}
+
+        {*return
+            (array)     Array of [c]@param.howMany[/c] record numbers
+        *}
+
+        {*warning
+            The Syntax as reported by the documentation is incorrect due to a
+            bug in the Documentor.
+        *}
+
+        {*example
+        $oDB = new IllicoDB();
+        $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+        $oDB->use( 'catalog' );
+
+        $recno   = null;
+        $index   = 0;
+        $records = array();
+        $needle  = 'What a fool believes';
+        $field   = 'f_title';
+
+        |** Perform a seek and get the index position where the record has been found **|
+        if ( $oDB->catalog->seek( $needle,$field,$recno,$records[b],$index[/b] ) )
+        {
+            [b]if ( ( $aAdditional = $oDB->catalog->fromIndex( $field,$index,5 ) ) > 0 )
+            {
+                foreach( $Additional as $recNumber )
+                {
+                    var_dump( trim( $oDB->catalog->Goto( $recNumber )->f_title ) . ' by ' . trim( $oDB->catalog->f_creator ) );
+                }
+            }   |** if ( ( $aAdditional = $oDB->catalog->fromIndex( $field,$index,5 ) ) > 0 ) **|[/b]
+        }
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function fromIndex( $field,$index,$howMany = 10 )
+    /*----------------------------------------------------*/
+    {
+        $aRetVal        = null;
+        $szFile         = $this->determineDataFile();
+        $szIndexFile    = $szFile . ".{$field}.idx";
+
+        if ( isset( $this->indexHandles[ $szIndexFile ] ) )
+        {
+            $fh = $this->indexHandles[ $szIndexFile ];
+            //var_dump( "Re-use handle" );
+        }
+        else
+        {
+            if ( $fh = fopen( $szIndexFile,'rb' ) )
+                $this->indexHandles[ $szIndexFile ] = $fh;
+        }
+
+        if ( $fh )
+        {
+            $recordSize = 9;                /* 9 car chq record est écrit sur 9 bytes */
+            $offset     = $recordSize * ( $index - 1 );
+            fseek( $fh,$offset,SEEK_SET );
+
+            for ( $i=0;$i < $howMany;$i++ )
+            {
+                $aRetVal[] = (int) fread( $fh,$recordSize );
+
+                if ( $this->eof() )
+                    break;
+            }   /* for( $i=0;$i<$howMany,$i++ ) */
+        }   /* if ( $fh ) */
+
+        return ( $aRetVal );
+    }   /* End of Table.seek() ======================================================== */
+    /* ================================================================================ */
 
 
+    /* ================================================================================ */
+    /** {{*readStructure( $oDom,$oXPath,$oNode )=
 
+        Read the structure of the table
+
+        {*params
+            $oDom           (DOMDocument)       The DOM Document that was used to read
+                                                the DB structure
+            $oXPath         (DOMXPath)          The XPath that was used when reading the
+                                                DB structure
+            $oNode          (DOMNode)           The node where the structure of the
+                                                table gets defined
+        *}
+
+        {*return
+            (self)      Current instance
+        *}
+
+        {*warning
+            This method would be better if declared protected
+        *}
+
+        {*example
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
     public function readStructure( $oDom,$oXPath,$oNode )
     /*-------------------------------------------------*/
     {
@@ -3709,29 +3658,33 @@ class Table extends Thing
             {
                 $oField                 = new Field();
 
-                $oField->name           =              trim( $field->getAttribute( 'name'   ) );
-                $oField->length         =              (int) $field->getAttribute( 'length' );
-                $oField->type           =  strtolower( trim( $field->getAttribute( 'type'   ) ) );
-                $oField->description    =              trim( $field->getAttribute( 'desc'   ) );
+                $oField->name           =              trim( $field->getAttribute( 'name'       ) );
+                $oField->length         =              (int) $field->getAttribute( 'length'     );
+                $oField->type           =  strtolower( trim( $field->getAttribute( 'type'       ) ) );
+                $oField->description    =              trim( $field->getAttribute( 'desc'       ) );
+                $oField->caption        =              trim( $field->getAttribute( 'caption'    ) );
+                $oField->xmltag         =              trim( $field->getAttribute( 'xmltag'     ) );
+
                 if ( $field->hasAttribute( 'offset' ) )
-                    $oField->offset    =               (int) $field->getAttribute( 'offset' );
+                    $oField->offset    =               (int) $field->getAttribute( 'offset'     );
 
                 //var_dump( $oField->offset );
 
                 if ( isset( $aFieldNames[$oField->name] ) )
-                {
                     throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$oField->name}' duplicate field (ErrCode: EXCEPTION_DUPLICATE_FIELD = " . EXCEPTION_DUPLICATE_FIELD . ")",EXCEPTION_DUPLICATE_FIELD );
-                }
                 else
-                {
                     $aFieldNames[$oField->name] = true;
-                }
 
                 if ( ( $len = $this->fieldLength( $oField->type ) ) !== -EXCEPTION_INVALID_FIELD )
                 {
-                    /* If length of 'id' field given */
-                    if ( $oField->type === 'id' && $oField->length !== 0 )
-                        $len = -1;
+                    if ( $oField->type === 'id' )
+                    {
+                        $this->idField = $oField; 
+
+                        /* If length of 'id' field given */
+                        if ( $oField->length !== 0 )
+                            $len = -1;
+                    }
 
                     if ( $len !== -1 )
                         $oField->length = $len;
@@ -3759,7 +3712,273 @@ class Table extends Thing
 
             $this->recordSize++;    /* On ajoute 1 byte qui est le premier byte du record qui indique si le record est deleted ou pas (*) */
         }   /* if ( ( $fieldCollection = $oXPath->query( 'field',$oNode ) ) && ( $fieldCollection->length > 0 ) ) */
+
+        return ( $this );
     }   /* End of Table.readStructure() =============================================== */
+    /* ================================================================================ */
+
+
+    protected function closeHandles()
+    /*-----------------------------*/
+    {
+        if ( ! is_null( $h = $this->readHandle     ) && is_resource( $h ) )
+            fclose( $h );
+
+        if ( ! is_null( $h = $this->writeHandle    ) && is_resource( $h ) )
+            fclose( $h );
+
+        if ( ! is_null( $h= $this->reccountHandle  ) && is_resource( $h ) )
+            fclose( $h );
+
+        if ( ! is_null( $h = $this->readMemoHandle ) && is_resource( $h ) )
+            fclose( $h );
+
+        if ( is_array( $this->indexHandles ) )
+        {
+            foreach( $this->indexHandles as $h )
+                fclose( $h );
+        }
+    }   /* End of Table.closehandles() ================================================ */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*import( $szFile )=
+
+        Import an XML file to create records. Existing records are updated, non-existing
+        records are appended
+
+        {*params
+            $szFile     (string)        The name of the XML file to import
+        *}
+
+        {*return
+            (self)      The current instance of the class
+        *}
+
+        {*remark
+            This methoid must be completely revisited in order to make sure it does
+            not work only for tracks !!! Hihihi.
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function import( $szFile,$indexField )
+    /*-----------------------------------------*/
+    {
+        if ( ! isset( $this->fields[$indexField] ) )
+            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$indexField}' is INVALID for a seek() operation (ErrCode: EXCEPTION_INVALID_FIELD = " . EXCEPTION_INVALID_FIELD . ")",EXCEPTION_INVALID_FIELD );
+
+        if ( ! is_file( $szIndexFile = $this->determineDataFile() . ".{$indexField}.idx" ) )
+            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$szIndexFile}' NOT found (ErrCode: EXCEPTION_FILE_NOT_FOUND = " . EXCEPTION_FILE_NOT_FOUND . ")",EXCEPTION_FILE_NOT_FOUND );
+
+        if ( is_file( $szFile ) )                                   /* If the file to import can be found */
+        {
+            $oDom = new \DOMDocument();
+
+            //var_dump( "ON VA TENTER D'IMPORTER {$szFile}" );
+
+            if ( $oDom->load( $szFile ) )
+            {
+                $oXPath = new DOMXPath( $oDom );
+
+                /* Let's find the parent tagname (e.g. "track/extension/compiled" -> "track") */
+                foreach ( $this->fields as $fieldname => $field )
+                {
+                    if ( ! empty( $field->xmltag ) )
+                    {
+                        $szParentTag = explode( '/',$field->xmltag )[0];
+                        break;
+                    }   /* if ( ! empty( $field->xmltag ) ) */
+                }   /* foreach ( $this->fields as $fieldname => $field ) */
+
+                /* Extract all "records" from the XML file */
+                if ( ( $oColl = $oXPath->query( "//{$szParentTag}" ) ) && $oColl->length > 0 )
+                {
+                    //var_dump( "FOUND TRACKS" );
+
+                    foreach( $oColl as $node )
+                    {
+                        $record = null;
+                        foreach ( $this->fields as $fieldname => $field )
+                        {
+                            //var_dump( $field );
+                            //die();
+                            if ( ! empty( $field->xmltag ) )
+                            {
+                                $tagName = str_replace( $szParentTag . '/','',$field->xmltag );
+                                //if ( ( $x = $oXPath->query( $field->xmltag,$oNode ) ) && $x->length > 0 )
+                                if ( ( $x = $oXPath->query( $tagName,$node ) ) && $x->length > 0 )
+                                {
+                                    //$record[$fieldname] = v::STR_padr( (string) $x->item(0)->nodeValue,$field->length,' ' );
+                                    $record[$fieldname] = $x->item(0)->nodeValue;
+                                }
+                            }   /* if ( ! empty( $field->xmltag ) ) */
+                        }   /* foreach ( $this->fields as $fieldname => $field ) */
+
+                        {   /* $record est qlq chose comme ...
+                            'f_compiled' => string '524547522d52475220-504f4b4f2d504b2020' (length=37)
+                            'f_location' => string 'http://s3-eu-west-1.amazonaws.com/quitus-pat/quitus/pat/mp3-0bf37b0c03fedec25308a17584069e86' (length=92)
+                            'f_title' => string 'Regret' (length=6)
+                            'f_creator' => string 'Poco' (length=4)
+                            'f_lang' => string 'en' (length=2)
+                            'f_duration' => string '376722' (length=6)
+                            'f_image' => string '' (length=0)
+                            'f_preview' => string '' (length=0)
+                            'f_href' => string '' (length=0)
+                            'f_intro' => string '' (length=0)
+                            'f_outro' => string '' (length=0)
+                            'f_startAt' => string '' (length=0)
+                            'f_endAt' => string 'DEFAULT_MIX_END_AT' (length=18)
+                            'f_rating' => string '7' (length=1)
+                            'f_plain' => string 'false' (length=5)
+                            'f_volumeAdjustment' => string '' (length=0)
+                            'f_fadeOut' => string '' (length=0)
+                            'f_genre' => string 'pop/rock' (length=8)
+                            'f_subgenre' => string '' (length=0)
+                            'f_quarantine' => string '' (length=0)
+                            'f_musicKey' => string '10B' (length=3)
+                            'f_energy' => string '6' (length=1)
+                            'f_bpm' => string '103' (length=3)
+                            'f_instrumental' => string '' (length=0)
+                            'f_prodYear' => string '2013' (length=4)
+                            'f_dateAdded' => string '20210809111637' (length=14)
+                            'f_role' => string '' (length=0)
+                            'f_lyrics' => string '' (length=0)
+                            'f_comment' => string '10B - Energy 6' (length=14)
+                            'f_keywords' => string '' (length=0)
+                            'f_style' => string '' (length=0)
+                            'f_mood' => string '' (length=0)
+                            'f_timing' => string '' (length=0)
+                            'f_copyright' => string '' (length=0)
+                            'f_rhythm' => string '' (length=0)
+                            'f_file' => string 'Poco - All Fired Up - Regret___trql_9.mp3' (length=41)
+                            */
+                        }   /* $record est qlq chose comme ... */
+
+                        $recno      = $select = $index = null;
+                        $trackFound = $this->seek( trim( $record[$indexField] ),$indexField,$recno,$select,$index );
+
+                        var_dump( "Here, there is a serious doubt about the use of idField(). Does it return a string (field name) or a Field object?" );
+
+                        if ( ! is_null( $this->idField() ) )
+                            $id = $this->idField()->name;           /* Name of the "id" field (if any) */
+
+                        if ( ! $trackFound )
+                        {
+                            //var_dump( trim( $record[$indexField] ) . " NOT FOUND; SHOULD ADD A NEW RECORD" );
+                            $this->append();
+                            if ( ! is_null( $id ) )                 /* If there's an ID ... then we need to update it automatically */
+                                $this->$id = null;                  /* Assign a new automatic ID */
+                        }   /* if ( ! $trackFound ) */
+                        else
+                        {
+                            //var_dump( trim( $record[$indexField] ) . " FOUND; SHOULD MODIFY AN EXISTING RECORD" );
+                        }
+
+                        /****************************************************************************/
+                        /*  Instead of writing each field separately in the table, we shall compose */
+                        /*  a long string representing the whole record and save it all at once.    */
+                        /*  We do this for performance as it avoids multiple offsets calculation    */
+                        /*  and moves of the internal file pointer.                                 */
+                        /*                                                                          */
+                        /*  Once done, we do basically the same thing with all the memo fields:     */
+                        /*  we compose 1 record for all memo fields at once and write them all      */
+                        /*  in one go instead of doing that for each field separately.              */
+                        /****************************************************************************/
+
+                        /* Prepare the buffer that will be written to the table (allocate memory) */
+                        $haystack = str_repeat( ' ',$this->recordSize );
+
+                        foreach( $this->offsets as $fieldname => $aField )
+                        {
+                            // Write a value of a given length at a given offset in a string
+                            // The characters already present in the string are overwritten
+                            // The length of the string is unchanged
+                            if ( $aField['type'] !== 'memo' )
+                                v::STR_insert2( $haystack,$record[$fieldname] ?? $this->$fieldname,$aField['offset'],$aField['length'] );
+                        }   /* foreach( $this->offsets as $fieldname => $aField ) */
+
+                        // Le seek() a positionné le recno au bon endroit
+                        // Si le record n'a pas été trouvé, alors le append()
+                        // a fait la même chose !
+                        //var_dump( $haystack );
+
+                        // Ici on prend une petite mesure de sécurité TEMPORAIRE
+                        // On va tester qu'on a déjà trouvé le record sinon on risque
+                        // d'écraser un autre !!! C'est TEMPORAIRE!
+
+                        //if ( $trackFound )
+                        {
+                            $oldRecord = $this->readRawRecord();
+                            //var_dump( $oldRecord,$haystack );
+                            if ( $haystack != $oldRecord )
+                            {
+                                $this->writeRawRecord( $haystack );
+                                //var_dump( "RECORD WRITTEN!" );
+                            }
+                            else
+                            {
+                                //var_dump( "No need to write the record: THEY ARE EQUAL" );
+                            }
+                        }   /* if ( $trackFound ) */
+
+
+                        {   /* To write the memo ... We should build an array like ...
+                            $aMemo = array( 'id'        => $szID                                ,
+                                            'lyrics'    => $aData['lyrics'             ] ?? ''  ,
+                                            'compiled'  => $aData['compiled'           ] ?? ''  ,
+                                            'cover'     => $aData['cover'              ] ?? ''  ,
+                                            'comment'   => $aData['comment'            ] ?? ''  ,
+                                            'keywords'  => $aData['keywords'           ] ?? ''  ,
+                                            'style'     => $aData['style'              ] ?? ''  ,
+                                            'mood'      => $aData['mood'               ] ?? ''  ,
+                                            'timing'    => $aData['timing'             ] ?? ''  ,
+                                            'copyright' => $aData['copyright'          ] ?? ''  ,
+                                            'role'      => $aData['role'               ] ?? ''  ,
+                                            'lang'      => $aData['lang'               ] ?? ''  ,
+                                            'rhythm'    => $aData['rhythm'             ] ?? ''  ,
+                                            'preview'   => $aData['preview'            ] ?? ''  ,
+                                            'file'      => $aData['file'               ] ?? ''  ,
+                                          ); */
+                        }   /* We should build an array like ... */
+
+
+                        var_dump( "Here also, there is a serious doubt about the use of idField(). Does it return a string (field name) or a Field object?" );
+                        $aMemo['id'] = $this->$id;
+
+                        foreach ( $this->offsets as $fieldname => $aField )
+                        {
+                            if ( $aField['type'] === 'memo' )
+                            {
+                                if ( isset( $record[$fieldname] ) )
+                                    $aMemo[$fieldname] = $record[$fieldname];
+                                else
+                                    $aMemo[$fieldname] = $this->$fieldname;
+                            }   /* if ( $aField['type'] === 'memo' ) */
+                        }   /* foreach ( $this->offsets as $fieldname => $aField ) */
+
+                        //var_dump( "ENSEMBLE DU MEMO",$aMemo );
+
+                        // MAIS ... PUTAIN ... CECI VA SIMPLEMENT S'ECIRE A LA FIN DU MEMO
+                        // ET C'EST PAS CE QUE JE VEUX. IL FAUT REMPLACER LE RECORD S'IL
+                        // EST TROUVÉ ET NON PAS SIMPLEMENT ÉCRIRE A LA FIN !!!
+
+                        $this->writeRawMemo( $aMemo );
+                        //var_dump( "========================" );
+                    }   /* foreach( $oColl as $node ) */
+
+                }   /* if ( ( $oColl = $oXPath->query( '//track' ) ) && $oColl->length > 0 ) */
+            }   /* if ( $oDom->load( $szFile ) ) */
+            else
+                throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$szFile}' CANNOT be loaded (ErrCode: EXCEPTION_CANNOT_LOAD_XML_FILE = " . EXCEPTION_CANNOT_LOAD_XML_FILE . ")",EXCEPTION_CANNOT_LOAD_XML_FILE );
+        }   /* if ( is_file( $szFile ) ) */
+        else
+            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$szFile}' NOT found (ErrCode: EXCEPTION_FILE_NOT_FOUND = " . EXCEPTION_FILE_NOT_FOUND . ")",EXCEPTION_FILE_NOT_FOUND );
+
+        return ( $this );
+    }   /* End of Table.import() ====================================================== */
     /* ================================================================================ */
 
 
@@ -3786,12 +4005,15 @@ class Table extends Thing
     {
         switch ( $property )
         {
+            case 'reccount'     :   $this->determineLengthOfDataFile(); /* $this->fileSize est mis à jour */
+                                    return ( $this->reccount = (int) ( $this->fileSize / $this->recordSize ) );
+            case 'record'       :   return ( $this->record() );
+            case 'recno'        :   return ( $this->recno );
             case 'storage'      :   return ( $this->determineDataFile() );
             default             :   if ( isset( $this->offsets[$property] ) )
-                                    {
                                         return ( $this->read( $property ) );
-                                    }
                                     else
+                                        //var_dump( $property,$this->offsets );
                                         throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$property}' UNKNOWN (ErrCode: " . EXCEPTION_INVALID_PROPERTY . ")",EXCEPTION_INVALID_PROPERTY );
                                         //throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$property}' UNKNOWN (ErrCode: " . EXCEPTION_CODE_INVALID_PROPERTY . ")",EXCEPTION_CODE_INVALID_PROPERTY );
         }   /* switch ( $property ) */
@@ -3823,14 +4045,298 @@ class Table extends Thing
         //var_dump( "IN " . __METHOD__ . "() WITH {$property} and {$value}" );
         switch( $property )
         {
-            default :   if ( isset( $this->fields[$property] ) )
-                        {
-                            return ( $this->write( $property,$value ) );
-                        }
+            case 'recno'    :
+                {
+                    if ( is_integer( $value ) )
+                    {
+                        if ( $value > 0 && $value <= $this->reccount )
+                            $this->recno = $value;
                         else
-                            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$property}' UNKNOWN (ErrCode: " . EXCEPTION_INVALID_PROPERTY . ")",EXCEPTION_INVALID_PROPERTY );
+                            throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$value}' OUTSIDE permitted range (ErrCode: EXCEPTION_OUT_OF_RANGE = " .  EXCEPTION_OUT_OF_RANGE . ")",EXCEPTION_OUT_OF_RANGE );
+                    }
+                    else
+                        throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$value}' is an INVALID value (ErrCode: EXCEPTION_INVALID_VALUE = " .  EXCEPTION_INVALID_VALUE . ")",EXCEPTION_INVALID_VALUE );
+                }
+                break;
+            default         :
+                {
+                    if ( isset( $this->fields[$property] ) )
+                    {
+                        return ( $this->write( $property,$value ) );
+                    }
+                    else
+                        throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$property}' UNKNOWN (ErrCode: EXCEPTION_INVALID_PROPERTY = " . EXCEPTION_INVALID_PROPERTY . ")",EXCEPTION_INVALID_PROPERTY );
+                }
+                break;
         }
     }   /* End of Table.__set() ======================================================= */
+    /* ================================================================================ */
+
+
+    public function __toForm( $szType = 'track' ) : string
+    /*---------------------------------------------------*/
+    {
+        $szHTML = '';
+
+        // CECI N'A RIEN A VOIR AVEC ILLICODB !!!
+        // CELA DOIT ETRE COMPLETEMENT GENERIQUE !!!
+
+
+        switch( $szType )
+        {
+            case 'track'   :
+                {
+                    $oForm                      = new Form();
+                    $oForm->szClass             = $this->szClass;
+                    $oForm->szOnSubmit          = $this->szOnSubmit;
+
+
+                    $oForm->settings['withBR']  = false;
+
+                    {   /* Create a fieldset and add the field set to the form */
+                        $oFieldset              = new Fieldset();
+                        $oFieldset->szCaption   = 'Track';
+                    }
+
+                    //$record = $this->record();
+
+                    //var_dump( $this->fields );
+
+                    foreach ( $this->fields as $name => $field )
+                    {
+                        //var_dump( $field->name . ' ... ' . $field->type . ':' . $field->length );
+
+                        $szInputType = 'txt';
+                        $szCaption  = $name;
+
+                        //if ( $field->type !== 'memo')
+                        {
+                            switch( $field->type )
+                            {
+                                case 'int'      :   $szInputType = 'num';
+                                                    break;
+                                case 'bool'     :   $szInputType = 'chk';
+                                                    break;
+                                case 'date'     :   $szInputType = 'dat';
+                                                    break;
+                                case 'datetime' :   $szInputType = 'datlocal';
+                                                    break;
+                                case 'memo'     :   $szInputType = 'edt';
+                                                    break;
+                                default         :   $szInputType = 'txt';
+                            }
+
+                            // Le dateAdded ne fonctionne pas bien !!!
+                            //var_dump( $field );
+                            if ( ! empty( $field->caption ) )
+                                $szCaption = $field->caption;
+
+                            //var_dump( $szCaption,$this->$name );
+
+                            $oFieldset->add( new Input( array( 'name'           =>  $name                   ,
+                                                               'type'           =>  $szInputType            ,
+                                                               'label'          =>  " {$szCaption} "        ,
+                                                               'lang'           =>  'en'                    ,
+                                                               'tooltip'        =>  $field->description     ,
+                                                               'required'       =>  false                   ,
+                                                               'delete'         =>  true                    ,
+                                                               'help'           =>  false                   ,
+                                                               'value'          =>  trim( $this->$name )    ,
+                                                             ) ) );
+                        }
+                    }
+
+                    $oFieldset->add( new Input( array( 'name'           =>  'Submit'                        ,
+                                                       'type'           =>  'cmd'                           ,
+                                                       'class'          =>  'shadow'                        ,
+                                                       'lang'           =>  'en'                            ,
+                                                       'tooltip'        =>  'Click to submit the values'    ,
+                                                       'value'          =>  ' Update '                      ,
+                                                     ) ) );
+
+                    $oForm->add( $oFieldset );
+                    $szHTML = (string) $oForm;
+                    goto end;
+                }
+                break;
+        }
+
+        end:
+        return ( $szHTML );
+    }   /* End of Table.__toForm() ==================================================== */
+    /* ================================================================================ */
+
+
+    public function __toHTML( $szType = 'record' ) : string
+    /*---------------------------------------------------*/
+    {
+        $szHTML = '';
+
+        end:
+        return ( $szHTML );
+    }   /* End of Table.__toHTML() ==================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*__toXML( $szFile[,$type] )=
+
+        Exports the data to an XML file
+
+        {*params
+            $szFile         (string)            Name of the target file
+            $type           (string)            type of extract: [c]table[/c] or
+                                                [c]reccord[/c] (default).
+        *}
+
+        {*return
+            (self)      Current instance of the class
+        *}
+
+        {*alias
+            [c]export()[/c]
+        *}
+
+        {*seealso @fnc.import *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __toXML( $szFile,$type = 'record' )
+    /*-----------------------------------------------*/
+    {
+        $xml = '';
+
+        switch( $type )
+        {
+            /* We need to export the entire table */
+            case 'table'    :
+                {
+                    /* If we sucessfully created the output file */
+                    if ( $fh = fopen( $szFile,"w+b" ) )
+                    {
+                        $szXML  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+                        $szXML .= "<IllicoDB>\n";
+                        $szXML .= "<table name=\"{$this->name}\" reccount=\"" . ( $reccount = $this->reccount() ) . "\" time=\"" . time(). "\" datetime=\"" . date( 'YmdHis' ) . "\">\n";
+
+                        fwrite( $fh,$szXML );
+
+                        /* Get the internal handle we use for reading */
+                        if ( is_null( $this->readHandle ) )
+                            $this->readHandle = fopen( $this->determineDataFile(),'r+b' );
+
+
+                        // Attention ... le readHandle peut être celui d'une table antérieure
+                        // et non celui de la table courante ni celui d'une view donnéee
+                        // En tout cas ... la lecture des champs d'une view ne se passe pas
+                        // correctement !
+
+                        if ( $this->readHandle )                    /* If we have a valid handle */
+                        {
+                            $fpos = ftell( $this->readHandle ); /* Save file pointer */
+                            fseek( $this->readHandle,0,SEEK_END );
+                            $filesize = ftell( $this->readHandle );
+                            //var_dump( "FILE SIZE: {$filesize}" );
+
+                            fseek( $this->readHandle,0,SEEK_SET );  /* Go to BOF */
+
+                            //var_dump( $this->offsets );
+                            //$this->die();
+                            $i = 1;
+                            //var_dump( $this->offsets );
+
+                            // ICI, IL Y A UNE ERREUR SI LA TABLE EST VIDE !!!
+                            /* While NOT end of table (or view) */
+                            while ( ! feof( $this->readHandle ) && $i <= $reccount )
+                            {
+                                $rawRecord = fread( $this->readHandle,$this->recordSize );
+                                //var_dump( $rawRecord );
+
+                                fwrite( $fh,"<record recno=\"" . $i++ . "\">\n" );
+
+                                foreach( $this->fields as $fieldname => $wtf )
+                                {
+                                    //var_dump( $fieldname . ' ... ' . $this->offsets[$fieldname]['type'] . ':' . $this->offsets[$fieldname]['offset'] . ' on ' . $this->offsets[$fieldname]['length'] );
+                                    if ( $this->offsets[$fieldname]['type'] !== 'memo' )
+                                        $value = trim( substr( $rawRecord,$this->offsets[$fieldname]['offset']+1,$this->offsets[$fieldname]['length'] ) );
+                                    else
+                                        $value = $this->readMemo( $fieldname );
+                                    fwrite( $fh,"<{$fieldname} type=\"{$this->offsets[$fieldname]['type']}\">" . htmlentities( $value,ENT_NOQUOTES | ENT_XML1 ) . "</{$fieldname}>\n" );
+                                    //fwrite( $fh,"<{$fieldname} type=\"{$data['type']}\">" . $value . "</{$fieldname}>\n" );
+                                }   /* foreach( $this->offsets as $fieldname => $data ) */
+                                fwrite( $fh,"</record>\n\n" );
+                                //if ( ftell( $this->readHandle ) >= $filesize )
+                                //     break;
+                            }   /* while( ! feof( $this->readHandle ) ) */
+                            fwrite( $fh,"</table>\n" );
+                            fwrite( $fh,"</IllicoDB>" );
+                            fseek( $this->readHandle,$fpos,SEEK_SET );
+                        }   /* if ( $this->readHandle ) */
+
+                        fclose( $fh );
+                        //var_dump( "End of table");
+                    }   /* if ( $fh = fopen( $szFile,"w+b" ) ) */
+                }
+                break;
+            /* This case should be treated as the general case:
+                - table is goto record #1, extract #reccount records
+                - record is goto current record, extract 1 record
+                - records is goto current record, extract n records
+            */
+            case 'records'  :
+                {
+                    // THIS MUST BE PROGRAMMED!
+                }
+                break;
+            /* We need to export a single record */
+            case 'record'   :
+            default         :
+                {
+                    /* If we sucessfully created the output file */
+                    if ( $fh = fopen( $szFile,"w+b" ) )
+                    {
+                        $szXML  = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+                        $szXML .= "<IllicoDB>\n";
+                        {   /* Table */
+
+                            $szXML .= "<table name=\"{$this->name}\" reccount=\"" . $this->reccount() . "\" time=\"" . time(). "\" datetime=\"" . date( 'YmdHis' ) . "\">\n";
+
+                            fwrite( $fh,$szXML );
+
+                            /* Get the internal handle we use for reading */
+                            if ( is_null( $this->readHandle ) )
+                                $this->readHandle = fopen( $this->determineDataFile(),'r+b' );
+
+                            if ( $this->readHandle )                    /* If we have a valid handle */
+                            {
+                                $fpos   = ftell( $this->readHandle );     /* Save file pointer */
+                                $offset = ( $this->recordSize * ( $this->recno - 1 ) )  +
+                                          1; /* +1 => because the 1st byte is the "deleted" mark */
+                                fseek( $this->readHandle,$offset,SEEK_SET );
+                                $rawRecord = fread( $this->readHandle,$this->recordSize );
+
+                                fwrite( $fh,"<record recno=\"" . $this->recno() . "\">\n" );
+                                    foreach( $this->offsets as $fieldname => $data )
+                                    {
+                                        $value = trim( substr( $rawRecord,$data['offset'],$data['length'] ) );
+                                        fwrite( $fh,"<{$fieldname} type=\"{$data['type']}\">" . htmlentities( $value,ENT_NOQUOTES | ENT_XML1 ) . "</{$fieldname}>\n" );
+                                    }   /* foreach( $this->offsets as $fieldname => $data ) */
+                                fwrite( $fh,"</record>\n\n" );
+                            }   /* if ( $this->readHandle ) */
+                            fwrite( $fh,"</table>\n" );
+                        }   /* Table */
+                        fwrite( $fh,"</IllicoDB>" );
+                        fseek( $this->readHandle,$fpos,SEEK_SET );
+
+                        fclose( $fh );
+                    }   /* if ( $fh = fopen( $szFile,"w+b" ) ) */
+                }
+        }   /* switch( $type ) */
+
+        end:
+        return ( $this );
+    }   /* End of Table.__toXML() ===================================================== */
+    public function export( $szFile ) { return ( $this->__toXML( $szFile ) ); }
     /* ================================================================================ */
 
 
@@ -3857,21 +4363,7 @@ class Table extends Thing
     public function __destruct()
     /*------------------------*/
     {
-        if ( ! is_null( $this->readHandle ) && is_resource( $this->readHandle ) )
-            fclose( $this->readHandle  );
-
-        if ( ! is_null( $this->writeHandle ) && is_resource( $this->writeHandle ) )
-            fclose( $this->writeHandle  );
-
-        if ( ! is_null( $this->reccountHandle ) && is_resource( $this->reccountHandle ) )
-            fclose( $this->reccountHandle  );
-
-        if ( is_array( $this->indexHandles ) )
-        {
-            foreach( $this->indexHandles as $handle )
-                fclose( $handle );
-        }
-
+        $this->closeHandles();
         $this->backup();
         $this->autodoc();
         $this->UIKey();
@@ -3883,6 +4375,214 @@ class Table extends Thing
 }   /* End of class Table ============================================================= */
 /* ==================================================================================== */
 
+
+class View extends Table
+/*--------------------*/
+{
+    // Fatal error: Uncaught Exception: trql\quitus\Table::readStructure() at line 3483: '' is NOT a valid field type (ErrCode: EXCEPTION_INVALID_FIELD_TYPE = 1010) in D:\websites\snippet-center\trql.illicodb.class.php on line 3483
+    // Ce qui est normal PUISQUE je dois inférer le type d'un champ sur base de sa définition dans table (une vue dépend d'une table ... et c'est dans la table que le type de champ est défini)
+
+    public $parentTable = null;
+    public $filesize    = -1;
+
+    /* ================================================================================ */
+    /** {{*__construct( $parentTable,$name )=
+
+        Class constructor
+
+        {*params
+            $parentTable    (Table)         The table this view is based on
+            $name           (string)        The name of the view
+        *}
+
+        {*return
+            (self)      The current instance of the class
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__destruct *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __construct( $parentTable,$name )
+    /*---------------------------------------------*/
+    {
+        //parent::__construct( $parentTable->container,$parentTable->name );
+        $this->updateSelf( __CLASS__,'/q/common/trql.classes.home/' . basename( __FILE__,'.php' ),$withFamily = false );
+
+        $this->name         = $name;                    /* View name */
+        $this->parentTable  = $parentTable;             /* the table the view is based on */
+
+        $this->container    = $this->parentTable->container;
+
+        $szDBFile = strtolower( v::FIL_addBS( $this->container->homeOfData ) . $this->container->name . '.illicoDB' );
+        //var_dump( __METHOD__,$szDBFile );
+
+        if ( is_file( $szDBFile ) )                                 /* If DB file found */
+        {
+            //var_dump( "Dans le __construct d'une VIEW" );
+            $oDom = new \DOMDocument();
+
+            if ( $oDom->load( $szDBFile ) )                         /* If we could load the DB file */
+            {
+                //var_dump( "DOM loaded" );
+                $oXPath = new \DOMXPath( $oDom );
+                //var_dump( "XPath created","views/view[@name='{$name}']" );
+
+                if ( ( $tableCollection = $oXPath->query( "views/view[@name='{$name}']" ) ) && ( $tableCollection->length > 0 ) )
+                {
+                    $this->readStructure( $oDom,$oXPath,$tableCollection->item(0) );
+                }
+
+                $this->recno        = 0;
+                $this->fileSize     = $this->parentTable->fileSize;
+                $this->recordSize   = $this->parentTable->recordSize;
+                $this->reccount     = $this->parentTable->reccount;
+                $this->offsets      = $this->parentTable->offsets;
+
+            }
+            else
+                // EXCEPTION
+
+            var_dump( $this->name,$this->fileSize,$this->recordSize,$this->reccount );
+        }
+        else
+            // EXCEPTION
+
+
+        return ( $this );
+    }   /* End of View.__construct() ================================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*readStructure( $oDom,$oXPath,$oNode )=
+
+        Read the structure of the view
+
+        {*params
+            $oDom           (DOMDocument)       The DOM Document that was used to read
+                                                the DB structure
+            $oXPath         (DOMXPath)          The XPath that was used when reading the
+                                                DB structure
+            $oNode          (DOMNode)           The node where the structure of the
+                                                table gets defined
+        *}
+
+        {*return
+            (self)      Current instance
+        *}
+
+        {*warning
+            This method would be better if declared protected
+        *}
+
+        {*example
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function readStructure( $oDom,$oXPath,$oNode )
+    /*-------------------------------------------------*/
+    {
+        if ( ( $fieldCollection = $oXPath->query( 'field',$oNode ) ) && ( $fieldCollection->length > 0 ) )
+        {
+            $offset = $this->recordSize = 0;
+
+            $aFieldNames = null;
+            $typeIDGiven = false;
+
+            foreach ( $fieldCollection as $field )
+            {
+                $oField                 = new Field();
+                $oField->name           = trim( $field->getAttribute( 'name'       ) );
+
+                if ( isset( $this->parentTable->fields[$oField->name] ) )
+                {
+                    $theParentField         = $this->parentTable->fields[$oField->name];
+
+                    $oField->length         = $theParentField->length;
+                    $oField->type           = $theParentField->type;
+                    $oField->description    = $theParentField->description;
+                    $oField->caption        = $theParentField->caption;
+                    $oField->xmltag         = $theParentField->xmltag;
+                    $oField->offset         = $theParentField->offset;
+
+                    $this->fields[$oField->name]  = $oField;
+                }
+                else
+                    throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$oField->name}' ... FIELD NOT FOUND (ErrCode: EXCEPTION_INVALID_FIELD = " . EXCEPTION_INVALID_FIELD . ")",EXCEPTION_INVALID_FIELD );
+            }   /* foreach ( $fieldCollection as $field ) */
+
+            $this->idField          = $this->parentTable->idField;
+            $this->offsets          = $this->parentTable->offsets;
+            $this->recordSize       = $this->parentTable->recordSize;
+        }   /* if ( ( $fieldCollection = $oXPath->query( 'field',$oNode ) ) && ( $fieldCollection->length > 0 ) ) */
+
+        return ( $this );
+    }   /* End of View.readStructure() ================================================ */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*determineDataFile()=
+
+        Determine the name of the data file (table) we're busy with
+
+        {*params
+        *}
+
+        {*return
+            (string)      The name of the physical file
+        *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function determineDataFile() : string
+    /*----------------------------------------*/
+    {
+        if ( is_null( $this->storage ) )
+            $this->storage = v::FIL_addBS( $this->container->homeOfData ) . strtolower( trim( $this->container->name    ) ) . '.' .
+                                                                            strtolower( trim( $this->parentTable->name  ) ) . '.illicoDB';
+
+        return ( $this->storage );
+    }   /* End of View.determineDataFile() =========================================== */
+    /* ================================================================================ */
+
+
+    /* ================================================================================ */
+    /** {{*destruct()=
+
+        Class destructor.
+
+        {*params
+        *}
+
+        {*return
+            (void)      No return.
+        *}
+
+        {*keywords constructors, destructors *}
+
+        {*seealso @fnc.__construct *}
+
+        *}}
+    */
+    /* ================================================================================ */
+    public function __destruct()
+    /*------------------------*/
+    {
+        $this->backup();
+        $this->autodoc();
+        $this->UIKey();
+        $this->WikiData();
+        $this->necroSignaling();
+    }   /* End of Table.__destruct() ================================================== */
+}
 
 /* ==================================================================================== */
 /** {{*class Field=
@@ -3904,6 +4604,8 @@ class Field extends Thing
                                                                                                                                         WikidataId Q190087 : classification of data in computer science; *} */
     public      $offset                     = null;
     public      $wikidataId                 = 'Q1172412';           /* {*property   $wikidataId                 (string)                WikidataId ... part of a database record *} */
+    public      $caption                    = null;                 /* {*property   $caption                    (string)                Caption of the field (typically used in the [c]__toForm()[/c] method) *} */
+    public      $xmltag                     = null;                 /* {*property   $xmltag                     (string)                XML node name to support import/export from and to XML *} */
 
     /* ================================================================================ */
     /** {{*__construct( [$szHome] )=

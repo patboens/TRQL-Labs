@@ -1260,22 +1260,22 @@ class Vaesoli
         $i = 0;
 
         $buffer[0] = fread( $fh2,$len );
-        var_dump( "LECTURE:" . $buffer[0] );
+        //var_dump( "LECTURE:" . $buffer[0] );
         fwrite( $fh1,$block );
-        var_dump( "ÉCRITURE:" . $block );
+        //var_dump( "ÉCRITURE:" . $block );
 
         while ( ! feof( $fh2 ) )
         {
             $buffer[1] = fread( $fh2,$len );
-            var_dump( "LECTURE:" . $buffer[1] );
+            //var_dump( "LECTURE:" . $buffer[1] );
 
             fwrite( $fh1,$buffer[0] );
-            var_dump( "ÉCRITURE:" . $buffer[0] );
+            //var_dump( "ÉCRITURE:" . $buffer[0] );
 
             $buffer[0] = $buffer[1];
         }
         fwrite( $fh1,$buffer[0] );
-        var_dump( "ÉCRITURE:" . $buffer[0] );
+        //var_dump( "ÉCRITURE:" . $buffer[0] );
 
         $size = ftell( $fh1 );
         fflush( $fh1 );
@@ -3000,69 +3000,12 @@ class Vaesoli
     /* ================================================================================ */
 
 
-    /* ================================================================================ */
-    /** {{*STR_musicalChairs( $szWord )=
-
-        Generates a set of words derived from $szWord. Each derived form is based
-        on the original word that has been amputated one character.
-
-        {*params
-            $szWord     (string)        Word to derive other words.
-        *}
-
-        {*warning
-            Use this function with caution as it consumes some resources before
-            it returns: the password is chosen amongst more than 3000
-            possible combinations.
-        *}
-
-        {*return
-            (array)     Array of words derived from
-        *}
-
-        {*author {PYB} *}
-        {*cdate 07-04-21 04:04 *}
-
-        {*assert is_array( STR_musicalChairs( 'world' ) ) *}
-
-        {*example
-            $aWords = STR_musicalChairs( "world" );
-
-            // 0 => string 'orld' (length=4)
-            // 1 => string 'wrld' (length=4)
-            // 2 => string 'wold' (length=4)
-            // 3 => string 'word' (length=4)
-            // 4 => string 'worl' (length=4)
-
-        *}
-
-        *}}
-     */
-    /* ========================================================================== */
-    public static function STR_musicalChairs( $szWord )
-    /*-----------------------------------------------*/
+    public static function STR_insert2( &$haystack,$needle,$offset,$length )
+    /*--------------------------------------------------------------------*/
     {
-        $aRetVal    = null;
-        $iLen       = mb_strlen( $szWord );
-
-        for ( $i = 0;$i < $iLen;$i++ )
-        {
-            if ( $i === 0 )
-                $szLeft = '';
-            else
-                $szLeft = mb_substr( $szWord,0,$i );
-
-            if ( $i === $iLen - 1 )
-                $szRight = '';
-            else
-                $szRight = mb_substr( $szWord,$i + 1 );
-
-            $aRetVal[] = $szLeft . $szRight;
-        }   /* for ( $i = 0;$i < $iLen;$i++ ) */
-
-        //var_dump( $aRetVal );
-        return ( $aRetVal );
-    }   /* End of vaesoli.STR_musicalChairs() ========================================= */
+        for ( $i=0;$i < $length; )
+            $haystack[$offset++] = $needle[$i++] ?? ' ';
+    }   /* End of vaesoli.STR_Insert2() =============================================== */
     /* ================================================================================ */
 
 
@@ -3130,7 +3073,7 @@ class Vaesoli
 
         *}}
      */
-    /* ========================================================================== */
+    /* =============================================================================== */
     public static function STR_GeneratePassword( $iLength = 10 )
     /*--------------------------------------------------------*/
     {
@@ -3245,6 +3188,71 @@ class Vaesoli
     }   /* == End of vaesoli.STR_InList() ============================================= */
     /* ================================================================================ */
 
+
+    /* ================================================================================ */
+    /** {{*STR_musicalChairs( $szWord )=
+
+        Generates a set of words derived from $szWord. Each derived form is based
+        on the original word that has been amputated one character.
+
+        {*params
+            $szWord     (string)        Word to derive other words.
+        *}
+
+        {*warning
+            Use this function with caution as it consumes some resources before
+            it returns: the password is chosen amongst more than 3000
+            possible combinations.
+        *}
+
+        {*return
+            (array)     Array of words derived from
+        *}
+
+        {*author {PYB} *}
+        {*cdate 07-04-21 04:04 *}
+
+        {*assert is_array( STR_musicalChairs( 'world' ) ) *}
+
+        {*example
+            $aWords = STR_musicalChairs( "world" );
+
+            // 0 => string 'orld' (length=4)
+            // 1 => string 'wrld' (length=4)
+            // 2 => string 'wold' (length=4)
+            // 3 => string 'word' (length=4)
+            // 4 => string 'worl' (length=4)
+
+        *}
+
+        *}}
+     */
+    /* ================================================================================ */
+    public static function STR_musicalChairs( $szWord )
+    /*-----------------------------------------------*/
+    {
+        $aRetVal    = null;
+        $iLen       = mb_strlen( $szWord );
+
+        for ( $i = 0;$i < $iLen;$i++ )
+        {
+            if ( $i === 0 )
+                $szLeft = '';
+            else
+                $szLeft = mb_substr( $szWord,0,$i );
+
+            if ( $i === $iLen - 1 )
+                $szRight = '';
+            else
+                $szRight = mb_substr( $szWord,$i + 1 );
+
+            $aRetVal[] = $szLeft . $szRight;
+        }   /* for ( $i = 0;$i < $iLen;$i++ ) */
+
+        //var_dump( $aRetVal );
+        return ( $aRetVal );
+    }   /* End of vaesoli.STR_musicalChairs() ========================================= */
+    /* ================================================================================ */
 
     /* ================================================================================ */
     /** {{*STR_sentences( $szStr )=
@@ -5576,6 +5584,15 @@ class Vaesoli
     /* ================================================================================ */
 
 
+    // $haystack = str_repeat( ' ',40 );
+    // testInsert( $haystack,'Salut',4,$length = 8 );
+    // testInsert( $haystack,'Ben',0,$length = 4 );
+    // testInsert( $haystack,'H',0,$length = 1 );
+    // testInsert( $haystack,'a',1,$length = 1 );
+    // var_dump( $haystack );
+    // => 'Han Salut                               ' (length=40)
+
+
     public static function STR_Reduce( $szStr,$cChar = ' ' )
     /*----------------------------------------------------*/
     {
@@ -5600,15 +5617,6 @@ class Vaesoli
         return ( $szRetVal );                                       /* Return result to caller */
     }   /* End of vaesoli.STR_Reduce() ================================================ */
     /* ================================================================================ */
-
-
-    public static function STR_Tran( $szStr,$szToReplace,$szReplacement = '' )
-    /*----------------------------------------------------------*/
-    {
-       return ( str_replace( $szToReplace,$szReplacement,$szStr ) );
-    }   /* End of vaesoli.STR_tran() ================================================== */
-    /* ================================================================================ */
-
 
     public static function STR_Left( $szStr,$iCount = 1 )
     /*-------------------------------------------------*/
@@ -5692,7 +5700,7 @@ class Vaesoli
     /* ================================================================================ */
 
 
-    /* ========================================================================== */
+    /* ================================================================================ */
     /** {{*STR_Right( $szStr,$iCount )=
 
         Returns the $iCount rightmost characters of $szStr
@@ -5731,14 +5739,21 @@ class Vaesoli
 
         *}}
      */
-    /* ========================================================================== */
+    /* ================================================================================ */
     public static function STR_Right( $szString,$iCount = 1 )
     /*---------------------------------------*/
     {
         return substr( $szString,0 + strlen( $szString ) - $iCount,$iCount );
-    }   /* End of function STR_Right() ========================================== */
-    /* ========================================================================== */
+    }   /* End of function STR_Right() ================================================ */
+    /* ================================================================================ */
 
+
+    public static function STR_Tran( $szStr,$szToReplace,$szReplacement = '' )
+    /*----------------------------------------------------------------------*/
+    {
+       return ( str_replace( $szToReplace,$szReplacement,$szStr ) );
+    }   /* End of vaesoli.STR_tran() ================================================== */
+    /* ================================================================================ */
 
     public static function TIM_MakeInt( $szDTOS )
     /*-----------------------------------------*/
@@ -6246,7 +6261,7 @@ class Vaesoli
                             $key = 'item';
                         }
 
-                        $subnode = $oSimpleXML->addChild( $key );
+                        $subnode = @$oSimpleXML->addChild( $key );
 
                         self::array_to_xml( $value,$subnode );
                     }

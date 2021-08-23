@@ -1,0 +1,9 @@
+Change Log v 0.0.8
+==================
+
+0)  
+13) CECI EST UN TODO IMPORTANT !
+
+    IL FAUT QUE TOUTES LES CLASSES QUI UTILISENT "Home" et "HomeDir" utilisent désormais "shelter". Il faut
+    y mettre des __get() et __set() pour assurer la compatbilité !
+    Par exemple, trql.website.class.php, on y utilise HomeDir !!!
