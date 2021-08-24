@@ -56,7 +56,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">09-02-21 08:58</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">17/03/2021 - 07:43:44</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">17/03/2021 - 06:43:44</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
@@ -1166,6 +1166,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property return">Return:</p>
 <p class="seealso">(boolean):  <code>true</code> if $oItem successfully added to the form;
  <code>false</code> otherwise.</p>
+<hr /><p class="property func" id="fnc.buildAlt"><span class="name"><strong><code>buildAlt()</code></strong></span>: Generates the 'alt' of the tag (if any)</p>
+<p class="property">Syntax:</p>
+<p><code>buildAlt()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The alt attribute <code>' alt="..."'</code>;</p>
 <hr /><p class="property func" id="fnc.buildClass"><span class="name"><strong><code>buildClass()</code></strong></span>: Builds the class attribute of the tag</p>
 <p class="property">Syntax:</p>
 <p><code>buildClass()</code></p>
@@ -1181,11 +1186,41 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p><code>buildID()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return</p>
+<hr /><p class="property func" id="fnc.buildIndent"><span class="name"><strong><code>buildIndent()</code></strong></span>: Generates necessary indentation spaces</p>
+<p class="property">Syntax:</p>
+<p><code>buildIndent()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  A number of spaces depending on the indentation level</p>
+<hr /><p class="property func" id="fnc.BuildLang"><span class="name"><strong><code>BuildLang()</code></strong></span>: Generates the language of the tag (if any)</p>
+<p class="property">Syntax:</p>
+<p><code>BuildLang()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  Language clause of the tag (lang="...")</p>
 <hr /><p class="property func" id="fnc.buildTarget"><span class="name"><strong><code>buildTarget()</code></strong></span>: Builds the target attribute of a form</p>
 <p class="property">Syntax:</p>
 <p><code>buildTarget()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(string):  The target attribute of the form</p>
+<hr /><p class="property func" id="fnc.BuildTitle"><span class="name"><strong><code>BuildTitle()</code></strong></span>: Generates the title of the tag (if any)</p>
+<p class="property">Syntax:</p>
+<p><code>BuildTitle( $szTitle )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.BuildTitle.szTitle"><code>$szTitle</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Optional title (tooltip)</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  Title clause of the tag (title="...")</p>
 <hr /><p class="property func" id="fnc.get"><span class="name"><strong><code>get()</code></strong></span>: Gets a form as saved in $szFile</p>
 <p class="property">Warning:</p>
 <p>Totalement expérimental ! Bien que la modification manuelle soit possible
@@ -1213,6 +1248,26 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </table>
 <p class="property return">Return:</p>
 <p class="seealso">(self):  The current instance of the class</p>
+<hr /><p class="property func" id="fnc.Render"><span class="name"><strong><code>Render()</code></strong></span>: Generates the HTML code of the tag</p>
+<p class="property">Syntax:</p>
+<p><code>Render( $oContainer )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.Render.oContainer"><code>$oContainer</code></td>
+<td class="type"><code>LSControl</code></td>
+<td class="description seealso">The container of the current control. Optional. <code>null</code> by default.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(void): </p>
 <hr /><p class="property func" id="fnc.render"><span class="name"><strong><code>render()</code></strong></span>: Renders the form</p>
 <p class="property">Syntax:</p>
 <p><code>render( $szType )</code></p>

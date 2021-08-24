@@ -49,15 +49,15 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <div class="trql_documentor_DocumentorSourceFile">
 <section class="header">
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.sprint.class.php</span>
-<span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\Sprint</code></span>
-<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\vaesoli\Vaesoli as Vaesoli,\trql\cyclicprocess\CyclicProcess as CyclicProcess,\trql\t as k,\trql\digitaldocument\DigitalDocument as DigitalDocument,\ReflectionCl as s</code></span>
+<span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\quitus</code></span>
+<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\vaesoli\Vaesoli as Vaesoli,\trql\quitus\CyclicProcess as CyclicProcess,\trql\quitus\T as k,\trql\schema\DigitalDocument as DigitalDocument,\ReflectionCl as s,\trql\quitus\KanbanBoard as KanbanBoard,\trql\html\Form as Form,\trql\html\Fieldset as Fieldset,\trql\html\Formset as Formset,\trql\html\Input as Input,\trql\schema\Aspiration as Aspiration</code></span>
 <span class="DocumentorLabel">Purpose: </span><span class="property purpose">In agile software development, a sprint is a set period of
  time during which specific tasks need to be completed and
  made ready for review.</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">07-01-21 11:38</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">06/03/2021 - 09:12:36</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">05/07/2021 - 10:06:25</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
@@ -122,6 +122,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="name" id="var.aRemarks"><code>$aRemarks</code></td>
 <td class="type"><code>array</code></td>
 <td class="description">A set of general-purpose remarks pertaining to this sprint</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.aspirationId"><code>$aspirationId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Parent Aspiration ID.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.aTasks"><code>$aTasks</code></td>
@@ -206,7 +211,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">The name of the item.</td>
 </tr>
 <tr class="property">
-<td class="name" id="var.oAspiration"><code>$oAspiration</code></td>
+<td class="name" id="var.oParentAspiration"><code>$oParentAspiration</code></td>
 <td class="type"><code>Aspiration</code></td>
 <td class="description">Parent <code>Aspiration</code> this Sprint is attached to</td>
 </tr>
@@ -225,6 +230,13 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  rescheduled events, the startDate property should be used for the newly
  scheduled start date. In the (rare) case of an event that has been
  postponed and rescheduled multiple times, this field may be repeated.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.ref"><code>$ref</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Identifies a unique object. It differs from <code><a href="#var-identifier">$identifier</a></code> in the sense that the latter
+ serves internal purposes while <code><a href="#var-ref">$ref</a></code> is more public reference, something that the global
+ system uses</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.sameAs"><code>$sameAs</code></td>
@@ -255,6 +267,16 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="type"><code>CreativeWork|Event</code></td>
 <td class="description">A <code><a href="?src=CreativeWork">CreativeWork</a></code> or <code><a href="?src=Event">Event</a></code> about this <code><a href="?src=Thing">Thing</a></code>. 
  Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szClass"><code>$szClass</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">CSS class of the sprint when it needs to be rendered as a form <code>__toForm()</code>)</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szOnSubmit"><code>$szOnSubmit</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Submit clause of the form (<code>__toForm()</code>)</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.szSprintNo"><code>$szSprintNo</code></td>
@@ -317,7 +339,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
   use \trql\portfolio\Portfolio       as Portfolio;
   use \trql\project\Aspiration        as Aspiration;
   <strong>use \trql\sprint\Sprint             as Sprint;</strong>
-  use \trql\task\Task                 as Task;
+  use \trql\quitus\Task                 as Task;
 
   /* They are used in the <a href="https://www.openpmo.site" class="DocumentorLink" title="Go to https://www.openpmo.site" itemprop="url">https://www.openpmo.site</a> initiative */
 
@@ -353,6 +375,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return</p>
 <span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
+<hr /><p class="property func" id="fnc.__toForm"><span class="name"><strong><code>__toForm()</code></strong></span>: Returns the object as a form</p>
+<p class="property">Syntax:</p>
+<p><code>__toForm()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  HTML Code corresponding to a form of the object</p>
 <hr /><p class="property func" id="fnc.__toHTML"><span class="name"><strong><code>__toHTML()</code></strong></span>: Renders the sprint in HTML</p>
 <p class="property">Warning:</p>
 <p>The method returns an empty string for the time being (05-03-21 07:34:13)</p>

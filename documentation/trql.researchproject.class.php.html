@@ -50,12 +50,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <section class="header">
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.researchproject.class.php</span>
 <span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\researchproject</code></span>
-<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\vaesoli\Vaesoli as Vaesoli,\trql\project\Project as Project</code></span>
+<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\vaesoli\Vaesoli as Vaesoli,\trql\schema\Project as Project</code></span>
 <span class="DocumentorLabel">Purpose: </span><span class="property purpose">A Research project.</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">28-08-2020 16:28</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">04/03/2021 - 11:15:13</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">05/07/2021 - 10:03:30</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
@@ -150,7 +150,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.aOutDependencies"><code>$aOutDependencies</code></td>
 <td class="type"><code>array</code></td>
-<td class="description">Array of projects that are expecting THIS project to delievr an output to be able to go ahead</td>
+<td class="description">Array of projects that are expecting THIS project to deliver an output to be able to go ahead</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.areaServed"><code>$areaServed</code></td>
@@ -177,6 +177,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="name" id="var.award"><code>$award</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">An award won by or for this item. Supersedes awards.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.backColor"><code>$backColor</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The background color that must be used when displaying this project in a kanban or taskboard</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.bankAccount"><code>$bankAccount</code></td>
@@ -284,6 +289,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="name" id="var.faxNumber"><code>$faxNumber</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">The fax number.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.foreColor"><code>$foreColor</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The foreground color that must be used when displaying this project in a kanban or taskboard</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.founder"><code>$founder</code></td>
@@ -498,6 +508,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  if any. Supersedes branchOf. Inverse property: subOrganization.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.portfolioId"><code>$portfolioId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Parent Portfolio ID.</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
 <td class="type"><code>Action</code></td>
 <td class="description">Indicates a potential <code><a href="?src=Action">Action</a></code>, which
@@ -517,6 +532,13 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  While such policies are most typically expressed in natural language,
  sometimes related information (e.g. indicating a funder) can be
  expressed using schema.org terminology.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.ref"><code>$ref</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Identifies a unique object. It differs from <code><a href="#var-identifier">$identifier</a></code> in the sense that the latter
+ serves internal purposes while <code><a href="#var-ref">$ref</a></code> is more public reference, something that the global
+ system uses</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.sameAs"><code>$sameAs</code></td>
@@ -561,7 +583,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <tr class="property">
 <td class="name" id="var.szMailto"><code>$szMailto</code></td>
 <td class="type"><code>string</code></td>
-<td class="description">The page that should be used to send a mail. If value is 'mailto:', then the local 
+<td class="description">The page that should be used to send a mail. If value is 'mailto:', then the local
  email facility will be used</td>
 </tr>
 <tr class="property">

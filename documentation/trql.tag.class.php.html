@@ -50,12 +50,12 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <section class="header">
 <span class="DocumentorLabel">Filename: </span><span class="property filename">trql.tag.class.php</span>
 <span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\html</code></span>
-<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\vaesoli\Vaesoli as Vaesoli,\trql\web\WebPageElement as WebPageElement,Over = null; public $szOnLoad = null; public $szOnUnLoad = null; public static $szBrowser = null; public static $szPlatform = null; public $aGenes = null; public $aCustomData = array(); public $wikidataId = null; public function __construct( $szHome = null ) { parent::__construct(); $this->updateSelf( __CLASS__,'/q/common/trql.cl as ses</code></span>
+<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\trql\vaesoli\Vaesoli as Vaesoli,\trql\web\WebPageElement as WebPageElement,Over = null; public $szOnLoad = null; public $szOnUnLoad = null; public static $szBrowser = null; public static $szPlatform = null; public $aGenes = null; public $aCustomData = array(); public $wikidataId = null; public function __construct( $szType = 'p',$szID = null,$szCl as s,= ''; if ( ! empty( $this->szPreload ) && STR_iInList( array('none','auto','metadata'),$this->szPreload ) ) { $szPreloadClause = " preload=\"{$this->szPreload}\""; } $szAutoplayClause = ''; if ( $this->Autoplay ) { $szAutoplayClause = " autoplay"; } $szLoopClause = ''; if ( $this->Loop ) { $szLoopClause = " loop"; } $szControlClause = ''; if ( $this->Controls ) { $szControlClause = " controls"; } $szSrcClause = $szSrcClause2 = ''; if ( count( $this->aSrc ) < 1 ) { if ( ! empty( $this->szSrc ) ) { $szSrcClause2 = " src=\"$this->szSrc\""; } } else { foreach ( $this->aSrc,.= "<source src=\"{$szSrc}\" />\n"; } } $szRetVal .= "{$this->szLeader}{$szIndent}<{$szTheType}{$szControlClause}{$szSrcClause2}{$szAutoplayClause}{$szLoopClause}{$szAttrs}{$szPreloadClause}>{$this->szInnerLeader}\n"; $szRetVal .= $szSrcClause; foreach( $this->aObjects,s' : { if ( ! empty( $this->szOnSubmit ) ) { $szRetVal .= " onsubmit=\"{$this->szOnSubmit}\""; } if ( ! empty( $this->szOnClick ) ) { $szRetVal .= " onclick=\"{$this->szOnClick}\""; } if ( ! empty( $this->szOnKeyPress ) ) { $szRetVal .= " onkeypress=\"{$this->szOnKeyPress}\""; } if ( ! empty( $this->szOnKeyUp ) ) { $szRetVal .= " onkeyup=\"{$this->szOnKeyUp}\""; } if ( ! empty( $this->szOnKeyDown ) ) { $szRetVal .= " onkeydown=\"{$this->szOnKeyDown}\""; } if ( ! empty( $this->szOnChange ) ) { $szRetVal .= " onchange=\"{$this->szOnChange}\""; } } break; } return ( $szRetVal ); } protected function buildTitle( $szTitle = null ) { $szRetVal = ''; if ( is_null( $szTitle ) && isset( $this->szTooltip ) && ! STR_Empty( $this->szTooltip ) ) { $szTitle = $this->szTooltip; } elseif ( is_null( $szTitle ) && isset( $this->szTitle ) && ! STR_Empty( $this->szTitle ) ) { $szTitle = $this->szTitle; } if ( ! empty( $szTitle ) ) { $szRetVal = " title=\"{$szTitle}\""; } return ( $szRetVal ); } protected function buildLang() { $szRetVal = ''; if ( $this->szLang ) { $szRetVal = " lang=\"{$this->szLang}\""; } return ( $szRetVal ); } public function buildIndent() { $szRetVal = ''; if ( $this->iIndentSpaces > 0 && $this->iIndentLevel > 0 ) { $szRetVal .= str_repeat( ' ',$this->iIndentSpaces * $this->iIndentLevel ); } return ( $szRetVal ); } protected function BuildAlt() { $szRetVal = ''; if ( $this->szAlt ) { $szRetVal = " alt=\"{$this->szAlt}\""; } return ( $szRetVal ); } public function buildStyle() { return ( $this->Build( 'style' ) ); } protected function buildID() { $szRetVal = ''; $szID = null; if ( ! empty( $this->identifier ) ) $szID = $this->identifier; elseif ( ! empty( $this->szGUID ) ) $szID = $this->szGUID; else $szID = $this->szID; if ( ! empty( $szID ) ) { $szRetVal = " id=\"{$szID}\""; } return ( $szRetVal ); } protected function buildCl as s</code></span>
 <span class="DocumentorLabel">Purpose: </span><span class="property purpose">Provides a generic way to create a (X)HTML tag</span>
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">12/04/2006 - 11:23</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">18/03/2021 - 06:08:41</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">15/04/2021 - 04:21:19</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
@@ -1027,9 +1027,9 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </table>
 <h2 class="DocumentorLabel">Methods of <code>Tag</code></h2>
-<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Creates a tag</p>
 <p class="property">Syntax:</p>
-<p><code>__construct( $szHome )</code></p>
+<p><code>__construct( $szText )</code></p>
 <span class="DocumentorLabel">Parameters: </span>
 <table class="properties">
 <thead>
@@ -1040,18 +1040,55 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 </tr>
 </thead>
 <tr class="parameter">
-<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
+<td class="name" id="param.__construct.szType"><code>$szType</code></td>
 <td class="type"><code>string</code></td>
-<td class="description seealso">Home of the class. Optional.</td>
+<td class="description seealso">Tag type ( 'p', 'div', 'ol', ... ). Optional. 'p' by default</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.__construct.szID"><code>$szID</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Tag ID (id="..."). Optional. null by default</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.__construct.szClass"><code>$szClass</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Tag ID (class="..."). Optional. null by default</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.__construct.szStyle"><code>$szStyle</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Tag style (style="..."). Optional. null by default</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.__construct.szText"><code>$szText</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Tag text (<p>...</p>). Optional. null by default</td>
 </tr>
 </table>
-<p class="property return">Return:</p>
-<p class="seealso">(self):  The current instance of the class</p>
+<p class="property">Example(s):</p>
+<pre>
+
+      $oTag                   = new Tag('video');
+      $oTag->InIFrame         = true;
+      $oTag->iWidth           = 560;
+      $oTag->iHeight          = 315;
+      $oTag->szCaption        = 'Startup Lab workshop: How Google sets goals: OKRs';
+      $oTag->szClass          = 'video shadow constrained';
+      $oTag->AllowFullScreen  = true;
+      $oTag->aSrc[]           = '//www.youtube.com/embed/mJB83EZtAjc';
+
+      echo $oTag->Render();
+  </pre>
 <hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>__destruct()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return</p>
+<hr /><p class="property func" id="fnc.buildAlt"><span class="name"><strong><code>buildAlt()</code></strong></span>: Generates the 'alt' of the tag (if any)</p>
+<p class="property">Syntax:</p>
+<p><code>buildAlt()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The alt attribute <code>' alt="..."'</code>;</p>
 <hr /><p class="property func" id="fnc.buildClass"><span class="name"><strong><code>buildClass()</code></strong></span>: Builds the class attribute of the tag</p>
 <p class="property">Syntax:</p>
 <p><code>buildClass()</code></p>
@@ -1062,6 +1099,56 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p><code>buildID()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return</p>
+<hr /><p class="property func" id="fnc.buildIndent"><span class="name"><strong><code>buildIndent()</code></strong></span>: Generates necessary indentation spaces</p>
+<p class="property">Syntax:</p>
+<p><code>buildIndent()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  A number of spaces depending on the indentation level</p>
+<hr /><p class="property func" id="fnc.BuildLang"><span class="name"><strong><code>BuildLang()</code></strong></span>: Generates the language of the tag (if any)</p>
+<p class="property">Syntax:</p>
+<p><code>BuildLang()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  Language clause of the tag (lang="...")</p>
+<hr /><p class="property func" id="fnc.BuildTitle"><span class="name"><strong><code>BuildTitle()</code></strong></span>: Generates the title of the tag (if any)</p>
+<p class="property">Syntax:</p>
+<p><code>BuildTitle( $szTitle )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.BuildTitle.szTitle"><code>$szTitle</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Optional title (tooltip)</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  Title clause of the tag (title="...")</p>
+<hr /><p class="property func" id="fnc.Render"><span class="name"><strong><code>Render()</code></strong></span>: Generates the HTML code of the tag</p>
+<p class="property">Syntax:</p>
+<p><code>Render( $oContainer )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.Render.oContainer"><code>$oContainer</code></td>
+<td class="type"><code>LSControl</code></td>
+<td class="description seealso">The container of the current control. Optional. <code>null</code> by default.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(void): </p>
 <hr /></section> <!-- .class -->
 </section> <!-- .classes -->
 </div> <!-- End of trql_documentor_DocumentorSourceFile-->

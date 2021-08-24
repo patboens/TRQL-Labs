@@ -1,0 +1,2491 @@
+<style>
+.trql_documentor_DocumentorSourceFile { margin: 1em 1em; padding: 1em; border: 1px solid #000; box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile * { box-sizing: border-box; }
+.trql_documentor_DocumentorSourceFile hr { border-top: 4px solid #800 !important; margin:2em 0; box-shadow: 0 6px 10px 1px rgba(0,0,0,.2); }
+.trql_documentor_DocumentorSourceFile pre { background: #c001; }
+.trql_documentor_DocumentorSourceFile pre strong { color: #b00; }
+.DocumentorLabel { font-style: italic; display: block; margin-top:1em; }
+.property { font-weight: bold;}
+.shadow { box-shadow: 0 20px 15px -15px rgba(0,0,0,.5); }
+.constrained { max-width: 100%; height: auto; }
+.center { text-align:center; }
+code,samp, .filename {color: #800 !important;
+   font-family: Consolas,"courier new";
+   background: rgba(240, 240, 240, 0.5);
+   border: 1px solid silver;
+   border-radius: 3px;
+   padding: 0px 5px; }
+.seealso code a {text-decoration:none;
+   color: #800 !important;
+   font-weight: bold;
+   font-style: italic;
+   }
+.property.inheritance code { border: none !important; }
+.assert.success { border: 2px solid green; padding: 5px; border-radius:3px; }
+.assert.failure { border: 2px solid red; padding: 5px; border-radius:3px; }
+.assert.success code, .assert.failure code { border: none !important; }
+.DocumentorLabel { font-style: italic; display: block;}
+section.class { margin: 1em 1em; padding: 1em; border: 1px solid #000; background: #eee9; }
+img.vaesoli-image { border:1px solid silver; padding: 1em; display: block;}
+table.properties { border:1px solid silver; border-collapse: collapse; width:100%; }
+table.properties thead th { border:1px solid silver;padding: .5em; width:20%; }
+table.properties thead th.description { width:60%; }
+table.properties tr.property td,
+table.properties tr.parameter td { border:1px solid silver;padding: .5em; width:20%; }
+table.properties tr.property td.description,
+table.properties tr.parameter td.description { width: 60%; }
+p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
+   letter-spacing: 3px;
+   width: 100%;
+   margin: 0 0 15px 0;
+   padding: 5px;
+   color: rgb(255,128,0);
+   padding: 1em;
+   border: 1px solid #999;
+   box-shadow: 0 0 5px 5px rgb(200 200 200 / 30%);
+   border: 1px solid #888; }
+</style>
+
+<div class="trql_documentor_DocumentorSourceFile">
+<section class="header">
+<span class="DocumentorLabel">Filename: </span><span class="property filename">trql.illicodb.class.php</span>
+<span class="DocumentorLabel">Namespace: </span><span class="property namespace"><code>trql\quitus</code></span>
+<span class="DocumentorLabel">Class aliases: </span><span class="property aliases"><code>\DOMDocument; use \DOMXPath; use \trql\vaesoli\Vaesoli as v,\trql\schema\Thing as Thing,\trql\html\Form as Form,\trql\html\Fieldset as Fieldset,\trql\html\Formset as Formset,\trql\html\Input as Input,commonTrait; protected $self = array( 'file' => __FILE__ , 'cl as s,OLD( $table ) { if ( $this->isOpen ) { if ( isset( $this->tables[ $table ] ) ) { $this->table = $table; try { $this->$table->Goto(1); } catch( Exception $e ) { var_dump( $e ); } } elseif ( isset( $this->views[ $table ] ) ) { $this->view = $table; try { $this->$table->Goto(1); } catch( Exception $e ) { var_dump( $e ); } } else throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": '{$table}' NOT FOUND (ErrCode: EXCEPTION_TABLE_NOT_FOUND = " . EXCEPTION_TABLE_NOT_FOUND . ")",EXCEPTION_TABLE_NOT_FOUND ); } else throw new \Exception( __METHOD__ . "() at line " . __LINE__ . ": datab as e,( $field ) { $n = strc as ecmp,( $field ) { $fValueA = $this->goto( $a )->$field; $fValueB = $this->goto( $b )->$field; if ( $fValueA === $fValueB ) return ( 0 ); if ( $fValueA > $fValueB ) return ( 1 ); else return ( -1 ); } ); $t2 = microtime( true ); var_dump( "SORT() PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" ); return ( $a ); } public function index( $field,$forced = false ) { $iRecno = 1; if ( isset( $this->fields[$field] ) ) { $szFile = $this->determineDataFile(); $szIndexFile = $szFile . ".{$field}.idx"; if ( ! $forced && v::FIL_File1OlderThanFile2( $szIndexFile,$szFile ) ) { goto end; } else { if ( $this->autoSort ) { $range = range( 1,$this->reccount() ); $aValues = $this->sort( $field,$range ); if ( $fh = fopen( $szIndexFile,'w+b' ) ) { foreach( $aValues,of idField(). Does it return a string (field name) or a Field object?" ); if ( ! is_null( $this->idField() ) ) $id = $this->idField()->name; if ( ! $trackFound ) { $this->append(); if ( ! is_null( $id ) ) $this->$id = null; } else { } $haystack = str_repeat( ' ',$this->recordSize ); foreach( $this->offsets,of idField(). Does it return a string (field name) or a Field object?" ); $aMemo['id'] = $this->$id; foreach ( $this->offsets</code></span>
+<span class="DocumentorLabel">Purpose: </span><span class="property purpose">TRQL Labs Database</span>
+<span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
+<span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
+<span class="DocumentorLabel">Creation date: </span><span class="property cdate">16-08-20 19:19</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">23/08/2021 - 17:42:06</span>
+<span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
+<span class="DocumentorLabel">Abstract: </span><span class="property abstract">IllicoDB is THE proprietary database of TRQL Labs/Lato
+                            Sensu Management.<br />
+
+                            An IllicoDB database is composed of:
+
+                                - a DB Container (XML file)
+                                - tables
+                                - memo files
+                                - indexes
+
+                            All tables are defined in the DB Container.
+
+                            Field names are not limited in size. It is recommended to
+                            name all field names with a starting "f_" so that field
+                            names can be easily recognized in the code.</span>
+<span class="DocumentorLabel">TODOs: </span><span class="property todo">1) Pouvoir créer le schéma d'une table sur base des propriétés d'une classe (on donne le nom de la classe
+           et la structure de la table est automatiquement déterminée par la classe; utilisation des méthodes
+           magiques __sleep() et __wakeup())
+        2) Pouvoir sauver tout un record ou une array de records (en commençant au recno
+           courant)
+        3) VIEWS: il faudrait être capable de créer des "champs" qui sont des expressions (field1 + field2)
+            - le difficulté sera de calculer des offsets dans ce cas là
+        4) Index on dates, datetimes, ints and floats
+        5) Implémenter les champs "guid" qui sont des champs "id" en fait
+        6) Pouvoir mettre un commentaire sur chaque champ de la structure d'une table
+        7) Pouvoir modifier la structure "on-the-fly" (les données sont recopiées sans aucune perte dans la nouvelle structure)
+        9) Création d'une documentation des tables faisant partie d'une DB
+        9) Disposer de Stored Procedures (c'est VRAIMENT pas urgent !)
+        10) Pouvoir mettre des champs en relation (1 .. 1, 1 .. n, n .. 1)
+        11) Le create() doit permettre de placer les descriptions des champs
+        12) Pouvoir faire une modification de structure de la DB à chaud (readStructure() doit pouvoir
+            être ré-appelé; un modifyStructure dot voir le jour)
+        13) Les noms des champs doivent être case-sensitive
+        14) Implémenter un champ "othermemo" : c'est un fichier mémo mais il a un nom
+            positionnable par l'utilisateur (une référence à un autre fichier mémo dans
+            lequel les données sont vraiment disponibles)
+        15) If duplicate id (on ne peut avoir QU'UN SEUL type 'id) => EXCEPTION
+        16) Permettre une mise à jour des index en temps réel : on voit quels sont les index
+            positionnés sur la table, et ils sont mis à jour automatiquement sur base
+            des write, append, delete et pack.
+        17) __toString devrait faire la même chose que __toXML MAIS ... devrait faire l'export
+            dans un fichier texte ! Par contre, le nom estmisleading car on s'attend à avoir
+            un retour de string. Peut-être trouver autre nom : __toText() ?
+        18) Vérifier la méthode de backup
+        19) Implémenter un __toZip()
+        20) Transformer le read() and write() pour lire et écrire dans un raw record
+        21) Faire précéder toutes les méthodes "protected" par le mot-clef "protected" dans
+            les déclarations de fonctions pour la doc</span>
+</section> <!-- .header -->
+<section class="classes">
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>IllicoDB</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">TRQL Labs proprietary database</span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="?src=Mother">Mother</a> &gt; <a href="?src=Thing">Thing</a> &gt; IllicoDB</code></span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class IllicoDB extends Thing</code></span>
+<span class="DocumentorLabel">Warning: </span><span class="property warning">This class should NOT be used in a production environment as it has NOT been
+ sufficiently tested. On top of that, many methods are not final: in the future
+ some of them may no longer exist.</span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An additional type for the item,
+ typically used for adding more
+ specific types from external
+ vocabularies in microdata syntax.
+ This is a relationship between
+ something and a class that the
+ thing is in. In RDFa syntax, it is
+ better to use the native RDFa
+ syntax - the 'typeof' attribute
+ - for multiple types.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.description"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A short description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A
+ short description of the item used
+ to disambiguate from other, similar
+ items. Information from other
+ properties (in particular, name)
+ may be necessary for the description
+ to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.identifier"><code>$identifier</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The identifier property represents any
+ kind of identifier for any kind of Thing,
+ such as ISBNs, GTIN codes, UUIDs etc.
+ http://schema.org provides dedicated
+ properties for representing many of these,
+ either as textual strings or as URL (URI)
+ links. See <a
+ href="https://schema.org/docs/datamodel.html#identifierBg">
+ background notes</a>
+ for more details.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.image"><code>$image</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of an image of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates a page (or other <code><a href="?src=CreativeWork">CreativeWork</a></code>, <code><a href="?src=Event">Event</a></code>)
+ for which this thing is the main entity
+ being described. See <a
+ href="https://schema.org/docs/datamodel.html#mainEntityBackground">
+ background notes</a> for details.
+ Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">DB Name</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential <code><a href="?src=Action">Action</a></code>, which
+ describes an idealized action in which
+ this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+ unambiguously indicates the item's
+ identity. E.g. the URL of the
+ item's Wikipedia page, Freebase
+ page, or official website.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.schemaOrg"><code>$schemaOrg</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Where the official documentation is maintained</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.self"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.storedProcedures"><code>$storedProcedures</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Set of stored procedures (NOT USED : 29-07-21 14:40:19)</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A <code><a href="?src=CreativeWork">CreativeWork</a></code> or <code><a href="?src=Event">Event</a></code> about this <code><a href="?src=Thing">Thing</a></code>. 
+ Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.tables"><code>$tables</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Set of tables composing the DB</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.url"><code>$url</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.views"><code>$views</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Set of views set on the DB</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">WikidataId ... organized collection of data in computing</td>
+</tr>
+</table>
+<h2 class="DocumentorLabel">Methods of <code>IllicoDB</code></h2>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>__construct( $szHome )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Home of the class. Optional.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__destruct">__destruct()</a></code></span>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
+<hr /><p class="property func" id="fnc.__get"><span class="name"><strong><code>__get()</code></strong></span>: Used for reading data from inaccessible (protected or private) or
+ non-existing properties.</p>
+<p class="property">Syntax:</p>
+<p><code>__get( $property )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__get.property"><code>$property</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the property to access</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  The value of <code>@param.property</code> or throwing an exception if
+ <code>@param.property</code> NOT found.</p>
+<hr /><p class="property func" id="fnc.__set"><span class="name"><strong><code>__set()</code></strong></span>: Run when writing data to inaccessible (protected or private) or non-existing
+ properties.</p>
+<p class="property">Syntax:</p>
+<p><code>__set( $value )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__set.property"><code>$property</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the property to access</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.__set.value"><code>$value</code></td>
+<td class="type"><code>mixed</code></td>
+<td class="description seealso">The value to assign to the property</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  What the internal method that's called returns</p>
+<hr /><p class="property func" id="fnc.close"><span class="name"><strong><code>close()</code></strong></span>: Close the DB Container</p>
+<p class="property">Syntax:</p>
+<p><code>close()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.close">close()</a></code></span>
+<hr /><p class="property func" id="fnc.delete"><span class="name"><strong><code>delete()</code></strong></span>: Logical deletion of the current record of @param.table</p>
+<p class="property">Syntax:</p>
+<p><code>delete( $table )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.delete.table"><code>$table</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Logical deletion of the current record</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if record deleted; <code>false</code> if not</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.deleted">deleted()</a></code>, <code><a href="#fnc.pack">pack()</a></code></span>
+<hr /><p class="property func" id="fnc.destruct"><span class="name"><strong><code>destruct()</code></strong></span>: Class destructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return.</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
+<hr /><p class="property func" id="fnc.index"><span class="name"><strong><code>index()</code></strong></span>: Index the @param.field field of the @param.table table</p>
+<p class="property">Warning:</p>
+<p>The algorithm is not well suited for very large databases that retain million
+ of records. IT MUST BE REBUILT. On top of that, there should be a mechanism
+ to build the index in a case-insensitive manner. The case of other types than
+ strings has not been taken into account so far.</p>
+<p class="property">Remark:</p>
+<p>If the index appears up-to-date it is not rebuilt</p>
+<p class="property">Syntax:</p>
+<p><code>index( $field )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.index.table"><code>$table</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the table concerned by the index operation</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.index.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the field to index on</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Array of values</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  $t1 = microtime( true );
+  <strong>$aValues = $oDB->index( 'artists','f_name' );</strong>
+  // Alternate code: <strong>$aValues = $oDB->artists->index( 'f_name' );</strong>
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  //var_dump( $aValues );
+
+
+  $t1 = microtime( true );
+  $index = $recno = 0;
+  if ( $oDB->seek( 'artists','Stevie',$aValues,$index,$recno ) )
+  {
+      $oDB->Go( 'artists',$recno );
+      //var_dump( $oDB->read( 'artists','name' ) );
+  }
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  </pre>
+<hr /><p class="property func" id="fnc.open"><span class="name"><strong><code>open()</code></strong></span>: Open the DB Container</p>
+<p class="property">Syntax:</p>
+<p><code>open( $folder )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.open.name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Name of the DB Container</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.open.folder"><code>$folder</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Directory where the DB Container is located</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.close">close()</a></code></span>
+<hr /><p class="property func" id="fnc.pack"><span class="name"><strong><code>pack()</code></strong></span>: Removes all records from a table that have been marked as deleted.</p>
+<p class="property">Syntax:</p>
+<p><code>pack( $table )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.pack.table"><code>$table</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Table to consider</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.deleted">deleted()</a></code>, <code><a href="#fnc.pack">pack()</a></code></span>
+<hr /><p class="property func" id="fnc.read"><span class="name"><strong><code>read()</code></strong></span>: Reads a field of a table.</p>
+<p class="property">Warning:</p>
+<p>This method is obsolete. Direct access to read() of a tabe is what should be
+ used.</p>
+<p class="property">Syntax:</p>
+<p><code>read()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.write">write()</a></code></span>
+<hr /><p class="property func" id="fnc.seek"><span class="name"><strong><code>seek()</code></strong></span>: Seek the @param.szValue in the @param.table table using the @param.aValues</p>
+<p class="property">Warning:</p>
+<p>The algorithm is not well suited for very large databases that retain million
+ of records. IT MUST BE REBUILT. On top of that, there should be a mechanism
+ to build the index in a case-insensitive manner.</p>
+<p class="property">Remark:</p>
+<p>Seeks are always case sensitive</p>
+<p class="property">Syntax:</p>
+<p><code>seek( $aValues )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.seek.table"><code>$table</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the table concerned by the seek operation</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.seek.szValue"><code>$szValue</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The value to look for</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.seek.aValues"><code>$aValues</code></td>
+<td class="type"><code>array</code></td>
+<td class="description seealso">The array of indexed values (typically resulting from a call to the <code>index()</code> method.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if @param.szValue found in @param.aValues.</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  $t1 = microtime( true );
+  $aValues = $oDB->index( 'artists','name' );
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  //var_dump( $aValues );
+
+
+  $t1 = microtime( true );
+  <strong>$index = $recno = 0;
+  if ( $oDB->seek( 'artists','Stevie',$aValues,$index,$recno ) )
+  {
+      //var_dump( $index,$recno );
+      $oDB->Go( 'artists',$recno );
+      //var_dump( $oDB->read( 'artists','name' ) );
+  }</strong>
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  </pre>
+<hr /><p class="property func" id="fnc.skip"><span class="name"><strong><code>skip()</code></strong></span>: Skip forward or backward (the internal record pointer is updated)</p>
+<p class="property">Syntax:</p>
+<p><code>skip( $n )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.skip.table"><code>$table</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the table concerned by the index operation</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.skip.n"><code>$n</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">The number of records that must be skipped. Moving 1 record forward: <code>@param.n = 1</code></td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Array of values</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  $t1 = microtime( true );
+  {
+      $oDB->artists->Go( 1 );
+      while( ! $oDB->artists->eof() )
+      {
+          $oDB->artists->skip();
+      }
+  }
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  </pre>
+<hr /><p class="property func" id="fnc.structure"><span class="name"><strong><code>structure()</code></strong></span>: Reports the DB structure</p>
+<p class="property">Warning:</p>
+<p>THE NAME OF THE METHOD WILL BE CHANGED. DO NOT USE FOR PRODUCTION</p>
+<p class="property">Syntax:</p>
+<p><code>structure()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The HTML code that reports the structure</p>
+<hr /><p class="property func" id="fnc.use"><span class="name"><strong><code>use()</code></strong></span>: Use a table</p>
+<p class="property">Remark:</p>
+<p>The DB Container must be open BEFORE using this method. If not open
+ a <code>EXCEPTION_DB_NOT_OPEN</code> exception is thrown.<br />
+ The record pointer of the table is positioned at 1 if records can be found
+ in the table; otherwise, it is <code>0</code>.</p>
+<p class="property">Syntax:</p>
+<p><code>use( $table )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.use.table"><code>$table</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Name of the table to use. If @param.table cannot be found in the DB Container a <code>EXCEPTION_TABLE_NOT_FOUND</code> exception is thrown.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  Imagine you have a DB called 'Tamarind'. This DB stores tracks and
+  artists for the "Tamarin Radio". The physical file of the DB Container is
+  '<code>tamarind.illicoDB</code>'<br />
+
+  Tracks are stored in the 'catalog' table ('<code>tamarind.catalog.illicoDB</code>')<br />
+  Artists are stored in the 'artists' table ('<code>tamarind.artists.illicoDB</code>)'<br /><br />
+
+  $oDB = new IllicoDB();
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  <strong>$oDB->use( 'artists' );</strong>
+  </pre>
+<hr /><p class="property func" id="fnc.write"><span class="name"><strong><code>write()</code></strong></span>: Writes @param.value in the @param.field field of the current record of the
+ @param.table table</p>
+<p class="property">Warning:</p>
+<p>THIS METHOD IS OBSOLETE. Direct access to write() of a table is what should
+ be used.</p>
+<p class="property">Syntax:</p>
+<p><code>write( $value )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.write.table"><code>$table</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the table concerned by the write operation</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.write.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the field concerned by the write operation</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.write.value"><code>$value</code></td>
+<td class="type"><code>mixed</code></td>
+<td class="description seealso">The value that must be written in the @param.field field of the @param.table table.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(int):  Returns the number of bytes written or <code>0</code> in case of error</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+  try
+  {
+      $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  }
+  catch ( Exception $e )
+  {
+      switch ( $e->getCode() )
+      {
+          case EXCEPTION_DB_CONTAINER_NOT_FOUND:
+              {
+                  var_dump( $e->getMessage() );
+                  var_dump( "STACK:",$e->getTrace() );
+                  $oDB->die();
+              }
+              break;
+          default:
+              {
+                  var_dump( $e );
+                  $oDB->die();
+              }
+      }   /* switch ( $e->getCode ) */
+
+  }
+
+  $oDB->use( 'artists' );
+  $oDB->clearData( 'artists' );
+
+  var_dump( "RECNO: "     . $oDB->recno(    'artists' ) );
+  var_dump( "RECCOUNT: "  . $oDB->reccount( 'artists' ) );
+
+  $oDB->append( 'artists' );
+
+  $oDB->write( 'artists','id'         ,v::guid( true ) );
+  $oDB->write( 'artists','firstname'  ,'Stevie' );
+  $oDB->write( 'artists','lastname'   ,'Nicks' );
+  $oDB->write( 'artists','birthdate'  ,date( 'Ymd',strtotime( '26 May 1948' ) ) );
+  $oDB->write( 'artists','birthplace' ,'Q16556' );    /* See Wikidata https://www.wikidata.org/wiki/Q16556 */
+
+  $t1 = microtime( true );
+  var_dump( trim( trim( $oDB->read( 'artists','firstname' ) ) . ' ' . trim( $oDB->read( 'artists','lastname' ) ) ) . ' born on ' . date('d-m-Y',strtotime( trim( $oDB->read( 'artists','birthdate' ) ) ) ) );
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  </pre>
+<hr /></section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Table</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description"></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="?src=Mother">Mother</a> &gt; <a href="?src=Thing">Thing</a> &gt; Table</code></span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Table extends Thing</code></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An additional type for the item,
+ typically used for adding more
+ specific types from external
+ vocabularies in microdata syntax.
+ This is a relationship between
+ something and a class that the
+ thing is in. In RDFa syntax, it is
+ better to use the native RDFa
+ syntax - the 'typeof' attribute
+ - for multiple types.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.description"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A short description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A
+ short description of the item used
+ to disambiguate from other, similar
+ items. Information from other
+ properties (in particular, name)
+ may be necessary for the description
+ to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.identifier"><code>$identifier</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The identifier property represents any
+ kind of identifier for any kind of Thing,
+ such as ISBNs, GTIN codes, UUIDs etc.
+ http://schema.org provides dedicated
+ properties for representing many of these,
+ either as textual strings or as URL (URI)
+ links. See <a
+ href="https://schema.org/docs/datamodel.html#identifierBg">
+ background notes</a>
+ for more details.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.image"><code>$image</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of an image of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates a page (or other <code><a href="?src=CreativeWork">CreativeWork</a></code>, <code><a href="?src=Event">Event</a></code>)
+ for which this thing is the main entity
+ being described. See <a
+ href="https://schema.org/docs/datamodel.html#mainEntityBackground">
+ background notes</a> for details.
+ Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential <code><a href="?src=Action">Action</a></code>, which
+ describes an idealized action in which
+ this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.recno"><code>$recno</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Number of records stored in the table (including all 'deleted' records)</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+ unambiguously indicates the item's
+ identity. E.g. the URL of the
+ item's Wikipedia page, Freebase
+ page, or official website.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.schemaOrg"><code>$schemaOrg</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Where the official documentation is maintained</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.self"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.softseek"><code>$softseek</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description"><code>true</code> to perform a soft seek when using <code><code><a href="?src=seek">seek</a></code>()</code>; <code>false</code> to perform an exact seek</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A <code><a href="?src=CreativeWork">CreativeWork</a></code> or <code><a href="?src=Event">Event</a></code> about this <code><a href="?src=Thing">Thing</a></code>. 
+ Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szClass"><code>$szClass</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">CSS class of the task when it needs to be rendered</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szOnSubmit"><code>$szOnSubmit</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Submit clause of the form (<code>__toForm()</code>)</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.url"><code>$url</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">WikidataId ... arrangement of data in rows and columns</td>
+</tr>
+</table>
+<h2 class="DocumentorLabel">Methods of <code>Table</code></h2>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>__construct( $name )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__construct.container"><code>$container</code></td>
+<td class="type"><code>IllicoDB</code></td>
+<td class="description seealso">DB Container</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.__construct.name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Table name</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__destruct">__destruct()</a></code></span>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
+<hr /><p class="property func" id="fnc.__get"><span class="name"><strong><code>__get()</code></strong></span>: Used for reading data from inaccessible (protected or private) or
+ non-existing properties.</p>
+<p class="property">Syntax:</p>
+<p><code>__get( $property )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__get.property"><code>$property</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the property to access</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  The value of <code>@param.property</code> or throwing an exception if
+ <code>@param.property</code> NOT found.</p>
+<hr /><p class="property func" id="fnc.__set"><span class="name"><strong><code>__set()</code></strong></span>: Run when writing data to inaccessible (protected or private) or non-existing
+ properties.</p>
+<p class="property">Syntax:</p>
+<p><code>__set( $value )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__set.property"><code>$property</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the property to access</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.__set.value"><code>$value</code></td>
+<td class="type"><code>mixed</code></td>
+<td class="description seealso">The value to assign to the property</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  What the internal function returns</p>
+<hr /><p class="property func" id="fnc.__toXML"><span class="name"><strong><code>__toXML()</code></strong></span>: Exports the data to an XML file</p>
+<p class="property">Syntax:</p>
+<p><code>__toXML( $type )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__toXML.szFile"><code>$szFile</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Name of the target file</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.__toXML.type"><code>$type</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">type of extract: <code>table</code> or <code>reccord</code> (default).</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  Current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.import">import()</a></code></span>
+<hr /><p class="property func" id="fnc.append"><span class="name"><strong><code>append()</code></strong></span>: Move the record pointer to @param.n</p>
+<p class="property">Remark:</p>
+<p>The record pointer (@var.recno) is advanced accordingly (always = to
+ @var.reccount)</p>
+<p class="property">Syntax:</p>
+<p><code>append( $n )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.append.n"><code>$n</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">The number of records to add. Optional. <code>1</code> by default</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  /* Adds 100 blank records */
+  <strong>$oDB->artists->append(100)</strong>;
+  </pre>
+<hr /><p class="property func" id="fnc.backup"><span class="name"><strong><code>backup()</code></strong></span>: Creates a backup of the table</p>
+<p class="property">Syntax:</p>
+<p><code>backup( $szTarget )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.backup.szTarget"><code>$szTarget</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the backup file. Optional. If not passed, @param.szTarget will be equal to the name of the physical file of the table augmented by the current date and time.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if backup successful; <code>false</code> if not.</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  </pre>
+<hr /><p class="property func" id="fnc.delete"><span class="name"><strong><code>delete()</code></strong></span>: Deletes the record from the current table.</p>
+<p class="property">Remark:</p>
+<p>This method should use the writeHandle instead of opening the file
+ and closing it</p>
+<p class="property">Syntax:</p>
+<p><code>delete()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if record deleted; <code>false</code> if not</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.deleted">deleted()</a></code>, <code><a href="#fnc.pack">pack()</a></code>, <code><a href="#fnc.recall">recall()</a></code></span>
+<hr /><p class="property func" id="fnc.deleted"><span class="name"><strong><code>deleted()</code></strong></span>: Determines whether a record is logically deleted or not</p>
+<p class="property">Remark:</p>
+<p>This method should use the readHandle instead of opening the file
+ and closing it</p>
+<p class="property">Syntax:</p>
+<p><code>deleted()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if record deleted; <code>false</code> if not</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.pack">pack()</a></code>, <code><a href="#fnc.delete">delete()</a></code>, <code><a href="#fnc.recall">recall()</a></code></span>
+<hr /><p class="property func" id="fnc.destruct"><span class="name"><strong><code>destruct()</code></strong></span>: Class destructor. All files which were not closed before are closed. All internal
+ handles are invalidated.</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return.</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
+<hr /><p class="property func" id="fnc.determineDataFile"><span class="name"><strong><code>determineDataFile()</code></strong></span>: Determine the name of the data file (table) we're busy with</p>
+<p class="property">Syntax:</p>
+<p><code>determineDataFile()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The name of the physical file</p>
+<hr /><p class="property func" id="fnc.fromIndex"><span class="name"><strong><code>fromIndex()</code></strong></span>: Get @param.howMany records from an index starting at @param.index position</p>
+<p class="property">Warning:</p>
+<p>The Syntax as reported by the documentation is incorrect due to a
+ bug in the Documentor.</p>
+<p class="property">Syntax:</p>
+<p><code>fromIndex( $howMany )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.fromIndex.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the field (determine the name of the index to reach)</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.fromIndex.index"><code>$index</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">Index number (typically from a previous call to <code>@class.seek()</code>)</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.fromIndex.howMany"><code>$howMany</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">Optional count of records to return. <code>10</code> by default</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Array of <code>@param.howMany</code> record numbers</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'catalog' );
+
+  $recno   = null;
+  $index   = 0;
+  $records = array();
+  $needle  = 'What a fool believes';
+  $field   = 'f_title';
+
+  /* Perform a seek and get the index position where the record has been found */
+  if ( $oDB->catalog->seek( $needle,$field,$recno,$records<strong>,$index</strong> ) )
+  {
+      <strong>if ( ( $aAdditional = $oDB->catalog->fromIndex( $field,$index,5 ) ) > 0 )
+      {
+          foreach( $Additional as $recNumber )
+          {
+              var_dump( trim( $oDB->catalog->Goto( $recNumber )->f_title ) . ' by ' . trim( $oDB->catalog->f_creator ) );
+          }
+      }   /* if ( ( $aAdditional = $oDB->catalog->fromIndex( $field,$index,5 ) ) > 0 ) */</strong>
+  }
+  </pre>
+<hr /><p class="property func" id="fnc.go"><span class="name"><strong><code>go()</code></strong></span>: Move the record pointer to @param.n</p>
+<p class="property">Remark:</p>
+<p>@fnc.go() differs from @fnc.goto() in the sense that it returns the current
+ record pointer (<code>recno</code>) whereas @fnc.goto() returns the current instance
+ of the class while doing exactly the same thing.</p>
+<p class="property">Syntax:</p>
+<p><code>go( $n )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.go.n"><code>$n</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">The record to go to.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(int):  The current record number</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  $t1 = microtime( true );
+  {
+      <strong>$oDB->artists->Go( 1 );</strong>
+      while( ! $oDB->artists->eof() )
+      {
+          $oDB->artists->skip();
+      }
+  }
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  </pre>
+<hr /><p class="property func" id="fnc.goto"><span class="name"><strong><code>goto()</code></strong></span>: Move the record pointer to @param.n</p>
+<p class="property">Remark:</p>
+<p>The <code>goto</code> method differs from the <code>go</code> method in that sense that
+ it returns the table it operates on</p>
+<p class="property">Syntax:</p>
+<p><code>goto( $n )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.goto.n"><code>$n</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">The record to go to.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(int):  The current record number</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  $t1 = microtime( true );
+  <strong>var_dump( $oDB->artists->goto( 20 )->f_name );</strong>
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  </pre>
+<hr /><p class="property func" id="fnc.id"><span class="name"><strong><code>id()</code></strong></span>: Returns the value of the "id" field ("id" type)</p>
+<p class="property">Syntax:</p>
+<p><code>id()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  The value of the "id" type field or <code>null</code> if none found</p>
+<hr /><p class="property func" id="fnc.idField"><span class="name"><strong><code>idField()</code></strong></span>: Returns the "id" type field</p>
+<p class="property">Syntax:</p>
+<p><code>idField()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  A Field or null if no field of "id" type</p>
+<hr /><p class="property func" id="fnc.import"><span class="name"><strong><code>import()</code></strong></span>: Import an XML file to create records. Existing records are updated, non-existing
+ records are appended</p>
+<p class="property">Remark:</p>
+<p>This methoid must be completely revisited in order to make sure it does
+ not work only for tracks !!! Hihihi.</p>
+<p class="property">Syntax:</p>
+<p><code>import( $szFile )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.import.szFile"><code>$szFile</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the XML file to import</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<hr /><p class="property func" id="fnc.index"><span class="name"><strong><code>index()</code></strong></span>: Index on the @param.field field if necessary unless @param.forced is set to
+ <code>true</code></p>
+<p class="property">Syntax:</p>
+<p><code>index( $field )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.index.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the field to index on</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  Current instance of the class</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  </pre>
+<hr /><p class="property func" id="fnc.indexes"><span class="name"><strong><code>indexes()</code></strong></span>: Returns the name of all indexes set on the current table</p>
+<p class="property">Syntax:</p>
+<p><code>indexes()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Array of filenames</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  </pre>
+<hr /><p class="property func" id="fnc.pack"><span class="name"><strong><code>pack()</code></strong></span>: Removes all records that have been marked as deleted.</p>
+<p class="property">Warning:</p>
+<p>Index may need to be rebuilt; Memo files are out of sync (WHICH IS A PROBLEM)</p>
+<p class="property">Syntax:</p>
+<p><code>pack()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">($iCount):  The number of records that were deleted</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.deleted">deleted()</a></code>, <code><a href="#fnc.delete">delete()</a></code>, <code><a href="#fnc.recall">recall()</a></code></span>
+<hr /><p class="property func" id="fnc.read"><span class="name"><strong><code>read()</code></strong></span>: Reads a field of the current record</p>
+<p class="property">Syntax:</p>
+<p><code>read( $field )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.read.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Field to read</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  The value of the field</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  /* Read the '<code>id</code>' field */
+  var_dump( <strong>$oDB->artists->Goto(15000)->read( 'id' )</strong> );
+  </pre>
+<hr /><p class="property func" id="fnc.readRawRecord"><span class="name"><strong><code>readRawRecord()</code></strong></span>: Reads the whole current record</p>
+<p class="property">Syntax:</p>
+<p><code>readRawRecord()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  The value of the field</p>
+<hr /><p class="property func" id="fnc.readStructure"><span class="name"><strong><code>readStructure()</code></strong></span>: Read the structure of the table</p>
+<p class="property">Warning:</p>
+<p>This method would be better if declared protected</p>
+<p class="property">Syntax:</p>
+<p><code>readStructure( $oNode )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.readStructure.oDom"><code>$oDom</code></td>
+<td class="type"><code>DOMDocument</code></td>
+<td class="description seealso">The DOM Document that was used to read the DB structure</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.readStructure.oXPath"><code>$oXPath</code></td>
+<td class="type"><code>DOMXPath</code></td>
+<td class="description seealso">The XPath that was used when reading the DB structure</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.readStructure.oNode"><code>$oNode</code></td>
+<td class="type"><code>DOMNode</code></td>
+<td class="description seealso">The node where the structure of the table gets defined</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  Current instance</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  </pre>
+<hr /><p class="property func" id="fnc.recall"><span class="name"><strong><code>recall()</code></strong></span>: Recalls a record from the current table (opposite operation of <code>@fnc.delete<code>)</p>
+<p class="property">Remark:</p>
+<p>This method should use the writeHandle instead of opening the file
+ and closing it</p>
+<p class="property">Syntax:</p>
+<p><code>recall()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if record successfully recalled; <code>false</code> if not</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.deleted">deleted()</a></code>, <code><a href="#fnc.delete">delete()</a></code>, <code><a href="#fnc.pack">pack()</a></code></span>
+<hr /><p class="property func" id="fnc.reccount"><span class="name"><strong><code>reccount()</code></strong></span>: Determine the number of records in the table</p>
+<p class="property">Syntax:</p>
+<p><code>reccount()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(int):  Record count</p>
+<hr /><p class="property func" id="fnc.seek"><span class="name"><strong><code>seek()</code></strong></span>: Seek @param.needle in the @param.field field of the table</p>
+<p class="property">Syntax:</p>
+<p><code>seek( $select )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.seek.needle"><code>$needle</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The value to look for</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.seek.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the field where the search will take place</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.seek.recno"><code>$recno</code></td>
+<td class="type"><code>int|null</code></td>
+<td class="description seealso">The record number of the first match</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.seek.select"><code>$select</code></td>
+<td class="type"><code>array</code></td>
+<td class="description seealso">Optional array. If passed, then ALL matches will be returned (record nuumbers)</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if @param.needle found; <code>false</code> otherwise</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'catalog' );
+
+  $recno   = null;
+  $records = array();
+  $needle  = 'What a fool believes';
+  $field   = 'f_title';
+
+  <strong>if ( $oDB->catalog->seek( $needle,$field,$recno,$records ) )
+  {
+      var_dump( $needle . ' FOUND' );
+
+      if ( count( $records ) != 0 )
+      {
+          foreach( $records as $recno )
+          {
+              var_dump( trim( $oDB->catalog->Goto($recno)->f_title ) . ' by ' . trim( $oDB->catalog->f_creator ) );
+          }
+      }
+  }</strong>
+  else
+  {
+      var_dump( $needle . ' NOT FOUND' );
+  }
+  </pre>
+<hr /><p class="property func" id="fnc.skip"><span class="name"><strong><code>skip()</code></strong></span>: Skip forward or backward (internal record pointer updated)</p>
+<p class="property">Remark:</p>
+<p>When attempting to move past the EOF (number of records in the table), the
+ internal marker of EOF is set; When attempting to move before the BOF (<1),
+ the internal marker of BOF is set.</p>
+<p class="property">Syntax:</p>
+<p><code>skip( $n )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.skip.table"><code>$table</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the table concerned by the index operation</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.skip.n"><code>$n</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">The number of records that must be skipped. Moving 1 record forward: <code>@param.n = 1</code></td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Array of values</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  $t1 = microtime( true );
+  {
+      $oDB->artists->Go( 1 );
+      while( ! $oDB->artists->eof() )
+      {
+          $oDB->artists->skip();
+      }
+  }
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  </pre>
+<hr /><p class="property func" id="fnc.sort"><span class="name"><strong><code>sort()</code></strong></span>: Index on the @param.field field betwwen record @param.iStart and @param.iEnd</p>
+<p class="property">Syntax:</p>
+<p><code>sort( $iEnd )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.sort.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the field to sort on</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.sort.iStart"><code>$iStart</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">Starting record number. Optional. <code>1</code> by default</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.sort.iEnd"><code>$iEnd</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">Endinf record number. Optional. <code>@fnc.reccount</code> by default</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Record numbers sorted</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  </pre>
+<hr /></section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>View</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description"></span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="?src=Mother">Mother</a> &gt; <a href="?src=Thing">Thing</a> &gt; <a href="?src=Table">Table</a> &gt; View</code></span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class View extends Table</code></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An additional type for the item,
+ typically used for adding more
+ specific types from external
+ vocabularies in microdata syntax.
+ This is a relationship between
+ something and a class that the
+ thing is in. In RDFa syntax, it is
+ better to use the native RDFa
+ syntax - the 'typeof' attribute
+ - for multiple types.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.description"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A short description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A
+ short description of the item used
+ to disambiguate from other, similar
+ items. Information from other
+ properties (in particular, name)
+ may be necessary for the description
+ to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.identifier"><code>$identifier</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The identifier property represents any
+ kind of identifier for any kind of Thing,
+ such as ISBNs, GTIN codes, UUIDs etc.
+ http://schema.org provides dedicated
+ properties for representing many of these,
+ either as textual strings or as URL (URI)
+ links. See <a
+ href="https://schema.org/docs/datamodel.html#identifierBg">
+ background notes</a>
+ for more details.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.image"><code>$image</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of an image of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates a page (or other <code><a href="?src=CreativeWork">CreativeWork</a></code>, <code><a href="?src=Event">Event</a></code>)
+ for which this thing is the main entity
+ being described. See <a
+ href="https://schema.org/docs/datamodel.html#mainEntityBackground">
+ background notes</a> for details.
+ Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential <code><a href="?src=Action">Action</a></code>, which
+ describes an idealized action in which
+ this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.recno"><code>$recno</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Number of records stored in the table (including all 'deleted' records)</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+ unambiguously indicates the item's
+ identity. E.g. the URL of the
+ item's Wikipedia page, Freebase
+ page, or official website.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.schemaOrg"><code>$schemaOrg</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Where the official documentation is maintained</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.self"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.softseek"><code>$softseek</code></td>
+<td class="type"><code>bool</code></td>
+<td class="description"><code>true</code> to perform a soft seek when using <code><code><a href="?src=seek">seek</a></code>()</code>; <code>false</code> to perform an exact seek</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A <code><a href="?src=CreativeWork">CreativeWork</a></code> or <code><a href="?src=Event">Event</a></code> about this <code><a href="?src=Thing">Thing</a></code>. 
+ Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szClass"><code>$szClass</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">CSS class of the task when it needs to be rendered</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.szOnSubmit"><code>$szOnSubmit</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Submit clause of the form (<code>__toForm()</code>)</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.url"><code>$url</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">WikidataId ... arrangement of data in rows and columns</td>
+</tr>
+</table>
+<h2 class="DocumentorLabel">Methods of <code>View</code></h2>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>__construct( $name )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__construct.parentTable"><code>$parentTable</code></td>
+<td class="type"><code>Table</code></td>
+<td class="description seealso">The table this view is based on</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.__construct.name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the view</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__destruct">__destruct()</a></code></span>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
+<hr /><p class="property func" id="fnc.__get"><span class="name"><strong><code>__get()</code></strong></span>: Used for reading data from inaccessible (protected or private) or
+ non-existing properties.</p>
+<p class="property">Syntax:</p>
+<p><code>__get( $property )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__get.property"><code>$property</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the property to access</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  The value of <code>@param.property</code> or throwing an exception if
+ <code>@param.property</code> NOT found.</p>
+<hr /><p class="property func" id="fnc.__set"><span class="name"><strong><code>__set()</code></strong></span>: Run when writing data to inaccessible (protected or private) or non-existing
+ properties.</p>
+<p class="property">Syntax:</p>
+<p><code>__set( $value )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__set.property"><code>$property</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the property to access</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.__set.value"><code>$value</code></td>
+<td class="type"><code>mixed</code></td>
+<td class="description seealso">The value to assign to the property</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  What the internal function returns</p>
+<hr /><p class="property func" id="fnc.__toXML"><span class="name"><strong><code>__toXML()</code></strong></span>: Exports the data to an XML file</p>
+<p class="property">Syntax:</p>
+<p><code>__toXML( $type )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__toXML.szFile"><code>$szFile</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Name of the target file</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.__toXML.type"><code>$type</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">type of extract: <code>table</code> or <code>reccord</code> (default).</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  Current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.import">import()</a></code></span>
+<hr /><p class="property func" id="fnc.append"><span class="name"><strong><code>append()</code></strong></span>: Move the record pointer to @param.n</p>
+<p class="property">Remark:</p>
+<p>The record pointer (@var.recno) is advanced accordingly (always = to
+ @var.reccount)</p>
+<p class="property">Syntax:</p>
+<p><code>append( $n )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.append.n"><code>$n</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">The number of records to add. Optional. <code>1</code> by default</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  /* Adds 100 blank records */
+  <strong>$oDB->artists->append(100)</strong>;
+  </pre>
+<hr /><p class="property func" id="fnc.backup"><span class="name"><strong><code>backup()</code></strong></span>: Creates a backup of the table</p>
+<p class="property">Syntax:</p>
+<p><code>backup( $szTarget )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.backup.szTarget"><code>$szTarget</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the backup file. Optional. If not passed, @param.szTarget will be equal to the name of the physical file of the table augmented by the current date and time.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if backup successful; <code>false</code> if not.</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  </pre>
+<hr /><p class="property func" id="fnc.delete"><span class="name"><strong><code>delete()</code></strong></span>: Deletes the record from the current table.</p>
+<p class="property">Remark:</p>
+<p>This method should use the writeHandle instead of opening the file
+ and closing it</p>
+<p class="property">Syntax:</p>
+<p><code>delete()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if record deleted; <code>false</code> if not</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.deleted">deleted()</a></code>, <code><a href="#fnc.pack">pack()</a></code>, <code><a href="#fnc.recall">recall()</a></code></span>
+<hr /><p class="property func" id="fnc.deleted"><span class="name"><strong><code>deleted()</code></strong></span>: Determines whether a record is logically deleted or not</p>
+<p class="property">Remark:</p>
+<p>This method should use the readHandle instead of opening the file
+ and closing it</p>
+<p class="property">Syntax:</p>
+<p><code>deleted()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if record deleted; <code>false</code> if not</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.pack">pack()</a></code>, <code><a href="#fnc.delete">delete()</a></code>, <code><a href="#fnc.recall">recall()</a></code></span>
+<hr /><p class="property func" id="fnc.destruct"><span class="name"><strong><code>destruct()</code></strong></span>: Class destructor.</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return.</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
+<hr /><p class="property func" id="fnc.determineDataFile"><span class="name"><strong><code>determineDataFile()</code></strong></span>: Determine the name of the data file (table) we're busy with</p>
+<p class="property">Syntax:</p>
+<p><code>determineDataFile()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(string):  The name of the physical file</p>
+<hr /><p class="property func" id="fnc.fromIndex"><span class="name"><strong><code>fromIndex()</code></strong></span>: Get @param.howMany records from an index starting at @param.index position</p>
+<p class="property">Warning:</p>
+<p>The Syntax as reported by the documentation is incorrect due to a
+ bug in the Documentor.</p>
+<p class="property">Syntax:</p>
+<p><code>fromIndex( $howMany )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.fromIndex.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the field (determine the name of the index to reach)</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.fromIndex.index"><code>$index</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">Index number (typically from a previous call to <code>@class.seek()</code>)</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.fromIndex.howMany"><code>$howMany</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">Optional count of records to return. <code>10</code> by default</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Array of <code>@param.howMany</code> record numbers</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'catalog' );
+
+  $recno   = null;
+  $index   = 0;
+  $records = array();
+  $needle  = 'What a fool believes';
+  $field   = 'f_title';
+
+  /* Perform a seek and get the index position where the record has been found */
+  if ( $oDB->catalog->seek( $needle,$field,$recno,$records<strong>,$index</strong> ) )
+  {
+      <strong>if ( ( $aAdditional = $oDB->catalog->fromIndex( $field,$index,5 ) ) > 0 )
+      {
+          foreach( $Additional as $recNumber )
+          {
+              var_dump( trim( $oDB->catalog->Goto( $recNumber )->f_title ) . ' by ' . trim( $oDB->catalog->f_creator ) );
+          }
+      }   /* if ( ( $aAdditional = $oDB->catalog->fromIndex( $field,$index,5 ) ) > 0 ) */</strong>
+  }
+  </pre>
+<hr /><p class="property func" id="fnc.go"><span class="name"><strong><code>go()</code></strong></span>: Move the record pointer to @param.n</p>
+<p class="property">Remark:</p>
+<p>@fnc.go() differs from @fnc.goto() in the sense that it returns the current
+ record pointer (<code>recno</code>) whereas @fnc.goto() returns the current instance
+ of the class while doing exactly the same thing.</p>
+<p class="property">Syntax:</p>
+<p><code>go( $n )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.go.n"><code>$n</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">The record to go to.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(int):  The current record number</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  $t1 = microtime( true );
+  {
+      <strong>$oDB->artists->Go( 1 );</strong>
+      while( ! $oDB->artists->eof() )
+      {
+          $oDB->artists->skip();
+      }
+  }
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  </pre>
+<hr /><p class="property func" id="fnc.goto"><span class="name"><strong><code>goto()</code></strong></span>: Move the record pointer to @param.n</p>
+<p class="property">Remark:</p>
+<p>The <code>goto</code> method differs from the <code>go</code> method in that sense that
+ it returns the table it operates on</p>
+<p class="property">Syntax:</p>
+<p><code>goto( $n )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.goto.n"><code>$n</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">The record to go to.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(int):  The current record number</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  $t1 = microtime( true );
+  <strong>var_dump( $oDB->artists->goto( 20 )->f_name );</strong>
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  </pre>
+<hr /><p class="property func" id="fnc.id"><span class="name"><strong><code>id()</code></strong></span>: Returns the value of the "id" field ("id" type)</p>
+<p class="property">Syntax:</p>
+<p><code>id()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  The value of the "id" type field or <code>null</code> if none found</p>
+<hr /><p class="property func" id="fnc.idField"><span class="name"><strong><code>idField()</code></strong></span>: Returns the "id" type field</p>
+<p class="property">Syntax:</p>
+<p><code>idField()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  A Field or null if no field of "id" type</p>
+<hr /><p class="property func" id="fnc.import"><span class="name"><strong><code>import()</code></strong></span>: Import an XML file to create records. Existing records are updated, non-existing
+ records are appended</p>
+<p class="property">Remark:</p>
+<p>This methoid must be completely revisited in order to make sure it does
+ not work only for tracks !!! Hihihi.</p>
+<p class="property">Syntax:</p>
+<p><code>import( $szFile )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.import.szFile"><code>$szFile</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the XML file to import</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<hr /><p class="property func" id="fnc.index"><span class="name"><strong><code>index()</code></strong></span>: Index on the @param.field field if necessary unless @param.forced is set to
+ <code>true</code></p>
+<p class="property">Syntax:</p>
+<p><code>index( $field )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.index.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the field to index on</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  Current instance of the class</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  </pre>
+<hr /><p class="property func" id="fnc.indexes"><span class="name"><strong><code>indexes()</code></strong></span>: Returns the name of all indexes set on the current table</p>
+<p class="property">Syntax:</p>
+<p><code>indexes()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Array of filenames</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  </pre>
+<hr /><p class="property func" id="fnc.pack"><span class="name"><strong><code>pack()</code></strong></span>: Removes all records that have been marked as deleted.</p>
+<p class="property">Warning:</p>
+<p>Index may need to be rebuilt; Memo files are out of sync (WHICH IS A PROBLEM)</p>
+<p class="property">Syntax:</p>
+<p><code>pack()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">($iCount):  The number of records that were deleted</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.deleted">deleted()</a></code>, <code><a href="#fnc.delete">delete()</a></code>, <code><a href="#fnc.recall">recall()</a></code></span>
+<hr /><p class="property func" id="fnc.read"><span class="name"><strong><code>read()</code></strong></span>: Reads a field of the current record</p>
+<p class="property">Syntax:</p>
+<p><code>read( $field )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.read.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Field to read</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  The value of the field</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  /* Read the '<code>id</code>' field */
+  var_dump( <strong>$oDB->artists->Goto(15000)->read( 'id' )</strong> );
+  </pre>
+<hr /><p class="property func" id="fnc.readRawRecord"><span class="name"><strong><code>readRawRecord()</code></strong></span>: Reads the whole current record</p>
+<p class="property">Syntax:</p>
+<p><code>readRawRecord()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(mixed):  The value of the field</p>
+<hr /><p class="property func" id="fnc.readStructure"><span class="name"><strong><code>readStructure()</code></strong></span>: Read the structure of the view</p>
+<p class="property">Warning:</p>
+<p>This method would be better if declared protected</p>
+<p class="property">Syntax:</p>
+<p><code>readStructure( $oNode )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.readStructure.oDom"><code>$oDom</code></td>
+<td class="type"><code>DOMDocument</code></td>
+<td class="description seealso">The DOM Document that was used to read the DB structure</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.readStructure.oXPath"><code>$oXPath</code></td>
+<td class="type"><code>DOMXPath</code></td>
+<td class="description seealso">The XPath that was used when reading the DB structure</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.readStructure.oNode"><code>$oNode</code></td>
+<td class="type"><code>DOMNode</code></td>
+<td class="description seealso">The node where the structure of the table gets defined</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  Current instance</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  </pre>
+<hr /><p class="property func" id="fnc.recall"><span class="name"><strong><code>recall()</code></strong></span>: Recalls a record from the current table (opposite operation of <code>@fnc.delete<code>)</p>
+<p class="property">Remark:</p>
+<p>This method should use the writeHandle instead of opening the file
+ and closing it</p>
+<p class="property">Syntax:</p>
+<p><code>recall()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if record successfully recalled; <code>false</code> if not</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.deleted">deleted()</a></code>, <code><a href="#fnc.delete">delete()</a></code>, <code><a href="#fnc.pack">pack()</a></code></span>
+<hr /><p class="property func" id="fnc.reccount"><span class="name"><strong><code>reccount()</code></strong></span>: Determine the number of records in the table</p>
+<p class="property">Syntax:</p>
+<p><code>reccount()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(int):  Record count</p>
+<hr /><p class="property func" id="fnc.seek"><span class="name"><strong><code>seek()</code></strong></span>: Seek @param.needle in the @param.field field of the table</p>
+<p class="property">Syntax:</p>
+<p><code>seek( $select )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.seek.needle"><code>$needle</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The value to look for</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.seek.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the field where the search will take place</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.seek.recno"><code>$recno</code></td>
+<td class="type"><code>int|null</code></td>
+<td class="description seealso">The record number of the first match</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.seek.select"><code>$select</code></td>
+<td class="type"><code>array</code></td>
+<td class="description seealso">Optional array. If passed, then ALL matches will be returned (record nuumbers)</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(bool):  <code>true</code> if @param.needle found; <code>false</code> otherwise</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'catalog' );
+
+  $recno   = null;
+  $records = array();
+  $needle  = 'What a fool believes';
+  $field   = 'f_title';
+
+  <strong>if ( $oDB->catalog->seek( $needle,$field,$recno,$records ) )
+  {
+      var_dump( $needle . ' FOUND' );
+
+      if ( count( $records ) != 0 )
+      {
+          foreach( $records as $recno )
+          {
+              var_dump( trim( $oDB->catalog->Goto($recno)->f_title ) . ' by ' . trim( $oDB->catalog->f_creator ) );
+          }
+      }
+  }</strong>
+  else
+  {
+      var_dump( $needle . ' NOT FOUND' );
+  }
+  </pre>
+<hr /><p class="property func" id="fnc.skip"><span class="name"><strong><code>skip()</code></strong></span>: Skip forward or backward (internal record pointer updated)</p>
+<p class="property">Remark:</p>
+<p>When attempting to move past the EOF (number of records in the table), the
+ internal marker of EOF is set; When attempting to move before the BOF (<1),
+ the internal marker of BOF is set.</p>
+<p class="property">Syntax:</p>
+<p><code>skip( $n )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.skip.table"><code>$table</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the table concerned by the index operation</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.skip.n"><code>$n</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">The number of records that must be skipped. Moving 1 record forward: <code>@param.n = 1</code></td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Array of values</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  $oDB = new IllicoDB();
+
+  $oDB->open( 'Tamarind','d:/websites/trql.fm/www/httpdocs/playlists/Tamarind/' );
+  $oDB->use( 'artists' );
+
+  $t1 = microtime( true );
+  {
+      $oDB->artists->Go( 1 );
+      while( ! $oDB->artists->eof() )
+      {
+          $oDB->artists->skip();
+      }
+  }
+  $t2 = microtime( true );
+  var_dump( "PERF: " . number_format( $t2 - $t1,5,',','.' ) . " secs" );
+  </pre>
+<hr /><p class="property func" id="fnc.sort"><span class="name"><strong><code>sort()</code></strong></span>: Index on the @param.field field betwwen record @param.iStart and @param.iEnd</p>
+<p class="property">Syntax:</p>
+<p><code>sort( $iEnd )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.sort.field"><code>$field</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">The name of the field to sort on</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.sort.iStart"><code>$iStart</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">Starting record number. Optional. <code>1</code> by default</td>
+</tr>
+<tr class="parameter">
+<td class="name" id="param.sort.iEnd"><code>$iEnd</code></td>
+<td class="type"><code>int</code></td>
+<td class="description seealso">Endinf record number. Optional. <code>@fnc.reccount</code> by default</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(array):  Record numbers sorted</p>
+<p class="property">Example(s):</p>
+<pre>
+
+  </pre>
+<hr /></section> <!-- .class -->
+<section class="class shadow">
+<span class="DocumentorLabel">Class: </span><span class="property classname"><code>Field</code></span>
+<span class="DocumentorLabel">Description: </span><span class="property description">Field of a table of an IllicoDB database</span>
+<span class="DocumentorLabel">Inheritance: </span><span class="property inheritance"><code><a href="?src=Mother">Mother</a> &gt; <a href="?src=Thing">Thing</a> &gt; Field</code></span>
+<span class="DocumentorLabel">Declaration: </span><span class="property declaration"><code>class Field extends Thing</code></span>
+<span class="DocumentorLabel">Properties: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="property">
+<td class="name" id="var.additionalType"><code>$additionalType</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An additional type for the item,
+ typically used for adding more
+ specific types from external
+ vocabularies in microdata syntax.
+ This is a relationship between
+ something and a class that the
+ thing is in. In RDFa syntax, it is
+ better to use the native RDFa
+ syntax - the 'typeof' attribute
+ - for multiple types.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.alternateName"><code>$alternateName</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">An alias for the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.caption"><code>$caption</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Caption of the field (typically used in the <code>__toForm()</code> method)</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.description"><code>$description</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A short description of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.disambiguatingDescription"><code>$disambiguatingDescription</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">A sub property of description. A
+ short description of the item used
+ to disambiguate from other, similar
+ items. Information from other
+ properties (in particular, name)
+ may be necessary for the description
+ to be useful for disambiguation.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.identifier"><code>$identifier</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The identifier property represents any
+ kind of identifier for any kind of Thing,
+ such as ISBNs, GTIN codes, UUIDs etc.
+ http://schema.org provides dedicated
+ properties for representing many of these,
+ either as textual strings or as URL (URI)
+ links. See <a
+ href="https://schema.org/docs/datamodel.html#identifierBg">
+ background notes</a>
+ for more details.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.image"><code>$image</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of an image of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.length"><code>$length</code></td>
+<td class="type"><code>int</code></td>
+<td class="description">Length of the field.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.mainEntityOfPage"><code>$mainEntityOfPage</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Indicates a page (or other <code><a href="?src=CreativeWork">CreativeWork</a></code>, <code><a href="?src=Event">Event</a></code>)
+ for which this thing is the main entity
+ being described. See <a
+ href="https://schema.org/docs/datamodel.html#mainEntityBackground">
+ background notes</a> for details.
+ Inverse property: <code><a href="#var-mainEntity">$mainEntity</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.name"><code>$name</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The name of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.potentialAction"><code>$potentialAction</code></td>
+<td class="type"><code>Action</code></td>
+<td class="description">Indicates a potential <code><a href="?src=Action">Action</a></code>, which
+ describes an idealized action in which
+ this thing would play an 'object' role.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.sameAs"><code>$sameAs</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of a reference Web page that
+ unambiguously indicates the item's
+ identity. E.g. the URL of the
+ item's Wikipedia page, Freebase
+ page, or official website.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.schemaOrg"><code>$schemaOrg</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Where the official documentation is maintained</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.self"><code>$self</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Fixed 'class' information.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.subjectOf"><code>$subjectOf</code></td>
+<td class="type"><code>CreativeWork|Event</code></td>
+<td class="description">A <code><a href="?src=CreativeWork">CreativeWork</a></code> or <code><a href="?src=Event">Event</a></code> about this <code><a href="?src=Thing">Thing</a></code>. 
+ Inverse property: <code><a href="#var-about">$about</a></code>.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.type"><code>$type</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">Field type (string, int, float, object, array, ...);
+ WikidataId Q190087 : classification of data in computer science;</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.url"><code>$url</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">URL of the item.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.wikidataId"><code>$wikidataId</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">WikidataId ... part of a database record</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.xmltag"><code>$xmltag</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">XML node name to support import/export from and to XML</td>
+</tr>
+</table>
+<h2 class="DocumentorLabel">Methods of <code>Field</code></h2>
+<p class="property func" id="fnc.__construct"><span class="name"><strong><code>__construct()</code></strong></span>: Class constructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>__construct( $szHome )</code></p>
+<span class="DocumentorLabel">Parameters: </span>
+<table class="properties">
+<thead>
+<tr>
+<th class="name">Name</th>
+<th class="type">Type</th>
+<th class="description">Description</th>
+</tr>
+</thead>
+<tr class="parameter">
+<td class="name" id="param.__construct.szHome"><code>$szHome</code></td>
+<td class="type"><code>string</code></td>
+<td class="description seealso">Home of the class. Optional.</td>
+</tr>
+</table>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__destruct">__destruct()</a></code></span>
+<hr /><p class="property func" id="fnc.__destruct"><span class="name"><strong><code>__destruct()</code></strong></span>: Class destructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>__destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
+<hr /><p class="property func" id="fnc.destruct"><span class="name"><strong><code>destruct()</code></strong></span>: Class destructor</p>
+<p class="property">Keywords:</p>
+<p>constructors, destructors</p>
+<p class="property">Syntax:</p>
+<p><code>destruct()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(void):  No return.</p>
+<span class="DocumentorLabel">See also: </span><span class="property seealso"><code><a href="#fnc.__construct">__construct()</a></code></span>
+<hr /></section> <!-- .class -->
+</section> <!-- .classes -->
+</div> <!-- End of trql_documentor_DocumentorSourceFile-->

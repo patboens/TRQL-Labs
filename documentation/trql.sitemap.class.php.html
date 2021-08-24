@@ -55,7 +55,7 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <span class="DocumentorLabel">Author: </span><span class="property author">Pat Y. Boens</span>
 <span class="DocumentorLabel">Company: </span><span class="property company">Lato Sensu Management<br />Rue du Bois des Mazuis, 47<br />5070 Vitrival<br />Belgium<br /><a href="https://www.latosensu.be" class="DocumentorLink" title="Go to https://www.latosensu.be" itemprop="url">https://www.latosensu.be</a> (geonames: <a href="http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" class="DocumentorLink" title="Go to http://api.geonames.org/get?geonameId=8520400&username=demo&style=full" itemprop="url">http://api.geonames.org/get?geonameId=8520400&username=demo&style=full</a>)<br />Vae Soli!: <a href="http://www.vaesoli.com" class="DocumentorLink" title="Go to http://www.vaesoli.com" itemprop="url">http://www.vaesoli.com</a><br /></span>
 <span class="DocumentorLabel">Creation date: </span><span class="property cdate">03-04-21 07:58</span>
-<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">03/04/2021 - 09:54:05</span>
+<span class="DocumentorLabel">Last modification date: </span><span class="property mdate">03/04/2021 - 07:54:05</span>
 <span class="DocumentorLabel">License/Copyrights: </span><span class="property license">Intellectual Property belongs to Pat Y. Boens. You are free to:<br /><br /><strong>Share</strong> — copy and redistribute the material in any medium or format<br /><strong>Adapt</strong> — remix, transform, and build upon the material for any purpose, even commercially.<br /><br />Under the following terms:<br /><br /><strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.<br /><br /><strong>No additional restrictions</strong> — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.<br /><br /><a href="https://creativecommons.org/licenses/by/4.0/legalcode" class="DocumentorLink" title="Go to https://creativecommons.org/licenses/by/4.0/legalcode" itemprop="url">https://creativecommons.org/licenses/by/4.0/legalcode</a></span>
 </section> <!-- .header -->
 <section class="classes">
@@ -174,6 +174,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="description">A secondary title of the <code><a href="?src=CreativeWork">CreativeWork</a></code>.</td>
 </tr>
 <tr class="property">
+<td class="name" id="var.analysis"><code>$analysis</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">Result of the analysis of the page (call to <code>analyze()</code>)</td>
+</tr>
+<tr class="property">
 <td class="name" id="var.associatedMedia"><code>$associatedMedia</code></td>
 <td class="type"><code>MediaObject</code></td>
 <td class="description">A media object that encodes this <code><a href="?src=CreativeWork">CreativeWork</a></code>. This property
@@ -247,6 +252,21 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
  
  For example "Available by appointment from the Reading Room" or 
  "Accessible only from logged-in accounts ".</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.content"><code>$content</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">The content of the page (the whole HTML) (filled after a call to <code>getURL()</code>)</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.contentFile"><code>$contentFile</code></td>
+<td class="type"><code>string</code></td>
+<td class="description">THE file that has been used to extract the real payload of the page, its content</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.contentFiles"><code>$contentFiles</code></td>
+<td class="type"><code>array</code></td>
+<td class="description">A list of files that are suitable candidates to contain the real payload of the page, its content</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.contentLocation"><code>$contentLocation</code></td>
@@ -423,6 +443,11 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <td class="name" id="var.headline"><code>$headline</code></td>
 <td class="type"><code>string</code></td>
 <td class="description">Headline of the article.</td>
+</tr>
+<tr class="property">
+<td class="name" id="var.helpPage"><code>$helpPage</code></td>
+<td class="type"><code>string|URL</code></td>
+<td class="description">Help page that provides additional explanations about the current page.</td>
 </tr>
 <tr class="property">
 <td class="name" id="var.identifier"><code>$identifier</code></td>
@@ -983,6 +1008,22 @@ p.property.func { font: .9em/1em lucida,georgia,"times new roman",serif;
 <p><code>__destruct()</code></p>
 <p class="property return">Return:</p>
 <p class="seealso">(void):  No return</p>
+<hr /><p class="property func" id="fnc.analyze"><span class="name"><strong><code>analyze()</code></strong></span>: Ananlyze the content of a web page</p>
+<p class="property">Warning:</p>
+<p>This method is in development</p>
+<p class="property">Syntax:</p>
+<p><code>analyze()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class. The result of the analysis is
+ put in the %var.analysis% property</p>
+<hr /><p class="property func" id="fnc.getURL"><span class="name"><strong><code>getURL()</code></strong></span>: Get the content of the page (the whole HTML)</p>
+<p class="property">Warning:</p>
+<p>This method is in development</p>
+<p class="property">Syntax:</p>
+<p><code>getURL()</code></p>
+<p class="property return">Return:</p>
+<p class="seealso">(self):  The current instance of the class. The result is
+ put in the %var.content% property</p>
 <hr /><p class="property func" id="fnc.listFiles"><span class="name"><strong><code>listFiles()</code></strong></span>: Class destructor</p>
 <p class="property">Syntax:</p>
 <p><code>listFiles( $szMask )</code></p>
